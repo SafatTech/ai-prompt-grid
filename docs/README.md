@@ -9,6 +9,7 @@
 | Doc | File | Purpose |
 | --- | --- | --- |
 | Competitor & reference | [competitor-proxima.md](./competitor-proxima.md) | Proxima as competitor + what we follow vs differentiate |
+| Phase 2 setup | [phase-2-setup.md](./phase-2-setup.md) | Apply migration, auth providers, admin bootstrap |
 | Brand & positioning | [brand-positioning.md](./brand-positioning.md) | Name, messaging, tone vs Proxima |
 | PRD v1 | [prd-v1.md](./prd-v1.md) | Goals, user stories, non-goals |
 | IA & sitemap | [ia-sitemap.md](./ia-sitemap.md) | Routes, nav, page sections (Create/Explore like Proxima) |
@@ -18,4 +19,4 @@
 | Design direction | [design-direction.md](./design-direction.md) | Graphite Gallery; Proxima structure ≠ visuals |
 | Tech checklist | [tech-checklist.md](./tech-checklist.md) | Stack, env, Supabase, phase gates |
 
-**Next:** Approve or edit these docs, then start **Phase 1** (Next.js scaffold + design tokens + Vercel shell).
+**Next:** Phase 1–2 are in the repo. Configure Supabase per [phase-2-setup.md](./phase-2-setup.md), then start **Phase 3** (public explore UI, style detail, copy, favorites wired to data).

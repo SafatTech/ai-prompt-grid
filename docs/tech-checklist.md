@@ -44,13 +44,17 @@ Never commit real secrets. Ship `.env.example` only.
 
 | Item | Notes | Done |
 | --- | --- | --- |
-| Enable Email magic link | Auth → Providers | [ ] |
-| Enable Google provider | Client ID/secret | [ ] |
-| Redirect URLs | Local + Vercel preview + prod | [ ] |
-| Tables per content model | Migrations in repo | [ ] |
-| RLS policies | Per content-model §11 | [ ] |
-| Storage bucket `style-images` | Public read for published assets | [ ] |
-| First admin profile | SQL: set `role = admin` | [ ] |
+| Enable Email magic link | Auth → Providers | [ ] *(your project)* |
+| Enable Google provider | Client ID/secret | [ ] *(your project)* |
+| Redirect URLs | Local + Vercel preview + prod | [ ] *(your project)* |
+| Tables per content model | [`supabase/migrations/20260912120000_init.sql`](../supabase/migrations/20260912120000_init.sql) | [x] |
+| RLS policies | Per content-model §11 + publish trigger | [x] |
+| Storage bucket `style-images` | Public read; admin write | [x] |
+| First admin profile | SQL bootstrap — see [phase-2-setup.md](./phase-2-setup.md) | [ ] *(your project)* |
+| App auth + proxy session | Magic link, Google, `/auth/callback`, `src/proxy.ts` | [x] |
+| Admin route gate | `requireAdmin()` on `/admin/*` | [x] |
+
+Full walkthrough: [phase-2-setup.md](./phase-2-setup.md).
 
 ---
 
@@ -58,11 +62,13 @@ Never commit real secrets. Ship `.env.example` only.
 
 | Item | Done |
 | --- | --- |
-| `create-next-app` App Router + TS + Tailwind + ESLint | [ ] |
-| Path aliases, base layout, fonts from design direction | [ ] |
-| Design tokens as CSS variables | [ ] |
-| Supabase browser + server clients | [ ] |
-| Deploy empty shell to Vercel | [ ] |
+| `create-next-app` App Router + TS + Tailwind + ESLint | [x] |
+| Path aliases, base layout, fonts from design direction | [x] |
+| Design tokens as CSS variables (Graphite Gallery) | [x] |
+| Site header/footer + Create/Explore nav (Proxima IA) | [x] |
+| Route stubs for public + admin sitemap | [x] |
+| Supabase browser + server clients + `.env.example` | [x] |
+| Deploy empty shell to Vercel | [ ] *(run when ready)* |
 
 ---
 

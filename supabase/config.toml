@@ -1,0 +1,23 @@
+# supabase/config.toml — optional CLI defaults
+# Link a project with `npx supabase link` then `npx supabase db push`
+
+[project]
+id = "aipromptgrid"
+
+[api]
+enabled = true
+
+[db]
+major_version = 15
+
+[auth]
+enabled = true
+site_url = "http://localhost:3000"
+additional_redirect_urls = ["http://localhost:3000/auth/callback"]
+
+[auth.email]
+enable_signup = true
+enable_confirmations = false
+
+[storage]
+enabled = true

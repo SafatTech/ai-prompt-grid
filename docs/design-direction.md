@@ -46,23 +46,24 @@
 
 ## 4. CSS variable sketch
 
+Implemented in Phase 1 (`src/app/globals.css`):
+
 ```css
 :root {
-  --color-bg: /* stone / warm gray */;
-  --color-bg-elevated: /* slightly lighter surface */;
-  --color-ink: /* near-black for text */;
-  --color-ink-muted: /* secondary text */;
-  --color-accent: /* teal or ink-blue CTA */;
-  --color-accent-contrast: /* on-accent text */;
-  --color-border: /* low-contrast hairline */;
-  --font-display: /* brand / hero */;
-  --font-body: /* UI / prompts */;
-  --radius-sm: /* modest; not pill-everything */;
-  --space-section: /* generous section gaps */;
+  --color-bg: #e6e3dc;
+  --color-bg-elevated: #f1eee7;
+  --color-bg-deep: #1c1f1e;
+  --color-ink: #161918;
+  --color-ink-muted: #5a605c;
+  --color-accent: #0c6b6b; /* deep teal */
+  --color-accent-contrast: #f7f5f0;
+  --color-border: #cfcabf;
+  --font-display: Fraunces;
+  --font-body: Figtree;
+  --radius-sm: 0.375rem;
+  --space-section: clamp(4.5rem, 10vw, 7.5rem);
 }
 ```
-
-Exact hex values chosen in Phase 1 when tokens are implemented.
 
 ---
 
