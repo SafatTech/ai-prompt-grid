@@ -17,6 +17,20 @@ export const NAV = {
   ],
 } as const;
 
+/** Controlled model slugs — mirrors docs/content-model.md §5 */
+export const MODEL_LABELS: Record<string, string> = {
+  gemini: "Gemini",
+  chatgpt: "ChatGPT",
+  midjourney: "Midjourney",
+  flux: "Flux",
+  "stable-diffusion": "Stable Diffusion",
+  other: "Other",
+};
+
+export function modelLabel(slug: string): string {
+  return MODEL_LABELS[slug] ?? slug;
+}
+
 /** Launch taxonomy — mirrors docs/content-model.md */
 export const CATEGORY_SEEDS = [
   { name: "Vintage Film", slug: "vintage-film" },
@@ -29,3 +43,43 @@ export const CATEGORY_SEEDS = [
   { name: "Fantasy & Surreal", slug: "fantasy-surreal" },
   { name: "Product & Commercial", slug: "product-commercial" },
 ] as const;
+
+/** Cinematic cover art for category cards — keyed by slug. */
+export const CATEGORY_COVERS: Record<string, { src: string; alt: string }> = {
+  "vintage-film": {
+    src: "/images/categories/vintage-film.png",
+    alt: "Vintage film style category cover",
+  },
+  cinematic: {
+    src: "/images/categories/cinematic.png",
+    alt: "Cinematic style category cover",
+  },
+  portrait: {
+    src: "/images/categories/portrait.png",
+    alt: "Portrait style category cover",
+  },
+  fashion: {
+    src: "/images/categories/fashion.png",
+    alt: "Fashion style category cover",
+  },
+  "street-documentary": {
+    src: "/images/categories/street-documentary.png",
+    alt: "Street and documentary style category cover",
+  },
+  "selfie-transformation": {
+    src: "/images/categories/selfie-transformation.png",
+    alt: "Selfie transformation style category cover",
+  },
+  "retro-nostalgia": {
+    src: "/images/categories/retro-nostalgia.png",
+    alt: "Retro and nostalgia style category cover",
+  },
+  "fantasy-surreal": {
+    src: "/images/categories/fantasy-surreal.png",
+    alt: "Fantasy and surreal style category cover",
+  },
+  "product-commercial": {
+    src: "/images/categories/product-commercial.png",
+    alt: "Product and commercial style category cover",
+  },
+};

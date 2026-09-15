@@ -29,7 +29,7 @@ export function WaitlistForm({
   return (
     <div className="section-pad">
       <Container width="narrow">
-        <PageHeader eyebrow={eyebrow} title={title} description={description} />
+        <PageHeader eyebrow={eyebrow} title={title} description={description} tone="light" />
 
         {state?.ok ? (
           <p
@@ -67,7 +67,11 @@ export function WaitlistForm({
         )}
 
         <p className="mt-8">
-          <Button href="/styles" variant="ghost">
+          <Button
+            href="/styles"
+            variant="ghost"
+            className="text-ink hover:bg-bg-elevated hover:text-ink"
+          >
             ← Back to Explore
           </Button>
         </p>

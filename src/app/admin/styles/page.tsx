@@ -31,6 +31,7 @@ export default async function AdminStylesPage() {
 
         {styles.length === 0 ? (
           <EmptyState
+            tone="light"
             className="mt-8"
             title="No styles yet"
             description="Apply the Phase 2 migration to seed two draft styles, or create one in Phase 4."

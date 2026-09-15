@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import Link from "next/link";
+import type { CSSProperties } from "react";
+import { CategoryCard } from "@/components/home/CategoryCard";
 import { Container } from "@/components/ui/Container";
 import { PageHeader } from "@/components/ui/PageHeader";
 import { listCategories } from "@/lib/data/catalog";
@@ -13,7 +14,11 @@ export default async function CategoriesPage() {
   const categories = await listCategories();
 
   return (
-    <div className="section-pad">
+    <div className="ambient-field section-pad surface-grain bg-surface-1 text-accent-contrast">
+      <div className="ambient-layer" aria-hidden="true">
+        <span className="ambient-orb ambient-orb-1 ambient-orb-bright" />
+      </div>
+
       <Container width="wide">
         <PageHeader
           eyebrow="Explore by style / concept"
@@ -21,25 +26,19 @@ export default async function CategoriesPage() {
           description="Browse look families the way you’d scan a creative platform — then open styles with proof and copyable prompts."
         />
 
-        <ul className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-          {categories.map((category) => (
-            <li key={category.id}>
-              <Link
-                href={`/categories/${category.slug}`}
-                className="group flex h-full flex-col justify-between rounded-md border border-border bg-bg-elevated px-5 py-6 transition-colors hover:border-accent hover:bg-accent-soft/40"
-              >
-                <span className="font-display text-2xl tracking-tight text-ink">
-                  {category.name}
-                </span>
-                {category.description ? (
-                  <span className="mt-3 text-sm text-ink-muted">
-                    {category.description}
-                  </span>
-                ) : null}
-                <span className="mt-6 text-sm font-medium text-accent opacity-0 transition-opacity group-hover:opacity-100">
-                  View styles →
-                </span>
-              </Link>
+        <ul className="mt-12 grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
+          {categories.map((category, index) => (
+            <li
+              key={category.id}
+              className={index === 0 ? "sm:col-span-2" : undefined}
+              style={{ "--card-index": index } as CSSProperties}
+            >
+              <CategoryCard
+                name={category.name}
+                slug={category.slug}
+                index={index}
+                featured={index === 0}
+              />
             </li>
           ))}
         </ul>

@@ -31,7 +31,10 @@ Restart `npm run dev` after saving env.
 1. Open Supabase → SQL → New query.  
 2. Paste the full contents of  
    [`supabase/migrations/20260912120000_init.sql`](../supabase/migrations/20260912120000_init.sql)  
-3. Run. You should see 9 categories and 2 **draft** styles.
+3. Run. You should see 9 categories and 2 **draft** styles.  
+4. Then run  
+   [`supabase/migrations/20260913140000_featured_home_styles.sql`](../supabase/migrations/20260913140000_featured_home_styles.sql)  
+   to publish **6 featured** home styles (static before/after under `public/images/featured/`).
 
 **Option B — Supabase CLI**
 
@@ -40,6 +43,8 @@ npx supabase login
 npx supabase link --project-ref YOUR_REF
 npx supabase db push
 ```
+
+(`db push` applies both init and featured-home migrations.)
 
 ---
 
@@ -66,9 +71,23 @@ npx supabase db push
 ## 4. Bootstrap your first admin
 
 1. Register on the site (`/register`) with your email (or Google).  
-2. In SQL Editor:
+2. In SQL Editor (fix the protect function first if needed, then promote):
 
 ```sql
+create or replace function public.protect_profile_role()
+returns trigger
+language plpgsql
+as $$
+begin
+  if tg_op = 'UPDATE'
+     and old.role is distinct from new.role
+     and auth.uid() is not null then
+    raise exception 'Role changes must be applied via SQL bootstrap (service role), not the client';
+  end if;
+  return new;
+end;
+$$;
+
 update public.profiles
 set role = 'admin'
 where id = (

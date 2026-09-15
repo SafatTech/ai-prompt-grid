@@ -5,6 +5,8 @@ type PageHeaderProps = {
   title: string;
   description?: string;
   className?: string;
+  /** Dark matches catalog/home; light for auth/legal until those pages are redesigned. */
+  tone?: "light" | "dark";
 };
 
 export function PageHeader({
@@ -12,19 +14,37 @@ export function PageHeader({
   title,
   description,
   className,
+  tone = "dark",
 }: PageHeaderProps) {
+  const isDark = tone === "dark";
+
   return (
     <header className={cn("max-w-2xl", className)}>
       {eyebrow ? (
-        <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-ink-muted">
+        <p
+          className={cn(
+            "accent-rule mb-4 text-xs font-semibold uppercase tracking-[0.2em]",
+            isDark ? "text-accent-soft" : "text-accent",
+          )}
+        >
           {eyebrow}
         </p>
       ) : null}
-      <h1 className="font-display text-4xl leading-[1.05] tracking-tight text-ink sm:text-5xl">
+      <h1
+        className={cn(
+          "font-display text-4xl leading-[1.05] tracking-tight sm:text-5xl",
+          isDark ? "text-gradient-light" : "text-gradient-ink",
+        )}
+      >
         {title}
       </h1>
       {description ? (
-        <p className="mt-4 text-base leading-relaxed text-ink-muted sm:text-lg">
+        <p
+          className={cn(
+            "mt-4 text-base leading-relaxed sm:text-lg",
+            isDark ? "text-white/60" : "text-ink-muted",
+          )}
+        >
           {description}
         </p>
       ) : null}

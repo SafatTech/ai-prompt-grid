@@ -67,8 +67,9 @@ export function AuthForm({
       {!configured ? (
         <p className="rounded-md border border-border bg-bg px-4 py-3 text-sm text-ink-muted">
           Add <code className="text-ink">NEXT_PUBLIC_SUPABASE_URL</code> and{" "}
-          <code className="text-ink">NEXT_PUBLIC_SUPABASE_ANON_KEY</code> to{" "}
-          <code className="text-ink">.env.local</code>, then apply the Phase 2
+          <code className="text-ink">NEXT_PUBLIC_SUPABASE_ANON_KEY</code> (or{" "}
+          <code className="text-ink">NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY</code>)
+          to <code className="text-ink">.env.local</code>, then apply the Phase 2
           migration. See <code className="text-ink">docs/phase-2-setup.md</code>
           .
         </p>
@@ -111,7 +112,7 @@ export function AuthForm({
           type="submit"
           size="lg"
           variant="secondary"
-          className="w-full"
+          className="w-full border-border bg-bg-elevated text-ink hover:border-border-strong hover:bg-bg-elevated"
           disabled={!configured || pending}
         >
           {pending ? "Sending link…" : `${title} with magic link`}

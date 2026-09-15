@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
@@ -5,34 +6,30 @@ import { SITE } from "@/lib/constants";
 
 export function HomeHero() {
   return (
-    <section className="relative isolate min-h-[calc(100svh-var(--header-height))] overflow-hidden surface-grain">
-      <div
-        className="absolute inset-0 -z-10"
-        aria-hidden="true"
-        style={{
-          background: `
-            radial-gradient(ellipse 80% 60% at 70% 40%, rgba(12, 107, 107, 0.22), transparent 55%),
-            linear-gradient(135deg, #2a2f2d 0%, #1c1f1e 42%, #0f3d3d 100%)
-          `,
-        }}
-      />
-      <div
-        className="absolute inset-y-0 right-0 -z-10 hidden w-[48%] md:block"
-        aria-hidden="true"
-      >
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(28,31,30,0.95)_0%,transparent_28%)]" />
-        <div className="grid h-full grid-cols-2 gap-3 p-8 opacity-90">
-          <HeroPanel className="translate-y-8" label="Before" tone="cool" />
-          <HeroPanel className="-translate-y-4" label="After" tone="warm" />
-        </div>
+    <section className="relative isolate -mt-[var(--header-height)] min-h-svh overflow-hidden">
+      <div className="absolute inset-0 -z-10" aria-hidden="true">
+        <Image
+          src="/images/hero/hero-main.png"
+          alt=""
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover object-[72%_center] md:object-[78%_center]"
+          quality={90}
+        />
+        {/* Ink scrim for type readability — left → right on desktop, bottom wash on mobile */}
+        <div
+          className="absolute inset-0 bg-gradient-to-t from-bg-deep/95 via-bg-deep/55 to-bg-deep/25 md:bg-gradient-to-r md:from-bg-deep/92 md:via-bg-deep/55 md:to-bg-deep/10"
+        />
+        <div className="absolute inset-0 surface-grain pointer-events-none opacity-60" />
       </div>
 
       <Container
         width="wide"
-        className="relative flex min-h-[calc(100svh-var(--header-height))] flex-col justify-center py-16 md:py-20"
+        className="relative flex min-h-svh flex-col justify-end pb-16 pt-[calc(var(--header-height)+3rem)] md:justify-center md:py-20 md:pt-[calc(var(--header-height)+2.5rem)]"
       >
         <div className="max-w-xl text-accent-contrast">
-          <p className="animate-rise font-display text-4xl tracking-tight sm:text-5xl md:text-6xl">
+          <p className="animate-rise font-display text-4xl tracking-tight sm:text-5xl md:text-6xl lg:text-[4.25rem]">
             {SITE.name}
           </p>
           <h1 className="animate-rise-delay mt-5 text-balance text-2xl font-medium leading-snug tracking-tight sm:text-3xl md:text-[2.15rem]">
@@ -67,37 +64,5 @@ export function HomeHero() {
         </div>
       </Container>
     </section>
-  );
-}
-
-function HeroPanel({
-  label,
-  tone,
-  className,
-}: {
-  label: string;
-  tone: "cool" | "warm";
-  className?: string;
-}) {
-  const gradient =
-    tone === "cool"
-      ? "linear-gradient(160deg, #4a5560 0%, #2c3338 55%, #1a1e22 100%)"
-      : "linear-gradient(160deg, #8a6f55 0%, #5c4636 45%, #3d2e24 100%)";
-
-  return (
-    <div
-      className={`relative overflow-hidden rounded-md border border-white/10 shadow-[0_24px_60px_rgba(0,0,0,0.35)] ${className ?? ""}`}
-      style={{ background: gradient }}
-    >
-      <div className="absolute inset-0 opacity-40 mix-blend-overlay"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 30% 20%, rgba(255,255,255,0.35), transparent 45%)",
-        }}
-      />
-      <div className="absolute bottom-4 left-4 rounded-sm bg-black/35 px-2.5 py-1 text-[11px] font-medium uppercase tracking-[0.14em] text-white/85 backdrop-blur-sm">
-        {label}
-      </div>
-    </div>
   );
 }

@@ -73,7 +73,11 @@ export default async function AdminEditStylePage({ params }: Props) {
           </div>
         )}
         <div className="mt-6">
-          <Button href="/admin/styles" variant="secondary">
+          <Button
+            href="/admin/styles"
+            variant="secondary"
+            className="border-border bg-bg-elevated text-ink hover:border-border-strong"
+          >
             Back to list
           </Button>
         </div>

@@ -39,27 +39,8 @@ begin
 end;
 $$;
 
-create or replace function public.is_admin()
-returns boolean
-language sql
-stable
-security definer
-set search_path = public
-as $$
-  select exists (
-    select 1
-    from public.profiles p
-    where p.id = auth.uid()
-      and p.role = 'admin'
-  );
-$$;
-
-revoke all on function public.is_admin() from public;
-grant execute on function public.is_admin() to authenticated;
-grant execute on function public.is_admin() to anon;
-
 -- ---------------------------------------------------------------------------
--- profiles
+-- profiles (must exist before is_admin())
 -- ---------------------------------------------------------------------------
 create table if not exists public.profiles (
   id uuid primary key references auth.users (id) on delete cascade,
@@ -69,6 +50,7 @@ create table if not exists public.profiles (
   updated_at timestamptz not null default timezone('utc', now())
 );
 
+drop trigger if exists profiles_set_updated_at on public.profiles;
 create trigger profiles_set_updated_at
   before update on public.profiles
   for each row execute function public.set_updated_at();
@@ -100,6 +82,26 @@ create trigger on_auth_user_created
   after insert on auth.users
   for each row execute function public.handle_new_user();
 
+-- Depends on profiles existing
+create or replace function public.is_admin()
+returns boolean
+language sql
+stable
+security definer
+set search_path = public
+as $$
+  select exists (
+    select 1
+    from public.profiles p
+    where p.id = auth.uid()
+      and p.role = 'admin'
+  );
+$$;
+
+revoke all on function public.is_admin() from public;
+grant execute on function public.is_admin() to authenticated;
+grant execute on function public.is_admin() to anon;
+
 -- ---------------------------------------------------------------------------
 -- categories
 -- ---------------------------------------------------------------------------
@@ -115,6 +117,7 @@ create table if not exists public.categories (
 
 create index if not exists categories_sort_order_idx on public.categories (sort_order);
 
+drop trigger if exists categories_set_updated_at on public.categories;
 create trigger categories_set_updated_at
   before update on public.categories
   for each row execute function public.set_updated_at();
@@ -151,6 +154,7 @@ create index if not exists styles_featured_idx on public.styles (is_featured) wh
 create index if not exists styles_model_slugs_gin on public.styles using gin (model_slugs);
 create index if not exists styles_title_trgm_ready on public.styles (lower(title));
 
+drop trigger if exists styles_set_updated_at on public.styles;
 create trigger styles_set_updated_at
   before update on public.styles
   for each row execute function public.set_updated_at();
@@ -325,7 +329,11 @@ returns trigger
 language plpgsql
 as $$
 begin
-  if tg_op = 'UPDATE' and old.role is distinct from new.role then
+  -- Block role changes from authenticated clients only.
+  -- SQL Editor / service role have auth.uid() = null and may bootstrap admins.
+  if tg_op = 'UPDATE'
+     and old.role is distinct from new.role
+     and auth.uid() is not null then
     raise exception 'Role changes must be applied via SQL bootstrap (service role), not the client';
   end if;
   return new;

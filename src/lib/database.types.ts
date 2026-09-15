@@ -132,8 +132,16 @@ export type Database = {
           is_premium?: boolean;
           credit_cost?: number | null;
         };
-        Relationships: [];
-      };
+          Relationships: [
+            {
+              foreignKeyName: "styles_category_id_fkey";
+              columns: ["category_id"];
+              isOneToOne: false;
+              referencedRelation: "categories";
+              referencedColumns: ["id"];
+            },
+          ];
+        };
       style_images: {
         Row: {
           id: string;
@@ -165,7 +173,15 @@ export type Database = {
           sort_order?: number;
           created_at?: string;
         };
-        Relationships: [];
+        Relationships: [
+          {
+            foreignKeyName: "style_images_style_id_fkey";
+            columns: ["style_id"];
+            isOneToOne: false;
+            referencedRelation: "styles";
+            referencedColumns: ["id"];
+          },
+        ];
       };
       favorites: {
         Row: {

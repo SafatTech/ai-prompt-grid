@@ -26,6 +26,7 @@ export default async function LoginPage({ searchParams }: Props) {
     <div className="section-pad">
       <Container width="narrow">
         <PageHeader
+          tone="light"
           eyebrow="Account"
           title="Sign in"
           description="Magic link or Google. Browse and copy stay open without an account."

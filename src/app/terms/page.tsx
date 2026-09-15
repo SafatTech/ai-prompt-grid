@@ -12,6 +12,7 @@ export default function TermsPage() {
     <div className="section-pad">
       <Container width="narrow">
         <PageHeader
+          tone="light"
           eyebrow="Legal"
           title="Terms of Service"
           description="Working outline. Final Terms ship with Phase 5 polish."

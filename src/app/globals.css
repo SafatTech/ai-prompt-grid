@@ -14,6 +14,12 @@
   --color-accent-contrast: #f7f5f0;
   --color-border: #cfcabf;
   --color-border-strong: #a8a295;
+  /* Cinematic dark surfaces — continuous editorial night canvas */
+  --surface-1: #141817;
+  --surface-2: #1c1f1e;
+  --surface-3: #212726;
+  --hairline: rgba(247, 245, 240, 0.09);
+  --hairline-strong: rgba(247, 245, 240, 0.16);
   --radius-sm: 0.375rem;
   --radius-md: 0.625rem;
   --space-section: clamp(4.5rem, 10vw, 7.5rem);
@@ -34,8 +40,14 @@
   --color-accent-contrast: var(--color-accent-contrast);
   --color-border: var(--color-border);
   --color-border-strong: var(--color-border-strong);
+  --color-surface-1: var(--surface-1);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-hairline: var(--hairline);
+  --color-hairline-strong: var(--hairline-strong);
   --font-display: var(--font-display);
   --font-sans: var(--font-body);
+  --font-prompt: var(--font-prompt);
   --radius-sm: var(--radius-sm);
   --radius-md: var(--radius-md);
   --shadow-soft: 0 18px 50px rgba(22, 25, 24, 0.08);
@@ -78,13 +90,44 @@
     font-family: var(--font-display), Georgia, serif;
   }
 
+  .font-prompt {
+    font-family: var(--font-prompt), "Source Serif 4", Georgia, "Times New Roman",
+      serif;
+    font-optical-sizing: auto;
+  }
+
   .section-pad {
     padding-block: var(--space-section);
+  }
+
+  .section-seam {
+    position: relative;
+    border-top: 1px solid var(--hairline);
+  }
+
+  .section-seam::before {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    inset-inline: 0;
+    top: 0;
+    height: 4.5rem;
+    background: linear-gradient(
+      180deg,
+      rgba(20, 24, 23, 0) 0%,
+      var(--surface-1) 100%
+    );
+    opacity: 0.55;
+    z-index: 0;
   }
 
   .text-balance {
     text-wrap: balance;
   }
+
+  /* ---------------------------------------------------------------------
+     Surface texture
+     --------------------------------------------------------------------- */
 
   .surface-grain {
     position: relative;
@@ -99,8 +142,261 @@
     opacity: 0.035;
     mix-blend-mode: multiply;
     background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    z-index: 2;
+  }
+
+  /* ---------------------------------------------------------------------
+     Ambient field — abstract atmospheric background system
+     Soft brand-colored light blooms + drifting geometry. No grids.
+     --------------------------------------------------------------------- */
+
+  /* `clip` (not `hidden`) so descendants can still use position: sticky. */
+  .ambient-field {
+    position: relative;
+    isolation: isolate;
+    overflow: clip;
+  }
+
+  .ambient-layer {
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: clip;
+  }
+
+  .ambient-field > *:not(.ambient-layer) {
+    position: relative;
     z-index: 1;
   }
+
+  .ambient-orb {
+    --orb-color: rgba(12, 107, 107, 0.16);
+    position: absolute;
+    border-radius: 9999px;
+    background: radial-gradient(circle, var(--orb-color), transparent 70%);
+    filter: blur(56px);
+    will-change: transform;
+  }
+
+  .ambient-orb-bright {
+    --orb-color: rgba(213, 236, 236, 0.12);
+  }
+
+  .ambient-orb-ink {
+    --orb-color: rgba(28, 31, 30, 0.22);
+  }
+
+  .ambient-orb-teal-soft {
+    --orb-color: rgba(12, 107, 107, 0.14);
+  }
+
+  .ambient-orb-1 {
+    width: min(48vw, 34rem);
+    height: min(48vw, 34rem);
+    top: -14%;
+    right: -8%;
+    animation: ambient-drift-1 26s ease-in-out infinite alternate;
+  }
+
+  .ambient-orb-2 {
+    width: min(40vw, 26rem);
+    height: min(40vw, 26rem);
+    bottom: -16%;
+    left: -10%;
+    animation: ambient-drift-2 32s ease-in-out infinite alternate;
+  }
+
+  .ambient-orb-3 {
+    width: min(30vw, 18rem);
+    height: min(30vw, 18rem);
+    top: 46%;
+    left: 52%;
+    animation: ambient-drift-3 22s ease-in-out infinite alternate;
+  }
+
+  @keyframes ambient-drift-1 {
+    from {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+      transform: translate3d(-7%, 9%, 0) scale(1.1);
+    }
+  }
+
+  @keyframes ambient-drift-2 {
+    from {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+      transform: translate3d(11%, -8%, 0) scale(1.06);
+    }
+  }
+
+  @keyframes ambient-drift-3 {
+    from {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+      transform: translate3d(-9%, -12%, 0) scale(1.14);
+    }
+  }
+
+  /* Drifting motes */
+  .ambient-spark {
+    position: absolute;
+    border-radius: 9999px;
+    background: rgba(12, 107, 107, 0.55);
+    box-shadow: 0 0 12px 2px rgba(12, 107, 107, 0.28);
+    opacity: 0.6;
+    will-change: transform;
+  }
+
+  .ambient-spark-light {
+    background: rgba(213, 236, 236, 0.85);
+    box-shadow: 0 0 14px 3px rgba(213, 236, 236, 0.28);
+  }
+
+  .ambient-spark-1 {
+    width: 0.4rem;
+    height: 0.4rem;
+    top: 22%;
+    left: 16%;
+    animation: spark-float-1 16s ease-in-out infinite;
+  }
+
+  .ambient-spark-2 {
+    width: 0.3rem;
+    height: 0.3rem;
+    top: 62%;
+    right: 22%;
+    animation: spark-float-2 19s ease-in-out infinite;
+  }
+
+  .ambient-spark-3 {
+    width: 0.5rem;
+    height: 0.5rem;
+    bottom: 18%;
+    left: 42%;
+    animation: spark-float-3 14s ease-in-out infinite;
+  }
+
+  @keyframes spark-float-1 {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0);
+      opacity: 0.25;
+    }
+    50% {
+      transform: translate3d(16px, -34px, 0);
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes spark-float-2 {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0);
+      opacity: 0.7;
+    }
+    50% {
+      transform: translate3d(-22px, 26px, 0);
+      opacity: 0.2;
+    }
+  }
+
+  @keyframes spark-float-3 {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0);
+      opacity: 0.3;
+    }
+    50% {
+      transform: translate3d(24px, 18px, 0);
+      opacity: 0.75;
+    }
+  }
+
+  /* ---------------------------------------------------------------------
+     Panels & type treatments
+     --------------------------------------------------------------------- */
+
+  .glass-panel {
+    border: 1px solid rgba(247, 245, 240, 0.12);
+    background: rgba(247, 245, 240, 0.055);
+    backdrop-filter: blur(14px) saturate(120%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 24px 60px -40px rgba(0, 0, 0, 0.8);
+  }
+
+  .glass-panel-light {
+    border: 1px solid rgba(207, 202, 191, 0.7);
+    background: rgba(247, 245, 240, 0.62);
+    backdrop-filter: blur(12px) saturate(115%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.65),
+      0 24px 60px -42px rgba(22, 25, 24, 0.5);
+  }
+
+  .text-gradient-light {
+    background: linear-gradient(
+      112deg,
+      #ffffff 0%,
+      var(--color-accent-contrast) 44%,
+      var(--color-accent-soft) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .text-gradient-ink {
+    background: linear-gradient(
+      112deg,
+      var(--color-ink) 0%,
+      #2c3634 46%,
+      var(--color-accent) 100%
+    );
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .accent-rule {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .accent-rule::before {
+    content: "";
+    height: 1px;
+    width: 2.25rem;
+    flex: none;
+    background: linear-gradient(90deg, currentColor, transparent);
+    opacity: 0.75;
+  }
+
+  /* Slow float for feature imagery */
+  .float-slow {
+    animation: float-slow 9s ease-in-out infinite;
+    will-change: transform;
+  }
+
+  @keyframes float-slow {
+    0%,
+    100% {
+      transform: translate3d(0, 0, 0);
+    }
+    50% {
+      transform: translate3d(0, -12px, 0);
+    }
+  }
+
+  /* ---------------------------------------------------------------------
+     Entrance motion
+     --------------------------------------------------------------------- */
 
   @keyframes rise-in {
     from {
@@ -110,6 +406,28 @@
     to {
       opacity: 1;
       transform: translateY(0);
+    }
+  }
+
+  @keyframes card-rise {
+    from {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes reveal-in {
+    from {
+      opacity: 0;
+      transform: translateY(38px) scale(0.985);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0) scale(1);
     }
   }
 
@@ -125,6 +443,53 @@
     animation: rise-in 0.75s cubic-bezier(0.22, 1, 0.36, 1) 0.22s both;
   }
 
+  .style-card-enter {
+    animation: card-rise 0.65s cubic-bezier(0.22, 1, 0.36, 1) both;
+    animation-delay: calc(var(--card-index, 0) * 55ms);
+  }
+
+  /*
+   * Scroll-linked reveal. Only enabled where `animation-timeline: view()`
+   * is supported; elsewhere content renders normally with no animation.
+   */
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal-in linear both;
+      animation-timeline: view();
+      animation-range: entry 4% cover 30%;
+    }
+
+    .reveal-stagger > * {
+      animation: reveal-in linear both;
+      animation-timeline: view();
+      animation-range: entry 2% cover
+        calc(24% + (var(--card-index, 0) * 2.5%));
+    }
+  }
+
+  /* ---------------------------------------------------------------------
+     Style card
+     --------------------------------------------------------------------- */
+
+  .card-sheen::after {
+    content: "";
+    pointer-events: none;
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      104deg,
+      transparent 38%,
+      rgba(255, 255, 255, 0.28) 50%,
+      transparent 62%
+    );
+    transform: translateX(-120%);
+    transition: transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .group:hover .card-sheen::after {
+    transform: translateX(120%);
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;
@@ -132,8 +497,20 @@
 
     .animate-rise,
     .animate-rise-delay,
-    .animate-rise-delay-2 {
+    .animate-rise-delay-2,
+    .style-card-enter,
+    .reveal,
+    .reveal-stagger > *,
+    .ambient-orb,
+    .ambient-spark,
+    .float-slow {
       animation: none;
+    }
+
+    .card-sheen::after,
+    .group:hover .card-sheen::after {
+      transition: none;
+      transform: translateX(-120%);
     }
   }
 }

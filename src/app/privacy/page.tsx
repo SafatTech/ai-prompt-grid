@@ -12,6 +12,7 @@ export default function PrivacyPage() {
     <div className="section-pad">
       <Container width="narrow">
         <PageHeader
+          tone="light"
           eyebrow="Legal"
           title="Privacy Policy"
           description="Plain-language draft for launch polish. Full policy ships before public marketing push."

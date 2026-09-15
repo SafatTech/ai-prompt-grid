@@ -25,7 +25,11 @@ export default function AdminNewStylePage() {
             <Button type="button" disabled>
               Save draft
             </Button>
-            <Button href="/admin/styles" variant="secondary">
+            <Button
+              href="/admin/styles"
+              variant="secondary"
+              className="border-border bg-bg-elevated text-ink hover:border-border-strong"
+            >
               Cancel
             </Button>
           </div>

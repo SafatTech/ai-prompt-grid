@@ -40,3 +40,5 @@ Supabase keys are optional for Phase 1 shell; auth and CMS need them from Phase 
 ## Phase 2
 
 See [`docs/phase-2-setup.md`](./docs/phase-2-setup.md) to apply the SQL migration, enable auth providers, and promote your first admin.
+
+Home featured demo styles (6 published + featured with static before/after under `public/images/featured/`) ship in `supabase/migrations/20260913140000_featured_home_styles.sql`. Apply with `supabase db push` (or run that file in the SQL editor) after the init migration.

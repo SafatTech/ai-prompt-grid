@@ -33,6 +33,7 @@ export default async function AccountPage() {
       <Container width="wide">
         <div className="flex flex-col gap-6 sm:flex-row sm:items-start sm:justify-between">
           <PageHeader
+            tone="light"
             eyebrow="Account"
             title="Your favorites"
             description={
@@ -53,6 +54,7 @@ export default async function AccountPage() {
           </p>
         ) : (
           <EmptyState
+            tone="light"
             className="mt-10"
             title="No favorites yet"
             description="Browse Explore, open a style you like, and tap favorite. Favorites require a published style."

@@ -17,12 +17,22 @@ export function SiteHeaderClient({
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [createOpen, setCreateOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const createMenuId = useId();
+  const isHome = pathname === "/";
+  const solidChrome = !isHome || scrolled || mobileOpen;
 
   const closeMenus = () => {
     setMobileOpen(false);
     setCreateOpen(false);
   };
+
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   useEffect(() => {
     if (!mobileOpen) return;
@@ -34,7 +44,14 @@ export function SiteHeaderClient({
   }, [mobileOpen]);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border/80 bg-bg/85 backdrop-blur-md">
+    <header
+      className={cn(
+        "fixed inset-x-0 top-0 z-50 transition-[background-color,border-color,backdrop-filter] duration-300",
+        solidChrome
+          ? "border-b border-hairline bg-surface-1/85 backdrop-blur-md"
+          : "border-b border-transparent bg-transparent",
+      )}
+    >
       <Container
         width="wide"
         className="flex h-[var(--header-height)] items-center justify-between gap-4"
@@ -42,7 +59,7 @@ export function SiteHeaderClient({
         <Link
           href="/"
           onClick={closeMenus}
-          className="font-display text-lg tracking-tight text-ink sm:text-xl"
+          className="font-display text-lg tracking-tight text-accent-contrast sm:text-xl"
         >
           {SITE.name}
         </Link>
@@ -65,8 +82,8 @@ export function SiteHeaderClient({
             <button
               type="button"
               className={cn(
-                "inline-flex h-10 items-center gap-1 rounded-md px-3 text-sm font-medium text-ink-muted transition-colors hover:bg-bg-elevated hover:text-ink",
-                pathname.startsWith("/coming-soon") && "text-ink",
+                "inline-flex h-10 items-center gap-1 rounded-md px-3 text-sm font-medium text-white/65 transition-colors hover:bg-white/[0.06] hover:text-white",
+                pathname.startsWith("/coming-soon") && "text-white",
               )}
               aria-expanded={createOpen}
               aria-controls={createMenuId}
@@ -83,17 +100,17 @@ export function SiteHeaderClient({
             {createOpen ? (
               <div
                 id={createMenuId}
-                className="absolute left-0 top-full z-50 mt-1 min-w-[14rem] rounded-md border border-border bg-bg-elevated py-1 shadow-soft"
+                className="absolute left-0 top-full z-50 mt-1 min-w-[14rem] rounded-md border border-hairline bg-surface-3 py-1 shadow-[0_24px_60px_-28px_rgba(0,0,0,0.85)]"
               >
                 {NAV.create.map((item) => (
                   <Link
                     key={item.href}
                     href={item.href}
                     onClick={closeMenus}
-                    className="block px-4 py-2.5 text-sm text-ink-muted transition-colors hover:bg-bg hover:text-ink"
+                    className="block px-4 py-2.5 text-sm text-white/70 transition-colors hover:bg-white/[0.06] hover:text-white"
                   >
                     {item.label}
-                    <span className="mt-0.5 block text-xs text-ink-faint">
+                    <span className="mt-0.5 block text-xs text-white/40">
                       Coming soon
                     </span>
                   </Link>
@@ -109,14 +126,14 @@ export function SiteHeaderClient({
               {isAdmin ? (
                 <Link
                   href="/admin"
-                  className="inline-flex h-10 items-center rounded-md px-3 text-sm font-medium text-ink-muted transition-colors hover:text-ink"
+                  className="inline-flex h-10 items-center rounded-md px-3 text-sm font-medium text-white/65 transition-colors hover:text-white"
                 >
                   Admin
                 </Link>
               ) : null}
               <Link
                 href="/account"
-                className="inline-flex h-10 items-center rounded-md bg-ink px-4 text-sm font-medium text-accent-contrast transition-colors hover:bg-bg-deep"
+                className="inline-flex h-10 items-center rounded-md bg-accent px-4 text-sm font-medium text-accent-contrast transition-colors hover:bg-accent-hover"
               >
                 Account
               </Link>
@@ -125,13 +142,13 @@ export function SiteHeaderClient({
             <>
               <Link
                 href="/login"
-                className="inline-flex h-10 items-center rounded-md px-3 text-sm font-medium text-ink-muted transition-colors hover:text-ink"
+                className="inline-flex h-10 items-center rounded-md px-3 text-sm font-medium text-white/65 transition-colors hover:text-white"
               >
                 Sign in
               </Link>
               <Link
                 href="/register"
-                className="inline-flex h-10 items-center rounded-md bg-ink px-4 text-sm font-medium text-accent-contrast transition-colors hover:bg-bg-deep"
+                className="inline-flex h-10 items-center rounded-md bg-accent px-4 text-sm font-medium text-accent-contrast transition-colors hover:bg-accent-hover"
               >
                 Register
               </Link>
@@ -141,7 +158,7 @@ export function SiteHeaderClient({
 
         <button
           type="button"
-          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-border md:hidden"
+          className="inline-flex h-10 w-10 items-center justify-center rounded-md border border-hairline text-accent-contrast md:hidden"
           aria-expanded={mobileOpen}
           aria-controls="mobile-nav"
           aria-label={mobileOpen ? "Close menu" : "Open menu"}
@@ -155,7 +172,7 @@ export function SiteHeaderClient({
       {mobileOpen ? (
         <div
           id="mobile-nav"
-          className="border-t border-border bg-bg md:hidden"
+          className="border-t border-hairline bg-surface-1 md:hidden"
         >
           <Container className="flex flex-col gap-1 py-4">
             <MobileLink href="/styles" onNavigate={closeMenus}>
@@ -164,7 +181,7 @@ export function SiteHeaderClient({
             <MobileLink href="/categories" onNavigate={closeMenus}>
               Categories
             </MobileLink>
-            <p className="px-3 pt-3 text-xs font-semibold uppercase tracking-[0.16em] text-ink-faint">
+            <p className="px-3 pt-3 text-xs font-semibold uppercase tracking-[0.16em] text-white/40">
               Create
             </p>
             {NAV.create.map((item) => (
@@ -176,7 +193,7 @@ export function SiteHeaderClient({
                 {item.label}
               </MobileLink>
             ))}
-            <div className="mt-3 flex flex-col gap-2 border-t border-border pt-4">
+            <div className="mt-3 flex flex-col gap-2 border-t border-hairline pt-4">
               {isSignedIn ? (
                 <>
                   {isAdmin ? (
@@ -187,7 +204,7 @@ export function SiteHeaderClient({
                   <Link
                     href="/account"
                     onClick={closeMenus}
-                    className="rounded-md bg-ink py-2.5 text-center text-sm font-medium text-accent-contrast"
+                    className="rounded-md bg-accent py-2.5 text-center text-sm font-medium text-accent-contrast"
                   >
                     Account
                   </Link>
@@ -197,14 +214,14 @@ export function SiteHeaderClient({
                   <Link
                     href="/login"
                     onClick={closeMenus}
-                    className="flex-1 rounded-md border border-border py-2.5 text-center text-sm font-medium"
+                    className="flex-1 rounded-md border border-hairline py-2.5 text-center text-sm font-medium text-accent-contrast"
                   >
                     Sign in
                   </Link>
                   <Link
                     href="/register"
                     onClick={closeMenus}
-                    className="flex-1 rounded-md bg-ink py-2.5 text-center text-sm font-medium text-accent-contrast"
+                    className="flex-1 rounded-md bg-accent py-2.5 text-center text-sm font-medium text-accent-contrast"
                   >
                     Register
                   </Link>
@@ -231,8 +248,8 @@ function NavLink({
     <Link
       href={href}
       className={cn(
-        "inline-flex h-10 items-center rounded-md px-3 text-sm font-medium transition-colors hover:bg-bg-elevated hover:text-ink",
-        active ? "text-ink" : "text-ink-muted",
+        "inline-flex h-10 items-center rounded-md px-3 text-sm font-medium transition-colors hover:bg-white/[0.06] hover:text-white",
+        active ? "text-white" : "text-white/65",
       )}
     >
       {children}
@@ -253,7 +270,7 @@ function MobileLink({
     <Link
       href={href}
       onClick={onNavigate}
-      className="rounded-md px-3 py-2.5 text-base font-medium text-ink"
+      className="rounded-md px-3 py-2.5 text-base font-medium text-accent-contrast"
     >
       {children}
     </Link>

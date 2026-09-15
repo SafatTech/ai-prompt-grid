@@ -26,6 +26,7 @@ export default async function RegisterPage({ searchParams }: Props) {
     <div className="section-pad">
       <Container width="narrow">
         <PageHeader
+          tone="light"
           eyebrow="Account"
           title="Register"
           description="Create an account to save favorites. Exploring and copying prompts never requires signup."

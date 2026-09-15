@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Figtree, Fraunces } from "next/font/google";
+import { Figtree, Fraunces, Source_Serif_4 } from "next/font/google";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { SITE } from "@/lib/constants";
@@ -14,6 +14,12 @@ const fraunces = Fraunces({
 const figtree = Figtree({
   subsets: ["latin"],
   variable: "--font-body",
+  display: "swap",
+});
+
+const sourceSerif = Source_Serif_4({
+  subsets: ["latin"],
+  variable: "--font-prompt",
   display: "swap",
 });
 
@@ -42,11 +48,12 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${figtree.variable} h-full antialiased`}
+      data-scroll-behavior="smooth"
+      className={`${fraunces.variable} ${figtree.variable} ${sourceSerif.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-bg text-ink">
         <SiteHeader />
-        <main className="flex-1">{children}</main>
+        <main className="flex-1 pt-[var(--header-height)]">{children}</main>
         <SiteFooter />
       </body>
     </html>
