@@ -26,7 +26,7 @@ Without env vars, the app keeps serving `src/lib/catalog/seed-styles.ts` (no bre
 
 ## Still open (Phase 4+)
 
-- Auth sign-in (replace localStorage library mock)
-- Persist saved styles / collections / creations to private tables
-- Upload pipeline into `user-creations` with signed URLs
+- ~~Auth sign-in (replace localStorage library mock)~~ → see `docs/PHASE_4_STATUS.md`
+- ~~Persist saved styles / collections~~ → Phase 4
+- Upload pipeline into `user-creations` with signed URLs (Phase 5)
 - Replace Picsum placeholders with licensed catalog assets in Storage

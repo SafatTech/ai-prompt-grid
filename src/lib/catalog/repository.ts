@@ -1,5 +1,5 @@
 import { getPublicSupabaseConfig, isSupabaseConfigured } from "@/lib/env";
-import { createServerSupabaseClient } from "@/lib/supabase/server";
+import { createPublicSupabaseClient } from "@/lib/supabase/public";
 import { mapDbStyleToCatalog, type DbStyleRow } from "./mapper";
 import { getPublishedStyleById, getPublishedStyles } from "./styles";
 import type { CatalogStyle } from "./types";
@@ -40,6 +40,7 @@ function mapRows(rows: DbStyleRow[]): CatalogStyle[] {
 /**
  * Published catalog for guest UI.
  * Prefers Supabase when configured; falls back to static seed otherwise.
+ * Uses a cookie-free anon client so catalog pages can prerender.
  */
 export async function listPublishedStyles(): Promise<CatalogStyle[]> {
   if (!isSupabaseConfigured()) {
@@ -47,7 +48,7 @@ export async function listPublishedStyles(): Promise<CatalogStyle[]> {
   }
 
   try {
-    const supabase = await createServerSupabaseClient();
+    const supabase = createPublicSupabaseClient();
     if (!supabase) return getPublishedStyles();
 
     const { data, error } = await supabase
@@ -82,7 +83,7 @@ export async function getPublishedStyleBySlug(
   }
 
   try {
-    const supabase = await createServerSupabaseClient();
+    const supabase = createPublicSupabaseClient();
     if (!supabase) return getPublishedStyleById(slug);
 
     const { data, error } = await supabase

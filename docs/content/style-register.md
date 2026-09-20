@@ -1,6 +1,10 @@
 # Style register — V0 beta
 
-Every beta style needs a complete row before status moves to **published**. Prototype seeds below are **draft placeholders** until owners complete testing, licensed evidence, and exact tool/mode records.
+Every beta style needs a complete row before status moves to **published**.
+
+**Live content:** after Supabase is seeded, create and edit styles in **`/admin`** (editor role). This register remains the planning checklist (owners, licence, tool/mode notes). Prototype seeds in code are **bootstrap only** — see `docs/PHASE_8_STATUS.md`.
+
+Prototype table rows below may still say draft until owners complete testing, licensed evidence, and exact tool/mode records.
 
 ## Controlled vocabularies
 

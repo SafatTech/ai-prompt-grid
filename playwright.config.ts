@@ -26,5 +26,15 @@ export default defineConfig({
     url: "http://localhost:3000",
     reuseExistingServer: !process.env.CI,
     timeout: 120_000,
+    env: {
+      ...process.env,
+      ...(process.env.CI
+        ? {
+            NEXT_PUBLIC_SUPABASE_URL: "",
+            NEXT_PUBLIC_SUPABASE_ANON_KEY: "",
+            SUPABASE_SERVICE_ROLE_KEY: "",
+          }
+        : {}),
+    },
   },
 });

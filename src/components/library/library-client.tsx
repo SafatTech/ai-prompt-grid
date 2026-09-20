@@ -28,6 +28,7 @@ export function LibraryClient({ styles }: Props) {
   const { openSignIn, openCollection, openSaveResult } = useUiModals();
   const { toast } = useToast();
   const [tab, setTab] = useState<Tab>("saved");
+  const [deletingId, setDeletingId] = useState<string | null>(null);
 
   if (!signedIn) {
     return (
@@ -59,7 +60,8 @@ export function LibraryClient({ styles }: Props) {
           My library
         </h1>
         <p className="m-0 text-[var(--muted)]">
-          Your saved styles and finished transformations stay in this browser.
+          Saved styles, collections, and creations sync privately to your account when
+          Supabase is configured.
         </p>
       </section>
 
@@ -224,51 +226,65 @@ export function LibraryClient({ styles }: Props) {
                     key={creation.id}
                     className="overflow-hidden rounded-[var(--radius)] border border-[var(--line)] bg-[var(--surface)]"
                   >
-                    <div className="grid h-[290px] grid-cols-[1fr_1.25fr] gap-0.5 bg-[var(--line)]">
-                      {creation.source ? (
-                        // eslint-disable-next-line @next/next/no-img-element
+                    <Link href={`/creations/${creation.id}`} className="block">
+                      <div className="grid h-[290px] grid-cols-[1fr_1.25fr] gap-0.5 bg-[var(--line)]">
+                        {creation.source ? (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img
+                            src={creation.source}
+                            alt="Source photo"
+                            className="h-full w-full object-cover"
+                          />
+                        ) : (
+                          <div className="grid place-items-center bg-[var(--surface-2)] text-xs text-[var(--muted)]">
+                            No source photo saved
+                          </div>
+                        )}
+                        {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
-                          src={creation.source}
-                          alt="Source photo"
+                          src={creation.result}
+                          alt="Saved AI result"
                           className="h-full w-full object-cover"
                         />
-                      ) : (
-                        <div className="grid place-items-center bg-[var(--surface-2)] text-xs text-[var(--muted)]">
-                          No source photo saved
-                        </div>
-                      )}
-                      {/* eslint-disable-next-line @next/next/no-img-element */}
-                      <img
-                        src={creation.result}
-                        alt="Saved AI result"
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
+                      </div>
+                    </Link>
                     <div className="p-[19px]">
                       <div className="flex justify-between gap-3 text-[11px] text-[var(--muted)]">
                         <span>{creation.styleName}</span>
                         <span>{creation.date}</span>
                       </div>
-                      <h3 className="my-2">{creation.styleName}</h3>
+                      <h3 className="my-2">
+                        <Link
+                          href={`/creations/${creation.id}`}
+                          className="text-inherit no-underline hover:underline"
+                        >
+                          {creation.styleName}
+                        </Link>
+                      </h3>
                       {creation.notes ? (
                         <p className="mb-4 text-[13px] text-[var(--muted)]">{creation.notes}</p>
                       ) : null}
                       <div className="mb-4 max-h-[74px] overflow-auto rounded-[10px] bg-[#101016] p-2.5 font-mono text-[11px] leading-normal text-[#bebbc7]">
                         {creation.prompt}
                       </div>
-                      <div className="flex gap-2">
-                        <a
+                      <div className="flex flex-wrap gap-2">
+                        <Link
+                          href={`/creations/${creation.id}`}
                           className="inline-flex min-h-11 items-center justify-center rounded-xl border border-[var(--line)] bg-[var(--surface-2)] px-[18px] text-sm font-bold"
-                          href={creation.result}
-                          download="ai-prompt-grid-result.jpg"
                         >
-                          Download
-                        </a>
+                          Open
+                        </Link>
                         <Button
                           variant="danger"
+                          disabled={deletingId === creation.id}
                           onClick={() => {
-                            deleteCreation(creation.id);
-                            toast("Creation deleted.");
+                            void (async () => {
+                              setDeletingId(creation.id);
+                              const ok = await deleteCreation(creation.id);
+                              setDeletingId(null);
+                              if (ok) toast("Creation deleted.");
+                              else toast("Could not delete creation.", "error");
+                            })();
                           }}
                         >
                           Delete
@@ -282,7 +298,7 @@ export function LibraryClient({ styles }: Props) {
               <EmptyState
                 icon="↔"
                 title="Your transformations will appear here"
-                description="Create them in an AI image editor, then save the finished images in this private browser library."
+                description="Create them in an AI image editor, then save the finished images privately here."
                 action={
                   <Link
                     href="/explore"

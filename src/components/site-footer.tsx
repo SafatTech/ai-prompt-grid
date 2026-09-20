@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { GridMark } from "@/components/grid-mark";
 
 export function SiteFooter() {
@@ -8,7 +9,23 @@ export function SiteFooter() {
           <GridMark />
           AI Prompt Grid
         </div>
-        <span>Discover tested styles. Transform your photo in an external AI editor.</span>
+        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
+          <span className="sm:mr-2">
+            Discover tested styles. Transform your photo in an external AI editor.
+          </span>
+          <Link
+            href="/privacy"
+            className="font-bold text-[var(--text)] underline-offset-2 hover:underline"
+          >
+            Privacy
+          </Link>
+          <Link
+            href="/terms"
+            className="font-bold text-[var(--text)] underline-offset-2 hover:underline"
+          >
+            Terms
+          </Link>
+        </div>
       </div>
     </footer>
   );

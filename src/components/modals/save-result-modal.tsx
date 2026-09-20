@@ -7,28 +7,32 @@ import { useLibrary } from "@/components/providers/library-provider";
 import { useToast } from "@/components/providers/toast-provider";
 import { assemblePrompt, defaultsForStyle } from "@/lib/catalog/prompts";
 import { getPublishedStyleById } from "@/lib/catalog/styles";
+import { isSupabaseConfigured } from "@/lib/env";
+import { MAX_UPLOAD_BYTES } from "@/lib/creations/constants";
+import { track } from "@/lib/analytics";
 
 type Props = {
   styleId: string;
   onClose: () => void;
 };
 
-function readImage(
+function previewFile(
   file: File | undefined,
-  onOk: (dataUrl: string) => void,
+  onOk: (dataUrl: string, file: File) => void,
   onError: (message: string) => void,
 ) {
   if (!file) return;
-  if (!file.type.startsWith("image/")) {
-    onError("Please choose an image file.");
+  const allowed = ["image/jpeg", "image/png", "image/webp"];
+  if (!allowed.includes(file.type) && !file.type.startsWith("image/")) {
+    onError("Please choose a JPEG, PNG, or WebP image.");
     return;
   }
-  if (file.size > 10 * 1024 * 1024) {
+  if (file.size > MAX_UPLOAD_BYTES) {
     onError("Choose an image under 10 MB.");
     return;
   }
   const reader = new FileReader();
-  reader.onload = () => onOk(String(reader.result));
+  reader.onload = () => onOk(String(reader.result), file);
   reader.onerror = () => onError("That image could not be read.");
   reader.readAsDataURL(file);
 }
@@ -37,15 +41,19 @@ export function SaveResultModal({ styleId, onClose }: Props) {
   const style = getPublishedStyleById(styleId);
   const { addCreation } = useLibrary();
   const { toast } = useToast();
-  const [result, setResult] = useState("");
-  const [source, setSource] = useState("");
+  const remote = isSupabaseConfigured();
+  const [resultPreview, setResultPreview] = useState("");
+  const [sourcePreview, setSourcePreview] = useState("");
+  const [resultFile, setResultFile] = useState<File | null>(null);
+  const [sourceFile, setSourceFile] = useState<File | null>(null);
+  const [busy, setBusy] = useState(false);
 
   if (!style) return null;
   const currentStyle = style;
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (!result) {
+    if (!resultPreview || (remote && !resultFile)) {
       toast("Select your transformed result first.", "error");
       return;
     }
@@ -55,15 +63,36 @@ export function SaveResultModal({ styleId, onClose }: Props) {
       return;
     }
     const form = new FormData(event.currentTarget);
-    addCreation({
-      result,
-      source,
+    const notes = String(form.get("notes") || "").trim();
+
+    setBusy(true);
+    if (!remote) {
+      track("creation_upload_started", {
+        style_id: currentStyle.id,
+        has_source: Boolean(sourcePreview),
+      });
+    }
+    const result = await addCreation({
       styleId: currentStyle.id,
       styleName: currentStyle.title,
-      notes: String(form.get("notes") || "").trim(),
+      notes,
       prompt: assembled.prompt,
+      resultFile: resultFile ?? undefined,
+      sourceFile: sourceFile,
+      result: resultPreview,
+      source: sourcePreview,
     });
-    toast("Result saved to My creations.");
+    setBusy(false);
+
+    if (!result.ok) {
+      toast(result.error, "error");
+      return;
+    }
+    toast(
+      remote
+        ? "Result saved privately to My creations."
+        : "Result saved to My creations (this browser).",
+    );
     onClose();
   }
 
@@ -72,7 +101,11 @@ export function SaveResultModal({ styleId, onClose }: Props) {
       wide
       label="Save transformed result"
       title="Save your transformed result"
-      description="Upload the image you created in your AI editor. Phase 1 stores this in your browser only."
+      description={
+        remote
+          ? "Upload the image you created in your AI editor. Stored privately in your account (JPEG, PNG, or WebP · max 10 MB)."
+          : "Upload the image you created in your AI editor. Stored privately in this browser until Supabase is configured."
+      }
       onClose={onClose}
     >
       <form onSubmit={onSubmit} className="grid gap-3">
@@ -87,18 +120,34 @@ export function SaveResultModal({ styleId, onClose }: Props) {
         <div className="grid gap-3 sm:grid-cols-2">
           <UploadField
             label="AI result"
-            preview={result}
+            preview={resultPreview}
             strong="Select your AI result"
+            testId="creation-result-input"
             onFile={(file) =>
-              readImage(file, setResult, (message) => toast(message, "error"))
+              previewFile(
+                file,
+                (url, f) => {
+                  setResultPreview(url);
+                  setResultFile(f);
+                },
+                (message) => toast(message, "error"),
+              )
             }
           />
           <UploadField
             label="Source photo (optional)"
-            preview={source}
+            preview={sourcePreview}
             strong="Add the source photo"
+            testId="creation-source-input"
             onFile={(file) =>
-              readImage(file, setSource, (message) => toast(message, "error"))
+              previewFile(
+                file,
+                (url, f) => {
+                  setSourcePreview(url);
+                  setSourceFile(f);
+                },
+                (message) => toast(message, "error"),
+              )
             }
           />
         </div>
@@ -112,11 +161,11 @@ export function SaveResultModal({ styleId, onClose }: Props) {
           />
         </label>
         <div className="mt-2 flex flex-wrap justify-end gap-2">
-          <Button type="button" variant="ghost" onClick={onClose}>
+          <Button type="button" variant="ghost" onClick={onClose} disabled={busy}>
             Cancel
           </Button>
-          <Button type="submit" data-testid="save-creation-submit">
-            Save to my creations
+          <Button type="submit" data-testid="save-creation-submit" disabled={busy}>
+            {busy ? "Saving…" : "Save to my creations"}
           </Button>
         </div>
       </form>
@@ -128,11 +177,13 @@ function UploadField({
   label,
   preview,
   strong,
+  testId,
   onFile,
 }: {
   label: string;
   preview: string;
   strong: string;
+  testId: string;
   onFile: (file: File | undefined) => void;
 }) {
   return (
@@ -141,7 +192,8 @@ function UploadField({
       <div className="relative grid min-h-[150px] place-items-center overflow-hidden rounded-[14px] border border-dashed border-[var(--line-strong)] bg-[#111118] text-center">
         <input
           type="file"
-          accept="image/jpeg,image/png,image/webp,image/*"
+          accept="image/jpeg,image/png,image/webp"
+          data-testid={testId}
           className="absolute inset-0 z-10 h-full w-full cursor-pointer opacity-0"
           onChange={(event) => onFile(event.target.files?.[0])}
         />

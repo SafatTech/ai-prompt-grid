@@ -28,17 +28,21 @@ Rules:
 - Commit `.env.example` only; real secrets stay in Vercel / local `.env.local`  
 - Separate storage buckets and data per environment  
 
-## Auth redirect URLs (plan before enabling)
+## Auth redirect URLs
 
-Document exact callbacks once hosts are known:
+Configure these in Supabase **Authentication → URL configuration** (and Google Cloud OAuth if using Google).
 
-| Provider | Local | Preview | Production |
+| Purpose | Local | Preview | Production |
 |---|---|---|---|
-| Google OAuth | TBD | TBD | TBD |
-| Magic link email redirect | TBD | TBD | TBD |
-| Post-auth app return | `/auth/callback` (planned) | same | same |
+| Site URL | `http://localhost:3000` | Preview origin | Production origin |
+| Redirect allow list | `http://localhost:3000/auth/callback` | `https://*.vercel.app/auth/callback` | `https://YOUR_DOMAIN/auth/callback` |
+| Post-auth app return | `/auth/callback?next=/` | same | same |
+
+Enable providers under **Authentication → Providers**: Google and Email (magic link / OTP).
 
 Also plan privacy-policy and terms pages before public beta invites.
+
+**Status:** `/privacy` and `/terms` shipped in Phase 7.
 
 ## Release path
 
@@ -49,6 +53,8 @@ Also plan privacy-policy and terms pages before public beta invites.
 
 ## Operational checklist
 
+- [x] Privacy policy and terms pages planned (`/privacy`, `/terms`)
+- [x] CI workflow for lint, unit, build, Playwright smoke
 - [ ] Dev + prod Supabase projects created  
 - [ ] Dev + prod Vercel projects/env vars set  
 - [ ] `catalog-public` and `user-creations` buckets configured per env  

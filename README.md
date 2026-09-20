@@ -63,6 +63,10 @@ tests/unit/              Unit tests
 | Analytics | `docs/engineering/analytics-events.md` |
 | Deployment | `docs/engineering/deployment-plan.md` |
 | Supabase setup | `docs/engineering/supabase-setup.md` |
+| Phase 5 status | `docs/PHASE_5_STATUS.md` |
+| Phase 6 status | `docs/PHASE_6_STATUS.md` |
+| Phase 7 status | `docs/PHASE_7_STATUS.md` |
+| Phase 8 status | `docs/PHASE_8_STATUS.md` |
 
 ## Phase status
 
@@ -70,13 +74,31 @@ tests/unit/              Unit tests
 
 **Phase 2 (public catalog)** — complete for static seed (see `docs/PHASE_2_STATUS.md`).
 
-**Phase 3 (Supabase catalog)** — complete for DB + fallback (see `docs/PHASE_3_STATUS.md`):
+**Phase 4 (Auth + library)** — complete for accounts + saves (see `docs/PHASE_4_STATUS.md`):
 
-- [x] Migrations (schema, RLS, storage buckets)
-- [x] SSR/browser/admin clients + catalog repository
-- [x] Seed script and async pages with static fallback
+- [x] Google OAuth + magic link, `/auth/callback`, session middleware
+- [x] Saved styles and collections in Supabase (RLS)
+- [x] Pending-action restore after sign-in
 
-**Phase 4 next:** Auth + private library persistence.
+**Phase 5 (Private creations)** — complete for cloud uploads (see `docs/PHASE_5_STATUS.md`):
+
+- [x] Upload to `user-creations` with validation + WebP re-encode
+- [x] `/creations/[id]`, delete, source-only delete, 25-creation quota
+
+**Phase 6 (Editorial admin)** — complete for lifecycle (see `docs/PHASE_6_STATUS.md`):
+
+- [x] `/admin` draft → review → publish → archive
+- [x] Role denial for ordinary users; audit log on publish/archive
+
+**Phase 7 (Launch hardening)** — complete for legal + CI smoke (see `docs/PHASE_7_STATUS.md`):
+
+- [x] Privacy / terms pages
+- [x] GitHub Actions CI
+- [x] Extra Playwright coverage for auth gate and upload size
+
+**Phase 8 (Admin content editor)** — create/edit style recipes in `/admin` (see `docs/PHASE_8_STATUS.md`).
+
+**Still open for full V0:** licensed catalog assets, style owners, optional live-OAuth e2e, Sentry, production cutover.
 
 ## Secrets
 

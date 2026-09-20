@@ -13,7 +13,7 @@ import { cn } from "@/lib/utils";
 export function SiteHeader() {
   const pathname = usePathname();
   const router = useRouter();
-  const { signedIn, signOut, setPendingAction } = useLibrary();
+  const { signedIn, signOut, setPendingAction, isEditor } = useLibrary();
   const { openSignIn } = useUiModals();
   const { toast } = useToast();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -62,6 +62,11 @@ export function SiteHeader() {
           </NavLink>
           <NavLink href="/explore">Categories</NavLink>
           <NavLink href="/how-it-works">How it works</NavLink>
+          {isEditor ? (
+            <NavLink href="/admin" active={pathname.startsWith("/admin")}>
+              Admin
+            </NavLink>
+          ) : null}
         </nav>
 
         <div className="ml-auto flex items-center gap-2.5">
@@ -116,6 +121,19 @@ export function SiteHeader() {
                   >
                     My library
                   </button>
+                  {isEditor ? (
+                    <button
+                      type="button"
+                      role="menuitem"
+                      className="w-full cursor-pointer rounded-[9px] border-0 bg-transparent px-2.5 py-2.5 text-left text-[var(--text)] hover:bg-[rgba(255,255,255,0.06)]"
+                      onClick={() => {
+                        setProfileOpen(false);
+                        router.push("/admin");
+                      }}
+                    >
+                      Editorial admin
+                    </button>
+                  ) : null}
                   <button
                     type="button"
                     role="menuitem"
@@ -170,13 +188,23 @@ export function SiteHeader() {
             How it works
           </Link>
           {signedIn ? (
-            <button
-              type="button"
-              className="mt-1.5 w-full rounded-xl px-3 py-3 text-left text-[var(--muted)]"
-              onClick={goLibrary}
-            >
-              My library
-            </button>
+            <>
+              <button
+                type="button"
+                className="mt-1.5 w-full rounded-xl px-3 py-3 text-left text-[var(--muted)]"
+                onClick={goLibrary}
+              >
+                My library
+              </button>
+              {isEditor ? (
+                <Link
+                  className="mt-1.5 block rounded-xl px-3 py-3 text-[var(--muted)]"
+                  href="/admin"
+                >
+                  Editorial admin
+                </Link>
+              ) : null}
+            </>
           ) : (
             <Button className="mt-2 w-full" onClick={openSignIn}>
               Sign in
