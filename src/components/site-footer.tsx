@@ -1,12 +1,12 @@
 import Link from "next/link";
-import { GridMark } from "@/components/grid-mark";
+import { StoryShiftMark } from "@/components/story-shift-mark";
 
 export function SiteFooter() {
   return (
     <footer className="border-t border-[var(--line)] py-8 text-xs text-[var(--muted)]">
       <div className="container flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
         <div className="flex items-center gap-2 font-bold text-[var(--text)]">
-          <GridMark />
+          <StoryShiftMark className="h-6 w-[35px]" />
           AI Prompt Grid
         </div>
         <div className="flex flex-wrap items-center gap-x-4 gap-y-2">

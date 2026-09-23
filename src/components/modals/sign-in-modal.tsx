@@ -133,7 +133,7 @@ export function SignInModal({ onClose }: { onClose: () => void }) {
             className="rounded-[10px] border border-[var(--line)] bg-[var(--surface-2)] px-3 py-2.5 text-[var(--text)]"
           />
         </label>
-        <Button type="submit" className="w-full" disabled={busy}>
+        <Button type="submit" className="w-full text-white" disabled={busy}>
           Email me a sign-in link
         </Button>
       </form>

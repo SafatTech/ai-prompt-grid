@@ -54,6 +54,15 @@ Personal photo transformation leads the list. Product imagery may appear (≤ ~1
 | 10 | Cinematic Travel Postcard | `travel-postcard` | Travel | Place | Change lighting | One photo | Flux | *TBD* | draft |
 | 11 | Editorial Fashion Look | `editorial-fashion` | Professional portraits | Person | New outfit or theme | Photo plus style reference | Other AI editor | *TBD* | draft |
 | 12 | Minimal Product Studio Shot | `product-studio` | Product and objects | Product or object | Change background | One photo | ChatGPT Image | *TBD* | draft |
+| 13 | South Asian Fashion Editorial | `south-asian-fashion-editorial` | Professional portraits | Person | New outfit or theme | One photo | ChatGPT Image | *TBD* | published |
+| 14 | Urban Street Fashion Editorial | `urban-street-fashion-editorial` | Cinematic | Person | Full scene transformation | One photo | ChatGPT Image | *TBD* | published |
+| 15 | Joyful Outdoor Lifestyle | `joyful-outdoor-lifestyle` | Cinematic | Person | Artistic restyle | One photo | ChatGPT Image | *TBD* | published |
+| 16 | Vintage Pulp Comic Hero | `vintage-pulp-comic-hero` | Vintage | Person | Artistic restyle | One photo | ChatGPT Image | *TBD* | published |
+| 17 | Intimate Cinematic Portrait | `intimate-cinematic-portrait` | Cinematic | Person | Change lighting | One photo | ChatGPT Image | *TBD* | published |
+| 18 | Travel Fashion Bouquet | `travel-fashion-bouquet` | Travel | Person | Full scene transformation | One photo | ChatGPT Image | *TBD* | published |
+| 19 | Dark Crowd Editorial | `dark-crowd-editorial` | Cinematic | Person | Full scene transformation | One photo | ChatGPT Image | *TBD* | published |
+| 20 | South Asian Editorial Collage | `south-asian-editorial-collage` | Professional portraits | Person | Artistic restyle | One photo | ChatGPT Image | *TBD* | published |
+| 21 | Analog Street Fashion | `analog-street-fashion` | Vintage | Person | New outfit or theme | One photo | ChatGPT Image | *TBD* | published |
 
 ## Detail sheet template (copy per style when testing)
 

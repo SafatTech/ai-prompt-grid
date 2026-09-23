@@ -49,6 +49,7 @@ export function CompareSlider({
               alt={`Source photo for ${title}`}
               className="h-full w-full object-cover"
               loading={large ? "eager" : "lazy"}
+              draggable={false}
             />
             <span className="absolute bottom-3 left-3 rounded-lg bg-[rgba(11,11,16,0.72)] px-2 py-1 text-[10px] font-extrabold backdrop-blur-sm">
               Source photo
@@ -61,6 +62,7 @@ export function CompareSlider({
               alt={`AI result showing ${title}`}
               className="h-full w-full object-cover"
               loading={large ? "eager" : "lazy"}
+              draggable={false}
             />
             <span className="absolute right-3 bottom-3 rounded-lg bg-[rgba(11,11,16,0.72)] px-2 py-1 text-[10px] font-extrabold backdrop-blur-sm">
               AI result
@@ -73,8 +75,12 @@ export function CompareSlider({
 
   return (
     <div
-      className={cn("compare relative h-full w-full overflow-hidden touch-pan-y", className)}
+      className={cn(
+        "compare relative h-full w-full overflow-hidden touch-pan-y select-none",
+        className,
+      )}
       data-compare
+      onDragStart={(event) => event.preventDefault()}
     >
       {showModeToggle ? <ModeToggle mode={mode} onChange={setMode} /> : null}
       <div className="absolute inset-0 bg-[linear-gradient(135deg,#292836,#15151e)]">
@@ -84,6 +90,7 @@ export function CompareSlider({
           alt={`Source photo for ${title}`}
           className="h-full w-full object-cover"
           loading={large ? "eager" : "lazy"}
+          draggable={false}
         />
       </div>
       <div className="absolute inset-0" style={{ clipPath: `inset(0 0 0 ${value}%)` }}>
@@ -93,6 +100,7 @@ export function CompareSlider({
           alt={`AI result showing ${title}`}
           className="h-full w-full object-cover"
           loading={large ? "eager" : "lazy"}
+          draggable={false}
         />
       </div>
       <span className="absolute bottom-3 left-3 rounded-lg bg-[rgba(11,11,16,0.72)] px-2 py-1 text-[10px] font-extrabold text-[var(--text)] backdrop-blur-sm">
@@ -118,7 +126,9 @@ export function CompareSlider({
         max={100}
         value={value}
         aria-label="Compare source photo and AI result"
-        className="absolute inset-0 m-0 h-full w-full cursor-ew-resize opacity-0"
+        className="absolute inset-0 z-[1] m-0 h-full w-full cursor-ew-resize opacity-0"
+        onPointerDown={(event) => event.stopPropagation()}
+        onClick={(event) => event.stopPropagation()}
         onChange={(event) => {
           setValue(Number(event.target.value));
           onInteract();

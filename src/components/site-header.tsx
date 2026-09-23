@@ -3,17 +3,20 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
-import { GridMark } from "@/components/grid-mark";
+import { StoryShiftMark } from "@/components/story-shift-mark";
 import { Button } from "@/components/ui/button";
 import { useLibrary } from "@/components/providers/library-provider";
 import { useUiModals } from "@/components/providers/ui-modal-provider";
 import { useToast } from "@/components/providers/toast-provider";
+import { getAvatarInitials } from "@/lib/auth/avatar-initials";
 import { cn } from "@/lib/utils";
 
 export function SiteHeader() {
   const pathname = usePathname();
   const router = useRouter();
-  const { signedIn, signOut, setPendingAction, isEditor } = useLibrary();
+  const { signedIn, signOut, setPendingAction, isEditor, userName, userEmail } =
+    useLibrary();
+  const avatarInitials = getAvatarInitials(userName, userEmail);
   const { openSignIn } = useUiModals();
   const { toast } = useToast();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -52,7 +55,7 @@ export function SiteHeader() {
           className="inline-flex shrink-0 items-center gap-[11px] text-[17px] font-bold tracking-[-0.02em]"
           aria-label="AI Prompt Grid home"
         >
-          <GridMark />
+          <StoryShiftMark />
           <span>AI Prompt Grid</span>
         </Link>
 
@@ -99,11 +102,15 @@ export function SiteHeader() {
               <button
                 type="button"
                 className="grid h-10 w-10 cursor-pointer place-items-center rounded-full border-2 border-[rgba(139,108,255,0.6)] bg-[linear-gradient(135deg,#6d52de,#c18cff)] p-0.5 text-sm font-extrabold text-[#100d1a]"
-                aria-label="Open profile menu"
+                aria-label={
+                  userName || userEmail
+                    ? `Open profile menu for ${userName || userEmail}`
+                    : "Open profile menu"
+                }
                 aria-expanded={profileOpen}
                 onClick={() => setProfileOpen((v) => !v)}
               >
-                AP
+                {avatarInitials}
               </button>
               {profileOpen ? (
                 <div

@@ -44,42 +44,46 @@ export function StyleCard({ style, compact = false, stagger = false }: Props) {
         stagger && "md:odd:mt-0 lg:[&:nth-child(3n+2)]:mt-6",
       )}
     >
+      {/* Compare lives outside the link so dragging the handle isn't a browser link-drag. */}
+      <div className="relative overflow-hidden bg-[#242331]" style={{ height }}>
+        <CompareSlider
+          source={style.source}
+          result={style.result}
+          title={style.title}
+          styleId={style.id}
+        />
+        <button
+          type="button"
+          className={cn(
+            "absolute top-3 right-3 z-4 flex h-[38px] w-[38px] cursor-pointer items-center justify-center rounded-[11px] border border-[rgba(255,255,255,0.22)] bg-[rgba(11,11,16,0.75)] text-lg text-[var(--text)] backdrop-blur-sm",
+            saved && "bg-[rgba(255,155,130,0.12)] text-[var(--peach)]",
+          )}
+          aria-label={saved ? `Unsave ${style.title}` : `Save ${style.title}`}
+          data-testid={`save-style-${style.id}`}
+          onClick={handleSave}
+        >
+          {saved ? "♥" : "♡"}
+        </button>
+      </div>
       <Link
         href={`/styles/${style.id}`}
-        className="block"
+        className="block p-[17px]"
         data-testid={`style-card-${style.id}`}
         aria-label={`Open ${style.title}`}
       >
-        <div className="relative overflow-hidden bg-[#242331]" style={{ height }}>
-          <CompareSlider source={style.source} result={style.result} title={style.title} />
-          <button
-            type="button"
-            className={cn(
-              "absolute top-3 right-3 z-4 flex h-[38px] w-[38px] cursor-pointer items-center justify-center rounded-[11px] border border-[rgba(255,255,255,0.22)] bg-[rgba(11,11,16,0.75)] text-lg text-[var(--text)] backdrop-blur-sm",
-              saved && "bg-[rgba(255,155,130,0.12)] text-[var(--peach)]",
-            )}
-            aria-label={saved ? `Unsave ${style.title}` : `Save ${style.title}`}
-            data-testid={`save-style-${style.id}`}
-            onClick={handleSave}
-          >
-            {saved ? "♥" : "♡"}
-          </button>
+        <div className="mb-3 flex flex-wrap gap-1.5">
+          <span className="inline-flex min-h-[25px] items-center rounded-[7px] border border-[rgba(139,108,255,0.2)] bg-[rgba(139,108,255,0.12)] px-2 text-[10px] font-bold text-[#c7bcff]">
+            {style.category}
+          </span>
+          <span className="inline-flex min-h-[25px] items-center rounded-[7px] border border-[rgba(255,255,255,0.07)] bg-[rgba(255,255,255,0.06)] px-2 text-[10px] font-bold text-[#c7c5cf]">
+            {style.subject}
+          </span>
+          <span className="inline-flex min-h-[25px] items-center rounded-[7px] border border-[rgba(255,255,255,0.07)] bg-[rgba(255,255,255,0.06)] px-2 text-[10px] font-bold text-[#c7c5cf]">
+            {style.tool}
+          </span>
         </div>
-        <div className="p-[17px]">
-          <div className="mb-3 flex flex-wrap gap-1.5">
-            <span className="inline-flex min-h-[25px] items-center rounded-[7px] border border-[rgba(139,108,255,0.2)] bg-[rgba(139,108,255,0.12)] px-2 text-[10px] font-bold text-[#c7bcff]">
-              {style.category}
-            </span>
-            <span className="inline-flex min-h-[25px] items-center rounded-[7px] border border-[rgba(255,255,255,0.07)] bg-[rgba(255,255,255,0.06)] px-2 text-[10px] font-bold text-[#c7c5cf]">
-              {style.subject}
-            </span>
-            <span className="inline-flex min-h-[25px] items-center rounded-[7px] border border-[rgba(255,255,255,0.07)] bg-[rgba(255,255,255,0.06)] px-2 text-[10px] font-bold text-[#c7c5cf]">
-              {style.tool}
-            </span>
-          </div>
-          <h3 className="m-0 mb-2 text-[19px] tracking-[-0.02em]">{style.title}</h3>
-          <p className="m-0 text-xs text-[var(--muted)]">{style.note}</p>
-        </div>
+        <h3 className="m-0 mb-2 text-[19px] tracking-[-0.02em]">{style.title}</h3>
+        <p className="m-0 text-xs text-[var(--muted)]">{style.note}</p>
       </Link>
     </article>
   );

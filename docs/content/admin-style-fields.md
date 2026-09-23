@@ -69,8 +69,8 @@ Use these tokens exactly (double curly braces):
 
 **Allowed option values today** (must match these labels when setting defaults):
 
-- **Mood:** Warm neutral, Deep blue, Soft pastel, Black and white  
-- **Background:** Softly blurred interior, Window-lit studio, Minimal cream wall, Keep original background  
+- **Mood:** Warm neutral, Deep blue, Soft pastel, Black and white, Warm neutral with luminous gold highlights, Deep charcoal, black, and warm amber, Sunlit warm gold with fresh natural greens, Vintage teal, burnt orange, cream, and faded sepia, Muted espresso, charcoal, and warm amber, Luminous golden-hour warmth, Deep teal shadows with burnt-orange highlights, Rich amber-gold with deep brown shadows, Soft sunlit analog warmth with a slightly faded film look  
+- **Background:** Softly blurred interior, Window-lit studio, Minimal cream wall, Keep original background, Upscale softly blurred interior with lateral motion blur, Dark luxury urban interior with a moving blurred crowd, Bright outdoor park with mature trees and colorful floating confetti, Retro roadside diner at sunset with a classic red car, Dim artist studio or reading room beside a textured window, Historic European-style cobblestone city street with soft café details, Dense dark city crowd at blue hour with heavy motion blur, Dark indoor room with strong late-afternoon window shadows, Tree-lined city street with parked cars and subtle street motion blur  
 - **Ratio:** 4:5 Portrait, 1:1 Square, 9:16 Story  
 
 **Do:** write one reusable sentence around each token. **Don’t:** paste a finished prompt with a specific mood/background/ratio baked in and expect the dropdowns to rewrite it.

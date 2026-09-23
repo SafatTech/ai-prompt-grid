@@ -1,3 +1,4 @@
+import { seedEditorialStyles } from "./seed-editorial-styles";
 import type { CatalogStyle } from "./types";
 
 function pair(
@@ -641,4 +642,5 @@ export const seedStyles: CatalogStyle[] = [
       ],
     },
   },
+  ...seedEditorialStyles,
 ];

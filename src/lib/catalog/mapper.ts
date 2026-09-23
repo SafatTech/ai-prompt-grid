@@ -99,6 +99,8 @@ function asStringArray(value: unknown): string[] {
 function resolveAssetUrl(key: string, publicBaseUrl: string | null): string {
   if (!key) return "";
   if (/^https?:\/\//i.test(key)) return key;
+  // App-public paths (e.g. /catalog/editorial/source-01.png) stay site-relative.
+  if (key.startsWith("/")) return key;
   if (!publicBaseUrl) return key;
   const base = publicBaseUrl.replace(/\/$/, "");
   return `${base}/storage/v1/object/public/catalog-public/${key.replace(/^\//, "")}`;

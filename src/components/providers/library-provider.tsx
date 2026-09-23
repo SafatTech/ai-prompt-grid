@@ -34,6 +34,7 @@ import {
 } from "@/lib/library/client";
 import type { Collection, Creation } from "@/lib/library/types";
 import { createBrowserSupabaseClient } from "@/lib/supabase/client";
+import { identityFromAuthUser } from "@/lib/auth/avatar-initials";
 import { track } from "@/lib/analytics";
 
 export type { Collection, Creation };
@@ -68,6 +69,8 @@ type PersistedLocal = {
 type LibraryState = {
   ready: boolean;
   signedIn: boolean;
+  userName: string | null;
+  userEmail: string | null;
   role: ProfileRole;
   isEditor: boolean;
   savedStyles: string[];
@@ -132,6 +135,8 @@ export function LibraryProvider({ children }: { children: ReactNode }) {
   const remote = isSupabaseConfigured();
   const [ready, setReady] = useState(false);
   const [userId, setUserId] = useState<string | null>(null);
+  const [userName, setUserName] = useState<string | null>(null);
+  const [userEmail, setUserEmail] = useState<string | null>(null);
   const [role, setRole] = useState<ProfileRole>("user");
   const [savedStyles, setSavedStyles] = useState<string[]>([]);
   const [collections, setCollections] = useState<Collection[]>(defaultCollections);
@@ -166,6 +171,7 @@ export function LibraryProvider({ children }: { children: ReactNode }) {
     );
     setCreations(remoteCreations);
     setRole(profile?.role ?? "user");
+    if (profile?.displayName) setUserName(profile.displayName);
   }, [userId]);
 
   const refreshCreations = useCallback(async () => {
@@ -223,8 +229,12 @@ export function LibraryProvider({ children }: { children: ReactNode }) {
 
       const { data } = await supabase.auth.getSession();
       if (cancelled) return;
-      const uid = data.session?.user.id ?? null;
+      const user = data.session?.user ?? null;
+      const uid = user?.id ?? null;
+      const identity = identityFromAuthUser(user);
       setUserId(uid);
+      setUserName(identity.name);
+      setUserEmail(identity.email);
       if (uid) {
         await refreshRemoteLibrary(uid);
         if (!cancelled) await applyPendingAfterAuth(uid);
@@ -253,8 +263,12 @@ export function LibraryProvider({ children }: { children: ReactNode }) {
     const {
       data: { subscription },
     } = supabase.auth.onAuthStateChange((_event, session) => {
-      const uid = session?.user.id ?? null;
+      const user = session?.user ?? null;
+      const uid = user?.id ?? null;
+      const identity = identityFromAuthUser(user);
       setUserId(uid);
+      setUserName(identity.name);
+      setUserEmail(identity.email);
       if (uid) {
         void refreshRemoteLibrary(uid).then(() => applyPendingAfterAuth(uid));
       } else {
@@ -304,6 +318,8 @@ export function LibraryProvider({ children }: { children: ReactNode }) {
       const supabase = createBrowserSupabaseClient();
       void supabase?.auth.signOut();
       setUserId(null);
+      setUserName(null);
+      setUserEmail(null);
       setRole("user");
       setSavedStyles([]);
       setCollections(defaultCollections);
@@ -575,6 +591,8 @@ export function LibraryProvider({ children }: { children: ReactNode }) {
     () => ({
       ready,
       signedIn,
+      userName,
+      userEmail,
       role,
       isEditor,
       savedStyles,
@@ -596,6 +614,8 @@ export function LibraryProvider({ children }: { children: ReactNode }) {
     [
       ready,
       signedIn,
+      userName,
+      userEmail,
       role,
       isEditor,
       savedStyles,
