@@ -64,6 +64,8 @@ Personal photo transformation leads the list. Product imagery may appear (≤ ~1
 | 20 | South Asian Editorial Collage | `south-asian-editorial-collage` | Professional portraits | Person | Artistic restyle | One photo | ChatGPT Image | *TBD* | published |
 | 21 | Analog Street Fashion | `analog-street-fashion` | Vintage | Person | New outfit or theme | One photo | ChatGPT Image | *TBD* | published |
 
+Additional person editorial styles **22–42** (templates 10–30) live in `src/lib/catalog/seed-editorial-styles-10-30.ts` — Golden Motion Glamour through Meadow Reverie.
+
 ## Detail sheet template (copy per style when testing)
 
 ```markdown

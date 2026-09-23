@@ -10,6 +10,11 @@
 !.yarn/releases
 !.yarn/versions
 
+# local content assets (not tracked)
+/source-images/
+/result_images/
+/prompts/
+
 # testing
 /coverage
 /playwright-report/
