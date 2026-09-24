@@ -152,6 +152,7 @@ export function StyleDetailClient({ style, relatedStyles }: Props) {
             styleId={style.id}
             large
             showModeToggle
+            defaultMode="side"
           />
         </div>
       </section>
