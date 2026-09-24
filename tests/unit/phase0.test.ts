@@ -22,9 +22,9 @@ describe("cn", () => {
 });
 
 describe("published catalog seed", () => {
-  it("exposes 42 published styles with recipe fields", () => {
+  it("exposes 30 published editorial styles with recipe fields", () => {
     const published = getPublishedStyles();
-    assert.equal(published.length, 42);
+    assert.equal(published.length, 30);
     for (const style of published) {
       assert.equal(style.status, "published");
       assert.ok(style.promptVariant.template.includes("{{mood}}"));
@@ -36,8 +36,8 @@ describe("published catalog seed", () => {
 });
 
 describe("assemblePrompt", () => {
-  it("builds a cinematic-window prompt with selected options", () => {
-    const style = getStyleById("cinematic-window");
+  it("builds an editorial prompt with selected options", () => {
+    const style = getStyleById("south-asian-fashion-editorial");
     assert.ok(style);
     const result = assemblePrompt(style, {
       ...defaultsForStyle(style),
@@ -46,24 +46,23 @@ describe("assemblePrompt", () => {
     });
     assert.equal(result.ok, true);
     if (!result.ok) return;
-    assert.match(result.prompt, /cinematic photograph/i);
+    assert.match(result.prompt, /South Asian fashion editorial/i);
     assert.match(result.prompt, /deep blue/i);
-    assert.doesNotMatch(result.prompt, /clothing/);
     assert.doesNotMatch(result.prompt, /\{\{/);
   });
 
-  it("builds a generic prompt for pet styles", () => {
-    const pet = getStyleById("painted-pet");
-    assert.ok(pet);
-    const result = assemblePrompt(pet, defaultsForStyle(pet));
+  it("builds a prompt for a later editorial style", () => {
+    const style = getStyleById("meadow-reverie");
+    assert.ok(style);
+    const result = assemblePrompt(style, defaultsForStyle(style));
     assert.equal(result.ok, true);
     if (!result.ok) return;
-    assert.match(result.prompt, /Painted Pet Portrait/);
-    assert.match(result.prompt, /pet photo/i);
+    assert.match(result.prompt, /moody outdoor editorial/i);
+    assert.match(result.prompt, /person/i);
   });
 
   it("rejects invalid prompt options", () => {
-    const style = getStyleById("cinematic-window");
+    const style = getStyleById("south-asian-fashion-editorial");
     assert.ok(style);
     const result = assemblePrompt(style, {
       ...defaultsForStyle(style),
@@ -71,26 +70,29 @@ describe("assemblePrompt", () => {
       mood: "Not a real mood",
     });
     assert.equal(result.ok, false);
-    assert.equal(previewPrompt(style, {
-      ...defaultsForStyle(style),
-      // @ts-expect-error intentional invalid mood
-      mood: "Nope",
-    }), "");
+    assert.equal(
+      previewPrompt(style, {
+        ...defaultsForStyle(style),
+        // @ts-expect-error intentional invalid mood
+        mood: "Nope",
+      }),
+      "",
+    );
   });
 });
 
 describe("explore filters", () => {
   it("parses and filters by category query params", () => {
     const query = parseExploreSearchParams(
-      new URLSearchParams("category=Pets&sort=Most%20saved"),
+      new URLSearchParams("category=Travel&sort=Most%20saved"),
     );
-    assert.deepEqual(query.category, ["Pets"]);
+    assert.deepEqual(query.category, ["Travel"]);
     assert.equal(query.sort, "Most saved");
     const filters = createEmptyFilters();
-    filters.category.add("Pets");
+    filters.category.add("Travel");
     const results = filterStyles(getPublishedStyles(), filters, "", "Most saved");
-    assert.equal(results.length, 1);
-    assert.equal(results[0].id, "painted-pet");
+    assert.ok(results.length >= 1);
+    assert.ok(results.every((style) => style.category === "Travel"));
     assert.equal(activeFilterEntries(filters).length, 1);
   });
 });

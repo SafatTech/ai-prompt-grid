@@ -120,6 +120,117 @@ textarea:focus-visible,
   }
 }
 
+.toast-item {
+  animation: toast-in 420ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.toast-progress {
+  animation: toast-progress 3800ms linear forwards;
+  opacity: 0.7;
+}
+
+@keyframes toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(14px) scale(0.97);
+    filter: blur(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    filter: blur(0);
+  }
+}
+
+@keyframes toast-progress {
+  from {
+    transform: scaleX(1);
+  }
+  to {
+    transform: scaleX(0);
+  }
+}
+
+.made-for-card {
+  isolation: isolate;
+  transition:
+    transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.made-for-card-media {
+  z-index: 0;
+  background-position: center;
+  background-size: cover;
+  transform: scale(1.001);
+  transition: transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.made-for-card-scrim {
+  z-index: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(10, 10, 17, 0.94) 0%,
+    rgba(10, 10, 17, 0.62) 58%,
+    rgba(10, 10, 17, 0.18) 100%
+  );
+  transition: background 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.made-for-card-icon {
+  transition:
+    transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    background-color 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    color 420ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.made-for-card:hover {
+  transform: translateY(-5px);
+  border-color: rgba(139, 108, 255, 0.42);
+  box-shadow: 0 22px 48px rgba(0, 0, 0, 0.34);
+}
+
+.made-for-card:hover .made-for-card-media {
+  transform: scale(1.07);
+}
+
+.made-for-card:hover .made-for-card-scrim {
+  background: linear-gradient(
+    90deg,
+    rgba(10, 10, 17, 0.9) 0%,
+    rgba(10, 10, 17, 0.5) 55%,
+    rgba(10, 10, 17, 0.08) 100%
+  );
+}
+
+.made-for-card:hover .made-for-card-icon {
+  transform: translateY(-2px) scale(1.06);
+  border-color: rgba(139, 108, 255, 0.45);
+  background-color: rgba(139, 108, 255, 0.18);
+  color: #ddd5ff;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .made-for-card,
+  .made-for-card-media,
+  .made-for-card-scrim,
+  .made-for-card-icon {
+    transition: none !important;
+  }
+
+  .made-for-card:hover {
+    transform: none;
+  }
+
+  .made-for-card:hover .made-for-card-media,
+  .made-for-card:hover .made-for-card-icon {
+    transform: none;
+  }
+}
+
 .sr-only {
   position: absolute;
   width: 1px;

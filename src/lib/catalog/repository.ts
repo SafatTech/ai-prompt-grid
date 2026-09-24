@@ -75,6 +75,46 @@ export async function listPublishedStyles(): Promise<CatalogStyle[]> {
   }
 }
 
+/**
+ * Homepage "Trending transformations" (max 6).
+ * Uses editor-assigned trending_rank when set; otherwise falls back to top published styles.
+ */
+export async function listTrendingStyles(limit = 6): Promise<CatalogStyle[]> {
+  const capped = Math.min(Math.max(limit, 1), 6);
+  const all = await listPublishedStyles();
+
+  if (!isSupabaseConfigured()) {
+    return all.slice(0, capped);
+  }
+
+  try {
+    const supabase = createPublicSupabaseClient();
+    if (!supabase) return all.slice(0, capped);
+
+    const { data, error } = await supabase
+      .from("styles")
+      .select(STYLE_SELECT)
+      .eq("status", "published")
+      .not("trending_rank", "is", null)
+      .order("trending_rank", { ascending: true })
+      .limit(capped);
+
+    if (error) {
+      console.warn("[catalog] Trending query failed; using catalog fallback.", error.message);
+      return all.slice(0, capped);
+    }
+
+    const mapped = mapRows((data ?? []) as DbStyleRow[]);
+    if (mapped.length === 0) {
+      return all.slice(0, capped);
+    }
+    return mapped;
+  } catch (err) {
+    console.warn("[catalog] Unexpected trending error; using catalog fallback.", err);
+    return all.slice(0, capped);
+  }
+}
+
 export async function getPublishedStyleBySlug(
   slug: string,
 ): Promise<CatalogStyle | undefined> {

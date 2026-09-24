@@ -32,20 +32,7 @@ function subjectToken(style: CatalogStyle) {
   return style.subject.toLowerCase();
 }
 
-function preserveList(style: CatalogStyle, options: PromptOptions) {
-  if (style.id === "cinematic-window") {
-    const details = [
-      "recognizable facial features",
-      "facial proportions",
-      "skin tone",
-      "hairstyle",
-      "expression",
-    ];
-    if (options.keepPose) details.push("pose");
-    if (options.keepClothing) details.push("clothing");
-    return naturalList(details);
-  }
-
+function preserveList(_style: CatalogStyle, options: PromptOptions) {
   const details = [
     "recognizable identity",
     "proportions",

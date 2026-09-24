@@ -2,11 +2,11 @@ import Link from "next/link";
 import { HeroArt } from "@/components/hero-art";
 import { HowItWorksSection } from "@/components/how-it-works-section";
 import { StyleCard } from "@/components/style-card";
-import { listPublishedStyles } from "@/lib/catalog/repository";
+import { listTrendingStyles } from "@/lib/catalog/repository";
 import { categories } from "@/lib/catalog/styles";
 
 export default async function HomePage() {
-  const trending = (await listPublishedStyles()).slice(0, 6);
+  const trending = await listTrendingStyles(6);
 
   return (
     <div>
@@ -94,40 +94,83 @@ export default async function HomePage() {
           </p>
         </div>
         <div className="grid gap-4 md:grid-cols-[1.18fr_0.92fr] md:grid-rows-2">
-          <article className="relative min-h-[310px] overflow-hidden rounded-[var(--radius)] border border-[var(--line)] bg-[linear-gradient(145deg,rgba(139,108,255,0.14),transparent_50%),var(--surface)] p-[27px] md:row-span-2 md:min-h-[396px]">
-            <div className="grid h-12 w-12 place-items-center rounded-[14px] border border-[var(--line-strong)] bg-[rgba(139,108,255,0.09)] text-[21px] text-[#c5baff]">
-              ↔
-            </div>
-            <h3 className="mt-24 mb-2 text-[33px] tracking-[-0.03em] md:mt-[170px]">
-              See the result first
-            </h3>
-            <p className="m-0 max-w-[440px] text-[var(--muted)]">
-              Every style pairs a source photo with an AI result, so you can judge the
-              transformation before copying anything.
-            </p>
-          </article>
-          <article className="min-h-[190px] rounded-[var(--radius)] border border-[var(--line)] bg-[var(--surface)] p-[27px]">
-            <div className="grid h-12 w-12 place-items-center rounded-[14px] border border-[var(--line-strong)] bg-[rgba(139,108,255,0.09)] text-[21px] text-[#c5baff]">
-              ⌁
-            </div>
-            <h3 className="mt-[54px] mb-2 text-[25px] tracking-[-0.03em]">Use the right prompt</h3>
-            <p className="m-0 text-[var(--muted)]">
-              Prompts are written and tested for photo transformation.
-            </p>
-          </article>
-          <article className="min-h-[190px] rounded-[var(--radius)] border border-[var(--line)] bg-[var(--surface)] p-[27px]">
-            <div className="grid h-12 w-12 place-items-center rounded-[14px] border border-[var(--line-strong)] bg-[rgba(139,108,255,0.09)] text-[21px] text-[#c5baff]">
-              ♡
-            </div>
-            <h3 className="mt-[54px] mb-2 text-[25px] tracking-[-0.03em]">Save your favorites</h3>
-            <p className="m-0 text-[var(--muted)]">
-              Build a personal collection of styles worth trying.
-            </p>
-          </article>
+          <MadeForCard
+            image="/home/made-for/see_the_result_first.png"
+            icon="↔"
+            title="See the result first"
+            body="Every style pairs a source photo with an AI result, so you can judge the transformation before copying anything."
+            featured
+          />
+          <MadeForCard
+            image="/home/made-for/use_the_right_prompt.png"
+            icon="⌁"
+            title="Use the right prompt"
+            body="Prompts are written and tested for photo transformation."
+          />
+          <MadeForCard
+            image="/home/made-for/save_your_fav.png"
+            icon="♡"
+            title="Save your favorites"
+            body="Build a personal collection of styles worth trying."
+          />
         </div>
       </section>
 
       <HowItWorksSection />
     </div>
+  );
+}
+
+function MadeForCard({
+  image,
+  icon,
+  title,
+  body,
+  featured = false,
+}: {
+  image: string;
+  icon: string;
+  title: string;
+  body: string;
+  featured?: boolean;
+}) {
+  return (
+    <article
+      className={
+        featured
+          ? "made-for-card group relative min-h-[310px] overflow-hidden rounded-[var(--radius)] border border-[var(--line)] p-[27px] md:row-span-2 md:min-h-[396px]"
+          : "made-for-card group relative min-h-[190px] overflow-hidden rounded-[var(--radius)] border border-[var(--line)] p-[27px]"
+      }
+    >
+      <div
+        className="made-for-card-media absolute inset-0"
+        style={{ backgroundImage: `url("${image}")` }}
+        aria-hidden
+      />
+      <div className="made-for-card-scrim absolute inset-0" aria-hidden />
+      <div
+        className="made-for-card-icon relative z-[1] grid h-12 w-12 place-items-center rounded-[14px] border border-[var(--line-strong)] bg-[rgba(139,108,255,0.09)] text-[21px] text-[#c5baff]"
+      >
+        {icon}
+      </div>
+      <h3
+        className={
+          featured
+            ? "relative z-[1] mt-24 mb-2 text-[33px] tracking-[-0.03em] transition-[color,transform] duration-[420ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 md:mt-[170px]"
+            : "relative z-[1] mt-[54px] mb-2 text-[25px] tracking-[-0.03em] transition-[color,transform] duration-[420ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5"
+        }
+      >
+        {title}
+      </h3>
+      <p
+        className={
+          featured
+            ? "relative z-[1] m-0 max-w-[440px] text-[var(--muted)] transition-colors duration-[420ms] group-hover:text-[#d2d0da]"
+            : "relative z-[1] m-0 text-[var(--muted)] transition-colors duration-[420ms] group-hover:text-[#d2d0da]"
+        }
+      >
+        {body}
+      </p>
+    </article>
   );
 }

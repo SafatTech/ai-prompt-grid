@@ -38,33 +38,14 @@ Prototype table rows below may still say draft until owners complete testing, li
 
 Personal photo transformation leads the list. Product imagery may appear (≤ ~1–2 of first 12–20) and must not dominate.
 
-## Initial register (from prototype — all draft)
+## Live register (editorial templates 1–30)
 
-| # | Title | Slug | Category | Subject | Intent | Requirement | Tool (proposed) | Owner | Status |
-|---|---|---|---|---|---|---|---|---|---|
-| 1 | Cinematic Window Portrait | `cinematic-window` | Cinematic | Person | Change lighting | One photo | ChatGPT Image | *TBD* | draft |
-| 2 | Dreamy Golden Hour | `golden-hour` | Cinematic | Person | Change lighting | One photo | Gemini | *TBD* | draft |
-| 3 | Vintage Film Snapshot | `vintage-film` | Vintage | Group | Artistic restyle | One photo | ChatGPT Image | *TBD* | draft |
-| 4 | Soft Watercolor Portrait | `watercolor-portrait` | Painting | Person | Artistic restyle | Photo plus style reference | Other AI editor | *TBD* | draft |
-| 5 | Studio Professional Headshot | `professional-headshot` | Professional portraits | Person | Change background | One photo | ChatGPT Image | *TBD* | draft |
-| 6 | Anime Street Portrait | `anime-street` | Anime | Person | Full scene transformation | One photo | Gemini | *TBD* | draft |
-| 7 | Clay 3D Avatar | `clay-avatar` | 3D avatars | Person | Artistic restyle | One photo | Flux | *TBD* | draft |
-| 8 | Fantasy Forest Explorer | `forest-explorer` | Fantasy | Person | New outfit or theme | One photo | Gemini | *TBD* | draft |
-| 9 | Painted Pet Portrait | `painted-pet` | Pets | Pet | Artistic restyle | One photo | ChatGPT Image | *TBD* | draft |
-| 10 | Cinematic Travel Postcard | `travel-postcard` | Travel | Place | Change lighting | One photo | Flux | *TBD* | draft |
-| 11 | Editorial Fashion Look | `editorial-fashion` | Professional portraits | Person | New outfit or theme | Photo plus style reference | Other AI editor | *TBD* | draft |
-| 12 | Minimal Product Studio Shot | `product-studio` | Product and objects | Product or object | Change background | One photo | ChatGPT Image | *TBD* | draft |
-| 13 | South Asian Fashion Editorial | `south-asian-fashion-editorial` | Professional portraits | Person | New outfit or theme | One photo | ChatGPT Image | *TBD* | published |
-| 14 | Urban Street Fashion Editorial | `urban-street-fashion-editorial` | Cinematic | Person | Full scene transformation | One photo | ChatGPT Image | *TBD* | published |
-| 15 | Joyful Outdoor Lifestyle | `joyful-outdoor-lifestyle` | Cinematic | Person | Artistic restyle | One photo | ChatGPT Image | *TBD* | published |
-| 16 | Vintage Pulp Comic Hero | `vintage-pulp-comic-hero` | Vintage | Person | Artistic restyle | One photo | ChatGPT Image | *TBD* | published |
-| 17 | Intimate Cinematic Portrait | `intimate-cinematic-portrait` | Cinematic | Person | Change lighting | One photo | ChatGPT Image | *TBD* | published |
-| 18 | Travel Fashion Bouquet | `travel-fashion-bouquet` | Travel | Person | Full scene transformation | One photo | ChatGPT Image | *TBD* | published |
-| 19 | Dark Crowd Editorial | `dark-crowd-editorial` | Cinematic | Person | Full scene transformation | One photo | ChatGPT Image | *TBD* | published |
-| 20 | South Asian Editorial Collage | `south-asian-editorial-collage` | Professional portraits | Person | Artistic restyle | One photo | ChatGPT Image | *TBD* | published |
-| 21 | Analog Street Fashion | `analog-street-fashion` | Vintage | Person | New outfit or theme | One photo | ChatGPT Image | *TBD* | published |
+Prototype Picsum placeholder styles were removed. The published catalog is person editorial styles from `seed-editorial-styles.ts` and `seed-editorial-styles-10-30.ts` (South Asian Fashion Editorial through Meadow Reverie).
 
-Additional person editorial styles **22–42** (templates 10–30) live in `src/lib/catalog/seed-editorial-styles-10-30.ts` — Golden Motion Glamour through Meadow Reverie.
+| # | Title | Status |
+|---|---|---|
+| 1–9 | Templates from `prompts/template(1-9).md` | published |
+| 10–30 | Templates from `prompts/template(10-30).txt` | published |
 
 ## Detail sheet template (copy per style when testing)
 

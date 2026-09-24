@@ -17,20 +17,20 @@ test.describe("phase 2 guest catalog", () => {
     await context.grantPermissions(["clipboard-read", "clipboard-write"]);
     await page.goto("/explore");
     await expect(page.getByTestId("explore-search")).toBeVisible();
-    await expect(page.getByTestId("results-count")).toContainText("12 styles");
+    await expect(page.getByTestId("results-count")).toContainText("30 styles");
 
-    await page.getByTestId("explore-search").fill("Painted Pet");
+    await page.getByTestId("explore-search").fill("Meadow Reverie");
     await expect(page.getByTestId("results-count")).toContainText("1 style");
-    await expect(page.getByTestId("style-card-painted-pet")).toBeVisible();
+    await expect(page.getByTestId("style-card-meadow-reverie")).toBeVisible();
 
-    await page.getByTestId("desktop-filters").getByTestId("filter-category-Cinematic").click();
+    await page.getByTestId("desktop-filters").getByTestId("filter-category-Pets").click();
     await expect(page.getByTestId("results-count")).toContainText("0 styles");
     await page.getByTestId("clear-filters").click();
-    await expect(page.getByTestId("results-count")).toContainText("12 styles");
+    await expect(page.getByTestId("results-count")).toContainText("30 styles");
 
-    await page.getByTestId("explore-search").fill("Painted Pet");
-    await page.getByTestId("style-card-painted-pet").click();
-    await expect(page).toHaveURL(/\/styles\/painted-pet/);
+    await page.getByTestId("explore-search").fill("Meadow Reverie");
+    await page.getByTestId("style-card-meadow-reverie").click();
+    await expect(page).toHaveURL(/\/styles\/meadow-reverie/);
     await expect(page.getByTestId("prompt-box")).toBeVisible();
 
     await page.getByTestId("mood-select").selectOption("Deep blue");
@@ -42,7 +42,7 @@ test.describe("phase 2 guest catalog", () => {
     ).toBeVisible();
     const clip = await page.evaluate(() => navigator.clipboard.readText()).catch(() => "");
     if (clip) {
-      expect(clip.toLowerCase()).toContain("painted pet");
+      expect(clip.toLowerCase()).toContain("moody outdoor");
       expect(clip.toLowerCase()).toContain("deep blue");
     }
   });

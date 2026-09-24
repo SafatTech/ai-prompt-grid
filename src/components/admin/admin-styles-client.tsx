@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { AdminTrendingPanel } from "@/components/admin/admin-trending-panel";
 import { Button } from "@/components/ui/button";
 import {
   STYLE_STATUS_TRANSITIONS,
@@ -89,6 +90,8 @@ export function AdminStylesClient({ initialStyles, role, displayName }: Props) {
         </Link>
       </section>
 
+      <AdminTrendingPanel styles={styles} onStylesChange={setStyles} />
+
       <div className="container flex flex-wrap gap-2 border-b border-[var(--line)] pb-4">
         {STATUS_FILTERS.map((value) => (
           <button
@@ -119,6 +122,7 @@ export function AdminStylesClient({ initialStyles, role, displayName }: Props) {
                 <tr>
                   <th className="px-4 py-3 font-bold">Style</th>
                   <th className="px-4 py-3 font-bold">Status</th>
+                  <th className="px-4 py-3 font-bold">Home</th>
                   <th className="px-4 py-3 font-bold">Tool</th>
                   <th className="px-4 py-3 font-bold">Variant</th>
                   <th className="px-4 py-3 font-bold">Edit</th>
@@ -147,6 +151,15 @@ export function AdminStylesClient({ initialStyles, role, displayName }: Props) {
                       </td>
                       <td className="px-4 py-4 align-top">
                         <StatusPill status={style.status} />
+                      </td>
+                      <td className="px-4 py-4 align-top text-[var(--muted)]">
+                        {style.trendingRank != null ? (
+                          <span className="inline-flex rounded-lg bg-[rgba(139,108,255,0.16)] px-2 py-1 text-[11px] font-bold text-[#c5b9ff]">
+                            #{style.trendingRank}
+                          </span>
+                        ) : (
+                          "—"
+                        )}
                       </td>
                       <td className="px-4 py-4 align-top text-[var(--muted)]">
                         {style.tool}

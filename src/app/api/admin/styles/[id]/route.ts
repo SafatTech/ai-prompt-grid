@@ -129,13 +129,24 @@ export async function PATCH(request: Request, context: RouteContext) {
       ? ((current.published_at as string | null) ?? now)
       : current.published_at;
 
+  const patch: {
+    status: PublishStatus;
+    published_at: string | null;
+    updated_at: string;
+    trending_rank?: null;
+  } = {
+    status: nextStatus,
+    published_at: nextStatus === "published" ? publishedAt : (current.published_at as string | null),
+    updated_at: now,
+  };
+  // Only published styles can stay on the homepage trending grid.
+  if (nextStatus !== "published") {
+    patch.trending_rank = null;
+  }
+
   const { error: updateError } = await supabase
     .from("styles")
-    .update({
-      status: nextStatus,
-      published_at: nextStatus === "published" ? publishedAt : current.published_at,
-      updated_at: now,
-    })
+    .update(patch)
     .eq("id", id);
 
   if (updateError) {

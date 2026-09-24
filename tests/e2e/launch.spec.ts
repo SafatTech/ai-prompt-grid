@@ -14,7 +14,7 @@ test.describe("launch hardening", () => {
 
   test("guest save opens sign-in; mock Google restores save", async ({ page, context }) => {
     await context.clearCookies();
-    await page.goto("/styles/painted-pet");
+    await page.goto("/styles/meadow-reverie");
     await page.evaluate(() => localStorage.clear());
     await page.reload();
 
@@ -38,13 +38,13 @@ test.describe("launch hardening", () => {
     await expect(page.getByText(/Style saved to your library/i)).toBeVisible();
     await page.goto("/library");
     await expect(page.getByRole("heading", { name: "My library" })).toBeVisible();
-    await expect(page.getByTestId("style-card-painted-pet")).toBeVisible();
+    await expect(page.getByTestId("style-card-meadow-reverie")).toBeVisible();
   });
 
   test("protected APIs reject anonymous callers", async ({ request }) => {
     const creation = await request.post("/api/creations", {
       multipart: {
-        styleSlug: "painted-pet",
+        styleSlug: "meadow-reverie",
         notes: "",
         promptSnapshot: "test prompt",
         result: {
@@ -73,7 +73,7 @@ test.describe("launch hardening", () => {
     context,
   }) => {
     await context.clearCookies();
-    await page.goto("/styles/painted-pet");
+    await page.goto("/styles/meadow-reverie");
     await page.evaluate(() => localStorage.clear());
     await page.reload();
 

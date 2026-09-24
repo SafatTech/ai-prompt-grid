@@ -66,6 +66,7 @@ export type AdminStyleRow = {
   variantStatus: PublishStatus | "none";
   publishedAt: string | null;
   updatedAt: string;
+  trendingRank: number | null;
 };
 
 export async function listAdminStyles(
@@ -74,7 +75,7 @@ export async function listAdminStyles(
   const { data, error } = await client
     .from("styles")
     .select(
-      "id, slug, title, status, published_at, updated_at, categories ( name ), prompt_variants ( tool, status, is_primary )",
+      "id, slug, title, status, published_at, updated_at, trending_rank, categories ( name ), prompt_variants ( tool, status, is_primary )",
     )
     .order("updated_at", { ascending: false });
 
@@ -108,6 +109,8 @@ export async function listAdminStyles(
       variantStatus: (primary?.status as PublishStatus) ?? "none",
       publishedAt: (row.published_at as string | null) ?? null,
       updatedAt: row.updated_at as string,
+      trendingRank:
+        typeof row.trending_rank === "number" ? row.trending_rank : null,
     };
   });
 }
