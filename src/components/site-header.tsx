@@ -11,7 +11,7 @@ import {
   type KeyboardEvent,
   type ReactNode,
 } from "react";
-import { PromptGridMark } from "@/components/prompt-grid-mark";
+import { StoryShiftMark } from "@/components/story-shift-mark";
 import {
   categoryGroups,
   creatorLinks,
@@ -177,7 +177,7 @@ export function SiteHeader() {
           aria-label="AI Prompt Grid home"
           onMouseEnter={closePanels}
         >
-          <PromptGridMark className="h-8 w-8" />
+          <StoryShiftMark />
           <span className="max-[389px]:hidden">AI Prompt Grid</span>
           <span className="hidden max-[389px]:inline">Prompt Grid</span>
         </Link>

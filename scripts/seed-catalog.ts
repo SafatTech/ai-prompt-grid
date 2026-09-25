@@ -186,7 +186,34 @@ async function main() {
     console.log(`Seeded ${style.id}`);
   }
 
-  console.log(`Done. Seeded ${seedStyles.length} styles.`);
+  // Remove prototype / orphan styles that are no longer in the seed catalog.
+  const keepSlugs = seedStyles.map((s) => s.id);
+  const { data: existing, error: listError } = await client
+    .from("styles")
+    .select("id, slug");
+  if (listError) throw listError;
+
+  const keep = new Set(keepSlugs);
+  const orphans = (existing ?? []).filter(
+    (row: { id: string; slug: string }) => !keep.has(row.slug),
+  );
+
+  for (const orphan of orphans) {
+    await client.from("creations").delete().eq("style_id", orphan.id);
+    await client.from("style_tags").delete().eq("style_id", orphan.id);
+    await client.from("style_assets").delete().eq("style_id", orphan.id);
+    await client.from("prompt_variants").delete().eq("style_id", orphan.id);
+    const { error: deleteError } = await client
+      .from("styles")
+      .delete()
+      .eq("id", orphan.id);
+    if (deleteError) throw deleteError;
+    console.log(`Removed orphan style ${orphan.slug}`);
+  }
+
+  console.log(
+    `Done. Seeded ${seedStyles.length} styles; removed ${orphans.length} orphans.`,
+  );
 }
 
 main().catch((err) => {
