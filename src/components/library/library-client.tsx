@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { EmptyState } from "@/components/empty-state";
 import { StyleCard } from "@/components/style-card";
 import { Button } from "@/components/ui/button";
@@ -29,6 +29,20 @@ export function LibraryClient({ styles }: Props) {
   const { toast } = useToast();
   const [tab, setTab] = useState<Tab>("saved");
   const [deletingId, setDeletingId] = useState<string | null>(null);
+
+  useEffect(() => {
+    function readHash() {
+      const hash = window.location.hash.replace("#", "");
+      if (hash === "saved" || hash === "collections" || hash === "creations") {
+        setTab(hash);
+      } else if (!hash) {
+        setTab("saved");
+      }
+    }
+    readHash();
+    window.addEventListener("hashchange", readHash);
+    return () => window.removeEventListener("hashchange", readHash);
+  }, []);
 
   if (!signedIn) {
     return (

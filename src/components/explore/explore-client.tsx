@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { EmptyState } from "@/components/empty-state";
 import { StyleCard } from "@/components/style-card";
@@ -40,6 +40,7 @@ export function ExploreClient({ styles }: Props) {
   );
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [page, setPage] = useState(1);
+  const appliedQuery = useRef<string | null>(null);
 
   const catalog = styles;
   const results = useMemo(
@@ -61,6 +62,7 @@ export function ExploreClient({ styles }: Props) {
         tool: [...next.filters.tool],
       });
       const qs = params.toString();
+      appliedQuery.current = qs;
       router.replace(qs ? `/explore?${qs}` : "/explore", { scroll: false });
     },
     [router],
@@ -87,8 +89,28 @@ export function ExploreClient({ styles }: Props) {
     setSearch("");
     setSort("Trending");
     setPage(1);
+    appliedQuery.current = "";
     router.replace("/explore", { scroll: false });
   }
+
+  useEffect(() => {
+    const next = searchParams.toString();
+    const focusSearch = searchParams.get("focus") === "search";
+    const first = appliedQuery.current === null;
+    if (appliedQuery.current !== next) {
+      appliedQuery.current = next;
+      if (!first) {
+        const query = parseExploreSearchParams(searchParams);
+        setSearch(query.q);
+        setSort(query.sort);
+        setFilters(filtersFromExploreQuery(query));
+        setPage(1);
+      }
+    }
+    if (focusSearch) {
+      document.getElementById("mainSearch")?.focus();
+    }
+  }, [searchParams]);
 
   function onSortChange(nextSort: SortOption) {
     setSort(nextSort);

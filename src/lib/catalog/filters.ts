@@ -68,9 +68,16 @@ export function filterStyles(
     const q = search.trim().toLowerCase();
     const matchesSearch =
       !q ||
-      [style.title, style.category, style.subject, style.intent, style.tool].some((value) =>
-        value.toLowerCase().includes(q),
-      );
+      [
+        style.title,
+        style.category,
+        style.subject,
+        style.intent,
+        style.tool,
+        style.description,
+        style.note,
+        style.promptVariant.defaults.mood,
+      ].some((value) => value.toLowerCase().includes(q));
     const matchesFilters = (Object.keys(filterGroups) as (keyof FilterState)[]).every(
       (key) => filters[key].size === 0 || filters[key].has(style[key]),
     );

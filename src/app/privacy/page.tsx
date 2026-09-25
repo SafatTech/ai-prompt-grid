@@ -84,7 +84,7 @@ export default function PrivacyPage() {
         </p>
       </Section>
 
-      <Section title="Contact">
+      <Section id="contact" title="Contact">
         <p>
           Questions about this policy: use the contact channel published with your beta
           invite, or the operator email listed on the production site when available.
@@ -99,14 +99,16 @@ export default function PrivacyPage() {
 }
 
 function Section({
+  id,
   title,
   children,
 }: {
+  id?: string;
   title: string;
   children: ReactNode;
 }) {
   return (
-    <section className="mb-8">
+    <section id={id} className="mb-8">
       <h2 className="mt-0 mb-3 text-[22px] tracking-[-0.02em]">{title}</h2>
       <div className="space-y-3 text-[15px] leading-relaxed text-[var(--muted)] [&_strong]:text-[var(--text)]">
         {children}
