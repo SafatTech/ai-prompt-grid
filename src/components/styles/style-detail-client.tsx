@@ -15,6 +15,7 @@ import {
   backgroundOptions,
   defaultsForStyle,
   moodOptions,
+  preserveToggleLabels,
   previewPrompt,
   ratioOptions,
   type PromptOptions,
@@ -289,12 +290,12 @@ export function StyleDetailClient({ style, relatedStyles }: Props) {
           </div>
 
           <Toggle
-            label="Keep clothing from original photo"
+            label={preserveToggleLabels(style.subject).clothing}
             checked={options.keepClothing}
             onChange={(checked) => setOptions((o) => ({ ...o, keepClothing: checked }))}
           />
           <Toggle
-            label="Keep original pose"
+            label={preserveToggleLabels(style.subject).pose}
             checked={options.keepPose}
             onChange={(checked) => setOptions((o) => ({ ...o, keepPose: checked }))}
           />

@@ -22,9 +22,9 @@ describe("cn", () => {
 });
 
 describe("published catalog seed", () => {
-  it("exposes 30 published editorial styles with recipe fields", () => {
+  it("exposes 40 published editorial styles with recipe fields", () => {
     const published = getPublishedStyles();
-    assert.equal(published.length, 30);
+    assert.equal(published.length, 40);
     for (const style of published) {
       assert.equal(style.status, "published");
       assert.ok(style.promptVariant.template.includes("{{mood}}"));
@@ -59,6 +59,17 @@ describe("assemblePrompt", () => {
     if (!result.ok) return;
     assert.match(result.prompt, /moody outdoor editorial/i);
     assert.match(result.prompt, /person/i);
+  });
+
+  it("builds a product preserve list from product toggles", () => {
+    const style = getStyleById("pure-white-packshot");
+    assert.ok(style);
+    const result = assemblePrompt(style, defaultsForStyle(style));
+    assert.equal(result.ok, true);
+    if (!result.ok) return;
+    assert.match(result.prompt, /product details & genuine packaging/i);
+    assert.doesNotMatch(result.prompt, /camera angle & framing/i);
+    assert.doesNotMatch(result.prompt, /\{\{/);
   });
 
   it("rejects invalid prompt options", () => {

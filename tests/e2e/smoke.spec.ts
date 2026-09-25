@@ -17,7 +17,7 @@ test.describe("phase 2 guest catalog", () => {
     await context.grantPermissions(["clipboard-read", "clipboard-write"]);
     await page.goto("/explore");
     await expect(page.getByTestId("explore-search")).toBeVisible();
-    await expect(page.getByTestId("results-count")).toContainText("30 styles");
+    await expect(page.getByTestId("results-count")).toContainText("40 styles");
 
     await page.getByTestId("explore-search").fill("Meadow Reverie");
     await expect(page.getByTestId("results-count")).toContainText("1 style");
@@ -26,7 +26,7 @@ test.describe("phase 2 guest catalog", () => {
     await page.getByTestId("desktop-filters").getByTestId("filter-category-Pets").click();
     await expect(page.getByTestId("results-count")).toContainText("0 styles");
     await page.getByTestId("clear-filters").click();
-    await expect(page.getByTestId("results-count")).toContainText("30 styles");
+    await expect(page.getByTestId("results-count")).toContainText("40 styles");
 
     await page.getByTestId("explore-search").fill("Meadow Reverie");
     await page.getByTestId("style-card-meadow-reverie").click();

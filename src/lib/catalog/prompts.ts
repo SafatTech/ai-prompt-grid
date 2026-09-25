@@ -29,10 +29,35 @@ function naturalList(items: string[]) {
 
 function subjectToken(style: CatalogStyle) {
   if (style.subject === "Person") return "person";
+  if (style.subject === "Product or object") return "product";
   return style.subject.toLowerCase();
 }
 
-function preserveList(_style: CatalogStyle, options: PromptOptions) {
+/** Labels for the two preserve toggles (mapped to keepClothing / keepPose). */
+export function preserveToggleLabels(subject: CatalogStyle["subject"]): {
+  clothing: string;
+  pose: string;
+} {
+  if (subject === "Product or object") {
+    return {
+      clothing: "Product details & genuine packaging",
+      pose: "Camera angle & framing",
+    };
+  }
+  return {
+    clothing: "Keep clothing from original photo",
+    pose: "Keep original pose",
+  };
+}
+
+function preserveList(style: CatalogStyle, options: PromptOptions) {
+  if (style.subject === "Product or object") {
+    const details: string[] = [];
+    if (options.keepClothing) details.push("product details & genuine packaging");
+    if (options.keepPose) details.push("camera angle & framing");
+    return details.length ? naturalList(details) : "no additional preserve requirements";
+  }
+
   const details = [
     "recognizable identity",
     "proportions",

@@ -9,6 +9,7 @@ import type { AdminStyleEditorPayload } from "@/lib/admin/styles-read";
 import {
   backgroundOptions,
   moodOptions,
+  preserveToggleLabels,
   previewPrompt,
   ratioOptions,
 } from "@/lib/catalog/prompts";
@@ -565,7 +566,7 @@ export function StyleEditorForm({
                 }))
               }
             />
-            Default: keep clothing
+            Default: {preserveToggleLabels(form.subject).clothing}
           </label>
           <label className="inline-flex items-center gap-2 text-sm">
             <input
@@ -584,7 +585,7 @@ export function StyleEditorForm({
                 }))
               }
             />
-            Default: keep pose
+            Default: {preserveToggleLabels(form.subject).pose}
           </label>
         </div>
         <Field label="Limitations (one per line)">

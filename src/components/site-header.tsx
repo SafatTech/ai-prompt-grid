@@ -57,6 +57,7 @@ export function SiteHeader() {
   const searchRef = useRef<HTMLInputElement>(null);
   const mobileSearchRef = useRef<HTMLInputElement>(null);
   const hoverTimer = useRef<number | null>(null);
+  const leaveTimer = useRef<number | null>(null);
   const [panel, setPanel] = useState<Panel | null>(null);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeGroup, setActiveGroup] = useState(categoryGroups[0].id);
@@ -125,6 +126,17 @@ export function SiteHeader() {
     hoverTimer.current = null;
   }
 
+  function clearLeave() {
+    if (leaveTimer.current) window.clearTimeout(leaveTimer.current);
+    leaveTimer.current = null;
+  }
+
+  function scheduleClose() {
+    clearHover();
+    clearLeave();
+    leaveTimer.current = window.setTimeout(() => setPanel(null), 140);
+  }
+
   function openPanel(next: Panel) {
     clearHover();
     setPanel(next);
@@ -132,6 +144,7 @@ export function SiteHeader() {
 
   function previewPanel(next: Panel) {
     clearHover();
+    clearLeave();
     if (panel) {
       setPanel(next);
       return;
@@ -141,6 +154,7 @@ export function SiteHeader() {
 
   function closePanels() {
     clearHover();
+    clearLeave();
     setPanel(null);
   }
 
@@ -169,6 +183,8 @@ export function SiteHeader() {
     <header
       ref={rootRef}
       className="sticky top-0 z-40 border-b border-[rgba(255,255,255,0.10)] bg-[rgba(11,11,16,0.94)] backdrop-blur-[8px]"
+      onMouseEnter={clearLeave}
+      onMouseLeave={scheduleClose}
     >
       <div className="mx-auto flex h-[var(--header)] w-full max-w-[1440px] items-center gap-3 px-6 max-[899px]:px-4">
         <Link

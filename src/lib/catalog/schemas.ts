@@ -63,6 +63,9 @@ export const moodSchema = z.enum([
   "Golden sunset cinematic travel-poster glow with warm peach-orange sky, glowing water reflections, rich blue boat tones, deep red-orange fabric, and soft atmospheric haze",
   "Warm intimate golden window light with creamy ivory whites, deep ruby-red bangles, antique silver jewelry, natural skin tones, and soft nostalgic film contrast",
   "Muted earthy",
+  "Bright neutral",
+  "Dark cool neutral",
+  "Warm golden neutral",
 ]);
 
 export const backgroundSchema = z.enum([
@@ -100,6 +103,16 @@ export const backgroundSchema = z.enum([
   "Varanasi-inspired riverside ghats at sunset with historic buildings, temple silhouettes, river boats, glowing shoreline lights, broad reflective water, and flying birds in the sky",
   "Warm traditional indoor setting beside a wooden window or doorway with muted beige-brown walls, soft sunlight, and shallow cinematic blur",
   "Grassy hillside meadow with tall wild grass, a bare tree, and a cloudy sky",
+  "Pure white seamless infinity studio background",
+  "Monochrome coral seamless studio backdrop with a circular coral pedestal",
+  "Sunlit pale-oak desk with a softly blurred open notebook, ceramic cup, and minimal greenery near a window",
+  "Warm light-beige textured paper surface with a closed cream notebook and graphite pencil at the edges",
+  "Warm limestone pedestal with soft green leaves, natural stone, folded unbleached linen, and a pale beige backdrop",
+  "Deep charcoal-black seamless studio with a low black reflective plinth",
+  "Pale sage-to-cream gradient studio background with subtle curved light trails",
+  "Warm ivory microsuede surface with a subtle fine matte-stone texture",
+  "A softly blurred neutral bathroom vanity beside a sunlit window",
+  "Sunlit pale-oak table with soft cream linen curtains and a small blurred dried-flower arrangement",
 ]);
 
 export const ratioSchema = z.enum(["4:5 Portrait", "1:1 Square", "9:16 Story"]);
