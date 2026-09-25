@@ -67,20 +67,18 @@ export function ExploreClient({ styles }: Props) {
   );
 
   function toggleFilter(group: keyof FilterState, value: string) {
-    setFilters((prev) => {
-      const next: FilterState = {
-        category: new Set(prev.category),
-        subject: new Set(prev.subject),
-        intent: new Set(prev.intent),
-        requirement: new Set(prev.requirement),
-        tool: new Set(prev.tool),
-      };
-      if (next[group].has(value)) next[group].delete(value);
-      else next[group].add(value);
-      syncUrl({ q: search, sort, filters: next });
-      return next;
-    });
+    const next: FilterState = {
+      category: new Set(filters.category),
+      subject: new Set(filters.subject),
+      intent: new Set(filters.intent),
+      requirement: new Set(filters.requirement),
+      tool: new Set(filters.tool),
+    };
+    if (next[group].has(value)) next[group].delete(value);
+    else next[group].add(value);
+    setFilters(next);
     setPage(1);
+    syncUrl({ q: search, sort, filters: next });
   }
 
   function clearFilters() {

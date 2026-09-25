@@ -362,9 +362,9 @@ export function StyleDetailClient({ style, relatedStyles }: Props) {
       <section className="container py-16">
         <h2 className="mb-7 text-[clamp(28px,3vw,42px)] tracking-[-0.035em]">More examples</h2>
         <div className="grid gap-4 md:grid-cols-3">
-          {style.examplePairs.map((example) => (
+          {style.examplePairs.map((example, index) => (
             <div
-              key={example.source}
+              key={`${style.id}-example-${index}`}
               className="grid h-[280px] grid-cols-2 gap-0.5 overflow-hidden rounded-[var(--radius)] border border-[var(--line)]"
             >
               <div className="relative">
