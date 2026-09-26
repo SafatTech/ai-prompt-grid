@@ -1,0 +1,1 @@
+Apply {{mood}} color grading consistently across all four panels. Use warm natural skin tones, deep royal-blue fabric, saturated crimson roses, soft sandstone and taupe architecture, and clean luminous highlights. Add subtle golden warmth in the skin and stone while keeping the blue saree vibrant and elegant.

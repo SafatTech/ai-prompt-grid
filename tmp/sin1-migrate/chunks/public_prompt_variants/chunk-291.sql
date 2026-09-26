@@ -1,0 +1,1 @@
+Bottom panel: create another intimate close-up focused on the hands, wrists, red bangles, silver jewelry, and embroidered white sleeves. Let the hands overlap naturally at a gentle diagonal, with rich detail in the bangles, ring, fabric, and skin texture.

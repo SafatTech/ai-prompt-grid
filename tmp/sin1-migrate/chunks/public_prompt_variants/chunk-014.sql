@@ -1,0 +1,1 @@
+Dress the subject in a distinctive hooded jacket with a calm three-quarter pose, turning their face toward the camera. Keep the subject sharply focused while anonymous people move around them in strong natural motion blur. Use {{mood}} color grading, dramatic editorial contrast, subtle film grain, and rich realistic jacket texture.

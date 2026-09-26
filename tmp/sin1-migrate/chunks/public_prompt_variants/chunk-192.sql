@@ -1,0 +1,1 @@
+Keep the illuminated areas warm and dimensional while preserving enough detail in the shadowed side of the face. Use realistic highlights along the cheekbones, brow, nose bridge, lips, jawline, and hair. Avoid flat studio lighting.

@@ -1,0 +1,1 @@
+Style the hair in a loose low ponytail or softly gathered hairstyle with several face-framing strands falling naturally around the cheeks and forehead. Preserve the subject’s natural hair color and texture while making the styling softly romantic and understated.

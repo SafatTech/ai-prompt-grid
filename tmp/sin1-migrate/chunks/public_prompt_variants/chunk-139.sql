@@ -1,0 +1,1 @@
+Ensure the three-panel collage feels balanced, tactile, intimate, and editorial. The subject should appear naturally happy and emotionally connected to the flowers, not formally posed.

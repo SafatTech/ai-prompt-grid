@@ -1,0 +1,1 @@
+Place the product against {{background}} and make it appear realistically suspended, with a subtle, soft shadow beneath it to establish scale. Keep the product perfectly sharp and fully visible; suggest motion only through restrained background light trails, soft graphic flow, or a gentle environmental effect.

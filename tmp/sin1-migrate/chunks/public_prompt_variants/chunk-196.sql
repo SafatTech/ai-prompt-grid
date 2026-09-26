@@ -1,0 +1,1 @@
+The final composition should feel masculine, warm, minimal, intense, sophisticated, and cinematic, similar to a high-fashion portrait contact sheet or editorial campaign.

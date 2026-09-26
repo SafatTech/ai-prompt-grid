@@ -1,0 +1,1 @@
+Use strong direct late-afternoon sunlight entering from one side of the frame. Let the light strike the subject’s face, rose, hair, and flowers sharply while producing distinct organic shadows from flower stems, petals, leaves, and loose hair across the forehead, eyes, cheeks, nose, and lips.

@@ -24,7 +24,7 @@ export function SignInPageClient() {
   }, [signedIn, openSignIn, router, safeNext]);
 
   return (
-    <section className="container py-[88px]">
+    <section className="container py-12 sm:py-[88px]">
       <h1 className="m-0 mb-2 text-[clamp(32px,4vw,48px)] tracking-[-0.04em]">Sign in</h1>
       <p className="m-0 text-[var(--muted)]">
         Use the dialog to continue with Google or email a sign-in link.

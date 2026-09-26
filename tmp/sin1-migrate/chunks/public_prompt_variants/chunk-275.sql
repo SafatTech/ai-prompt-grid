@@ -1,0 +1,1 @@
+Apply {{mood}} color grading throughout the image. Use glowing sunset tones, warm peach-orange sky hues, soft golden reflections on the water, rich blue paint texture on the boat, deep red-orange fabric tones, and natural warm skin color. Preserve realistic pores, hair strands, facial texture, jewelry detail, and cloth texture. Avoid plastic skin or excessive glamour retouching.

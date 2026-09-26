@@ -1,0 +1,1 @@
+Place a large lush bouquet prominently in the lower foreground. Build the arrangement from deep crimson-red roses, soft blush and pale peach roses, small delicate filler flowers, muted burgundy accents, and natural eucalyptus or dusty-green foliage. Make the bouquet abundant, layered, photorealistic, and slightly asymmetrical, with some flowers closer to the lens to create depth.

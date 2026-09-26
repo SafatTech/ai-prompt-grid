@@ -1,0 +1,1 @@
+Use warm direct sunlight from a low side angle, similar to late-afternoon or golden-hour sunlight. Let the light strongly illuminate the cheekbones, nose, lips, neck, and parts of the hair while producing realistic sculpted shadows beneath the jaw and around the hood. Keep the sunlight warm without making the scene excessively orange.

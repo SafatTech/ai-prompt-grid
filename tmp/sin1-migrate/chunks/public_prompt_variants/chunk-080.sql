@@ -1,0 +1,1 @@
+Keep the expression gentle and authentic. The subject should appear to be sharing a private happy moment with the flowers rather than posing directly for a formal portrait.

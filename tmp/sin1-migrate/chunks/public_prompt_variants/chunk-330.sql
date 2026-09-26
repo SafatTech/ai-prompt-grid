@@ -1,0 +1,1 @@
+Show one adult hand holding the product naturally so its everyday size and scale are immediately clear. Place the scene within {{background}}, keeping the product fully visible, sharply focused, and unobstructed by the hand.

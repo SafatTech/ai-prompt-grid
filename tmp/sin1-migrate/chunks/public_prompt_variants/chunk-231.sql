@@ -1,0 +1,1 @@
+Top-right panel: create a close beauty portrait from approximately the chest upward. Let the subject lower the gaze slightly with a gentle smile, highlighting the silver earrings, natural skin texture, subtle makeup, bindi, and the translucent blue saree drape across the shoulder. Keep the face softly lit and intimate.

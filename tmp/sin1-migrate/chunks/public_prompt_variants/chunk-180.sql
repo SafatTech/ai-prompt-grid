@@ -1,0 +1,1 @@
+Do not add text, logos, watermarks, social-media interface elements, play icons, borders, extra people, duplicated flowers, extra fingers, distorted facial features, malformed earbuds, floating objects, or unrealistic anatomy.

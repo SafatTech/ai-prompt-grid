@@ -2,26 +2,29 @@
  * Seed the Supabase catalog from static seedStyles.
  *
  * Usage:
- *   cp .env.example .env.local   # fill URL + anon + service role
  *   npx tsx --env-file=.env.local scripts/seed-catalog.ts
  *
- * Requires migrations applied first (supabase db push / SQL editor).
+ * Local `/catalog/...` asset paths are uploaded to catalog-public (WebP),
+ * same pipeline as admin upload, then stored as public URLs on style_assets.
  */
 
 import { createHash } from "node:crypto";
+import fs from "node:fs";
+import path from "node:path";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import { processUploadImage } from "../src/lib/creations/image";
 import { seedStyles } from "../src/lib/catalog/seed-styles";
 import type { CatalogStyle } from "../src/lib/catalog/types";
 
-/** Untyped until generated Database types land; schema is defined in SQL migrations. */
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type SeedClient = SupabaseClient<any>;
 
+const CATALOG_BUCKET = "catalog-public";
+const ROOT = path.resolve(import.meta.dirname, "..");
+
 function requireEnv(name: string): string {
   const value = process.env[name];
-  if (!value) {
-    throw new Error(`Missing required env: ${name}`);
-  }
+  if (!value) throw new Error(`Missing required env: ${name}`);
   return value;
 }
 
@@ -40,6 +43,67 @@ function slugify(value: string): string {
     .toLowerCase()
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/^-|-$/g, "");
+}
+
+function isRemoteCatalogUrl(url: string): boolean {
+  return (
+    /^https?:\/\//i.test(url) &&
+    url.includes("/storage/v1/object/public/catalog-public/")
+  );
+}
+
+async function ensureCatalogBucket(client: SeedClient) {
+  const { data: buckets, error: listError } = await client.storage.listBuckets();
+  if (listError) throw listError;
+  if ((buckets ?? []).some((b) => b.name === CATALOG_BUCKET)) return;
+
+  const { error: createError } = await client.storage.createBucket(CATALOG_BUCKET, {
+    public: true,
+    fileSizeLimit: "10MB",
+    allowedMimeTypes: ["image/jpeg", "image/png", "image/webp"],
+  });
+  if (createError && !/already exists/i.test(createError.message)) {
+    throw createError;
+  }
+  console.log(`Created storage bucket ${CATALOG_BUCKET}`);
+}
+
+async function resolveAssetUrl(
+  client: SeedClient,
+  assetUrl: string,
+  cache: Map<string, string>,
+): Promise<string> {
+  if (!assetUrl) return assetUrl;
+  if (isRemoteCatalogUrl(assetUrl) || /^https?:\/\//i.test(assetUrl)) {
+    return assetUrl;
+  }
+  if (cache.has(assetUrl)) return cache.get(assetUrl)!;
+  if (!assetUrl.startsWith("/catalog/")) return assetUrl;
+
+  const localPath = path.join(ROOT, "public", assetUrl.replace(/^\//, ""));
+  if (!fs.existsSync(localPath)) {
+    throw new Error(`Missing catalog file for seed: ${localPath}`);
+  }
+
+  const input = fs.readFileSync(localPath);
+  const processed = await processUploadImage(input, "image/png");
+  if (!processed.ok) throw new Error(`${localPath}: ${processed.error}`);
+
+  const cleaned = assetUrl.replace(/^\//, "").replace(/\.[^.]+$/, "");
+  const key = `seed/${cleaned}.${processed.image.ext}`;
+  const { error: uploadError } = await client.storage
+    .from(CATALOG_BUCKET)
+    .upload(key, processed.image.buffer, {
+      contentType: processed.image.contentType,
+      upsert: true,
+    });
+  if (uploadError) {
+    throw new Error(`Upload failed for ${key}: ${uploadError.message}`);
+  }
+
+  const { data } = client.storage.from(CATALOG_BUCKET).getPublicUrl(key);
+  cache.set(assetUrl, data.publicUrl);
+  return data.publicUrl;
 }
 
 async function upsertCategory(
@@ -61,6 +125,7 @@ async function seedStyle(
   client: SeedClient,
   style: CatalogStyle,
   categoryId: string,
+  assetCache: Map<string, string>,
 ) {
   const styleId = uuidFromKey(`style:${style.id}`);
 
@@ -113,33 +178,39 @@ async function seedStyle(
 
   await client.from("style_assets").delete().eq("style_id", styleId);
 
+  const cardSource = await resolveAssetUrl(client, style.source, assetCache);
+  const cardResult = await resolveAssetUrl(client, style.result, assetCache);
+
   const assets = [
     {
       id: uuidFromKey(`asset:${style.id}:card`),
       style_id: styleId,
       kind: "card_pair",
-      source_storage_key: style.source,
-      result_storage_key: style.result,
+      source_storage_key: cardSource,
+      result_storage_key: cardResult,
       alt_text: `${style.title} card pair`,
-      provenance: { source: "seed", licence: "placeholder" },
+      provenance: { source: "seed", licence: "catalog" },
       sort_order: 0,
     },
-    ...style.examplePairs.map((pair, index) => ({
+  ];
+
+  for (let index = 0; index < style.examplePairs.length; index++) {
+    const pair = style.examplePairs[index]!;
+    assets.push({
       id: uuidFromKey(`asset:${style.id}:ex:${index + 1}`),
       style_id: styleId,
       kind: "example_pair",
-      source_storage_key: pair.source,
-      result_storage_key: pair.result,
+      source_storage_key: await resolveAssetUrl(client, pair.source, assetCache),
+      result_storage_key: await resolveAssetUrl(client, pair.result, assetCache),
       alt_text: pair.altSource,
-      provenance: { source: "seed", licence: "placeholder" },
+      provenance: { source: "seed", licence: "catalog" },
       sort_order: index + 1,
-    })),
-  ];
+    });
+  }
 
   const { error: assetsError } = await client.from("style_assets").insert(assets);
   if (assetsError) throw assetsError;
 
-  // Subject / intent / tool tags for future filtering facets
   const tagSpecs = [
     { name: style.subject, kind: "subject" },
     { name: style.intent, kind: "intent" },
@@ -171,8 +242,11 @@ async function main() {
     auth: { autoRefreshToken: false, persistSession: false },
   });
 
+  await ensureCatalogBucket(client);
+
   const categoryNames = [...new Set(seedStyles.map((s) => s.category))];
   const categoryIds = new Map<string, string>();
+  const assetCache = new Map<string, string>();
 
   for (let i = 0; i < categoryNames.length; i++) {
     const cat = await upsertCategory(client, categoryNames[i]!, i);
@@ -182,11 +256,10 @@ async function main() {
   for (const style of seedStyles) {
     const categoryId = categoryIds.get(style.category);
     if (!categoryId) throw new Error(`Missing category for ${style.id}`);
-    await seedStyle(client, style, categoryId);
+    await seedStyle(client, style, categoryId, assetCache);
     console.log(`Seeded ${style.id}`);
   }
 
-  // Remove prototype / orphan styles that are no longer in the seed catalog.
   const keepSlugs = seedStyles.map((s) => s.id);
   const { data: existing, error: listError } = await client
     .from("styles")
@@ -212,7 +285,7 @@ async function main() {
   }
 
   console.log(
-    `Done. Seeded ${seedStyles.length} styles; removed ${orphans.length} orphans.`,
+    `Done. Seeded ${seedStyles.length} styles; removed ${orphans.length} orphans; catalog uploads ${assetCache.size}.`,
   );
 }
 

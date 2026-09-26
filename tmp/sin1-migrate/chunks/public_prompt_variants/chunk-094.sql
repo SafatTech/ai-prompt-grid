@@ -1,0 +1,1 @@
+Use natural outdoor daylight inside the individual photographs, with soft greenery or sunlit environmental blur behind some portraits. Maintain shallow depth of field inside each photo while keeping the scrapbook canvas itself flat and paper-like.

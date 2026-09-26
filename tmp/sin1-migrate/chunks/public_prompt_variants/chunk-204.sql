@@ -1,0 +1,1 @@
+Keep the hairstyle consistent across the collage. If needed, style the hair into a half-up messy bun with long flowing texture around the shoulders, matching both the realistic central portrait and the stylized mini versions.

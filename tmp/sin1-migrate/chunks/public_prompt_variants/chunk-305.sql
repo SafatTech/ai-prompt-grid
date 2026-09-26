@@ -1,0 +1,1 @@
+Place the product against {{background}}, interpreted as a seamless, distraction-free studio setting with no visible horizon line. Use bright, soft, even studio lighting, realistic glass and material reflections, a subtle natural contact shadow directly beneath the product, and {{mood}} colour grading.

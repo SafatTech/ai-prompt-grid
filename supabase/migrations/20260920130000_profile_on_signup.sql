@@ -27,6 +27,10 @@ create trigger on_auth_user_created
   after insert on auth.users
   for each row execute function public.handle_new_user();
 
+-- Trigger-only. Signup still runs it as supabase_auth_admin; the Data API must not.
+revoke all on function public.handle_new_user() from public, anon, authenticated;
+grant execute on function public.handle_new_user() to supabase_auth_admin;
+
 -- Allow a user to insert their own profile row (belt-and-suspenders beside the trigger)
 drop policy if exists profiles_insert_own on public.profiles;
 create policy profiles_insert_own on public.profiles

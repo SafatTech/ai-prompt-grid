@@ -1,0 +1,1 @@
+Apply {{mood}} color grading consistently to every embedded photograph. Use soft natural daylight, lightly warm skin tones, muted blush-pink clothing, gentle blue accents, creamy whites, subtle film softness, and clean youthful contrast. Keep skin realistic and preserve pores, facial texture, hair strands, and natural tonal variation.

@@ -1,0 +1,1 @@
+Top panel: show an extreme close-up of the subject’s crossed hands and wrists resting gently over the white embroidered fabric. Make the red bangles, oxidized silver bangles, statement ring, fingers, and embroidery the visual focus. Use soft sunlight to reveal jewelry texture, skin detail, and fabric stitching.

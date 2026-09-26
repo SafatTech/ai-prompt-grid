@@ -1,0 +1,1 @@
+Apply soft directional daylight, crisp tactile surface detail, gentle realistic shadows, and {{mood}} colour grading. Keep the overall composition minimal, refined, and photorealistic.

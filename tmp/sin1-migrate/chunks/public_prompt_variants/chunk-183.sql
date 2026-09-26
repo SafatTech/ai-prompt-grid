@@ -1,0 +1,1 @@
+If clothing is not preserved, replace the original outfit with a dark chocolate-brown or near-black collared shirt or lightweight jacket with a relaxed open neckline. Keep the styling minimal, masculine, understated, and editorial. Add subtle accessories such as a small hoop earring and a thin chain necklace only if they support the look.

@@ -1,0 +1,1 @@
+Apply {{mood}} color grading consistently across all three panels. Use warm golden sunlight, creamy ivory whites, deep ruby-red bangles, oxidized silver jewelry, soft natural skin tones, warm wooden browns, and gentle cinematic shadow depth. Preserve realistic pores, hand texture, fine hairs, fabric stitching, embroidery, metal reflections, and glass-bangle highlights.

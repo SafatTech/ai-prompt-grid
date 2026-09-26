@@ -1,0 +1,1 @@
+Include the subject’s soft cast shadow on the wall where appropriate, along with the leafy dappled shadows, to create visual depth and a poetic cinematic mood. Keep the wall simple and uncluttered so the subject remains the focus.

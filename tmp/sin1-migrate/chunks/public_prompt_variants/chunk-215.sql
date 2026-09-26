@@ -1,0 +1,1 @@
+Top-left panel: show a full or three-quarter walking portrait outdoors on a quiet sunlit street lined with trees and boundary walls. Let the subject walk naturally while looking off to one side with a soft relaxed smile.

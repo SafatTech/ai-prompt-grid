@@ -1,0 +1,1 @@
+Style the hair in a polished updo or loosely pinned evening hairstyle with soft volume at the crown and a few delicate face-framing strands. Preserve the subject’s natural hair color and texture while giving it a refined formal finish.

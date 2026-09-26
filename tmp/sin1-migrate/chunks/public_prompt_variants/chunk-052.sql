@@ -1,0 +1,1 @@
+The overall mood should feel romantic, intimate, sunlit, artistic, and cinematic rather than like a conventional studio headshot.

@@ -1,0 +1,1 @@
+Allow the warped background to create sweeping curved lines that visually lead toward the subject. Keep these flowing distortions smooth, organic, elegant, and photographic rather than chaotic or psychedelic. The subject must remain clearly separated from the warped environment.

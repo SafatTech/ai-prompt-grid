@@ -189,7 +189,7 @@ function UploadField({
   return (
     <label className="grid gap-1.5 text-[11px] font-bold text-[#cbc9d2]">
       {label}
-      <div className="relative grid min-h-[150px] place-items-center overflow-hidden rounded-[14px] border border-dashed border-[var(--line-strong)] bg-[#111118] text-center">
+      <div className="relative grid min-h-[120px] place-items-center overflow-hidden rounded-[14px] border border-dashed border-[var(--line-strong)] bg-[#111118] text-center sm:min-h-[150px]">
         <input
           type="file"
           accept="image/jpeg,image/png,image/webp"

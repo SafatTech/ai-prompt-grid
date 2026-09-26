@@ -1,0 +1,1 @@
+Add subtle editorial polish with fine photographic grain, warm highlight roll-off, gentle optical bloom, and a soft nostalgic film texture. The image should feel intimate, graceful, traditional, and cinematic, like a jewelry-and-fashion editorial captured in natural window light.

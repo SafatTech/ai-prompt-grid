@@ -13,7 +13,7 @@ export function EmptyState({ icon = "⌕", title, description, action, className
   return (
     <div
       className={cn(
-        "grid min-h-[350px] place-items-center rounded-[var(--radius)] border border-dashed border-[var(--line-strong)] p-10 text-center",
+        "grid min-h-[240px] place-items-center rounded-[var(--radius)] border border-dashed border-[var(--line-strong)] p-6 text-center sm:min-h-[350px] sm:p-10",
         className,
       )}
     >

@@ -1,0 +1,1 @@
+Use soft directional natural light, similar to late-afternoon sunlight entering a shaded heritage courtyard. Let the light gently shape the face, hair, saree folds, bouquet, and stone textures. Avoid harsh flat lighting. Preserve highlight detail in the blue fabric and roses.

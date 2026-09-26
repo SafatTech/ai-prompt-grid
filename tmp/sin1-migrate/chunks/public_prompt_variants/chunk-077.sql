@@ -1,0 +1,1 @@
+Use strong warm directional lighting from behind and slightly to one side of the subject, producing a golden rim light around the hair, shoulder, and bouquet edges. Add soft warm frontal fill so the face remains beautifully visible while retaining dimensional shadows. Let the strongest highlights glow naturally on loose hair strands, rose petals, and the subject’s shoulder.

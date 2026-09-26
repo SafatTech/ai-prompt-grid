@@ -1,0 +1,1 @@
+Apply {{mood}} color grading consistently across the collage. Use warm golden sunlight, earthy brown and rust tones, creamy highlights, muted greenery, sunlit skin tones, and gentle nostalgic contrast. Preserve realistic pores, hair strands, natural fabric texture, and authentic tonal variation. Avoid plastic smoothing or overly glamorous retouching.

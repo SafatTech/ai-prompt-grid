@@ -1,0 +1,1 @@
+Bottom panel: create the tightest close-up, cropping closer around the face and shoulders. Let a few strands of hair fall across the forehead or near one eye, and use an intense sideways gaze or direct stare to produce a more dramatic editorial mood.

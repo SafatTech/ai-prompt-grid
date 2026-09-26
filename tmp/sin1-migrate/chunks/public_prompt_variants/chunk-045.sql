@@ -1,0 +1,1 @@
+Apply {{mood}} color grading throughout the portrait. Preserve warm natural skin tones, rich deep-red flower tones, crisp white floral highlights, dark hair contrast, and dramatic sunlit warmth. Keep pores, fine skin detail, lips, eyelashes, and subtle tonal variation realistic. Avoid plastic skin, excessive smoothing, or artificial beauty-filter effects.

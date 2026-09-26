@@ -1,0 +1,1 @@
+Middle panel: turn the upper body and head more strongly to one side, creating an over-the-shoulder or strong three-quarter profile. Direct the eyes back toward the camera or slightly past it. Keep the jawline pronounced and the expression composed and self-assured.

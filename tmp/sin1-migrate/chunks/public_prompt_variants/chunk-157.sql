@@ -1,0 +1,1 @@
+If pose is not preserved, create a close portrait from around the mid-torso upward with the body turned slightly away from the camera. Let the subject lean or rest close to a wall, with the head turned gently to one side and the gaze directed off-camera. Keep the expression calm, introspective, soft, and elegant, with a faint subtle smile or neutral relaxed lips.

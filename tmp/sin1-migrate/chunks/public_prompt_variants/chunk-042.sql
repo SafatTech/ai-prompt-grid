@@ -1,0 +1,1 @@
+If pose is not preserved, reposition the subject into a very close beauty portrait with the face turned slightly toward the camera, chin relaxed, and eyes looking naturally toward the lens with a soft, calm, subtly confident expression. Keep the pose intimate and candid rather than formal.

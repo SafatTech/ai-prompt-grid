@@ -1,0 +1,1 @@
+The finished portrait should feel fresh, peaceful, youthful, free-spirited, sun-drenched, and cinematic, like a candid moment captured while resting in a meadow on a clear day.

@@ -1,0 +1,1 @@
+Create the environment from {{background}}. Render it with strong shallow depth of field, smooth circular bokeh, gentle tonal separation, and enough blur that the subject, flowers, jewelry, and clothing remain the visual focus. Do not introduce distracting recognizable people or unnecessary objects.

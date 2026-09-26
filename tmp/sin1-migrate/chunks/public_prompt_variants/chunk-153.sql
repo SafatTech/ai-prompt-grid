@@ -1,0 +1,1 @@
+The overall aesthetic should feel timeless, introspective, sophisticated, editorial, and cinematic, similar to a monochrome film poster or fine-art fashion portrait.

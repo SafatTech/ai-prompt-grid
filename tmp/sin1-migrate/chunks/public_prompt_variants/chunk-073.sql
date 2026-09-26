@@ -1,0 +1,1 @@
+Style the hair with soft natural volume and loose flowing waves around the face and shoulders. Allow a few fine strands to catch the backlight for a realistic luminous edge. Keep the hairstyle elegant but slightly effortless rather than highly structured.

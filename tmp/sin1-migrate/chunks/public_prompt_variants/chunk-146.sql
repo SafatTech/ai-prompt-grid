@@ -1,0 +1,1 @@
+Keep the central portrait crisp, dimensional, and high contrast. Render the two background faces with significantly lower opacity, soft edges, reduced contrast, and an ethereal printed-photograph appearance. They should feel like memories or alternate viewpoints rather than separate people.

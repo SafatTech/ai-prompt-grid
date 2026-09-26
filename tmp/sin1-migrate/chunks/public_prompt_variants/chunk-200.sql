@@ -1,0 +1,1 @@
+If clothing is not preserved, style the subject in a crisp white button-up blouse with a relaxed open collar, high-waisted beige tailored trousers, simple white sneakers, and elegant oversized gold hoop earrings. Keep the outfit clean, modern, soft, and neutral.

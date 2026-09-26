@@ -1,0 +1,1 @@
+Use a wide-angle or moderately wide portrait-lens perspective from below. The low viewpoint should make the sky expansive and place the subject confidently above the surrounding flowers while maintaining believable facial proportions.

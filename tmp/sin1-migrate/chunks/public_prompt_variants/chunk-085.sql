@@ -1,0 +1,1 @@
+If clothing is not preserved, style the subject in a relaxed pale blush-pink or very light pink-and-white vertically striped button-up shirt with the collar casually open and sleeves rolled to the forearms. Pair it with simple dark trousers and a minimal metallic wristwatch or bracelet. Keep the styling youthful, clean, casual, and understated.

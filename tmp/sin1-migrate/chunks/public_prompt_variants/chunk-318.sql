@@ -1,0 +1,1 @@
+Use soft natural daylight, realistic tactile materials, gentle environmental shadows, and {{mood}} colour grading. Create a quiet, high-end editorial feeling without making the scene look artificial or changing the product itself.

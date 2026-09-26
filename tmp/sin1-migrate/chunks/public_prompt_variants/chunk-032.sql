@@ -1,0 +1,1 @@
+If pose is not preserved, reposition the subject into a graceful close-up editorial pose with the head turned slightly downward and toward one side, eyes softly closed or lowered, shoulders relaxed, and a subtle natural smile. The pose should feel candid, intimate, serene, and effortless rather than formal or rigid.

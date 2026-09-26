@@ -1,0 +1,1 @@
+Use strong but flattering late-afternoon directional sunlight. Allow the light to create luminous edges around the hair and dupatta, warm highlights across the face and shoulders, and soft long shadows across the street. Keep the close-up portraits gently sculpted with realistic light falloff.

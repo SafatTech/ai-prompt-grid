@@ -1,0 +1,1 @@
+Use shallow depth of field and a cinematic portrait-lens aesthetic. Add gentle highlight bloom, fine film grain, slightly softened contrast, subtle atmospheric haze, and warm analog-style tonal roll-off. The photograph should feel like a still frame from an intimate dramatic film rather than a bright studio portrait.

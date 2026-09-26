@@ -1,0 +1,1 @@
+Frame the image from approximately the waist or upper torso upward. Let the bouquet occupy a substantial portion of the lower half of the composition while the face remains clearly visible above it. Maintain enough space around the hair and shoulders for the warm rim light to remain visible.

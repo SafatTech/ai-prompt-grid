@@ -1,0 +1,1 @@
+The projected floral shadows are a defining element of the style. They should appear naturally caused by real sunlight and nearby flowers rather than looking painted, composited, or artificial.

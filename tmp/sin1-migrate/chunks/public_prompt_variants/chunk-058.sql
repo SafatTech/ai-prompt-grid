@@ -1,0 +1,1 @@
+If pose is not preserved, use a different complementary pose or detail crop in each section:

@@ -1,0 +1,1 @@
+Apply {{mood}} color grading across the entire composition. Convert the scene into refined black and white with rich charcoal blacks, luminous whites, smooth silver-gray midtones, controlled highlight roll-off, and subtle vintage tonal softness. Preserve realistic pores, individual hair strands, eyebrow detail, and natural facial structure.

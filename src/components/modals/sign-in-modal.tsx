@@ -130,7 +130,7 @@ export function SignInModal({ onClose }: { onClose: () => void }) {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="you@example.com"
-            className="rounded-[10px] border border-[var(--line)] bg-[var(--surface-2)] px-3 py-2.5 text-[var(--text)]"
+            className="min-h-11 rounded-[10px] border border-[var(--line)] bg-[var(--surface-2)] px-3 py-2.5 text-base text-[var(--text)]"
           />
         </label>
         <Button type="submit" className="w-full text-white" disabled={busy}>
@@ -146,7 +146,7 @@ export function SignInModal({ onClose }: { onClose: () => void }) {
       ) : null}
       <button
         type="button"
-        className="mt-3 cursor-pointer border-0 bg-transparent p-0 font-bold text-[#bbaeff]"
+        className="mt-3 inline-flex min-h-11 cursor-pointer items-center border-0 bg-transparent p-0 font-bold text-[#bbaeff]"
         onClick={() => {
           onClose();
           toast("Continuing as a guest. Sign in when you want to save.");

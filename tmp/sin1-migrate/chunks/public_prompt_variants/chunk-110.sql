@@ -1,0 +1,1 @@
+Use an ultra-wide-angle or close-range selfie-camera aesthetic with noticeable perspective exaggeration. The face should remain proportionally believable while the arm extending toward the lens appears enlarged by perspective. Keep the effect intentional and photographic rather than anatomically distorted.

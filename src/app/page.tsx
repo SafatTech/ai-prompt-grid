@@ -14,10 +14,10 @@ export default async function HomePage() {
         <div className="hero-bg" aria-hidden />
         <div className="container hero-inner">
           <div>
-            <span className="inline-flex min-h-[30px] items-center rounded-[var(--pill)] border border-[rgba(139,108,255,0.23)] bg-[rgba(139,108,255,0.1)] px-[11px] text-xs font-extrabold tracking-[0.12em] text-[#c1b4ff] uppercase">
+            <span className="inline-flex min-h-[30px] max-w-full flex-wrap items-center rounded-[var(--pill)] border border-[rgba(139,108,255,0.23)] bg-[rgba(139,108,255,0.1)] px-[11px] py-1 text-left text-xs font-extrabold tracking-[0.12em] text-[#c1b4ff] uppercase">
               Transform the photos you already love
             </span>
-            <h1 className="mt-[22px] mb-5 max-w-[670px] text-[clamp(48px,6.25vw,88px)] leading-[0.95] font-bold tracking-[-0.065em] max-[860px]:max-w-[700px] max-[860px]:text-[clamp(48px,12vw,74px)] max-[640px]:text-[clamp(43px,13.2vw,63px)] max-[640px]:tracking-[-0.055em]">
+            <h1 className="mt-[22px] mb-5 max-w-[670px] text-[clamp(38px,11vw,88px)] leading-[0.95] font-bold tracking-[-0.065em] max-[860px]:max-w-[700px] max-[640px]:tracking-[-0.055em]">
               Find a look.{" "}
               <span className="font-semibold text-[var(--muted)]">Keep your story.</span>
             </h1>
@@ -45,8 +45,8 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="container py-[88px]">
-        <div className="mb-7 flex items-end justify-between gap-5">
+      <section className="container py-12 sm:py-16 lg:py-[88px]">
+        <div className="mb-7 flex flex-col items-start gap-2 sm:flex-row sm:items-end sm:justify-between sm:gap-5">
           <h2 className="m-0 text-[clamp(28px,3vw,42px)] tracking-[-0.035em]">
             Trending transformations
           </h2>
@@ -61,21 +61,21 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="container py-16">
+      <section className="container py-12 sm:py-16">
         <div className="mb-[30px] max-w-[760px]">
           <h2 className="m-0 mb-2.5 text-[clamp(32px,4vw,54px)] leading-[1.03] tracking-[-0.045em]">
             Start with the look
           </h2>
-          <p className="m-0 text-[17px] text-[var(--muted)]">
+          <p className="m-0 text-[15px] text-[var(--muted)] sm:text-[17px]">
             Choose a direction for the photo you already have.
           </p>
         </div>
-        <div className="flex gap-2.5 overflow-x-auto pb-3.5 [scrollbar-width:thin]">
+        <div className="category-chip-scroll -mx-3 flex gap-2.5 overflow-x-auto px-3 pb-3.5 [scrollbar-width:thin] sm:-mx-4 sm:px-4 md:-mx-6 md:px-6">
           {categories.map((category) => (
             <Link
               key={category}
               href={`/explore?category=${encodeURIComponent(category)}`}
-              className="inline-flex min-h-[38px] shrink-0 items-center rounded-[var(--pill)] border border-[var(--line)] bg-[var(--surface)] px-3.5 text-[13px] text-[#c8c6cf] hover:border-[rgba(139,108,255,0.55)] hover:bg-[rgba(139,108,255,0.14)] hover:text-[var(--text)]"
+              className="inline-flex min-h-11 shrink-0 items-center rounded-[var(--pill)] border border-[var(--line)] bg-[var(--surface)] px-3.5 text-[14px] text-[#c8c6cf] hover:border-[rgba(139,108,255,0.55)] hover:bg-[rgba(139,108,255,0.14)] hover:text-[var(--text)]"
             >
               {category}
             </Link>
@@ -83,12 +83,12 @@ export default async function HomePage() {
         </div>
       </section>
 
-      <section className="container py-[88px]">
+      <section className="container py-12 sm:py-16 lg:py-[88px]">
         <div className="mb-[30px] max-w-[760px]">
           <h2 className="m-0 mb-2.5 text-[clamp(32px,4vw,54px)] leading-[1.03] tracking-[-0.045em]">
             Made for your photos
           </h2>
-          <p className="m-0 text-[17px] text-[var(--muted)]">
+          <p className="m-0 text-[15px] text-[var(--muted)] sm:text-[17px]">
             See what changes, keep what matters, and carry the prompt to the editor you
             trust.
           </p>
@@ -138,8 +138,8 @@ function MadeForCard({
     <article
       className={
         featured
-          ? "made-for-card group relative min-h-[310px] overflow-hidden rounded-[var(--radius)] border border-[var(--line)] p-[27px] md:row-span-2 md:min-h-[396px]"
-          : "made-for-card group relative min-h-[190px] overflow-hidden rounded-[var(--radius)] border border-[var(--line)] p-[27px]"
+          ? "made-for-card group relative flex min-h-[260px] flex-col overflow-hidden rounded-[var(--radius)] border border-[var(--line)] p-5 md:row-span-2 md:min-h-[396px] md:p-[27px]"
+          : "made-for-card group relative flex min-h-[180px] flex-col overflow-hidden rounded-[var(--radius)] border border-[var(--line)] p-5 md:p-[27px]"
       }
     >
       <div
@@ -156,8 +156,8 @@ function MadeForCard({
       <h3
         className={
           featured
-            ? "relative z-[1] mt-24 mb-2 text-[33px] tracking-[-0.03em] transition-[color,transform] duration-[420ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 md:mt-[170px]"
-            : "relative z-[1] mt-[54px] mb-2 text-[25px] tracking-[-0.03em] transition-[color,transform] duration-[420ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5"
+            ? "relative z-[1] mt-auto mb-2 pt-10 text-[24px] tracking-[-0.03em] transition-[color,transform] duration-[420ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 sm:text-[28px] md:pt-[170px] md:text-[33px]"
+            : "relative z-[1] mt-auto mb-2 pt-8 text-[20px] tracking-[-0.03em] transition-[color,transform] duration-[420ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-x-0.5 md:pt-[54px] md:text-[25px]"
         }
       >
         {title}

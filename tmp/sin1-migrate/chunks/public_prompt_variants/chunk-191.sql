@@ -1,0 +1,1 @@
+Use strong direct sunlight or hard directional studio light coming from one side of the frame. Allow the light to strike the subject’s face and hair while creating a bold, clearly defined cast shadow of the head and shoulders on the wall behind. The cast shadow should be an important visual element in all three panels.

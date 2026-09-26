@@ -22,9 +22,9 @@ describe("cn", () => {
 });
 
 describe("published catalog seed", () => {
-  it("exposes 40 published editorial styles with recipe fields", () => {
+  it("exposes 50 published styles with recipe fields", () => {
     const published = getPublishedStyles();
-    assert.equal(published.length, 40);
+    assert.equal(published.length, 50);
     for (const style of published) {
       assert.equal(style.status, "published");
       assert.ok(style.promptVariant.template.includes("{{mood}}"));
@@ -70,6 +70,16 @@ describe("assemblePrompt", () => {
     assert.match(result.prompt, /product details & genuine packaging/i);
     assert.doesNotMatch(result.prompt, /camera angle & framing/i);
     assert.doesNotMatch(result.prompt, /\{\{/);
+  });
+
+  it("builds a group preserve list from group toggles", () => {
+    const style = getStyleById("after-hours-polaroid");
+    assert.ok(style);
+    const result = assemblePrompt(style, defaultsForStyle(style));
+    assert.equal(result.ok, true);
+    if (!result.ok) return;
+    assert.match(result.prompt, /identities and facial features/i);
+    assert.match(result.prompt, /group arrangement and pose/i);
   });
 
   it("rejects invalid prompt options", () => {

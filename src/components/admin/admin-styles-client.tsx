@@ -69,15 +69,15 @@ export function AdminStylesClient({ initialStyles, role, displayName }: Props) {
 
   return (
     <div>
-      <section className="container pt-16 pb-6">
+      <section className="container pt-10 pb-6 sm:pt-16">
         <p className="m-0 mb-2 text-[11px] font-bold tracking-[0.08em] text-[var(--muted)] uppercase">
           Editorial · {role}
           {displayName ? ` · ${displayName}` : ""}
         </p>
-        <h1 className="m-0 mb-2 text-[clamp(36px,4.5vw,56px)] tracking-[-0.04em]">
+        <h1 className="m-0 mb-2 text-[clamp(32px,6vw,56px)] tracking-[-0.04em]">
           Style lifecycle
         </h1>
-        <p className="m-0 mb-5 max-w-[54ch] text-[var(--muted)]">
+        <p className="m-0 mb-5 max-w-[54ch] text-[15px] text-[var(--muted)] sm:text-base">
           Create and edit recipes, then draft, review, publish, or archive. Publish and
           archive write an audit log. Archiving never deletes private user creations.
         </p>
@@ -112,97 +112,150 @@ export function AdminStylesClient({ initialStyles, role, displayName }: Props) {
         ))}
       </div>
 
-      <section className="container py-8 pb-[100px]">
+      <section className="container py-8 pb-16 sm:pb-[100px]">
         {visible.length === 0 ? (
           <p className="text-[var(--muted)]">No styles in this filter.</p>
         ) : (
-          <div className="overflow-x-auto rounded-[var(--radius)] border border-[var(--line)]">
-            <table className="w-full min-w-[720px] border-collapse text-left text-sm">
-              <thead className="bg-[var(--surface-2)] text-[11px] tracking-[0.06em] text-[var(--muted)] uppercase">
-                <tr>
-                  <th className="px-4 py-3 font-bold">Style</th>
-                  <th className="px-4 py-3 font-bold">Status</th>
-                  <th className="px-4 py-3 font-bold">Home</th>
-                  <th className="px-4 py-3 font-bold">Tool</th>
-                  <th className="px-4 py-3 font-bold">Variant</th>
-                  <th className="px-4 py-3 font-bold">Edit</th>
-                  <th className="px-4 py-3 font-bold">Actions</th>
-                </tr>
-              </thead>
-              <tbody>
-                {visible.map((style) => {
-                  const next = STYLE_STATUS_TRANSITIONS[style.status] ?? [];
-                  return (
-                    <tr
-                      key={style.id}
-                      className="border-t border-[var(--line)] bg-[var(--surface)]"
-                    >
-                      <td className="px-4 py-4 align-top">
-                        <div className="font-bold text-[var(--text)]">{style.title}</div>
-                        <div className="mt-1 text-[12px] text-[var(--muted)]">
-                          {style.category} ·{" "}
-                          <Link
-                            href={`/styles/${style.slug}`}
-                            className="text-[var(--text)] underline-offset-2 hover:underline"
-                          >
-                            {style.slug}
-                          </Link>
-                        </div>
-                      </td>
-                      <td className="px-4 py-4 align-top">
-                        <StatusPill status={style.status} />
-                      </td>
-                      <td className="px-4 py-4 align-top text-[var(--muted)]">
-                        {style.trendingRank != null ? (
-                          <span className="inline-flex rounded-lg bg-[rgba(139,108,255,0.16)] px-2 py-1 text-[11px] font-bold text-[#c5b9ff]">
-                            #{style.trendingRank}
-                          </span>
-                        ) : (
-                          "—"
-                        )}
-                      </td>
-                      <td className="px-4 py-4 align-top text-[var(--muted)]">
-                        {style.tool}
-                      </td>
-                      <td className="px-4 py-4 align-top text-[var(--muted)]">
-                        {style.variantStatus}
-                      </td>
-                      <td className="px-4 py-4 align-top">
-                        <Link
-                          href={`/admin/styles/${style.slug}/edit`}
-                          data-testid={`admin-edit-${style.slug}`}
-                          className="inline-flex min-h-10 items-center justify-center rounded-xl border border-[var(--line)] bg-[var(--surface-2)] px-3 text-sm font-bold text-[var(--text)]"
+          <>
+            <ul className="m-0 grid list-none gap-3 p-0 lg:hidden">
+              {visible.map((style) => {
+                const next = STYLE_STATUS_TRANSITIONS[style.status] ?? [];
+                return (
+                  <li
+                    key={style.id}
+                    className="rounded-[var(--radius)] border border-[var(--line)] bg-[var(--surface)] p-4"
+                  >
+                    <div className="mb-3 flex flex-wrap items-start justify-between gap-2">
+                      <div className="min-w-0">
+                        <h2 className="m-0 text-base font-bold text-[var(--text)]">
+                          {style.title}
+                        </h2>
+                        <p className="m-0 mt-1 text-[12px] text-[var(--muted)]">
+                          {style.category} · {style.tool}
+                          {style.trendingRank != null ? ` · Home #${style.trendingRank}` : ""}
+                        </p>
+                      </div>
+                      <StatusPill status={style.status} />
+                    </div>
+                    <div className="flex flex-wrap gap-2">
+                      <Link
+                        href={`/admin/styles/${style.slug}/edit`}
+                        data-testid={`admin-edit-${style.slug}`}
+                        className="inline-flex min-h-10 items-center justify-center rounded-xl border border-[var(--line)] bg-[var(--surface-2)] px-3 text-sm font-bold text-[var(--text)]"
+                      >
+                        Edit
+                      </Link>
+                      {next.map((status) => (
+                        <Button
+                          key={status}
+                          variant={
+                            status === "published"
+                              ? "primary"
+                              : status === "archived"
+                                ? "danger"
+                                : "ghost"
+                          }
+                          disabled={busyId === style.id}
+                          data-testid={`admin-${style.slug}-${status}`}
+                          onClick={() => void setStatus(style, status)}
                         >
-                          Edit
-                        </Link>
-                      </td>
-                      <td className="px-4 py-4 align-top">
-                        <div className="flex flex-wrap gap-2">
-                          {next.map((status) => (
-                            <Button
-                              key={status}
-                              variant={
-                                status === "published"
-                                  ? "primary"
-                                  : status === "archived"
-                                    ? "danger"
-                                    : "ghost"
-                              }
-                              disabled={busyId === style.id}
-                              data-testid={`admin-${style.slug}-${status}`}
-                              onClick={() => void setStatus(style, status)}
+                          {ACTION_LABEL[status]}
+                        </Button>
+                      ))}
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+
+            <div className="hidden overflow-x-auto rounded-[var(--radius)] border border-[var(--line)] lg:block">
+              <table className="w-full min-w-[720px] border-collapse text-left text-sm">
+                <thead className="bg-[var(--surface-2)] text-[11px] tracking-[0.06em] text-[var(--muted)] uppercase">
+                  <tr>
+                    <th className="px-4 py-3 font-bold">Style</th>
+                    <th className="px-4 py-3 font-bold">Status</th>
+                    <th className="px-4 py-3 font-bold">Home</th>
+                    <th className="px-4 py-3 font-bold">Tool</th>
+                    <th className="px-4 py-3 font-bold">Variant</th>
+                    <th className="px-4 py-3 font-bold">Edit</th>
+                    <th className="px-4 py-3 font-bold">Actions</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {visible.map((style) => {
+                    const next = STYLE_STATUS_TRANSITIONS[style.status] ?? [];
+                    return (
+                      <tr
+                        key={style.id}
+                        className="border-t border-[var(--line)] bg-[var(--surface)]"
+                      >
+                        <td className="px-4 py-4 align-top">
+                          <div className="font-bold text-[var(--text)]">{style.title}</div>
+                          <div className="mt-1 text-[12px] text-[var(--muted)]">
+                            {style.category} ·{" "}
+                            <Link
+                              href={`/styles/${style.slug}`}
+                              className="text-[var(--text)] underline-offset-2 hover:underline"
                             >
-                              {ACTION_LABEL[status]}
-                            </Button>
-                          ))}
-                        </div>
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
-          </div>
+                              {style.slug}
+                            </Link>
+                          </div>
+                        </td>
+                        <td className="px-4 py-4 align-top">
+                          <StatusPill status={style.status} />
+                        </td>
+                        <td className="px-4 py-4 align-top text-[var(--muted)]">
+                          {style.trendingRank != null ? (
+                            <span className="inline-flex rounded-lg bg-[rgba(139,108,255,0.16)] px-2 py-1 text-[11px] font-bold text-[#c5b9ff]">
+                              #{style.trendingRank}
+                            </span>
+                          ) : (
+                            "—"
+                          )}
+                        </td>
+                        <td className="px-4 py-4 align-top text-[var(--muted)]">
+                          {style.tool}
+                        </td>
+                        <td className="px-4 py-4 align-top text-[var(--muted)]">
+                          {style.variantStatus}
+                        </td>
+                        <td className="px-4 py-4 align-top">
+                          <Link
+                            href={`/admin/styles/${style.slug}/edit`}
+                            data-testid={`admin-edit-${style.slug}`}
+                            className="inline-flex min-h-10 items-center justify-center rounded-xl border border-[var(--line)] bg-[var(--surface-2)] px-3 text-sm font-bold text-[var(--text)]"
+                          >
+                            Edit
+                          </Link>
+                        </td>
+                        <td className="px-4 py-4 align-top">
+                          <div className="flex flex-wrap gap-2">
+                            {next.map((status) => (
+                              <Button
+                                key={status}
+                                variant={
+                                  status === "published"
+                                    ? "primary"
+                                    : status === "archived"
+                                      ? "danger"
+                                      : "ghost"
+                                }
+                                disabled={busyId === style.id}
+                                data-testid={`admin-${style.slug}-${status}`}
+                                onClick={() => void setStatus(style, status)}
+                              >
+                                {ACTION_LABEL[status]}
+                              </Button>
+                            ))}
+                          </div>
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              </table>
+            </div>
+          </>
         )}
       </section>
     </div>

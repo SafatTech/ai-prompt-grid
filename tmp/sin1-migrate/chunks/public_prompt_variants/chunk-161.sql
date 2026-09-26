@@ -1,0 +1,1 @@
+Use strong directional light from one side, similar to sunlight coming through a nearby window or filtered outdoor light. Let the face, jewelry, and saree border catch elegant highlights while the opposite side falls into softer shadow. Maintain a moody but flattering portrait balance.

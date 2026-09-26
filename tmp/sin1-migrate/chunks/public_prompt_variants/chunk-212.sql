@@ -1,0 +1,1 @@
+Create a polished four-image collage arranged in a clean two-by-two grid with thin white divider lines between the panels. Each panel should show the same subject in a different candid lifestyle moment while maintaining identical identity, styling, color treatment, and overall photographic mood.

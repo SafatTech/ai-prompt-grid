@@ -1,0 +1,1 @@
+Style the subject in a softly flowing light summer outfit, holding a loose bouquet of delicate wildflowers with natural green stems. Give them a genuine happy expression, naturally windblown hair, and a walking or lightly running pose. Use {{mood}} color grading, realistic fabric movement, soft background depth, and elegant editorial-film detail.

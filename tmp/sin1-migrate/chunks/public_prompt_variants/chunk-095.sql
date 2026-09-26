@@ -1,0 +1,1 @@
+Create believable paper texture, slightly imperfect torn edges, soft contact shadows beneath overlapping photographs and notes, subtle tape translucency, and realistic printed-photo texture. The collage should feel tactile and handmade while still looking polished enough for a modern editorial social-media aesthetic.

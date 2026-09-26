@@ -1,0 +1,1 @@
+Top-right panel: show a seated close portrait of the subject reading a dark-covered poetry or journal-style book. Frame it from about the waist or knees upward, with the book held near the face and one knee drawn upward casually. Add a few tiny decorative emoji-like accents nearby, such as a red heart, a white dove, and a yellow crescent moon, keeping them subtle and playful.

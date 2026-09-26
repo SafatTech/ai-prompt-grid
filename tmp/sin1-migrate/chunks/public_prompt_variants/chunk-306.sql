@@ -1,0 +1,1 @@
+Keep the product fully visible, centrally composed with generous clean space around it. Render in {{ratio}} as premium photorealistic e-commerce product photography.

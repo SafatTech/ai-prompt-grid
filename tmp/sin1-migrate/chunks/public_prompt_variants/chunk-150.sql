@@ -1,0 +1,1 @@
+Introduce fine analog film grain, subtle paper-like texture, delicate vignette darkening near the outer edges, and faint distressed or imperfect photographic borders. Keep these effects refined and understated rather than heavily grungy.

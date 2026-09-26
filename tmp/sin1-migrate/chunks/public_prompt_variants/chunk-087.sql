@@ -1,0 +1,1 @@
+Preserve the subject’s natural hairstyle but allow slightly fuller texture and relaxed movement if needed. Keep individual curls or waves sharply defined in the main portraits and avoid changing the person into a different hairstyle or identity.

@@ -1,0 +1,1 @@
+Render the rose with deep velvety crimson petals, realistic layered folds, rich tonal depth, and visible natural texture. Render the baby’s-breath as numerous small white blossoms on thin branching stems. Some blossoms may remain sharply focused while others fall softly out of focus to create foreground depth.

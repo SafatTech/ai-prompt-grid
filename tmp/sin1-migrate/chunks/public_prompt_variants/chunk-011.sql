@@ -1,0 +1,2 @@
+insert into public.prompt_variants (id, style_id, tool, mode, input_image_count, input_image_roles, version, template, variables, settings, test_record, is_primary, status, created_at, updated_at) values
+('476bb804-4e83-5705-b4ff-93a160cad85a', '5c9de9f3-edf0-5e8f-a915-23032d562b35', 'ChatGPT Image', 'Image edit / transform with uploaded photo', 1, "[\"source photo\"]"::jsonb, '1.0.0', 'Transform the uploaded {{subject}} into a joyful cinematic travel-fashion portrait, preserving their identity, facial features, natural skin texture, and {{preserve}}.

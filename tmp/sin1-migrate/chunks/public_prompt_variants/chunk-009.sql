@@ -1,0 +1,1 @@
+Style the subject in relaxed dark layers over a simple light shirt, seated calmly with a reflective expression and one hand resting near the face. Use {{mood}} color grading, filtered side lighting, gentle film grain, realistic clothing texture, and a quiet indie-film atmosphere. Keep the face and hands crisp with soft depth in the surrounding details.

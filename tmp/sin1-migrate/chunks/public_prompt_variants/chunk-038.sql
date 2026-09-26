@@ -1,0 +1,1 @@
+Frame the subject as a close portrait from approximately the chest or shoulders upward. Keep the face large in the composition with enough surrounding space for the glowing rim light and flowing hair to remain visible. Avoid overly tight cropping around the hair or chin.

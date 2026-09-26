@@ -1,0 +1,1 @@
+Frame the portrait from approximately the upper thighs or waist upward with the subject occupying most of the composition while still leaving enough surrounding space for the moving golden environment to remain visible. Keep the face positioned naturally within the upper-middle portion of the frame.

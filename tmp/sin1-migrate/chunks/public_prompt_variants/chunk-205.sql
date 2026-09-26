@@ -1,0 +1,1 @@
+Apply {{mood}} color grading across the entire composition. Use warm soft daylight, creamy beige tones, clean whites, muted blush accents, subtle greenery, and a light editorial finish. Keep the central portrait realistic and naturally lit, while allowing the surrounding chibi portraits to have a slightly more illustrated, glossy, doll-like finish.

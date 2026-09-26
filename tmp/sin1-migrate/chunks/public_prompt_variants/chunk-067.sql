@@ -1,0 +1,1 @@
+Keep the diagonal separators extremely thin and elegant. Do not use thick borders, decorative frames, text boxes, or graphic-design elements beyond the three photographic sections and their narrow separators.

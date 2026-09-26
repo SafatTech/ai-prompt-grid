@@ -1,0 +1,1 @@
+Create {{background}}. Use a dark, softly blurred indoor evening setting with minimal recognizable detail. Include a few small circular out-of-focus lights or soft luminous highlights in the distance to create subtle cinematic bokeh while keeping the face dominant.

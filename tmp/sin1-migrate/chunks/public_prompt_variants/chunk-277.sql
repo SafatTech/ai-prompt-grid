@@ -1,0 +1,1 @@
+Fill the sky with several flying seagulls or river birds at different distances to create movement and travel-poster energy. Keep the birds naturally placed and proportionate.

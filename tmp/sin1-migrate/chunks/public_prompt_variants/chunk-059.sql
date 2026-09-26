@@ -1,0 +1,1 @@
+Top panel: show a close side-profile or three-quarter beauty portrait from approximately the shoulders upward. Turn the subject’s face gently toward nearby flowers with the chin slightly lifted and eyes softly closed or lowered. Keep the expression peaceful and subtly smiling. Let loose natural hair flow around the head and shoulders.

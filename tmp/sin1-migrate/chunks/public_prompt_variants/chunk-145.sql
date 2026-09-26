@@ -1,0 +1,1 @@
+Create two secondary enlarged portrait exposures behind the main figure. Place one faded profile on the left side facing outward and another larger translucent three-quarter or side profile on the right side facing the opposite direction. Let these background portraits extend higher than the central figure and fade naturally into the surrounding light backdrop.

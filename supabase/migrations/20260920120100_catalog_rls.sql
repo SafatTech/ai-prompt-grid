@@ -14,8 +14,13 @@ alter table public.creations enable row level security;
 alter table public.reports enable row level security;
 alter table public.audit_logs enable row level security;
 
--- Helper: current profile role
-create or replace function public.current_profile_role()
+-- Helper lives outside the Data API so it cannot be called over REST.
+-- security definer avoids RLS recursion when policies read the caller's role.
+create schema if not exists private;
+revoke all on schema private from public;
+grant usage on schema private to anon, authenticated, service_role;
+
+create or replace function private.current_profile_role()
 returns text
 language sql
 stable
@@ -24,6 +29,11 @@ set search_path = public
 as $$
   select role from public.profiles where id = auth.uid();
 $$;
+
+revoke all on function private.current_profile_role() from public;
+grant execute on function private.current_profile_role() to anon, authenticated, service_role;
+
+drop function if exists public.current_profile_role();
 
 -- Categories / tags: public read
 drop policy if exists categories_public_read on public.categories;
@@ -39,13 +49,13 @@ drop policy if exists styles_public_read_published on public.styles;
 create policy styles_public_read_published on public.styles
   for select using (
     status = 'published'
-    or public.current_profile_role() in ('editor', 'admin')
+    or private.current_profile_role() in ('editor', 'admin')
   );
 
 drop policy if exists styles_editor_write on public.styles;
 create policy styles_editor_write on public.styles
-  for all using (public.current_profile_role() in ('editor', 'admin'))
-  with check (public.current_profile_role() in ('editor', 'admin'));
+  for all using (private.current_profile_role() in ('editor', 'admin'))
+  with check (private.current_profile_role() in ('editor', 'admin'));
 
 -- Prompt variants / assets / style_tags follow parent style visibility
 drop policy if exists prompt_variants_public_read on public.prompt_variants;
@@ -56,13 +66,13 @@ create policy prompt_variants_public_read on public.prompt_variants
       select 1 from public.styles s
       where s.id = prompt_variants.style_id and s.status = 'published'
     )
-    or public.current_profile_role() in ('editor', 'admin')
+    or private.current_profile_role() in ('editor', 'admin')
   );
 
 drop policy if exists prompt_variants_editor_write on public.prompt_variants;
 create policy prompt_variants_editor_write on public.prompt_variants
-  for all using (public.current_profile_role() in ('editor', 'admin'))
-  with check (public.current_profile_role() in ('editor', 'admin'));
+  for all using (private.current_profile_role() in ('editor', 'admin'))
+  with check (private.current_profile_role() in ('editor', 'admin'));
 
 drop policy if exists style_assets_public_read on public.style_assets;
 create policy style_assets_public_read on public.style_assets
@@ -71,13 +81,13 @@ create policy style_assets_public_read on public.style_assets
       select 1 from public.styles s
       where s.id = style_assets.style_id and s.status = 'published'
     )
-    or public.current_profile_role() in ('editor', 'admin')
+    or private.current_profile_role() in ('editor', 'admin')
   );
 
 drop policy if exists style_assets_editor_write on public.style_assets;
 create policy style_assets_editor_write on public.style_assets
-  for all using (public.current_profile_role() in ('editor', 'admin'))
-  with check (public.current_profile_role() in ('editor', 'admin'));
+  for all using (private.current_profile_role() in ('editor', 'admin'))
+  with check (private.current_profile_role() in ('editor', 'admin'));
 
 drop policy if exists style_tags_public_read on public.style_tags;
 create policy style_tags_public_read on public.style_tags
@@ -86,20 +96,20 @@ create policy style_tags_public_read on public.style_tags
       select 1 from public.styles s
       where s.id = style_tags.style_id and s.status = 'published'
     )
-    or public.current_profile_role() in ('editor', 'admin')
+    or private.current_profile_role() in ('editor', 'admin')
   );
 
 drop policy if exists style_tags_editor_write on public.style_tags;
 create policy style_tags_editor_write on public.style_tags
-  for all using (public.current_profile_role() in ('editor', 'admin'))
-  with check (public.current_profile_role() in ('editor', 'admin'));
+  for all using (private.current_profile_role() in ('editor', 'admin'))
+  with check (private.current_profile_role() in ('editor', 'admin'));
 
 -- Profiles: own row
 drop policy if exists profiles_select_own on public.profiles;
 create policy profiles_select_own on public.profiles
   for select using (
     id = auth.uid()
-    or public.current_profile_role() in ('editor', 'admin')
+    or private.current_profile_role() in ('editor', 'admin')
   );
 
 drop policy if exists profiles_update_own on public.profiles;
@@ -146,13 +156,13 @@ create policy reports_insert_auth on public.reports
 
 drop policy if exists reports_editor on public.reports;
 create policy reports_editor on public.reports
-  for all using (public.current_profile_role() in ('editor', 'admin'))
-  with check (public.current_profile_role() in ('editor', 'admin'));
+  for all using (private.current_profile_role() in ('editor', 'admin'))
+  with check (private.current_profile_role() in ('editor', 'admin'));
 
 -- Audit logs: editors read; writes via service role / editor paths
 drop policy if exists audit_logs_editor_read on public.audit_logs;
 create policy audit_logs_editor_read on public.audit_logs
-  for select using (public.current_profile_role() in ('editor', 'admin'));
+  for select using (private.current_profile_role() in ('editor', 'admin'));
 
 -- ---------------------------------------------------------------------------
 -- Storage buckets (public catalog vs private creations)
@@ -171,11 +181,11 @@ drop policy if exists catalog_public_editor_write on storage.objects;
 create policy catalog_public_editor_write on storage.objects
   for all using (
     bucket_id = 'catalog-public'
-    and public.current_profile_role() in ('editor', 'admin')
+    and private.current_profile_role() in ('editor', 'admin')
   )
   with check (
     bucket_id = 'catalog-public'
-    and public.current_profile_role() in ('editor', 'admin')
+    and private.current_profile_role() in ('editor', 'admin')
   );
 
 drop policy if exists user_creations_owner on storage.objects;
@@ -188,3 +198,7 @@ create policy user_creations_owner on storage.objects
     bucket_id = 'user-creations'
     and auth.uid()::text = (storage.foldername(name))[1]
   );
+
+-- Signed-in users can edit their display name and preferences, not their role.
+revoke update on table public.profiles from anon, authenticated;
+grant update (display_name, preferences) on table public.profiles to authenticated;

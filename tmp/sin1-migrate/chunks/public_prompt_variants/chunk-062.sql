@@ -1,0 +1,1 @@
+Integrate delicate white jasmine-like blossoms around the subject’s hair in the upper panel, with a small cascading strand positioned naturally near the ear. Include vivid pink-red blossoms close to the face in the upper panel and near the open hand in the lower panel. Keep all flowers botanical and realistic, with natural stems, petal shapes, and believable scale.

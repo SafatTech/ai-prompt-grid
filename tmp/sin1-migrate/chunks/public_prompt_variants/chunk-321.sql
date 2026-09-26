@@ -1,0 +1,1 @@
+Place the product against {{background}}, interpreted as a dark, minimalist studio scene with a restrained reflective surface beneath it. Keep the product fully visible and isolated, with no props or visual distractions.

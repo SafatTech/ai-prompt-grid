@@ -1,0 +1,1 @@
+Top-right panel: create a close beauty portrait from approximately the shoulders upward. Turn the face slightly toward warm sunlight and let the subject look gently upward and away from the lens with a soft dreamy expression. Emphasize glowing skin, delicate eye makeup, glossy lips, gold earrings, and warm highlights in the hair.

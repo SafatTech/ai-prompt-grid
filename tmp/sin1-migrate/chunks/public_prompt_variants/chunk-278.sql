@@ -1,0 +1,1 @@
+Use warm golden-hour or sunset lighting. Let the low sun illuminate the side of the face, shoulders, hair, and skirt while reflecting across the water. Add a soft atmospheric glow and subtle haze to the distant ghats for depth.

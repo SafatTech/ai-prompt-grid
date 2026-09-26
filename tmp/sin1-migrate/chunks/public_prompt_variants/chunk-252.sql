@@ -1,0 +1,1 @@
+Use shallow depth of field with premium portrait-lens rendering. Keep the eyes, eyelashes, lips, jewelry, facial skin, and nearby glove details sharply resolved while allowing the background to fall into smooth blur.

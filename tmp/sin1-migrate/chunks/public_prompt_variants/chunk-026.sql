@@ -1,0 +1,1 @@
+Keep the subject’s face, eyes, jewelry, clothing embroidery, and foreground body details crisp and highly detailed. Motion blur should affect primarily the background and peripheral environmental elements, not the face. Add soft optical glow, realistic lens bloom around bright lights, subtle depth separation, fine photographic texture, and a premium full-frame-camera look.

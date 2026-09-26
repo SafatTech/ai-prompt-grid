@@ -1,0 +1,1 @@
+Frame the portrait tightly from approximately the upper shoulders upward. Let the face occupy most of the composition while flowers enter prominently from the lower-left or lower-center foreground. Preserve enough space around the hairline and shoulders so the portrait feels balanced.

@@ -1,0 +1,1 @@
+Create {{background}}. Keep it dark, minimal, softly blurred, and warm-toned, with faint window-like patches of golden light or indistinct interior shapes in the distance. The environment should remain visually quiet and never compete with the subject.

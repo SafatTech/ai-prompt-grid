@@ -1,0 +1,1 @@
+Bottom panel: show a graceful close-up of one hand and forearm with the palm facing gently upward and fingers naturally relaxed. Decorate the wrist with multiple intricate gold bangles. Include part of the embroidered garment near the edge of the frame so the three panels remain visually connected.

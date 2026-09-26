@@ -1,0 +1,1 @@
+If pose is not preserved, place the subject seated sideways on the pointed front bow of a wooden boat, with the body angled slightly away from the camera and the face turned toward one side. Keep one hand resting naturally on the lap or boat edge and the expression soft, calm, and subtly smiling, as if enjoying the atmosphere of the river at sunset.

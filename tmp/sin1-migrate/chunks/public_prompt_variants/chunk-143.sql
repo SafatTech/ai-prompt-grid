@@ -1,0 +1,1 @@
+If clothing is not preserved, replace the original outfit with a refined dark charcoal or black wool overcoat featuring a structured high collar, layered over a light cream or off-white ribbed knit sweater. Keep the wardrobe minimal, elegant, masculine, timeless, and slightly formal.

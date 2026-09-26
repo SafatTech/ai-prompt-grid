@@ -1,0 +1,1 @@
+Style the subject in relaxed light-toned clothing, holding a simple hardbound notebook or book, with sparse colorful confetti floating naturally around them. Give the portrait an optimistic, candid expression, soft background depth, realistic clothing texture, and cinematic editorial polish. Use {{mood}} color grading with natural highlights and a gentle film-like finish.

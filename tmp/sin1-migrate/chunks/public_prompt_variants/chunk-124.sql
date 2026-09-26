@@ -1,0 +1,1 @@
+Keep the eyes, lips, facial hair, fingertips, rose petals, and illuminated skin areas sharply rendered while allowing the surrounding clothing and background to become progressively softer. Maintain realistic pores, subtle skin variation, individual hair strands, and natural hand texture. Avoid plastic smoothing or glamour-style retouching.

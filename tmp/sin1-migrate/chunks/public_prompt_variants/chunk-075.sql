@@ -1,0 +1,1 @@
+Apply {{mood}} color grading throughout the image. Use glowing amber highlights, warm caramel midtones, rich burgundy and crimson floral tones, creamy skin highlights, and deep soft brown shadows. Preserve natural skin texture, pores, subtle facial variation, realistic lips, and individual hair strands. Avoid plastic skin, excessive smoothing, or artificial beauty-filter effects.

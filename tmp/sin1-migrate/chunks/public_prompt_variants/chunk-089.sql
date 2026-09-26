@@ -1,0 +1,1 @@
+Create {{background}} as the scrapbook canvas itself. Use a light off-white graph-paper or notebook-paper surface with very faint gray grid lines. Layer photographic cutouts, taped paper scraps, small blue decorative elements, thin botanical drawings, paper clips, pressed-flower details, and subtle hand-drawn doodles around the subject without making the design cluttered.

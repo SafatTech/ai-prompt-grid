@@ -1,0 +1,1 @@
+Top-left panel: show a dynamic full-body twirling or turning pose on a quiet residential street. Let the dress flare naturally with motion, the dupatta trail behind, and the subject look back toward the camera with a bright joyful smile. Capture natural movement in the hair and fabric.

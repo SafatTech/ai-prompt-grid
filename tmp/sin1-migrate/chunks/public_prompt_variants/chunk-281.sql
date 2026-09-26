@@ -1,0 +1,1 @@
+Add travel-poster style headline text at the top of the image. Include “इश्क-ए-” in red Devanagari lettering above “बनारस” in a larger mustard-yellow or golden Devanagari style. The typography should feel decorative, elegant, and centered near the top without overpowering the portrait.

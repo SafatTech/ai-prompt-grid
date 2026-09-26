@@ -1,0 +1,1 @@
+Create {{background}} as a warm, softly lit traditional interior with a wooden doorway or window frame, muted beige or brown walls, and minimal softly blurred furnishings. Keep the environment intimate and unobtrusive so the subject, jewelry, and white embroidered clothing remain dominant.

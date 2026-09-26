@@ -1,0 +1,1 @@
+Create {{background}}. Use a simple matte beige, tan, or warm taupe wall behind the subject. Keep the background minimal and uncluttered so the face and shadow patterns remain dominant.

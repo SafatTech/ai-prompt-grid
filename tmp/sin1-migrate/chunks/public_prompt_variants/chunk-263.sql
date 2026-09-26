@@ -1,0 +1,1 @@
+Bottom-right panel: show a relaxed full or three-quarter standing portrait on the same residential street. Let the subject hold the hands loosely near the waist or allow the dupatta to fall naturally. Keep the posture elegant and effortless, with a soft smile and direct or slightly off-camera gaze.

@@ -1,0 +1,1 @@
+Maintain strong visual separation between the central dark coat and the luminous background. The central subject should occupy the lower-middle portion of the frame, while the two ghosted faces create a triangular composition around and behind the head.

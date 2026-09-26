@@ -1,0 +1,1 @@
+Do not add video play buttons, mute icons, carousel indicators, social-media interface elements, watermarks, brand logos, large typography, extra unrelated people, mismatched versions of the subject, duplicated facial features, malformed hands, distorted limbs, or random decorative clutter.

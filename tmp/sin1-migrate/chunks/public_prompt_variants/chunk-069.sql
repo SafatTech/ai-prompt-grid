@@ -1,0 +1,1 @@
+Do not add text, logos, watermarks, social-media interface elements, carousel arrows, pagination dots, UI icons, duplicate faces, mismatched identities between panels, extra hands, malformed fingers, duplicated jewelry, distorted flowers, or inconsistent clothing.

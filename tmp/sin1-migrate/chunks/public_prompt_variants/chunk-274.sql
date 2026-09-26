@@ -1,0 +1,1 @@
+Preserve the subject’s long hair in a loose, softly flowing style with gentle natural movement from the breeze. Keep the identity realistic and consistent.

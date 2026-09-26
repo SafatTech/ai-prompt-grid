@@ -1,0 +1,1 @@
+Place a wrapped floral bouquet prominently in all three frames. Build it with blush or pale pink roses, deep red roses, baby’s-breath filler flowers, and soft kraft-paper or translucent bouquet wrapping. The bouquet should feel elegant, abundant, and romantic, with realistic floral texture and natural arrangement.

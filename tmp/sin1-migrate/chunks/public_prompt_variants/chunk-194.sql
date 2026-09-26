@@ -1,0 +1,1 @@
+Use shallow depth of field and a premium portrait-photography aesthetic. Keep the eyes, face, hair, and nearby clothing details crisp while the plain wall remains softly rendered. Add very subtle analog film grain and gentle tonal softness for a polished but slightly vintage finish.

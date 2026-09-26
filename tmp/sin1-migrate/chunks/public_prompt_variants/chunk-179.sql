@@ -1,0 +1,1 @@
+Frame the subject from approximately the chest upward, leaving substantial open sky around the head. Let daisies rise naturally into the lower foreground and partially overlap the clothing without obscuring the face.

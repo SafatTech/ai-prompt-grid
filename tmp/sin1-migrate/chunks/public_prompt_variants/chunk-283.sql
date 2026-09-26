@@ -1,0 +1,1 @@
+Do not add social-media UI, play buttons, watermarks, random extra people in the foreground, distorted birds, malformed hands, duplicated jewelry, or cluttered text. Keep the poster headline clean and readable.

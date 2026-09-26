@@ -16,7 +16,7 @@ export default async function AdminEditStylePage({ params }: Props) {
   const lockSlug = style.status !== "draft";
 
   return (
-    <section className="container pt-12">
+    <section className="container pt-8 sm:pt-12">
       <StyleEditorForm
         mode="edit"
         styleId={style.id}

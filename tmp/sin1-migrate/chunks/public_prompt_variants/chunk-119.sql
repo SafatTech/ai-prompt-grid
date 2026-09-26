@@ -1,0 +1,1 @@
+Preserve or subtly refine the subject’s natural hairstyle, allowing a few loose strands to fall toward the forehead. If facial hair is present, keep it realistic and consistent with the source identity rather than removing or dramatically changing it. Add only minimal accessories, such as a small simple hoop earring if appropriate to the styling.

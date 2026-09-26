@@ -1,0 +1,1 @@
+Create one polished vertical collage that combines a realistic central fashion portrait of the subject with several smaller stylized chibi-like versions of the same person arranged around it. Every version must clearly represent the same subject through consistent facial features, hair, skin tone, and styling cues.

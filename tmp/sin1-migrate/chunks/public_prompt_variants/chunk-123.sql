@@ -1,0 +1,1 @@
+Create pronounced but natural chiaroscuro. Preserve facial detail inside the shadows instead of crushing everything to pure black. The subject should appear sculpted by light, with realistic dimensional transitions across the brow, nose, jawline, cheek, neck, hands, and fabric folds.

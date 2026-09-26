@@ -1,0 +1,1 @@
+Use controlled close-up studio lighting to reveal authentic material texture, refined highlights, subtle contact shadows, and {{mood}} colour grading. Keep the composition minimal, premium, and photorealistic.

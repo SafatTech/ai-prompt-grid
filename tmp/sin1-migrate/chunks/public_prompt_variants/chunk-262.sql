@@ -1,0 +1,1 @@
+Bottom-left panel: create an intimate close-up portrait with the subject looking toward the camera and smiling naturally. Keep the face dominant, preserve realistic skin texture, and let warm sunlight skim across the cheekbones and hair.

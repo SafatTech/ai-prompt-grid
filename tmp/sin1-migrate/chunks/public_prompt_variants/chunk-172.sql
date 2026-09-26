@@ -1,0 +1,1 @@
+Create {{background}}. Place the subject outdoors beneath a vivid open blue sky with a few soft white clouds and surrounded by a field or dense cluster of white daisies with yellow centers. Keep the environment natural, uplifting, and uncluttered.

@@ -1,0 +1,1 @@
+Use soft frontal or side fill lighting on the face so facial features remain clearly visible despite the strong backlight. Maintain delicate shadow transitions across the cheeks, jawline, nose, eyelids, and neck. The result should feel like a premium monochrome fashion photograph captured with professional studio lighting.

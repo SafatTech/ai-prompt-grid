@@ -1,0 +1,1 @@
+If clothing is not preserved, style the subject in a relaxed soft-yellow lightweight button-up shirt worn casually over a simple white inner top, paired with light-wash blue jeans. Keep the outfit youthful, comfortable, fresh, and understated so the face and floral environment remain the main focus.

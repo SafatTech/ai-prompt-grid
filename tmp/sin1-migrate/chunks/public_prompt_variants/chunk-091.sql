@@ -1,0 +1,1 @@
+Give the center image a white Polaroid-style border and a slight handmade paper tilt. Add a small pale-blue paper clip near one upper corner of the Polaroid. Other subject photos may be clean cutouts without rectangular backgrounds so they feel layered directly onto the scrapbook page.

@@ -1,0 +1,1 @@
+If pose is not preserved, position the primary foreground portrait from approximately the chest upward with the shoulders angled slightly away from the camera. Turn the head gently to one side and direct the eyes slightly upward or away from the lens, creating a calm, introspective, self-assured expression. Keep the mouth relaxed and neutral rather than smiling broadly.

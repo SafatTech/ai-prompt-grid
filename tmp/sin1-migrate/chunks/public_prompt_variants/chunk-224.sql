@@ -1,0 +1,1 @@
+Keep the collage clean, balanced, and visually calm. Each frame should feel like a different memory from the same golden afternoon, with the overall layout reading as a cohesive story rather than unrelated images.

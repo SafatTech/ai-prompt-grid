@@ -6,7 +6,7 @@ export default async function AdminNewStylePage() {
   if (!gate.ok) return gate.node;
 
   return (
-    <section className="container pt-12">
+    <section className="container pt-8 sm:pt-12">
       <StyleEditorForm mode="create" />
     </section>
   );

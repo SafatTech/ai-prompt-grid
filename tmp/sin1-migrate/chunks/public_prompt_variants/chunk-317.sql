@@ -1,0 +1,1 @@
+Place the product within {{background}}, using only a few restrained natural elements such as foliage, stone, linen, or organic textures. Keep the setting refined and uncluttered, with the product fully visible and clearly dominant over every supporting element.

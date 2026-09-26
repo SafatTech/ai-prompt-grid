@@ -1,0 +1,1 @@
+Create the scene from {{background}}. Interpret the selected environment as an immersive artistic setting surrounding the subject rather than a flat backdrop. Include abundant flowers positioned around the subject at different distances from the camera, with several blossoms very close to the lens to create strong foreground depth.

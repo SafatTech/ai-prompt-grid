@@ -1,0 +1,1 @@
+Build the final composition around one sharply focused main portrait in the foreground and two larger faded portraits of the same subject positioned behind it. All three portraits must clearly depict the same person with consistent facial identity and hairstyle.

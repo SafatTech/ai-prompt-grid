@@ -1,0 +1,1 @@
+Use realistic skin texture, believable hand anatomy, soft diffused light, authentic material reflections, subtle environmental shadows, and {{mood}} colour grading. Keep the background softly out of focus and let the product remain the clear focal point.

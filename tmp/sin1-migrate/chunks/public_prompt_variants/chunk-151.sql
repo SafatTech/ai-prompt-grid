@@ -1,0 +1,1 @@
+Use moderate shallow depth of field on the central portrait. Keep the eyes, hairline, facial features, sweater texture, and coat collar sharply resolved while letting the edges of the garment gradually soften.

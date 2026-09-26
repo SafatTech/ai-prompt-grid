@@ -1,0 +1,1 @@
+Use premium photorealistic studio photography, clean controlled highlights, soft sculpted shadows, and {{mood}} colour grading. Keep the product as the obvious focal point, fully visible and centrally framed with balanced negative space.

@@ -1,0 +1,1 @@
+Create {{background}}. The setting should feel like a peaceful residential or neighborhood street with leafy trees, sun filtering through branches, light-colored walls or fences, and a calm everyday outdoor atmosphere. For the reading panel, keep the same outdoor environment or a closely matching natural setting so the collage still feels coherent.

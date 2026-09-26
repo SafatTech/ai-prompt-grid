@@ -1,0 +1,1 @@
+If pose is not preserved, create several surrounding mini-scenes using exaggerated cute chibi proportions: slightly oversized head, expressive large eyes, softened facial features, and a smaller body while still retaining the subject’s recognizable identity.

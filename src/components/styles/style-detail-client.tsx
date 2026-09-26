@@ -37,6 +37,8 @@ export function StyleDetailClient({ style, relatedStyles }: Props) {
   const router = useRouter();
   const [options, setOptions] = useState<PromptOptions>(() => defaultsForStyle(style));
   const [optionsStyleId, setOptionsStyleId] = useState(style.id);
+  const [compareDefault, setCompareDefault] = useState<"slider" | "side">("slider");
+  const [showStickyCopy, setShowStickyCopy] = useState(false);
   if (style.id !== optionsStyleId) {
     setOptionsStyleId(style.id);
     setOptions(defaultsForStyle(style));
@@ -55,6 +57,25 @@ export function StyleDetailClient({ style, relatedStyles }: Props) {
       router.replace(`/styles/${style.id}`);
     }
   }, [searchParams, signedIn, style.id, openSaveResult, router]);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 1024px)");
+    const apply = () => setCompareDefault(mq.matches ? "side" : "slider");
+    apply();
+    mq.addEventListener("change", apply);
+    return () => mq.removeEventListener("change", apply);
+  }, []);
+
+  useEffect(() => {
+    const aside = document.getElementById("customize-prompt");
+    if (!aside) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => setShowStickyCopy(!entry.isIntersecting),
+      { rootMargin: "-80px 0px 0px 0px", threshold: 0 },
+    );
+    observer.observe(aside);
+    return () => observer.disconnect();
+  }, [style.id]);
 
   function onSave() {
     if (!signedIn) {
@@ -117,7 +138,7 @@ export function StyleDetailClient({ style, relatedStyles }: Props) {
   return (
     <div>
       <section className="container pt-7">
-        <div className="mb-5 flex items-center justify-between gap-4">
+        <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
           <div className="flex min-w-0 items-center gap-3">
             <Link
               href="/explore"
@@ -130,7 +151,7 @@ export function StyleDetailClient({ style, relatedStyles }: Props) {
               Explore / {style.category} / {style.title}
             </span>
           </div>
-          <div className="flex gap-2">
+          <div className="grid grid-cols-2 gap-2 sm:flex sm:shrink-0">
             <Button variant="secondary" data-testid="detail-save-style" onClick={onSave}>
               {saved ? "♥ Saved" : "♡ Save style"}
             </Button>
@@ -145,15 +166,16 @@ export function StyleDetailClient({ style, relatedStyles }: Props) {
             </Button>
           </div>
         </div>
-        <div className="h-[min(68dvh,720px)] min-h-[420px] overflow-hidden rounded-[22px] border border-[var(--line)] bg-[var(--surface)] shadow-[var(--shadow)] md:min-h-[480px]">
+        <div className="h-[min(52dvh,560px)] min-h-[280px] overflow-hidden rounded-[22px] border border-[var(--line)] bg-[var(--surface)] shadow-[var(--shadow)] md:min-h-[360px] lg:h-[min(68dvh,720px)] lg:min-h-[480px]">
           <CompareSlider
+            key={compareDefault}
             source={style.source}
             result={style.result}
             title={style.title}
             styleId={style.id}
             large
             showModeToggle
-            defaultMode="side"
+            defaultMode={compareDefault}
           />
         </div>
       </section>
@@ -176,10 +198,12 @@ export function StyleDetailClient({ style, relatedStyles }: Props) {
               </span>
             ))}
           </div>
-          <h1 className="m-0 mb-4 text-[clamp(40px,4.8vw,67px)] leading-none tracking-[-0.05em]">
+          <h1 className="m-0 mb-4 text-[clamp(32px,6vw,67px)] leading-none tracking-[-0.05em]">
             {style.title}
           </h1>
-          <p className="m-0 max-w-[690px] text-[19px] text-[#c2c0ca]">{profile.description}</p>
+          <p className="m-0 max-w-[690px] text-[16px] text-[#c2c0ca] sm:text-[19px]">
+            {profile.description}
+          </p>
           <p className="mt-3 text-sm text-[var(--muted)]">
             Target photo: {style.targetSourcePhoto}. Inputs:{" "}
             {style.promptVariant.inputImageRoles.join(" → ")} (
@@ -198,7 +222,7 @@ export function StyleDetailClient({ style, relatedStyles }: Props) {
 
           <section className="border-t border-[var(--line)] py-7">
             <h2 className="mb-4 text-[22px]">What changes</h2>
-            <div className="grid grid-cols-2 gap-2 lg:grid-cols-4">
+            <div className="grid grid-cols-2 gap-2 max-[380px]:grid-cols-1 lg:grid-cols-4">
               {profile.changes.map((item) => (
                 <div
                   key={item}
@@ -233,12 +257,15 @@ export function StyleDetailClient({ style, relatedStyles }: Props) {
           </section>
         </article>
 
-        <aside className="rounded-[22px] border border-[var(--line)] bg-[var(--surface)] p-[23px] shadow-[0_18px_55px_rgba(0,0,0,0.2)] lg:sticky lg:top-[calc(var(--header)+18px)]">
+        <aside
+          id="customize-prompt"
+          className="rounded-[22px] border border-[var(--line)] bg-[var(--surface)] p-[23px] shadow-[0_18px_55px_rgba(0,0,0,0.2)] lg:sticky lg:top-[calc(var(--header)+18px)]"
+        >
           <h2 className="m-0 mb-1 text-[23px] tracking-[-0.025em]">Customize this prompt</h2>
           <p className="mb-[22px] text-[13px] text-[var(--muted)]">
             Adjust the details, then copy the prompt to {style.promptVariant.tool}.
           </p>
-          <div className="grid grid-cols-2 gap-3">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
             <Field label="Color mood">
               <select
                 value={options.mood}
@@ -270,7 +297,7 @@ export function StyleDetailClient({ style, relatedStyles }: Props) {
                 ))}
               </select>
             </Field>
-            <Field label="Output ratio" className="col-span-2">
+            <Field label="Output ratio" className="sm:col-span-2">
               <select
                 value={options.ratio}
                 onChange={(e) =>
@@ -313,9 +340,9 @@ export function StyleDetailClient({ style, relatedStyles }: Props) {
             )}
           </div>
 
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
             <Button
-              className="col-span-2"
+              className="sm:col-span-2"
               data-testid="copy-prompt"
               onClick={onCopy}
               disabled={!assembled.ok}
@@ -330,7 +357,7 @@ export function StyleDetailClient({ style, relatedStyles }: Props) {
             </Button>
             <Link
               href="/explore"
-              className="col-span-2 inline-flex min-h-11 items-center justify-center rounded-xl border border-[var(--line)] px-[18px] text-sm font-bold text-[var(--muted)] hover:border-[var(--line-strong)] hover:text-[var(--text)]"
+              className="inline-flex min-h-11 items-center justify-center rounded-xl border border-[var(--line)] px-[18px] text-sm font-bold text-[var(--muted)] hover:border-[var(--line-strong)] hover:text-[var(--text)] sm:col-span-2"
             >
               Try another style
             </Link>
@@ -360,13 +387,13 @@ export function StyleDetailClient({ style, relatedStyles }: Props) {
         </aside>
       </section>
 
-      <section className="container py-16">
+      <section className="container py-12 sm:py-16">
         <h2 className="mb-7 text-[clamp(28px,3vw,42px)] tracking-[-0.035em]">More examples</h2>
-        <div className="grid gap-4 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {style.examplePairs.map((example, index) => (
             <div
               key={`${style.id}-example-${index}`}
-              className="grid h-[280px] grid-cols-2 gap-0.5 overflow-hidden rounded-[var(--radius)] border border-[var(--line)]"
+              className="grid h-[220px] grid-cols-2 gap-0.5 overflow-hidden rounded-[var(--radius)] border border-[var(--line)] md:h-[260px] lg:h-[280px]"
             >
               <div className="relative">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -397,8 +424,8 @@ export function StyleDetailClient({ style, relatedStyles }: Props) {
         </div>
       </section>
 
-      <section className="container py-[88px]">
-        <div className="mb-7 flex items-end justify-between gap-5">
+      <section className="container py-12 sm:py-16 lg:py-[88px]">
+        <div className="mb-7 flex flex-col items-start gap-2 sm:flex-row sm:items-end sm:justify-between sm:gap-5">
           <h2 className="m-0 text-[clamp(28px,3vw,42px)] tracking-[-0.035em]">
             Related styles
           </h2>
@@ -413,7 +440,7 @@ export function StyleDetailClient({ style, relatedStyles }: Props) {
         </div>
       </section>
 
-      <section className="container mb-[90px] grid items-center gap-5 rounded-[var(--radius)] border border-[var(--line)] bg-[var(--surface)] p-8 md:grid-cols-[auto_1fr]">
+      <section className="container mb-[90px] grid items-center gap-5 rounded-[var(--radius)] border border-[var(--line)] bg-[var(--surface)] p-6 sm:p-8 md:grid-cols-[auto_1fr]">
         <div className="grid h-[58px] w-[58px] place-items-center rounded-2xl bg-[rgba(103,216,178,0.1)] text-[25px] text-[var(--mint)]">
           ✓
         </div>
@@ -425,6 +452,19 @@ export function StyleDetailClient({ style, relatedStyles }: Props) {
           </p>
         </div>
       </section>
+
+      {showStickyCopy ? (
+        <div className="fixed inset-x-0 bottom-0 z-30 border-t border-[var(--line)] bg-[rgba(11,11,16,0.94)] px-4 pt-3 pb-[max(0.75rem,env(safe-area-inset-bottom))] backdrop-blur-[8px] lg:hidden">
+          <Button
+            className="w-full"
+            data-testid="sticky-copy-prompt"
+            onClick={onCopy}
+            disabled={!assembled.ok}
+          >
+            Copy prompt
+          </Button>
+        </div>
+      ) : null}
     </div>
   );
 }

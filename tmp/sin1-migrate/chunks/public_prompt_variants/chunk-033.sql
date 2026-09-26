@@ -1,0 +1,1 @@
+Style the hair with soft natural volume and loose flowing movement around the face and shoulders. Keep the hairstyle elegant and slightly windswept, with individual strands visible around the silhouette. Preserve the subject’s natural hair characteristics while allowing the styling to become fuller and more cinematic.

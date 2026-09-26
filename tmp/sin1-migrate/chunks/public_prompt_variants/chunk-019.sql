@@ -1,0 +1,1 @@
+Apply {{mood}} color grading, soft daylight flare, realistic film grain, subtle vintage-camera texture, and gentle directional motion blur around the surroundings while keeping the subject’s face, bouquet, and outfit crisp. Build the scene from {{background}}, interpreted as a lively urban street with soft anonymous movement and natural depth.

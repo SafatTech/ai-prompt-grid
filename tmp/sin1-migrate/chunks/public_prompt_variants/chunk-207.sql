@@ -1,0 +1,1 @@
+Add small handwritten note snippets or mini caption cards around the collage, styled like casual journal notes. Keep any visible text short, decorative, and secondary to the images. Use a few tiny hearts, check marks, doodles, and simple motivational phrases to enhance the scrapbook feel without overcrowding the composition.

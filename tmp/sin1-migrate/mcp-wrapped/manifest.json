@@ -1,0 +1,212 @@
+[
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_styles\\chunk-000.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_styles__chunk-000.sql.json",
+    "queryLen": 6257
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_styles\\chunk-001.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_styles__chunk-001.sql.json",
+    "queryLen": 6225
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_styles\\chunk-002.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_styles__chunk-002.sql.json",
+    "queryLen": 5941
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_styles\\chunk-003.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_styles__chunk-003.sql.json",
+    "queryLen": 5837
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_styles\\chunk-004.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_styles__chunk-004.sql.json",
+    "queryLen": 5897
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_styles\\chunk-005.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_styles__chunk-005.sql.json",
+    "queryLen": 5849
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_styles\\chunk-006.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_styles__chunk-006.sql.json",
+    "queryLen": 6417
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_styles\\chunk-007.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_styles__chunk-007.sql.json",
+    "queryLen": 6341
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_prompt_variants\\chunk-000.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_prompt_variants__chunk-000.sql.json",
+    "queryLen": 10177
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_prompt_variants\\chunk-001.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_prompt_variants__chunk-001.sql.json",
+    "queryLen": 14501
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_prompt_variants\\chunk-002.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_prompt_variants__chunk-002.sql.json",
+    "queryLen": 34553
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_prompt_variants\\chunk-003.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_prompt_variants__chunk-003.sql.json",
+    "queryLen": 33857
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_prompt_variants\\chunk-004.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_prompt_variants__chunk-004.sql.json",
+    "queryLen": 34937
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_prompt_variants\\chunk-005.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_prompt_variants__chunk-005.sql.json",
+    "queryLen": 30181
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_prompt_variants\\chunk-006.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_prompt_variants__chunk-006.sql.json",
+    "queryLen": 10405
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_prompt_variants\\chunk-007.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_prompt_variants__chunk-007.sql.json",
+    "queryLen": 10357
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_style_assets\\chunk-000.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_style_assets__chunk-000.sql.json",
+    "queryLen": 3481
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_style_assets\\chunk-001.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_style_assets__chunk-001.sql.json",
+    "queryLen": 3465
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_style_assets\\chunk-002.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_style_assets__chunk-002.sql.json",
+    "queryLen": 3481
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_style_assets\\chunk-003.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_style_assets__chunk-003.sql.json",
+    "queryLen": 3441
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_style_assets\\chunk-004.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_style_assets__chunk-004.sql.json",
+    "queryLen": 3477
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_style_assets\\chunk-005.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_style_assets__chunk-005.sql.json",
+    "queryLen": 3497
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_style_assets\\chunk-006.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_style_assets__chunk-006.sql.json",
+    "queryLen": 3441
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_style_assets\\chunk-007.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_style_assets__chunk-007.sql.json",
+    "queryLen": 3477
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_style_assets\\chunk-008.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_style_assets__chunk-008.sql.json",
+    "queryLen": 3481
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_style_assets\\chunk-009.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_style_assets__chunk-009.sql.json",
+    "queryLen": 3441
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_style_assets\\chunk-010.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_style_assets__chunk-010.sql.json",
+    "queryLen": 3477
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_style_assets\\chunk-011.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_style_assets__chunk-011.sql.json",
+    "queryLen": 3485
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_style_assets\\chunk-012.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_style_assets__chunk-012.sql.json",
+    "queryLen": 3453
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_style_assets\\chunk-013.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_style_assets__chunk-013.sql.json",
+    "queryLen": 3481
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_style_assets\\chunk-014.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_style_assets__chunk-014.sql.json",
+    "queryLen": 3517
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_style_assets\\chunk-015.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_style_assets__chunk-015.sql.json",
+    "queryLen": 3465
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_style_assets\\chunk-016.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_style_assets__chunk-016.sql.json",
+    "queryLen": 3485
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_style_assets\\chunk-017.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_style_assets__chunk-017.sql.json",
+    "queryLen": 3469
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_style_assets\\chunk-018.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_style_assets__chunk-018.sql.json",
+    "queryLen": 3421
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_style_assets\\chunk-019.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_style_assets__chunk-019.sql.json",
+    "queryLen": 3449
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_style_assets\\chunk-020.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_style_assets__chunk-020.sql.json",
+    "queryLen": 3489
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_style_assets\\chunk-021.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_style_assets__chunk-021.sql.json",
+    "queryLen": 3445
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_style_assets\\chunk-022.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_style_assets__chunk-022.sql.json",
+    "queryLen": 3445
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\chunks2\\public_style_assets\\chunk-023.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_style_assets__chunk-023.sql.json",
+    "queryLen": 3457
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\public_categories.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_categories.json",
+    "queryLen": 1793
+  },
+  {
+    "sqlPath": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\public_tags.sql",
+    "out": "c:\\my-work-directory\\Business\\image-prompts-website-v3\\tmp\\sin1-migrate\\mcp-wrapped\\public_tags.json",
+    "queryLen": 2793
+  }
+]

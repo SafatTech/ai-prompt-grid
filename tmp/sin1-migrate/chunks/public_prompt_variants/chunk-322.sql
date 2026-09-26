@@ -1,0 +1,1 @@
+Use controlled rim lighting to trace the product silhouette, a narrow soft highlight to reveal its material texture, deep readable shadows, subtle realistic reflection, and {{mood}} colour grading. The result should feel cinematic, premium, and photorealistic.

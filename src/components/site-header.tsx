@@ -186,7 +186,7 @@ export function SiteHeader() {
       onMouseEnter={clearLeave}
       onMouseLeave={scheduleClose}
     >
-      <div className="mx-auto flex h-[var(--header)] w-full max-w-[1440px] items-center gap-3 px-6 max-[899px]:px-4">
+      <div className="mx-auto flex h-[var(--header)] w-full max-w-[1440px] items-center gap-3 px-6 max-lg:px-4">
         <Link
           href="/"
           className="inline-flex shrink-0 items-center gap-2.5 text-[16px] font-bold tracking-[-0.03em] text-[#F5F3EE]"
@@ -198,7 +198,7 @@ export function SiteHeader() {
           <span className="hidden max-[389px]:inline">Prompt Grid</span>
         </Link>
 
-        <nav className="ml-6 hidden items-center gap-1 min-[900px]:flex" aria-label="Main navigation">
+        <nav className="ml-6 hidden items-center gap-1 lg:flex" aria-label="Main navigation">
           <NavLink href="/explore" active={exploreActive} onMouseEnter={closePanels}>
             Explore styles
           </NavLink>
@@ -243,7 +243,7 @@ export function SiteHeader() {
 
         <div className="ml-auto flex items-center gap-2">
           {panel === "search" ? (
-            <form onSubmit={onSearch} className="hidden min-[900px]:block">
+            <form onSubmit={onSearch} className="hidden lg:block">
               <label className="sr-only" htmlFor={searchId}>
                 Search styles
               </label>
@@ -260,7 +260,7 @@ export function SiteHeader() {
           ) : (
             <button
               type="button"
-              className="grid h-10 w-10 cursor-pointer place-items-center rounded-xl border border-[rgba(255,255,255,0.10)] text-[#A6A4B2] hover:text-[#F5F3EE] max-[899px]:hidden"
+              className="grid h-10 w-10 cursor-pointer place-items-center rounded-xl border border-[rgba(255,255,255,0.10)] text-[#A6A4B2] hover:text-[#F5F3EE] max-lg:hidden"
               aria-label="Search styles"
               aria-expanded={false}
               aria-controls={searchId}
@@ -272,7 +272,7 @@ export function SiteHeader() {
 
           <button
             type="button"
-            className="grid h-11 w-11 cursor-pointer place-items-center rounded-xl border border-[rgba(255,255,255,0.10)] text-[#F5F3EE] min-[900px]:hidden"
+            className="grid h-11 w-11 cursor-pointer place-items-center rounded-xl border border-[rgba(255,255,255,0.10)] text-[#F5F3EE] lg:hidden"
             aria-label="Search styles"
             onClick={() => {
               focusMobileSearch.current = true;
@@ -283,7 +283,7 @@ export function SiteHeader() {
           </button>
 
           {signedIn ? (
-            <div className="relative hidden min-[900px]:block">
+            <div className="relative hidden lg:block">
               <button
                 type="button"
                 className="grid h-10 w-10 cursor-pointer place-items-center rounded-full border border-[rgba(139,108,255,0.55)] bg-[linear-gradient(135deg,#8B6CFF,#FF9B82)] text-sm font-extrabold text-[#1a1020]"
@@ -302,7 +302,7 @@ export function SiteHeader() {
           ) : (
             <Button
               variant="ghost"
-              className="hidden min-[900px]:inline-flex"
+              className="hidden lg:inline-flex"
               data-testid="header-sign-in"
               onClick={() => {
                 closePanels();
@@ -316,7 +316,7 @@ export function SiteHeader() {
 
           <Link
             href="/explore"
-            className="hidden h-11 items-center rounded-[14px] bg-[linear-gradient(135deg,#8B6CFF,#FF9B82)] px-4 text-sm font-bold text-[#1a1020] min-[900px]:inline-flex"
+            className="hidden h-11 items-center rounded-[14px] bg-[linear-gradient(135deg,#8B6CFF,#FF9B82)] px-4 text-sm font-bold text-[#1a1020] lg:inline-flex"
             onMouseEnter={closePanels}
           >
             Explore styles
@@ -324,7 +324,7 @@ export function SiteHeader() {
 
           <button
             type="button"
-            className="grid h-11 w-11 cursor-pointer place-items-center rounded-xl border border-[rgba(255,255,255,0.10)] text-[#F5F3EE] min-[900px]:hidden"
+            className="grid h-11 w-11 cursor-pointer place-items-center rounded-xl border border-[rgba(255,255,255,0.10)] text-[#F5F3EE] lg:hidden"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
             aria-expanded={mobileOpen}
             aria-controls={drawerId}
@@ -336,7 +336,7 @@ export function SiteHeader() {
       </div>
 
       {panel === "categories" ? (
-        <div className="absolute top-full left-1/2 z-40 hidden w-[min(1120px,calc(100%-48px))] -translate-x-1/2 pt-2 min-[900px]:block">
+        <div className="absolute top-full left-1/2 z-40 hidden w-[min(1120px,calc(100%-48px))] -translate-x-1/2 pt-2 lg:block">
           <div
             id={categoriesId}
             className="nav-panel-in grid grid-cols-[29%_43%_28%] overflow-hidden rounded-[20px] border border-[rgba(255,255,255,0.10)] bg-[#15151E] p-5 shadow-[0_18px_50px_rgba(0,0,0,0.38)]"
@@ -381,7 +381,7 @@ export function SiteHeader() {
       {panel === "account" && signedIn ? (
         <div
           id={accountId}
-          className="nav-panel-in absolute top-[calc(100%+8px)] right-6 z-40 hidden w-[230px] rounded-[18px] border border-[rgba(255,255,255,0.10)] bg-[#15151E] p-2 shadow-[0_18px_50px_rgba(0,0,0,0.38)] min-[900px]:block"
+          className="nav-panel-in absolute top-[calc(100%+8px)] right-6 z-40 hidden w-[230px] rounded-[18px] border border-[rgba(255,255,255,0.10)] bg-[#15151E] p-2 shadow-[0_18px_50px_rgba(0,0,0,0.38)] lg:block"
           role="menu"
         >
           <p className="px-3 py-2 text-xs text-[#A6A4B2]">{userName || userEmail || "Signed in"}</p>
@@ -411,7 +411,7 @@ export function SiteHeader() {
       ) : null}
 
       {mobileOpen ? (
-        <div className="fixed inset-0 z-50 min-[900px]:hidden">
+        <div className="fixed inset-0 z-50 h-dvh lg:hidden">
           <button
             type="button"
             className="absolute inset-0 cursor-pointer border-0 bg-black/55"
@@ -420,7 +420,7 @@ export function SiteHeader() {
           />
           <div
             id={drawerId}
-            className="nav-panel-in absolute top-0 right-0 flex h-full w-[min(92vw,420px)] flex-col bg-[#15151E] shadow-[-16px_0_40px_rgba(0,0,0,0.4)]"
+            className="nav-panel-in absolute top-0 right-0 flex h-dvh w-[min(92vw,420px)] flex-col bg-[#15151E] pt-[max(1rem,env(safe-area-inset-top))] shadow-[-16px_0_40px_rgba(0,0,0,0.4)]"
           >
             <div className="flex items-center justify-end px-4 pt-4">
               <button
@@ -528,31 +528,66 @@ export function SiteHeader() {
                 </li>
               </ul>
             </div>
-            <div className="border-t border-[rgba(255,255,255,0.10)] px-4 py-4">
+            <div className="border-t border-[rgba(255,255,255,0.10)] px-4 py-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
               {signedIn ? (
-                <div className="flex items-center gap-3">
-                  <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[linear-gradient(135deg,#8B6CFF,#FF9B82)] text-sm font-extrabold text-[#1a1020]">
-                    {avatarInitials}
-                  </span>
-                  <div className="min-w-0 flex-1">
-                    <p className="m-0 truncate text-sm font-bold text-[#F5F3EE]">
-                      {userName || userEmail || "Your account"}
-                    </p>
-                    <Link
-                      href="/library"
-                      className="text-sm text-[#A6A4B2] underline-offset-2 hover:underline"
-                      onClick={() => setMobileOpen(false)}
+                <div className="flex flex-col gap-3">
+                  <div className="flex items-center gap-3">
+                    <span className="grid h-11 w-11 shrink-0 place-items-center rounded-full bg-[linear-gradient(135deg,#8B6CFF,#FF9B82)] text-sm font-extrabold text-[#1a1020]">
+                      {avatarInitials}
+                    </span>
+                    <div className="min-w-0 flex-1">
+                      <p className="m-0 truncate text-sm font-bold text-[#F5F3EE]">
+                        {userName || userEmail || "Your account"}
+                      </p>
+                    </div>
+                    <button
+                      type="button"
+                      className="min-h-11 cursor-pointer rounded-xl border border-[rgba(255,255,255,0.10)] bg-transparent px-3 text-sm text-[#F5F3EE]"
+                      onClick={signOutAndLeave}
                     >
-                      My library
-                    </Link>
+                      Sign out
+                    </button>
                   </div>
-                  <button
-                    type="button"
-                    className="min-h-11 cursor-pointer rounded-xl border border-[rgba(255,255,255,0.10)] bg-transparent px-3 text-sm text-[#F5F3EE]"
-                    onClick={signOutAndLeave}
-                  >
-                    Sign out
-                  </button>
+                  <ul className="m-0 list-none p-0">
+                    <li>
+                      <Link
+                        href="/library"
+                        className="flex min-h-11 items-center rounded-[12px] px-3 text-sm text-[#F5F3EE] hover:bg-[#2A1A31]"
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        My library
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/library#saved"
+                        className="flex min-h-11 items-center rounded-[12px] px-3 text-sm text-[#F5F3EE] hover:bg-[#2A1A31]"
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        Saved styles
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        href="/library#creations"
+                        className="flex min-h-11 items-center rounded-[12px] px-3 text-sm text-[#F5F3EE] hover:bg-[#2A1A31]"
+                        onClick={() => setMobileOpen(false)}
+                      >
+                        My creations
+                      </Link>
+                    </li>
+                    {isEditor ? (
+                      <li>
+                        <Link
+                          href="/admin"
+                          className="flex min-h-11 items-center rounded-[12px] px-3 text-sm text-[#F5F3EE] hover:bg-[#2A1A31]"
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          Editorial admin
+                        </Link>
+                      </li>
+                    ) : null}
+                  </ul>
                 </div>
               ) : (
                 <>

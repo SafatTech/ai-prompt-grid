@@ -1,0 +1,1 @@
+If clothing is not preserved, replace the original outfit with an elegant white or ivory embroidered traditional dress featuring delicate threadwork, floral embroidery, sheer sleeves, and soft semi-transparent fabric. Keep the outfit refined, feminine, luminous, and detailed without appearing overly ornate.

@@ -1,0 +1,1 @@
+Keep the hairstyle long, loose, smooth, and softly flowing with natural volume. Preserve the subject’s natural hair color and texture while allowing slight movement from the breeze in the wider panels.

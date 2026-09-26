@@ -38,14 +38,14 @@ Prototype table rows below may still say draft until owners complete testing, li
 
 Personal photo transformation leads the list. Product imagery may appear (≤ ~1–2 of first 12–20) and must not dominate.
 
-## Live register (editorial templates 1–30)
+## Live register (editorial + product + group templates)
 
-Prototype Picsum placeholder styles were removed. The published catalog is person editorial styles from `seed-editorial-styles.ts` and `seed-editorial-styles-10-30.ts` (South Asian Fashion Editorial through Meadow Reverie).
+- Person editorial templates **1–30**
+- Product templates **1–10** (`seed-product-styles.ts`)
+- Group templates **1–10** (`seed-group-styles.ts`) — After Hours Polaroid through Photo Booth Chaos
 
-| # | Title | Status |
-|---|---|---|
-| 1–9 | Templates from `prompts/template(1-9).md` | published |
-| 10–30 | Templates from `prompts/template(10-30).txt` | published |
+Product preserve toggles use **Product details & genuine packaging** and **Camera angle & framing**.  
+Group preserve toggles use **Identities & facial features** and **Group arrangement & pose**.
 
 ## Detail sheet template (copy per style when testing)
 

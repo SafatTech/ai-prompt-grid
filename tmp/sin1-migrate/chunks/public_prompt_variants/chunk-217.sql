@@ -1,0 +1,1 @@
+Bottom-left panel: show a close detail shot focused on the subject’s hand resting naturally on denim-clad legs or lap. Emphasize stacked bangles, warm-toned nail polish, fabric texture, and the floral print of the top.

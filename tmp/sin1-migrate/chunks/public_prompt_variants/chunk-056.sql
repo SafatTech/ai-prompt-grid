@@ -1,0 +1,1 @@
+Create one cohesive portrait made from three separate photographic crops of the same subject. Divide the canvas into three wide diagonal sections using very thin, clean light-colored separator lines. The panels should feel like three moments from the same professional fashion photoshoot rather than three unrelated images.

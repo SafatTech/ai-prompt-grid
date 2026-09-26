@@ -1,0 +1,1 @@
+If clothing is not preserved, replace the original outfit with a deep navy or midnight-blue zip-front hoodie with a softly structured hood. Keep the styling casual, youthful, minimal, and slightly sporty. Add a subtle dark backpack strap over one shoulder and, if suitable, a small simple hoop earring and a single white wireless earbud for a relaxed modern lifestyle feel.

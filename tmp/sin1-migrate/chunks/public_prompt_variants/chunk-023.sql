@@ -1,0 +1,1 @@
+Style the hair in an elegant half-up evening hairstyle with volume at the crown, a loose textured bun or gathered section at the top, soft strands framing the face, and the remaining hair flowing naturally around the shoulders. Preserve the subject’s natural hair color and realistic strand detail.

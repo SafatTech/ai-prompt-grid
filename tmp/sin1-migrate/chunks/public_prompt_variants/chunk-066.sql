@@ -1,0 +1,1 @@
+Use a premium editorial photography aesthetic with realistic full-frame-camera rendering, shallow depth of field, crisp focal details, subtle optical softness outside the focal plane, fine photographic texture, and restrained cinematic polish.

@@ -1,0 +1,1 @@
+Stage the product naturally within {{background}}. Keep it fully visible as the clear focal point, with only a few soft, restrained home details placed in the distant background for atmosphere.

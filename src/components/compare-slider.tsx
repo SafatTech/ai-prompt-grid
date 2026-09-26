@@ -96,8 +96,10 @@ export function CompareSlider({
 
     const nearHandle = isNearHandle(event.clientX);
 
-    // Detail page: drag near the handle to compare; drag elsewhere to pan.
-    // Cards (no pan): any drag compares.
+    // Cards: only the handle starts a compare so vertical page scroll still works.
+    // Detail: drag near the handle to compare; drag elsewhere to pan.
+    if (!allowPan && !nearHandle) return;
+
     if (!allowPan || nearHandle) {
       activeDrag.current = { type: "slider", pointerId: event.pointerId };
       setSliding(true);
@@ -179,7 +181,7 @@ export function CompareSlider({
         {showModeToggle ? (
           <ModeToggle mode={mode} onChange={setMode} />
         ) : null}
-        <div className="grid h-full grid-cols-2 gap-0.5">
+        <div className="grid h-full grid-cols-1 gap-0.5 lg:grid-cols-2">
           <div className="relative min-h-0 bg-[linear-gradient(135deg,#292836,#15151e)]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
@@ -215,7 +217,7 @@ export function CompareSlider({
     <div
       ref={containerRef}
       className={cn(
-        "compare relative h-full w-full overflow-hidden touch-none select-none",
+        "compare relative h-full w-full overflow-hidden touch-pan-y select-none",
         cursorClass,
         className,
       )}

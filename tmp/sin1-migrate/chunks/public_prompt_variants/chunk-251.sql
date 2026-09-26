@@ -1,0 +1,1 @@
+Keep the sheer glove visibly translucent, with realistic fabric texture and soft diagonal folds across the forearm. Preserve the natural form of the hand beneath the mesh without distorted fingers or unnatural fabric wrapping.

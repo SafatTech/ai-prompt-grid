@@ -1,0 +1,1 @@
+Do not add text, logos, watermarks, social-media UI elements, icons, borders beyond the thin panel dividers, extra people, duplicated bouquet parts, malformed hands, extra fingers, inconsistent identities, or distorted facial features.

@@ -1,0 +1,1 @@
+Create a warm, romantic triptych layout made from three photographs of the same person arranged into one collage. Use one large horizontal image across the full top half, and two smaller vertical images side by side in the bottom half. Separate the three images with thin clean white divider lines. The collage should feel like three candid moments from the same photo session.

@@ -11,7 +11,8 @@
     "format:check": "prettier --check .",
     "test:unit": "tsx --test tests/unit/**/*.test.ts",
     "test:e2e": "playwright test",
-    "db:seed": "tsx --env-file=.env.local scripts/seed-catalog.ts"
+    "db:seed": "tsx --env-file=.env.local scripts/seed-catalog.ts",
+    "db:upload-catalog": "tsx --env-file=.env.local scripts/upload-catalog-assets.ts"
   },
   "dependencies": {
     "@supabase/ssr": "^0.12.7",

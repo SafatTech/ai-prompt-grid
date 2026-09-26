@@ -1,0 +1,1 @@
+Use clean daylight portrait photography for the main figure, with realistic skin texture, natural fabric folds, and soft depth separation. For the mini versions, maintain consistent identity while allowing more exaggerated eyes, compact proportions, and cute expressive poses.

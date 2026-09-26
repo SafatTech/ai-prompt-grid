@@ -35,7 +35,7 @@ export function CreationDetailClient({ creation: initial, creationId }: Props) {
 
   if (!ready) {
     return (
-      <section className="container py-[88px]">
+      <section className="container py-12 sm:py-[88px]">
         <p className="text-[var(--muted)]">Loading…</p>
       </section>
     );
@@ -43,7 +43,7 @@ export function CreationDetailClient({ creation: initial, creationId }: Props) {
 
   if (!signedIn) {
     return (
-      <section className="container py-[88px]">
+      <section className="container py-12 sm:py-[88px]">
         <EmptyState
           icon="♡"
           title="Sign in to view this creation"
@@ -63,7 +63,7 @@ export function CreationDetailClient({ creation: initial, creationId }: Props) {
 
   if (!active) {
     return (
-      <section className="container py-[88px]">
+      <section className="container py-12 sm:py-[88px]">
         <EmptyState
           icon="↔"
           title="Creation not found"
@@ -115,7 +115,7 @@ export function CreationDetailClient({ creation: initial, creationId }: Props) {
     : active.result;
 
   return (
-    <section className="container pb-[100px]">
+    <section className="container pb-16 sm:pb-[100px]">
       <div className="mb-8 flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="m-0 mb-2 text-[11px] font-bold tracking-[0.08em] text-[var(--muted)] uppercase">
@@ -145,21 +145,21 @@ export function CreationDetailClient({ creation: initial, creationId }: Props) {
 
       <div className="grid gap-6 lg:grid-cols-[1.2fr_0.8fr]">
         <div className="overflow-hidden rounded-[var(--radius)] border border-[var(--line)] bg-[var(--surface)]">
-          <div className="grid min-h-[360px] grid-cols-1 gap-0.5 bg-[var(--line)] sm:grid-cols-[1fr_1.25fr]">
+          <div className="grid min-h-0 grid-cols-1 gap-0.5 bg-[var(--line)] lg:min-h-[360px] lg:grid-cols-[1fr_1.25fr]">
             {active.source ? (
               <div className="relative">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={active.source}
                   alt="Source photo"
-                  className="h-full min-h-[280px] w-full object-cover"
+                  className="h-full max-h-[50dvh] min-h-[200px] w-full object-cover sm:min-h-[240px] lg:max-h-none lg:min-h-[280px]"
                 />
                 <span className="absolute top-3 left-3 rounded-lg bg-black/55 px-2 py-1 text-[11px] font-bold">
                   Source
                 </span>
               </div>
             ) : (
-              <div className="grid min-h-[200px] place-items-center bg-[var(--surface-2)] px-6 text-center text-sm text-[var(--muted)]">
+              <div className="grid min-h-[160px] place-items-center bg-[var(--surface-2)] px-6 text-center text-sm text-[var(--muted)] sm:min-h-[200px]">
                 No source photo saved
               </div>
             )}
@@ -168,7 +168,7 @@ export function CreationDetailClient({ creation: initial, creationId }: Props) {
               <img
                 src={active.result}
                 alt="Saved AI result"
-                className="h-full min-h-[280px] w-full object-cover"
+                className="h-full max-h-[50dvh] min-h-[200px] w-full object-cover sm:min-h-[240px] lg:max-h-none lg:min-h-[280px]"
               />
               <span className="absolute top-3 left-3 rounded-lg bg-black/55 px-2 py-1 text-[11px] font-bold">
                 Result

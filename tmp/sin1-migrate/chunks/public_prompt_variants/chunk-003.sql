@@ -1,0 +1,1 @@
+Dress the subject in refined dark streetwear with subtle sunglasses and a confident three-quarter pose. Create a cinematic scene with a sharply focused subject surrounded by anonymous passersby moving in natural lateral motion blur. Use {{mood}} color grading, deep editorial contrast, subtle film grain, and premium fashion-photography detail.

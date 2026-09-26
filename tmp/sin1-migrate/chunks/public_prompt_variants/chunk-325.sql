@@ -1,0 +1,1 @@
+Use clean premium studio lighting, precise material highlights, controlled depth, and {{mood}} colour grading. The composition should feel energetic and modern without becoming cluttered or unrealistic.

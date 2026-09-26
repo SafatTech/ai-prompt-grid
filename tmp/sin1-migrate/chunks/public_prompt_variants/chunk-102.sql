@@ -1,0 +1,1 @@
+Create a joyful candid expression with a broad natural smile, visible teeth, softly closed or nearly closed eyes, relaxed cheeks, and an energetic carefree feeling. The expression should look like a genuine happy moment captured spontaneously rather than a conventional posed portrait.

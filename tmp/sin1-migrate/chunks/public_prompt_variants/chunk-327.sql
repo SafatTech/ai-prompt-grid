@@ -1,0 +1,1 @@
+Frame the product’s most tactile, valuable details prominently against {{background}}. Keep the main product feature tack sharp while allowing only distant areas to fall into a realistic, soft shallow depth of field.

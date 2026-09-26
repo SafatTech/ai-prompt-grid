@@ -1,0 +1,1 @@
+Create one cohesive four-image editorial collage arranged as a clean two-by-two grid with thin, subtle divider lines. Every panel must show the same subject with consistent identity, hairstyle, wardrobe, jewelry, lighting direction, and photographic treatment.

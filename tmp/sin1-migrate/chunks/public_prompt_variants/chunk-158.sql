@@ -1,0 +1,1 @@
+Style the hair in a loose, softly tousled, naturally flowing way with visible wave movement and a few strands falling around the face. Preserve the subject’s natural hair texture while giving it a romantic, editorial quality.

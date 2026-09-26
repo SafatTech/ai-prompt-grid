@@ -1,0 +1,1 @@
+If clothing is not preserved, style the subject in a simple elegant black outfit with a delicate pearl necklace, a rich red shoulder bag, and a bouquet of deep red roses wrapped in natural brown paper. Create a carefree walking pose with eyes gently closed or lifted toward the light, a relaxed happy expression, and naturally moving hair.

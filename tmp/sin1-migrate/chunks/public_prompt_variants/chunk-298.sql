@@ -1,0 +1,1 @@
+Optionally include only a few tiny decorative symbolic accents near the edge of the middle panel, such as very small sparkle, white dove, crescent moon, or ring motifs, but keep them minimal and secondary to the photography.

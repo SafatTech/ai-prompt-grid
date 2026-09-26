@@ -1,0 +1,1 @@
+Add several torn-paper note cards in pale cream, muted blue, or soft gray-blue tones. Place them at different angles and attach some with realistic pieces of semi-transparent blue or beige masking tape. Notes should look like personal handwritten journal snippets or motivational phrases, but keep any visible writing short, tasteful, legible, and secondary to the portraits.

@@ -1,0 +1,1 @@
+Frame the subject tightly but comfortably, leaving enough space around the hair, shoulders, earrings, glove, and hand. Keep the face large in the composition while preserving an elegant balance between the exposed shoulder and the gloved arm.

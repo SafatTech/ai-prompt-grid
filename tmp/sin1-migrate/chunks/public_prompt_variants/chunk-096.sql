@@ -1,0 +1,1 @@
+Keep the overall layout airy and balanced. Use the subject portraits as the main visual hierarchy, with the centered Polaroid acting as the anchor. Leave enough negative space between decorative elements so the composition does not become visually noisy.

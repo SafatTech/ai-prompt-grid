@@ -1,0 +1,1 @@
+If clothing is not preserved, replace the original outfit with a soft ivory or white romantic blouse featuring delicate lace, embroidery, or lightly textured fabric around the shoulders and neckline. Keep the wardrobe elegant, minimal, and secondary to the face and flowers.

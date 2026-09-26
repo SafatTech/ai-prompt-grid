@@ -1,0 +1,1 @@
+The final collage should feel romantic, refined, celebratory, intimate, and fashion-editorial while remaining photorealistic. Each panel should reveal a different detail of the same person: overall beauty and floral styling, expressive eye detail, and graceful jewelry-adorned hand detail.

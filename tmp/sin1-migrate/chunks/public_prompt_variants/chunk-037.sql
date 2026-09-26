@@ -1,0 +1,1 @@
+Introduce subtle cinematic bloom around the brightest backlit areas, fine photographic grain, gentle atmospheric particles or dust in the distant background, and a shallow depth of field. Keep the face, eyelashes, lips, hair near the face, jewelry, and foreground clothing sharply resolved while allowing the outer background to remain soft.

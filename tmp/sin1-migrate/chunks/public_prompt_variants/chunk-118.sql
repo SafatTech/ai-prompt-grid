@@ -1,0 +1,1 @@
+Place a single deep-red rose against or just above the subject’s forearm near the lower-right portion of the portrait. The rose should have a realistic green stem and a few natural leaves. Keep it prominent enough to become the only strong color accent in the composition without obscuring the hands or face.

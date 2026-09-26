@@ -1,0 +1,4 @@
+If pose is not preserved, create three complementary candid poses while keeping the same subject and same styling across all panels:
+Top panel: the subject gently looks downward at the bouquet with a soft natural smile, holding it close to the chest in a calm affectionate pose.
+Bottom-left panel: the subject looks down shyly while lightly touching or brushing hair away from the face with one hand, creating a bashful candid moment.
+Bottom-right panel: the subject hugs the bouquet close with both arms, tilts the head back or slightly to the side, closes or softens the eyes, and smiles with a dreamy content expression.

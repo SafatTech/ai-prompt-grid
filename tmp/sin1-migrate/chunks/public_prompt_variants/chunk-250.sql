@@ -1,0 +1,1 @@
+Use flattering soft frontal or three-quarter beauty lighting combined with gentle side shaping. Let the light create luminous highlights across the forehead, cheekbones, nose, lips, shoulders, jewelry, and sheer glove while maintaining dimensional shadows around the jaw and hair.

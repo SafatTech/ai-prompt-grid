@@ -1,0 +1,1 @@
+Style the subject’s hair with loose natural movement around the face. Allow a few fine strands to fall across the forehead, cheek, or eye area in a deliberately imperfect, windswept way while keeping the subject’s identity and both eyes recognizable.

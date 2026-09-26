@@ -1,0 +1,1 @@
+Top panel: show a close frontal or slightly three-quarter head-and-shoulders portrait with the subject facing mostly toward the camera. Keep the expression serious, calm, and slightly intense, with relaxed lips and direct or nearly direct eye contact.

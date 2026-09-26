@@ -1,0 +1,1 @@
+Add traditional silver-toned jhumka earrings, a tiny black bindi, a delicate nose pin if suitable, and stacks of deep red glass bangles mixed with antique-silver kadas or oxidized bangles on both wrists. Add one ornate silver statement ring and a few minimal thin rings. Jewelry should look realistic, intricate, and handcrafted rather than oversized or artificial.

@@ -1,0 +1,1 @@
+Place a large deep-crimson rose immediately below and beside the subject’s lips, close enough to become a dominant foreground element without hiding important facial features. Surround the rose and one side of the face with clusters of tiny white baby’s-breath flowers and delicate branching stems.

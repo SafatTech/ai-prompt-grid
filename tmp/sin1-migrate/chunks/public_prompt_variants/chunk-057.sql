@@ -1,0 +1,1 @@
+If clothing is not preserved, style the subject in an elegant ivory traditional formal outfit with delicate gold embroidery, beadwork, sequins, and refined fabric texture. Add tasteful traditional gold jewelry, including ornate round statement earrings and layered decorative bangles. Keep the styling sophisticated, detailed, and realistic.

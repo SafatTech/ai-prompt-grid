@@ -1,0 +1,1 @@
+Use shallow-to-moderate depth of field in the close portraits and slightly deeper focus in the wider architectural panels. Keep the face, jewelry, bouquet, and saree texture sharp while allowing distant stone details to soften naturally.

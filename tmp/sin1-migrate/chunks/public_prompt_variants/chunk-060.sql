@@ -1,0 +1,1 @@
+Middle panel: create an extreme beauty close-up focused primarily on one eye, eyebrow, upper cheek, and a small portion of the nose bridge. Preserve the subject’s actual eye shape and facial identity. Use refined natural eye makeup with defined lashes and a subtle eyeliner treatment. Keep pores, eyebrow hairs, eyelashes, and skin texture realistic and sharply resolved.

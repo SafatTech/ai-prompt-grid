@@ -1,0 +1,1 @@
+Style the hair long, loose, softly waved, and naturally flowing. Preserve the subject’s natural hair color and texture while allowing gentle motion in the wider panels and polished framing around the face in the close-ups.

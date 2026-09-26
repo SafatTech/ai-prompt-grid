@@ -1,0 +1,1 @@
+If clothing is not preserved, dress the subject in an oversized dark charcoal or black hoodie or sweatshirt with a soft casual fit. Keep the clothing simple, cozy, and understated so the bouquet and expression remain the visual focus.

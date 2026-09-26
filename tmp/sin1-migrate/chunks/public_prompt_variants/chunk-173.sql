@@ -1,0 +1,1 @@
+Place several daisies very close to the camera along the bottom and side edges of the frame. Use shallow depth of field so some foreground flowers become large, soft, and partially blurred while midground daisies remain more recognizable. The foreground flowers should create a strong sense of depth and make the camera feel physically positioned inside the flower patch.

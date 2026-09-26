@@ -1,0 +1,1 @@
+For the main central portrait, keep the subject mostly realistic and full-length, standing naturally with one or both hands resting casually in the trouser pockets. Use a calm confident expression, relaxed shoulders, and a polished lifestyle-fashion posture.

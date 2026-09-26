@@ -1,0 +1,1 @@
+Do not add text, logos, watermarks, social-media interface elements, gallery icons, extra people, mismatched identities between panels, duplicated facial features, malformed ears, distorted jewelry, extra limbs, or unrealistic facial anatomy.

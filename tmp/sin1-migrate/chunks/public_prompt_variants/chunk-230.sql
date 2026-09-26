@@ -1,0 +1,1 @@
+Top-left panel: show the subject seated gracefully on old stone steps or beside a historic stone wall, holding a compact bouquet of deep crimson-red roses in both hands. Keep the body relaxed, feet naturally placed, and let the subject look slightly away from the camera with a soft calm smile.

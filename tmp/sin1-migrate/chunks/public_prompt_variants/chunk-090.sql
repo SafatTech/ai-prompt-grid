@@ -1,0 +1,1 @@
+Arrange approximately five to six photos of the same subject in different sizes. Place two larger cutout portraits near the upper left and upper right, one centered Polaroid-style photograph around the middle, and several overlapping portrait cutouts across the lower half. Let some photographs overlap naturally to create depth while keeping every face clearly visible.

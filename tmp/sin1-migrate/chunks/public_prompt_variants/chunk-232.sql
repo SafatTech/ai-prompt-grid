@@ -1,0 +1,1 @@
+Bottom-left panel: create a closer front-facing portrait with the bouquet of red roses raised near the lower foreground. Let the subject look toward the camera with a composed, warm expression. Keep the roses richly detailed and the face crisp, with shallow depth of field behind.

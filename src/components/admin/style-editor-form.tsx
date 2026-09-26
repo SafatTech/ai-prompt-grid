@@ -746,7 +746,7 @@ function Section({
   children: ReactNode;
 }) {
   return (
-    <section className="rounded-[var(--radius)] border border-[var(--line)] bg-[var(--surface)] p-5">
+    <section className="rounded-[var(--radius)] border border-[var(--line)] bg-[var(--surface)] p-4 sm:p-5">
       <h2 className="mt-0 mb-4 text-[20px] tracking-[-0.02em]">{title}</h2>
       <div className="grid gap-3">{children}</div>
     </section>

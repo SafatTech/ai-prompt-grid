@@ -1,0 +1,1 @@
+Apply {{mood}} color grading consistently across all three panels. Use warm amber-brown skin highlights, muted earthy tones, deep chocolate clothing, rich soft shadows, and strong but controlled cinematic contrast. Preserve realistic pores, facial hair, lip texture, eyebrow detail, and individual hair strands. Avoid excessive smoothing or artificial beauty-filter effects.

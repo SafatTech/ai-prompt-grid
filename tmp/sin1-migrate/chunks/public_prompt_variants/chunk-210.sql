@@ -1,0 +1,1 @@
+Do not add social-media UI, play buttons, carousel indicators, watermarks, brand logos, unrelated people, inconsistent identities, extra limbs, malformed hands, distorted faces, duplicate features, or cluttered decorative elements.

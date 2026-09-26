@@ -1,0 +1,1 @@
+Use soft directional studio lighting on the main subject, creating subtle sculpting around the cheekbones, jawline, nose, brow, and neck without harsh shadows. Allow the faded background portraits to appear softer and flatter, as though printed or double-exposed into the same frame.

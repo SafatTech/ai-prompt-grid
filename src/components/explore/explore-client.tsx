@@ -112,6 +112,20 @@ export function ExploreClient({ styles }: Props) {
     }
   }, [searchParams]);
 
+  useEffect(() => {
+    document.body.classList.toggle("no-scroll", drawerOpen);
+    return () => document.body.classList.remove("no-scroll");
+  }, [drawerOpen]);
+
+  useEffect(() => {
+    if (!drawerOpen) return;
+    function onKey(event: KeyboardEvent) {
+      if (event.key === "Escape") setDrawerOpen(false);
+    }
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [drawerOpen]);
+
   function onSortChange(nextSort: SortOption) {
     setSort(nextSort);
     setPage(1);
@@ -128,7 +142,7 @@ export function ExploreClient({ styles }: Props) {
     <div
       className={cn(
         isDrawer
-          ? "fixed inset-x-0 bottom-0 z-[65] max-h-[84dvh] overflow-auto rounded-t-[22px] border-t border-[var(--line-strong)] bg-[#14141d] px-5 pt-[22px] pb-[30px] shadow-[0_-20px_60px_rgba(0,0,0,0.5)]"
+          ? "fixed inset-x-0 bottom-0 z-[65] max-h-[84dvh] overflow-auto rounded-t-[22px] border-t border-[var(--line-strong)] bg-[#14141d] px-5 pt-[22px] pb-[max(1.25rem,env(safe-area-inset-bottom))] shadow-[0_-20px_60px_rgba(0,0,0,0.5)]"
           : "sticky top-[calc(var(--header)+20px)] max-h-[calc(100dvh-var(--header)-40px)] self-start overflow-y-auto pr-1.5",
       )}
       role={isDrawer ? "dialog" : undefined}
@@ -149,7 +163,7 @@ export function ExploreClient({ styles }: Props) {
           {isDrawer ? (
             <button
               type="button"
-              className="grid h-[38px] w-[38px] place-items-center rounded-xl border border-[var(--line)]"
+              className="grid h-11 w-11 place-items-center rounded-xl border border-[var(--line)]"
               aria-label="Close filters"
               onClick={() => setDrawerOpen(false)}
             >
@@ -172,7 +186,7 @@ export function ExploreClient({ styles }: Props) {
                   data-testid={`filter-${key}-${value}`}
                   onClick={() => toggleFilter(key, value)}
                   className={cn(
-                    "inline-flex min-h-[33px] cursor-pointer items-center rounded-[var(--pill)] border border-[var(--line)] bg-[var(--surface)] px-2.5 text-[11px] text-[#c8c6cf]",
+                    "inline-flex min-h-10 cursor-pointer items-center rounded-[var(--pill)] border border-[var(--line)] bg-[var(--surface)] px-2.5 text-[11px] text-[#c8c6cf]",
                     activeChip &&
                       "border-[rgba(139,108,255,0.55)] bg-[rgba(139,108,255,0.14)] text-[var(--text)]",
                   )}
@@ -194,16 +208,16 @@ export function ExploreClient({ styles }: Props) {
 
   return (
     <div>
-      <section className="container pt-16 pb-9">
-        <h1 className="m-0 mb-2.5 text-[clamp(42px,5vw,70px)] leading-none tracking-[-0.055em]">
+      <section className="container pt-10 pb-9 sm:pt-16">
+        <h1 className="m-0 mb-2.5 text-[clamp(32px,8vw,70px)] leading-none tracking-[-0.055em]">
           Find a style for your photo
         </h1>
-        <p className="m-0 text-[17px] text-[var(--muted)]">
+        <p className="m-0 text-[15px] text-[var(--muted)] sm:text-[17px]">
           Browse {catalog.length} tested styles for portraits, pets, places, objects, and
           more.
         </p>
         <form
-          className="mt-[30px] grid grid-cols-[1fr_auto] gap-2.5"
+          className="mt-[30px] grid grid-cols-1 gap-2.5 sm:grid-cols-[1fr_auto]"
           onSubmit={(event) => event.preventDefault()}
         >
           <label className="sr-only" htmlFor="mainSearch">
@@ -277,7 +291,7 @@ export function ExploreClient({ styles }: Props) {
                 data-testid="style-results"
               >
                 {visible.map((style) => (
-                  <StyleCard key={style.id} style={style} stagger />
+                  <StyleCard key={style.id} style={style} compact stagger />
                 ))}
               </div>
               {visible.length < results.length ? (
@@ -305,7 +319,17 @@ export function ExploreClient({ styles }: Props) {
           )}
         </div>
       </section>
-      {drawerOpen ? filterPanel(true) : null}
+      {drawerOpen ? (
+        <>
+          <button
+            type="button"
+            className="fixed inset-0 z-[64] cursor-pointer border-0 bg-black/55 md:hidden"
+            aria-label="Close filters"
+            onClick={() => setDrawerOpen(false)}
+          />
+          {filterPanel(true)}
+        </>
+      ) : null}
     </div>
   );
 }

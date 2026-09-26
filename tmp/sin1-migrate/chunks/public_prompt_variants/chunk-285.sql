@@ -1,0 +1,1 @@
+Create one cohesive vertical triptych made from three cinematic photographs of the same subject, stacked from top to bottom and separated by thin white dotted or beaded divider lines. Keep the identity, hairstyle, wardrobe, jewelry, lighting direction, and color treatment consistent across all three panels.

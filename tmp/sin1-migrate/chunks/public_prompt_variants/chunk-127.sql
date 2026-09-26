@@ -1,0 +1,1 @@
+Keep the pose compact and asymmetrical. Avoid formal centered headshot framing. The image should communicate quiet introspection, loneliness, romance, and cinematic stillness while remaining photorealistic.

@@ -1,0 +1,1 @@
+Use directional natural-looking light that creates a luminous edge around individual hair strands, delicate highlights on jewelry and embroidery, and soft sculpting across the face and hand. Keep the three sections consistent in lighting direction and photographic treatment so they clearly belong to the same shoot.

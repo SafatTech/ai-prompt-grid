@@ -1,0 +1,1 @@
+Stage the product in {{background}}, interpreted as a believable, use-appropriate everyday environment. Keep the product fully visible in sharp foreground focus, with only subtle supporting objects in the distant background and a shallow, realistic depth of field.

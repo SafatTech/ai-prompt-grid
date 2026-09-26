@@ -55,7 +55,7 @@ export function StyleCard({ style, compact = false, stagger = false }: Props) {
         <button
           type="button"
           className={cn(
-            "absolute top-3 right-3 z-4 flex h-[38px] w-[38px] cursor-pointer items-center justify-center rounded-[11px] border border-[rgba(255,255,255,0.22)] bg-[rgba(11,11,16,0.75)] text-lg text-[var(--text)] backdrop-blur-sm",
+            "absolute top-3 right-3 z-4 flex h-11 w-11 cursor-pointer items-center justify-center rounded-[11px] border border-[rgba(255,255,255,0.22)] bg-[rgba(11,11,16,0.75)] text-lg text-[var(--text)] backdrop-blur-sm",
             saved && "bg-[rgba(255,155,130,0.12)] text-[var(--peach)]",
           )}
           aria-label={saved ? `Unsave ${style.title}` : `Save ${style.title}`}

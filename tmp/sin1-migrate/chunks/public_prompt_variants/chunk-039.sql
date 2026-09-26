@@ -1,0 +1,1 @@
+Do not add text, logos, watermarks, phone-interface elements, carousel arrows, social-media icons, borders, extra people, duplicated jewelry, malformed clothing, distorted facial features, extra limbs, or unnatural hair artifacts.

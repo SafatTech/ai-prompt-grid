@@ -1,0 +1,1 @@
+Use shallow-to-moderate depth of field. Keep the subject crisp in each panel while softly blurring distant street details. Let the hand-detail panel emphasize textures sharply, including skin, jewelry, denim, and floral fabric.

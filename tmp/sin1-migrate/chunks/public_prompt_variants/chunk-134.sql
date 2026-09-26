@@ -1,0 +1,1 @@
+Keep the subject’s hair loose, natural, and softly tousled, with gentle movement around the face. Let a few strands fall naturally across the forehead or cheeks in some panels to support the candid lifestyle mood.

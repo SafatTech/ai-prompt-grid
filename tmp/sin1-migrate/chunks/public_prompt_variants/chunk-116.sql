@@ -1,0 +1,1 @@
+If clothing is not preserved, replace the original outfit with a simple fitted black long-sleeve top or black knit sweater. Keep the styling minimal, elegant, masculine, and understated so the face, hands, and rose remain the main visual focus.

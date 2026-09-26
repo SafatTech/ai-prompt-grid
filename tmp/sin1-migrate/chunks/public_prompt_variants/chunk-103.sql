@@ -1,0 +1,1 @@
+Keep the hair loose and naturally expressive. Allow individual strands and sections of hair to move outward around the face as though affected by a gentle breeze or the dynamic perspective of the selfie. Preserve the subject’s natural hair color, texture, curl pattern, and overall identity.

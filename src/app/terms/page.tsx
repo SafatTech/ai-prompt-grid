@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function TermsPage() {
   return (
-    <article className="container max-w-[720px] py-16 pb-[100px]">
+    <article className="container max-w-[720px] py-10 pb-16 sm:py-16 sm:pb-[100px]">
       <p className="m-0 mb-2 text-[11px] font-bold tracking-[0.08em] text-[var(--muted)] uppercase">
         Legal
       </p>

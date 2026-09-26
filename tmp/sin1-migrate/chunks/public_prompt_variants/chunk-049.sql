@@ -1,0 +1,1 @@
+Keep one side of the face brightly illuminated and allow the opposite side to fall into deeper natural shadow. Add subtle specular highlights to the eyes and lips, gentle warmth in the skin, and sculpted dimensional contrast around the cheekbones, nose, jawline, and brow.

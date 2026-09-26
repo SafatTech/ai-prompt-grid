@@ -1,0 +1,1 @@
+Style the hair with slightly wet, tousled, textured movement. Preserve the subject’s natural hair color and overall structure while allowing loose strands and subtle volume around the forehead. If facial hair is present, keep it natural and consistent rather than removing or exaggerating it.

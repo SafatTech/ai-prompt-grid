@@ -1,0 +1,1 @@
+Add very subtle editorial polish such as fine photographic grain, restrained highlight bloom, and soft contrast. In one close panel, a few tiny warm spark-like glints may appear near the lower saree edge, but keep them minimal, elegant, and realistic rather than magical or decorative.

@@ -1,0 +1,1 @@
+Maintain the same lighting direction and wall color in all three frames so the collage feels like one continuous editorial photo session.

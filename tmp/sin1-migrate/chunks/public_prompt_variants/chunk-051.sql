@@ -1,0 +1,1 @@
+Use a close-focus editorial photography aesthetic with shallow depth of field, crisp facial detail, realistic lens rendering, subtle photographic grain, gentle highlight roll-off, and natural optical softness in the background.

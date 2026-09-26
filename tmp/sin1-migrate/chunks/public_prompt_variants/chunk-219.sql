@@ -1,0 +1,1 @@
+Keep the subject’s hair long, loose, and naturally wavy with soft volume and movement. Preserve the natural hair color while allowing light to catch highlights in the strands. Keep the hairstyle consistent across all panels.

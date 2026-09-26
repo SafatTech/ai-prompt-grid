@@ -1,0 +1,1 @@
+Frame the subject from approximately the waist or knees upward depending on the selfie perspective. Let the extended arm enter prominently from a lower corner of the frame and guide the eye toward the subject’s face. Surround the opposite side of the composition with abundant flowers to balance the perspective.

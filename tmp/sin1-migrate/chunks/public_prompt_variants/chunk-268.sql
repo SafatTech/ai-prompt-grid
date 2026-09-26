@@ -1,0 +1,1 @@
+Use shallow-to-moderate depth of field. Keep the subject, jewelry, face, and key clothing details sharp while allowing distant houses, walls, plants, and street elements to soften naturally. In the twirling panel, preserve motion in the dress and hair while keeping the face clear.

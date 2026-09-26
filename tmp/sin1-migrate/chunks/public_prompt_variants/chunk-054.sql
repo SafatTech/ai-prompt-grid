@@ -1,0 +1,1 @@
+Do not add text, logos, watermarks, social-media interface elements, carousel arrows, borders, extra people, duplicated flowers, malformed petals, distorted facial features, extra limbs, unnatural accessories, or artificial-looking shadows.

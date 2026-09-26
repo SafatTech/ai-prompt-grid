@@ -1,0 +1,1 @@
+If pose is not preserved, create three coordinated panels:

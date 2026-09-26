@@ -1,0 +1,1 @@
+Use a shallow-to-moderate depth of field. Keep the subject’s face and key midground flowers crisp while allowing the closest flowers, extended hand near the lens, and distant background to soften naturally according to their distance from the camera.

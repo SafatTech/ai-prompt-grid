@@ -1,0 +1,1 @@
+Create {{background}}. Keep it simple, dark, cool-toned, softly blurred, and visually unobtrusive so the face and flowers remain dominant. The setting should feel like an outdoor or window-lit environment with strong natural depth separation and no distracting scenery.

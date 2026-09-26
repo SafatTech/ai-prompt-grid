@@ -1,0 +1,1 @@
+Apply {{mood}} color grading consistently across the entire image. Keep the subject’s skin realistic and dimensional, preserve pores and subtle facial texture, use soft luminous highlights, gentle contrast, clean midtones, and an airy photographic finish. Avoid plastic skin, excessive smoothing, unnatural face reshaping, or heavy glamour retouching.

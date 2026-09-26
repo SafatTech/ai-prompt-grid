@@ -1,0 +1,1 @@
+Include delicate decorative details such as tiny blue hearts, small stars, simple black doodles, thin floral line drawings, clusters of tiny white dried flowers, and a few pale-blue pressed-flower accents. These should feel hand-placed and organic rather than like glossy digital stickers.

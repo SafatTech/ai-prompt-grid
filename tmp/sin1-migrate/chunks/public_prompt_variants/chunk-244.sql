@@ -1,0 +1,1 @@
+If clothing is not preserved, replace the original outfit with an elegant black evening look featuring a fitted spaghetti-strap or sleeveless top with a clean neckline. Add one long sheer black mesh glove extending from the hand to above the elbow on the arm closest to the face. Keep the styling minimal, refined, feminine, and sophisticated.

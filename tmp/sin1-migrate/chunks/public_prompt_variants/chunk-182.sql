@@ -1,0 +1,1 @@
+Create one cohesive portrait composed of three horizontal photographic panels stacked vertically. Each panel should show the same subject in a different close-up pose while maintaining identical identity, hairstyle, wardrobe, lighting direction, and overall photographic treatment.

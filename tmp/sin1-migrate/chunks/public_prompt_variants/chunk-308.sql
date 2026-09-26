@@ -1,0 +1,1 @@
+Place the product on a simple geometric pedestal built from {{background}}. Keep the scene monochromatic and minimal, using one dominant backdrop colour with a slightly deeper or lighter pedestal tone. Add no unrelated props.

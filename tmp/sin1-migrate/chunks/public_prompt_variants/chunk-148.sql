@@ -1,0 +1,1 @@
+Create {{background}}. Use a bright minimal off-white or pale gray studio-like field with soft atmospheric texture, gentle tonal falloff, and faint analog photographic imperfections. Keep the background almost empty so the layered faces remain visually dominant.

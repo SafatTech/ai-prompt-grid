@@ -1,0 +1,1 @@
+Use bright soft natural daylight with flattering illumination across the face. Add gentle highlights to the hair, nose, cheeks, lips, flowers, and clothing without harsh blown-out areas. Keep shadows light and natural to preserve the cheerful, fresh atmosphere.

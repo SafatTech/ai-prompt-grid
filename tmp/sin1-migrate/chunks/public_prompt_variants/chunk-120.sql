@@ -1,0 +1,1 @@
+Apply {{mood}} color grading throughout the image. Use warm amber highlights, rich brown-black shadows, muted natural skin tones, deep neutral blacks, and one saturated crimson-red accent from the rose. Keep the overall palette subdued and cinematic rather than colorful.

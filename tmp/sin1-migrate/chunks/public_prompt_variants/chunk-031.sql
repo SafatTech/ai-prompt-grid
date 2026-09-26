@@ -1,0 +1,1 @@
+If clothing is not preserved, replace the original outfit with a luxurious glossy satin or silk blouse in a light reflective tone, styled with a relaxed open collar and refined evening-fashion appearance. Add minimal elegant jewelry such as small hoop earrings and a delicate necklace. Keep the wardrobe sophisticated, understated, and premium rather than heavily embellished.

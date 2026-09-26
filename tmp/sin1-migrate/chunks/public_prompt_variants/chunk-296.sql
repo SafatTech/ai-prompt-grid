@@ -1,0 +1,1 @@
+Maintain shallow depth of field in the main portrait and macro-like detail in the hand panels. Keep jewelry and hands crisp in the close-ups while allowing surrounding fabric and background to soften naturally.

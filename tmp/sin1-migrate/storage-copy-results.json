@@ -1,0 +1,9 @@
+{
+  "total": 80,
+  "failures": [
+    {
+      "objectPath": "seed/catalog/editorial/result-23.webp",
+      "error": "upload 520 <!DOCTYPE html>\n<!--[if lt IE 7]> <html class=\"no-js ie6 oldie\" lang=\"en-US\"> <![endif]-->\n<!--[if IE 7]>    <html class"
+    }
+  ]
+}

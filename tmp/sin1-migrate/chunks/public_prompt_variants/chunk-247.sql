@@ -1,0 +1,1 @@
+Add elegant floral or crystal stud earrings and a very delicate necklace with a small sparkling pendant. Keep the jewelry subtle enough to complement the portrait without becoming the main focus.

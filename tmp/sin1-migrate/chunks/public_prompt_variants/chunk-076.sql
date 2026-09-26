@@ -1,0 +1,1 @@
+Create {{background}}. Keep the environment dark, intimate, softly blurred, and elegant, with subtle hints of warm decorative lights, distant floral shapes, or indistinct interior details. The background should never compete with the subject and bouquet.

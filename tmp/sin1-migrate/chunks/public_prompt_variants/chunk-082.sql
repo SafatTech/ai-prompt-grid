@@ -1,0 +1,1 @@
+Do not add text, logos, watermarks, video play buttons, mute icons, social-media controls, carousel arrows, borders, extra people, duplicated flowers, malformed petals, extra fingers, distorted hands, duplicated limbs, or unnatural facial features.

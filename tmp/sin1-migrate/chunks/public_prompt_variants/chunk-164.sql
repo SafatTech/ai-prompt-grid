@@ -1,0 +1,1 @@
+The overall image should feel graceful, intimate, nostalgic, monochrome, and quietly dramatic, like a refined fine-art portrait or cinematic still.

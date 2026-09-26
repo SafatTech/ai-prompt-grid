@@ -1,0 +1,1 @@
+Use warm directional sunlight coming from one side, creating a cozy nostalgic afternoon look. Let the light softly illuminate the face, hair, bouquet, and shoulders while leaving some shadowed areas for depth. Add faint film grain and a slightly dreamy analog-photo atmosphere.

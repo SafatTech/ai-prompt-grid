@@ -1,0 +1,1 @@
+Use strong directional natural sunlight entering from one side, similar to warm late-afternoon window light. Let sunlight create luminous highlights across the face, arms, hands, earrings, rings, bangles, and embroidered sleeves, while producing soft natural shadows that sculpt the features.

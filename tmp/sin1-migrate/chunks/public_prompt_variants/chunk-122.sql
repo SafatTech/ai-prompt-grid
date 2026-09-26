@@ -1,0 +1,1 @@
+Use strong directional warm light entering from one side of the frame, similar to late-afternoon sunlight passing through a window. Let the light fall across the subject’s forehead, cheekbones, nose, lips, ear, hands, and rose while allowing much of the opposite side of the portrait to remain in deep soft shadow.

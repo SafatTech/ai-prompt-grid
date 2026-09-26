@@ -1,0 +1,1 @@
+Apply {{mood}} color grading consistently across all three panels. Keep skin realistic and dimensional, preserve fine facial and hair detail, maintain controlled highlight roll-off, and avoid excessive skin smoothing or artificial beauty-filter effects.

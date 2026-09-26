@@ -1,0 +1,1 @@
+Use soft diffused window daylight, authentic material texture, gentle natural shadows, and {{mood}} colour grading. The scene should feel premium, calm, and lived-in while keeping the product as the clear focal point.

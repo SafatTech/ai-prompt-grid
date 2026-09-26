@@ -1,0 +1,1 @@
+If clothing is not preserved, replace the original outfit with an elegant ivory, cream, or champagne-toned off-shoulder dress or softly draped formal garment. Keep the fabric refined, lightly luminous, and romantic without excessive ornamentation. The clothing should complement the warm floral palette and remain secondary to the subject’s face and bouquet.

@@ -1,0 +1,1 @@
+Create {{background}}. Use a minimal textured wall as the main setting, allowing dramatic organic leaf or branch shadows to fall across the wall and partially across the subject. The shadows should feel naturally cast by sunlight filtering through foliage rather than painted or artificial.

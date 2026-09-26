@@ -46,7 +46,7 @@ export function LibraryClient({ styles }: Props) {
 
   if (!signedIn) {
     return (
-      <section className="container py-[88px]">
+      <section className="container py-12 sm:py-[88px]">
         <EmptyState
           icon="♡"
           title="Sign in to open your library"
@@ -69,11 +69,11 @@ export function LibraryClient({ styles }: Props) {
 
   return (
     <div>
-      <section className="container pt-16 pb-6">
-        <h1 className="m-0 mb-2 text-[clamp(42px,5vw,66px)] tracking-[-0.05em]">
+      <section className="container pt-10 pb-6 sm:pt-16">
+        <h1 className="m-0 mb-2 text-[clamp(36px,8vw,66px)] tracking-[-0.05em]">
           My library
         </h1>
-        <p className="m-0 text-[var(--muted)]">
+        <p className="m-0 text-[15px] text-[var(--muted)] sm:text-base">
           Saved styles, collections, and creations sync privately to your account when
           Supabase is configured.
         </p>
@@ -103,14 +103,14 @@ export function LibraryClient({ styles }: Props) {
         ))}
       </div>
 
-      <section className="container py-[34px] pb-[100px]">
+      <section className="container py-8 pb-16 sm:py-[34px] sm:pb-[100px]">
         {tab === "saved" ? (
           <>
-            <div className="mb-[22px] flex items-center justify-between gap-3">
-              <h2 className="m-0 text-[27px]">Saved styles</h2>
+            <div className="mb-[22px] flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <h2 className="m-0 text-[22px] sm:text-[27px]">Saved styles</h2>
               <Link
                 href="/explore"
-                className="inline-flex min-h-11 items-center justify-center rounded-xl border border-[var(--line)] bg-[var(--surface-2)] px-[18px] text-sm font-bold"
+                className="inline-flex min-h-11 w-full items-center justify-center rounded-xl border border-[var(--line)] bg-[var(--surface-2)] px-[18px] text-sm font-bold sm:w-auto"
               >
                 Explore more
               </Link>
@@ -143,9 +143,11 @@ export function LibraryClient({ styles }: Props) {
 
         {tab === "collections" ? (
           <>
-            <div className="mb-[22px] flex items-center justify-between gap-3">
-              <h2 className="m-0 text-[27px]">Collections</h2>
-              <Button onClick={openCollection}>New collection</Button>
+            <div className="mb-[22px] flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <h2 className="m-0 text-[22px] sm:text-[27px]">Collections</h2>
+              <Button className="w-full sm:w-auto" onClick={openCollection}>
+                New collection
+              </Button>
             </div>
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {collections.map((collection) => {
@@ -229,9 +231,14 @@ export function LibraryClient({ styles }: Props) {
 
         {tab === "creations" ? (
           <>
-            <div className="mb-[22px] flex items-center justify-between gap-3">
-              <h2 className="m-0 text-[27px]">My creations</h2>
-              <Button onClick={() => openSaveResult(styles[0].id)}>Add a result</Button>
+            <div className="mb-[22px] flex flex-col items-start gap-3 sm:flex-row sm:items-center sm:justify-between">
+              <h2 className="m-0 text-[22px] sm:text-[27px]">My creations</h2>
+              <Button
+                className="w-full sm:w-auto"
+                onClick={() => openSaveResult(styles[0].id)}
+              >
+                Add a result
+              </Button>
             </div>
             {creations.length ? (
               <div className="grid grid-cols-1 gap-[18px] md:grid-cols-2">
@@ -241,16 +248,16 @@ export function LibraryClient({ styles }: Props) {
                     className="overflow-hidden rounded-[var(--radius)] border border-[var(--line)] bg-[var(--surface)]"
                   >
                     <Link href={`/creations/${creation.id}`} className="block">
-                      <div className="grid h-[290px] grid-cols-[1fr_1.25fr] gap-0.5 bg-[var(--line)]">
+                      <div className="grid h-[200px] grid-cols-1 gap-0.5 bg-[var(--line)] sm:h-[240px] sm:grid-cols-[1fr_1.25fr] md:h-[290px]">
                         {creation.source ? (
                           // eslint-disable-next-line @next/next/no-img-element
                           <img
                             src={creation.source}
                             alt="Source photo"
-                            className="h-full w-full object-cover"
+                            className="h-full max-h-[140px] w-full object-cover sm:max-h-none"
                           />
                         ) : (
-                          <div className="grid place-items-center bg-[var(--surface-2)] text-xs text-[var(--muted)]">
+                          <div className="grid min-h-[100px] place-items-center bg-[var(--surface-2)] text-xs text-[var(--muted)] sm:min-h-0">
                             No source photo saved
                           </div>
                         )}
@@ -258,12 +265,12 @@ export function LibraryClient({ styles }: Props) {
                         <img
                           src={creation.result}
                           alt="Saved AI result"
-                          className="h-full w-full object-cover"
+                          className="h-full max-h-[140px] w-full object-cover sm:max-h-none"
                         />
                       </div>
                     </Link>
                     <div className="p-[19px]">
-                      <div className="flex justify-between gap-3 text-[11px] text-[var(--muted)]">
+                      <div className="flex flex-col gap-1 text-[11px] text-[var(--muted)] sm:flex-row sm:justify-between sm:gap-3">
                         <span>{creation.styleName}</span>
                         <span>{creation.date}</span>
                       </div>

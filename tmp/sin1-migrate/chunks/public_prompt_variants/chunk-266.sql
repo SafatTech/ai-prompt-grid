@@ -1,0 +1,1 @@
+Create {{background}}. Interpret the setting as a calm residential street or lane with warm-toned walls, gates, trees, soft greenery, and late-afternoon sunlight. Keep the environment photorealistic, elegant, and uncluttered, with no distracting crowds or unrelated objects.

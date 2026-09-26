@@ -1,0 +1,1 @@
+Frame the subject closely from approximately the chest or waist upward. Let the folded arms and hands occupy the lower portion of the composition while the face sits slightly above center. The red rose should create a visual counterpoint near the hands and dark clothing.

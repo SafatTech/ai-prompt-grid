@@ -1,0 +1,1 @@
+Create {{background}}. Interpret it as an old heritage or palace-like architectural setting with weathered stone steps, carved archways, textured walls, and warm historic masonry. Keep the environment photorealistic, uncluttered, and softly softened by depth of field where appropriate.

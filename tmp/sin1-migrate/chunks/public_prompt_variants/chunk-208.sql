@@ -1,0 +1,1 @@
+Keep the main realistic portrait centered and dominant. Arrange the chibi versions around the edges and corners so they frame the central figure without blocking the face or clothing. Use overlapping paper layers, soft contact shadows, tape pieces, and subtle depth to make the page feel handcrafted.

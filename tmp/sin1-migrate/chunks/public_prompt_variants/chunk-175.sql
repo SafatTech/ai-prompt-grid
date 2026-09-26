@@ -1,0 +1,1 @@
+Let the sunlight create subtle rim highlights around the windswept hair and soft luminous edges on some daisy petals. Preserve bright sky detail and avoid blowing out the highlights.

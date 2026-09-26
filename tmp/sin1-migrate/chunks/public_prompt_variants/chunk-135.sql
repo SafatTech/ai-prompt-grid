@@ -1,0 +1,1 @@
+Apply {{mood}} color grading consistently across all three panels. Use warm beige-golden light, slightly muted contrast, soft shadow transitions, delicate highlight bloom, and a subtle vintage film mood. Keep natural skin tones, realistic pores, gentle facial texture, and soft hair detail. Avoid over-retouching or artificial beauty-filter smoothing.

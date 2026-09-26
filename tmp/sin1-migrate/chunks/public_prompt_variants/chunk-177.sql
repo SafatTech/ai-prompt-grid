@@ -1,0 +1,1 @@
+Use shallow-to-moderate depth of field. Keep the face, upper clothing, and selected midground flowers crisp while allowing the closest daisies and distant clouds to soften naturally. Add subtle photographic grain and gentle highlight roll-off for a polished lifestyle-editorial finish.

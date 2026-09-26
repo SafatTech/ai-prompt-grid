@@ -1,0 +1,1 @@
+Use shallow to moderate depth of field so the face and bouquet remain crisp while the background stays softly blurred. Keep all three images visually consistent, as if shot in the same place, with the same light, wardrobe, bouquet, and mood.

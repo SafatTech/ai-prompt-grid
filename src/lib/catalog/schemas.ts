@@ -66,6 +66,14 @@ export const moodSchema = z.enum([
   "Bright neutral",
   "Dark cool neutral",
   "Warm golden neutral",
+  "Warm nostalgic",
+  "Soft nostalgic",
+  "Moody cinematic",
+  "Vibrant cinematic",
+  "Flashy nostalgic",
+  "Elegant warm editorial",
+  "Cozy playful",
+  "Playful nostalgic",
 ]);
 
 export const backgroundSchema = z.enum([
@@ -113,6 +121,16 @@ export const backgroundSchema = z.enum([
   "Warm ivory microsuede surface with a subtle fine matte-stone texture",
   "A softly blurred neutral bathroom vanity beside a sunlit window",
   "Sunlit pale-oak table with soft cream linen curtains and a small blurred dried-flower arrangement",
+  "Evening city lights with soft distant bokeh",
+  "Classic mottled studio backdrop",
+  "Luxury rooftop at sunset with city lights",
+  "Layered handmade scrapbook page with torn paper, tape, mini photos, and doodles",
+  "Detailed scenic outdoor adventure setting",
+  "Sunset beach hangout with casual party vibe",
+  "Luxury garden picnic with soft golden-hour light",
+  "Cozy retro living-room set with warm ambient lights",
+  "Miniature snowy village scene with handcrafted depth",
+  "Cozy indoor celebration setting with subtle booth-style atmosphere",
 ]);
 
 export const ratioSchema = z.enum(["4:5 Portrait", "1:1 Square", "9:16 Story"]);

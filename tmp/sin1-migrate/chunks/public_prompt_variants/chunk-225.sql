@@ -1,0 +1,1 @@
+Do not add social-media interface elements, play buttons, watermarks, logos, random extra people, distorted hands, duplicate limbs, mismatched identities between panels, malformed jewelry, or cluttered graphic decorations.

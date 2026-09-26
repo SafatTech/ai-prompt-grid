@@ -1,0 +1,1 @@
+Build the final composition as a handcrafted visual diary made from several different photographs of the same subject arranged across one vertical scrapbook page. Keep the same person consistent in every photo crop, with matching facial identity, hairstyle, skin tone, and wardrobe throughout the collage.

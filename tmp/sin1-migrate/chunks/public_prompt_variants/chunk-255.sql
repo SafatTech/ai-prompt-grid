@@ -1,0 +1,1 @@
+Do not add time, date, lock-screen elements, text, logos, watermarks, social-media interface elements, play buttons, borders, extra people, duplicate jewelry, extra fingers, malformed hands, distorted facial features, or unrealistic glove anatomy.

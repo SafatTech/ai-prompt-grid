@@ -1,0 +1,1 @@
+Separate the three horizontal photographs with extremely thin, subtle divider lines or clean edge transitions. Do not add decorative graphic frames, text, captions, or scrapbook elements.

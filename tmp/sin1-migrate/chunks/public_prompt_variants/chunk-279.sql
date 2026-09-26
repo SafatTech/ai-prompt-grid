@@ -1,0 +1,1 @@
+The wooden boat should be clearly visible and weathered, with blue painted planks, rope details, and worn texture. The subject should sit near the center-front of the composition so the converging lines of the boat guide the eye toward the person and the city beyond.

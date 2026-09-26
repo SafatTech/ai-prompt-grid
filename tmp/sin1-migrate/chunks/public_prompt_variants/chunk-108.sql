@@ -1,0 +1,1 @@
+Arrange lush flowers beside and around the subject, including large layered blossoms, smaller supporting flowers, buds, leaves, and natural stems. Use varied focus depth: keep several flowers around the subject sharp, allow flowers closest to the lens to become softly blurred, and blend distant floral elements gradually into the warped environment.

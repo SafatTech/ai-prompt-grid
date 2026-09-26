@@ -1,0 +1,1 @@
+Illustrate the subject in a classic leather jacket over a simple shirt, posed confidently in a retro roadside setting with a vintage car and diner-inspired architecture. Use bold ink contours, halftone shading, crosshatching, weathered-paper texture, and {{mood}} print-color treatment. Keep the artwork polished, dramatic, and clearly illustrated rather than photorealistic.

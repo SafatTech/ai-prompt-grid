@@ -1,0 +1,1 @@
+Add subtle photographic grain, refined highlight bloom, gentle tonal softness, and a polished classic-Hollywood portrait atmosphere. The final image should feel intimate, sophisticated, glamorous, timeless, and cinematic rather than like a standard studio headshot.

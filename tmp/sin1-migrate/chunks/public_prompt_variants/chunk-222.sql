@@ -1,0 +1,1 @@
+Use strong natural sunlight filtered through tree leaves, creating soft dappled light and shadow on the ground, walls, subject, and clothing. The lighting should feel warm, summery, cozy, and lifestyle-editorial rather than studio-like.

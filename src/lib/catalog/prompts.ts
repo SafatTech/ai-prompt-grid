@@ -44,6 +44,12 @@ export function preserveToggleLabels(subject: CatalogStyle["subject"]): {
       pose: "Camera angle & framing",
     };
   }
+  if (subject === "Group") {
+    return {
+      clothing: "Identities & facial features",
+      pose: "Group arrangement & pose",
+    };
+  }
   return {
     clothing: "Keep clothing from original photo",
     pose: "Keep original pose",
@@ -55,6 +61,13 @@ function preserveList(style: CatalogStyle, options: PromptOptions) {
     const details: string[] = [];
     if (options.keepClothing) details.push("product details & genuine packaging");
     if (options.keepPose) details.push("camera angle & framing");
+    return details.length ? naturalList(details) : "no additional preserve requirements";
+  }
+
+  if (style.subject === "Group") {
+    const details: string[] = [];
+    if (options.keepClothing) details.push("identities and facial features");
+    if (options.keepPose) details.push("group arrangement and pose");
     return details.length ? naturalList(details) : "no additional preserve requirements";
   }
 

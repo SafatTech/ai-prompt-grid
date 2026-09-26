@@ -1,0 +1,1 @@
+Keep the subject’s hair natural but allow it to become lightly windswept and textured. Let several strands lift or move around the top and sides of the head to reinforce the outdoor breeze. Preserve the subject’s natural hair color, density, and overall identity.

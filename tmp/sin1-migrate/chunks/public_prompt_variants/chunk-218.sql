@@ -1,0 +1,1 @@
+Bottom-right panel: show a back-view walking portrait on the same sunlit tree-lined street, with one hand raised into the hair. Let the woven shoulder bag hang naturally from one shoulder.

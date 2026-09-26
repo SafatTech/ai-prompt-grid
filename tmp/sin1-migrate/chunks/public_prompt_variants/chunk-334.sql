@@ -1,0 +1,1 @@
+Use natural window light, gentle environmental shadows, realistic tactile materials, a refined shallow depth of field, and {{mood}} colour grading. The result should feel inviting, premium, and photorealistic rather than overly staged.

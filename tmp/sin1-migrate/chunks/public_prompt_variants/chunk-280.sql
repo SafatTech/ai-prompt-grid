@@ -1,0 +1,1 @@
+Use shallow-to-moderate depth of field. Keep the subject, nearby boat textures, and immediate foreground crisp while allowing the far background buildings and distant boats to soften slightly. Maintain a premium editorial-photography feel with subtle cinematic polish.

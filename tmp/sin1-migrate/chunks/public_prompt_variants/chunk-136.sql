@@ -1,0 +1,1 @@
+Create {{background}}. The environment should feel like a simple sunlit wall or corner near a doorway or window, with warm direct sunlight casting soft geometric window-shadow patterns across the wall in some areas. Keep the setting minimal and calm, with no distracting objects.

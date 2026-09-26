@@ -1,0 +1,1 @@
+Use a shallow-to-moderate depth of field with a premium editorial-photography feel. Keep the face, earrings, necklace, and key saree details sharp while the background remains slightly softened. Add subtle fine film grain and gentle tonal softness to create a timeless classic portrait aesthetic.

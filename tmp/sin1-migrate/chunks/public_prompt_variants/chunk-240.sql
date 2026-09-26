@@ -1,0 +1,1 @@
+The collage should feel romantic, regal, cinematic, traditional, and polished, like a fashion story photographed at a historic palace or heritage monument.

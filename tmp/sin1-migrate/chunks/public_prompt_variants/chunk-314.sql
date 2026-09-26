@@ -1,0 +1,1 @@
+Arrange the product naturally from an overhead camera view on {{background}}. Keep the product as the largest, central element and add only a few restrained, product-appropriate supporting props near the frame edges. Use intentional asymmetrical spacing and generous negative space; never let props compete with the product.

@@ -1,0 +1,1 @@
+Use shallow depth of field so the face and key flowers remain crisp while the outer bouquet, background lights, and distant details transition smoothly into creamy blur. Add subtle optical bloom around bright highlights, fine photographic grain, soft highlight roll-off, and realistic full-frame-camera depth.

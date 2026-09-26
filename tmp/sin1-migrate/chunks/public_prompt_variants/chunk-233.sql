@@ -1,0 +1,1 @@
+Bottom-right panel: show a full or three-quarter standing portrait beneath a grand heritage archway or historic stone structure. Let the subject hold the bouquet at waist level while the saree pallu lifts and flows outward to one side in a gentle breeze, creating graceful motion. Keep the architecture symmetrical and cinematic without overpowering the subject.

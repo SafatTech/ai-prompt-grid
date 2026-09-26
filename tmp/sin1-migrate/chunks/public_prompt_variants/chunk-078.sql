@@ -1,0 +1,1 @@
+The lighting should resemble late-afternoon golden light or warm cinematic event lighting in a dark interior. Maintain deep shadow areas around the background while letting the face, hair, bare shoulder, and bouquet emerge from the darkness with soft luminous contrast.
