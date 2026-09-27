@@ -473,7 +473,7 @@ textarea:focus-visible,
   pointer-events: none;
   background:
     linear-gradient(90deg, rgba(11, 11, 16, 0.36), rgba(11, 11, 16, 0.1)),
-    url("/brand/hero-background.png") 58% center / cover no-repeat;
+    url("/brand/hero/hero-background.webp") 58% center / cover no-repeat;
   opacity: 0.28;
 }
 

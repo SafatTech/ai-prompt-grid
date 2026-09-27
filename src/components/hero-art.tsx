@@ -3,29 +3,29 @@ import Link from "next/link";
 const cards = [
   {
     href: "/styles/modern-curb-refresh",
-    source: "/catalog/place/source-06.png",
-    result: "/catalog/place/result-06.png",
+    source: "/brand/hero/place-source-06.webp",
+    result: "/brand/hero/place-result-06.webp",
     from: "Place photo",
     to: "Modern curb refresh",
   },
   {
     href: "/styles/intimate-cinematic-portrait",
-    source: "/catalog/editorial/source-05.png",
-    result: "/catalog/editorial/result-05.png",
+    source: "/brand/hero/editorial-source-05.webp",
+    result: "/brand/hero/editorial-result-05.webp",
     from: "Simple selfie",
     to: "Cinematic portrait",
   },
   {
     href: "/styles/travel-fashion-bouquet",
-    source: "/catalog/editorial/source-06.png",
-    result: "/catalog/editorial/result-06.png",
+    source: "/brand/hero/editorial-source-06.webp",
+    result: "/brand/hero/editorial-result-06.webp",
     from: "Travel image",
     to: "Travel fashion",
   },
   {
     href: "/styles/anime-squad",
-    source: "/catalog/group/source-05.png",
-    result: "/catalog/group/result-05.png",
+    source: "/brand/hero/group-source-05.webp",
+    result: "/brand/hero/group-result-05.webp",
     from: "Group photo",
     to: "Anime squad",
   },
@@ -47,9 +47,21 @@ export function HeroArt() {
       >
         <div className="hero-comparison-images">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={featured.source} alt={featured.from} loading="eager" />
+          <img
+            src={featured.source}
+            alt={featured.from}
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+          />
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={featured.result} alt={featured.to} loading="eager" />
+          <img
+            src={featured.result}
+            alt={featured.to}
+            loading="eager"
+            fetchPriority="high"
+            decoding="async"
+          />
           <span className="mini-arrow" aria-hidden>
             →
           </span>
@@ -61,7 +73,7 @@ export function HeroArt() {
       </Link>
 
       <div className="hero-floating-cards">
-        {cards.map((card) => (
+        {cards.map((card, index) => (
           <Link
             key={card.href}
             href={card.href}
@@ -70,9 +82,21 @@ export function HeroArt() {
           >
             <div className="mini-images">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={card.source} alt={card.from} loading="eager" />
+              <img
+                src={card.source}
+                alt={card.from}
+                loading={index < 2 ? "eager" : "lazy"}
+                fetchPriority={index < 2 ? "high" : "low"}
+                decoding="async"
+              />
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src={card.result} alt={card.to} loading="eager" />
+              <img
+                src={card.result}
+                alt={card.to}
+                loading={index < 2 ? "eager" : "lazy"}
+                fetchPriority={index < 2 ? "high" : "low"}
+                decoding="async"
+              />
               <span className="mini-arrow" aria-hidden>
                 →
               </span>
