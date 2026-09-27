@@ -12,10 +12,9 @@ import { cn } from "@/lib/utils";
 type Props = {
   style: CatalogStyle;
   compact?: boolean;
-  stagger?: boolean;
 };
 
-export function StyleCard({ style, compact = false, stagger = false }: Props) {
+export function StyleCard({ style, compact = false }: Props) {
   const { signedIn, isSaved, toggleSave, setPendingAction } = useLibrary();
   const { toast } = useToast();
   const { openSignIn } = useUiModals();
@@ -41,7 +40,6 @@ export function StyleCard({ style, compact = false, stagger = false }: Props) {
     <article
       className={cn(
         "group relative overflow-hidden rounded-[var(--radius)] border border-[var(--line)] bg-[var(--surface)] transition-[transform,border-color] duration-280 hover:-translate-y-1 hover:border-[rgba(255,255,255,0.2)]",
-        stagger && "md:odd:mt-0 lg:[&:nth-child(3n+2)]:mt-6",
       )}
     >
       {/* Compare lives outside the link so dragging the handle isn't a browser link-drag. */}

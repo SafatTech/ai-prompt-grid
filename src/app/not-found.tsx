@@ -13,8 +13,9 @@ export default function NotFound() {
         className="pointer-events-none absolute inset-0 -z-10"
         aria-hidden
         style={{
-          background:
-            "radial-gradient(circle at 18% 12%, rgba(139,108,255,0.16), transparent 32rem), radial-gradient(circle at 88% 78%, rgba(255,155,130,0.08), transparent 24rem)",
+          backgroundImage:
+            "radial-gradient(ellipse 75% 60% at 18% 12%, rgba(139,108,255,0.16) 0%, rgba(139,108,255,0.05) 40%, transparent 72%), radial-gradient(ellipse 65% 50% at 88% 78%, rgba(255,155,130,0.08) 0%, transparent 70%)",
+          backgroundRepeat: "no-repeat",
         }}
       />
 

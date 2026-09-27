@@ -62,7 +62,7 @@ export default async function HomePage() {
         </div>
         <div className="grid grid-cols-1 items-start gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
           {trending.map((style) => (
-            <StyleCard key={style.id} style={style} compact stagger />
+            <StyleCard key={style.id} style={style} compact />
           ))}
         </div>
       </section>

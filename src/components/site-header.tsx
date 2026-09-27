@@ -7,7 +7,6 @@ import {
   useId,
   useRef,
   useState,
-  type FormEvent,
   type KeyboardEvent,
   type ReactNode,
 } from "react";
@@ -22,6 +21,7 @@ import {
   type NavGroup,
   type NavItem,
 } from "@/components/nav/menu-data";
+import { NavSearchField } from "@/components/nav/nav-search-field";
 import { Button } from "@/components/ui/button";
 import { useLibrary } from "@/components/providers/library-provider";
 import { useUiModals } from "@/components/providers/ui-modal-provider";
@@ -155,12 +155,16 @@ export function SiteHeader() {
     setPanel((current) => (current === next ? null : next));
   }
 
-  function onSearch(event: FormEvent) {
-    event.preventDefault();
-    const q = search.trim();
+  function onSearchSubmit(query: string) {
+    const q = query.trim();
     setPanel(null);
     setMobileOpen(false);
     router.push(q ? `/explore?q=${encodeURIComponent(q)}` : "/explore?focus=search");
+  }
+
+  function closeSearchChrome() {
+    setPanel(null);
+    setMobileOpen(false);
   }
 
   function signOutAndLeave() {
@@ -235,20 +239,19 @@ export function SiteHeader() {
 
         <div className="ml-auto flex items-center gap-2">
           {panel === "search" ? (
-            <form onSubmit={onSearch} className="hidden lg:block">
-              <label className="sr-only" htmlFor={searchId}>
-                Search styles
-              </label>
-              <input
-                ref={searchRef}
-                id={searchId}
-                type="search"
+            <div className="relative hidden w-[280px] lg:block">
+              <NavSearchField
                 value={search}
-                onChange={(event) => setSearch(event.target.value)}
-                placeholder="Search cinematic, anime, watercolor..."
-                className="h-10 w-[240px] rounded-xl border border-[rgba(255,255,255,0.10)] bg-[#15151E] px-3 text-sm text-[#F5F3EE] placeholder:text-[#A6A4B2]"
+                onChange={setSearch}
+                onSubmitSearch={onSearchSubmit}
+                onNavigate={closeSearchChrome}
+                inputRef={searchRef}
+                inputId={searchId}
+                autoFocus
+                inputClassName="h-10 w-full rounded-xl border border-[rgba(255,255,255,0.10)] bg-[#15151E] px-3 text-sm text-[#F5F3EE] placeholder:text-[#A6A4B2]"
+                listClassName="min-w-[320px]"
               />
-            </form>
+            </div>
           ) : (
             <button
               type="button"
@@ -420,20 +423,16 @@ export function SiteHeader() {
               >
                 Explore styles
               </Link>
-              <form onSubmit={onSearch} className="mt-3">
-                <label className="sr-only" htmlFor={`${searchId}-mobile`}>
-                  Search styles
-                </label>
-                <input
-                  ref={mobileSearchRef}
-                  id={`${searchId}-mobile`}
-                  type="search"
-                  value={search}
-                  onChange={(event) => setSearch(event.target.value)}
-                  placeholder="Search cinematic, anime, watercolor..."
-                  className="h-12 w-full rounded-[16px] border border-[rgba(255,255,255,0.10)] bg-[#0B0B10] px-3.5 text-base text-[#F5F3EE] placeholder:text-[#A6A4B2]"
-                />
-              </form>
+              <NavSearchField
+                value={search}
+                onChange={setSearch}
+                onSubmitSearch={onSearchSubmit}
+                onNavigate={closeSearchChrome}
+                inputRef={mobileSearchRef}
+                inputId={`${searchId}-mobile`}
+                inputClassName="mt-3 h-12 w-full rounded-[16px] border border-[rgba(255,255,255,0.10)] bg-[#0B0B10] px-3.5 text-base text-[#F5F3EE] placeholder:text-[#A6A4B2]"
+                listClassName="left-0 right-0"
+              />
               <ul className="m-0 mt-4 list-none p-0">
                 <li>
                   <Link

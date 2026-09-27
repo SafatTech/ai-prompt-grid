@@ -33,8 +33,8 @@ test.describe("phase 2 guest catalog", () => {
     await expect(page).toHaveURL(/\/styles\/meadow-reverie/);
     await expect(page.getByTestId("prompt-box")).toBeVisible();
 
-    await page.getByTestId("mood-select").selectOption("Deep blue");
-    await expect(page.getByTestId("prompt-box")).toContainText("deep blue");
+    await page.getByTestId("mood-select").selectOption("Moody cinematic");
+    await expect(page.getByTestId("prompt-box")).toContainText("moody cinematic");
 
     await page.getByTestId("copy-prompt").click();
     await expect(
@@ -43,14 +43,14 @@ test.describe("phase 2 guest catalog", () => {
     const clip = await page.evaluate(() => navigator.clipboard.readText()).catch(() => "");
     if (clip) {
       expect(clip.toLowerCase()).toContain("moody outdoor");
-      expect(clip.toLowerCase()).toContain("deep blue");
+      expect(clip.toLowerCase()).toContain("moody cinematic");
     }
   });
 
   test("load more reveals additional styles", async ({ page }) => {
     await page.goto("/explore");
-    await expect(page.getByTestId("style-results").locator("article")).toHaveCount(6);
+    await expect(page.getByTestId("style-results").locator("article")).toHaveCount(18);
     await page.getByTestId("load-more").click();
-    await expect(page.getByTestId("style-results").locator("article")).toHaveCount(12);
+    await expect(page.getByTestId("style-results").locator("article")).toHaveCount(36);
   });
 });

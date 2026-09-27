@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useState, type FormEvent } from "react";
 import { ModalShell } from "@/components/modals/modal-shell";
+import { EmailIcon, GoogleIcon } from "@/components/icons";
 import { Button } from "@/components/ui/button";
 import { useLibrary } from "@/components/providers/library-provider";
 import { useToast } from "@/components/providers/toast-provider";
@@ -109,11 +110,14 @@ export function SignInModal({ onClose }: { onClose: () => void }) {
       onClose={onClose}
     >
       <Button
-        className="mb-[15px] w-full bg-[var(--text)] text-[#16131d] hover:bg-white"
+        className="mb-[15px] w-full gap-2.5 bg-[var(--text)] text-[#16131d] hover:bg-white"
         data-testid="google-sign-in"
         disabled={busy}
         onClick={() => void onGoogle()}
       >
+        <span className="grid h-7 w-7 place-items-center rounded-full bg-white shadow-[0_1px_2px_rgba(0,0,0,0.12)]">
+          <GoogleIcon className="h-4 w-4" />
+        </span>
         Continue with Google
       </Button>
       <div className="my-3 flex items-center gap-3 text-xs text-[var(--muted)]">
@@ -133,7 +137,8 @@ export function SignInModal({ onClose }: { onClose: () => void }) {
             className="min-h-11 rounded-[10px] border border-[var(--line)] bg-[var(--surface-2)] px-3 py-2.5 text-base text-[var(--text)]"
           />
         </label>
-        <Button type="submit" className="w-full text-white" disabled={busy}>
+        <Button type="submit" className="w-full gap-2.5 text-white" disabled={busy}>
+          <EmailIcon />
           Email me a sign-in link
         </Button>
       </form>

@@ -11,6 +11,10 @@ import {
   defaultsForStyle,
   previewPrompt,
 } from "../../src/lib/catalog/prompts";
+import {
+  assertPresetValuesInSchema,
+  labeledOptionsForStyle,
+} from "../../src/lib/catalog/prompt-option-presets";
 import { promptOptionsSchema } from "../../src/lib/catalog/schemas";
 import { getPublishedStyles, getStyleById } from "../../src/lib/catalog/styles";
 import { cn } from "../../src/lib/utils";
@@ -148,5 +152,45 @@ describe("promptOptionsSchema", () => {
       keepPose: true,
     });
     assert.equal(parsed.success, true);
+  });
+});
+
+describe("labeledOptionsForStyle", () => {
+  it("keeps preset values inside schema enums", () => {
+    assert.doesNotThrow(() => assertPresetValuesInSchema());
+  });
+
+  it("returns at most 10 options with the style default first", () => {
+    const style = getStyleById("south-asian-fashion-editorial");
+    assert.ok(style);
+    const defaults = defaultsForStyle(style);
+    const moods = labeledOptionsForStyle(style, "mood");
+    const backgrounds = labeledOptionsForStyle(style, "background");
+
+    assert.ok(moods.length <= 10);
+    assert.ok(backgrounds.length <= 10);
+    assert.equal(moods[0]?.value, defaults.mood);
+    assert.equal(backgrounds[0]?.value, defaults.background);
+    assert.ok(moods.every((item) => item.label.split(/\s+/).length <= 4));
+    assert.ok(backgrounds.every((item) => item.label.split(/\s+/).length <= 4));
+  });
+
+  it("assembles prompts with the full selected background sentence", () => {
+    const style = getStyleById("pure-white-packshot");
+    assert.ok(style);
+    const backgrounds = labeledOptionsForStyle(style, "background");
+    const selected = backgrounds.find(
+      (item) => item.value !== defaultsForStyle(style).background,
+    );
+    assert.ok(selected);
+    assert.notEqual(selected.label, selected.value);
+
+    const result = assemblePrompt(style, {
+      ...defaultsForStyle(style),
+      background: selected.value as ReturnType<typeof defaultsForStyle>["background"],
+    });
+    assert.equal(result.ok, true);
+    if (!result.ok) return;
+    assert.ok(result.prompt.toLowerCase().includes(selected.value.toLowerCase()));
   });
 });
