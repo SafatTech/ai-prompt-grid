@@ -38,14 +38,18 @@ Prototype table rows below may still say draft until owners complete testing, li
 
 Personal photo transformation leads the list. Product imagery may appear (≤ ~1–2 of first 12–20) and must not dominate.
 
-## Live register (editorial + product + group templates)
+## Live register (all subject packs)
 
 - Person editorial templates **1–30**
 - Product templates **1–10** (`seed-product-styles.ts`)
-- Group templates **1–10** (`seed-group-styles.ts`) — After Hours Polaroid through Photo Booth Chaos
+- Group templates **1–10** (`seed-group-styles.ts`)
+- Place templates **1–10** (`seed-place-styles.ts`)
+- Pet templates **1–9** (`seed-pet-styles.ts`) — Cute 3D Toon Pet through Dreamy Memorial Portrait
 
-Product preserve toggles use **Product details & genuine packaging** and **Camera angle & framing**.  
-Group preserve toggles use **Identities & facial features** and **Group arrangement & pose**.
+Product preserve: **Product details & genuine packaging** / **Camera angle & framing**.  
+Group preserve: **Identities & facial features** / **Group arrangement & pose**.  
+Place preserve: **Structural layout** / **Camera perspective**.  
+Pet preserve: **Pet identity and distinctive markings** / **Original pose and composition**.
 
 ## Detail sheet template (copy per style when testing)
 

@@ -16,6 +16,8 @@
 /prompts/
 /products_images/
 /group_images/
+/place_images/
+/pets_images/
 
 # testing
 /coverage

@@ -301,8 +301,18 @@ function ModeToggle({
   mode: CompareMode;
   onChange: (mode: CompareMode) => void;
 }) {
+  // Keep toggle clicks out of the slider's pointer-capture drag handlers.
+  function stopDragBubble(event: { stopPropagation: () => void }) {
+    event.stopPropagation();
+  }
+
   return (
-    <div className="absolute top-3 left-3 z-10 flex overflow-hidden rounded-lg border border-[rgba(255,255,255,0.18)] bg-[rgba(11,11,16,0.75)] text-[11px] font-bold backdrop-blur-sm">
+    <div
+      className="absolute top-3 left-3 z-10 flex overflow-hidden rounded-lg border border-[rgba(255,255,255,0.18)] bg-[rgba(11,11,16,0.75)] text-[11px] font-bold backdrop-blur-sm"
+      onPointerDown={stopDragBubble}
+      onPointerMove={stopDragBubble}
+      onPointerUp={stopDragBubble}
+    >
       <button
         type="button"
         className={cn(

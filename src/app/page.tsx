@@ -11,31 +11,37 @@ export default async function HomePage() {
   return (
     <div>
       <section className="hero">
-        <div className="hero-bg" aria-hidden />
+        <div className="hero-bg hero-background-film" aria-hidden />
         <div className="container hero-inner">
-          <div>
-            <span className="inline-flex min-h-[30px] max-w-full flex-wrap items-center rounded-[var(--pill)] border border-[rgba(139,108,255,0.23)] bg-[rgba(139,108,255,0.1)] px-[11px] py-1 text-left text-xs font-extrabold tracking-[0.12em] text-[#c1b4ff] uppercase">
+          <div className="hero-copy">
+            <span className="hero-eyebrow inline-flex min-h-[30px] max-w-full flex-wrap items-center rounded-[var(--pill)] border border-[rgba(139,108,255,0.23)] bg-[rgba(139,108,255,0.1)] px-[11px] py-1 text-left text-xs font-extrabold tracking-[0.12em] text-[#c1b4ff] uppercase">
               Transform the photos you already love
             </span>
-            <h1 className="mt-[22px] mb-5 max-w-[670px] text-[clamp(38px,11vw,88px)] leading-[0.95] font-bold tracking-[-0.065em] max-[860px]:max-w-[700px] max-[640px]:tracking-[-0.055em]">
-              Find a look.{" "}
-              <span className="font-semibold text-[var(--muted)]">Keep your story.</span>
+            <h1 className="hero-title mt-[22px] mb-5 max-w-[670px] text-[clamp(38px,11vw,88px)] leading-[0.95] font-bold tracking-[-0.065em]">
+              Find a look.
+              <br className="hero-title-break" />
+              <span className="font-semibold text-[var(--muted)]">
+                Keep your
+                <br className="hero-title-break" />
+                {" "}
+                story.
+              </span>
             </h1>
-            <p className="m-0 max-w-[610px] text-[clamp(16px,1.25vw,19px)] text-[#c3c1cb] max-[640px]:text-[15px]">
-              Use tested prompts to turn your photos into cinematic portraits, paintings,
-              avatars, and more.
+            <p className="hero-description m-0 max-w-[610px] text-[clamp(16px,1.25vw,19px)] text-[#c3c1cb]">
+              Tested prompts turn your photos into cinematic portraits,
+              paintings, and more.
             </p>
-            <div className="mt-[30px] flex flex-wrap gap-[11px]">
+            <div className="hero-actions mt-[30px] flex flex-wrap gap-[11px]">
               <Link
                 href="/explore"
                 data-testid="hero-explore"
-                className="inline-flex min-h-11 items-center justify-center rounded-xl bg-[var(--violet)] px-[18px] text-sm font-bold text-[#100d1a] hover:bg-[#9b82ff]"
+                className="primary-button inline-flex min-h-11 items-center justify-center rounded-xl bg-[var(--violet)] px-[18px] text-sm font-bold text-[#100d1a] hover:bg-[#9b82ff]"
               >
                 Explore styles
               </Link>
               <Link
                 href="/how-it-works"
-                className="inline-flex min-h-11 items-center justify-center rounded-xl border border-[var(--line)] bg-[var(--surface-2)] px-[18px] text-sm font-bold text-[var(--text)] hover:border-[var(--line-strong)] hover:bg-[#272636]"
+                className="secondary-button inline-flex min-h-11 items-center justify-center rounded-xl border border-[var(--line)] bg-[var(--surface-2)] px-[18px] text-sm font-bold text-[var(--text)] hover:border-[var(--line-strong)] hover:bg-[#272636]"
               >
                 How it works
               </Link>

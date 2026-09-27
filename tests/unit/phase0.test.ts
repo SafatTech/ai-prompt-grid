@@ -22,9 +22,9 @@ describe("cn", () => {
 });
 
 describe("published catalog seed", () => {
-  it("exposes 50 published styles with recipe fields", () => {
+  it("exposes 69 published styles with recipe fields", () => {
     const published = getPublishedStyles();
-    assert.equal(published.length, 50);
+    assert.equal(published.length, 69);
     for (const style of published) {
       assert.equal(style.status, "published");
       assert.ok(style.promptVariant.template.includes("{{mood}}"));
@@ -80,6 +80,26 @@ describe("assemblePrompt", () => {
     if (!result.ok) return;
     assert.match(result.prompt, /identities and facial features/i);
     assert.match(result.prompt, /group arrangement and pose/i);
+  });
+
+  it("builds a place preserve list from place toggles", () => {
+    const style = getStyleById("cozy-dream-room");
+    assert.ok(style);
+    const result = assemblePrompt(style, defaultsForStyle(style));
+    assert.equal(result.ok, true);
+    if (!result.ok) return;
+    assert.match(result.prompt, /structural layout/i);
+    assert.match(result.prompt, /camera perspective/i);
+  });
+
+  it("builds a pet preserve list from pet toggles", () => {
+    const style = getStyleById("cute-3d-toon-pet");
+    assert.ok(style);
+    const result = assemblePrompt(style, defaultsForStyle(style));
+    assert.equal(result.ok, true);
+    if (!result.ok) return;
+    assert.match(result.prompt, /pet identity and distinctive markings/i);
+    assert.match(result.prompt, /original pose and composition/i);
   });
 
   it("rejects invalid prompt options", () => {

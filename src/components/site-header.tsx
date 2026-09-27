@@ -64,7 +64,6 @@ export function SiteHeader() {
   const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [mobileGroup, setMobileGroup] = useState<string | null>(null);
   const [creatorsOpen, setCreatorsOpen] = useState(false);
-  const focusMobileSearch = useRef(false);
   const [search, setSearch] = useState("");
   const [routeKey, setRouteKey] = useState(pathname);
 
@@ -113,13 +112,6 @@ export function SiteHeader() {
   useEffect(() => {
     if (panel === "search") searchRef.current?.focus();
   }, [panel]);
-
-  useEffect(() => {
-    if (mobileOpen && focusMobileSearch.current) {
-      mobileSearchRef.current?.focus();
-      focusMobileSearch.current = false;
-    }
-  }, [mobileOpen]);
 
   function clearHover() {
     if (hoverTimer.current) window.clearTimeout(hoverTimer.current);
@@ -269,18 +261,6 @@ export function SiteHeader() {
               <IconSearch />
             </button>
           )}
-
-          <button
-            type="button"
-            className="grid h-11 w-11 cursor-pointer place-items-center rounded-xl border border-[rgba(255,255,255,0.10)] text-[#F5F3EE] lg:hidden"
-            aria-label="Search styles"
-            onClick={() => {
-              focusMobileSearch.current = true;
-              setMobileOpen(true);
-            }}
-          >
-            <IconSearch />
-          </button>
 
           {signedIn ? (
             <div className="relative hidden lg:block">

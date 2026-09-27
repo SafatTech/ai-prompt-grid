@@ -50,6 +50,18 @@ export function preserveToggleLabels(subject: CatalogStyle["subject"]): {
       pose: "Group arrangement & pose",
     };
   }
+  if (subject === "Place") {
+    return {
+      clothing: "Structural layout",
+      pose: "Camera perspective",
+    };
+  }
+  if (subject === "Pet") {
+    return {
+      clothing: "Pet identity and distinctive markings",
+      pose: "Original pose and composition",
+    };
+  }
   return {
     clothing: "Keep clothing from original photo",
     pose: "Keep original pose",
@@ -68,6 +80,20 @@ function preserveList(style: CatalogStyle, options: PromptOptions) {
     const details: string[] = [];
     if (options.keepClothing) details.push("identities and facial features");
     if (options.keepPose) details.push("group arrangement and pose");
+    return details.length ? naturalList(details) : "no additional preserve requirements";
+  }
+
+  if (style.subject === "Place") {
+    const details: string[] = [];
+    if (options.keepClothing) details.push("structural layout");
+    if (options.keepPose) details.push("camera perspective");
+    return details.length ? naturalList(details) : "no additional preserve requirements";
+  }
+
+  if (style.subject === "Pet") {
+    const details: string[] = [];
+    if (options.keepClothing) details.push("pet identity and distinctive markings");
+    if (options.keepPose) details.push("original pose and composition");
     return details.length ? naturalList(details) : "no additional preserve requirements";
   }
 
