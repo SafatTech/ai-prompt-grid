@@ -2,6 +2,10 @@
 
 import { useEffect, useRef, useState, type ReactNode } from "react";
 
+function prefersReducedMotion() {
+  return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+}
+
 export function HowReveal({
   children,
   className = "",
@@ -22,11 +26,8 @@ export function HowReveal({
     const el = ref.current;
     if (!el) return;
 
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (mq.matches) {
-      setVisible(true);
-      return;
-    }
+    // CSS already forces full opacity under prefers-reduced-motion.
+    if (prefersReducedMotion()) return;
 
     if (mode === "mount") {
       const timer = window.setTimeout(() => setVisible(true), 40);

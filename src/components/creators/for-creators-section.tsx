@@ -20,11 +20,8 @@ function Reveal({
     const el = ref.current;
     if (!el) return;
 
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    if (mq.matches) {
-      setVisible(true);
-      return;
-    }
+    // CSS already forces full opacity under prefers-reduced-motion.
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
