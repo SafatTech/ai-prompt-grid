@@ -1,3 +1,4 @@
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { requireEditor } from "@/lib/admin/access";
 import {
@@ -56,6 +57,9 @@ export async function PUT(request: Request) {
   if (!result.ok) {
     return NextResponse.json({ error: result.error }, { status: result.status });
   }
+
+  // Homepage prerenders trending from the public catalog; bust that cache on save.
+  revalidatePath("/");
 
   const styles = await listTrendingAdminStyles(supabase);
   return NextResponse.json({ styles });

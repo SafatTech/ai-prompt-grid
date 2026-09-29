@@ -5,6 +5,9 @@ import { StyleCard } from "@/components/style-card";
 import { listTrendingStyles } from "@/lib/catalog/repository";
 import { categories } from "@/lib/catalog/styles";
 
+/** ISR safety net so homepage trending catches up even without an admin save. */
+export const revalidate = 60;
+
 export default async function HomePage() {
   const trending = await listTrendingStyles(6);
 

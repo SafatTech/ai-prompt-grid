@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import {
   canTransition,
   listAdminStyles,
@@ -189,6 +190,13 @@ export async function PATCH(request: Request, context: RouteContext) {
     if (auditError) {
       console.warn("[admin] audit log failed", auditError.message);
     }
+  }
+
+  // Unpublish clears trending_rank; publish/archive can change home + catalog surfaces.
+  revalidatePath("/");
+  revalidatePath("/explore");
+  if (typeof current.slug === "string" && current.slug.length > 0) {
+    revalidatePath(`/styles/${current.slug}`);
   }
 
   const styles = await listAdminStyles(supabase);

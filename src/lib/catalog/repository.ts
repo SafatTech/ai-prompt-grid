@@ -115,6 +115,70 @@ export async function listTrendingStyles(limit = 6): Promise<CatalogStyle[]> {
   }
 }
 
+/** Lightweight published-style rows for sitemap generation. */
+export type SitemapStyleEntry = {
+  slug: string;
+  lastModified: Date;
+};
+
+/**
+ * Published style URLs for `/sitemap.xml`.
+ * Prefers Supabase `updated_at` / `published_at`; falls back to seed catalog.
+ */
+export async function listPublishedStyleSitemapEntries(): Promise<
+  SitemapStyleEntry[]
+> {
+  if (isSupabaseConfigured()) {
+    try {
+      const supabase = createPublicSupabaseClient();
+      if (supabase) {
+        const { data, error } = await supabase
+          .from("styles")
+          .select("slug, updated_at, published_at")
+          .eq("status", "published")
+          .order("updated_at", { ascending: false });
+
+        if (!error && data && data.length > 0) {
+          return data
+            .filter(
+              (row): row is { slug: string; updated_at: string | null; published_at: string | null } =>
+                typeof row.slug === "string" && row.slug.length > 0,
+            )
+            .map((row) => ({
+              slug: row.slug,
+              lastModified: new Date(
+                row.updated_at || row.published_at || Date.now(),
+              ),
+            }));
+        }
+
+        if (error) {
+          console.warn(
+            "[catalog] Sitemap style query failed; using seed fallback.",
+            error.message,
+          );
+        }
+      }
+    } catch (err) {
+      console.warn(
+        "[catalog] Unexpected sitemap catalog error; using seed fallback.",
+        err,
+      );
+    }
+  }
+
+  return getPublishedStyles().map((style) => ({
+    slug: style.id,
+    lastModified: parseSitemapDate(style.promptVariant.lastVerified),
+  }));
+}
+
+function parseSitemapDate(value: string): Date {
+  if (!value) return new Date();
+  const parsed = new Date(value);
+  return Number.isNaN(parsed.getTime()) ? new Date() : parsed;
+}
+
 export async function getPublishedStyleBySlug(
   slug: string,
 ): Promise<CatalogStyle | undefined> {
