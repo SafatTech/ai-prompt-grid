@@ -301,9 +301,8 @@ export function ForCreatorsSection() {
                 Ask for a look that is not listed yet
               </h3>
               <p className="m-0 mb-6 text-[15px] text-[var(--muted)] sm:text-base">
-                During the private beta, style ideas go through the contact channel on your
-                invite. Include the subject, the look you want, and a note about which
-                editor you used.
+                Send style ideas through the contact page. Include the subject, the look
+                you want, and a note about which editor you used.
               </p>
               <div className="flex flex-wrap gap-3">
                 <Link
@@ -313,7 +312,7 @@ export function ForCreatorsSection() {
                   Browse the catalog
                 </Link>
                 <Link
-                  href="/privacy#contact"
+                  href="/contact"
                   className="inline-flex min-h-11 items-center justify-center rounded-xl border border-[var(--line-strong)] bg-transparent px-[18px] text-sm font-bold text-[var(--text)] transition-colors hover:border-[rgba(139,108,255,0.45)] hover:bg-[rgba(139,108,255,0.08)]"
                 >
                   Contact us

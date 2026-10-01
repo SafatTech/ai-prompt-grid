@@ -142,12 +142,12 @@ export async function listPublishedStyleSitemapEntries(): Promise<
           return data
             .filter(
               (row): row is { slug: string; updated_at: string | null; published_at: string | null } =>
-                typeof row.slug === "string" && row.slug.length > 0,
+                typeof row.slug === "string" && row.slug.trim().length > 0,
             )
             .map((row) => ({
-              slug: row.slug,
-              lastModified: new Date(
-                row.updated_at || row.published_at || Date.now(),
+              slug: row.slug.trim(),
+              lastModified: parseSitemapDate(
+                row.updated_at || row.published_at || "",
               ),
             }));
         }

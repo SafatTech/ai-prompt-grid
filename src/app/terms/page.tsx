@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { CONTACT_EMAIL, CONTACT_MAILTO } from "@/lib/site-contact";
 
 export const metadata: Metadata = {
-  title: "Terms of use · AI Prompt Grid",
+  title: "Terms of use",
   description:
-    "Terms for using the AI Prompt Grid private beta catalog and private library.",
+    "Terms for using the AI Prompt Grid catalog and private library.",
+  alternates: {
+    canonical: "/terms",
+  },
 };
 
 export default function TermsPage() {
@@ -18,8 +22,8 @@ export default function TermsPage() {
         Terms of use
       </h1>
       <p className="m-0 mb-10 text-[var(--muted)]">
-        Last updated: 20 September 2026. These terms apply to the AI Prompt Grid private
-        beta. They may be updated before a wider release.
+        Last updated: 29 September 2026. These terms apply to your use of AI Prompt
+        Grid. We may update them; the date above will change when we do.
       </p>
 
       <Section title="The service">
@@ -31,11 +35,11 @@ export default function TermsPage() {
         </p>
       </Section>
 
-      <Section title="Eligibility and beta access">
+      <Section title="Eligibility">
         <p>
-          Access may be limited to invited testers. The product is provided as-is during
-          beta and may change, break, or be withdrawn. Do not rely on it as your only
-          archive of important photos.
+          You must be able to form a binding contract where you live and comply with
+          applicable law. The product is provided as-is and may change as we improve
+          features. Do not rely on it as your only archive of important photos.
         </p>
       </Section>
 
@@ -68,26 +72,42 @@ export default function TermsPage() {
 
       <Section title="Disclaimers">
         <p>
-          The beta is provided without warranties of uninterrupted availability, fitness
-          for a particular purpose, or non-infringement to the fullest extent permitted
-          by law. External AI editors are separate products under their own terms.
+          The service is provided without warranties of uninterrupted availability,
+          fitness for a particular purpose, or non-infringement to the fullest extent
+          permitted by law. External AI editors are separate products under their own
+          terms.
         </p>
       </Section>
 
       <Section title="Limitation of liability">
         <p>
           To the fullest extent permitted by law, the operator is not liable for indirect
-          or consequential damages arising from use of the beta, including lost photos or
-          failed external transformations. Aggregate liability for claims relating to the
-          beta is limited to the amount you paid us for the service in the prior three
-          months (which is zero while the private beta is free).
+          or consequential damages arising from use of the service, including lost photos
+          or failed external transformations. Aggregate liability for claims relating to
+          the service is limited to the amount you paid us for the service in the prior
+          three months (or zero if the service was free for you during that period).
         </p>
       </Section>
 
       <Section title="Changes">
         <p>
-          We may update these terms. Material changes for beta testers will be noted with
-          the invite channel or on this page with a new “last updated” date.
+          We may update these terms. Material changes will be noted on this page with a
+          new “last updated” date. Continued use after that date means you accept the
+          updated terms.
+        </p>
+      </Section>
+
+      <Section title="Contact">
+        <p>
+          Questions about these terms: email{" "}
+          <a href={CONTACT_MAILTO} className="font-bold text-[var(--text)] underline-offset-2 hover:underline">
+            {CONTACT_EMAIL}
+          </a>{" "}
+          or visit{" "}
+          <Link href="/contact" className="font-bold text-[var(--text)] underline-offset-2 hover:underline">
+            Contact
+          </Link>
+          .
         </p>
       </Section>
 

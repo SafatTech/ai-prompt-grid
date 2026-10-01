@@ -272,8 +272,8 @@ export const creatorLinks: NavItem[] = [
   },
   {
     label: "Contact us",
-    description: "Questions about the private beta",
-    href: "/privacy#contact",
+    description: "Support, style requests, and partnerships",
+    href: "/contact",
   },
 ];
 

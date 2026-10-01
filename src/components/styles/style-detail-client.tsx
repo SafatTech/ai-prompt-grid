@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import {
+  Suspense,
   useEffect,
   useId,
   useMemo,
@@ -9,11 +10,11 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
 import { CompareSlider } from "@/components/compare-slider";
 import { CopyIcon } from "@/components/icons";
 import { ShareModal } from "@/components/modals/share-modal";
 import { StyleCard } from "@/components/style-card";
+import { StyleSaveResultQuery } from "@/components/styles/style-save-result-query";
 import { Button } from "@/components/ui/button";
 import { useLibrary } from "@/components/providers/library-provider";
 import { useToast } from "@/components/providers/toast-provider";
@@ -39,8 +40,6 @@ export function StyleDetailClient({ style, relatedStyles }: Props) {
   const { signedIn, isSaved, toggleSave, setPendingAction } = useLibrary();
   const { toast } = useToast();
   const { openSignIn, openSaveResult, openExternalInfo } = useUiModals();
-  const searchParams = useSearchParams();
-  const router = useRouter();
   const [options, setOptions] = useState<PromptOptions>(() => defaultsForStyle(style));
   const [optionsStyleId, setOptionsStyleId] = useState(style.id);
   const [compareDefault, setCompareDefault] = useState<"slider" | "side">("slider");
@@ -65,13 +64,6 @@ export function StyleDetailClient({ style, relatedStyles }: Props) {
   useEffect(() => {
     track("style_view", { style_id: style.id, category: style.category });
   }, [style.id, style.category]);
-
-  useEffect(() => {
-    if (searchParams.get("saveResult") === "1" && signedIn) {
-      openSaveResult(style.id);
-      router.replace(`/styles/${style.id}`);
-    }
-  }, [searchParams, signedIn, style.id, openSaveResult, router]);
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 1024px)");
@@ -158,6 +150,9 @@ export function StyleDetailClient({ style, relatedStyles }: Props) {
 
   return (
     <div>
+      <Suspense fallback={null}>
+        <StyleSaveResultQuery styleId={style.id} />
+      </Suspense>
       <section className="container pt-7">
         <div className="mb-5 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-4">
           <div className="flex min-w-0 items-center gap-3">

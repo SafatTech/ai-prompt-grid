@@ -1,11 +1,15 @@
 import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { CONTACT_EMAIL, CONTACT_MAILTO } from "@/lib/site-contact";
 
 export const metadata: Metadata = {
-  title: "Privacy policy · AI Prompt Grid",
+  title: "Privacy policy",
   description:
     "How AI Prompt Grid handles accounts, private photos, analytics, and third-party tools.",
+  alternates: {
+    canonical: "/privacy",
+  },
 };
 
 export default function PrivacyPage() {
@@ -18,15 +22,15 @@ export default function PrivacyPage() {
         Privacy policy
       </h1>
       <p className="m-0 mb-10 text-[var(--muted)]">
-        Last updated: 20 September 2026. This summary covers the private beta of AI
-        Prompt Grid. It is not a substitute for jurisdiction-specific counsel.
+        Last updated: 29 September 2026. This summary explains how AI Prompt Grid
+        handles personal data. It is not a substitute for jurisdiction-specific counsel.
       </p>
 
       <Section title="What the product does">
         <p>
           AI Prompt Grid helps you browse tested photo-transformation styles and copy
           prompts for use in <strong>external</strong> AI image editors. We do not run
-          onsite image generation or editing jobs in V0.
+          onsite image generation or editing jobs.
         </p>
       </Section>
 
@@ -78,16 +82,26 @@ export default function PrivacyPage() {
 
       <Section title="Retention and deletion">
         <p>
-          You can delete creations from My library. Account deletion and full data-export
-          processes for the private beta will be confirmed with the operator before wider
-          invites. Contact the site operator if you need an account removed sooner.
+          You can delete creations from My library. To request account deletion or a
+          data export, email{" "}
+          <a href={CONTACT_MAILTO} className="font-bold text-[var(--text)] underline-offset-2 hover:underline">
+            {CONTACT_EMAIL}
+          </a>
+          . We will respond as promptly as reasonably possible.
         </p>
       </Section>
 
       <Section id="contact" title="Contact">
         <p>
-          Questions about this policy: use the contact channel published with your beta
-          invite, or the operator email listed on the production site when available.
+          Privacy questions: email{" "}
+          <a href={CONTACT_MAILTO} className="font-bold text-[var(--text)] underline-offset-2 hover:underline">
+            {CONTACT_EMAIL}
+          </a>{" "}
+          or use the{" "}
+          <Link href="/contact" className="font-bold text-[var(--text)] underline-offset-2 hover:underline">
+            contact page
+          </Link>
+          .
         </p>
       </Section>
 

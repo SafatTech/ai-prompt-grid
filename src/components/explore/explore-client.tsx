@@ -1,8 +1,9 @@
 "use client";
 
-import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense, useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { EmptyState } from "@/components/empty-state";
+import { ExploreUrlSync } from "@/components/explore/explore-url-sync";
 import { StyleCard } from "@/components/style-card";
 import { Button } from "@/components/ui/button";
 import {
@@ -15,24 +16,17 @@ import {
   type FilterState,
   type SortOption,
 } from "@/lib/catalog/filters";
+import type { ExploreQuery } from "@/lib/catalog/schemas";
 import { filterGroups, groupLabels } from "@/lib/catalog/styles";
 import type { CatalogStyle } from "@/lib/catalog/types";
 import { cn } from "@/lib/utils";
 
 const PAGE_SIZE = 18;
 
-type Props = { styles: CatalogStyle[] };
+type Props = { styles: CatalogStyle[]; initialQuery: ExploreQuery };
 
-export function ExploreClient({ styles }: Props) {
-  const searchParams = useSearchParams();
+export function ExploreClient({ styles, initialQuery }: Props) {
   const router = useRouter();
-  const initialQuery = useMemo(
-    () => parseExploreSearchParams(searchParams),
-    // Initialize once from the landing URL only.
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [],
-  );
-
   const [search, setSearch] = useState(initialQuery.q);
   const [sort, setSort] = useState<SortOption>(initialQuery.sort);
   const [filters, setFilters] = useState<FilterState>(() =>
@@ -40,7 +34,9 @@ export function ExploreClient({ styles }: Props) {
   );
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [page, setPage] = useState(1);
-  const appliedQuery = useRef<string | null>(null);
+  const appliedQuery = useRef<string | null>(
+    exploreQueryToSearchParams(initialQuery).toString(),
+  );
 
   const catalog = styles;
   const results = useMemo(
@@ -68,6 +64,23 @@ export function ExploreClient({ styles }: Props) {
     [router],
   );
 
+  const onUrlQueryString = useCallback((next: string, focusSearch: boolean) => {
+    const first = appliedQuery.current === null;
+    if (appliedQuery.current !== next) {
+      appliedQuery.current = next;
+      if (!first) {
+        const query = parseExploreSearchParams(new URLSearchParams(next));
+        setSearch(query.q);
+        setSort(query.sort);
+        setFilters(filtersFromExploreQuery(query));
+        setPage(1);
+      }
+    }
+    if (focusSearch) {
+      document.getElementById("mainSearch")?.focus();
+    }
+  }, []);
+
   function toggleFilter(group: keyof FilterState, value: string) {
     const next: FilterState = {
       category: new Set(filters.category),
@@ -92,25 +105,6 @@ export function ExploreClient({ styles }: Props) {
     appliedQuery.current = "";
     router.replace("/explore", { scroll: false });
   }
-
-  useEffect(() => {
-    const next = searchParams.toString();
-    const focusSearch = searchParams.get("focus") === "search";
-    const first = appliedQuery.current === null;
-    if (appliedQuery.current !== next) {
-      appliedQuery.current = next;
-      if (!first) {
-        const query = parseExploreSearchParams(searchParams);
-        setSearch(query.q);
-        setSort(query.sort);
-        setFilters(filtersFromExploreQuery(query));
-        setPage(1);
-      }
-    }
-    if (focusSearch) {
-      document.getElementById("mainSearch")?.focus();
-    }
-  }, [searchParams]);
 
   useEffect(() => {
     document.body.classList.toggle("no-scroll", drawerOpen);
@@ -244,6 +238,9 @@ export function ExploreClient({ styles }: Props) {
 
   return (
     <div>
+      <Suspense fallback={null}>
+        <ExploreUrlSync onQueryString={onUrlQueryString} />
+      </Suspense>
       <section className="container pt-10 pb-9 sm:pt-16">
         <h1 className="m-0 mb-2.5 text-[clamp(32px,8vw,70px)] leading-none tracking-[-0.055em]">
           Find a style for your photo

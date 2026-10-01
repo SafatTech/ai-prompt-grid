@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 
 export const metadata: Metadata = {
-  title: "Page not found · AI Prompt Grid",
+  title: "Page not found",
   description: "That page does not exist. Browse styles or return home.",
 };
 

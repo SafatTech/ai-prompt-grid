@@ -5,7 +5,8 @@ import { SiteHeader } from "@/components/site-header";
 import { LibraryProvider } from "@/components/providers/library-provider";
 import { ToastProvider } from "@/components/providers/toast-provider";
 import { UiModalProvider } from "@/components/providers/ui-modal-provider";
-import { getSiteUrl } from "@/lib/site-url";
+import { CONTACT_EMAIL } from "@/lib/site-contact";
+import { absoluteUrl, getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -26,9 +27,6 @@ export const metadata: Metadata = {
   },
   description:
     "Discover tested prompts for transforming your own photos in external AI image editors.",
-  alternates: {
-    canonical: "/",
-  },
   robots: {
     index: true,
     follow: true,
@@ -47,7 +45,6 @@ export const metadata: Metadata = {
     title: "AI Prompt Grid",
     description:
       "Discover tested prompts for transforming your own photos in external AI image editors.",
-    url: "/",
   },
   twitter: {
     card: "summary_large_image",
@@ -63,6 +60,45 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
+function siteJsonLd() {
+  const organizationId = absoluteUrl("/#organization");
+  const websiteId = absoluteUrl("/#website");
+  return {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": organizationId,
+        name: "AI Prompt Grid",
+        url: absoluteUrl("/"),
+        email: CONTACT_EMAIL,
+        contactPoint: {
+          "@type": "ContactPoint",
+          contactType: "customer support",
+          email: CONTACT_EMAIL,
+        },
+      },
+      {
+        "@type": "WebSite",
+        "@id": websiteId,
+        name: "AI Prompt Grid",
+        url: absoluteUrl("/"),
+        description:
+          "Discover tested prompts for transforming your own photos in external AI image editors.",
+        publisher: { "@id": organizationId },
+        potentialAction: {
+          "@type": "SearchAction",
+          target: {
+            "@type": "EntryPoint",
+            urlTemplate: `${absoluteUrl("/explore")}?q={search_term_string}`,
+          },
+          "query-input": "required name=search_term_string",
+        },
+      },
+    ],
+  };
+}
+
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
@@ -71,6 +107,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(siteJsonLd()) }}
+        />
         <ToastProvider>
           <LibraryProvider>
             <UiModalProvider>

@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { HeroArt } from "@/components/hero-art";
 import { HowItWorksSection } from "@/components/how-it-works-section";
@@ -7,6 +8,12 @@ import { categories } from "@/lib/catalog/styles";
 
 /** ISR safety net so homepage trending catches up even without an admin save. */
 export const revalidate = 60;
+
+export const metadata: Metadata = {
+  alternates: {
+    canonical: "/",
+  },
+};
 
 export default async function HomePage() {
   const trending = await listTrendingStyles(6);
