@@ -35,6 +35,10 @@ describe("GA4 bootstrap", () => {
     assert.match(script, /"GB"/);
     assert.match(script, /"CH"/);
     assert.doesNotMatch(script, /"PK"/);
+    const loader = script.indexOf(
+      "https://www.googletagmanager.com/gtag/js?id=G-TEST1234",
+    );
+    assert.ok(loader > config);
   });
 });
 

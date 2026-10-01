@@ -62,6 +62,13 @@ gtag('consent', 'default', {
 });
 gtag('js', new Date());
 gtag('config', ${JSON.stringify(measurementId)});
+(function(){
+  var s = document.createElement('script');
+  s.async = true;
+  s.src = ${JSON.stringify(`https://www.googletagmanager.com/gtag/js?id=${measurementId}`)};
+  var first = document.getElementsByTagName('script')[0];
+  first.parentNode.insertBefore(s, first);
+})();
 `.trim();
 }
 
