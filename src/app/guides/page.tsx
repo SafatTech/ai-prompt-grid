@@ -2,7 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { GuideBreadcrumbs } from "@/components/guides/guide-breadcrumbs";
 import { listIndexableGuides, listVisibleGuides } from "@/lib/guides/load";
-import { canonicalGuideUrl, documentTitle, formatGuideDate } from "@/lib/guides/prepare";
+import {
+  canonicalGuideUrl,
+  defaultOgImage,
+  documentTitle,
+  formatGuideDate,
+} from "@/lib/guides/prepare";
 
 const description =
   "Long-form prompt guides for turning photos you already have into a specific look in ChatGPT, Gemini, and other external AI image editors.";
@@ -16,11 +21,13 @@ export const metadata: Metadata = {
     description,
     url: canonicalGuideUrl(),
     type: "website",
+    images: [defaultOgImage],
   },
   twitter: {
     card: "summary_large_image",
     title: documentTitle("Guides"),
     description,
+    images: [defaultOgImage],
   },
   robots: listIndexableGuides().length > 0 ? undefined : { index: false, follow: true },
 };

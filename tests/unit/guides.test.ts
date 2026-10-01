@@ -2,12 +2,17 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { loadAllGuides } from "../../src/lib/guides/load";
 import {
+  defaultOgImage,
   documentTitle,
+  guideArticleImage,
   guideLinkMode,
   guideMetadataTitle,
+  guideRobots,
+  guideSocialImage,
   isGuideVisible,
   linkStyleMentions,
   prepareGuideMarkdown,
+  showsDraftGuides,
   stripLeadingH1,
 } from "../../src/lib/guides/prepare";
 
@@ -24,6 +29,37 @@ describe("guide publishing rules", () => {
     assert.equal(isGuideVisible(true, false), false);
     assert.equal(isGuideVisible(false, false), true);
     assert.equal(isGuideVisible(true, true), true);
+  });
+
+  it("shows drafts on Vercel preview and hides them on Vercel production", () => {
+    assert.equal(
+      showsDraftGuides({ NODE_ENV: "production", VERCEL_ENV: "preview" }),
+      true,
+    );
+    assert.equal(
+      showsDraftGuides({ NODE_ENV: "production", VERCEL_ENV: "development" }),
+      true,
+    );
+    assert.equal(
+      showsDraftGuides({ NODE_ENV: "development", VERCEL_ENV: "production" }),
+      false,
+    );
+    assert.equal(
+      showsDraftGuides({ NODE_ENV: "production", VERCEL_ENV: "production" }),
+      false,
+    );
+    assert.equal(showsDraftGuides({ NODE_ENV: "production" }), false);
+    assert.equal(showsDraftGuides({ NODE_ENV: "development" }), true);
+    assert.equal(showsDraftGuides({ NODE_ENV: "test" }), true);
+  });
+
+  it("keeps drafts noindex even when a preview can show them", () => {
+    assert.equal(
+      showsDraftGuides({ NODE_ENV: "production", VERCEL_ENV: "preview" }),
+      true,
+    );
+    assert.deepEqual(guideRobots(true), { index: false, follow: false });
+    assert.deepEqual(guideRobots(false), { index: true, follow: true });
   });
 
   it("keeps document titles within 60 characters", () => {
@@ -82,15 +118,59 @@ describe("guide publishing rules", () => {
       source,
     );
   });
+
+  it("does not link a title inside existing link text or a longer word", () => {
+    const styles = [{ id: "retro-sitcom-cast", title: "Retro Sitcom Cast" }];
+    const insideLink = "Read [the Retro Sitcom Cast notes](/how-it-works) today.";
+    assert.equal(linkStyleMentions(insideLink, styles), insideLink);
+    assert.equal(
+      linkStyleMentions("Retro Sitcom Casting is not Retro Sitcom Cast.", styles),
+      "Retro Sitcom Casting is not [Retro Sitcom Cast](/styles/retro-sitcom-cast).",
+    );
+    const image = "![Retro Sitcom Cast](/guides/x/hero.webp)";
+    assert.equal(linkStyleMentions(image, styles), image);
+  });
+
+  it("does not nest a shorter title inside a longer style link", () => {
+    assert.equal(
+      linkStyleMentions("Velvet Rose Noir, then Rose Noir.", [
+        { id: "velvet-rose-noir", title: "Velvet Rose Noir" },
+        { id: "rose-noir", title: "Rose Noir" },
+      ]),
+      "[Velvet Rose Noir](/styles/velvet-rose-noir), then [Rose Noir](/styles/rose-noir).",
+    );
+  });
+
+  it("uses the hero image for social cards and falls back to the site image", () => {
+    const placeholder = "![Soon](guide-image-placeholder)";
+    assert.equal(guideArticleImage(placeholder), undefined);
+    assert.deepEqual(guideSocialImage(placeholder), { ...defaultOgImage });
+    assert.deepEqual(guideSocialImage("```\n![Hidden](/secret.webp)\n```"), {
+      ...defaultOgImage,
+    });
+    assert.equal(
+      guideArticleImage(
+        "![Soon](guide-image-placeholder)\n\n![Hero](/guides/halloween/hero.webp)",
+      ),
+      "https://aipromptgrid.com/guides/halloween/hero.webp",
+    );
+    assert.deepEqual(guideSocialImage("![Hero shot](/guides/halloween/hero.webp)"), {
+      url: "/guides/halloween/hero.webp",
+      alt: "Hero shot",
+    });
+  });
 });
 
 describe("guide files", () => {
-  it("loads five drafts with the expected slugs and SEO fields", () => {
+  it("loads the five guides with the expected slugs and SEO fields", () => {
     const guides = loadAllGuides();
     assert.deepEqual(guides.map((guide) => guide.slug).sort(), [...SLUGS].sort());
     for (const guide of guides) {
-      assert.equal(guide.draft, true);
+      if (!guide.draft) {
+        assert.doesNotMatch(guide.body, /\[IMAGE:|guide-image-placeholder/);
+      }
       assert.equal(guide.body.startsWith("#"), false);
+      assert.doesNotMatch(guide.body, /\[[^\]]*\[/);
       assert.ok(guide.description.length > 40);
       assert.ok(guide.description.length <= 160);
       assert.ok(documentTitle(guide.title).length <= 60);

@@ -8,10 +8,22 @@ export type StyleMention = {
   title: string;
 };
 
+/**
+ * Drafts are readable in local dev and on Vercel preview deployments.
+ * Preview builds set NODE_ENV=production, so VERCEL_ENV decides when it is set.
+ * Production (VERCEL_ENV=production, or NODE_ENV=production with no Vercel env) hides them.
+ */
 export function showsDraftGuides(
-  nodeEnv: string | undefined = process.env.NODE_ENV,
+  env: { NODE_ENV?: string; VERCEL_ENV?: string } = process.env,
 ): boolean {
-  return nodeEnv !== "production";
+  if (env.VERCEL_ENV) return env.VERCEL_ENV !== "production";
+  return env.NODE_ENV !== "production";
+}
+
+/** Drafts stay noindex on every host, including previews where they are readable. */
+export function guideRobots(draft: boolean): { index: boolean; follow: boolean } {
+  if (draft) return { index: false, follow: false };
+  return { index: true, follow: true };
 }
 
 export function isGuideVisible(draft: boolean, showDrafts: boolean): boolean {
@@ -56,6 +68,66 @@ export function rewriteImagePlaceholders(markdown: string): string {
   );
 }
 
+/** Same art as `src/app/opengraph-image.tsx`, used when a page sets its own Open Graph. */
+export const defaultOgImage = {
+  url: "/opengraph-image",
+  width: 1200,
+  height: 630,
+  alt: "AI Prompt Grid — tested photo transformation prompts",
+} as const;
+
+export type GuideImage = {
+  alt: string;
+  src: string;
+};
+
+const MARKDOWN_IMAGE = /!\[([^\]]*)\]\(([^)\s]+)(?:\s+"[^"]*")?\)/g;
+
+/** First real figure in the guide. Placeholders and fenced examples are ignored. */
+export function guideHeroImage(markdown: string): GuideImage | null {
+  const outsideFences = markdown
+    .split(/(```[\s\S]*?```)/g)
+    .filter((_, index) => index % 2 === 0)
+    .join("\n");
+
+  for (const match of outsideFences.matchAll(MARKDOWN_IMAGE)) {
+    const src = match[2] ?? "";
+    if (!src || src === "guide-image-placeholder") continue;
+    return { alt: (match[1] ?? "").trim(), src };
+  }
+  return null;
+}
+
+export function guideSocialImage(markdown: string): {
+  url: string;
+  alt: string;
+  width?: number;
+  height?: number;
+} {
+  const hero = guideHeroImage(markdown);
+  if (!hero) return { ...defaultOgImage };
+  return {
+    url:
+      hero.src.startsWith("http") || hero.src.startsWith("/") ? hero.src : `/${hero.src}`,
+    alt: hero.alt || defaultOgImage.alt,
+  };
+}
+
+/** Absolute image URL for Article JSON-LD. Undefined when the guide has no real image. */
+export function guideArticleImage(markdown: string): string | undefined {
+  const hero = guideHeroImage(markdown);
+  if (!hero) return undefined;
+  if (/^https?:\/\//i.test(hero.src)) return hero.src;
+  if (hero.src.startsWith("//")) return `https:${hero.src}`;
+  const path = hero.src.startsWith("/") ? hero.src : `/${hero.src}`;
+  return `${PRODUCTION_SITE_URL}${path}`;
+}
+
+/**
+ * Inline code, images, and existing links (including their label text) are left alone.
+ * A style title is linked at most once, and only on a whole-word match outside those spans.
+ * A style the writer already linked is not linked again.
+ */
 export function linkStyleMentions(
   markdown: string,
   styles: readonly StyleMention[],
@@ -64,24 +136,44 @@ export function linkStyleMentions(
     .filter((style) => style.title.trim().length >= 8 && style.id.trim().length > 0)
     .sort((a, b) => b.title.length - a.title.length);
 
-  return mapOutsideFences(markdown, (segment) => {
-    const pieces = segment.split(/(`[^`]*`|!\[[^\]]*\]\([^)]*\))/g);
-    return pieces
-      .map((piece, index) => {
-        if (index % 2 === 1) return piece;
-        let text = piece;
-        for (const style of sorted) {
-          if (text.includes(`](/styles/${style.id})`)) continue;
-          const pattern = new RegExp(
-            `(?<!\\[)${escapeRegExp(style.title)}(?!\\]\\()`,
-            "",
-          );
-          text = text.replace(pattern, `[${style.title}](/styles/${style.id})`);
-        }
-        return text;
-      })
-      .join("");
-  });
+  return mapOutsideFences(markdown, (segment) => linkPlainStyleMentions(segment, sorted));
+}
+
+const PROTECTED_MARKDOWN =
+  /(`[^`]*`|!\[[^\]]*\]\([^)\n]*\)|\[[^\]]*\]\([^)\n]*\)|\[[^\]]*\]\[[^\]]*\]|\[[^\]]*\])/g;
+
+function linkPlainStyleMentions(
+  segment: string,
+  styles: readonly StyleMention[],
+): string {
+  const held: string[] = [];
+  const hold = (value: string) => {
+    const token = `\u0000${held.length}\u0000`;
+    held.push(value);
+    return token;
+  };
+
+  let text = segment.replace(PROTECTED_MARKDOWN, (match) => hold(match));
+
+  for (const style of styles) {
+    if (
+      segmentLinksStyle(segment, style.id) ||
+      held.some((chunk) => segmentLinksStyle(chunk, style.id))
+    ) {
+      continue;
+    }
+    const pattern = new RegExp(`\\b${escapeRegExp(style.title)}\\b`, "u");
+    text = text.replace(pattern, (match) => hold(`[${match}](/styles/${style.id})`));
+  }
+
+  return text.replace(
+    /\u0000(\d+)\u0000/g,
+    (_match, index: string) => held[Number(index)] ?? "",
+  );
+}
+
+function segmentLinksStyle(text: string, id: string): boolean {
+  return text.includes(`](/styles/${id})`);
 }
 
 export function prepareGuideMarkdown(

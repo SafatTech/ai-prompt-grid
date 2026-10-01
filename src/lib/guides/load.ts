@@ -47,7 +47,7 @@ export function listIndexableGuides(): Guide[] {
   return loadAllGuides().filter((guide) => !guide.draft);
 }
 
-/** Guides a visitor can open. Drafts are included only outside production. */
+/** Guides a visitor can open. Drafts are included in local dev and on Vercel previews. */
 export function listVisibleGuides(): Guide[] {
   const showDrafts = showsDraftGuides();
   return loadAllGuides().filter((guide) => !guide.draft || showDrafts);

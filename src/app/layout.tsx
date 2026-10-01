@@ -5,6 +5,7 @@ import { SiteHeader } from "@/components/site-header";
 import { LibraryProvider } from "@/components/providers/library-provider";
 import { ToastProvider } from "@/components/providers/toast-provider";
 import { UiModalProvider } from "@/components/providers/ui-modal-provider";
+import { listIndexableGuides } from "@/lib/guides/load";
 import { CONTACT_EMAIL } from "@/lib/site-contact";
 import { absoluteUrl, getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
@@ -104,6 +105,8 @@ function siteJsonLd() {
 }
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
+  const showGuidesLink = listIndexableGuides().length > 0;
+
   return (
     <html
       lang="en"
@@ -118,11 +121,11 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <ToastProvider>
           <LibraryProvider>
             <UiModalProvider>
-              <SiteHeader />
+              <SiteHeader showGuidesLink={showGuidesLink} />
               <main className="flex-1" id="main">
                 {children}
               </main>
-              <SiteFooter />
+              <SiteFooter showGuidesLink={showGuidesLink} />
             </UiModalProvider>
           </LibraryProvider>
         </ToastProvider>

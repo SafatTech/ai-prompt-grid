@@ -41,7 +41,7 @@ const groupIcons: Record<string, ReactNode> = {
   tools: <IconLayers />,
 };
 
-export function SiteHeader() {
+export function SiteHeader({ showGuidesLink }: { showGuidesLink: boolean }) {
   const pathname = usePathname();
   const router = useRouter();
   const { signedIn, signOut, isEditor, userName, userEmail } = useLibrary();
@@ -237,9 +237,11 @@ export function SiteHeader() {
           <NavLink href="/how-it-works" active={howActive} onMouseEnter={closePanels}>
             How it works
           </NavLink>
-          <NavLink href="/guides" active={guidesActive} onMouseEnter={closePanels}>
-            Guides
-          </NavLink>
+          {showGuidesLink ? (
+            <NavLink href="/guides" active={guidesActive} onMouseEnter={closePanels}>
+              Guides
+            </NavLink>
+          ) : null}
           <div className="relative flex self-stretch items-center">
             <MenuButton
               label="For creators"
@@ -525,18 +527,20 @@ export function SiteHeader() {
                     How it works
                   </Link>
                 </li>
-                <li>
-                  <Link
-                    href="/guides"
-                    className={cn(
-                      "flex min-h-11 items-center rounded-[12px] px-3 text-[#A6A4B2]",
-                      guidesActive && "bg-[#2A1A31] text-[#F5F3EE]",
-                    )}
-                    onClick={() => setMobileOpen(false)}
-                  >
-                    Guides
-                  </Link>
-                </li>
+                {showGuidesLink ? (
+                  <li>
+                    <Link
+                      href="/guides"
+                      className={cn(
+                        "flex min-h-11 items-center rounded-[12px] px-3 text-[#A6A4B2]",
+                        guidesActive && "bg-[#2A1A31] text-[#F5F3EE]",
+                      )}
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      Guides
+                    </Link>
+                  </li>
+                ) : null}
                 <li>
                   <Accordion
                     label="For creators"

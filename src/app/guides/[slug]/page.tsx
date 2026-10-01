@@ -8,7 +8,10 @@ import {
   canonicalGuideUrl,
   documentTitle,
   formatGuideDate,
+  guideArticleImage,
   guideMetadataTitle,
+  guideRobots,
+  guideSocialImage,
   showsDraftGuides,
 } from "@/lib/guides/prepare";
 import { absoluteUrl } from "@/lib/site-url";
@@ -30,12 +33,13 @@ export async function generateMetadata({ params }: GuidePageProps): Promise<Meta
 
   const canonical = canonicalGuideUrl(guide.slug);
   const title = documentTitle(guide.title);
+  const image = guideSocialImage(guide.body);
 
   return {
     title: guideMetadataTitle(guide.title),
     description: guide.description,
     alternates: { canonical },
-    robots: guide.draft ? { index: false, follow: false } : { index: true, follow: true },
+    robots: guideRobots(guide.draft),
     openGraph: {
       title,
       description: guide.description,
@@ -43,11 +47,13 @@ export async function generateMetadata({ params }: GuidePageProps): Promise<Meta
       type: "article",
       publishedTime: guide.date,
       modifiedTime: guide.updated,
+      images: [image],
     },
     twitter: {
       card: "summary_large_image",
       title,
       description: guide.description,
+      images: [image],
     },
   };
 }
@@ -59,6 +65,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
 
   const canonical = canonicalGuideUrl(guide.slug);
   const visibleSlugs = visibleGuideSlugs();
+  const articleImage = guideArticleImage(guide.body);
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -68,6 +75,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
         description: guide.description,
         datePublished: guide.date,
         dateModified: guide.updated,
+        ...(articleImage ? { image: articleImage } : {}),
         author: {
           "@type": "Organization",
           name: "AI Prompt Grid",
