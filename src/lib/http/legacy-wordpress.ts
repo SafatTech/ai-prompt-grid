@@ -2,17 +2,28 @@ export type LegacyAction =
   { kind: "ignore" } | { kind: "gone" } | { kind: "redirect"; pathname: string };
 
 /**
- * WordPress slugs that now have a real page on this site.
- * `/terms-of-service` is intentionally absent: another change adds that page,
- * and this module must not redirect or 410 it.
+ * Old WordPress slugs that still have a different current page.
+ * `/privacy-policy` is not here: the legal pages own that URL, and `/privacy`
+ * will redirect to it. This module must not redirect or 410 it.
  */
 const CONTENT_REDIRECTS: Record<string, string> = {
-  "/privacy-policy": "/privacy",
   "/about-us": "/about",
   "/contact-us": "/contact",
 };
 
-const RESERVED_PATHS = new Set(["/terms-of-service"]);
+/**
+ * Real pages this change must leave to their own routes, including trailing
+ * slashes and `?p=` permalinks. `/terms-of-service` and `/privacy-policy` are
+ * added by the legal-pages work.
+ */
+const RESERVED_PATHS = new Set([
+  "/terms-of-service",
+  "/privacy-policy",
+  "/cookie-policy",
+  "/disclaimer",
+  "/about",
+  "/contact",
+]);
 
 function stripTrailingSlash(pathname: string): string {
   if (pathname.length > 1 && pathname.endsWith("/")) {
@@ -86,22 +97,22 @@ function isWordPressGonePath(path: string): boolean {
 
 /**
  * Classify a request that may be left over from the 2025 WordPress site.
- * `ignore` leaves Next.js routing alone (including the real app, and
- * `/terms-of-service`, which must not be redirected or retired here).
+ * `ignore` leaves Next.js routing alone, including the real app and the
+ * legal/about/contact URLs this change must not redirect or retire.
  */
 export function classifyLegacyRequest(
   pathname: string,
   searchParams: URLSearchParams,
 ): LegacyAction {
   const stripped = stripTrailingSlash(pathname || "/");
-  if (RESERVED_PATHS.has(stripped)) return { kind: "ignore" };
+  const path = stripped.toLowerCase();
+  if (RESERVED_PATHS.has(path)) return { kind: "ignore" };
 
   const postId = searchParams.get("p");
   if (postId !== null && (postId === "" || /^\d+$/.test(postId))) {
     return { kind: "gone" };
   }
 
-  const path = stripped.toLowerCase();
   const redirectTo = CONTENT_REDIRECTS[path];
   if (redirectTo) return { kind: "redirect", pathname: redirectTo };
   if (isWordPressGonePath(path)) return { kind: "gone" };

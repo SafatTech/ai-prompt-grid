@@ -7,36 +7,44 @@ function classify(path: string, search = "") {
 }
 
 describe("legacy WordPress requests", () => {
-  it("leaves the current site and /terms-of-service alone", () => {
+  it("leaves legal, about, and contact pages alone", () => {
     assert.deepEqual(classify("/"), { kind: "ignore" });
     assert.deepEqual(classify("/explore"), { kind: "ignore" });
     assert.deepEqual(classify("/styles/meadow-reverie"), { kind: "ignore" });
-    assert.deepEqual(classify("/about"), { kind: "ignore" });
-    assert.deepEqual(classify("/about/"), { kind: "ignore" });
-    assert.deepEqual(classify("/contact/"), { kind: "ignore" });
     assert.deepEqual(classify("/privacy"), { kind: "ignore" });
     assert.deepEqual(classify("/terms"), { kind: "ignore" });
-    assert.deepEqual(classify("/terms-of-service"), { kind: "ignore" });
-    assert.deepEqual(classify("/terms-of-service/"), { kind: "ignore" });
-    assert.deepEqual(classify("/terms-of-service/", "p=1"), { kind: "ignore" });
+    for (const path of [
+      "/about",
+      "/about/",
+      "/contact",
+      "/contact/",
+      "/privacy-policy",
+      "/privacy-policy/",
+      "/Privacy-Policy/",
+      "/cookie-policy",
+      "/cookie-policy/",
+      "/disclaimer",
+      "/disclaimer/",
+      "/terms-of-service",
+      "/terms-of-service/",
+    ]) {
+      assert.deepEqual(classify(path), { kind: "ignore" }, path);
+      assert.deepEqual(classify(path, "p=1"), { kind: "ignore" }, `${path}?p=1`);
+    }
   });
 
-  it("sends old content slugs to the matching current page", () => {
-    assert.deepEqual(classify("/privacy-policy"), {
-      kind: "redirect",
-      pathname: "/privacy",
-    });
-    assert.deepEqual(classify("/privacy-policy/"), {
-      kind: "redirect",
-      pathname: "/privacy",
-    });
-    assert.deepEqual(classify("/Privacy-Policy/"), {
-      kind: "redirect",
-      pathname: "/privacy",
-    });
+  it("sends old about and contact slugs to the current pages", () => {
     assert.deepEqual(classify("/about-us"), {
       kind: "redirect",
       pathname: "/about",
+    });
+    assert.deepEqual(classify("/about-us/"), {
+      kind: "redirect",
+      pathname: "/about",
+    });
+    assert.deepEqual(classify("/contact-us"), {
+      kind: "redirect",
+      pathname: "/contact",
     });
     assert.deepEqual(classify("/contact-us/"), {
       kind: "redirect",
