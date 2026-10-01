@@ -1,10 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { RelatedStyles } from "@/components/styles/related-styles";
 import { StyleDetailClient } from "@/components/styles/style-detail-client";
-import {
-  getPublishedStyleBySlug,
-  listPublishedStyles,
-} from "@/lib/catalog/repository";
+import { relatedStylesFor } from "@/lib/catalog/related-styles";
+import { getPublishedStyleBySlug, listPublishedStyles } from "@/lib/catalog/repository";
 import { absoluteUrl } from "@/lib/site-url";
 
 export async function generateStaticParams() {
@@ -59,18 +58,6 @@ export async function generateMetadata({
   };
 }
 
-function relatedFor(
-  styleId: string,
-  category: string,
-  catalog: Awaited<ReturnType<typeof listPublishedStyles>>,
-) {
-  return catalog
-    .filter((item) => item.id !== styleId && item.category === category)
-    .concat(catalog.filter((item) => item.id !== styleId))
-    .filter((item, index, arr) => arr.findIndex((s) => s.id === item.id) === index)
-    .slice(0, 3);
-}
-
 export default async function StyleDetailPage({
   params,
 }: {
@@ -83,7 +70,7 @@ export default async function StyleDetailPage({
   ]);
   if (!style) notFound();
 
-  const relatedStyles = relatedFor(style.id, style.category, catalog);
+  const relatedStyles = relatedStylesFor(style.id, style.category, catalog);
   const pageUrl = absoluteUrl(`/styles/${style.id}`);
   const jsonLd = {
     "@context": "https://schema.org",
@@ -109,7 +96,9 @@ export default async function StyleDetailPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <StyleDetailClient style={style} relatedStyles={relatedStyles} />
+      <StyleDetailClient style={style}>
+        <RelatedStyles styles={relatedStyles} category={style.category} />
+      </StyleDetailClient>
     </>
   );
 }

@@ -1,11 +1,26 @@
 "use client";
 
-import { Suspense, useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
+import {
+  Suspense,
+  useCallback,
+  useEffect,
+  useId,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { useRouter } from "next/navigation";
 import { EmptyState } from "@/components/empty-state";
 import { ExploreUrlSync } from "@/components/explore/explore-url-sync";
 import { StyleCard } from "@/components/style-card";
 import { Button } from "@/components/ui/button";
+import {
+  EXPLORE_PAGE_SIZE,
+  explorePageCount,
+  explorePageHref,
+  exploreQueryFromFilters,
+  parseExplorePage,
+} from "@/lib/catalog/explore-pages";
 import {
   activeFilterEntries,
   createEmptyFilters,
@@ -21,11 +36,19 @@ import { filterGroups, groupLabels } from "@/lib/catalog/styles";
 import type { CatalogStyle } from "@/lib/catalog/types";
 import { cn } from "@/lib/utils";
 
-const PAGE_SIZE = 18;
+type Props = {
+  styles: CatalogStyle[];
+  initialQuery: ExploreQuery;
+  initialPage: number;
+  initialQueryString: string;
+};
 
-type Props = { styles: CatalogStyle[]; initialQuery: ExploreQuery };
-
-export function ExploreClient({ styles, initialQuery }: Props) {
+export function ExploreClient({
+  styles,
+  initialQuery,
+  initialPage,
+  initialQueryString,
+}: Props) {
   const router = useRouter();
   const [search, setSearch] = useState(initialQuery.q);
   const [sort, setSort] = useState<SortOption>(initialQuery.sort);
@@ -33,18 +56,28 @@ export function ExploreClient({ styles, initialQuery }: Props) {
     filtersFromExploreQuery(initialQuery),
   );
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [page, setPage] = useState(1);
-  const appliedQuery = useRef<string | null>(
-    exploreQueryToSearchParams(initialQuery).toString(),
-  );
+  const [pageOverride, setPageOverride] = useState<number | null>(null);
+  const [extraPages, setExtraPages] = useState(0);
+  const [seenQuery, setSeenQuery] = useState(initialQueryString);
+  if (seenQuery !== initialQueryString) {
+    setSeenQuery(initialQueryString);
+    setPageOverride(null);
+    setExtraPages(0);
+  }
+  const urlPage = pageOverride ?? initialPage;
+  const appliedQuery = useRef<string | null>(initialQueryString);
 
   const catalog = styles;
   const results = useMemo(
     () => filterStyles(catalog, filters, search, sort),
     [catalog, filters, search, sort],
   );
-  const visible = results.slice(0, page * PAGE_SIZE);
+  const pageCount = explorePageCount(results.length);
+  const safePage = Math.min(urlPage, pageCount);
+  const start = (safePage - 1) * EXPLORE_PAGE_SIZE;
+  const visible = results.slice(start, start + EXPLORE_PAGE_SIZE * (1 + extraPages));
   const active = activeFilterEntries(filters);
+  const listingQuery = exploreQueryFromFilters(filters, search, sort);
 
   const syncUrl = useCallback(
     (next: { q: string; sort: SortOption; filters: FilterState }) => {
@@ -69,11 +102,13 @@ export function ExploreClient({ styles, initialQuery }: Props) {
     if (appliedQuery.current !== next) {
       appliedQuery.current = next;
       if (!first) {
-        const query = parseExploreSearchParams(new URLSearchParams(next));
+        const parsed = new URLSearchParams(next);
+        const query = parseExploreSearchParams(parsed);
         setSearch(query.q);
         setSort(query.sort);
         setFilters(filtersFromExploreQuery(query));
-        setPage(1);
+        setPageOverride(parseExplorePage(parsed) ?? 1);
+        setExtraPages(0);
       }
     }
     if (focusSearch) {
@@ -92,7 +127,8 @@ export function ExploreClient({ styles, initialQuery }: Props) {
     if (next[group].has(value)) next[group].delete(value);
     else next[group].add(value);
     setFilters(next);
-    setPage(1);
+    setPageOverride(1);
+    setExtraPages(0);
     syncUrl({ q: search, sort, filters: next });
   }
 
@@ -101,7 +137,8 @@ export function ExploreClient({ styles, initialQuery }: Props) {
     setFilters(empty);
     setSearch("");
     setSort("Trending");
-    setPage(1);
+    setPageOverride(1);
+    setExtraPages(0);
     appliedQuery.current = "";
     router.replace("/explore", { scroll: false });
   }
@@ -122,13 +159,15 @@ export function ExploreClient({ styles, initialQuery }: Props) {
 
   function onSortChange(nextSort: SortOption) {
     setSort(nextSort);
-    setPage(1);
+    setPageOverride(1);
+    setExtraPages(0);
     syncUrl({ q: search, sort: nextSort, filters });
   }
 
   function onSearchChange(value: string) {
     setSearch(value);
-    setPage(1);
+    setPageOverride(1);
+    setExtraPages(0);
     syncUrl({ q: value, sort, filters });
   }
 
@@ -313,17 +352,22 @@ export function ExploreClient({ styles, initialQuery }: Props) {
                   <StyleCard key={style.id} style={style} compact />
                 ))}
               </div>
-              {visible.length < results.length ? (
+              {start + visible.length < results.length ? (
                 <div className="mt-8 flex justify-center">
                   <Button
                     variant="secondary"
                     data-testid="load-more"
-                    onClick={() => setPage((current) => current + 1)}
+                    onClick={() => setExtraPages((current) => current + 1)}
                   >
                     Load more styles
                   </Button>
                 </div>
               ) : null}
+              <ExplorePagination
+                page={safePage}
+                pageCount={pageCount}
+                hrefFor={(target) => explorePageHref(listingQuery, target)}
+              />
             </>
           ) : (
             <EmptyState
@@ -350,6 +394,64 @@ export function ExploreClient({ styles, initialQuery }: Props) {
         </>
       ) : null}
     </div>
+  );
+}
+
+function ExplorePagination({
+  page,
+  pageCount,
+  hrefFor,
+}: {
+  page: number;
+  pageCount: number;
+  hrefFor: (page: number) => string;
+}) {
+  if (pageCount <= 1) return null;
+
+  const linkClass =
+    "inline-flex min-h-11 items-center justify-center rounded-xl border border-[var(--line)] px-3 text-sm font-bold text-[var(--muted)] hover:border-[var(--line-strong)] hover:text-[var(--text)]";
+
+  return (
+    <nav
+      className="mt-8 flex flex-wrap items-center justify-center gap-2"
+      aria-label="Style pages"
+      data-testid="explore-pagination"
+    >
+      {page > 1 ? (
+        <a rel="prev" href={hrefFor(page - 1)} className={linkClass}>
+          Previous
+        </a>
+      ) : null}
+      {Array.from({ length: pageCount }, (_, index) => {
+        const number = index + 1;
+        if (number === page) {
+          return (
+            <span
+              key={number}
+              aria-current="page"
+              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-[var(--line-strong)] bg-[var(--surface-2)] px-3 text-sm font-bold text-[var(--text)]"
+            >
+              {number}
+            </span>
+          );
+        }
+        return (
+          <a key={number} href={hrefFor(number)} className={`${linkClass} min-w-11`}>
+            {number}
+          </a>
+        );
+      })}
+      {page < pageCount ? (
+        <a
+          rel="next"
+          href={hrefFor(page + 1)}
+          className={linkClass}
+          data-testid="explore-next"
+        >
+          Next
+        </a>
+      ) : null}
+    </nav>
   );
 }
 
