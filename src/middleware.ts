@@ -7,10 +7,12 @@ import { classifyLegacyRequest } from "@/lib/http/legacy-wordpress";
  * 308 them onto a 404 document. Content aliases 301 once; the rest 410.
  */
 function legacyWordpressResponse(request: NextRequest): NextResponse | null {
-  const action = classifyLegacyRequest(
-    request.nextUrl.pathname,
-    request.nextUrl.searchParams,
-  );
+  const pathname = request.nextUrl.pathname;
+  if (pathname.startsWith("/api/") || pathname.startsWith("/_next/")) {
+    return null;
+  }
+
+  const action = classifyLegacyRequest(pathname, request.nextUrl.searchParams);
   if (action.kind === "ignore") return null;
 
   if (action.kind === "redirect") {

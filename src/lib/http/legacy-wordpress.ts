@@ -106,10 +106,22 @@ export function classifyLegacyRequest(
 ): LegacyAction {
   const stripped = stripTrailingSlash(pathname || "/");
   const path = stripped.toLowerCase();
+
+  // App and framework routes are never leftover WordPress URLs.
+  if (path.startsWith("/api/") || path.startsWith("/_next/")) {
+    return { kind: "ignore" };
+  }
+
   if (RESERVED_PATHS.has(path)) return { kind: "ignore" };
 
+  // WordPress post permalinks were only `/?p=N` and `/index.php?p=N`.
+  // An empty `p` is not an id; let `/` render the homepage.
   const postId = searchParams.get("p");
-  if (postId !== null && (postId === "" || /^\d+$/.test(postId))) {
+  if (
+    (path === "/" || path === "/index.php") &&
+    postId !== null &&
+    /^\d+$/.test(postId)
+  ) {
     return { kind: "gone" };
   }
 

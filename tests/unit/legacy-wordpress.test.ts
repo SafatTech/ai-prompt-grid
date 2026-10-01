@@ -76,11 +76,21 @@ describe("legacy WordPress requests", () => {
     }
   });
 
-  it("retires WordPress ?p= permalinks without touching other queries", () => {
+  it("retires WordPress ?p= permalinks only on the old homepage paths", () => {
+    assert.deepEqual(classify("/", "p=123"), { kind: "gone" });
     assert.deepEqual(classify("/", "p=1"), { kind: "gone" });
-    assert.deepEqual(classify("/", "p="), { kind: "gone" });
-    assert.deepEqual(classify("/explore", "p=42"), { kind: "gone" });
+    assert.deepEqual(classify("/index.php", "p=123"), { kind: "gone" });
+    assert.deepEqual(classify("/", "p="), { kind: "ignore" });
+    assert.deepEqual(classify("/explore", "p=2"), { kind: "ignore" });
+    assert.deepEqual(classify("/styles/x", "p=1"), { kind: "ignore" });
     assert.deepEqual(classify("/explore", "q=portrait"), { kind: "ignore" });
     assert.deepEqual(classify("/", "page=2"), { kind: "ignore" });
+  });
+
+  it("skips API and Next.js internals entirely", () => {
+    assert.deepEqual(classify("/api/creations", "p=1"), { kind: "ignore" });
+    assert.deepEqual(classify("/api/search/suggest", "p=1"), { kind: "ignore" });
+    assert.deepEqual(classify("/_next/static/chunks/app.js", "p=1"), { kind: "ignore" });
+    assert.deepEqual(classify("/_next/image"), { kind: "ignore" });
   });
 });
