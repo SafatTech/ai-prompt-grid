@@ -64,7 +64,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
     "@graph": [
       {
         "@type": "Article",
-        headline: guide.title,
+        headline: guide.heading,
         description: guide.description,
         datePublished: guide.date,
         dateModified: guide.updated,
@@ -104,7 +104,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
           {
             "@type": "ListItem",
             position: 3,
-            name: guide.title,
+            name: guide.heading,
             item: canonical,
           },
         ],
@@ -120,7 +120,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
           __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
         }}
       />
-      <GuideBreadcrumbs current={guide.title} />
+      <GuideBreadcrumbs current={guide.heading} />
       {guide.draft ? (
         <p className="m-0 mb-4 rounded-2xl border border-dashed border-[#8b6cff] bg-[#15151E] px-4 py-3 text-sm leading-relaxed text-[var(--muted)]">
           Draft. This URL returns 404 in production, and it is excluded from the index and
@@ -129,7 +129,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
         </p>
       ) : null}
       <h1 className="m-0 mb-3 text-[clamp(32px,4.5vw,48px)] leading-[1.05] tracking-[-0.04em]">
-        {guide.title}
+        {guide.heading}
       </h1>
       <p className="m-0 mb-2 text-[17px] leading-relaxed text-[var(--muted)]">
         {guide.description}

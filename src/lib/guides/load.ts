@@ -12,7 +12,10 @@ const GUIDES_DIR = path.join(process.cwd(), "content", "guides");
 
 export type Guide = {
   slug: string;
+  /** Meta title from frontmatter. Kept separate from the visible heading. */
   title: string;
+  /** Visible H1. Writer files set `h1`; otherwise the meta title is used. */
+  heading: string;
   description: string;
   date: string;
   updated: string;
@@ -68,9 +71,12 @@ function parseGuideFile(file: string, styles: readonly StyleMention[]): Guide {
   const parsed = matter(raw);
   const data = parsed.data;
 
+  const title = requireString(data.title, "title", file);
+
   return {
     slug,
-    title: requireString(data.title, "title", file),
+    title,
+    heading: optionalString(data.h1) ?? title,
     description: requireString(data.description, "description", file),
     date: requireDate(data.date, "date", file),
     updated:
@@ -80,6 +86,12 @@ function parseGuideFile(file: string, styles: readonly StyleMention[]): Guide {
     draft: requireDraft(data.draft, file),
     body: prepareGuideMarkdown(parsed.content, styles),
   };
+}
+
+function optionalString(value: unknown): string | undefined {
+  if (typeof value !== "string") return undefined;
+  const trimmed = value.trim();
+  return trimmed.length > 0 ? trimmed : undefined;
 }
 
 function requireString(value: unknown, field: string, file: string): string {
