@@ -68,25 +68,25 @@ const CONTROLS = [
 
 const STYLE_PREVIEWS = [
   {
-    source: "/catalog/editorial/source-01.png",
-    result: "/catalog/editorial/result-01.png",
+    source: "/brand/how-it-works/editorial-source-01.webp",
+    result: "/brand/how-it-works/editorial-result-01.webp",
     title: "Editorial",
   },
   {
-    source: "/catalog/editorial/source-12.png",
-    result: "/catalog/editorial/result-12.png",
+    source: "/brand/how-it-works/editorial-source-12.webp",
+    result: "/brand/how-it-works/editorial-result-12.webp",
     title: "Crimson Bloom Shadows",
   },
   {
-    source: "/catalog/editorial/source-08.png",
-    result: "/catalog/editorial/result-08.png",
+    source: "/brand/how-it-works/editorial-source-08.webp",
+    result: "/brand/how-it-works/editorial-result-08.webp",
     title: "Cinematic",
   },
 ];
 
 const RESULT_PREVIEWS = [
-  "/catalog/editorial/result-12.png",
-  "/catalog/editorial/result-06.png",
+  "/brand/how-it-works/editorial-result-12.webp",
+  "/brand/how-it-works/editorial-result-06.webp",
 ];
 
 function PromptPreview() {
@@ -144,6 +144,10 @@ function StyleCardsVisual() {
             <img
               src={isCenter ? card.result : card.source}
               alt=""
+              width={480}
+              height={600}
+              loading="lazy"
+              decoding="async"
               className="absolute inset-0 h-full w-full object-cover"
             />
             {isCenter ? (
@@ -172,7 +176,15 @@ function ResultCardsVisual() {
           )}
         >
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={src} alt="" className="absolute inset-0 h-full w-full object-cover" />
+          <img
+            src={src}
+            alt=""
+            width={480}
+            height={600}
+            loading="lazy"
+            decoding="async"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
           <div
             className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_30%_20%,rgba(255,255,255,0.12),transparent_55%)]"
             aria-hidden

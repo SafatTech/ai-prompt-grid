@@ -16,8 +16,12 @@ function TransformationPreview() {
         <figure className="relative m-0 aspect-[3/4] overflow-hidden rounded-[16px] border border-[var(--line-strong)] shadow-[0_22px_48px_rgba(0,0,0,0.45)]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/catalog/editorial/source-12.png"
+            src="/brand/how-it-works/editorial-source-12.webp"
             alt="Example source photo before applying Crimson Bloom Shadows"
+            width={480}
+            height={600}
+            decoding="async"
+            fetchPriority="high"
             className="absolute inset-0 size-full object-cover"
           />
           <figcaption className="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,transparent,rgba(11,11,16,0.88))] px-2.5 pt-8 pb-2.5 text-[11px] font-bold tracking-wide text-[var(--text)] sm:text-xs">
@@ -35,8 +39,12 @@ function TransformationPreview() {
         <figure className="relative m-0 aspect-[3/4] overflow-hidden rounded-[16px] border border-[rgba(139,108,255,0.45)] shadow-[0_22px_48px_rgba(0,0,0,0.5)]">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/catalog/editorial/result-12.png"
+            src="/brand/how-it-works/editorial-result-12.webp"
             alt="Crimson Bloom Shadows style result"
+            width={480}
+            height={600}
+            decoding="async"
+            fetchPriority="high"
             className="absolute inset-0 size-full object-cover"
           />
           <figcaption className="absolute inset-x-0 bottom-0 bg-[linear-gradient(180deg,transparent,rgba(11,11,16,0.88))] px-2.5 pt-8 pb-2.5 text-[11px] font-bold tracking-wide text-[var(--text)] sm:text-xs">
