@@ -13,7 +13,6 @@ import {
 import { CompareSlider } from "@/components/compare-slider";
 import { CopyIcon } from "@/components/icons";
 import { ShareModal } from "@/components/modals/share-modal";
-import { StyleCard } from "@/components/style-card";
 import { StyleSaveResultQuery } from "@/components/styles/style-save-result-query";
 import { Button } from "@/components/ui/button";
 import { useLibrary } from "@/components/providers/library-provider";
@@ -32,11 +31,10 @@ import { labeledOptionsForStyle } from "@/lib/catalog/prompt-option-presets";
 import { getStyleProfile, type CatalogStyle } from "@/lib/catalog/styles";
 import { cn } from "@/lib/utils";
 
-type Props = { style: CatalogStyle; relatedStyles: CatalogStyle[] };
+type Props = { style: CatalogStyle; children?: ReactNode };
 
-export function StyleDetailClient({ style, relatedStyles }: Props) {
+export function StyleDetailClient({ style, children }: Props) {
   const profile = getStyleProfile(style);
-  const related = relatedStyles;
   const { signedIn, isSaved, toggleSave, setPendingAction } = useLibrary();
   const { toast } = useToast();
   const { openSignIn, openSaveResult, openExternalInfo } = useUiModals();
@@ -51,10 +49,7 @@ export function StyleDetailClient({ style, relatedStyles }: Props) {
   }
   const assembled = useMemo(() => assemblePrompt(style, options), [style, options]);
   const prompt = assembled.ok ? assembled.prompt : previewPrompt(style, options);
-  const moodSelectOptions = useMemo(
-    () => labeledOptionsForStyle(style, "mood"),
-    [style],
-  );
+  const moodSelectOptions = useMemo(() => labeledOptionsForStyle(style, "mood"), [style]);
   const backgroundSelectOptions = useMemo(
     () => labeledOptionsForStyle(style, "background"),
     [style],
@@ -164,11 +159,27 @@ export function StyleDetailClient({ style, relatedStyles }: Props) {
               ←
             </Link>
             <span className="truncate text-xs text-[var(--muted)]">
-              Explore / {style.category} / {style.title}
+              <Link href="/explore" className="hover:text-[var(--text)]">
+                Explore
+              </Link>
+              {" / "}
+              <Link
+                href={`/explore?category=${encodeURIComponent(style.category)}`}
+                className="hover:text-[var(--text)]"
+              >
+                {style.category}
+              </Link>
+              {" / "}
+              {style.title}
             </span>
           </div>
           <div className="grid grid-cols-2 gap-2 sm:flex sm:shrink-0">
-            <Button variant="secondary" className="gap-2.5" data-testid="detail-save-style" onClick={onSave}>
+            <Button
+              variant="secondary"
+              className="gap-2.5"
+              data-testid="detail-save-style"
+              onClick={onSave}
+            >
               <span aria-hidden="true">{saved ? "♥" : "♡"}</span>
               <span>{saved ? "Saved" : "Save style"}</span>
             </Button>
@@ -253,8 +264,8 @@ export function StyleDetailClient({ style, relatedStyles }: Props) {
               ))}
             </div>
             <div className="mt-[22px] rounded-[14px] border border-[rgba(255,155,130,0.23)] bg-[rgba(255,155,130,0.07)] p-[17px] text-[13px] text-[#e6c7c0]">
-              AI tools can still change small details. Review the final result before using
-              it professionally.
+              AI tools can still change small details. Review the final result before
+              using it professionally.
             </div>
           </section>
 
@@ -272,7 +283,9 @@ export function StyleDetailClient({ style, relatedStyles }: Props) {
           id="customize-prompt"
           className="rounded-[22px] border border-[var(--line)] bg-[var(--surface)] p-[23px] shadow-[0_18px_55px_rgba(0,0,0,0.2)] lg:sticky lg:top-[calc(var(--header)+18px)]"
         >
-          <h2 className="m-0 mb-1 text-[23px] tracking-[-0.025em]">Customize this prompt</h2>
+          <h2 className="m-0 mb-1 text-[23px] tracking-[-0.025em]">
+            Customize this prompt
+          </h2>
           <p className="mb-[22px] text-[13px] text-[var(--muted)]">
             Adjust the details, then copy the prompt to {style.promptVariant.tool}.
           </p>
@@ -331,9 +344,7 @@ export function StyleDetailClient({ style, relatedStyles }: Props) {
             {assembled.ok ? (
               prompt
             ) : (
-              <span className="text-[var(--danger)]">
-                {assembled.errors.join(" ")}
-              </span>
+              <span className="text-[var(--danger)]">{assembled.errors.join(" ")}</span>
             )}
           </div>
 
@@ -386,7 +397,9 @@ export function StyleDetailClient({ style, relatedStyles }: Props) {
       </section>
 
       <section className="container py-12 sm:py-16">
-        <h2 className="mb-7 text-[clamp(28px,3vw,42px)] tracking-[-0.035em]">More examples</h2>
+        <h2 className="mb-7 text-[clamp(28px,3vw,42px)] tracking-[-0.035em]">
+          More examples
+        </h2>
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {style.examplePairs.map((example, index) => (
             <div
@@ -422,21 +435,7 @@ export function StyleDetailClient({ style, relatedStyles }: Props) {
         </div>
       </section>
 
-      <section className="container py-12 sm:py-16 lg:py-[88px]">
-        <div className="mb-7 flex flex-col items-start gap-2 sm:flex-row sm:items-end sm:justify-between sm:gap-5">
-          <h2 className="m-0 text-[clamp(28px,3vw,42px)] tracking-[-0.035em]">
-            Related styles
-          </h2>
-          <Link href="/explore" className="font-bold text-[#bbaeff]">
-            Explore all →
-          </Link>
-        </div>
-        <div className="grid grid-cols-1 gap-[18px] sm:grid-cols-2 lg:grid-cols-3">
-          {related.map((item) => (
-            <StyleCard key={item.id} style={item} compact />
-          ))}
-        </div>
-      </section>
+      {children}
 
       <section className="container mb-[90px] grid items-center gap-5 rounded-[var(--radius)] border border-[var(--line)] bg-[var(--surface)] p-6 sm:p-8 md:grid-cols-[auto_1fr]">
         <div className="grid h-[58px] w-[58px] place-items-center rounded-2xl bg-[rgba(103,216,178,0.1)] text-[25px] text-[var(--mint)]">
@@ -592,7 +591,7 @@ function ChangeCard({ label, index }: { label: string; index: number }) {
         aria-hidden
       />
       <div
-        className={`pointer-events-none absolute -top-8 -right-6 h-24 w-24 rounded-full ${theme.orb} opacity-50 blur-2xl transition duration-500 group-hover:opacity-70 group-hover:scale-110`}
+        className={`pointer-events-none absolute -top-8 -right-6 h-24 w-24 rounded-full ${theme.orb} opacity-50 blur-2xl transition duration-500 group-hover:scale-110 group-hover:opacity-70`}
         aria-hidden
       />
       <div
