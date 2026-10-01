@@ -81,6 +81,7 @@ export function SiteHeader() {
 
   const exploreActive = pathname.startsWith("/explore") || pathname.startsWith("/styles");
   const howActive = pathname.startsWith("/how-it-works");
+  const guidesActive = pathname.startsWith("/guides");
   const selectedGroup =
     categoryGroups.find((group) => group.id === activeGroup) ?? categoryGroups[0];
 
@@ -235,6 +236,9 @@ export function SiteHeader() {
           />
           <NavLink href="/how-it-works" active={howActive} onMouseEnter={closePanels}>
             How it works
+          </NavLink>
+          <NavLink href="/guides" active={guidesActive} onMouseEnter={closePanels}>
+            Guides
           </NavLink>
           <div className="relative flex self-stretch items-center">
             <MenuButton
@@ -519,6 +523,18 @@ export function SiteHeader() {
                     onClick={() => setMobileOpen(false)}
                   >
                     How it works
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/guides"
+                    className={cn(
+                      "flex min-h-11 items-center rounded-[12px] px-3 text-[#A6A4B2]",
+                      guidesActive && "bg-[#2A1A31] text-[#F5F3EE]",
+                    )}
+                    onClick={() => setMobileOpen(false)}
+                  >
+                    Guides
                   </Link>
                 </li>
                 <li>

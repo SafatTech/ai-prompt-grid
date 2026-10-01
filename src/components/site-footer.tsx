@@ -15,6 +15,12 @@ export function SiteFooter() {
             Discover tested styles. Transform your photo in an external AI editor.
           </span>
           <Link
+            href="/guides"
+            className="font-bold text-[var(--text)] underline-offset-2 hover:underline"
+          >
+            Guides
+          </Link>
+          <Link
             href="/about"
             className="font-bold text-[var(--text)] underline-offset-2 hover:underline"
           >
