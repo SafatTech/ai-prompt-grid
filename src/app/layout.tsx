@@ -71,6 +71,10 @@ function siteJsonLd() {
         "@id": organizationId,
         name: "AI Prompt Grid",
         url: absoluteUrl("/"),
+        logo: {
+          "@type": "ImageObject",
+          url: absoluteUrl("/brand/logo.png"),
+        },
         email: CONTACT_EMAIL,
         contactPoint: {
           "@type": "ContactPoint",
