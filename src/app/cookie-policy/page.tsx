@@ -45,13 +45,14 @@ export default function CookiePolicyPage() {
 
       <LegalSection title="Your choices">
         <p>
-          If you are in the EEA, the UK, or Switzerland, you can accept or reject
-          advertising and analytics cookies in the consent message Google shows on the
-          Site, and you can change that choice later in the same message. You can also
-          block or delete cookies in your browser settings, or turn off personalized
-          Google ads in <a href="https://myadcenter.google.com/">My Ad Center</a>. If you
-          block cookies, some parts of the Site may not work properly, including staying
-          signed in. Questions? Email <a href={CONTACT_MAILTO}>{CONTACT_EMAIL}</a>.
+          Advertising and analytics cookies stay off for visitors in the EEA, the UK, and
+          Switzerland. Analytics cookies stay off until you accept them. When we show ads,
+          a Google-certified consent message will let you accept or reject them and change
+          your choice later. You can also block or delete cookies in your browser
+          settings, or turn off personalized Google ads in{" "}
+          <a href="https://myadcenter.google.com/">My Ad Center</a>. If you block cookies,
+          some parts of the Site may not work properly, including staying signed in.
+          Questions? Email <a href={CONTACT_MAILTO}>{CONTACT_EMAIL}</a>.
         </p>
       </LegalSection>
     </LegalPage>

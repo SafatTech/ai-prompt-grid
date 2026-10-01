@@ -25,8 +25,8 @@ export default function PrivacyPolicyPage() {
         <ul>
           <li>
             <strong>Information you give us.</strong> If you email us, we receive your
-            email address and whatever you include in the message, such as your name. The
-            Site has no signup form and no separate mailing list.
+            email address and whatever you include in the message, such as your name.
+            There is no newsletter and no contact form.
           </li>
           <li>
             <strong>Information collected automatically.</strong> Your IP address, browser
@@ -95,9 +95,11 @@ export default function PrivacyPolicyPage() {
       <LegalSection title="Analytics">
         <p>
           We use Google Analytics 4 (GA4) to understand how visitors use the Site, such as
-          which pages are viewed. GA4 uses cookies. In the EEA, the UK, and Switzerland,
-          analytics cookies stay off until you accept them in the consent message on the
-          Site. You can opt out of Google Analytics with the{" "}
+          which pages are viewed. GA4 uses cookies. Advertising and analytics cookies stay
+          off for visitors in the EEA, the UK, and Switzerland. Analytics cookies stay off
+          until you accept them. When we show ads, a Google-certified consent message will
+          let you accept or reject them and change your choice later. You can opt out of
+          Google Analytics with the{" "}
           <a href="https://tools.google.com/dlpage/gaoptout">
             Google Analytics opt-out add-on
           </a>
@@ -128,11 +130,12 @@ export default function PrivacyPolicyPage() {
           Depending on where you live, you may have the right to access, correct, delete,
           or move your personal data, to object to or limit how we process it, and to
           withdraw consent. If you&apos;re in the EEA, the UK, or Switzerland, we rely on
-          your consent for advertising and analytics cookies, and you can change those
-          choices at any time through the consent message Google shows on the Site. If
-          you&apos;re a California resident, you can ask what we&apos;ve collected and opt
-          out of the &quot;sale&quot; or &quot;sharing&quot; of your personal information
-          for targeted ads. To make a request, email{" "}
+          your consent for advertising and analytics cookies. Advertising and analytics
+          cookies stay off for visitors in the EEA, the UK, and Switzerland. When we show
+          ads, a Google-certified consent message will let you accept or reject them and
+          change your choice later. If you&apos;re a California resident, you can ask what
+          we&apos;ve collected and opt out of the &quot;sale&quot; or &quot;sharing&quot;
+          of your personal information for targeted ads. To make a request, email{" "}
           <a href={CONTACT_MAILTO}>{CONTACT_EMAIL}</a>.
         </p>
       </LegalSection>
