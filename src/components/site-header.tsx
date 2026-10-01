@@ -59,6 +59,8 @@ export function SiteHeader() {
   const hoverTimer = useRef<number | null>(null);
   const leaveTimer = useRef<number | null>(null);
   const [panel, setPanel] = useState<Panel | null>(null);
+  /** Click/keyboard opens stay open until dismiss; hover opens still close on leave. */
+  const [panelPinned, setPanelPinned] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeGroup, setActiveGroup] = useState(categoryGroups[0].id);
   const [categoriesOpen, setCategoriesOpen] = useState(false);
@@ -70,6 +72,7 @@ export function SiteHeader() {
   if (pathname !== routeKey) {
     setRouteKey(pathname);
     setPanel(null);
+    setPanelPinned(false);
     setMobileOpen(false);
     setCreatorsOpen(false);
     setCategoriesOpen(false);
@@ -85,11 +88,13 @@ export function SiteHeader() {
     function onPointerDown(event: PointerEvent) {
       if (!rootRef.current?.contains(event.target as Node)) {
         setPanel(null);
+        setPanelPinned(false);
       }
     }
     function onKey(event: globalThis.KeyboardEvent) {
       if (event.key === "Escape") {
         setPanel(null);
+        setPanelPinned(false);
         setMobileOpen(false);
         setCreatorsOpen(false);
         setCategoriesOpen(false);
@@ -124,13 +129,19 @@ export function SiteHeader() {
   }
 
   function scheduleClose() {
+    if (panelPinned) return;
     clearHover();
     clearLeave();
-    leaveTimer.current = window.setTimeout(() => setPanel(null), 140);
+    leaveTimer.current = window.setTimeout(() => {
+      setPanel(null);
+      setPanelPinned(false);
+    }, 220);
   }
 
   function openPanel(next: Panel) {
     clearHover();
+    clearLeave();
+    setPanelPinned(true);
     setPanel(next);
   }
 
@@ -141,18 +152,29 @@ export function SiteHeader() {
       setPanel(next);
       return;
     }
-    hoverTimer.current = window.setTimeout(() => setPanel(next), 120);
+    hoverTimer.current = window.setTimeout(() => {
+      setPanelPinned(false);
+      setPanel(next);
+    }, 120);
   }
 
   function closePanels() {
     clearHover();
     clearLeave();
+    setPanelPinned(false);
     setPanel(null);
   }
 
   function togglePanel(next: Panel) {
     clearHover();
-    setPanel((current) => (current === next ? null : next));
+    clearLeave();
+    if (panel === next) {
+      setPanelPinned(false);
+      setPanel(null);
+      return;
+    }
+    setPanelPinned(true);
+    setPanel(next);
   }
 
   function onSearchSubmit(query: string) {
@@ -223,16 +245,21 @@ export function SiteHeader() {
               onMouseEnter={() => previewPanel("creators")}
             />
             {panel === "creators" ? (
-              <ul
-                id={creatorsId}
-                className="nav-panel-in absolute top-[calc(100%+8px)] left-0 z-40 m-0 w-[280px] list-none rounded-[18px] border border-[rgba(255,255,255,0.10)] bg-[#15151E] p-2 shadow-[0_18px_50px_rgba(0,0,0,0.38)]"
+              <div
+                className="absolute top-full left-0 z-40 pt-2"
+                onMouseEnter={clearLeave}
               >
-                {creatorLinks.map((item) => (
-                  <li key={item.href + item.label}>
-                    <MenuLink item={item} onNavigate={closePanels} />
-                  </li>
-                ))}
-              </ul>
+                <ul
+                  id={creatorsId}
+                  className="nav-panel-in m-0 w-[280px] list-none rounded-[18px] border border-[rgba(255,255,255,0.10)] bg-[#15151E] p-2 shadow-[0_18px_50px_rgba(0,0,0,0.38)]"
+                >
+                  {creatorLinks.map((item) => (
+                    <li key={item.href + item.label}>
+                      <MenuLink item={item} onNavigate={closePanels} />
+                    </li>
+                  ))}
+                </ul>
+              </div>
             ) : null}
           </div>
         </nav>
@@ -319,7 +346,10 @@ export function SiteHeader() {
       </div>
 
       {panel === "categories" ? (
-        <div className="absolute top-full left-1/2 z-40 hidden w-[min(1120px,calc(100%-48px))] -translate-x-1/2 pt-2 lg:block">
+        <div
+          className="absolute top-full left-1/2 z-40 hidden w-[min(1120px,calc(100%-48px))] -translate-x-1/2 pt-2 lg:block"
+          onMouseEnter={clearLeave}
+        >
           <div
             id={categoriesId}
             className="nav-panel-in grid grid-cols-[29%_43%_28%] overflow-hidden rounded-[20px] border border-[rgba(255,255,255,0.10)] bg-[#15151E] p-5 shadow-[0_18px_50px_rgba(0,0,0,0.38)]"
@@ -363,33 +393,40 @@ export function SiteHeader() {
 
       {panel === "account" && signedIn ? (
         <div
-          id={accountId}
-          className="nav-panel-in absolute top-[calc(100%+8px)] right-6 z-40 hidden w-[230px] rounded-[18px] border border-[rgba(255,255,255,0.10)] bg-[#15151E] p-2 shadow-[0_18px_50px_rgba(0,0,0,0.38)] lg:block"
-          role="menu"
+          className="absolute top-full right-6 z-40 hidden pt-2 lg:block"
+          onMouseEnter={clearLeave}
         >
-          <p className="px-3 py-2 text-xs text-[#A6A4B2]">{userName || userEmail || "Signed in"}</p>
-          <AccountLink href="/library" onClick={closePanels}>
-            My library
-          </AccountLink>
-          <AccountLink href="/library#saved" onClick={closePanels}>
-            Saved styles
-          </AccountLink>
-          <AccountLink href="/library#creations" onClick={closePanels}>
-            My creations
-          </AccountLink>
-          {isEditor ? (
-            <AccountLink href="/admin" onClick={closePanels}>
-              Editorial admin
-            </AccountLink>
-          ) : null}
-          <button
-            type="button"
-            role="menuitem"
-            className="min-h-11 w-full cursor-pointer rounded-[12px] border-0 bg-transparent px-3 text-left text-sm text-[#F5F3EE] hover:bg-[#2A1A31]"
-            onClick={signOutAndLeave}
+          <div
+            id={accountId}
+            className="nav-panel-in w-[230px] rounded-[18px] border border-[rgba(255,255,255,0.10)] bg-[#15151E] p-2 shadow-[0_18px_50px_rgba(0,0,0,0.38)]"
+            role="menu"
           >
-            Sign out
-          </button>
+            <p className="px-3 py-2 text-xs text-[#A6A4B2]">
+              {userName || userEmail || "Signed in"}
+            </p>
+            <AccountLink href="/library" onClick={closePanels}>
+              My library
+            </AccountLink>
+            <AccountLink href="/library#saved" onClick={closePanels}>
+              Saved styles
+            </AccountLink>
+            <AccountLink href="/library#creations" onClick={closePanels}>
+              My creations
+            </AccountLink>
+            {isEditor ? (
+              <AccountLink href="/admin" onClick={closePanels}>
+                Editorial admin
+              </AccountLink>
+            ) : null}
+            <button
+              type="button"
+              role="menuitem"
+              className="min-h-11 w-full cursor-pointer rounded-[12px] border-0 bg-transparent px-3 text-left text-sm text-[#F5F3EE] hover:bg-[#2A1A31]"
+              onClick={signOutAndLeave}
+            >
+              Sign out
+            </button>
+          </div>
         </div>
       ) : null}
 
