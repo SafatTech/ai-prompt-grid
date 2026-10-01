@@ -16,8 +16,10 @@ const STATIC_PAGES: Array<{
   { path: "/how-it-works", changeFrequency: "monthly", priority: 0.7 },
   { path: "/about", changeFrequency: "monthly", priority: 0.6 },
   { path: "/contact", changeFrequency: "monthly", priority: 0.6 },
-  { path: "/privacy", changeFrequency: "yearly", priority: 0.3 },
-  { path: "/terms", changeFrequency: "yearly", priority: 0.3 },
+  { path: "/privacy-policy", changeFrequency: "yearly", priority: 0.3 },
+  { path: "/cookie-policy", changeFrequency: "yearly", priority: 0.3 },
+  { path: "/disclaimer", changeFrequency: "yearly", priority: 0.3 },
+  { path: "/terms-of-service", changeFrequency: "yearly", priority: 0.3 },
 ];
 
 function safeLastModified(value: Date | string | number | undefined): Date {

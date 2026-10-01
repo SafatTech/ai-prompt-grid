@@ -1,5 +1,6 @@
 import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
+import { legalCanonicalPath } from "@/lib/http/legal-redirects";
 import { classifyLegacyRequest } from "@/lib/http/legacy-wordpress";
 
 /**
@@ -51,6 +52,13 @@ function trailingSlashRedirect(request: NextRequest): NextResponse | null {
   return redirectToPath(request, pathname.slice(0, -1), 308);
 }
 
+/** 301 `/privacy` and `/terms` to the canonical legal pages, including a trailing slash. */
+function legalCanonicalRedirect(request: NextRequest): NextResponse | null {
+  const target = legalCanonicalPath(request.nextUrl.pathname);
+  if (!target) return null;
+  return redirectToPath(request, target, 301);
+}
+
 /**
  * Refreshes the Auth session cookies on each matched request.
  * Gates `/admin` to editor/admin profiles when Supabase is configured.
@@ -59,6 +67,9 @@ function trailingSlashRedirect(request: NextRequest): NextResponse | null {
 export async function middleware(request: NextRequest) {
   const legacy = legacyWordpressResponse(request);
   if (legacy) return legacy;
+
+  const legal = legalCanonicalRedirect(request);
+  if (legal) return legal;
 
   const slash = trailingSlashRedirect(request);
   if (slash) return slash;
