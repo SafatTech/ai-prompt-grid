@@ -1,6 +1,14 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import { describe, it } from "node:test";
 import { loadAllGuides } from "../../src/lib/guides/load";
+import {
+  publishedSlugFromMatter,
+  readPublishedGuideSlugs,
+  renderPublishedGuideManifest,
+} from "../../src/lib/guides/published-manifest";
 import {
   defaultOgImage,
   documentTitle,
@@ -187,5 +195,50 @@ describe("guide files", () => {
     assert.match(pets, /\/guides\/halloween-ai-prompts-for-selfies/);
     assert.match(karwa, /\/guides\/diwali-couple-ai-photo-editing-prompts/);
     assert.match(karwa, /\/guides\/80s-ai-photo-prompt-couple-family/);
+  });
+});
+
+describe("published guide manifest", () => {
+  it("keeps drafts out of the published slug list", () => {
+    assert.equal(publishedSlugFromMatter("still-draft.mdx", true), null);
+    assert.equal(publishedSlugFromMatter("published-one.mdx", false), "published-one");
+    assert.equal(publishedSlugFromMatter("notes.txt", false), null);
+    assert.throws(() => publishedSlugFromMatter("missing-draft.mdx", undefined), /draft/);
+
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), "guides-"));
+    fs.writeFileSync(path.join(dir, "published-one.mdx"), "---\ndraft: false\n---\n");
+    fs.writeFileSync(path.join(dir, "still-draft.mdx"), "---\ndraft: true\n---\n");
+    fs.writeFileSync(path.join(dir, "notes.txt"), "draft: false\n");
+    assert.deepEqual(readPublishedGuideSlugs(dir), ["published-one"]);
+  });
+
+  it("matches the loader and the file the layout imports", () => {
+    const slugs = readPublishedGuideSlugs();
+    assert.deepEqual(
+      slugs,
+      loadAllGuides()
+        .filter((guide) => !guide.draft)
+        .map((guide) => guide.slug)
+        .sort(),
+    );
+    const manifest = fs.readFileSync(
+      path.join(process.cwd(), "src/lib/guides/published-slugs.generated.ts"),
+      "utf8",
+    );
+    assert.equal(manifest, renderPublishedGuideManifest(slugs));
+    assert.match(
+      renderPublishedGuideManifest(["beta-guide", "alpha-guide"]),
+      /beta-guide/,
+    );
+  });
+
+  it("root layout reads the manifest instead of the guides directory", () => {
+    const layout = fs.readFileSync(
+      path.join(process.cwd(), "src/app/layout.tsx"),
+      "utf8",
+    );
+    assert.equal(layout.includes("listIndexableGuides"), false);
+    assert.match(layout, /published-slugs\.generated/);
+    assert.doesNotMatch(layout, /content\/guides|readFileSync|readdirSync/);
   });
 });

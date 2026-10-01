@@ -5,7 +5,7 @@ import { SiteHeader } from "@/components/site-header";
 import { LibraryProvider } from "@/components/providers/library-provider";
 import { ToastProvider } from "@/components/providers/toast-provider";
 import { UiModalProvider } from "@/components/providers/ui-modal-provider";
-import { listIndexableGuides } from "@/lib/guides/load";
+import { publishedGuideSlugs } from "@/lib/guides/published-slugs.generated";
 import { CONTACT_EMAIL } from "@/lib/site-contact";
 import { absoluteUrl, getSiteUrl } from "@/lib/site-url";
 import "./globals.css";
@@ -105,7 +105,7 @@ function siteJsonLd() {
 }
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
-  const showGuidesLink = listIndexableGuides().length > 0;
+  const showGuidesLink = publishedGuideSlugs.length > 0;
 
   return (
     <html
