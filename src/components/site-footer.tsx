@@ -41,13 +41,25 @@ export function SiteFooter({ showGuidesLink }: { showGuidesLink: boolean }) {
             {CONTACT_EMAIL}
           </a>
           <Link
-            href="/privacy"
+            href="/privacy-policy"
             className="font-bold text-[var(--text)] underline-offset-2 hover:underline"
           >
             Privacy
           </Link>
           <Link
-            href="/terms"
+            href="/cookie-policy"
+            className="font-bold text-[var(--text)] underline-offset-2 hover:underline"
+          >
+            Cookie policy
+          </Link>
+          <Link
+            href="/disclaimer"
+            className="font-bold text-[var(--text)] underline-offset-2 hover:underline"
+          >
+            Disclaimer
+          </Link>
+          <Link
+            href="/terms-of-service"
             className="font-bold text-[var(--text)] underline-offset-2 hover:underline"
           >
             Terms

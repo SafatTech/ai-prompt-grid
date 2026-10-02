@@ -21,8 +21,8 @@ export default function ContactPage() {
         Contact
       </h1>
       <p className="m-0 mb-10 text-[17px] leading-relaxed text-[var(--muted)]">
-        We read every message. Use email for the fastest reply on product
-        questions, style ideas, and account requests.
+        We read every message. Use email for the fastest reply on product questions, style
+        ideas, and account requests.
       </p>
 
       <section className="mb-10 rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-6 sm:p-8">
@@ -37,19 +37,23 @@ export default function ContactPage() {
           {CONTACT_EMAIL}
         </a>
         <p className="m-0 mt-4 text-[13px] text-[var(--muted)]">
-          Typical topics: catalog feedback, style requests, privacy or account
-          deletion, partnerships, and press.
+          Typical topics: catalog feedback, style requests, privacy or account deletion,
+          partnerships, and press.
         </p>
       </section>
 
       <section className="mb-8">
-        <h2 className="mt-0 mb-3 text-[22px] tracking-[-0.02em]">
-          What to include
-        </h2>
+        <h2 className="mt-0 mb-3 text-[22px] tracking-[-0.02em]">What to include</h2>
         <ul className="m-0 list-disc space-y-2 pl-5 text-[15px] leading-relaxed text-[var(--muted)]">
-          <li>For a style request: subject (person, pet, place, product), the look you want, and which AI editor you use.</li>
+          <li>
+            For a style request: subject (person, pet, place, product), the look you want,
+            and which AI editor you use.
+          </li>
           <li>For account help: the email on your account (do not send passwords).</li>
-          <li>For privacy requests: a clear description of what you need removed or exported.</li>
+          <li>
+            For privacy requests: a clear description of what you need removed or
+            exported.
+          </li>
         </ul>
       </section>
 
@@ -57,20 +61,47 @@ export default function ContactPage() {
         <h2 className="mt-0 mb-3 text-[22px] tracking-[-0.02em]">Other pages</h2>
         <div className="space-y-2 text-[15px] leading-relaxed text-[var(--muted)]">
           <p>
-            <Link href="/about" className="font-bold text-[var(--text)] underline-offset-2 hover:underline">
+            <Link
+              href="/about"
+              className="font-bold text-[var(--text)] underline-offset-2 hover:underline"
+            >
               About
             </Link>{" "}
             — who we are and how prompts are tested.
           </p>
           <p>
-            <Link href="/privacy" className="font-bold text-[var(--text)] underline-offset-2 hover:underline">
+            <Link
+              href="/privacy-policy"
+              className="font-bold text-[var(--text)] underline-offset-2 hover:underline"
+            >
               Privacy policy
             </Link>{" "}
-            — how accounts and private photos are handled.
+            — how accounts, private photos, analytics, and ads are handled.
           </p>
           <p>
-            <Link href="/terms" className="font-bold text-[var(--text)] underline-offset-2 hover:underline">
-              Terms of use
+            <Link
+              href="/cookie-policy"
+              className="font-bold text-[var(--text)] underline-offset-2 hover:underline"
+            >
+              Cookie policy
+            </Link>{" "}
+            — essential, analytics, and advertising cookies.
+          </p>
+          <p>
+            <Link
+              href="/disclaimer"
+              className="font-bold text-[var(--text)] underline-offset-2 hover:underline"
+            >
+              Disclaimer
+            </Link>{" "}
+            — prompts are for inspiration, and results vary.
+          </p>
+          <p>
+            <Link
+              href="/terms-of-service"
+              className="font-bold text-[var(--text)] underline-offset-2 hover:underline"
+            >
+              Terms of service
             </Link>{" "}
             — rules for using the catalog and library.
           </p>

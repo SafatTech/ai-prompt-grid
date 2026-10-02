@@ -4,15 +4,18 @@ test.describe("launch hardening", () => {
   test("privacy and terms pages are linked from the footer", async ({ page }) => {
     await page.goto("/");
     await page.getByRole("contentinfo").getByRole("link", { name: "Privacy" }).click();
-    await expect(page).toHaveURL(/\/privacy/);
+    await expect(page).toHaveURL(/\/privacy-policy$/);
     await expect(page.getByRole("heading", { name: "Privacy policy" })).toBeVisible();
 
     await page.getByRole("contentinfo").getByRole("link", { name: "Terms" }).click();
-    await expect(page).toHaveURL(/\/terms/);
-    await expect(page.getByRole("heading", { name: "Terms of use" })).toBeVisible();
+    await expect(page).toHaveURL(/\/terms-of-service$/);
+    await expect(page.getByRole("heading", { name: "Terms of service" })).toBeVisible();
   });
 
-  test("guest save opens sign-in; mock Google restores save", async ({ page, context }) => {
+  test("guest save opens sign-in; mock Google restores save", async ({
+    page,
+    context,
+  }) => {
     await context.clearCookies();
     await page.goto("/styles/meadow-reverie");
     await page.evaluate(() => localStorage.clear());
