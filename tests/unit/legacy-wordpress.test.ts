@@ -87,6 +87,19 @@ describe("legacy WordPress requests", () => {
     assert.deepEqual(classify("/", "page=2"), { kind: "ignore" });
   });
 
+  it("leaves guide pages alone, including trailing slashes and ?p=", () => {
+    for (const path of [
+      "/guides",
+      "/guides/",
+      "/guides/halloween-ai-prompts-for-selfies",
+      "/guides/halloween-ai-prompts-for-selfies/",
+      "/Guides/Halloween-AI-Prompts-For-Selfies/",
+    ]) {
+      assert.deepEqual(classify(path), { kind: "ignore" }, path);
+      assert.deepEqual(classify(path, "p=1"), { kind: "ignore" }, `${path}?p=1`);
+    }
+  });
+
   it("skips API and Next.js internals entirely", () => {
     assert.deepEqual(classify("/api/creations", "p=1"), { kind: "ignore" });
     assert.deepEqual(classify("/api/search/suggest", "p=1"), { kind: "ignore" });

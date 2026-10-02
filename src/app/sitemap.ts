@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { listPublishedStyleSitemapEntries } from "@/lib/catalog/repository";
+import { listIndexableGuides } from "@/lib/guides/load";
 import { dedupedStylePaths, explorePaginationPaths } from "@/lib/seo/public-paths";
 import { absoluteUrl } from "@/lib/site-url";
 
@@ -72,5 +73,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.warn("[sitemap] Style entries unavailable; serving static URLs only.", err);
   }
 
-  return [...staticEntries, ...explorePageEntries, ...styleEntries];
+  const publishedGuides = listIndexableGuides();
+  const guideEntries: MetadataRoute.Sitemap =
+    publishedGuides.length === 0
+      ? []
+      : [
+          {
+            url: absoluteUrl("/guides"),
+            lastModified: now,
+            changeFrequency: "weekly",
+            priority: 0.7,
+          },
+          ...publishedGuides.map((guide) => ({
+            url: absoluteUrl(`/guides/${guide.slug}`),
+            lastModified: safeLastModified(guide.updated),
+            changeFrequency: "monthly" as const,
+            priority: 0.7,
+          })),
+        ];
+
+  return [...staticEntries, ...explorePageEntries, ...guideEntries, ...styleEntries];
 }

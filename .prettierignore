@@ -6,3 +6,4 @@ playwright-report
 test-results
 supabase/templates
 tmp
+src/lib/guides/published-slugs.generated.ts

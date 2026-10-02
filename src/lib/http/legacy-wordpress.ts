@@ -112,6 +112,11 @@ export function classifyLegacyRequest(
     return { kind: "ignore" };
   }
 
+  // Guide index and articles stay on their own routes, including a trailing slash.
+  if (path === "/guides" || path.startsWith("/guides/")) {
+    return { kind: "ignore" };
+  }
+
   if (RESERVED_PATHS.has(path)) return { kind: "ignore" };
 
   // WordPress post permalinks were only `/?p=N` and `/index.php?p=N`.
