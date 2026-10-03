@@ -62,7 +62,11 @@ describe("guide publishing rules", () => {
       true,
     );
     assert.deepEqual(guideRobots(true), { index: false, follow: false });
-    assert.deepEqual(guideRobots(false), { index: true, follow: true });
+    assert.deepEqual(guideRobots(false), {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+    });
   });
 
   it("keeps document titles within 60 characters", () => {
@@ -191,13 +195,12 @@ describe("guide files", () => {
     }
   });
 
-  it("interlinks the Halloween pair and Karwa Chauth to Diwali and the 80s guide", () => {
+  it("drops the cancelled pet guide from the selfie guide and keeps the other cross-links", () => {
     const guides = new Map(loadAllGuides().map((guide) => [guide.slug, guide.body]));
     const selfies = guides.get("halloween-ai-prompts-for-selfies") ?? "";
-    const pets = guides.get("ai-pet-halloween-costume-prompts") ?? "";
     const karwa = guides.get("karwa-chauth-ai-photo-editing-prompts") ?? "";
-    assert.match(selfies, /\/guides\/ai-pet-halloween-costume-prompts/);
-    assert.match(pets, /\/guides\/halloween-ai-prompts-for-selfies/);
+    assert.doesNotMatch(selfies, /ai-pet-halloween-costume-prompts/);
+    assert.match(selfies, /\/guides\/80s-ai-photo-prompt-couple-family/);
     assert.match(karwa, /\/guides\/diwali-couple-ai-photo-editing-prompts/);
     assert.match(karwa, /\/guides\/80s-ai-photo-prompt-couple-family/);
   });

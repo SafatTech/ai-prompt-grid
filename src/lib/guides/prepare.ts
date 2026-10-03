@@ -21,9 +21,13 @@ export function showsDraftGuides(
 }
 
 /** Drafts stay noindex on every host, including previews where they are readable. */
-export function guideRobots(draft: boolean): { index: boolean; follow: boolean } {
+export function guideRobots(draft: boolean): {
+  index: boolean;
+  follow: boolean;
+  "max-image-preview"?: "large";
+} {
   if (draft) return { index: false, follow: false };
-  return { index: true, follow: true };
+  return { index: true, follow: true, "max-image-preview": "large" };
 }
 
 export function isGuideVisible(draft: boolean, showDrafts: boolean): boolean {

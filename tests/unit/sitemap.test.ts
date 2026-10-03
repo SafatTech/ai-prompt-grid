@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { describe, it } from "node:test";
 import sitemap from "../../src/app/sitemap";
+import { publishedGuides } from "../../src/lib/guides/published-slugs.generated";
 import { guideSitemapEntries } from "../../src/lib/seo/guide-sitemap";
 import { absoluteUrl } from "../../src/lib/site-url";
 
@@ -54,16 +55,21 @@ describe("sitemap handler", () => {
     assert.match(source, /guideSitemapEntries/);
   });
 
-  it("returns the static public pages and omits draft guides", async () => {
+  it("omits draft guides and lists only published ones", async () => {
     const entries = await sitemap();
     const urls = entries.map((entry) => entry.url);
     for (const path of ["/", "/explore", "/about", "/contact", "/privacy-policy"]) {
       assert.ok(urls.includes(absoluteUrl(path)), path);
     }
-    assert.equal(
-      urls.some((url) => url.includes("/guides")),
-      false,
-    );
+    const guideUrls = urls.filter((url) => url.includes("/guides"));
+    const expected =
+      publishedGuides.length > 0
+        ? [
+            absoluteUrl("/guides"),
+            ...publishedGuides.map((guide) => absoluteUrl("/guides/" + guide.slug)),
+          ]
+        : [];
+    assert.deepEqual(guideUrls, expected);
     for (const entry of entries) {
       if (entry.lastModified instanceof Date) {
         assert.equal(Number.isNaN(entry.lastModified.getTime()), false);
