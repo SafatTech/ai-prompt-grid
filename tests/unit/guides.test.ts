@@ -3,6 +3,7 @@ import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
 import { describe, it } from "node:test";
+import matter from "gray-matter";
 import { loadAllGuides } from "../../src/lib/guides/load";
 import {
   publishedSlugFromMatter,
@@ -23,14 +24,6 @@ import {
   showsDraftGuides,
   stripLeadingH1,
 } from "../../src/lib/guides/prepare";
-
-const SLUGS = [
-  "80s-ai-photo-prompt-couple-family",
-  "halloween-ai-prompts-for-selfies",
-  "ai-pet-halloween-costume-prompts",
-  "diwali-couple-ai-photo-editing-prompts",
-  "karwa-chauth-ai-photo-editing-prompts",
-];
 
 describe("guide publishing rules", () => {
   it("hides drafts in production and shows them in development", () => {
@@ -170,9 +163,19 @@ describe("guide publishing rules", () => {
 });
 
 describe("guide files", () => {
-  it("loads the five guides with the expected slugs and SEO fields", () => {
+  it("matches every guide filename to its frontmatter slug", () => {
+    const dir = path.join(process.cwd(), "content", "guides");
+    const files = fs.readdirSync(dir).filter((file) => file.endsWith(".mdx"));
     const guides = loadAllGuides();
-    assert.deepEqual(guides.map((guide) => guide.slug).sort(), [...SLUGS].sort());
+    assert.deepEqual(
+      guides.map((guide) => guide.slug).sort(),
+      files.map((file) => file.slice(0, -".mdx".length)).sort(),
+    );
+    for (const file of files) {
+      const raw = fs.readFileSync(path.join(dir, file), "utf8");
+      const filenameSlug = file.slice(0, -".mdx".length);
+      assert.equal(matter(raw).data.slug, filenameSlug);
+    }
     for (const guide of guides) {
       if (!guide.draft) {
         assert.doesNotMatch(guide.body, /\[IMAGE:|guide-image-placeholder/);
