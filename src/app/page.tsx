@@ -9,9 +9,24 @@ import { categories } from "@/lib/catalog/styles";
 /** ISR safety net so homepage trending catches up even without an admin save. */
 export const revalidate = 60;
 
+const HOME_TITLE = "AI Photo Editing Prompts: Gemini & ChatGPT | AI Prompt Grid";
+const HOME_DESCRIPTION =
+  "Tested AI photo editing prompts for Gemini and ChatGPT. Find a look, keep your story, and transform photos you already love.";
+
 export const metadata: Metadata = {
+  title: { absolute: HOME_TITLE },
+  description: HOME_DESCRIPTION,
   alternates: {
     canonical: "/",
+  },
+  openGraph: {
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    url: "/",
+  },
+  twitter: {
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
   },
 };
 
@@ -27,7 +42,7 @@ export default async function HomePage() {
             <span className="hero-eyebrow inline-flex min-h-[30px] max-w-full flex-wrap items-center rounded-[var(--pill)] border border-[rgba(139,108,255,0.23)] bg-[rgba(139,108,255,0.1)] px-[11px] py-1 text-left text-xs font-extrabold tracking-[0.12em] text-[#c1b4ff] uppercase">
               Transform the photos you already love
             </span>
-            <h1 className="hero-title mt-[22px] mb-5 max-w-[670px] text-[clamp(38px,11vw,88px)] leading-[0.95] font-bold tracking-[-0.065em]">
+            <h1 className="hero-title mt-[22px] mb-0 max-w-[670px] text-[clamp(38px,11vw,88px)] leading-[0.95] font-bold tracking-[-0.065em]">
               Find a look.
               <br className="hero-title-break" />
               <span className="font-semibold text-[var(--muted)]">
@@ -36,11 +51,11 @@ export default async function HomePage() {
                 {" "}
                 story.
               </span>
+              <span className="hero-description mt-5 block max-w-[610px] text-[clamp(16px,1.25vw,19px)] leading-normal font-normal tracking-normal text-[#c3c1cb]">
+                Tested AI photo editing prompts turn your photos into cinematic
+                portraits, paintings, and more.
+              </span>
             </h1>
-            <p className="hero-description m-0 max-w-[610px] text-[clamp(16px,1.25vw,19px)] text-[#c3c1cb]">
-              Tested prompts turn your photos into cinematic portraits,
-              paintings, and more.
-            </p>
             <div className="hero-actions mt-[30px] flex flex-wrap gap-[11px]">
               <Link
                 href="/explore"
