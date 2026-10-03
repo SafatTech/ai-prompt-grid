@@ -24,7 +24,7 @@ const HALLOWEEN_OG_IMAGE = {
   url: "/guides/halloween-ai-prompts-for-selfies/pumpkin-patch-og.webp",
   width: 1200,
   height: 630,
-  alt: "Woman in a cream knit sweater sitting on a hay bale among pumpkins at golden hour.",
+  alt: "Smiling woman with long wavy hair in a cream knit sweater at a pumpkin patch at golden hour.",
 } as const;
 
 export function generateStaticParams() {
