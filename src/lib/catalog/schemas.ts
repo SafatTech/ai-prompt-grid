@@ -90,6 +90,11 @@ export const moodSchema = z.enum([
   "Warm magical adventurous",
   "Warm cozy humorous",
   "Soft warm peaceful",
+  "Warm golden",
+  "Eerie cool",
+  "Warm magical",
+  "Moody gothic",
+  "Soft dramatic",
 ]);
 
 export const backgroundSchema = z.enum([
@@ -166,6 +171,11 @@ export const backgroundSchema = z.enum([
   "Enchanted forest path with flowers, sunlight, a stone bridge, distant castle, and whimsical storybook scenery",
   "Cozy home office desk with a laptop, coffee mug, notebook, warm lamp light, books, and soft greenery",
   "Peaceful flower-filled garden with soft golden sunset light, distant misty hills, delicate blossoms, and a faint rainbow",
+  "Pumpkin patch",
+  "Abandoned street at night",
+  "Cozy cottage kitchen",
+  "Candlelit gothic library",
+  "Plain dark background",
 ]);
 
 export const ratioSchema = z.enum(["4:5 Portrait", "1:1 Square", "9:16 Story"]);

@@ -40,7 +40,7 @@ Personal photo transformation leads the list. Product imagery may appear (≤ ~1
 
 ## Live register (all subject packs)
 
-- Person editorial templates **1–30**
+- Person editorial templates **1–35** (incl. Halloween **31–35** in `seed-halloween-styles.ts`)
 - Product templates **1–10** (`seed-product-styles.ts`)
 - Group templates **1–10** (`seed-group-styles.ts`)
 - Place templates **1–10** (`seed-place-styles.ts`)

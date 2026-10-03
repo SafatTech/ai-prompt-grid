@@ -92,6 +92,11 @@ export const moodLabels: Record<string, string> = {
   "Warm magical adventurous": "Magical adventurous",
   "Warm cozy humorous": "Cozy humorous",
   "Soft warm peaceful": "Soft peaceful",
+  "Warm golden": "Warm golden",
+  "Eerie cool": "Eerie cool",
+  "Warm magical": "Warm magical",
+  "Moody gothic": "Moody gothic",
+  "Soft dramatic": "Soft dramatic",
 };
 
 /** Short 2–3 word UI labels for full background prompt strings. */
@@ -213,6 +218,11 @@ export const backgroundLabels: Record<string, string> = {
     "Home office",
   "Peaceful flower-filled garden with soft golden sunset light, distant misty hills, delicate blossoms, and a faint rainbow":
     "Flower garden",
+  "Pumpkin patch": "Pumpkin patch",
+  "Abandoned street at night": "Abandoned street",
+  "Cozy cottage kitchen": "Cottage kitchen",
+  "Candlelit gothic library": "Gothic library",
+  "Plain dark background": "Plain dark",
 };
 
 const genericMoodPresets = [
@@ -299,13 +309,13 @@ export const categoryMoodPresets: Record<CategoryName, readonly string[]> = {
   Fantasy: [
     "Warm magical adventurous",
     "Warm adventurous",
-    "Bright dreamy pastel spring with soft blush pinks, creamy whites, fresh botanical greens, warm natural skin tones, and airy luminous highlights",
+    "Warm magical",
+    "Moody gothic",
+    "Warm golden",
+    "Eerie cool",
+    "Soft dramatic",
     "Soft warm peaceful",
-    "Vibrant cinematic",
     "Luminous golden-hour warmth",
-    "Soft pastel",
-    "Warm cozy pastel",
-    "Moody cinematic",
   ],
   Pets: [
     "Warm cozy humorous",
@@ -412,13 +422,13 @@ export const categoryBackgroundPresets: Record<CategoryName, readonly string[]> 
   ],
   Fantasy: [
     "Enchanted forest path with flowers, sunlight, a stone bridge, distant castle, and whimsical storybook scenery",
-    "Immersive garden of soft pink and white flowers surrounded by flowing blush-pink, ivory, and botanical-green liquid-wave distortions",
+    "Pumpkin patch",
+    "Cozy cottage kitchen",
+    "Candlelit gothic library",
+    "Abandoned street at night",
+    "Plain dark background",
     "Peaceful flower-filled garden with soft golden sunset light, distant misty hills, delicate blossoms, and a faint rainbow",
     "Detailed scenic outdoor adventure setting",
-    "Miniature snowy village scene with handcrafted depth",
-    "Open vivid blue sky with scattered soft white clouds, surrounded by a dense field of white daisies with yellow centers and large blurred flowers close to the lens",
-    "Grassy hillside meadow with tall wild grass, a bare tree, and a cloudy sky",
-    "Soft sunlit garden greenery with warm natural bokeh and distant foliage completely out of focus",
     "Keep original background",
   ],
   Pets: [
