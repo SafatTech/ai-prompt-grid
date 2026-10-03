@@ -13,6 +13,19 @@ const HALLOWEEN_SELFIE_DIR = "/guides/halloween-ai-prompts-for-selfies/";
 const HALLOWEEN_SELFIE_WIDTH = 1122;
 const HALLOWEEN_SELFIE_HEIGHT = 1402;
 
+/** Title token so only the first before/after pair loads immediately. */
+function markFirstHalloweenPair(markdown: string): string {
+  let remaining = 2;
+  return markdown.replace(
+    /!\[([^\]]*)\]\((\/guides\/halloween-ai-prompts-for-selfies\/[^)\s]+)\)/g,
+    (full, alt: string, src: string) => {
+      if (remaining <= 0) return full;
+      remaining -= 1;
+      return `![${alt}](${src} "hero")`;
+    },
+  );
+}
+
 export function GuideMarkdown({
   markdown,
   visibleSlugs,
@@ -20,6 +33,8 @@ export function GuideMarkdown({
   markdown: string;
   visibleSlugs: ReadonlySet<string>;
 }) {
+  const body = markFirstHalloweenPair(markdown);
+
   return (
     <div className="guide-body">
       <Markdown
@@ -38,7 +53,11 @@ export function GuideMarkdown({
           ),
           p: ({ children }) => {
             const pair = halloweenSelfiePair(children);
-            if (pair) return <GuideBeforeAfter images={pair} />;
+            if (pair) {
+              return (
+                <GuideBeforeAfter images={pair} eager={pair.every((image) => image.hero)} />
+              );
+            }
             return (
               <p className="my-3 text-[15px] leading-relaxed text-[var(--muted)]">
                 {children}
@@ -95,7 +114,7 @@ export function GuideMarkdown({
           ),
         }}
       >
-        {markdown}
+        {body}
       </Markdown>
     </div>
   );
@@ -130,19 +149,28 @@ function GuideAnchor({
   );
 }
 
-function GuideImage({ src, alt }: { src?: unknown; alt?: string }) {
+function GuideImage({
+  src,
+  alt,
+}: {
+  src?: unknown;
+  alt?: string;
+  title?: string;
+}) {
   return <GuideFigure src={typeof src === "string" ? src : ""} alt={alt ?? ""} />;
 }
 
-function halloweenSelfiePair(children: ReactNode): { src: string; alt: string }[] | null {
-  const images: { src: string; alt: string }[] = [];
+function halloweenSelfiePair(
+  children: ReactNode,
+): { src: string; alt: string; hero: boolean }[] | null {
+  const images: { src: string; alt: string; hero: boolean }[] = [];
   for (const node of Children.toArray(children)) {
     if (typeof node === "string") {
       if (node.trim() === "") continue;
       return null;
     }
     if (
-      !isValidElement<{ src?: unknown; alt?: unknown }>(node) ||
+      !isValidElement<{ src?: unknown; alt?: unknown; title?: unknown }>(node) ||
       node.type !== GuideImage
     ) {
       return null;
@@ -150,7 +178,7 @@ function halloweenSelfiePair(children: ReactNode): { src: string; alt: string }[
     const src = typeof node.props.src === "string" ? node.props.src : "";
     if (!src.startsWith(HALLOWEEN_SELFIE_DIR)) return null;
     const alt = typeof node.props.alt === "string" ? node.props.alt : "";
-    images.push({ src, alt });
+    images.push({ src, alt, hero: node.props.title === "hero" });
   }
   return images.length >= 2 ? images : null;
 }
@@ -161,7 +189,13 @@ function frameLabel(src: string): string | null {
   return null;
 }
 
-function GuideBeforeAfter({ images }: { images: { src: string; alt: string }[] }) {
+function GuideBeforeAfter({
+  images,
+  eager = false,
+}: {
+  images: { src: string; alt: string }[];
+  eager?: boolean;
+}) {
   return (
     <div className="my-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
       {images.map((image) => {
@@ -175,6 +209,8 @@ function GuideBeforeAfter({ images }: { images: { src: string; alt: string }[] }
               height={HALLOWEEN_SELFIE_HEIGHT}
               sizes="(max-width: 640px) calc(100vw - 24px), 360px"
               className="h-auto w-full rounded-2xl bg-[#15151E]"
+              loading={eager ? "eager" : "lazy"}
+              fetchPriority={eager ? "high" : "auto"}
             />
             {label ? (
               <figcaption className="mt-2 text-center text-xs text-[var(--muted)]">

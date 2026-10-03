@@ -20,6 +20,13 @@ type GuidePageProps = {
   params: Promise<{ slug: string }>;
 };
 
+const HALLOWEEN_OG_IMAGE = {
+  url: "/guides/halloween-ai-prompts-for-selfies/pumpkin-patch-og.webp",
+  width: 1200,
+  height: 630,
+  alt: "Woman in a cream knit sweater sitting on a hay bale among pumpkins at golden hour.",
+} as const;
+
 export function generateStaticParams() {
   return listVisibleGuides().map((guide) => ({ slug: guide.slug }));
 }
@@ -33,7 +40,10 @@ export async function generateMetadata({ params }: GuidePageProps): Promise<Meta
 
   const canonical = canonicalGuideUrl(guide.slug);
   const title = documentTitle(guide.title);
-  const image = guideSocialImage(guide.body);
+  const image =
+    guide.slug === "halloween-ai-prompts-for-selfies"
+      ? HALLOWEEN_OG_IMAGE
+      : guideSocialImage(guide.body);
 
   return {
     title: guideMetadataTitle(guide.title),
@@ -65,7 +75,10 @@ export default async function GuidePage({ params }: GuidePageProps) {
 
   const canonical = canonicalGuideUrl(guide.slug);
   const visibleSlugs = visibleGuideSlugs();
-  const articleImage = guideArticleImage(guide.body);
+  const articleImage =
+    guide.slug === "halloween-ai-prompts-for-selfies"
+      ? absoluteUrl(HALLOWEEN_OG_IMAGE.url)
+      : guideArticleImage(guide.body);
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [

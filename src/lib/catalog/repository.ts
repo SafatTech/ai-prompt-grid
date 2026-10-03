@@ -58,7 +58,10 @@ export async function listPublishedStyles(): Promise<CatalogStyle[]> {
       .order("save_count", { ascending: false });
 
     if (error) {
-      console.warn("[catalog] Supabase query failed; using seed fallback.", error.message);
+      console.warn(
+        "[catalog] Supabase query failed; using seed fallback.",
+        error.message,
+      );
       return getPublishedStyles();
     }
 
@@ -100,7 +103,10 @@ export async function listTrendingStyles(limit = 6): Promise<CatalogStyle[]> {
       .limit(capped);
 
     if (error) {
-      console.warn("[catalog] Trending query failed; using catalog fallback.", error.message);
+      console.warn(
+        "[catalog] Trending query failed; using catalog fallback.",
+        error.message,
+      );
       return all.slice(0, capped);
     }
 
@@ -122,33 +128,66 @@ export type SitemapStyleEntry = {
 };
 
 /**
+ * Abort a stalled sitemap catalog read so the seed fallback can still run.
+ * withTimeout fires slightly later, so an abort can reject, get logged, and
+ * fall back. It only wins when the aborted request never settles.
+ */
+const SITEMAP_STYLE_QUERY_MS = 4_000;
+const SITEMAP_STYLE_QUERY_BACKSTOP_MS = SITEMAP_STYLE_QUERY_MS + 1_000;
+
+function withTimeout<T>(promise: PromiseLike<T>, ms: number): Promise<T> {
+  const settled = Promise.resolve(promise);
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  // A second consumer so a late rejection is not an unhandled rejection after
+  // the timeout already won the race.
+  settled.then(
+    () => {},
+    () => {},
+  );
+  const timeout = new Promise<never>((_, reject) => {
+    timer = setTimeout(() => {
+      reject(new Error(`Timed out after ${ms}ms`));
+    }, ms);
+  });
+  return Promise.race([settled, timeout]).finally(() => {
+    if (timer) clearTimeout(timer);
+  });
+}
+
+/**
  * Published style URLs for `/sitemap.xml`.
  * Prefers Supabase `updated_at` / `published_at`; falls back to seed catalog.
+ * A stalled query is aborted and logged, then the seed catalog is used.
  */
-export async function listPublishedStyleSitemapEntries(): Promise<
-  SitemapStyleEntry[]
-> {
+export async function listPublishedStyleSitemapEntries(): Promise<SitemapStyleEntry[]> {
   if (isSupabaseConfigured()) {
     try {
       const supabase = createPublicSupabaseClient();
       if (supabase) {
-        const { data, error } = await supabase
-          .from("styles")
-          .select("slug, updated_at, published_at")
-          .eq("status", "published")
-          .order("updated_at", { ascending: false });
+        const { data, error } = await withTimeout(
+          supabase
+            .from("styles")
+            .select("slug, updated_at, published_at")
+            .eq("status", "published")
+            .order("updated_at", { ascending: false })
+            .abortSignal(AbortSignal.timeout(SITEMAP_STYLE_QUERY_MS)),
+          SITEMAP_STYLE_QUERY_BACKSTOP_MS,
+        );
 
         if (!error && data && data.length > 0) {
           return data
             .filter(
-              (row): row is { slug: string; updated_at: string | null; published_at: string | null } =>
-                typeof row.slug === "string" && row.slug.trim().length > 0,
+              (
+                row,
+              ): row is {
+                slug: string;
+                updated_at: string | null;
+                published_at: string | null;
+              } => typeof row.slug === "string" && row.slug.trim().length > 0,
             )
             .map((row) => ({
               slug: row.slug.trim(),
-              lastModified: parseSitemapDate(
-                row.updated_at || row.published_at || "",
-              ),
+              lastModified: parseSitemapDate(row.updated_at || row.published_at || ""),
             }));
         }
 
