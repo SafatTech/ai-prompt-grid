@@ -44,6 +44,7 @@ export default async function HomePage() {
             </span>
             <h1 className="hero-title mt-[22px] mb-0 max-w-[670px] text-[clamp(38px,11vw,88px)] leading-[0.95] font-bold tracking-[-0.065em]">
               Find a look.
+              {" "}
               <br className="hero-title-break" />
               <span className="font-semibold text-[var(--muted)]">
                 Keep your
@@ -51,6 +52,7 @@ export default async function HomePage() {
                 {" "}
                 story.
               </span>
+              {" "}
               <span className="hero-description mt-5 block max-w-[610px] text-[clamp(16px,1.25vw,19px)] leading-normal font-normal tracking-normal text-[#c3c1cb]">
                 Tested AI photo editing prompts turn your photos into cinematic
                 portraits, paintings, and more.
