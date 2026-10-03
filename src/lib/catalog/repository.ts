@@ -128,10 +128,12 @@ export type SitemapStyleEntry = {
 };
 
 /**
- * Bound the sitemap catalog read so a stalled Supabase call cannot sit until
- * the platform kills the function (HTTP 500) before the seed fallback runs.
+ * Abort a stalled sitemap catalog read so the seed fallback can still run.
+ * withTimeout fires slightly later, so an abort can reject, get logged, and
+ * fall back. It only wins when the aborted request never settles.
  */
-const SITEMAP_STYLE_QUERY_MS = 8_000;
+const SITEMAP_STYLE_QUERY_MS = 4_000;
+const SITEMAP_STYLE_QUERY_BACKSTOP_MS = SITEMAP_STYLE_QUERY_MS + 1_000;
 
 function withTimeout<T>(promise: PromiseLike<T>, ms: number): Promise<T> {
   const settled = Promise.resolve(promise);
@@ -155,6 +157,7 @@ function withTimeout<T>(promise: PromiseLike<T>, ms: number): Promise<T> {
 /**
  * Published style URLs for `/sitemap.xml`.
  * Prefers Supabase `updated_at` / `published_at`; falls back to seed catalog.
+ * A stalled query is aborted and logged, then the seed catalog is used.
  */
 export async function listPublishedStyleSitemapEntries(): Promise<SitemapStyleEntry[]> {
   if (isSupabaseConfigured()) {
@@ -166,8 +169,9 @@ export async function listPublishedStyleSitemapEntries(): Promise<SitemapStyleEn
             .from("styles")
             .select("slug, updated_at, published_at")
             .eq("status", "published")
-            .order("updated_at", { ascending: false }),
-          SITEMAP_STYLE_QUERY_MS,
+            .order("updated_at", { ascending: false })
+            .abortSignal(AbortSignal.timeout(SITEMAP_STYLE_QUERY_MS)),
+          SITEMAP_STYLE_QUERY_BACKSTOP_MS,
         );
 
         if (!error && data && data.length > 0) {

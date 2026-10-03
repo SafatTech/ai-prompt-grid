@@ -39,8 +39,8 @@ function safeLastModified(value: Date | string | number | undefined): Date {
  * Always returns static pages even if the catalog query or guide manifest fails.
  *
  * Guide URLs come from the build-time published manifest (draft: false only).
- * The sitemap must not parse guide bodies: that pipeline reads every draft and
- * a single bad file would 500 this whole response.
+ * Skipping the guide body pipeline is defensive hardening. It is not a
+ * confirmed explanation of the production 500s.
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();

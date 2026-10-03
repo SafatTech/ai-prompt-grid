@@ -53,8 +53,8 @@ export function publishedGuideFromMatter(
 }
 
 /**
- * Published guides, sorted by slug. Reads frontmatter only — not the body
- * pipeline — so a draft article cannot fail sitemap generation.
+ * Published guides, sorted by slug. Reads frontmatter only, so sitemap
+ * generation stays off the guide body pipeline.
  */
 export function readPublishedGuides(
   dir = path.join(process.cwd(), "content", "guides"),
