@@ -1,12 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
-import { isValidElement, type ReactNode } from "react";
+import { Children, isValidElement, type ReactNode } from "react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { CopyPromptButton } from "@/components/guides/copy-prompt-button";
 import { guideLinkMode } from "@/lib/guides/prepare";
 
 const PLACEHOLDER_SRC = "guide-image-placeholder";
+
+/** Every file in this folder is a 1122×1402 WebP. Width and height reserve that ratio. */
+const HALLOWEEN_SELFIE_DIR = "/guides/halloween-ai-prompts-for-selfies/";
+const HALLOWEEN_SELFIE_WIDTH = 1122;
+const HALLOWEEN_SELFIE_HEIGHT = 1402;
 
 export function GuideMarkdown({
   markdown,
@@ -31,11 +36,15 @@ export function GuideMarkdown({
           h3: ({ children }) => (
             <h3 className="mt-6 mb-2 text-[17px] tracking-[-0.02em]">{children}</h3>
           ),
-          p: ({ children }) => (
-            <p className="my-3 text-[15px] leading-relaxed text-[var(--muted)]">
-              {children}
-            </p>
-          ),
+          p: ({ children }) => {
+            const pair = halloweenSelfiePair(children);
+            if (pair) return <GuideBeforeAfter images={pair} />;
+            return (
+              <p className="my-3 text-[15px] leading-relaxed text-[var(--muted)]">
+                {children}
+              </p>
+            );
+          },
           ul: ({ children }) => (
             <ul className="my-4 list-disc space-y-2 pl-5 text-[15px] leading-relaxed text-[var(--muted)]">
               {children}
@@ -57,9 +66,7 @@ export function GuideMarkdown({
               {children}
             </GuideAnchor>
           ),
-          img: ({ src, alt }) => (
-            <GuideFigure src={typeof src === "string" ? src : ""} alt={alt ?? ""} />
-          ),
+          img: GuideImage,
           pre: ({ children }) => <PromptBlock>{children}</PromptBlock>,
           code: ({ className, children }) => {
             if (className) return <code className={className}>{children}</code>;
@@ -123,6 +130,64 @@ function GuideAnchor({
   );
 }
 
+function GuideImage({ src, alt }: { src?: unknown; alt?: string }) {
+  return <GuideFigure src={typeof src === "string" ? src : ""} alt={alt ?? ""} />;
+}
+
+function halloweenSelfiePair(children: ReactNode): { src: string; alt: string }[] | null {
+  const images: { src: string; alt: string }[] = [];
+  for (const node of Children.toArray(children)) {
+    if (typeof node === "string") {
+      if (node.trim() === "") continue;
+      return null;
+    }
+    if (
+      !isValidElement<{ src?: unknown; alt?: unknown }>(node) ||
+      node.type !== GuideImage
+    ) {
+      return null;
+    }
+    const src = typeof node.props.src === "string" ? node.props.src : "";
+    if (!src.startsWith(HALLOWEEN_SELFIE_DIR)) return null;
+    const alt = typeof node.props.alt === "string" ? node.props.alt : "";
+    images.push({ src, alt });
+  }
+  return images.length >= 2 ? images : null;
+}
+
+function frameLabel(src: string): string | null {
+  if (src.includes("-before.")) return "Before";
+  if (src.includes("-after.")) return "After";
+  return null;
+}
+
+function GuideBeforeAfter({ images }: { images: { src: string; alt: string }[] }) {
+  return (
+    <div className="my-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
+      {images.map((image) => {
+        const label = frameLabel(image.src);
+        return (
+          <figure key={image.src} className="m-0">
+            <Image
+              src={image.src}
+              alt={image.alt}
+              width={HALLOWEEN_SELFIE_WIDTH}
+              height={HALLOWEEN_SELFIE_HEIGHT}
+              sizes="(max-width: 640px) calc(100vw - 24px), 360px"
+              className="h-auto w-full rounded-2xl bg-[#15151E]"
+            />
+            {label ? (
+              <figcaption className="mt-2 text-center text-xs text-[var(--muted)]">
+                {label}
+              </figcaption>
+            ) : null}
+          </figure>
+        );
+      })}
+    </div>
+  );
+}
+
 function GuideFigure({ src, alt }: { src: string; alt: string }) {
   if (!src || src === PLACEHOLDER_SRC) {
     return (
@@ -137,6 +202,27 @@ function GuideFigure({ src, alt }: { src: string; alt: string }) {
             </p>
           </div>
         </div>
+      </figure>
+    );
+  }
+
+  if (src.startsWith(HALLOWEEN_SELFIE_DIR)) {
+    const label = frameLabel(src);
+    return (
+      <figure className="my-6">
+        <Image
+          src={src}
+          alt={alt}
+          width={HALLOWEEN_SELFIE_WIDTH}
+          height={HALLOWEEN_SELFIE_HEIGHT}
+          sizes="(max-width: 760px) 100vw, 760px"
+          className="h-auto w-full rounded-2xl bg-[#15151E]"
+        />
+        {label || alt ? (
+          <figcaption className="mt-2 text-center text-xs text-[var(--muted)]">
+            {label ?? alt}
+          </figcaption>
+        ) : null}
       </figure>
     );
   }
