@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { listPublishedStyleSitemapEntries } from "@/lib/catalog/repository";
-import { listIndexableGuides } from "@/lib/guides/load";
+import { publishedGuides } from "@/lib/guides/published-slugs.generated";
+import { guideSitemapEntries } from "@/lib/seo/guide-sitemap";
 import { dedupedStylePaths, explorePaginationPaths } from "@/lib/seo/public-paths";
 import { absoluteUrl } from "@/lib/site-url";
 
@@ -35,7 +36,11 @@ function safeLastModified(value: Date | string | number | undefined): Date {
 /**
  * Google-facing sitemap of indexable public URLs only.
  * Excludes auth, library, creations, admin, and API routes.
- * Always returns static pages even if the catalog query fails.
+ * Always returns static pages even if the catalog query or guide manifest fails.
+ *
+ * Guide URLs come from the build-time published manifest (draft: false only).
+ * Skipping the guide body pipeline is defensive hardening. It is not a
+ * confirmed explanation of the production 500s.
  */
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const now = new Date();
@@ -75,24 +80,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     console.warn("[sitemap] Style entries unavailable; serving static URLs only.", err);
   }
 
-  const publishedGuides = listIndexableGuides();
-  const guideEntries: MetadataRoute.Sitemap =
-    publishedGuides.length === 0
-      ? []
-      : [
-          {
-            url: absoluteUrl("/guides"),
-            lastModified: now,
-            changeFrequency: "weekly",
-            priority: 0.7,
-          },
-          ...publishedGuides.map((guide) => ({
-            url: absoluteUrl(`/guides/${guide.slug}`),
-            lastModified: safeLastModified(guide.updated),
-            changeFrequency: "monthly" as const,
-            priority: 0.7,
-          })),
-        ];
+  let guideEntries: MetadataRoute.Sitemap = [];
+  try {
+    guideEntries = guideSitemapEntries(publishedGuides, now);
+  } catch (err) {
+    console.warn(
+      "[sitemap] Guide entries unavailable; serving the rest of the sitemap.",
+      err,
+    );
+  }
 
   return [...staticEntries, ...explorePageEntries, ...guideEntries, ...styleEntries];
 }
