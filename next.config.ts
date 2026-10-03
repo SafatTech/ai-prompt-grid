@@ -13,11 +13,11 @@ const nextConfig: NextConfig = {
   // Trailing-slash redirects are handled in middleware so legacy WordPress
   // URLs can return 410/301 directly instead of bouncing onto a 404.
   skipTrailingSlashRedirect: true,
-  // Guide pages and the sitemap still read the markdown at runtime.
+  // Guide pages read the markdown at runtime. The sitemap uses the generated
+  // manifest instead, so it does not need those files in its serverless trace.
   outputFileTracingIncludes: {
     "/guides": ["./content/guides/**/*.mdx"],
     "/guides/[slug]": ["./content/guides/**/*.mdx"],
-    "/sitemap.xml": ["./content/guides/**/*.mdx"],
   },
 };
 

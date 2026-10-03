@@ -5,7 +5,9 @@ import path from "node:path";
 import { describe, it } from "node:test";
 import { loadAllGuides } from "../../src/lib/guides/load";
 import {
+  publishedGuideFromMatter,
   publishedSlugFromMatter,
+  readPublishedGuides,
   readPublishedGuideSlugs,
   renderPublishedGuideManifest,
 } from "../../src/lib/guides/published-manifest";
@@ -206,14 +208,29 @@ describe("published guide manifest", () => {
     assert.throws(() => publishedSlugFromMatter("missing-draft.mdx", undefined), /draft/);
 
     const dir = fs.mkdtempSync(path.join(os.tmpdir(), "guides-"));
-    fs.writeFileSync(path.join(dir, "published-one.mdx"), "---\ndraft: false\n---\n");
-    fs.writeFileSync(path.join(dir, "still-draft.mdx"), "---\ndraft: true\n---\n");
+    fs.writeFileSync(
+      path.join(dir, "published-one.mdx"),
+      '---\ndraft: false\nupdated: "2026-10-01"\n---\n# not parsed\n',
+    );
+    fs.writeFileSync(
+      path.join(dir, "still-draft.mdx"),
+      "---\ndraft: true\nupdated: not-a-date\n---\n[IMAGE: broken draft body\n",
+    );
     fs.writeFileSync(path.join(dir, "notes.txt"), "draft: false\n");
     assert.deepEqual(readPublishedGuideSlugs(dir), ["published-one"]);
+    assert.deepEqual(readPublishedGuides(dir), [
+      { slug: "published-one", updated: "2026-10-01" },
+    ]);
+    assert.equal(
+      publishedGuideFromMatter("still-draft.mdx", { draft: true, updated: "nope" }),
+      null,
+    );
   });
 
   it("matches the loader and the file the layout imports", () => {
-    const slugs = readPublishedGuideSlugs();
+    const guides = readPublishedGuides();
+    const slugs = guides.map((guide) => guide.slug);
+    assert.deepEqual(slugs, readPublishedGuideSlugs());
     assert.deepEqual(
       slugs,
       loadAllGuides()
@@ -225,9 +242,9 @@ describe("published guide manifest", () => {
       path.join(process.cwd(), "src/lib/guides/published-slugs.generated.ts"),
       "utf8",
     );
-    assert.equal(manifest, renderPublishedGuideManifest(slugs));
+    assert.equal(manifest, renderPublishedGuideManifest(guides));
     assert.match(
-      renderPublishedGuideManifest(["beta-guide", "alpha-guide"]),
+      renderPublishedGuideManifest([{ slug: "beta-guide", updated: "2026-10-01" }]),
       /beta-guide/,
     );
   });

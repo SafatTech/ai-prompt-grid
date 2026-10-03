@@ -8,6 +8,12 @@ export const PUBLISHED_GUIDE_MANIFEST_PATH = path.join(
   "src/lib/guides/published-slugs.generated.ts",
 );
 
+export type PublishedGuideRecord = {
+  slug: string;
+  /** YYYY-MM-DD from `updated` or `date`, or "" when the frontmatter has neither. */
+  updated: string;
+};
+
 /**
  * Published slug for one guide file, or null when it is still a draft.
  * Non-mdx files are ignored. A missing or non-boolean `draft` is an error so
@@ -25,39 +31,83 @@ export function publishedSlugFromMatter(fileName: string, draft: unknown): strin
   return draft ? null : slug;
 }
 
+/** Calendar day for sitemap lastmod. Invalid values are omitted, not fatal. */
+export function publishedGuideUpdatedFromMatter(value: unknown): string {
+  if (value instanceof Date && !Number.isNaN(value.getTime())) {
+    return value.toISOString().slice(0, 10);
+  }
+  if (typeof value === "string" && /^\d{4}-\d{2}-\d{2}$/.test(value)) return value;
+  return "";
+}
+
+export function publishedGuideFromMatter(
+  fileName: string,
+  data: { draft?: unknown; updated?: unknown; date?: unknown },
+): PublishedGuideRecord | null {
+  const slug = publishedSlugFromMatter(fileName, data.draft);
+  if (!slug) return null;
+  return {
+    slug,
+    updated: publishedGuideUpdatedFromMatter(data.updated ?? data.date),
+  };
+}
+
+/**
+ * Published guides, sorted by slug. Reads frontmatter only — not the body
+ * pipeline — so a draft article cannot fail sitemap generation.
+ */
+export function readPublishedGuides(
+  dir = path.join(process.cwd(), "content", "guides"),
+): PublishedGuideRecord[] {
+  if (!fs.existsSync(dir)) return [];
+  const guides: PublishedGuideRecord[] = [];
+  for (const file of fs.readdirSync(dir)) {
+    if (!file.endsWith(".mdx")) continue;
+    const raw = fs.readFileSync(path.join(dir, file), "utf8");
+    const guide = publishedGuideFromMatter(file, matter(raw).data);
+    if (guide) guides.push(guide);
+  }
+  guides.sort((a, b) => a.slug.localeCompare(b.slug));
+  return guides;
+}
+
 /** Published guide slugs, sorted. Reads frontmatter only — not the guide body pipeline. */
 export function readPublishedGuideSlugs(
   dir = path.join(process.cwd(), "content", "guides"),
 ): string[] {
-  if (!fs.existsSync(dir)) return [];
-  const slugs: string[] = [];
-  for (const file of fs.readdirSync(dir)) {
-    if (!file.endsWith(".mdx")) continue;
-    const raw = fs.readFileSync(path.join(dir, file), "utf8");
-    const slug = publishedSlugFromMatter(file, matter(raw).data.draft);
-    if (slug) slugs.push(slug);
-  }
-  slugs.sort();
-  return slugs;
+  return readPublishedGuides(dir).map((guide) => guide.slug);
 }
 
-export function renderPublishedGuideManifest(slugs: readonly string[]): string {
-  const body =
-    slugs.length === 0
+function renderStringArray(values: readonly string[]): string {
+  if (values.length === 0) return "[]";
+  return `[\n${values.map((value) => `  ${JSON.stringify(value)},`).join("\n")}\n]`;
+}
+
+export function renderPublishedGuideManifest(
+  guides: readonly PublishedGuideRecord[],
+): string {
+  const slugs = renderStringArray(guides.map((guide) => guide.slug));
+  const records =
+    guides.length === 0
       ? "[]"
-      : `[\n${slugs.map((slug) => `  ${JSON.stringify(slug)},`).join("\n")}\n]`;
-  return `// Generated from content/guides by next.config.ts. Do not edit.\nexport const publishedGuideSlugs: readonly string[] = ${body};\n`;
+      : `[\n${guides
+          .map(
+            (guide) =>
+              `  { slug: ${JSON.stringify(guide.slug)}, updated: ${JSON.stringify(guide.updated)} },`,
+          )
+          .join("\n")}\n]`;
+  return `// Generated from content/guides by next.config.ts. Do not edit.\nexport const publishedGuideSlugs: readonly string[] = ${slugs};\nexport const publishedGuides: readonly { slug: string; updated: string }[] = ${records};\n`;
 }
 
 /** Writes the layout manifest when the published set changes. Returns the slugs. */
 export function writePublishedGuideManifest(
   dir = path.join(process.cwd(), "content", "guides"),
 ): string[] {
-  const slugs = readPublishedGuideSlugs(dir);
-  const next = renderPublishedGuideManifest(slugs);
+  const guides = readPublishedGuides(dir);
+  const next = renderPublishedGuideManifest(guides);
   const current = fs.existsSync(PUBLISHED_GUIDE_MANIFEST_PATH)
     ? fs.readFileSync(PUBLISHED_GUIDE_MANIFEST_PATH, "utf8")
     : "";
   if (current !== next) fs.writeFileSync(PUBLISHED_GUIDE_MANIFEST_PATH, next);
-  return slugs;
+  return guides.map((guide) => guide.slug);
 }
