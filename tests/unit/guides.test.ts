@@ -4,7 +4,14 @@ import os from "node:os";
 import path from "node:path";
 import { describe, it } from "node:test";
 import matter from "gray-matter";
-import { loadAllGuides } from "../../src/lib/guides/load";
+import { renderToStaticMarkup } from "react-dom/server";
+import { GuideMarkdown } from "../../src/components/guides/guide-markdown";
+import {
+  firstDimensionedPairSrcs,
+  isFirstDimensionedPair,
+  parseDimensionTitle,
+} from "../../src/lib/guides/image-pairs";
+import { loadAllGuides, parseGuideOgImage } from "../../src/lib/guides/load";
 import {
   publishedGuideFromMatter,
   publishedSlugFromMatter,
@@ -23,9 +30,12 @@ import {
   isGuideVisible,
   linkStyleMentions,
   prepareGuideMarkdown,
+  resolveGuideArticleImage,
+  resolveGuideSocialImage,
   showsDraftGuides,
   stripLeadingH1,
 } from "../../src/lib/guides/prepare";
+import { absoluteUrl } from "../../src/lib/site-url";
 
 describe("guide publishing rules", () => {
   it("hides drafts in production and shows them in development", () => {
@@ -166,6 +176,130 @@ describe("guide publishing rules", () => {
       alt: "Hero shot",
     });
   });
+
+  it("reads WIDTHxHEIGHT image titles and ignores anything else", () => {
+    assert.deepEqual(parseDimensionTitle("960x1200"), { width: 960, height: 1200 });
+    assert.deepEqual(parseDimensionTitle(" 1122x1402 "), { width: 1122, height: 1402 });
+    assert.equal(parseDimensionTitle("1122X1402"), null);
+    assert.equal(parseDimensionTitle("hero"), null);
+    assert.equal(parseDimensionTitle("960x"), null);
+    assert.equal(parseDimensionTitle("0x1200"), null);
+    assert.equal(parseDimensionTitle("960.5x1200"), null);
+    assert.equal(parseDimensionTitle(""), null);
+    assert.equal(parseDimensionTitle(undefined), null);
+  });
+
+  it("treats only the first dimensioned image paragraph as the eager pair", () => {
+    const markdown = [
+      "Intro",
+      "",
+      '![One](/guides/hero-before.webp "960x1200")',
+      '![Two](/guides/hero-after.webp "960x1200")',
+      "",
+      "```",
+      '![Hidden before](/guides/hidden-before.webp "100x100")',
+      '![Hidden after](/guides/hidden-after.webp "100x100")',
+      "```",
+      "",
+      '![Later before](/guides/later-before.webp "1122x1402")',
+      '![Later after](/guides/later-after.webp "1122x1402")',
+      "",
+      '![Alone](/guides/single.webp "800x600")',
+    ].join("\n");
+
+    const first = firstDimensionedPairSrcs(markdown);
+    assert.deepEqual(first, ["/guides/hero-before.webp", "/guides/hero-after.webp"]);
+    assert.equal(isFirstDimensionedPair(first, first), true);
+    assert.equal(
+      isFirstDimensionedPair(
+        ["/guides/later-before.webp", "/guides/later-after.webp"],
+        first,
+      ),
+      false,
+    );
+    assert.equal(
+      isFirstDimensionedPair(
+        ["/guides/hero-after.webp", "/guides/hero-before.webp"],
+        first,
+      ),
+      false,
+    );
+    assert.deepEqual(
+      firstDimensionedPairSrcs("![Plain](/guides/a.webp)\n![Plain](/guides/b.webp)\n"),
+      [],
+    );
+  });
+
+  it("renders the first pair eager and later pairs lazy, with real dimensions", () => {
+    const html = renderToStaticMarkup(
+      GuideMarkdown({
+        visibleSlugs: new Set(),
+        markdown: [
+          '![Hero before](/guides/halloween-ai-prompts-for-selfies/pumpkin-patch-before.webp "1122x1402")',
+          '![Hero after](/guides/halloween-ai-prompts-for-selfies/pumpkin-patch-after.webp "1122x1402")',
+          "",
+          '![Next before](/guides/halloween-ai-prompts-for-selfies/zombie-before.webp "1122x1402")',
+          '![Next after](/guides/halloween-ai-prompts-for-selfies/zombie-after.webp "1122x1402")',
+          "",
+          '![Single card](/guides/halloween-ai-prompts-for-selfies/pumpkin-patch-og.webp "1200x630")',
+        ].join("\n"),
+      }),
+    );
+    const imgs = [...html.matchAll(/<img\b[^>]*>/g)].map((match) => match[0]);
+    assert.equal(imgs.length, 5);
+    for (const img of imgs.slice(0, 2)) {
+      assert.match(img, /loading="eager"/);
+      assert.match(img, /fetchPriority="high"/);
+      assert.match(img, /width="1122"/);
+      assert.match(img, /height="1402"/);
+      assert.match(img, /sizes="\(max-width: 640px\) calc\(100vw - 24px\), 360px"/);
+    }
+    for (const img of imgs.slice(2, 4)) {
+      assert.match(img, /loading="lazy"/);
+      assert.match(img, /fetchPriority="auto"/);
+      assert.match(img, /width="1122"/);
+      assert.match(img, /height="1402"/);
+    }
+    assert.match(imgs[4] ?? "", /width="1200"/);
+    assert.match(imgs[4] ?? "", /height="630"/);
+    assert.match(imgs[4] ?? "", /sizes="\(max-width: 760px\) 100vw, 760px"/);
+    assert.equal(html.match(/<figcaption[^>]*>Before<\/figcaption>/g)?.length, 2);
+    assert.equal(html.match(/<figcaption[^>]*>After<\/figcaption>/g)?.length, 2);
+  });
+
+  it("uses frontmatter ogImage and falls back to the body hero", () => {
+    const ogImage = {
+      url: "/guides/example/card.webp",
+      width: 1200,
+      height: 630,
+      alt: "Festival card",
+    };
+    const body = "![Hero shot](/guides/example/hero.webp)";
+    assert.deepEqual(resolveGuideSocialImage({ ogImage, body }), ogImage);
+    assert.equal(resolveGuideArticleImage({ ogImage, body }), absoluteUrl(ogImage.url));
+    assert.equal(
+      resolveGuideArticleImage({
+        ogImage: { ...ogImage, url: "https://cdn.example/card.webp" },
+        body,
+      }),
+      "https://cdn.example/card.webp",
+    );
+    assert.deepEqual(resolveGuideSocialImage({ body }), guideSocialImage(body));
+    assert.equal(resolveGuideArticleImage({ body }), guideArticleImage(body));
+
+    assert.equal(parseGuideOgImage(undefined, "guide.mdx"), undefined);
+    assert.equal(parseGuideOgImage(null, "guide.mdx"), undefined);
+    assert.deepEqual(parseGuideOgImage(ogImage, "guide.mdx"), ogImage);
+    assert.throws(
+      () => parseGuideOgImage({ url: "card.webp" }, "guide.mdx"),
+      /ogImage.url/,
+    );
+    assert.throws(
+      () => parseGuideOgImage({ ...ogImage, width: 0 }, "guide.mdx"),
+      /ogImage.width/,
+    );
+    assert.throws(() => parseGuideOgImage(["/card.webp"], "guide.mdx"), /ogImage/);
+  });
 });
 
 describe("guide files", () => {
@@ -203,6 +337,83 @@ describe("guide files", () => {
     assert.match(selfies, /\/guides\/80s-ai-photo-prompt-couple-family/);
     assert.match(karwa, /\/guides\/diwali-couple-ai-photo-editing-prompts/);
     assert.match(karwa, /\/guides\/80s-ai-photo-prompt-couple-family/);
+  });
+
+  it("keeps Halloween's social image and makes its first pair the eager one", () => {
+    const guide = loadAllGuides().find(
+      (item) => item.slug === "halloween-ai-prompts-for-selfies",
+    );
+    assert.ok(guide);
+    assert.deepEqual(guide.ogImage, {
+      url: "/guides/halloween-ai-prompts-for-selfies/pumpkin-patch-og.webp",
+      width: 1200,
+      height: 630,
+      alt: "Smiling woman with long wavy hair in a cream knit sweater at a pumpkin patch at golden hour.",
+    });
+    assert.deepEqual(resolveGuideSocialImage(guide), guide.ogImage);
+    assert.equal(
+      resolveGuideArticleImage(guide),
+      absoluteUrl("/guides/halloween-ai-prompts-for-selfies/pumpkin-patch-og.webp"),
+    );
+    const first = firstDimensionedPairSrcs(guide.body);
+    assert.deepEqual(first, [
+      "/guides/halloween-ai-prompts-for-selfies/pumpkin-patch-before.webp",
+      "/guides/halloween-ai-prompts-for-selfies/pumpkin-patch-after.webp",
+    ]);
+    assert.equal(guide.body.match(/"1122x1402"/g)?.length, 14);
+  });
+
+  it("publishes the Diwali guide with ten sized pairs and no withheld prompts", () => {
+    const guide = loadAllGuides().find(
+      (item) => item.slug === "diwali-couple-ai-photo-editing-prompts",
+    );
+    assert.ok(guide);
+    assert.equal(guide.draft, false);
+    assert.equal(guide.updated, "2026-10-05");
+    assert.deepEqual(guide.ogImage, {
+      url: "/guides/diwali-couple-ai-photo-editing-prompts/diya-lit-balcony-og.webp",
+      width: 1200,
+      height: 630,
+      alt: "Smiling couple on a diya-lit balcony at night, she in a maroon silk saree and he in an ivory kurta, with marigold garlands and fireworks over the city.",
+    });
+    assert.deepEqual(firstDimensionedPairSrcs(guide.body), [
+      "/guides/diwali-couple-ai-photo-editing-prompts/diya-lit-balcony-before.webp",
+      "/guides/diwali-couple-ai-photo-editing-prompts/diya-lit-balcony-after.webp",
+    ]);
+    assert.equal(guide.body.match(/"960x1200"/g)?.length, 20);
+    assert.match(guide.body, /Prompts 3 and 6/);
+    assert.match(guide.body, /Prompt 4/);
+    assert.match(guide.body, /Prompt 12/);
+    assert.doesNotMatch(guide.body, /Lakshmi|Bhai Dooj|\[IMAGE:/i);
+    assert.match(
+      guide.body,
+      /The people in the "before" photos are AI-generated, not real people\. Every "after" image on this page is an AI edit made with the prompts below, tested in October 2026\./,
+    );
+    for (const slug of [
+      "diya-lit-balcony",
+      "finishing-the-rangoli-together",
+      "first-diwali-as-a-married-couple",
+      "separate-photos-couple",
+      "fairy-light-portrait",
+      "golden-hour-sparkler-shot",
+      "kurta-and-nehru-jacket-with-lanterns",
+      "candid-phuljhadi-moment",
+      "babys-first-diwali",
+      "family-diwali-in-karachi-or-sindh",
+      "diaspora-diwali-in-a-cold-city",
+    ]) {
+      assert.equal(guide.body.includes(`](/styles/${slug})`), true, slug);
+    }
+    assert.equal(guide.body.includes("family-lakshmi-puja-photo"), false);
+    assert.match(guide.body, /he in a cream kurta and dark coat with a light scarf/);
+    const merge = loadAllGuides().find(
+      (item) => item.slug === "how-to-merge-two-photos-in-gemini",
+    );
+    assert.match(merge?.body ?? "", /Only have separate photos\? Combine them/);
+    assert.doesNotMatch(
+      merge?.body ?? "",
+      /diwali-couple-ai-photo-editing-prompts\)\*\* \(Prompt/,
+    );
   });
 });
 
