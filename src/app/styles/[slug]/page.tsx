@@ -4,6 +4,7 @@ import { RelatedStyles } from "@/components/styles/related-styles";
 import { StyleDetailClient } from "@/components/styles/style-detail-client";
 import { relatedStylesFor } from "@/lib/catalog/related-styles";
 import { getPublishedStyleBySlug, listPublishedStyles } from "@/lib/catalog/repository";
+import { stylePageDescription } from "@/lib/catalog/style-meta";
 import { absoluteUrl } from "@/lib/site-url";
 
 export async function generateStaticParams() {
@@ -25,10 +26,10 @@ export async function generateMetadata({
     };
   }
 
-  const summary = (style.note || style.description || "").trim();
-  const description = summary
-    ? `${summary} Copy-ready prompt for ChatGPT, Gemini, and other AI image editors.`
-    : `Copy-ready ${style.title} prompt for ChatGPT, Gemini, and other AI image editors.`;
+  const description = stylePageDescription(
+    style.note || style.description || "",
+    style.title,
+  );
 
   const title = `${style.title} Prompt`;
   const url = `/styles/${style.id}`;
