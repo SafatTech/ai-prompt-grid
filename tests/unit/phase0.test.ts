@@ -26,9 +26,9 @@ describe("cn", () => {
 });
 
 describe("published catalog seed", () => {
-  it("exposes 74 published styles with recipe fields", () => {
+  it("exposes 86 published styles with recipe fields", () => {
     const published = getPublishedStyles();
-    assert.equal(published.length, 74);
+    assert.equal(published.length, 86);
     for (const style of published) {
       assert.equal(style.status, "published");
       assert.ok(style.promptVariant.template.includes("{{mood}}"));

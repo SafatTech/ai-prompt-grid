@@ -97,6 +97,15 @@ export const moodLabels: Record<string, string> = {
   "Warm magical": "Warm magical",
   "Moody gothic": "Moody gothic",
   "Soft dramatic": "Soft dramatic",
+  "Warm golden festive": "Golden festive",
+  "Warm candid festive": "Candid festive",
+  "Rich warm celebratory": "Rich celebratory",
+  "Warm romantic festive": "Romantic festive",
+  "Soft warm festive": "Soft festive",
+  "Warm evening festive": "Evening festive",
+  "Warm joyful festive": "Joyful festive",
+  "Soft warm dreamy": "Soft dreamy",
+  "Cozy warm winter festive": "Winter festive",
 };
 
 /** Short 2–3 word UI labels for full background prompt strings. */
@@ -223,6 +232,30 @@ export const backgroundLabels: Record<string, string> = {
   "Cozy cottage kitchen": "Cottage kitchen",
   "Candlelit gothic library": "Gothic library",
   "Plain dark background": "Plain dark",
+  "An elegant apartment balcony at Diwali night with rows of glowing clay diyas along the railing, warm string lights, and subtle distant fireworks":
+    "Diya balcony",
+  "The front entrance of a welcoming home during Diwali, with a vivid rangoli on the floor, small glowing diyas surrounding it, and warm light spilling naturally from the doorway":
+    "Rangoli entrance",
+  "The entrance of an elegant home decorated for Diwali with marigold torans, a large colorful rangoli, dozens of glowing diyas, and delicate fairy lights above the doorway":
+    "Marigold entrance",
+  "A lamp-lit rooftop terrace at Diwali night with subtle diya illumination, warm ambient lights, and soft distant fireworks in the evening sky":
+    "Rooftop terrace",
+  "A dark Diwali-night setting filled with soft golden bokeh and subtle glowing fairy lights":
+    "Fairy-light bokeh",
+  "A Diwali courtyard at dusk lined with glowing diyas, marigold garlands, and a deepening evening sky":
+    "Diwali courtyard",
+  "A rooftop at Diwali evening with paper lanterns overhead, string lights, distant city lights, and faint fireworks in the background":
+    "Lantern rooftop",
+  "A decorated residential lane at Diwali night with glowing diyas, string lights, soft smoke, and a lively festive atmosphere":
+    "Festive lane",
+  "A home entrance decorated for Lakshmi Puja with marigold torans, a large rangoli, and glowing diyas placed at the family's feet":
+    "Lakshmi Puja door",
+  "A cozy Diwali portrait setting with marigold petals, soft cushions, and distant glowing diyas safely positioned far behind the baby":
+    "Baby Diwali set",
+  "The courtyard of a historic stone temple in Karachi or Sindh decorated with diyas, string lights, a rangoli at the family's feet, a box of mithai, and children's sparklers glowing safely nearby":
+    "Karachi courtyard",
+  "A cold-city residential street at Diwali night with terraced houses, fairy lights glowing in the windows, diyas on the front steps, warm light from an open doorway, and subtle fireworks over the rooftops":
+    "Cold-city street",
 };
 
 const genericMoodPresets = [
@@ -308,14 +341,14 @@ export const categoryMoodPresets: Record<CategoryName, readonly string[]> = {
   ],
   Fantasy: [
     "Warm magical adventurous",
-    "Warm adventurous",
-    "Warm magical",
+    "Warm golden festive",
+    "Warm joyful festive",
+    "Warm candid festive",
+    "Soft warm festive",
     "Moody gothic",
-    "Warm golden",
-    "Eerie cool",
-    "Soft dramatic",
-    "Soft warm peaceful",
-    "Luminous golden-hour warmth",
+    "Warm magical",
+    "Soft warm dreamy",
+    "Cozy warm winter festive",
   ],
   Pets: [
     "Warm cozy humorous",
@@ -422,13 +455,13 @@ export const categoryBackgroundPresets: Record<CategoryName, readonly string[]> 
   ],
   Fantasy: [
     "Enchanted forest path with flowers, sunlight, a stone bridge, distant castle, and whimsical storybook scenery",
+    "An elegant apartment balcony at Diwali night with rows of glowing clay diyas along the railing, warm string lights, and subtle distant fireworks",
+    "A Diwali courtyard at dusk lined with glowing diyas, marigold garlands, and a deepening evening sky",
+    "A home entrance decorated for Lakshmi Puja with marigold torans, a large rangoli, and glowing diyas placed at the family's feet",
     "Pumpkin patch",
-    "Cozy cottage kitchen",
     "Candlelit gothic library",
-    "Abandoned street at night",
-    "Plain dark background",
-    "Peaceful flower-filled garden with soft golden sunset light, distant misty hills, delicate blossoms, and a faint rainbow",
-    "Detailed scenic outdoor adventure setting",
+    "Cozy cottage kitchen",
+    "A dark Diwali-night setting filled with soft golden bokeh and subtle glowing fairy lights",
     "Keep original background",
   ],
   Pets: [

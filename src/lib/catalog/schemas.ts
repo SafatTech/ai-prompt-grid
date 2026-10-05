@@ -95,6 +95,15 @@ export const moodSchema = z.enum([
   "Warm magical",
   "Moody gothic",
   "Soft dramatic",
+  "Warm golden festive",
+  "Warm candid festive",
+  "Rich warm celebratory",
+  "Warm romantic festive",
+  "Soft warm festive",
+  "Warm evening festive",
+  "Warm joyful festive",
+  "Soft warm dreamy",
+  "Cozy warm winter festive",
 ]);
 
 export const backgroundSchema = z.enum([
@@ -176,6 +185,18 @@ export const backgroundSchema = z.enum([
   "Cozy cottage kitchen",
   "Candlelit gothic library",
   "Plain dark background",
+  "An elegant apartment balcony at Diwali night with rows of glowing clay diyas along the railing, warm string lights, and subtle distant fireworks",
+  "The front entrance of a welcoming home during Diwali, with a vivid rangoli on the floor, small glowing diyas surrounding it, and warm light spilling naturally from the doorway",
+  "The entrance of an elegant home decorated for Diwali with marigold torans, a large colorful rangoli, dozens of glowing diyas, and delicate fairy lights above the doorway",
+  "A lamp-lit rooftop terrace at Diwali night with subtle diya illumination, warm ambient lights, and soft distant fireworks in the evening sky",
+  "A dark Diwali-night setting filled with soft golden bokeh and subtle glowing fairy lights",
+  "A Diwali courtyard at dusk lined with glowing diyas, marigold garlands, and a deepening evening sky",
+  "A rooftop at Diwali evening with paper lanterns overhead, string lights, distant city lights, and faint fireworks in the background",
+  "A decorated residential lane at Diwali night with glowing diyas, string lights, soft smoke, and a lively festive atmosphere",
+  "A home entrance decorated for Lakshmi Puja with marigold torans, a large rangoli, and glowing diyas placed at the family's feet",
+  "A cozy Diwali portrait setting with marigold petals, soft cushions, and distant glowing diyas safely positioned far behind the baby",
+  "The courtyard of a historic stone temple in Karachi or Sindh decorated with diyas, string lights, a rangoli at the family's feet, a box of mithai, and children's sparklers glowing safely nearby",
+  "A cold-city residential street at Diwali night with terraced houses, fairy lights glowing in the windows, diyas on the front steps, warm light from an open doorway, and subtle fireworks over the rooftops",
 ]);
 
 export const ratioSchema = z.enum(["4:5 Portrait", "1:1 Square", "9:16 Story"]);
