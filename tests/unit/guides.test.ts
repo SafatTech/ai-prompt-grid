@@ -387,8 +387,25 @@ describe("guide files", () => {
     assert.doesNotMatch(guide.body, /Lakshmi|Bhai Dooj|\[IMAGE:/i);
     assert.match(
       guide.body,
-      /Every "after" image on this page is an AI edit made with the prompts below, tested in October 2026\./,
+      /The people in the "before" photos are AI-generated, not real people\. Every "after" image on this page is an AI edit made with the prompts below, tested in October 2026\./,
     );
+    for (const slug of [
+      "diya-lit-balcony",
+      "finishing-the-rangoli-together",
+      "first-diwali-as-a-married-couple",
+      "separate-photos-couple",
+      "fairy-light-portrait",
+      "golden-hour-sparkler-shot",
+      "kurta-and-nehru-jacket-with-lanterns",
+      "candid-phuljhadi-moment",
+      "babys-first-diwali",
+      "family-diwali-in-karachi-or-sindh",
+      "diaspora-diwali-in-a-cold-city",
+    ]) {
+      assert.equal(guide.body.includes(`](/styles/${slug})`), true, slug);
+    }
+    assert.equal(guide.body.includes("family-lakshmi-puja-photo"), false);
+    assert.match(guide.body, /he in a cream kurta and dark coat with a light scarf/);
     const merge = loadAllGuides().find(
       (item) => item.slug === "how-to-merge-two-photos-in-gemini",
     );
