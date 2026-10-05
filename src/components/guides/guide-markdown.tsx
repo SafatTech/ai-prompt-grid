@@ -4,27 +4,15 @@ import { Children, isValidElement, type ReactNode } from "react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { CopyPromptButton } from "@/components/guides/copy-prompt-button";
+import {
+  firstDimensionedPairSrcs,
+  isFirstDimensionedPair,
+  isLocalGuideSrc,
+  parseDimensionTitle,
+} from "@/lib/guides/image-pairs";
 import { guideLinkMode } from "@/lib/guides/prepare";
 
 const PLACEHOLDER_SRC = "guide-image-placeholder";
-
-/** Every file in this folder is a 1122×1402 WebP. Width and height reserve that ratio. */
-const HALLOWEEN_SELFIE_DIR = "/guides/halloween-ai-prompts-for-selfies/";
-const HALLOWEEN_SELFIE_WIDTH = 1122;
-const HALLOWEEN_SELFIE_HEIGHT = 1402;
-
-/** Title token so only the first before/after pair loads immediately. */
-function markFirstHalloweenPair(markdown: string): string {
-  let remaining = 2;
-  return markdown.replace(
-    /!\[([^\]]*)\]\((\/guides\/halloween-ai-prompts-for-selfies\/[^)\s]+)\)/g,
-    (full, alt: string, src: string) => {
-      if (remaining <= 0) return full;
-      remaining -= 1;
-      return `![${alt}](${src} "hero")`;
-    },
-  );
-}
 
 export function GuideMarkdown({
   markdown,
@@ -33,7 +21,7 @@ export function GuideMarkdown({
   markdown: string;
   visibleSlugs: ReadonlySet<string>;
 }) {
-  const body = markFirstHalloweenPair(markdown);
+  const eagerPair = firstDimensionedPairSrcs(markdown);
 
   return (
     <div className="guide-body">
@@ -52,10 +40,16 @@ export function GuideMarkdown({
             <h3 className="mt-6 mb-2 text-[17px] tracking-[-0.02em]">{children}</h3>
           ),
           p: ({ children }) => {
-            const pair = halloweenSelfiePair(children);
+            const pair = sizedLocalPair(children);
             if (pair) {
               return (
-                <GuideBeforeAfter images={pair} eager={pair.every((image) => image.hero)} />
+                <GuideBeforeAfter
+                  images={pair}
+                  eager={isFirstDimensionedPair(
+                    pair.map((image) => image.src),
+                    eagerPair,
+                  )}
+                />
               );
             }
             return (
@@ -114,7 +108,7 @@ export function GuideMarkdown({
           ),
         }}
       >
-        {body}
+        {markdown}
       </Markdown>
     </div>
   );
@@ -152,18 +146,21 @@ function GuideAnchor({
 function GuideImage({
   src,
   alt,
+  title,
 }: {
   src?: unknown;
   alt?: string;
   title?: string;
 }) {
-  return <GuideFigure src={typeof src === "string" ? src : ""} alt={alt ?? ""} />;
+  return (
+    <GuideFigure src={typeof src === "string" ? src : ""} alt={alt ?? ""} title={title} />
+  );
 }
 
-function halloweenSelfiePair(
+function sizedLocalPair(
   children: ReactNode,
-): { src: string; alt: string; hero: boolean }[] | null {
-  const images: { src: string; alt: string; hero: boolean }[] = [];
+): { src: string; alt: string; width: number; height: number }[] | null {
+  const images: { src: string; alt: string; width: number; height: number }[] = [];
   for (const node of Children.toArray(children)) {
     if (typeof node === "string") {
       if (node.trim() === "") continue;
@@ -176,9 +173,10 @@ function halloweenSelfiePair(
       return null;
     }
     const src = typeof node.props.src === "string" ? node.props.src : "";
-    if (!src.startsWith(HALLOWEEN_SELFIE_DIR)) return null;
+    const dimensions = parseDimensionTitle(node.props.title);
+    if (!isLocalGuideSrc(src) || !dimensions) return null;
     const alt = typeof node.props.alt === "string" ? node.props.alt : "";
-    images.push({ src, alt, hero: node.props.title === "hero" });
+    images.push({ src, alt, width: dimensions.width, height: dimensions.height });
   }
   return images.length >= 2 ? images : null;
 }
@@ -193,7 +191,7 @@ function GuideBeforeAfter({
   images,
   eager = false,
 }: {
-  images: { src: string; alt: string }[];
+  images: { src: string; alt: string; width: number; height: number }[];
   eager?: boolean;
 }) {
   return (
@@ -205,8 +203,8 @@ function GuideBeforeAfter({
             <Image
               src={image.src}
               alt={image.alt}
-              width={HALLOWEEN_SELFIE_WIDTH}
-              height={HALLOWEEN_SELFIE_HEIGHT}
+              width={image.width}
+              height={image.height}
               sizes="(max-width: 640px) calc(100vw - 24px), 360px"
               className="h-auto w-full rounded-2xl bg-[#15151E]"
               loading={eager ? "eager" : "lazy"}
@@ -224,7 +222,7 @@ function GuideBeforeAfter({
   );
 }
 
-function GuideFigure({ src, alt }: { src: string; alt: string }) {
+function GuideFigure({ src, alt, title }: { src: string; alt: string; title?: string }) {
   if (!src || src === PLACEHOLDER_SRC) {
     return (
       <figure className="my-6">
@@ -242,15 +240,16 @@ function GuideFigure({ src, alt }: { src: string; alt: string }) {
     );
   }
 
-  if (src.startsWith(HALLOWEEN_SELFIE_DIR)) {
+  const dimensions = parseDimensionTitle(title);
+  if (dimensions && isLocalGuideSrc(src)) {
     const label = frameLabel(src);
     return (
       <figure className="my-6">
         <Image
           src={src}
           alt={alt}
-          width={HALLOWEEN_SELFIE_WIDTH}
-          height={HALLOWEEN_SELFIE_HEIGHT}
+          width={dimensions.width}
+          height={dimensions.height}
           sizes="(max-width: 760px) 100vw, 760px"
           className="h-auto w-full rounded-2xl bg-[#15151E]"
         />
@@ -263,7 +262,7 @@ function GuideFigure({ src, alt }: { src: string; alt: string }) {
     );
   }
 
-  if (src.startsWith("/") && !src.startsWith("//") && !src.includes("..")) {
+  if (isLocalGuideSrc(src)) {
     return (
       <figure className="my-6">
         <div className="relative aspect-[3/2] overflow-hidden rounded-2xl bg-[#15151E]">

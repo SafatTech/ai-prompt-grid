@@ -5,6 +5,7 @@ import { getPublishedStyles } from "@/lib/catalog/styles";
 import {
   prepareGuideMarkdown,
   showsDraftGuides,
+  type GuideOgImage,
   type StyleMention,
 } from "@/lib/guides/prepare";
 
@@ -20,6 +21,8 @@ export type Guide = {
   date: string;
   updated: string;
   draft: boolean;
+  /** Social card from frontmatter. Absent guides fall back to the body hero. */
+  ogImage?: GuideOgImage;
   /** Markdown body with the duplicate H1 removed and placeholders normalized. */
   body: string;
 };
@@ -84,8 +87,47 @@ function parseGuideFile(file: string, styles: readonly StyleMention[]): Guide {
         ? requireDate(data.date, "date", file)
         : requireDate(data.updated, "updated", file),
     draft: requireDraft(data.draft, file),
+    ogImage: parseGuideOgImage(data.ogImage, file),
     body: prepareGuideMarkdown(parsed.content, styles),
   };
+}
+
+/** Optional `ogImage` frontmatter. Missing means use the body fallback. */
+export function parseGuideOgImage(
+  value: unknown,
+  file: string,
+): GuideOgImage | undefined {
+  if (value == null) return undefined;
+  if (typeof value !== "object" || Array.isArray(value)) {
+    throw new Error(
+      `${file}: frontmatter ogImage must be an object with url, width, height and alt`,
+    );
+  }
+  const record = value as Record<string, unknown>;
+  const url = requireString(record.url, "ogImage.url", file);
+  if (url.startsWith("//") || url.includes("..")) {
+    throw new Error(
+      `${file}: frontmatter ogImage.url must not be protocol-relative or contain ..`,
+    );
+  }
+  if (!url.startsWith("/") && !/^https?:\/\//i.test(url)) {
+    throw new Error(
+      `${file}: frontmatter ogImage.url must be a root-relative or absolute URL`,
+    );
+  }
+  return {
+    url,
+    width: requirePositiveInt(record.width, "ogImage.width", file),
+    height: requirePositiveInt(record.height, "ogImage.height", file),
+    alt: requireString(record.alt, "ogImage.alt", file),
+  };
+}
+
+function requirePositiveInt(value: unknown, field: string, file: string): number {
+  if (typeof value !== "number" || !Number.isInteger(value) || value < 1) {
+    throw new Error(`${file}: frontmatter ${field} must be a positive integer`);
+  }
+  return value;
 }
 
 function optionalString(value: unknown): string | undefined {

@@ -1,4 +1,4 @@
-import { PRODUCTION_SITE_URL } from "@/lib/site-url";
+import { absoluteUrl, PRODUCTION_SITE_URL } from "@/lib/site-url";
 
 const BRAND_SUFFIX = " · AI Prompt Grid";
 const TITLE_LIMIT = 60;
@@ -115,6 +115,36 @@ export function guideSocialImage(markdown: string): {
       hero.src.startsWith("http") || hero.src.startsWith("/") ? hero.src : `/${hero.src}`,
     alt: hero.alt || defaultOgImage.alt,
   };
+}
+
+/** Optional social image declared in guide frontmatter. */
+export type GuideOgImage = {
+  url: string;
+  width: number;
+  height: number;
+  alt: string;
+};
+
+/**
+ * Open Graph / Twitter image. A frontmatter `ogImage` wins; otherwise the
+ * first real image in the body, then the site card.
+ */
+export function resolveGuideSocialImage(guide: {
+  ogImage?: GuideOgImage;
+  body: string;
+}): { url: string; alt: string; width?: number; height?: number } {
+  return guide.ogImage ?? guideSocialImage(guide.body);
+}
+
+/** Absolute Article JSON-LD image. Frontmatter `ogImage` wins over the body hero. */
+export function resolveGuideArticleImage(guide: {
+  ogImage?: GuideOgImage;
+  body: string;
+}): string | undefined {
+  if (!guide.ogImage) return guideArticleImage(guide.body);
+  const url = guide.ogImage.url;
+  if (/^https?:\/\//i.test(url)) return url;
+  return absoluteUrl(url);
 }
 
 /** Absolute image URL for Article JSON-LD. Undefined when the guide has no real image. */
