@@ -1,6 +1,5 @@
 import { eightiesStyleIds } from "./seed-80s-styles";
 import { linkedinStyleIds } from "./seed-linkedin-styles";
-import { mergeStyleIds } from "./seed-merge-styles";
 
 const COPY_READY_SENTENCE =
   "Copy-ready prompt for ChatGPT, Gemini, and other AI image editors.";
@@ -46,7 +45,7 @@ function fitDocumentTitle(look: string): string | { absolute: string } {
 
 /**
  * Style document titles. 1980s pages use "[Look] AI Photo Prompt".
- * LinkedIn and merge pages already use a full prompt title, so nothing extra is added.
+ * LinkedIn pages already use a full prompt title, so nothing extra is added.
  * Other styles keep the existing "[Look] Prompt" title. All stay within 60 characters.
  */
 export function styleMetadataTitle(style: {
@@ -56,9 +55,7 @@ export function styleMetadataTitle(style: {
   if (eightiesStyleIds.has(style.id)) {
     return fitDocumentTitle(`${style.title} AI Photo Prompt`);
   }
-  if (linkedinStyleIds.has(style.id) || mergeStyleIds.has(style.id)) {
-    return fitDocumentTitle(style.title);
-  }
+  if (linkedinStyleIds.has(style.id)) return fitDocumentTitle(style.title);
   return `${style.title} Prompt`;
 }
 

@@ -18,7 +18,6 @@ export const editIntentSchema = z.enum([
 
 export const inputRequirementSchema = z.enum([
   "One photo",
-  "Two photos",
   "Photo plus style reference",
 ]);
 
@@ -106,8 +105,6 @@ export const moodSchema = z.enum([
   "Soft warm dreamy",
   "Cozy warm winter festive",
   "Rich saturated sunset colors with painted-poster warmth and slight print wear",
-  "Warm sunset backlight with soft golden haze",
-  "Match the original photo's colors",
 ]);
 
 export const backgroundSchema = z.enum([
@@ -218,16 +215,6 @@ export const backgroundSchema = z.enum([
   "Softly blurred bright modern office with glass walls and plants",
   "Softly blurred green trees in late-afternoon light",
   "Dark charcoal studio backdrop with a soft gradient",
-  "Riverside promenade with a calm river, trees along the bank, and warm late-afternoon light",
-  "Cozy café table beside a large window with softly blurred interior",
-  "Soft cream paper border with a thin gold divider line",
-  "Wide sandy beach at sunset with gentle waves and a glowing horizon",
-  "Living room decorated for Eid with warm string lights, crescent lanterns, and soft floral accents",
-  "Rooftop dinner table at dusk with warm fairy lights and a softly blurred city skyline",
-  "Sunny traditional courtyard with a woven charpai, potted plants, and soft morning light",
-  "Wedding stage with a floral backdrop of white and blush flowers, warm fairy lights, and a cream sofa",
-  "Sunny campus lawn with trees and softly blurred academic buildings",
-  "Mountain viewpoint with pine trees, a green valley, and distant snowy peaks",
 ]);
 
 export const ratioSchema = z.enum(["4:5 Portrait", "1:1 Square", "9:16 Story"]);

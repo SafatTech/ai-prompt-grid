@@ -12,7 +12,7 @@ export type EditIntent =
   | "New outfit or theme"
   | "Full scene transformation";
 
-export type InputRequirement = "One photo" | "Two photos" | "Photo plus style reference";
+export type InputRequirement = "One photo" | "Photo plus style reference";
 
 export type PublishStatus = "draft" | "in_review" | "published" | "archived";
 
