@@ -200,6 +200,8 @@ export function StyleDetailClient({ style, children }: Props) {
             result={style.result}
             title={style.title}
             styleId={style.id}
+            altSource={style.examplePairs[0]?.altSource}
+            altResult={style.examplePairs[0]?.altResult}
             large
             showModeToggle
             defaultMode={compareDefault}

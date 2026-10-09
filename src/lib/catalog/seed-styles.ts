@@ -1,4 +1,5 @@
 import { seedDiwaliStyles } from "./seed-diwali-styles";
+import { seedEightiesStyles } from "./seed-80s-styles";
 import { seedEditorialStyles } from "./seed-editorial-styles";
 import { seedEditorialStyles10to30 } from "./seed-editorial-styles-10-30";
 import { seedGroupStyles } from "./seed-group-styles";
@@ -10,7 +11,7 @@ import type { CatalogStyle } from "./types";
 
 /**
  * Published catalog seed =
- * person/group editorial 1–47 (Halloween 31–35 + Diwali 36–47)
+ * person/group editorial 1–59 (Halloween 31–35 + Diwali 36–47 + 1980s 48–59)
  * + product 1–10 + group 1–10 + place 1–10 + pet 1–9.
  */
 export const seedStyles: CatalogStyle[] = [
@@ -18,6 +19,7 @@ export const seedStyles: CatalogStyle[] = [
   ...seedEditorialStyles10to30,
   ...seedHalloweenStyles,
   ...seedDiwaliStyles,
+  ...seedEightiesStyles,
   ...seedProductStyles,
   ...seedGroupStyles,
   ...seedPlaceStyles,

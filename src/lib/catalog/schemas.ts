@@ -16,10 +16,7 @@ export const editIntentSchema = z.enum([
   "Full scene transformation",
 ]);
 
-export const inputRequirementSchema = z.enum([
-  "One photo",
-  "Photo plus style reference",
-]);
+export const inputRequirementSchema = z.enum(["One photo", "Photo plus style reference"]);
 
 export const publishStatusSchema = z.enum([
   "draft",
@@ -104,6 +101,7 @@ export const moodSchema = z.enum([
   "Warm joyful festive",
   "Soft warm dreamy",
   "Cozy warm winter festive",
+  "Rich saturated sunset colors with painted-poster warmth and slight print wear",
 ]);
 
 export const backgroundSchema = z.enum([
@@ -197,6 +195,15 @@ export const backgroundSchema = z.enum([
   "A cozy Diwali portrait setting with marigold petals, soft cushions, and distant glowing diyas safely positioned far behind the baby",
   "The courtyard of a historic stone temple in Karachi or Sindh decorated with diyas, string lights, a rangoli at the family's feet, a box of mithai, and children's sparklers glowing safely nearby",
   "A cold-city residential street at Diwali night with terraced houses, fairy lights glowing in the windows, diyas on the front steps, warm light from an open doorway, and subtle fireworks over the rooftops",
+  "Hand-painted sunset sky with empty space at the top",
+  "Soft blue 1980s laser-style studio backdrop",
+  "Busy 1980s city market street in bright afternoon sun",
+  "Mirrored aerobics studio wall with a pastel gradient backdrop",
+  "1980s teenager bedroom with a cassette player, a stack of tapes, and a patterned bedspread",
+  "Dark roller rink with neon lights",
+  "Purple and blue laser-beam mall photo-studio backdrop",
+  "Park at golden hour with soft trees",
+  "Floral wedding-stage backdrop",
 ]);
 
 export const ratioSchema = z.enum(["4:5 Portrait", "1:1 Square", "9:16 Story"]);
