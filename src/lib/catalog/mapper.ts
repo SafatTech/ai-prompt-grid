@@ -62,6 +62,7 @@ export type DbStyleAsset = {
   result_storage_key: string;
   alt_text: string;
   sort_order: number;
+  provenance?: unknown;
 };
 
 export type DbStyleRow = {
@@ -178,12 +179,28 @@ function mapExamplePairs(
   const examples = pairs.filter((a) => a.kind === "example_pair");
   const source = examples.length > 0 ? examples : pairs;
 
-  return source.map((asset, index) => ({
-    source: resolveAssetUrl(asset.source_storage_key, publicBaseUrl),
-    result: resolveAssetUrl(asset.result_storage_key, publicBaseUrl),
-    altSource: asset.alt_text || `Source example ${index + 1}`,
-    altResult: asset.alt_text || `Result example ${index + 1}`,
-  }));
+  return source.map((asset, index) => {
+    const provenance = asRecord(asset.provenance);
+    const altSource =
+      stringField(provenance, "altSource") ||
+      asset.alt_text ||
+      `Source example ${index + 1}`;
+    const altResult =
+      stringField(provenance, "altResult") ||
+      asset.alt_text ||
+      `Result example ${index + 1}`;
+    return {
+      source: resolveAssetUrl(asset.source_storage_key, publicBaseUrl),
+      result: resolveAssetUrl(asset.result_storage_key, publicBaseUrl),
+      altSource,
+      altResult,
+    };
+  });
+}
+
+function stringField(record: Record<string, unknown>, key: string): string | null {
+  const value = record[key];
+  return typeof value === "string" && value.trim() ? value : null;
 }
 
 function mapCardMedia(

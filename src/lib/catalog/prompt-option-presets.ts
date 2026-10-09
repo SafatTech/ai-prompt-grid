@@ -106,6 +106,8 @@ export const moodLabels: Record<string, string> = {
   "Warm joyful festive": "Joyful festive",
   "Soft warm dreamy": "Soft dreamy",
   "Cozy warm winter festive": "Winter festive",
+  "Rich saturated sunset colors with painted-poster warmth and slight print wear":
+    "Poster sunset",
 };
 
 /** Short 2–3 word UI labels for full background prompt strings. */
@@ -256,6 +258,16 @@ export const backgroundLabels: Record<string, string> = {
     "Karachi courtyard",
   "A cold-city residential street at Diwali night with terraced houses, fairy lights glowing in the windows, diyas on the front steps, warm light from an open doorway, and subtle fireworks over the rooftops":
     "Cold-city street",
+  "Hand-painted sunset sky with empty space at the top": "Painted sunset",
+  "Soft blue 1980s laser-style studio backdrop": "Blue laser studio",
+  "Busy 1980s city market street in bright afternoon sun": "Market street",
+  "Mirrored aerobics studio wall with a pastel gradient backdrop": "Aerobics studio",
+  "1980s teenager bedroom with a cassette player, a stack of tapes, and a patterned bedspread":
+    "Cassette bedroom",
+  "Dark roller rink with neon lights": "Neon roller rink",
+  "Purple and blue laser-beam mall photo-studio backdrop": "Mall laser studio",
+  "Park at golden hour with soft trees": "Golden hour park",
+  "Floral wedding-stage backdrop": "Floral wedding stage",
 };
 
 const genericMoodPresets = [

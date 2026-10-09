@@ -17,7 +17,7 @@ test.describe("phase 2 guest catalog", () => {
     await context.grantPermissions(["clipboard-read", "clipboard-write"]);
     await page.goto("/explore");
     await expect(page.getByTestId("explore-search")).toBeVisible();
-    await expect(page.getByTestId("results-count")).toContainText("86 styles");
+    await expect(page.getByTestId("results-count")).toContainText("98 styles");
 
     await page.getByTestId("explore-search").fill("Meadow Reverie");
     await expect(page.getByTestId("results-count")).toContainText("1 style");
@@ -26,7 +26,7 @@ test.describe("phase 2 guest catalog", () => {
     await page.getByTestId("desktop-filters").getByTestId("filter-category-Pets").click();
     await expect(page.getByTestId("results-count")).toContainText(/\d+ styles?/);
     await page.getByTestId("clear-filters").click();
-    await expect(page.getByTestId("results-count")).toContainText("86 styles");
+    await expect(page.getByTestId("results-count")).toContainText("98 styles");
 
     await page.getByTestId("explore-search").fill("Meadow Reverie");
     await page.getByTestId("style-card-meadow-reverie").click();
@@ -40,7 +40,9 @@ test.describe("phase 2 guest catalog", () => {
     await expect(
       page.getByText(/Prompt copied|Could not copy automatically/i),
     ).toBeVisible();
-    const clip = await page.evaluate(() => navigator.clipboard.readText()).catch(() => "");
+    const clip = await page
+      .evaluate(() => navigator.clipboard.readText())
+      .catch(() => "");
     if (clip) {
       expect(clip.toLowerCase()).toContain("moody outdoor");
       expect(clip.toLowerCase()).toContain("moody cinematic");

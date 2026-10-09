@@ -16,6 +16,8 @@ type Props = {
   showModeToggle?: boolean;
   /** Defaults to slider. Style detail passes "side" so the full frame is visible. */
   defaultMode?: CompareMode;
+  altSource?: string;
+  altResult?: string;
 };
 
 type ActiveDrag =
@@ -45,7 +47,11 @@ export function CompareSlider({
   className,
   showModeToggle = false,
   defaultMode = "slider",
+  altSource,
+  altResult,
 }: Props) {
+  const sourceAlt = altSource || `Source photo for ${title}`;
+  const resultAlt = altResult || `AI result showing ${title}`;
   const [value, setValue] = useState(50);
   const [mode, setMode] = useState<CompareMode>(defaultMode);
   const [pan, setPan] = useState({ x: 50, y: 50 });
@@ -186,7 +192,7 @@ export function CompareSlider({
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={source}
-              alt={`Source photo for ${title}`}
+              alt={sourceAlt}
               className="h-full w-full object-cover"
               loading={large ? "eager" : "lazy"}
               draggable={false}
@@ -199,7 +205,7 @@ export function CompareSlider({
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={result}
-              alt={`AI result showing ${title}`}
+              alt={resultAlt}
               className="h-full w-full object-cover"
               loading={large ? "eager" : "lazy"}
               draggable={false}
@@ -236,7 +242,7 @@ export function CompareSlider({
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={source}
-          alt={`Source photo for ${title}`}
+          alt={sourceAlt}
           className="pointer-events-none h-full w-full object-cover"
           style={objectPosition ? { objectPosition } : undefined}
           loading={large ? "eager" : "lazy"}
@@ -250,7 +256,7 @@ export function CompareSlider({
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={result}
-          alt={`AI result showing ${title}`}
+          alt={resultAlt}
           className="pointer-events-none h-full w-full object-cover"
           style={objectPosition ? { objectPosition } : undefined}
           loading={large ? "eager" : "lazy"}

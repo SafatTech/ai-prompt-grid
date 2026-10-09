@@ -16,6 +16,7 @@ import {
   labeledOptionsForStyle,
 } from "../../src/lib/catalog/prompt-option-presets";
 import { promptOptionsSchema } from "../../src/lib/catalog/schemas";
+import { eightiesStyleIds } from "../../src/lib/catalog/seed-80s-styles";
 import { getPublishedStyles, getStyleById } from "../../src/lib/catalog/styles";
 import { cn } from "../../src/lib/utils";
 
@@ -26,14 +27,14 @@ describe("cn", () => {
 });
 
 describe("published catalog seed", () => {
-  it("exposes 86 published styles with recipe fields", () => {
+  it("exposes 98 published styles with recipe fields", () => {
     const published = getPublishedStyles();
-    assert.equal(published.length, 86);
+    assert.equal(published.length, 98);
     for (const style of published) {
       assert.equal(style.status, "published");
       assert.ok(style.promptVariant.template.includes("{{mood}}"));
       assert.ok(style.promptVariant.mode.length > 0);
-      assert.ok(style.examplePairs.length >= 2);
+      assert.ok(style.examplePairs.length >= (eightiesStyleIds.has(style.id) ? 1 : 2));
       assert.ok(style.promptVariant.limitations.length >= 1);
     }
   });

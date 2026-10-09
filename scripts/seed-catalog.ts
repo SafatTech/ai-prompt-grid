@@ -13,6 +13,10 @@ import fs from "node:fs";
 import path from "node:path";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
 import { processUploadImage } from "../src/lib/creations/image";
+import {
+  eightiesAssetProvenance,
+  eightiesStyleIds,
+} from "../src/lib/catalog/seed-80s-styles";
 import { seedStyles } from "../src/lib/catalog/seed-styles";
 import type { CatalogStyle } from "../src/lib/catalog/types";
 
@@ -168,7 +172,9 @@ async function seedStyle(
     variables: { defaults: style.promptVariant.defaults },
     settings: {},
     test_record: {
-      lastVerified: style.promptVariant.lastVerified,
+      ...(style.promptVariant.lastVerified
+        ? { lastVerified: style.promptVariant.lastVerified }
+        : {}),
       limitations: style.promptVariant.limitations,
     },
     is_primary: true,
@@ -180,6 +186,8 @@ async function seedStyle(
 
   const cardSource = await resolveAssetUrl(client, style.source, assetCache);
   const cardResult = await resolveAssetUrl(client, style.result, assetCache);
+  const cardSourceAlt = style.examplePairs[0]?.altSource ?? `${style.title} source`;
+  const cardResultAlt = style.examplePairs[0]?.altResult ?? `${style.title} result`;
 
   const assets = [
     {
@@ -188,8 +196,10 @@ async function seedStyle(
       kind: "card_pair",
       source_storage_key: cardSource,
       result_storage_key: cardResult,
-      alt_text: `${style.title} card pair`,
-      provenance: { source: "seed", licence: "catalog" },
+      alt_text: eightiesStyleIds.has(style.id)
+        ? cardSourceAlt
+        : `${style.title} card pair`,
+      provenance: provenanceFor(style, cardSourceAlt, cardResultAlt),
       sort_order: 0,
     },
   ];
@@ -203,7 +213,7 @@ async function seedStyle(
       source_storage_key: await resolveAssetUrl(client, pair.source, assetCache),
       result_storage_key: await resolveAssetUrl(client, pair.result, assetCache),
       alt_text: pair.altSource,
-      provenance: { source: "seed", licence: "catalog" },
+      provenance: provenanceFor(style, pair.altSource, pair.altResult),
       sort_order: index + 1,
     });
   }
@@ -219,12 +229,24 @@ async function seedStyle(
 
   for (const tag of tagSpecs) {
     const tagSlug = slugify(`${tag.kind}-${tag.name}`);
-    const tagId = uuidFromKey(`tag:${tagSlug}`);
-    const { error: tagError } = await client.from("tags").upsert(
-      { id: tagId, name: tag.name, slug: tagSlug, kind: tag.kind },
-      { onConflict: "slug" },
-    );
-    if (tagError) throw tagError;
+    const { data: existingTag, error: findTagError } = await client
+      .from("tags")
+      .select("id")
+      .eq("slug", tagSlug)
+      .maybeSingle();
+    if (findTagError) throw findTagError;
+
+    let tagId = existingTag?.id;
+    if (!tagId) {
+      tagId = uuidFromKey(`tag:${tagSlug}`);
+      const { error: tagError } = await client.from("tags").insert({
+        id: tagId,
+        name: tag.name,
+        slug: tagSlug,
+        kind: tag.kind,
+      });
+      if (tagError) throw tagError;
+    }
 
     const { error: linkError } = await client.from("style_tags").upsert(
       { style_id: styleId, tag_id: tagId },
@@ -232,6 +254,17 @@ async function seedStyle(
     );
     if (linkError) throw linkError;
   }
+}
+
+function provenanceFor(style: CatalogStyle, altSource: string, altResult: string) {
+  if (!eightiesStyleIds.has(style.id)) {
+    return { source: "seed", licence: "catalog" };
+  }
+  return {
+    ...eightiesAssetProvenance,
+    altSource,
+    altResult,
+  };
 }
 
 async function main() {
@@ -244,20 +277,44 @@ async function main() {
 
   await ensureCatalogBucket(client);
 
-  const categoryNames = [...new Set(seedStyles.map((s) => s.category))];
   const categoryIds = new Map<string, string>();
   const assetCache = new Map<string, string>();
 
-  for (let i = 0; i < categoryNames.length; i++) {
-    const cat = await upsertCategory(client, categoryNames[i]!, i);
-    categoryIds.set(cat.name, cat.id);
+  const only = process.argv
+    .find((arg) => arg.startsWith("--only="))
+    ?.slice("--only=".length);
+  const stylesToSeed =
+    only === "80s"
+      ? seedStyles.filter((style) => eightiesStyleIds.has(style.id))
+      : seedStyles;
+
+  if (only === "80s") {
+    const { data: cat, error: catError } = await client
+      .from("categories")
+      .select("id")
+      .eq("slug", "vintage")
+      .maybeSingle();
+    if (catError) throw catError;
+    if (!cat?.id) throw new Error("Vintage category not found in DB");
+    categoryIds.set("Vintage", cat.id);
+  } else {
+    const categoryNames = [...new Set(seedStyles.map((s) => s.category))];
+    for (let i = 0; i < categoryNames.length; i++) {
+      const cat = await upsertCategory(client, categoryNames[i]!, i);
+      categoryIds.set(cat.name, cat.id);
+    }
   }
 
-  for (const style of seedStyles) {
+  for (const style of stylesToSeed) {
     const categoryId = categoryIds.get(style.category);
     if (!categoryId) throw new Error(`Missing category for ${style.id}`);
     await seedStyle(client, style, categoryId, assetCache);
     console.log(`Seeded ${style.id}`);
+  }
+
+  if (only) {
+    console.log(`Done. Seeded ${stylesToSeed.length} styles (--only=${only}).`);
+    return;
   }
 
   const keepSlugs = seedStyles.map((s) => s.id);

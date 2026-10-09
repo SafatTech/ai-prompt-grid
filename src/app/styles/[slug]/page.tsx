@@ -4,7 +4,11 @@ import { RelatedStyles } from "@/components/styles/related-styles";
 import { StyleDetailClient } from "@/components/styles/style-detail-client";
 import { relatedStylesFor } from "@/lib/catalog/related-styles";
 import { getPublishedStyleBySlug, listPublishedStyles } from "@/lib/catalog/repository";
-import { stylePageDescription } from "@/lib/catalog/style-meta";
+import {
+  styleMetadataTitle,
+  stylePageDescription,
+  styleSocialTitle,
+} from "@/lib/catalog/style-meta";
 import { absoluteUrl } from "@/lib/site-url";
 
 export async function generateStaticParams() {
@@ -31,9 +35,11 @@ export async function generateMetadata({
     style.title,
   );
 
-  const title = `${style.title} Prompt`;
+  const title = styleMetadataTitle(style);
+  const socialTitle = styleSocialTitle(style);
   const url = `/styles/${style.id}`;
   const ogImage = style.result || style.source || undefined;
+  const ogAlt = style.examplePairs[0]?.altResult || `${style.title} result example`;
 
   return {
     title,
@@ -42,17 +48,15 @@ export async function generateMetadata({
       canonical: url,
     },
     openGraph: {
-      title: `${title} · AI Prompt Grid`,
+      title: socialTitle,
       description,
       url,
       type: "article",
-      images: ogImage
-        ? [{ url: ogImage, alt: `${style.title} result example` }]
-        : undefined,
+      images: ogImage ? [{ url: ogImage, alt: ogAlt }] : undefined,
     },
     twitter: {
       card: "summary_large_image",
-      title: `${title} · AI Prompt Grid`,
+      title: socialTitle,
       description,
       images: ogImage ? [ogImage] : undefined,
     },
