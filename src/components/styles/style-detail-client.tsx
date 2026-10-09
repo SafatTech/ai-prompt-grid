@@ -236,8 +236,11 @@ export function StyleDetailClient({ style, children }: Props) {
           <p className="mt-3 text-sm text-[var(--muted)]">
             Target photo: {style.targetSourcePhoto}. Inputs:{" "}
             {style.promptVariant.inputImageRoles.join(" → ")} (
-            {style.promptVariant.inputImageCount}). Last verified{" "}
-            {style.promptVariant.lastVerified}. Prompt v{style.promptVariant.version}.
+            {style.promptVariant.inputImageCount}).
+            {style.promptVariant.lastVerified
+              ? ` Last verified ${style.promptVariant.lastVerified}.`
+              : null}{" "}
+            Prompt v{style.promptVariant.version}.
           </p>
 
           <section className="mt-9 border-t border-[var(--line)] py-7">

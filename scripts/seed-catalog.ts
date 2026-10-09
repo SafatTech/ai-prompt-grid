@@ -172,7 +172,9 @@ async function seedStyle(
     variables: { defaults: style.promptVariant.defaults },
     settings: {},
     test_record: {
-      lastVerified: style.promptVariant.lastVerified,
+      ...(style.promptVariant.lastVerified
+        ? { lastVerified: style.promptVariant.lastVerified }
+        : {}),
       limitations: style.promptVariant.limitations,
     },
     is_primary: true,
@@ -227,12 +229,24 @@ async function seedStyle(
 
   for (const tag of tagSpecs) {
     const tagSlug = slugify(`${tag.kind}-${tag.name}`);
-    const tagId = uuidFromKey(`tag:${tagSlug}`);
-    const { error: tagError } = await client.from("tags").upsert(
-      { id: tagId, name: tag.name, slug: tagSlug, kind: tag.kind },
-      { onConflict: "slug" },
-    );
-    if (tagError) throw tagError;
+    const { data: existingTag, error: findTagError } = await client
+      .from("tags")
+      .select("id")
+      .eq("slug", tagSlug)
+      .maybeSingle();
+    if (findTagError) throw findTagError;
+
+    let tagId = existingTag?.id;
+    if (!tagId) {
+      tagId = uuidFromKey(`tag:${tagSlug}`);
+      const { error: tagError } = await client.from("tags").insert({
+        id: tagId,
+        name: tag.name,
+        slug: tagSlug,
+        kind: tag.kind,
+      });
+      if (tagError) throw tagError;
+    }
 
     const { error: linkError } = await client.from("style_tags").upsert(
       { style_id: styleId, tag_id: tagId },
@@ -263,14 +277,8 @@ async function main() {
 
   await ensureCatalogBucket(client);
 
-  const categoryNames = [...new Set(seedStyles.map((s) => s.category))];
   const categoryIds = new Map<string, string>();
   const assetCache = new Map<string, string>();
-
-  for (let i = 0; i < categoryNames.length; i++) {
-    const cat = await upsertCategory(client, categoryNames[i]!, i);
-    categoryIds.set(cat.name, cat.id);
-  }
 
   const only = process.argv
     .find((arg) => arg.startsWith("--only="))
@@ -279,6 +287,23 @@ async function main() {
     only === "80s"
       ? seedStyles.filter((style) => eightiesStyleIds.has(style.id))
       : seedStyles;
+
+  if (only === "80s") {
+    const { data: cat, error: catError } = await client
+      .from("categories")
+      .select("id")
+      .eq("slug", "vintage")
+      .maybeSingle();
+    if (catError) throw catError;
+    if (!cat?.id) throw new Error("Vintage category not found in DB");
+    categoryIds.set("Vintage", cat.id);
+  } else {
+    const categoryNames = [...new Set(seedStyles.map((s) => s.category))];
+    for (let i = 0; i < categoryNames.length; i++) {
+      const cat = await upsertCategory(client, categoryNames[i]!, i);
+      categoryIds.set(cat.name, cat.id);
+    }
+  }
 
   for (const style of stylesToSeed) {
     const categoryId = categoryIds.get(style.category);
