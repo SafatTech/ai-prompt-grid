@@ -1,4 +1,5 @@
 import { eightiesStyleIds } from "./seed-80s-styles";
+import { linkedinStyleIds } from "./seed-linkedin-styles";
 
 const COPY_READY_SENTENCE =
   "Copy-ready prompt for ChatGPT, Gemini, and other AI image editors.";
@@ -24,19 +25,38 @@ export function stylePageDescription(summary: string, title: string): string {
 }
 
 /**
- * Style document titles. 1980s pages use "[Look] AI Photo Prompt" and stay
- * within 60 characters. Other styles keep the existing "[Look] Prompt" title.
+ * Shorten an overflowing title on a word boundary.
+ * A cut that already ends a word keeps that word.
+ */
+function trimAtWordBoundary(value: string, limit: number): string {
+  if (value.length <= limit) return value;
+  const slice = value.slice(0, limit);
+  if (slice.endsWith(" ") || value[limit] === " ") return slice.trimEnd();
+  const boundary = slice.lastIndexOf(" ");
+  if (boundary > 0) return slice.slice(0, boundary).trimEnd();
+  return slice.trimEnd();
+}
+
+function fitDocumentTitle(look: string): string | { absolute: string } {
+  if (`${look}${BRAND_SUFFIX}`.length <= TITLE_LIMIT) return look;
+  if (look.length <= TITLE_LIMIT) return { absolute: look };
+  return { absolute: trimAtWordBoundary(look, TITLE_LIMIT) };
+}
+
+/**
+ * Style document titles. 1980s pages use "[Look] AI Photo Prompt".
+ * LinkedIn pages already use a full prompt title, so nothing extra is added.
+ * Other styles keep the existing "[Look] Prompt" title. All stay within 60 characters.
  */
 export function styleMetadataTitle(style: {
   id: string;
   title: string;
 }): string | { absolute: string } {
-  if (!eightiesStyleIds.has(style.id)) return `${style.title} Prompt`;
-
-  const look = `${style.title} AI Photo Prompt`;
-  if (`${look}${BRAND_SUFFIX}`.length <= TITLE_LIMIT) return look;
-  if (look.length <= TITLE_LIMIT) return { absolute: look };
-  return { absolute: look.slice(0, TITLE_LIMIT).trimEnd() };
+  if (eightiesStyleIds.has(style.id)) {
+    return fitDocumentTitle(`${style.title} AI Photo Prompt`);
+  }
+  if (linkedinStyleIds.has(style.id)) return fitDocumentTitle(style.title);
+  return `${style.title} Prompt`;
 }
 
 /** Open Graph / Twitter title, including the brand suffix when it fits. */

@@ -112,7 +112,7 @@ describe("guide publishing rules", () => {
   it("does not link a guide that is not visible", () => {
     const visible = new Set(["diwali-couple-ai-photo-editing-prompts"]);
     assert.equal(
-      guideLinkMode("/guides/karwa-chauth-ai-photo-editing-prompts", visible),
+      guideLinkMode("/guides/dropped-draft-guide", visible),
       "text",
     );
     assert.equal(
@@ -332,11 +332,15 @@ describe("guide files", () => {
   it("drops the cancelled pet guide from the selfie guide and keeps the other cross-links", () => {
     const guides = new Map(loadAllGuides().map((guide) => [guide.slug, guide.body]));
     const selfies = guides.get("halloween-ai-prompts-for-selfies") ?? "";
-    const karwa = guides.get("karwa-chauth-ai-photo-editing-prompts") ?? "";
+    const headshots = guides.get("gemini-headshot-cv-photo-prompts") ?? "";
+    const merge = guides.get("how-to-merge-two-photos-in-gemini") ?? "";
+    const face = guides.get("how-to-keep-face-same-in-gemini-ai") ?? "";
     assert.doesNotMatch(selfies, /ai-pet-halloween-costume-prompts/);
     assert.match(selfies, /\/guides\/80s-ai-photo-prompts-solo-couple/);
-    assert.match(karwa, /\/guides\/diwali-couple-ai-photo-editing-prompts/);
-    assert.match(karwa, /\/guides\/80s-ai-photo-prompts-solo-couple/);
+    assert.doesNotMatch(headshots, /karwa-chauth/);
+    assert.doesNotMatch(merge, /karwa-chauth/);
+    assert.doesNotMatch(face, /karwa-chauth/);
+    assert.match(face, /\/guides\/gemini-headshot-cv-photo-prompts/);
   });
 
   it("keeps Halloween's social image and makes its first pair the eager one", () => {

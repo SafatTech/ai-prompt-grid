@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { stylePageDescription } from "../../src/lib/catalog/style-meta";
+import { styleMetadataTitle, stylePageDescription } from "../../src/lib/catalog/style-meta";
 
 const SECOND = "Copy-ready prompt for ChatGPT, Gemini, and other AI image editors.";
 
@@ -38,5 +38,35 @@ describe("style page meta description", () => {
       stylePageDescription("  ", "Midnight Glove Noir"),
       "Copy-ready Midnight Glove Noir prompt for ChatGPT, Gemini, and other AI image editors.",
     );
+  });
+});
+
+describe("document title word boundary", () => {
+  const eightiesId = "1985-studio-portrait";
+
+  it("drops a partial last word when the cut lands inside a word", () => {
+    const metadata = styleMetadataTitle({
+      id: eightiesId,
+      title: "Alpha Beta Gamma Delta Epsilon Zeta Eta Theta Iota",
+    });
+    assert.equal(typeof metadata, "object");
+    if (typeof metadata === "string") return;
+    assert.equal(
+      metadata.absolute,
+      "Alpha Beta Gamma Delta Epsilon Zeta Eta Theta Iota AI Photo",
+    );
+    assert.ok(metadata.absolute.length <= 60);
+    assert.equal(metadata.absolute.endsWith("Promp"), false);
+  });
+
+  it("keeps the last complete word when the cut already ends on a boundary", () => {
+    const metadata = styleMetadataTitle({
+      id: eightiesId,
+      title: `${"Word ".repeat(12)}Extra`,
+    });
+    assert.equal(typeof metadata, "object");
+    if (typeof metadata === "string") return;
+    assert.equal(metadata.absolute, "Word ".repeat(12).trimEnd());
+    assert.equal(metadata.absolute.split(" ").length, 12);
   });
 });
