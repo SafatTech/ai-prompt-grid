@@ -54,13 +54,13 @@ const aiGeneratedLimit =
 const faceOcclusionLimit = "Heavy face occlusion can weaken identity fidelity";
 
 const passportLimit =
-  "This look is for CVs and forms that accept a white-background photo. Official ID photo rules vary by country, so check yours.";
+  "Official passport, visa and ID photos have strict rules, and many authorities reject AI-edited or digitally altered photos. Check your issuing authority's requirements; this prompt does not produce a compliant ID photo.";
 
 const linkedin: LinkedinSeed[] = [
   {
     n: "60",
     id: "navy-blazer-linkedin-profile-picture-prompt-gemini",
-    title: "Navy Blazer LinkedIn Profile Picture Prompt for Gemini (Men & Women)",
+    title: "Navy Blazer LinkedIn Photo Prompt for Gemini (Men & Women)",
     note: "Navy blazer, white shirt, light-grey studio",
     description:
       "Turn a casual selfie into a classic LinkedIn profile picture with a navy blazer, white shirt, and a soft light-grey studio backdrop, keeping your face unchanged.",
@@ -89,7 +89,7 @@ const linkedin: LinkedinSeed[] = [
   {
     n: "61",
     id: "charcoal-suit-corporate-linkedin-profile-picture-prompt-gemini-men",
-    title: "Charcoal Suit Corporate LinkedIn Profile Picture Prompt for Gemini (Men)",
+    title: "Charcoal Suit LinkedIn Photo Prompt for Gemini (Men)",
     note: "Coat pant, light blue shirt, dark tie",
     description:
       "Turn a portrait into a corporate headshot for men in a charcoal two-piece suit (coat pant), light blue shirt, and dark tie, with soft front-left studio light.",
@@ -119,7 +119,7 @@ const linkedin: LinkedinSeed[] = [
   {
     n: "62",
     id: "black-blazer-linkedin-profile-picture-prompt-gemini-women",
-    title: "Black Blazer LinkedIn Profile Picture Prompt for Gemini (Women)",
+    title: "Black Blazer LinkedIn Photo Prompt for Gemini (Women)",
     note: "Black blazer, cream high-neck top, beige studio",
     description:
       "Turn a portrait into a polished LinkedIn profile picture for women with a tailored black blazer, cream high-neck top, light natural makeup, and a soft beige backdrop.",
@@ -147,7 +147,7 @@ const linkedin: LinkedinSeed[] = [
   {
     n: "63",
     id: "hijab-office-linkedin-profile-picture-prompt-gemini-women",
-    title: "Hijab Office LinkedIn Profile Picture Prompt for Gemini (Women)",
+    title: "Hijab Office LinkedIn Photo Prompt for Gemini (Women)",
     note: "Dusty-rose hijab, navy blazer, grey studio",
     description:
       "Turn a hijab portrait into a professional LinkedIn headshot with a neatly wrapped dusty-rose hijab, navy blazer, and a soft grey studio backdrop.",
@@ -176,7 +176,7 @@ const linkedin: LinkedinSeed[] = [
   {
     n: "64",
     id: "dupatta-office-linkedin-profile-picture-prompt-gemini-women",
-    title: "Dupatta Office LinkedIn Profile Picture Prompt for Gemini (Women)",
+    title: "Dupatta Office LinkedIn Photo Prompt for Gemini (Women)",
     note: "Off-white kurta, beige blazer, draped dupatta",
     description:
       "Turn a portrait into an office headshot for women with an off-white kurta, fitted beige blazer, and a neatly draped solid dupatta on a light-grey backdrop.",
@@ -206,7 +206,7 @@ const linkedin: LinkedinSeed[] = [
   {
     n: "65",
     id: "shalwar-kameez-linkedin-profile-picture-prompt-gemini-men",
-    title: "Shalwar Kameez Waistcoat LinkedIn Profile Picture Prompt for Gemini (Men)",
+    title: "Shalwar Kameez LinkedIn Photo Prompt for Gemini (Men)",
     note: "White kameez, navy waistcoat, grey studio",
     description:
       "Turn a portrait into a formal LinkedIn headshot for men in a crisp white shalwar kameez and navy waistcoat, with soft even light on a light-grey backdrop.",
@@ -237,17 +237,17 @@ const linkedin: LinkedinSeed[] = [
     n: "66",
     id: "cv-photo-ai-prompt-plain-background-resume-headshot",
     title: "CV Photo AI Prompt: Plain Background Resume Headshot",
-    note: "Plain light backdrop, smart formal, slight smile",
+    note: "Plain cream wall, own clothes, slight smile",
     description:
-      "Turn a casual photo into a clean CV or resume photo for job portals, with smart formal clothing and a plain light backdrop. Not a substitute for a passport or ID card.",
-    intent: "New outfit or theme",
+      "Gives a clean, plain-background CV or resume photo, keeping their own clothes.",
+    intent: "Change background",
     mood: "Bright neutral",
     background: "Minimal cream wall",
     ratio: "4:5 Portrait",
-    keepClothing: false,
+    keepClothing: true,
     keepPose: false,
-    changes: ["Smart formal clothing", "Plain light backdrop", "Shadow-free even light"],
-    stays: ["Face and identity", "Skin tone", "Hairstyle", "Apparent age"],
+    changes: ["Plain cream wall", "Shadow-free even light"],
+    stays: ["Face and identity", "Own clothing", "Skin tone", "Glasses"],
     height: 360,
     targetSourcePhoto: "One recent, front-facing head-and-shoulders photo",
     bestSourcePhoto: [
@@ -257,14 +257,14 @@ const linkedin: LinkedinSeed[] = [
       "Original image should not be blurry",
     ],
     altSource: "Woman with glasses in a lavender knit sweater, in a bedroom.",
-    altResult: "Woman with glasses in a smart top, plain cream wall.",
+    altResult: "Woman with glasses in the same lavender knit sweater, plain cream wall.",
     template:
-      "Edit the uploaded {{subject}} into a clean CV photo with soft, even lighting, no shadows on the face, and sharp focus. Follow the selected source-preservation settings: {{preserve}}. If clothing is not preserved, dress them in smart formal clothing in plain, solid colors. If pose is not preserved, have them face the camera with a slight friendly smile, framed from head to upper shoulders. Keep their face shape, eyes, nose, lips, hairline, any beard, glasses, or head covering, apparent age, and exact skin tone; do not beautify, slim, de-age, or lighten the skin, and keep natural skin texture. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair and clothing. Do not add people, text, lettering, or logos. Compose for {{ratio}} without cropping the face.",
+      "Edit the uploaded {{subject}} into a clean CV photo with soft, even lighting, no shadows on the face, and sharp focus. Follow the selected source-preservation settings: {{preserve}}. If clothing is preserved, keep their own clothes. If pose is not preserved, have them face the camera with a slight friendly smile, framed from head to upper shoulders. Keep their face shape, eyes, nose, lips, hairline, any beard, glasses, or head covering, apparent age, and exact skin tone; do not beautify, slim, de-age, or lighten the skin, and keep natural skin texture. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair and clothing. Do not add people, text, lettering, or logos. Compose for {{ratio}} without cropping the face.",
   },
   {
     n: "67",
     id: "modern-office-linkedin-profile-picture-prompt-gemini",
-    title: "Modern Office LinkedIn Profile Picture Prompt for Gemini (Office Photo)",
+    title: "Modern Office LinkedIn Photo Prompt for Gemini",
     note: "Blurred glass office, window light",
     description:
       "Place a portrait in a bright modern office with glass walls and plants softly blurred behind, keeping their own clothes, with natural window light.",
@@ -284,7 +284,8 @@ const linkedin: LinkedinSeed[] = [
       "No other people in the photo",
       "Original image should not be blurry",
     ],
-    altSource: "Man with curly hair and a goatee in a light-blue shirt, on a city street.",
+    altSource:
+      "Man with wavy dark hair and a short full beard in a light-blue shirt, on a city street.",
     altResult: "Man in a smart blue shirt, blurred bright office with glass and plants.",
     template:
       "Edit the uploaded {{subject}} into an office headshot with natural window light on the face and a shallow depth of field. Follow the selected source-preservation settings: {{preserve}}. If clothing is preserved, keep their own clothes. If clothing is not preserved, dress them in smart business clothing in plain colors. If pose is not preserved, use head-and-shoulders framing turned slightly toward the camera. Keep their face shape, eyes, nose, lips, hairline, any beard, glasses, or head covering, apparent age, and exact skin tone; do not beautify, slim, de-age, or lighten the skin, and keep natural skin texture. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair and clothing. Do not add people, text, lettering, or logos. Compose for {{ratio}} without cropping the face.",
@@ -292,8 +293,7 @@ const linkedin: LinkedinSeed[] = [
   {
     n: "68",
     id: "outdoor-natural-light-linkedin-profile-picture-prompt-gemini",
-    title:
-      "Outdoor Natural Light LinkedIn Profile Picture Prompt for Gemini (Freelancers & Teachers)",
+    title: "Outdoor Natural Light LinkedIn Photo Prompt for Gemini",
     note: "Blurred trees, late-afternoon light, warm smile",
     description:
       "Turn a portrait into an approachable outdoor headshot for freelancers, teachers, and creatives, keeping their own clothes, with blurred green trees and late-afternoon light.",
@@ -322,7 +322,7 @@ const linkedin: LinkedinSeed[] = [
   {
     n: "69",
     id: "linkedin-photo-clean-up-ai-prompt-gemini-keep-outfit",
-    title: "LinkedIn Photo Clean-Up AI Prompt for Gemini (Keep Your Outfit)",
+    title: "LinkedIn Photo Clean-Up AI Prompt for Gemini (Keep Outfit)",
     note: "Minimal edit: plain grey, tidy, even light",
     description:
       "Keep your own photo and outfit, and only swap in a plain soft grey backdrop, even out the light, and tidy stray hairs and lint.",
@@ -343,7 +343,7 @@ const linkedin: LinkedinSeed[] = [
       "Original image should not be blurry",
     ],
     altSource:
-      "Man with a salt-and-pepper beard in a messy open light-blue shirt, in front of cluttered shelves.",
+      "Man with messy dark hair and a dark beard in a rumpled, open light-blue shirt, in front of cluttered shelves.",
     altResult: "Man in the same light-blue shirt tidied, plain soft-grey backdrop.",
     template:
       "Edit the uploaded {{subject}} with minimal changes into a tidy professional headshot. Follow the selected source-preservation settings: {{preserve}}. If clothing is not preserved, neaten the outfit into a similar plain smart version without changing its style. If pose is not preserved, straighten into a simple head-and-shoulders pose facing the camera. Even out the lighting and remove small stray hairs and lint. No skin smoothing, slimming, or makeup changes. Keep their face shape, eyes, nose, lips, hairline, any beard, glasses, or head covering, apparent age, and exact skin tone; do not beautify, slim, de-age, or lighten the skin, and keep natural skin texture. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair and clothing. Do not add people, text, lettering, or logos. Compose for {{ratio}} without cropping the face.",
@@ -378,9 +378,9 @@ const linkedin: LinkedinSeed[] = [
       "Original image should not be blurry",
     ],
     altSource: "Woman with long hair in a maroon henley, in a hallway.",
-    altResult: "Woman in a maroon top with a neat collar, light-grey studio.",
+    altResult: "Woman in the same maroon henley, light-grey studio.",
     second: {
-      altSource: "Bearded man in a blue plaid shirt, on a street.",
+      altSource: "Bearded man in a brown and navy plaid shirt, on a street.",
       altResult: "Bearded man in a plaid shirt with a neat collar, light-grey studio.",
     },
     template:
@@ -389,7 +389,7 @@ const linkedin: LinkedinSeed[] = [
   {
     n: "71",
     id: "saree-office-linkedin-profile-picture-prompt-gemini-women",
-    title: "Saree Office LinkedIn Profile Picture Prompt for Gemini (Women)",
+    title: "Saree Office LinkedIn Photo Prompt for Gemini (Women)",
     note: "Plain silk-cotton saree, fitted blouse, grey studio",
     description:
       "Turn a portrait into an elegant office headshot for women in a plain solid-color saree with a neatly pinned pallu, on a soft light-grey backdrop.",
@@ -421,8 +421,7 @@ const linkedin: LinkedinSeed[] = [
     id: "passport-size-photo-ai-prompt-gemini-white-background",
     title: "Passport Size Photo AI Prompt for Gemini (White Background)",
     note: "Plain white, front-facing, for CVs and forms",
-    description:
-      "Turn a photo into a passport-size style headshot on a plain white background for CVs and forms that accept one. Official ID photo rules vary by country, so check yours before using it on a passport, visa, or national ID.",
+    description: passportLimit,
     intent: "Change background",
     mood: "Bright neutral",
     background: "Pure white seamless infinity studio background",
@@ -449,7 +448,7 @@ const linkedin: LinkedinSeed[] = [
   {
     n: "73",
     id: "executive-corporate-linkedin-profile-picture-prompt-gemini",
-    title: "Executive Dark Studio LinkedIn Profile Picture Prompt for Gemini (Corporate)",
+    title: "Executive Dark Studio LinkedIn Photo Prompt for Gemini",
     note: "Low-key charcoal backdrop, soft side light",
     description:
       "Turn a portrait into a confident executive headshot with a dark charcoal studio backdrop, dark formal outfit, and soft low-key side light.",
@@ -478,7 +477,7 @@ const linkedin: LinkedinSeed[] = [
   {
     n: "74",
     id: "home-office-linkedin-profile-picture-prompt-gemini",
-    title: "Home Office LinkedIn Profile Picture Prompt for Gemini (Remote Work)",
+    title: "Home Office LinkedIn Photo Prompt for Gemini (Remote Work)",
     note: "Blurred home-office desk, warm lamp light",
     description:
       "Place a portrait in a softly blurred home office for remote-work profiles, freelancer pages, and video-call avatars, keeping their own clothes.",

@@ -16,10 +16,14 @@ import { styleSocialTitle } from "../../src/lib/catalog/style-meta";
 const TOKEN = /\{\{[a-zA-Z]+\}\}/;
 
 const keepClothesIds = new Set([
+  "cv-photo-ai-prompt-plain-background-resume-headshot",
   "modern-office-linkedin-profile-picture-prompt-gemini",
   "outdoor-natural-light-linkedin-profile-picture-prompt-gemini",
   "home-office-linkedin-profile-picture-prompt-gemini",
 ]);
+
+const passportNote =
+  "Official passport, visa and ID photos have strict rules, and many authorities reject AI-edited or digitally altered photos. Check your issuing authority's requirements; this prompt does not produce a compliant ID photo.";
 
 describe("LinkedIn headshot style pages", () => {
   it("publishes 15 professional portrait styles numbered 60 through 74", () => {
@@ -48,10 +52,14 @@ describe("LinkedIn headshot style pages", () => {
     ]);
   });
 
-  it("keeps document titles within 60 characters and does not append another Prompt", () => {
+  it("keeps style titles and document titles within 60 characters", () => {
     for (const style of seedLinkedinStyles) {
+      assert.ok(
+        style.title.length <= 60,
+        `${style.id} title is ${style.title.length}: ${style.title}`,
+      );
       const social = styleSocialTitle(style);
-      assert.ok(social.length <= 60, `${style.id} title is ${social.length}: ${social}`);
+      assert.ok(social.length <= 60, `${style.id} social title is ${social.length}: ${social}`);
       assert.equal(social.endsWith(" Prompt"), false);
     }
   });
@@ -84,6 +92,7 @@ describe("LinkedIn headshot style pages", () => {
       assert.equal(result.ok, true);
       if (!result.ok) continue;
       assert.match(result.prompt, /keep their own clothes/i);
+      assert.doesNotMatch(result.prompt, /smart formal/i);
     }
 
     const team = seedLinkedinStyles.find(
@@ -99,7 +108,18 @@ describe("LinkedIn headshot style pages", () => {
       (item) => item.id === "passport-size-photo-ai-prompt-gemini-white-background",
     );
     assert.ok(passport);
-    assert.match(passport.description, /check yours/i);
-    assert.ok(passport.promptVariant.limitations.some((line) => /check yours/i.test(line)));
+    assert.equal(passport.description, passportNote);
+    assert.ok(passport.promptVariant.limitations.includes(passportNote));
+
+    const cv = seedLinkedinStyles.find(
+      (item) => item.id === "cv-photo-ai-prompt-plain-background-resume-headshot",
+    );
+    assert.ok(cv);
+    assert.equal(
+      cv.examplePairs[0]?.altResult,
+      "Woman with glasses in the same lavender knit sweater, plain cream wall.",
+    );
+    assert.doesNotMatch(cv.description, /formal/i);
+    assert.doesNotMatch(cv.note, /formal/i);
   });
 });

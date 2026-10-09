@@ -24,10 +24,23 @@ export function stylePageDescription(summary: string, title: string): string {
   return `${lead} ${COPY_READY_SENTENCE}`;
 }
 
+/**
+ * Shorten an overflowing title on a word boundary.
+ * A cut that already ends a word keeps that word.
+ */
+function trimAtWordBoundary(value: string, limit: number): string {
+  if (value.length <= limit) return value;
+  const slice = value.slice(0, limit);
+  if (slice.endsWith(" ") || value[limit] === " ") return slice.trimEnd();
+  const boundary = slice.lastIndexOf(" ");
+  if (boundary > 0) return slice.slice(0, boundary).trimEnd();
+  return slice.trimEnd();
+}
+
 function fitDocumentTitle(look: string): string | { absolute: string } {
   if (`${look}${BRAND_SUFFIX}`.length <= TITLE_LIMIT) return look;
   if (look.length <= TITLE_LIMIT) return { absolute: look };
-  return { absolute: look.slice(0, TITLE_LIMIT).trimEnd() };
+  return { absolute: trimAtWordBoundary(look, TITLE_LIMIT) };
 }
 
 /**
