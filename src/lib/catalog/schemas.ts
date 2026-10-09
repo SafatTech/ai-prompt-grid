@@ -207,6 +207,14 @@ export const backgroundSchema = z.enum([
   "Purple and blue laser-beam mall photo-studio backdrop",
   "Park at golden hour with soft trees",
   "Floral wedding-stage backdrop",
+  "Soft evenly lit light-grey studio backdrop",
+  "Soft out-of-focus neutral grey studio backdrop",
+  "Soft beige studio backdrop",
+  "Plain soft grey studio backdrop",
+  "Plain light-grey studio backdrop",
+  "Softly blurred bright modern office with glass walls and plants",
+  "Softly blurred green trees in late-afternoon light",
+  "Dark charcoal studio backdrop with a soft gradient",
 ]);
 
 export const ratioSchema = z.enum(["4:5 Portrait", "1:1 Square", "9:16 Story"]);

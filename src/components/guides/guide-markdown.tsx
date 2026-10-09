@@ -183,8 +183,8 @@ function sizedLocalPair(
 }
 
 function frameLabel(src: string): string | null {
-  if (src.includes("-before.") || /\/source-\d+\./.test(src)) return "Before";
-  if (src.includes("-after.") || /\/result-\d+\./.test(src)) return "After";
+  if (src.includes("-before.") || /\/source-\d+b?\./.test(src)) return "Before";
+  if (src.includes("-after.") || /\/result-\d+b?\./.test(src)) return "After";
   return null;
 }
 

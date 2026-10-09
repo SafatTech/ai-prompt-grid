@@ -268,6 +268,14 @@ export const backgroundLabels: Record<string, string> = {
   "Purple and blue laser-beam mall photo-studio backdrop": "Mall laser studio",
   "Park at golden hour with soft trees": "Golden hour park",
   "Floral wedding-stage backdrop": "Floral wedding stage",
+  "Soft evenly lit light-grey studio backdrop": "Even grey studio",
+  "Soft out-of-focus neutral grey studio backdrop": "Blurred grey studio",
+  "Soft beige studio backdrop": "Beige studio",
+  "Plain soft grey studio backdrop": "Soft grey studio",
+  "Plain light-grey studio backdrop": "Light grey studio",
+  "Softly blurred bright modern office with glass walls and plants": "Glass office",
+  "Softly blurred green trees in late-afternoon light": "Blurred trees",
+  "Dark charcoal studio backdrop with a soft gradient": "Charcoal gradient",
 };
 
 const genericMoodPresets = [
