@@ -16,7 +16,10 @@ export const editIntentSchema = z.enum([
   "Full scene transformation",
 ]);
 
-export const inputRequirementSchema = z.enum(["One photo", "Photo plus style reference"]);
+export const inputRequirementSchema = z.enum([
+  "One photo",
+  "Photo plus style reference",
+]);
 
 export const publishStatusSchema = z.enum([
   "draft",

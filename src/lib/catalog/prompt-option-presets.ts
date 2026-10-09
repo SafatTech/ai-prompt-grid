@@ -121,8 +121,7 @@ export const backgroundLabels: Record<string, string> = {
   "Bright outdoor park with mature trees and colorful floating confetti": "Park confetti",
   "Retro roadside diner at sunset with a classic red car": "Retro diner",
   "Dim artist studio or reading room beside a textured window": "Artist studio",
-  "Historic European-style cobblestone city street with soft café details":
-    "Cobblestone street",
+  "Historic European-style cobblestone city street with soft café details": "Cobblestone street",
   "Dense dark city crowd at blue hour with heavy motion blur": "Night crowd",
   "Dark indoor room with strong late-afternoon window shadows": "Window shadows",
   "Tree-lined city street with parked cars and subtle street motion blur": "City street",
@@ -166,23 +165,19 @@ export const backgroundLabels: Record<string, string> = {
     "Riverside sunset",
   "Warm traditional indoor setting beside a wooden window or doorway with muted beige-brown walls, soft sunlight, and shallow cinematic blur":
     "Traditional indoor",
-  "Grassy hillside meadow with tall wild grass, a bare tree, and a cloudy sky":
-    "Hillside meadow",
+  "Grassy hillside meadow with tall wild grass, a bare tree, and a cloudy sky": "Hillside meadow",
   "Pure white seamless infinity studio background": "White infinity",
-  "Monochrome coral seamless studio backdrop with a circular coral pedestal":
-    "Coral pedestal",
+  "Monochrome coral seamless studio backdrop with a circular coral pedestal": "Coral pedestal",
   "Sunlit pale-oak desk with a softly blurred open notebook, ceramic cup, and minimal greenery near a window":
     "Oak desk",
   "Warm light-beige textured paper surface with a closed cream notebook and graphite pencil at the edges":
     "Paper surface",
   "Warm limestone pedestal with soft green leaves, natural stone, folded unbleached linen, and a pale beige backdrop":
     "Limestone pedestal",
-  "Deep charcoal-black seamless studio with a low black reflective plinth":
-    "Charcoal studio",
+  "Deep charcoal-black seamless studio with a low black reflective plinth": "Charcoal studio",
   "Pale sage-to-cream gradient studio background with subtle curved light trails":
     "Sage gradient",
-  "Warm ivory microsuede surface with a subtle fine matte-stone texture":
-    "Ivory microsuede",
+  "Warm ivory microsuede surface with a subtle fine matte-stone texture": "Ivory microsuede",
   "A softly blurred neutral bathroom vanity beside a sunlit window": "Bathroom vanity",
   "Sunlit pale-oak table with soft cream linen curtains and a small blurred dried-flower arrangement":
     "Oak table",
@@ -196,8 +191,7 @@ export const backgroundLabels: Record<string, string> = {
   "Luxury garden picnic with soft golden-hour light": "Garden picnic",
   "Cozy retro living-room set with warm ambient lights": "Retro living room",
   "Miniature snowy village scene with handcrafted depth": "Snowy village",
-  "Cozy indoor celebration setting with subtle booth-style atmosphere":
-    "Indoor celebration",
+  "Cozy indoor celebration setting with subtle booth-style atmosphere": "Indoor celebration",
   "Cozy contemporary bedroom interior with warm wood accents, layered neutral textiles, soft curtains and subtle greenery":
     "Cozy bedroom",
   "Modern staged living room with cream upholstery, warm natural wood, textured neutral rug, soft curtains, indoor greenery and refined minimal decor":
@@ -336,7 +330,6 @@ export const categoryMoodPresets: Record<CategoryName, readonly string[]> = {
     "Elegant warm editorial",
   ],
   Vintage: [
-    "Rich saturated sunset colors with painted-poster warmth and slight print wear",
     "Warm nostalgic",
     "Soft nostalgic",
     "Flashy nostalgic",
@@ -451,20 +444,15 @@ export const categoryBackgroundPresets: Record<CategoryName, readonly string[]> 
     "Keep original background",
   ],
   Vintage: [
-    "Hand-painted sunset sky with empty space at the top",
-    "Soft blue 1980s laser-style studio backdrop",
-    "Busy 1980s city market street in bright afternoon sun",
-    "Mirrored aerobics studio wall with a pastel gradient backdrop",
-    "1980s teenager bedroom with a cassette player, a stack of tapes, and a patterned bedspread",
-    "Dark roller rink with neon lights",
-    "Purple and blue laser-beam mall photo-studio backdrop",
-    "Park at golden hour with soft trees",
-    "Keep original background",
-    "Floral wedding-stage backdrop",
-    "Classic mottled studio backdrop",
     "Retro roadside diner at sunset with a classic red car",
     "Cozy retro living-room set with warm ambient lights",
+    "Layered handmade scrapbook page with torn paper, tape, mini photos, and doodles",
+    "Off-white graph-paper scrapbook page with faint grid lines, torn paper notes, pale-blue tape, small doodles, paper clips, delicate dried flowers, blue botanical accents, and layered photo cutouts",
+    "Layered cream scrapbook page with torn paper, tilted Polaroid frames, tape pieces, handwritten doodles, tiny hearts, casual note cards, and soft outdoor greenery inside selected photo frames",
+    "Classic mottled studio backdrop",
+    "Cozy indoor celebration setting with subtle booth-style atmosphere",
     "Quiet sunlit residential street with warm walls, trees, soft greenery, neighborhood gates, and long late-afternoon shadows",
+    "Keep original background",
   ],
   "Professional portraits": [
     "Window-lit studio",
@@ -539,7 +527,11 @@ function isCategoryName(value: string): value is CategoryName {
 }
 
 function shortLabelFallback(value: string): string {
-  const words = value.replace(/[,—]/g, " ").split(/\s+/).filter(Boolean).slice(0, 3);
+  const words = value
+    .replace(/[,—]/g, " ")
+    .split(/\s+/)
+    .filter(Boolean)
+    .slice(0, 3);
   return words.join(" ") || value;
 }
 
@@ -548,7 +540,10 @@ function labelFor(kind: "mood" | "background", value: string): string {
   return map[value] ?? shortLabelFallback(value);
 }
 
-function presetsFor(category: string, kind: "mood" | "background"): readonly string[] {
+function presetsFor(
+  category: string,
+  kind: "mood" | "background",
+): readonly string[] {
   if (isCategoryName(category)) {
     const presets =
       kind === "mood"

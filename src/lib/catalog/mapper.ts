@@ -29,7 +29,12 @@ const REQUIREMENTS = new Set<InputRequirement>([
   "Photo plus style reference",
 ]);
 
-const STATUSES = new Set<PublishStatus>(["draft", "in_review", "published", "archived"]);
+const STATUSES = new Set<PublishStatus>([
+  "draft",
+  "in_review",
+  "published",
+  "archived",
+]);
 
 export type DbCategory = {
   name: string;
@@ -157,7 +162,8 @@ function mapPromptVariant(row: DbPromptVariant): PromptVariant {
       keepClothing: defaults.keepClothing !== false,
       keepPose: defaults.keepPose !== false,
     },
-    lastVerified: typeof test.lastVerified === "string" ? test.lastVerified : "",
+    lastVerified:
+      typeof test.lastVerified === "string" ? test.lastVerified : "",
     limitations: asStringArray(test.limitations),
   };
 }

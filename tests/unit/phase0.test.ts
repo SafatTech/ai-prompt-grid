@@ -16,6 +16,7 @@ import {
   labeledOptionsForStyle,
 } from "../../src/lib/catalog/prompt-option-presets";
 import { promptOptionsSchema } from "../../src/lib/catalog/schemas";
+import { eightiesStyleIds } from "../../src/lib/catalog/seed-80s-styles";
 import { getPublishedStyles, getStyleById } from "../../src/lib/catalog/styles";
 import { cn } from "../../src/lib/utils";
 
@@ -33,7 +34,7 @@ describe("published catalog seed", () => {
       assert.equal(style.status, "published");
       assert.ok(style.promptVariant.template.includes("{{mood}}"));
       assert.ok(style.promptVariant.mode.length > 0);
-      assert.ok(style.examplePairs.length >= 2);
+      assert.ok(style.examplePairs.length >= (eightiesStyleIds.has(style.id) ? 1 : 2));
       assert.ok(style.promptVariant.limitations.length >= 1);
     }
   });

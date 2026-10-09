@@ -20,15 +20,7 @@ function evidence(
 ): CatalogStyle["examplePairs"] {
   const source = asset(`source-${n}.png`);
   const result = asset(`result-${n}.png`);
-  return [
-    { source, result, altSource, altResult },
-    {
-      source,
-      result,
-      altSource: `${altSource} (detail)`,
-      altResult: `${altResult} (detail)`,
-    },
-  ];
+  return [{ source, result, altSource, altResult }];
 }
 
 type EightiesSeed = {
@@ -52,6 +44,8 @@ type EightiesSeed = {
   altSource: string;
   altResult: string;
   limitations?: string[];
+  inputImageCount?: number;
+  inputImageRoles?: string[];
 };
 
 const aiGeneratedLimit =
@@ -164,11 +158,11 @@ const eighties: EightiesSeed[] = [
   },
   {
     n: "51",
-    id: "walkman-street-snapshot",
-    title: "Walkman Street Snapshot",
-    note: "Candid market walk with a Walkman",
+    id: "cassette-player-street-snapshot",
+    title: "Cassette Player Street Snapshot",
+    note: "Candid market walk with a portable cassette player with foam headphones",
     description:
-      "Recreate a photo as a candid 1980s street snapshot, walking a city market in denim with a Walkman and film grain.",
+      "Recreate a photo as a candid 1980s street snapshot, walking a city market in denim with a portable cassette player with foam headphones and film grain.",
     subject: "Person",
     intent: "Full scene transformation",
     mood: "Warm nostalgic",
@@ -176,7 +170,7 @@ const eighties: EightiesSeed[] = [
     keepClothing: false,
     keepPose: false,
     changes: [
-      "Casual 1980s outfit and Walkman",
+      "Casual 1980s outfit and portable cassette player with foam headphones",
       "Market street",
       "Point-and-shoot film look",
     ],
@@ -192,9 +186,9 @@ const eighties: EightiesSeed[] = [
     altSource:
       "AI-generated photo of a young man in a white t-shirt and jeans standing on a sunny street.",
     altResult:
-      "AI edit of that photo as a 1980s market snapshot, with a denim jacket, a Walkman, and a busy street behind him.",
+      "AI edit of that photo as a 1980s market snapshot, with a denim jacket, a portable cassette player with foam headphones, and a busy street behind him.",
     template:
-      "Edit the uploaded {{subject}} into a candid 1980s street snapshot walking through a city market, shot like a 35mm point-and-shoot photo with visible film grain and slightly off-center framing. Follow the selected source-preservation settings: {{preserve}}. If clothing is not preserved, dress them in a denim jacket, high-waisted jeans, and white sneakers, with a Walkman and foam headphones around the neck. If pose is not preserved, show them mid-walk. Apply {{mood}} color grading in bright afternoon sun with warm faded colors. Replace the background with {{background}}, keeping clean edges around hair and clothing. Do not add people, lettering, or logos. Compose for {{ratio}} without cropping the face.",
+      "Edit the uploaded {{subject}} into a candid 1980s street snapshot walking through a city market, shot like a 35mm point-and-shoot photo with visible film grain and slightly off-center framing. Follow the selected source-preservation settings: {{preserve}}. If clothing is not preserved, dress them in a denim jacket, high-waisted jeans, and white sneakers, with a portable cassette player with foam headphones around the neck. If pose is not preserved, show them mid-walk. Apply {{mood}} color grading in bright afternoon sun with warm faded colors. Replace the background with {{background}}, keeping clean edges around hair and clothing. Do not add people, lettering, or logos. Compose for {{ratio}} without cropping the face.",
   },
   {
     n: "52",
@@ -260,7 +254,7 @@ const eighties: EightiesSeed[] = [
     altResult:
       "AI edit of that photo as a flash snapshot in a 1980s bedroom, with posters, a cassette player, and a patterned bedspread.",
     template:
-      "Edit the uploaded {{subject}} into a casual 1980s snapshot sitting on a bed, like a print from an old photo album with visible grain. Follow the selected source-preservation settings: {{preserve}}. If clothing is not preserved, keep a simple 1980s casual outfit. If pose is not preserved, seat them on the bed facing the camera. Apply {{mood}} color grading with direct flash, slightly harsh highlights, warm indoor tones, and faded colors. Replace the background with {{background}}, and add posters of film stars and bands with no readable text or real logos. Do not add extra people, lettering, or logos. Compose for {{ratio}} without cropping the face.",
+      "Edit the uploaded {{subject}} into a casual 1980s snapshot sitting on a bed, like a print from an old photo album with visible grain. Follow the selected source-preservation settings: {{preserve}}. If clothing is not preserved, keep a simple 1980s casual outfit. If pose is not preserved, seat them on the bed facing the camera. Apply {{mood}} color grading with direct flash, slightly harsh highlights, warm indoor tones, and faded colors. Replace the background with {{background}}, and add abstract or illustrated music and movie posters with no real people, readable text or logos. Do not add extra people, lettering, or logos. Compose for {{ratio}} without cropping the face.",
   },
   {
     n: "54",
@@ -330,7 +324,7 @@ const eighties: EightiesSeed[] = [
     targetSourcePhoto: "One couple photo with both faces clear",
     bestSourcePhoto: [
       "Both faces fully visible",
-      "The two people distinguishable left and right",
+      "The two people clearly distinguishable",
       "No heavy beauty filters",
       "Original image should not be blurry",
     ],
@@ -339,7 +333,7 @@ const eighties: EightiesSeed[] = [
     altResult:
       "AI edit of that couple as a hand-painted 1980s film poster, with a blazer, a magenta saree, and a sunset sky.",
     template:
-      "Edit the uploaded {{subject}} into the lead pair on a hand-painted 1980s South Asian film poster, with painted poster texture and slight print wear. Keep both faces fully recognizable and do not merge or swap features. Follow the selected source-preservation settings: {{preserve}}. If clothing is not preserved, dress the person on the left in a wide-collar printed shirt, open blazer, thick side-parted hair, and aviator sunglasses pushed up on the head, and dress the person on the right in a deep magenta chiffon saree with a gold border, big soft curls, bold eyeliner, and gold jhumkas. If pose is not preserved, pose the couple close together. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair and clothing. Leave empty space at the top but do not write any text, lettering, or logos. Compose for {{ratio}} without cropping either face.",
+      "Edit the uploaded {{subject}} into the lead pair on a hand-painted 1980s South Asian film poster, with painted poster texture and slight print wear. Keep both faces fully recognizable and do not merge or swap features. Follow the selected source-preservation settings: {{preserve}}. If clothing is not preserved, dress the man in a wide-collar printed shirt, open blazer, thick side-parted hair, and aviator sunglasses pushed up on the head, and dress the woman in a deep magenta chiffon saree with a gold border, big soft curls, bold eyeliner, and gold jhumkas. If pose is not preserved, pose the couple close together. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair and clothing. Leave empty space at the top but do not write any text, lettering, or logos. Compose for {{ratio}} without cropping either face.",
   },
   {
     n: "56",
@@ -410,9 +404,9 @@ const eighties: EightiesSeed[] = [
     n: "58",
     id: "combine-two-photos-80s-couple",
     title: "Two Photos, One 80s Couple",
-    note: "One portrait restyled as a 1980s outdoor couple",
+    note: "Two photos into one 1980s outdoor couple",
     description:
-      "Restyle one portrait into a 1980s outdoor couple photo at golden hour, keeping the face matched to the source.",
+      "Combine two photos into one 1980s outdoor couple photo at golden hour, keeping each face matched to its source.",
     subject: "Group",
     intent: "Full scene transformation",
     mood: "Warm nostalgic cinematic sunlight with soft vintage tones, gentle film grain, creamy highlights, and cozy shadow depth",
@@ -427,22 +421,20 @@ const eighties: EightiesSeed[] = [
       "Each skin tone",
     ],
     height: 350,
-    targetSourcePhoto: "One clear portrait with the face large and sharp",
+    targetSourcePhoto:
+      "Two clear portraits, one of each person, attached in the same message",
     bestSourcePhoto: [
-      "Face large and sharp",
-      "Even lighting on the face",
-      "A straightforward head angle",
-      "Original image should not be blurry",
+      "Each face large and sharp",
+      "Even lighting on both faces",
+      "Straightforward head angles",
+      "Original images should not be blurry",
     ],
+    inputImageCount: 2,
+    inputImageRoles: ["person A", "person B"],
     altSource:
       "AI-generated portrait of a young man with short dark hair and a mustache, wearing a white t-shirt.",
     altResult:
       "AI edit of that portrait into a 1980s outdoor couple photo in a park at golden hour.",
-    limitations: [
-      aiGeneratedLimit,
-      "This page shows one source photo. A second upload is not collected here.",
-      "Heavy face occlusion can weaken identity fidelity",
-    ],
     template:
       "The upload is two photos of the {{subject}}: the first is person A and the second is person B. Create one new 1980s outdoor couple photograph of them standing side by side, matching lighting and camera angle so they look photographed together, with warm faded film colors, soft grain, and 35mm snapshot framing. Keep person A's face, hair texture, and skin tone exactly as in photo 1, and person B's exactly as in photo 2. Do not mix their features. Follow the selected source-preservation settings: {{preserve}}. If clothing is not preserved, dress both in 1980s period outfits. If pose is not preserved, stand them side by side. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair and clothing. Do not add extra people, lettering, or logos. Compose for {{ratio}} without cropping either face.",
   },
@@ -507,8 +499,8 @@ export const seedEightiesStyles: CatalogStyle[] = eighties.map((item, index) => 
     version: "1.0.0",
     tool: "ChatGPT Image",
     mode: "Image edit / transform with uploaded photo",
-    inputImageCount: 1,
-    inputImageRoles: ["source photo"],
+    inputImageCount: item.inputImageCount ?? 1,
+    inputImageRoles: item.inputImageRoles ?? ["source photo"],
     template: item.template,
     defaults: {
       mood: item.mood,

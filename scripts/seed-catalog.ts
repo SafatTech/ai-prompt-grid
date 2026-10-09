@@ -51,7 +51,8 @@ function slugify(value: string): string {
 
 function isRemoteCatalogUrl(url: string): boolean {
   return (
-    /^https?:\/\//i.test(url) && url.includes("/storage/v1/object/public/catalog-public/")
+    /^https?:\/\//i.test(url) &&
+    url.includes("/storage/v1/object/public/catalog-public/")
   );
 }
 
@@ -109,12 +110,17 @@ async function resolveAssetUrl(
   return data.publicUrl;
 }
 
-async function upsertCategory(client: SeedClient, name: string, sortOrder: number) {
+async function upsertCategory(
+  client: SeedClient,
+  name: string,
+  sortOrder: number,
+) {
   const slug = slugify(name);
   const id = uuidFromKey(`category:${slug}`);
-  const { error } = await client
-    .from("categories")
-    .upsert({ id, name, slug, sort_order: sortOrder }, { onConflict: "slug" });
+  const { error } = await client.from("categories").upsert(
+    { id, name, slug, sort_order: sortOrder },
+    { onConflict: "slug" },
+  );
   if (error) throw error;
   return { id, name, slug };
 }
@@ -222,17 +228,16 @@ async function seedStyle(
   for (const tag of tagSpecs) {
     const tagSlug = slugify(`${tag.kind}-${tag.name}`);
     const tagId = uuidFromKey(`tag:${tagSlug}`);
-    const { error: tagError } = await client
-      .from("tags")
-      .upsert(
-        { id: tagId, name: tag.name, slug: tagSlug, kind: tag.kind },
-        { onConflict: "slug" },
-      );
+    const { error: tagError } = await client.from("tags").upsert(
+      { id: tagId, name: tag.name, slug: tagSlug, kind: tag.kind },
+      { onConflict: "slug" },
+    );
     if (tagError) throw tagError;
 
-    const { error: linkError } = await client
-      .from("style_tags")
-      .upsert({ style_id: styleId, tag_id: tagId }, { onConflict: "style_id,tag_id" });
+    const { error: linkError } = await client.from("style_tags").upsert(
+      { style_id: styleId, tag_id: tagId },
+      { onConflict: "style_id,tag_id" },
+    );
     if (linkError) throw linkError;
   }
 }

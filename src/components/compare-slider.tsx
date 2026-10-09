@@ -184,7 +184,9 @@ export function CompareSlider({
   if (mode === "side") {
     return (
       <div className={cn("relative h-full w-full", className)}>
-        {showModeToggle ? <ModeToggle mode={mode} onChange={setMode} /> : null}
+        {showModeToggle ? (
+          <ModeToggle mode={mode} onChange={setMode} />
+        ) : null}
         <div className="grid h-full grid-cols-1 gap-0.5 lg:grid-cols-2">
           <div className="relative min-h-0 bg-[linear-gradient(135deg,#292836,#15151e)]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -221,7 +223,7 @@ export function CompareSlider({
     <div
       ref={containerRef}
       className={cn(
-        "compare relative h-full w-full touch-pan-y overflow-hidden select-none",
+        "compare relative h-full w-full overflow-hidden touch-pan-y select-none",
         cursorClass,
         className,
       )}
@@ -247,7 +249,10 @@ export function CompareSlider({
           draggable={false}
         />
       </div>
-      <div className="absolute inset-0" style={{ clipPath: `inset(0 0 0 ${value}%)` }}>
+      <div
+        className="absolute inset-0"
+        style={{ clipPath: `inset(0 0 0 ${value}%)` }}
+      >
         {/* eslint-disable-next-line @next/next/no-img-element */}
         <img
           src={result}
