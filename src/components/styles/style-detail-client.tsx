@@ -233,6 +233,15 @@ export function StyleDetailClient({ style, children }: Props) {
           <p className="m-0 max-w-[690px] text-[16px] text-[#c2c0ca] sm:text-[19px]">
             {profile.description}
           </p>
+          {style.id === "combine-two-photos-80s-couple" ||
+          style.id === "separate-photos-couple" ? (
+            <p className="mt-3 max-w-[690px] text-sm text-[var(--muted)]">
+              <Link href="/guides/how-to-merge-two-photos-in-gemini" className="font-bold text-[#bbaeff]">
+                How to merge two photos in Gemini
+              </Link>{" "}
+              is the guide for couple, family, and pet merges. This page keeps its own look.
+            </p>
+          ) : null}
           <p className="mt-3 text-sm text-[var(--muted)]">
             Target photo: {style.targetSourcePhoto}. Inputs:{" "}
             {style.promptVariant.inputImageRoles.join(" → ")} (
