@@ -26,6 +26,7 @@ const INTENTS = new Set<EditIntent>([
 
 const REQUIREMENTS = new Set<InputRequirement>([
   "One photo",
+  "Two photos",
   "Photo plus style reference",
 ]);
 

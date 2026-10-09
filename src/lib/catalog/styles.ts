@@ -41,7 +41,7 @@ export const filterGroups = {
     "New outfit or theme",
     "Full scene transformation",
   ] as const,
-  requirement: ["One photo", "Photo plus style reference"] as const,
+  requirement: ["One photo", "Two photos", "Photo plus style reference"] as const,
   tool: ["ChatGPT Image", "Gemini", "Flux", "Other AI editor"] as const,
 };
 
