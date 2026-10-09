@@ -334,9 +334,9 @@ describe("guide files", () => {
     const selfies = guides.get("halloween-ai-prompts-for-selfies") ?? "";
     const karwa = guides.get("karwa-chauth-ai-photo-editing-prompts") ?? "";
     assert.doesNotMatch(selfies, /ai-pet-halloween-costume-prompts/);
-    assert.match(selfies, /\/guides\/80s-ai-photo-prompt-couple-family/);
+    assert.match(selfies, /\/guides\/80s-ai-photo-prompts-solo-couple/);
     assert.match(karwa, /\/guides\/diwali-couple-ai-photo-editing-prompts/);
-    assert.match(karwa, /\/guides\/80s-ai-photo-prompt-couple-family/);
+    assert.match(karwa, /\/guides\/80s-ai-photo-prompts-solo-couple/);
   });
 
   it("keeps Halloween's social image and makes its first pair the eager one", () => {

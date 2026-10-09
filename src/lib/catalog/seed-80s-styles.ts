@@ -218,7 +218,7 @@ const eighties: EightiesSeed[] = [
       "Original image should not be blurry",
     ],
     altSource:
-      "AI-generated photo of a smiling young woman with dark hair in a bun, in a black tee and leggings.",
+      "AI-generated photo of a smiling young woman with dark hair in a ponytail, in a black tee and leggings.",
     altResult:
       "AI edit as a 1980s aerobics portrait in a neon outfit, in a mirrored studio with a pastel backdrop.",
     template:
@@ -292,7 +292,7 @@ const eighties: EightiesSeed[] = [
     altSource:
       "AI-generated photo of a young couple against a light wall, him in navy and her in lilac.",
     altResult:
-      "AI edit as a 1985 studio couple portrait, him in navy and her in lilac, with feathered hair and a mottled backdrop.",
+      "AI edit as a 1985 studio couple portrait, him in a brown tweed blazer with a white shirt and tie, her in a maroon blouse, with feathered hair and a mottled backdrop.",
     template:
       "Edit the uploaded {{subject}} into a 1985 professional studio couple portrait with voluminous feathered hair and light film grain. Preserve each person's face separately and do not blend, swap, or beautify features. Follow the selected source-preservation settings: {{preserve}}. If clothing is not preserved, dress both people in 1980s period clothing. If pose is not preserved, pose them together in a simple frontal studio pose. Apply {{mood}} color grading with soft frontal flash. Replace the background with {{background}}, keeping clean edges around hair and clothing. Do not add people, lettering, or logos. Compose for {{ratio}} without cropping either face.",
   },
@@ -331,7 +331,7 @@ const eighties: EightiesSeed[] = [
     altSource:
       "AI-generated photo of an older couple, him in glasses and a navy sweater, her in mustard.",
     altResult:
-      "AI edit of that older couple as a hand-painted 1980s film poster, him in glasses and a navy sweater, her in mustard, against a sunset sky.",
+      "AI edit of that older couple as a hand-painted 1980s film poster, him in an open denim blazer over a wide-collar printed shirt, her in a magenta saree with gold jhumkas, against a sunset sky.",
     template:
       "Edit the uploaded {{subject}} into the lead pair on a hand-painted 1980s South Asian film poster, with painted poster texture and slight print wear. Keep both faces fully recognizable and do not merge or swap features. Follow the selected source-preservation settings: {{preserve}}. If clothing is not preserved, dress the man in a wide-collar printed shirt, open blazer, thick side-parted hair, and aviator sunglasses pushed up on the head, and dress the woman in a deep magenta chiffon saree with a gold border, big soft curls, bold eyeliner, and gold jhumkas. If pose is not preserved, pose the couple close together. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair and clothing. Leave empty space at the top but do not write any text, lettering, or logos. Compose for {{ratio}} without cropping either face.",
   },
@@ -361,7 +361,7 @@ const eighties: EightiesSeed[] = [
     altSource:
       "AI-generated photo of a couple, him in an olive jacket and her in a rust sweater.",
     altResult:
-      "AI edit as a harsh-flash disposable-camera snapshot at a neon roller rink, him in an olive jacket and her in a rust sweater.",
+      "AI edit as a harsh-flash disposable-camera snapshot at a neon roller rink, him in a purple, teal and black windbreaker over a white tee, her in a denim jacket, a pink top and a scrunchie.",
     template:
       "Edit the uploaded {{subject}} into a candid 1980s disposable-camera snapshot of a date night, with slightly off-center framing and visible film grain. Preserve each person's face separately and do not blend or swap features. Follow the selected source-preservation settings: {{preserve}}. If clothing is not preserved, dress them in 1980s casual outfits such as a denim jacket, a windbreaker, high-waisted jeans, and a scrunchie. If pose is not preserved, keep them close together as if caught mid-date. Apply {{mood}} color grading with harsh direct on-camera flash, slightly overexposed skin, and a warm color shift. Replace the background with {{background}}, keeping clean edges around hair and clothing. Do not add people, lettering, or logos. Compose for {{ratio}} without cropping either face.",
   },
@@ -464,7 +464,7 @@ const eighties: EightiesSeed[] = [
     altSource:
       "AI-generated photo of a couple, him in a dark shirt and her in a green kurta.",
     altResult:
-      "AI edit as a 1980s wedding-album portrait, him in a dark shirt and her in a green kurta, against a floral stage.",
+      "AI edit as a 1980s wedding-album portrait, him in a cream sherwani with a red dupatta, her in a red bridal lehenga with gold jewellery, against a floral stage.",
     template:
       "Edit the uploaded {{subject}} into a page from a 1980s wedding album, with slightly yellowed print, rounded photo corners, and mild film grain. Preserve each person's face separately and do not blend or beautify features. Follow the selected source-preservation settings: {{preserve}}. If clothing is not preserved, dress them in a red bridal lehenga and a cream sherwani. If pose is not preserved, use a formal posed portrait. Apply {{mood}} color grading with on-camera flash and soft shadows behind them. Replace the background with {{background}}, keeping clean edges around hair and clothing. Do not add people, lettering, or logos. Compose for {{ratio}} without cropping either face.",
   },

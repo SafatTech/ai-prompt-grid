@@ -8,6 +8,7 @@ import {
   firstDimensionedPairSrcs,
   isFirstDimensionedPair,
   isLocalGuideSrc,
+  isSizedGuideSrc,
   parseDimensionTitle,
 } from "@/lib/guides/image-pairs";
 import { guideLinkMode } from "@/lib/guides/prepare";
@@ -174,7 +175,7 @@ function sizedLocalPair(
     }
     const src = typeof node.props.src === "string" ? node.props.src : "";
     const dimensions = parseDimensionTitle(node.props.title);
-    if (!isLocalGuideSrc(src) || !dimensions) return null;
+    if (!isSizedGuideSrc(src) || !dimensions) return null;
     const alt = typeof node.props.alt === "string" ? node.props.alt : "";
     images.push({ src, alt, width: dimensions.width, height: dimensions.height });
   }
@@ -182,8 +183,8 @@ function sizedLocalPair(
 }
 
 function frameLabel(src: string): string | null {
-  if (src.includes("-before.")) return "Before";
-  if (src.includes("-after.")) return "After";
+  if (src.includes("-before.") || /\/source-\d+\./.test(src)) return "Before";
+  if (src.includes("-after.") || /\/result-\d+\./.test(src)) return "After";
   return null;
 }
 
@@ -198,18 +199,34 @@ function GuideBeforeAfter({
     <div className="my-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
       {images.map((image) => {
         const label = frameLabel(image.src);
+        const loading = eager ? "eager" : "lazy";
+        const fetchPriority = eager ? "high" : "auto";
         return (
           <figure key={image.src} className="m-0">
-            <Image
-              src={image.src}
-              alt={image.alt}
-              width={image.width}
-              height={image.height}
-              sizes="(max-width: 640px) calc(100vw - 24px), 360px"
-              className="h-auto w-full rounded-2xl bg-[#15151E]"
-              loading={eager ? "eager" : "lazy"}
-              fetchPriority={eager ? "high" : "auto"}
-            />
+            {isLocalGuideSrc(image.src) ? (
+              <Image
+                src={image.src}
+                alt={image.alt}
+                width={image.width}
+                height={image.height}
+                sizes="(max-width: 640px) calc(100vw - 24px), 360px"
+                className="h-auto w-full rounded-2xl bg-[#15151E]"
+                loading={loading}
+                fetchPriority={fetchPriority}
+              />
+            ) : (
+              // Remote catalog files stay on Supabase, so they are not optimized here.
+              // eslint-disable-next-line @next/next/no-img-element
+              <img
+                src={image.src}
+                alt={image.alt}
+                width={image.width}
+                height={image.height}
+                loading={loading}
+                fetchPriority={fetchPriority}
+                className="h-auto w-full rounded-2xl bg-[#15151E]"
+              />
+            )}
             {label ? (
               <figcaption className="mt-2 text-center text-xs text-[var(--muted)]">
                 {label}

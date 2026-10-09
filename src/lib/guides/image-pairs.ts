@@ -1,6 +1,7 @@
 /**
- * Local guide images declare their real size in the markdown title:
+ * Guide images declare their real size in the markdown title:
  * `![alt](/guides/example/photo.webp "960x1200")`.
+ * A https URL works the same way when the file lives outside the repo.
  * A paragraph of two or more of those images is a before/after pair.
  * The first pair in the document loads immediately; the rest wait.
  */
@@ -31,6 +32,17 @@ export function isLocalGuideSrc(src: string): boolean {
   return src.startsWith("/") && !src.startsWith("//") && !src.includes("..");
 }
 
+/** Local file or absolute https URL that can sit in a sized before/after pair. */
+export function isSizedGuideSrc(src: string): boolean {
+  if (isLocalGuideSrc(src)) return true;
+  if (src.includes("..") || src.includes(" ")) return false;
+  try {
+    return new URL(src).protocol === "https:";
+  } catch {
+    return false;
+  }
+}
+
 function outsideFences(markdown: string): string {
   return markdown
     .split(/(```[\s\S]*?```)/g)
@@ -39,8 +51,8 @@ function outsideFences(markdown: string): string {
 }
 
 /**
- * Src list of the first paragraph that is only local images with dimension
- * titles. Empty when the guide has no before/after pair.
+ * Src list of the first paragraph that is only sized guide images.
+ * Empty when the guide has no before/after pair.
  */
 export function firstDimensionedPairSrcs(markdown: string): string[] {
   const paragraphs = outsideFences(markdown).split(/\n\s*\n/);
@@ -56,7 +68,7 @@ export function firstDimensionedPairSrcs(markdown: string): string[] {
     for (const line of lines) {
       const match = IMAGE_LINE.exec(line);
       const src = match?.[2] ?? "";
-      if (!match || !isLocalGuideSrc(src) || !parseDimensionTitle(match[3])) {
+      if (!match || !isSizedGuideSrc(src) || !parseDimensionTitle(match[3])) {
         onlySizedLocalImages = false;
         break;
       }
