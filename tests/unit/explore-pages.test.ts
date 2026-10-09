@@ -42,7 +42,7 @@ describe("explore pagination", () => {
 
   it("covers every published style across server pages and the sitemap", () => {
     const styles = getPublishedStyles();
-    assert.equal(styles.length, 113);
+    assert.equal(styles.length, 125);
     assert.equal(EXPLORE_PAGE_SIZE, 18);
 
     const seen = new Set<string>();
@@ -54,10 +54,10 @@ describe("explore pagination", () => {
       assert.ok(slice.length <= EXPLORE_PAGE_SIZE);
       for (const style of slice) seen.add(style.id);
     }
-    assert.equal(seen.size, 113);
+    assert.equal(seen.size, 125);
 
     const stylePaths = dedupedStylePaths(styles.map((style) => style.id));
-    assert.equal(stylePaths.length, 113);
+    assert.equal(stylePaths.length, 125);
     assert.ok(stylePaths.includes("/styles/meadow-reverie"));
     assert.deepEqual(explorePaginationPaths(styles.length), [
       "/explore?page=2",
