@@ -41,6 +41,10 @@ type MergeSeed = {
 const aiGeneratedLimit =
   "Example people and animals in the before photos are AI-generated, not real.";
 
+/** Guide social image and result-75. The crop is 1200x630; the style result is 4:5. */
+export const mergeOgAlt =
+  "Couple on a riverside promenade at golden hour, his arm around her shoulder.";
+
 const merge: MergeSeed[] = [
   {
     n: "75",
@@ -82,8 +86,8 @@ const merge: MergeSeed[] = [
     altSource:
       "Woman in her late 20s in a sage-green jacket over a black top, on a riverside walkway.",
     altSecond:
-      "Man with stubble in a dark-green jacket over a navy tee, on a rocky riverbank.",
-    altResult: "Couple on a riverside promenade at golden hour, her arm over his shoulder.",
+      "Man with stubble in a dark-green jacket over a black tee, on a rocky riverbank.",
+    altResult: mergeOgAlt,
     template:
       "Merge the first uploaded photo and the second uploaded photo into one natural {{subject}} photo of a couple standing side by side. The first uploaded photo shows person A and the second uploaded photo shows person B. Follow the selected source-preservation settings: {{preserve}}. Always keep person A's face shape, eyes, nose, lips, hairline, hair, any beard, glasses, or head covering, apparent age, and exact skin tone as in the first uploaded photo, and person B's exactly as in the second uploaded photo. Treat them as two separate people; do not blend, swap, beautify, slim, de-age, or lighten either face, and keep natural skin texture. Keep the outfit each person wears in their own photo. If group arrangement and pose are not preserved, stand them close together, one arm around the other's shoulder, both smiling at the camera, with realistic relative heights. Light both people with one warm, low sun from the left so they look photographed together, with matching shadows and color temperature. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair and clothing. Do not add extra people, text, lettering, or logos. Compose for {{ratio}} without cropping either face.",
   },
@@ -155,8 +159,9 @@ const merge: MergeSeed[] = [
       "Original images should not be blurry",
     ],
     altSource: "Woman with wavy hair in a brown scoop-neck top, indoors.",
-    altSecond: "Man with short curly hair in a sage-green shirt, indoors.",
-    altResult: "The two original photos side by side on cream paper with a thin gold divider.",
+    altSecond: "Young man with tousled dark hair and a light moustache in an olive-green tee, indoors.",
+    altResult:
+      "The two original photos of the couple side by side on cream paper with a thin gold divider.",
     template:
       "Place the first uploaded photo on the left and the second uploaded photo on the right, side by side in one elegant framed layout as a single couple keepsake of the {{subject}}. Follow the selected source-preservation settings: {{preserve}}. Do not change the content of either photo: keep every face, skin tone, outfit, pose, and original photo background exactly as uploaded, and do not merge the people into one scene. If group arrangement and pose are not preserved, you may crop each photo slightly so both share the same size and eye level. Apply a gentle {{mood}} color grade to both photos so they match. Set both photos on {{background}}, with even margins around them. Do not add extra people, text, lettering, or logos. Compose for {{ratio}} without cropping either face.",
   },
@@ -279,7 +284,7 @@ const merge: MergeSeed[] = [
       "Couple in their 40s in a living room, him in a sage-green shirt and her in a cream and blue floral kurti.",
     altSecond: "Two children, a girl in a lavender knit and a boy in a navy top.",
     altResult:
-      "Family of four in festive clothes, parents seated with the children beside them, string lights and crescent lanterns.",
+      "Family of four in festive clothes, parents seated with the children standing behind them, string lights and crescent lanterns.",
     template:
       "Merge the first uploaded photo and the second uploaded photo into one formal {{subject}} family portrait for Eid. The first uploaded photo shows the parents and the second uploaded photo shows their children; include every person from both photos and no one else. Follow the selected source-preservation settings: {{preserve}}. Always keep each person's face shape, eyes, nose, lips, hairline, hair, any beard, glasses, or head covering, apparent age, height, and exact skin tone exactly as in their own photo. Treat everyone as separate people; do not blend, swap, beautify, slim, de-age, or lighten any face, and keep natural skin texture. Dress everyone in modest, formal festive clothes such as kurtas, shalwar kameez, or embroidered suits in coordinated soft colors. If group arrangement and pose are not preserved, seat the parents on a sofa in the center with the children standing behind or beside them, everyone smiling at the camera, at realistic relative heights. Light everyone with the same soft, warm light. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair and clothing. Do not add extra people, text, lettering, or logos. Compose for {{ratio}} without cropping any face.",
   },
@@ -463,7 +468,7 @@ const merge: MergeSeed[] = [
     ],
     altSource: "Graduate in a black gown and cap on a campus lawn.",
     altSecond:
-      "Parent in their 50s with glasses and a grey beard, in a navy blazer and light-blue shirt.",
+      "Parent in their 50s with glasses and a grey beard, in a charcoal blazer and light-blue shirt.",
     altResult: "Graduate beside her parent on a sunny campus lawn, his arm at her shoulder.",
     template:
       "Merge the first uploaded photo and the second uploaded photo into one proud graduation day {{subject}} photo. The first uploaded photo shows the graduate and the second uploaded photo shows their parent. Follow the selected source-preservation settings: {{preserve}}. Always keep the graduate's face shape, eyes, nose, lips, hairline, hair, any beard, glasses, or head covering, apparent age, and exact skin tone as in the first uploaded photo, and the parent's exactly as in the second uploaded photo. Treat them as two separate people; do not blend, swap, beautify, slim, de-age, or lighten either face, and keep natural skin texture. Dress the graduate in a plain black graduation gown and cap with no crest or insignia, and keep the parent's own outfit. If group arrangement and pose are not preserved, stand them side by side, the parent's arm around the graduate, both smiling at the camera, at realistic relative heights. Light both with the same bright daylight and matching shadows. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair and clothing. Do not add extra people, text, lettering, or logos. Compose for {{ratio}} without cropping either face.",
