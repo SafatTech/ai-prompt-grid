@@ -108,8 +108,6 @@ export const moodLabels: Record<string, string> = {
   "Cozy warm winter festive": "Winter festive",
   "Rich saturated sunset colors with painted-poster warmth and slight print wear":
     "Poster sunset",
-  "Warm sunset backlight with soft golden haze": "Sunset backlight",
-  "Match the original photo's colors": "Match original colors",
 };
 
 /** Short 2–3 word UI labels for full background prompt strings. */
@@ -278,22 +276,6 @@ export const backgroundLabels: Record<string, string> = {
   "Softly blurred bright modern office with glass walls and plants": "Glass office",
   "Softly blurred green trees in late-afternoon light": "Blurred trees",
   "Dark charcoal studio backdrop with a soft gradient": "Charcoal gradient",
-  "Riverside promenade with a calm river, trees along the bank, and warm late-afternoon light":
-    "Riverside promenade",
-  "Cozy café table beside a large window with softly blurred interior": "Cafe window",
-  "Soft cream paper border with a thin gold divider line": "Cream gold frame",
-  "Wide sandy beach at sunset with gentle waves and a glowing horizon": "Sunset beach",
-  "Living room decorated for Eid with warm string lights, crescent lanterns, and soft floral accents":
-    "Eid living room",
-  "Rooftop dinner table at dusk with warm fairy lights and a softly blurred city skyline":
-    "Rooftop lights",
-  "Sunny traditional courtyard with a woven charpai, potted plants, and soft morning light":
-    "Sunny courtyard",
-  "Wedding stage with a floral backdrop of white and blush flowers, warm fairy lights, and a cream sofa":
-    "Wedding stage",
-  "Sunny campus lawn with trees and softly blurred academic buildings": "Campus lawn",
-  "Mountain viewpoint with pine trees, a green valley, and distant snowy peaks":
-    "Mountain viewpoint",
 };
 
 const genericMoodPresets = [
