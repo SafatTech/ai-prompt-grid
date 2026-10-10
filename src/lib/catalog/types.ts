@@ -12,7 +12,7 @@ export type EditIntent =
   | "New outfit or theme"
   | "Full scene transformation";
 
-export type InputRequirement = "One photo" | "Photo plus style reference";
+export type InputRequirement = "One photo" | "Two photos" | "Photo plus style reference";
 
 export type PublishStatus = "draft" | "in_review" | "published" | "archived";
 
@@ -21,6 +21,9 @@ export type ExamplePair = {
   result: string;
   altSource: string;
   altResult: string;
+  /** Pixel size of the result file, when known. Optional so older rows still map. */
+  resultWidth?: number;
+  resultHeight?: number;
 };
 
 export type PromptVariant = {

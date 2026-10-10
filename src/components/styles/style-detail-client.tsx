@@ -11,6 +11,14 @@ import {
   type ReactNode,
 } from "react";
 import { CompareSlider } from "@/components/compare-slider";
+import { MergeBeforeAfter, resultPresentation } from "@/components/merge-before-after";
+import {
+  mergeInputPhotos,
+  mergeResultImage,
+  mergeResultSize,
+  usesMergeHero,
+  usesMergeStack,
+} from "@/lib/catalog/merge-inputs";
 import { CopyIcon } from "@/components/icons";
 import { ShareModal } from "@/components/modals/share-modal";
 import { StyleSaveResultQuery } from "@/components/styles/style-save-result-query";
@@ -48,6 +56,8 @@ export function StyleDetailClient({ style, children }: Props) {
     setOptions(defaultsForStyle(style));
   }
   const assembled = useMemo(() => assemblePrompt(style, options), [style, options]);
+  const resultSize = mergeResultSize(style);
+  const resultFit = resultPresentation(resultSize.width, resultSize.height);
   const prompt = assembled.ok ? assembled.prompt : previewPrompt(style, options);
   const moodSelectOptions = useMemo(() => labeledOptionsForStyle(style, "mood"), [style]);
   const backgroundSelectOptions = useMemo(
@@ -193,20 +203,32 @@ export function StyleDetailClient({ style, children }: Props) {
             </Button>
           </div>
         </div>
-        <div className="h-[min(52dvh,560px)] min-h-[280px] overflow-hidden rounded-[22px] border border-[var(--line)] bg-[var(--surface)] shadow-[var(--shadow)] md:min-h-[360px] lg:h-[min(68dvh,720px)] lg:min-h-[480px]">
-          <CompareSlider
-            key={compareDefault}
-            source={style.source}
-            result={style.result}
-            title={style.title}
-            styleId={style.id}
-            altSource={style.examplePairs[0]?.altSource}
-            altResult={style.examplePairs[0]?.altResult}
-            large
-            showModeToggle
-            defaultMode={compareDefault}
-          />
-        </div>
+        {usesMergeHero(style) ? (
+          <div className="rounded-[22px] border border-[var(--line)] bg-[var(--surface)] p-6 shadow-[var(--shadow)] lg:p-8">
+            <MergeBeforeAfter
+              variant="hero"
+              priority
+              title={style.title}
+              inputs={mergeInputPhotos(style)}
+              result={mergeResultImage(style)}
+            />
+          </div>
+        ) : (
+          <div className="h-[min(52dvh,560px)] min-h-[280px] overflow-hidden rounded-[22px] border border-[var(--line)] bg-[var(--surface)] shadow-[var(--shadow)] md:min-h-[360px] lg:h-[min(68dvh,720px)] lg:min-h-[480px]">
+            <CompareSlider
+              key={compareDefault}
+              source={style.source}
+              result={style.result}
+              title={style.title}
+              styleId={style.id}
+              altSource={style.examplePairs[0]?.altSource}
+              altResult={style.examplePairs[0]?.altResult}
+              large
+              showModeToggle
+              defaultMode={compareDefault}
+            />
+          </div>
+        )}
       </section>
 
       <section className="container grid items-start gap-10 pt-12 pb-[95px] lg:grid-cols-[minmax(0,1fr)_440px] lg:gap-16 lg:pt-[70px]">
@@ -233,6 +255,15 @@ export function StyleDetailClient({ style, children }: Props) {
           <p className="m-0 max-w-[690px] text-[16px] text-[#c2c0ca] sm:text-[19px]">
             {profile.description}
           </p>
+          {style.id === "combine-two-photos-80s-couple" ||
+          style.id === "separate-photos-couple" ? (
+            <p className="mt-3 max-w-[690px] text-sm text-[var(--muted)]">
+              <Link href="/guides/how-to-merge-two-photos-in-gemini" className="font-bold text-[#bbaeff]">
+                How to merge two photos in Gemini
+              </Link>{" "}
+              is the guide for couple, family, and pet merges. This page keeps its own look.
+            </p>
+          ) : null}
           <p className="mt-3 text-sm text-[var(--muted)]">
             Target photo: {style.targetSourcePhoto}. Inputs:{" "}
             {style.promptVariant.inputImageRoles.join(" → ")} (
@@ -384,7 +415,13 @@ export function StyleDetailClient({ style, children }: Props) {
                 Open {style.promptVariant.tool} in {style.promptVariant.mode}
               </li>
               <li className="mb-1">
-                Upload {style.promptVariant.inputImageRoles.join(", then ")}
+                Upload{" "}
+                {style.promptVariant.inputImageCount >= 2
+                  ? Array.from(
+                      { length: style.promptVariant.inputImageCount },
+                      (_, index) => `Photo ${index + 1}`,
+                    ).join(", then ")
+                  : style.promptVariant.inputImageRoles.join(", then ")}
               </li>
               <li className="mb-1">Paste this prompt</li>
               <li>Generate and check your result</li>
@@ -420,15 +457,20 @@ export function StyleDetailClient({ style, children }: Props) {
                   loading="lazy"
                 />
                 <span className="absolute bottom-3 left-3 rounded-lg bg-[rgba(11,11,16,0.72)] px-2 py-1 text-[10px] font-extrabold">
-                  Source photo
+                  {usesMergeStack(style) ? `Photo ${index + 1}` : "Source photo"}
                 </span>
               </div>
-              <div className="relative">
+              <div className={cn("relative", resultFit.contain && "bg-[#f5f3ee]")}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={example.result}
                   alt={example.altResult}
-                  className="h-full w-full object-cover"
+                  width={example.resultWidth ?? resultSize.width}
+                  height={example.resultHeight ?? resultSize.height}
+                  className={cn(
+                    "h-full w-full",
+                    resultFit.contain ? "object-contain" : "object-cover",
+                  )}
                   loading="lazy"
                 />
                 <span className="absolute right-3 bottom-3 rounded-lg bg-[rgba(11,11,16,0.72)] px-2 py-1 text-[10px] font-extrabold">

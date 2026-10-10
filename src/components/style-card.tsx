@@ -3,6 +3,8 @@
 import Link from "next/link";
 import type { MouseEvent } from "react";
 import { CompareSlider } from "@/components/compare-slider";
+import { MergeBeforeAfter } from "@/components/merge-before-after";
+import { mergeInputPhotos, mergeResultImage, usesMergeStack } from "@/lib/catalog/merge-inputs";
 import { useLibrary } from "@/components/providers/library-provider";
 import { useToast } from "@/components/providers/toast-provider";
 import { useUiModals } from "@/components/providers/ui-modal-provider";
@@ -20,6 +22,7 @@ export function StyleCard({ style, compact = false }: Props) {
   const { openSignIn } = useUiModals();
   const saved = isSaved(style.id);
   const height = compact ? Math.min(style.height, 320) : style.height;
+  const mergePhotos = usesMergeStack(style) ? mergeInputPhotos(style) : [];
 
   function handleSave(event: MouseEvent) {
     event.preventDefault();
@@ -44,12 +47,21 @@ export function StyleCard({ style, compact = false }: Props) {
     >
       {/* Compare lives outside the link so dragging the handle isn't a browser link-drag. */}
       <div className="relative overflow-hidden bg-[#242331]" style={{ height }}>
-        <CompareSlider
-          source={style.source}
-          result={style.result}
-          title={style.title}
-          styleId={style.id}
-        />
+        {mergePhotos.length >= 2 ? (
+          <MergeBeforeAfter
+            variant="card"
+            title={style.title}
+            inputs={mergePhotos}
+            result={mergeResultImage(style)}
+          />
+        ) : (
+          <CompareSlider
+            source={style.source}
+            result={style.result}
+            title={style.title}
+            styleId={style.id}
+          />
+        )}
         <button
           type="button"
           className={cn(
@@ -82,6 +94,11 @@ export function StyleCard({ style, compact = false }: Props) {
         </div>
         <h3 className="m-0 mb-2 text-[19px] tracking-[-0.02em]">{style.title}</h3>
         <p className="m-0 text-xs text-[var(--muted)]">{style.note}</p>
+        {mergePhotos.length >= 2 ? (
+          <p className="mt-2 mb-0 text-xs font-semibold text-[var(--muted)]">
+            Merge · {mergePhotos.length} photos
+          </p>
+        ) : null}
       </Link>
     </article>
   );

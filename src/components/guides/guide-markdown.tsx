@@ -4,8 +4,11 @@ import { Children, isValidElement, type ReactNode } from "react";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { CopyPromptButton } from "@/components/guides/copy-prompt-button";
+import { MergeBeforeAfter } from "@/components/merge-before-after";
 import {
+  classifyPairImages,
   firstDimensionedPairSrcs,
+  headingForImageSrc,
   isFirstDimensionedPair,
   isLocalGuideSrc,
   isSizedGuideSrc,
@@ -43,15 +46,23 @@ export function GuideMarkdown({
           p: ({ children }) => {
             const pair = sizedLocalPair(children);
             if (pair) {
-              return (
-                <GuideBeforeAfter
-                  images={pair}
-                  eager={isFirstDimensionedPair(
-                    pair.map((image) => image.src),
-                    eagerPair,
-                  )}
-                />
+              const eager = isFirstDimensionedPair(
+                pair.map((image) => image.src),
+                eagerPair,
               );
+              const classified = classifyPairImages(pair);
+              if (classified.result && classified.inputs.length >= 2) {
+                return (
+                  <MergeBeforeAfter
+                    variant="guide"
+                    priority={eager}
+                    title={headingForImageSrc(markdown, classified.result.src)}
+                    inputs={classified.inputs}
+                    result={classified.result}
+                  />
+                );
+              }
+              return <GuideBeforeAfter images={pair} eager={eager} />;
             }
             return (
               <p className="my-3 text-[15px] leading-relaxed text-[var(--muted)]">
