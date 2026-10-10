@@ -79,6 +79,29 @@ export function firstDimensionedPairSrcs(markdown: string): string[] {
   return [];
 }
 
+const GUIDE_INPUT_SRC = /(?:-before(?:-[bcd])?\.|\/source-\d+[bcd]?\.)/;
+const GUIDE_RESULT_SRC = /(?:-after\.|\/result-\d+[bcd]?\.)/;
+
+/**
+ * Split a sized guide group into inputs and one result.
+ * Two or more inputs and exactly one result use the docked layout.
+ * Anything else, including a single before/after or two separate results,
+ * returns an empty classification so the old grid stays.
+ */
+export function classifyPairImages<T extends { src: string }>(
+  images: readonly T[],
+): { inputs: T[]; result: T | null } {
+  const inputs: T[] = [];
+  const results: T[] = [];
+  for (const image of images) {
+    if (GUIDE_RESULT_SRC.test(image.src)) results.push(image);
+    else if (GUIDE_INPUT_SRC.test(image.src)) inputs.push(image);
+    else return { inputs: [], result: null };
+  }
+  if (results.length !== 1 || inputs.length < 2) return { inputs: [], result: null };
+  return { inputs, result: results[0] ?? null };
+}
+
 /** True when this rendered pair is the first dimensioned pair in the document. */
 export function isFirstDimensionedPair(
   srcs: readonly string[],

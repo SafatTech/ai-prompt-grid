@@ -11,7 +11,9 @@
  *
  * The folder must contain before/<slug>-before.webp, before/<slug>-before-b.webp,
  * and after/<slug>-after.webp. Each style uploads source-<n>.webp, source-<n>b.webp,
- * and result-<n>.webp. The second example pair uses the same result.
+ * and result-<n>.webp. The second example pair is Photo 2 and uses the
+ * same result URL. The print-stack and docked layouts read that existing
+ * row. No extra style_assets columns are required.
  * The 1200x630 guide image is read from scripts/assets/merge-two-photos-og.webp
  * and uploaded to seed/catalog/editorial/merge-two-photos-og.webp.
  * Its alt matches result-75. Style 77's result stays 1:1 (1200x1200).

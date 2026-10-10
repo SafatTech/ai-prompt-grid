@@ -520,7 +520,8 @@ const categorySlug: Record<string, string> = {
 
 /**
  * Two-photo merge templates 75–86.
- * Each style stores the second before as source-<n>b.webp beside result-<n>.webp.
+ * Each style stores Photo 2 as source-<n>b.webp on a second example pair
+ * that shares result-<n>.webp. The layout reads that pair. No extra columns.
  */
 export const seedMergeStyles: CatalogStyle[] = merge.map((item, index) => {
   const source = asset(`source-${item.n}.png`);
