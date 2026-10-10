@@ -4,7 +4,7 @@ import Link from "next/link";
 import type { MouseEvent } from "react";
 import { CompareSlider } from "@/components/compare-slider";
 import { MergeBeforeAfter } from "@/components/merge-before-after";
-import { mergeInputPhotos, usesMergeStack } from "@/lib/catalog/merge-inputs";
+import { mergeInputPhotos, mergeResultImage, usesMergeStack } from "@/lib/catalog/merge-inputs";
 import { useLibrary } from "@/components/providers/library-provider";
 import { useToast } from "@/components/providers/toast-provider";
 import { useUiModals } from "@/components/providers/ui-modal-provider";
@@ -52,10 +52,7 @@ export function StyleCard({ style, compact = false }: Props) {
             variant="card"
             title={style.title}
             inputs={mergePhotos}
-            result={{
-              src: style.result,
-              alt: style.examplePairs[0]?.altResult ?? "",
-            }}
+            result={mergeResultImage(style)}
           />
         ) : (
           <CompareSlider

@@ -102,7 +102,13 @@ async function uploadFile(client, localPath, key) {
   if (error) throw new Error(key + ": " + error.message);
 }
 
-function pairAsset(styleId, kind, sortOrder, sourceUrl, resultUrl, altSource, altResult) {
+function resultPixels(style) {
+  const ratio = style.variant?.defaults?.ratio ?? "";
+  if (String(ratio).startsWith("1:1")) return { resultWidth: 1200, resultHeight: 1200 };
+  return { resultWidth: 1122, resultHeight: 1402 };
+}
+
+function pairAsset(styleId, kind, sortOrder, sourceUrl, resultUrl, altSource, altResult, pixels) {
   return {
     id: uuidFromKey("asset:" + styleId + ":" + kind + ":" + sortOrder),
     style_id: uuidFromKey("style:" + styleId),
@@ -114,6 +120,8 @@ function pairAsset(styleId, kind, sortOrder, sourceUrl, resultUrl, altSource, al
       ...DATA.provenance,
       altSource,
       altResult,
+      resultWidth: pixels.resultWidth,
+      resultHeight: pixels.resultHeight,
     },
     sort_order: sortOrder,
   };
@@ -190,9 +198,10 @@ async function seedStyle(client, style, categoryId) {
     .eq("style_id", styleId);
   if (deleteAssetError) throw deleteAssetError;
 
+  const pixels = resultPixels(style);
   const assets = [
-    pairAsset(style.id, "card_pair", 0, style._sourceUrl, style._resultUrl, style.altSource, style.altResult),
-    pairAsset(style.id, "example_pair", 1, style._sourceUrl, style._resultUrl, style.altSource, style.altResult),
+    pairAsset(style.id, "card_pair", 0, style._sourceUrl, style._resultUrl, style.altSource, style.altResult, pixels),
+    pairAsset(style.id, "example_pair", 1, style._sourceUrl, style._resultUrl, style.altSource, style.altResult, pixels),
     pairAsset(
       style.id,
       "example_pair",
@@ -201,6 +210,7 @@ async function seedStyle(client, style, categoryId) {
       style._resultUrl,
       style.altSecond,
       style.altResult,
+      pixels,
     ),
   ];
   const { error: assetsError } = await client.from("style_assets").insert(assets);

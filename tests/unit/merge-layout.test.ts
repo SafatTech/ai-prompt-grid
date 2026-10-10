@@ -1,12 +1,16 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
+import path from "node:path";
 import { describe, it } from "node:test";
 import {
   mergeInputPhotos,
+  mergeResultSize,
   usesMergeHero,
   usesMergeStack,
 } from "../../src/lib/catalog/merge-inputs";
 import { getStyleById } from "../../src/lib/catalog/styles";
-import { classifyPairImages } from "../../src/lib/guides/image-pairs";
+import { resultPresentation } from "../../src/components/merge-before-after";
+import { classifyPairImages, headingForImageSrc } from "../../src/lib/guides/image-pairs";
 
 describe("merge input photos", () => {
   it("reads Photo 2 from the example pair that shares the result", () => {
@@ -20,6 +24,15 @@ describe("merge input photos", () => {
     assert.equal(usesMergeHero(style), true);
     assert.equal(usesMergeStack(style), true);
     assert.equal(style.examplePairs[0]?.result, style.examplePairs[1]?.result);
+    assert.match(photos[0]?.src ?? "", /supabase\.co/);
+    assert.deepEqual(mergeResultSize(style), { width: 1122, height: 1402 });
+  });
+
+  it("keeps the keepsake result square", () => {
+    const style = getStyleById("side-by-side-keepsake-frame-merge-two-photos-prompt-gemini-couple");
+    assert.ok(style);
+    assert.deepEqual(mergeResultSize(style), { width: 1200, height: 1200 });
+    assert.match(style.result, /result-77\.webp$/);
   });
 
   it("keeps a two-photo style on one before when the second file is not stored", () => {
@@ -63,6 +76,46 @@ describe("classify guide image groups", () => {
       { src: "/guides/example/portrait-after.webp" },
     ]);
     assert.deepEqual(classified, { inputs: [], result: null });
+  });
+
+  it("keeps a square result's 1200x1200 size", () => {
+    const classified = classifyPairImages([
+      {
+        src: "https://example.com/storage/source-77.webp",
+        width: 1122,
+        height: 1402,
+      },
+      {
+        src: "https://example.com/storage/source-77b.webp",
+        width: 1122,
+        height: 1402,
+      },
+      {
+        src: "https://example.com/storage/result-77.webp",
+        width: 1200,
+        height: 1200,
+      },
+    ]);
+    assert.equal(classified.inputs.length, 2);
+    assert.equal(classified.result?.width, 1200);
+    assert.equal(classified.result?.height, 1200);
+    const guide = fs.readFileSync(
+      path.join(process.cwd(), "content/guides/how-to-merge-two-photos-in-gemini.mdx"),
+      "utf8",
+    );
+    const resultLine = guide
+      .split("\n")
+      .find((line) => line.includes("result-77.webp"));
+    assert.match(resultLine ?? "", /"1200x1200"/);
+    assert.equal(
+      headingForImageSrc(guide, resultLine?.match(/\(([^)\s]+)/)?.[1] ?? ""),
+      "3. Two photos in one frame",
+    );
+    assert.deepEqual(resultPresentation(1200, 1200), {
+      aspectRatio: "1200 / 1200",
+      contain: true,
+    });
+    assert.equal(resultPresentation(1122, 1402).contain, false);
   });
 
   it("keeps two separate results on the old grid", () => {

@@ -257,13 +257,19 @@ async function seedStyle(
 }
 
 function provenanceFor(style: CatalogStyle, altSource: string, altResult: string) {
+  const sized = style.examplePairs.find((pair) => pair.resultWidth && pair.resultHeight);
+  const dimensions =
+    sized?.resultWidth && sized.resultHeight
+      ? { resultWidth: sized.resultWidth, resultHeight: sized.resultHeight }
+      : {};
   if (!eightiesStyleIds.has(style.id)) {
-    return { source: "seed", licence: "catalog" };
+    return { source: "seed", licence: "catalog", ...dimensions };
   }
   return {
     ...eightiesAssetProvenance,
     altSource,
     altResult,
+    ...dimensions,
   };
 }
 

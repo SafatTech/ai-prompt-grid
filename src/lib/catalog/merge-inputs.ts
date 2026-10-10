@@ -5,6 +5,32 @@ export type MergeInputPhoto = {
   alt: string;
 };
 
+const PORTRAIT_RESULT = { width: 1122, height: 1402 };
+const SQUARE_RESULT = { width: 1200, height: 1200 };
+
+/** Result file size. Provenance wins; a 1:1 ratio is the square keepsake. */
+export function mergeResultSize(style: CatalogStyle): { width: number; height: number } {
+  const stored = style.examplePairs.find((pair) => pair.resultWidth && pair.resultHeight);
+  if (stored?.resultWidth && stored.resultHeight) {
+    return { width: stored.resultWidth, height: stored.resultHeight };
+  }
+  if (style.promptVariant.defaults.ratio.startsWith("1:1")) return SQUARE_RESULT;
+  return PORTRAIT_RESULT;
+}
+
+export function mergeResultImage(style: CatalogStyle): {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+} {
+  return {
+    src: style.result,
+    alt: style.examplePairs[0]?.altResult ?? "",
+    ...mergeResultSize(style),
+  };
+}
+
 /**
  * Photos that belong to one merged result.
  * Photo 1 is the first example pair. Photo 2+ are later pairs that share

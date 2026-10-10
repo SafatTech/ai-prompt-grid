@@ -21,6 +21,9 @@ export type ExamplePair = {
   result: string;
   altSource: string;
   altResult: string;
+  /** Pixel size of the result file, when known. Optional so older rows still map. */
+  resultWidth?: number;
+  resultHeight?: number;
 };
 
 export type PromptVariant = {

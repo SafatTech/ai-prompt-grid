@@ -1,16 +1,18 @@
 import type { CatalogStyle } from "./types";
 
 /**
- * Prefer Supabase catalog-public WebPs (uploaded by publish-merge-standalone).
- * Falls back to local /catalog only when the public Supabase URL is unset.
+ * Public catalog WebPs. A configured Supabase URL wins. Preview builds that
+ * omit it still use the published project, because source-75b.png and the
+ * other merge files are not in this repo.
  */
+const PUBLISHED_SUPABASE_URL = "https://rbmirzmppbytorbhncxj.supabase.co";
+
 function asset(name: string): string {
-  const base = process.env.NEXT_PUBLIC_SUPABASE_URL?.replace(/\/$/, "");
+  const base = (
+    process.env.NEXT_PUBLIC_SUPABASE_URL || PUBLISHED_SUPABASE_URL
+  ).replace(/\/$/, "");
   const stem = name.replace(/\.[^.]+$/, "");
-  if (base) {
-    return `${base}/storage/v1/object/public/catalog-public/seed/catalog/editorial/${stem}.webp`;
-  }
-  return `/catalog/editorial/${name}`;
+  return `${base}/storage/v1/object/public/catalog-public/seed/catalog/editorial/${stem}.webp`;
 }
 
 type MergeSeed = {
@@ -527,6 +529,9 @@ export const seedMergeStyles: CatalogStyle[] = merge.map((item, index) => {
   const source = asset(`source-${item.n}.png`);
   const second = asset(`source-${item.n}b.png`);
   const result = asset(`result-${item.n}.png`);
+  const resultSize = item.ratio.startsWith("1:1")
+    ? { resultWidth: 1200, resultHeight: 1200 }
+    : { resultWidth: 1122, resultHeight: 1402 };
   return {
     id: item.id,
     title: item.title,
@@ -547,8 +552,14 @@ export const seedMergeStyles: CatalogStyle[] = merge.map((item, index) => {
     changes: item.changes,
     stays: item.stays,
     examplePairs: [
-      { source, result, altSource: item.altSource, altResult: item.altResult },
-      { source: second, result, altSource: item.altSecond, altResult: item.altResult },
+      { source, result, altSource: item.altSource, altResult: item.altResult, ...resultSize },
+      {
+        source: second,
+        result,
+        altSource: item.altSecond,
+        altResult: item.altResult,
+        ...resultSize,
+      },
     ],
     promptVariant: {
       id: `${item.id}-v1`,

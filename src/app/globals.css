@@ -1181,6 +1181,10 @@ textarea:focus-visible,
   transform: rotate(90deg);
 }
 
+.mba-arrow path {
+  stroke-width: 5;
+}
+
 .mba-pill {
   position: absolute;
   z-index: 2;
@@ -1361,6 +1365,10 @@ textarea:focus-visible,
     width: 64px;
     margin: 0;
     transform: none;
+  }
+
+  .mba-arrow path {
+    stroke-width: 2.2;
   }
 
   .mba-chip {

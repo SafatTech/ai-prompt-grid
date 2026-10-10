@@ -8,6 +8,7 @@ import { MergeBeforeAfter } from "@/components/merge-before-after";
 import {
   classifyPairImages,
   firstDimensionedPairSrcs,
+  headingForImageSrc,
   isFirstDimensionedPair,
   isLocalGuideSrc,
   isSizedGuideSrc,
@@ -55,7 +56,7 @@ export function GuideMarkdown({
                   <MergeBeforeAfter
                     variant="guide"
                     priority={eager}
-                    title={classified.result.alt || "Example"}
+                    title={headingForImageSrc(markdown, classified.result.src)}
                     inputs={classified.inputs}
                     result={classified.result}
                   />

@@ -190,11 +190,14 @@ function mapExamplePairs(
       stringField(provenance, "altResult") ||
       asset.alt_text ||
       `Result example ${index + 1}`;
+    const resultWidth = numberField(provenance, "resultWidth");
+    const resultHeight = numberField(provenance, "resultHeight");
     return {
       source: resolveAssetUrl(asset.source_storage_key, publicBaseUrl),
       result: resolveAssetUrl(asset.result_storage_key, publicBaseUrl),
       altSource,
       altResult,
+      ...(resultWidth && resultHeight ? { resultWidth, resultHeight } : {}),
     };
   });
 }
@@ -202,6 +205,11 @@ function mapExamplePairs(
 function stringField(record: Record<string, unknown>, key: string): string | null {
   const value = record[key];
   return typeof value === "string" && value.trim() ? value : null;
+}
+
+function numberField(record: Record<string, unknown>, key: string): number | undefined {
+  const value = record[key];
+  return typeof value === "number" && Number.isFinite(value) && value > 0 ? value : undefined;
 }
 
 function mapCardMedia(

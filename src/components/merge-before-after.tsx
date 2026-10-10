@@ -20,9 +20,37 @@ type Props = {
 
 const DEFAULT_WIDTH = 1122;
 const DEFAULT_HEIGHT = 1402;
+const PORTRAIT_RATIO = 4 / 5;
+const RENDER_WIDTHS = [160, 320, 640];
+
+/** Result box follows the file. A square keepsake is not cropped to 4:5. */
+export function resultPresentation(
+  width?: number,
+  height?: number,
+): { aspectRatio: string; contain: boolean } {
+  const frameWidth = width && width > 0 ? width : DEFAULT_WIDTH;
+  const frameHeight = height && height > 0 ? height : DEFAULT_HEIGHT;
+  const contain = Math.abs(frameWidth / frameHeight - PORTRAIT_RATIO) >= 0.02;
+  return { aspectRatio: `${frameWidth} / ${frameHeight}`, contain };
+}
 
 function isRemoteSrc(src: string): boolean {
   return src.startsWith("https://") || src.startsWith("http://");
+}
+
+/** Smaller WebP for chips and prints. Null when the file is not a public catalog object. */
+function catalogRenderUrl(src: string, width: number): string | null {
+  const marker = "/storage/v1/object/public/";
+  const at = src.indexOf(marker);
+  if (!src.startsWith("https://") || at < 0) return null;
+  const path = src.slice(at + marker.length).split("?")[0];
+  if (!path) return null;
+  const params = new URLSearchParams({
+    width: String(width),
+    quality: "75",
+    format: "webp",
+  });
+  return `${src.slice(0, at)}/storage/v1/render/image/public/${path}?${params}`;
 }
 
 function FrameImage({
@@ -30,12 +58,14 @@ function FrameImage({
   sizes,
   priority = false,
   highPriority = false,
+  resize = false,
   className,
 }: {
   image: MergeImage;
   sizes: string;
   priority?: boolean;
   highPriority?: boolean;
+  resize?: boolean;
   className?: string;
 }) {
   const width = image.width ?? DEFAULT_WIDTH;
@@ -55,11 +85,22 @@ function FrameImage({
       />
     );
   }
+  const srcSet = resize
+    ? RENDER_WIDTHS.map((frame) => {
+        const url = catalogRenderUrl(image.src, frame);
+        return url ? `${url} ${frame}w` : "";
+      })
+        .filter(Boolean)
+        .join(", ")
+    : "";
+  const src = (resize && catalogRenderUrl(image.src, 640)) || image.src;
   return (
     // Remote catalog files stay on Supabase. Width and height still reserve the box.
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src={image.src}
+      src={src}
+      srcSet={srcSet || undefined}
+      sizes={srcSet ? sizes : undefined}
       alt={image.alt}
       width={width}
       height={height}
@@ -84,14 +125,12 @@ function Arrow() {
         d="M4 26 C18 8,36 6,54 18"
         fill="none"
         stroke="currentColor"
-        strokeWidth="2.2"
         strokeLinecap="round"
       />
       <path
         d="M46 10 L56 19 L44 23"
         fill="none"
         stroke="currentColor"
-        strokeWidth="2.2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
@@ -135,6 +174,7 @@ export function MergeBeforeAfter({
     (variant === "card" ? "(max-width: 768px) 100vw, 360px" : "(max-width: 768px) 100vw, 560px");
   const inputSizes =
     variant === "card" ? "46px" : variant === "guide" ? "150px" : "(max-width: 768px) 50vw, 320px";
+  const resultFrame = resultPresentation(result.width, result.height);
 
   if (variant === "card") {
     const chips = inputs.slice(0, 3);
@@ -148,12 +188,13 @@ export function MergeBeforeAfter({
         className={cn("absolute inset-0 m-0", className)}
       >
         <figcaption className="sr-only">{label}</figcaption>
-        <div className="absolute inset-0">
+        <div className={cn("absolute inset-0", resultFrame.contain && "bg-[#f5f3ee]")}>
           <FrameImage
             image={{ ...result, alt: resultAlt(result, title) }}
             sizes={resultSizes}
             priority={priority}
             highPriority={priority}
+            className={resultFrame.contain ? "object-contain" : undefined}
           />
         </div>
         <div className="absolute bottom-2 left-2 z-3 flex">
@@ -163,6 +204,7 @@ export function MergeBeforeAfter({
                 image={{ ...input, alt: inputAlt(input, title, index, inputs.length) }}
                 sizes={inputSizes}
                 priority={priority}
+                resize
               />
             </div>
           ))}
@@ -190,12 +232,19 @@ export function MergeBeforeAfter({
         )}
       >
         <figcaption className="sr-only">{label}</figcaption>
-        <div className="relative aspect-[4/5] overflow-hidden rounded-[18px] shadow-[var(--shadow)]">
+        <div
+          className={cn(
+            "relative overflow-hidden rounded-[18px] shadow-[var(--shadow)]",
+            resultFrame.contain && "bg-[#f5f3ee]",
+          )}
+          style={{ aspectRatio: resultFrame.aspectRatio }}
+        >
           <FrameImage
             image={{ ...result, alt: resultAlt(result, title) }}
             sizes={resultSizes}
             priority={priority}
             highPriority={priority}
+            className={resultFrame.contain ? "object-contain" : undefined}
           />
           <span className="mba-pill mba-pill-result mba-pill-result-end" aria-hidden="true">
             Result
@@ -211,6 +260,7 @@ export function MergeBeforeAfter({
                 image={{ ...input, alt: inputAlt(input, title, index, shown.length) }}
                 sizes={inputSizes}
                 priority={priority}
+                resize
               />
               <span className="mba-chip-label" aria-hidden="true">
                 {shown.length === 1 ? "Before" : `Photo ${index + 1}`}
@@ -251,6 +301,7 @@ export function MergeBeforeAfter({
                     image={{ ...input, alt: inputAlt(input, title, index, shown.length) }}
                     sizes={inputSizes}
                     priority={priority}
+                    resize
                   />
                 </div>
                 <span className="mba-lip" aria-hidden="true">
@@ -266,12 +317,19 @@ export function MergeBeforeAfter({
           ) : null}
         </div>
         <Arrow />
-        <div className="relative aspect-[4/5] overflow-hidden rounded-[18px] shadow-[var(--shadow)] outline outline-1 outline-white/12">
+        <div
+          className={cn(
+            "relative overflow-hidden rounded-[18px] shadow-[var(--shadow)] outline outline-1 outline-white/12",
+            resultFrame.contain && "bg-[#f5f3ee]",
+          )}
+          style={{ aspectRatio: resultFrame.aspectRatio }}
+        >
           <FrameImage
             image={{ ...result, alt: resultAlt(result, title) }}
             sizes={resultSizes}
             priority={priority}
             highPriority={priority}
+            className={resultFrame.contain ? "object-contain" : undefined}
           />
           <span className="mba-pill mba-pill-result" aria-hidden="true">
             Result

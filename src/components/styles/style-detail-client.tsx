@@ -11,8 +11,14 @@ import {
   type ReactNode,
 } from "react";
 import { CompareSlider } from "@/components/compare-slider";
-import { MergeBeforeAfter } from "@/components/merge-before-after";
-import { mergeInputPhotos, usesMergeHero, usesMergeStack } from "@/lib/catalog/merge-inputs";
+import { MergeBeforeAfter, resultPresentation } from "@/components/merge-before-after";
+import {
+  mergeInputPhotos,
+  mergeResultImage,
+  mergeResultSize,
+  usesMergeHero,
+  usesMergeStack,
+} from "@/lib/catalog/merge-inputs";
 import { CopyIcon } from "@/components/icons";
 import { ShareModal } from "@/components/modals/share-modal";
 import { StyleSaveResultQuery } from "@/components/styles/style-save-result-query";
@@ -50,6 +56,8 @@ export function StyleDetailClient({ style, children }: Props) {
     setOptions(defaultsForStyle(style));
   }
   const assembled = useMemo(() => assemblePrompt(style, options), [style, options]);
+  const resultSize = mergeResultSize(style);
+  const resultFit = resultPresentation(resultSize.width, resultSize.height);
   const prompt = assembled.ok ? assembled.prompt : previewPrompt(style, options);
   const moodSelectOptions = useMemo(() => labeledOptionsForStyle(style, "mood"), [style]);
   const backgroundSelectOptions = useMemo(
@@ -202,10 +210,7 @@ export function StyleDetailClient({ style, children }: Props) {
               priority
               title={style.title}
               inputs={mergeInputPhotos(style)}
-              result={{
-                src: style.result,
-                alt: style.examplePairs[0]?.altResult ?? "",
-              }}
+              result={mergeResultImage(style)}
             />
           </div>
         ) : (
@@ -455,12 +460,17 @@ export function StyleDetailClient({ style, children }: Props) {
                   {usesMergeStack(style) ? `Photo ${index + 1}` : "Source photo"}
                 </span>
               </div>
-              <div className="relative">
+              <div className={cn("relative", resultFit.contain && "bg-[#f5f3ee]")}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
                 <img
                   src={example.result}
                   alt={example.altResult}
-                  className="h-full w-full object-cover"
+                  width={example.resultWidth ?? resultSize.width}
+                  height={example.resultHeight ?? resultSize.height}
+                  className={cn(
+                    "h-full w-full",
+                    resultFit.contain ? "object-contain" : "object-cover",
+                  )}
                   loading="lazy"
                 />
                 <span className="absolute right-3 bottom-3 rounded-lg bg-[rgba(11,11,16,0.72)] px-2 py-1 text-[10px] font-extrabold">
