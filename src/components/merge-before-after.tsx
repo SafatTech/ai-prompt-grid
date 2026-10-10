@@ -21,7 +21,6 @@ type Props = {
 const DEFAULT_WIDTH = 1122;
 const DEFAULT_HEIGHT = 1402;
 const PORTRAIT_RATIO = 4 / 5;
-const RENDER_WIDTHS = [160, 320, 640];
 
 /** Result box follows the file. A square keepsake is not cropped to 4:5. */
 export function resultPresentation(
@@ -38,34 +37,17 @@ function isRemoteSrc(src: string): boolean {
   return src.startsWith("https://") || src.startsWith("http://");
 }
 
-/** Smaller WebP for chips and prints. Null when the file is not a public catalog object. */
-function catalogRenderUrl(src: string, width: number): string | null {
-  const marker = "/storage/v1/object/public/";
-  const at = src.indexOf(marker);
-  if (!src.startsWith("https://") || at < 0) return null;
-  const path = src.slice(at + marker.length).split("?")[0];
-  if (!path) return null;
-  const params = new URLSearchParams({
-    width: String(width),
-    quality: "75",
-    format: "webp",
-  });
-  return `${src.slice(0, at)}/storage/v1/render/image/public/${path}?${params}`;
-}
-
 function FrameImage({
   image,
   sizes,
   priority = false,
   highPriority = false,
-  resize = false,
   className,
 }: {
   image: MergeImage;
   sizes: string;
   priority?: boolean;
   highPriority?: boolean;
-  resize?: boolean;
   className?: string;
 }) {
   const width = image.width ?? DEFAULT_WIDTH;
@@ -85,25 +67,15 @@ function FrameImage({
       />
     );
   }
-  const srcSet = resize
-    ? RENDER_WIDTHS.map((frame) => {
-        const url = catalogRenderUrl(image.src, frame);
-        return url ? `${url} ${frame}w` : "";
-      })
-        .filter(Boolean)
-        .join(", ")
-    : "";
-  const src = (resize && catalogRenderUrl(image.src, 640)) || image.src;
   return (
-    // Remote catalog files stay on Supabase. Width and height still reserve the box.
+    // Original catalog WebPs. Width, height, and sizes reserve the box.
     // eslint-disable-next-line @next/next/no-img-element
     <img
-      src={src}
-      srcSet={srcSet || undefined}
-      sizes={srcSet ? sizes : undefined}
+      src={image.src}
       alt={image.alt}
       width={width}
       height={height}
+      sizes={sizes}
       loading={priority ? "eager" : "lazy"}
       fetchPriority={highPriority ? "high" : "auto"}
       decoding="async"
@@ -204,7 +176,6 @@ export function MergeBeforeAfter({
                 image={{ ...input, alt: inputAlt(input, title, index, inputs.length) }}
                 sizes={inputSizes}
                 priority={priority}
-                resize
               />
             </div>
           ))}
@@ -260,7 +231,6 @@ export function MergeBeforeAfter({
                 image={{ ...input, alt: inputAlt(input, title, index, shown.length) }}
                 sizes={inputSizes}
                 priority={priority}
-                resize
               />
               <span className="mba-chip-label" aria-hidden="true">
                 {shown.length === 1 ? "Before" : `Photo ${index + 1}`}
@@ -301,7 +271,6 @@ export function MergeBeforeAfter({
                     image={{ ...input, alt: inputAlt(input, title, index, shown.length) }}
                     sizes={inputSizes}
                     priority={priority}
-                    resize
                   />
                 </div>
                 <span className="mba-lip" aria-hidden="true">
