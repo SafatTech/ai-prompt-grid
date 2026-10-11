@@ -108,8 +108,8 @@ describe("classify guide image groups", () => {
 
   it("docks local -input- guide files with a remote result", () => {
     const classified = classifyPairImages([
-      { src: "/guides/how-to-merge-two-photos-in-gemini/wedding-stage-input-man.png" },
-      { src: "/guides/how-to-merge-two-photos-in-gemini/wedding-stage-input-woman.png" },
+      { src: "/guides/how-to-merge-two-photos-in-gemini/wedding-stage-input-man.webp" },
+      { src: "/guides/how-to-merge-two-photos-in-gemini/wedding-stage-input-woman.webp" },
       {
         src: "https://example.com/storage/result-84.webp",
       },
@@ -124,7 +124,7 @@ describe("classify guide image groups", () => {
     assert.equal(
       headingForImageSrc(
         guide,
-        "/guides/how-to-merge-two-photos-in-gemini/wedding-stage-input-man.png",
+        "/guides/how-to-merge-two-photos-in-gemini/wedding-stage-input-man.webp",
       ),
       "8. Wedding stage",
     );
