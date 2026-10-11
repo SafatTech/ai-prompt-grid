@@ -106,13 +106,11 @@ describe("classify guide image groups", () => {
     assert.equal(resultPresentation(1122, 1402).contain, false);
   });
 
-  it("docks local -input- guide files with a remote result", () => {
+  it("docks wedding and mountain everyday inputs with remote results", () => {
     const classified = classifyPairImages([
-      { src: "/guides/how-to-merge-two-photos-in-gemini/wedding-stage-input-man.webp" },
-      { src: "/guides/how-to-merge-two-photos-in-gemini/wedding-stage-input-woman.webp" },
-      {
-        src: "https://example.com/storage/result-84.webp",
-      },
+      { src: "https://example.com/storage/source-84.webp" },
+      { src: "https://example.com/storage/source-84b.webp" },
+      { src: "https://example.com/storage/result-84.webp" },
     ]);
     assert.equal(classified.inputs.length, 2);
     assert.match(classified.result?.src ?? "", /result-84\.webp$/);
@@ -124,13 +122,15 @@ describe("classify guide image groups", () => {
     assert.equal(
       headingForImageSrc(
         guide,
-        "/guides/how-to-merge-two-photos-in-gemini/wedding-stage-input-man.webp",
+        "https://rbmirzmppbytorbhncxj.supabase.co/storage/v1/object/public/catalog-public/seed/catalog/editorial/source-84.webp",
       ),
       "8. Wedding stage",
     );
     assert.match(guide, /ordinary everyday photo taken at home/);
     assert.match(guide, /ordinary photo taken at home/);
-    assert.doesNotMatch(guide, /source-84|source-86|sherwani|lehenga|black puffer/);
+    assert.match(guide, /source-84\.webp/);
+    assert.match(guide, /source-86\.webp/);
+    assert.doesNotMatch(guide, /sherwani|lehenga|black puffer|wedding-stage-input/);
   });
 
   it("keeps two separate results on the old grid", () => {

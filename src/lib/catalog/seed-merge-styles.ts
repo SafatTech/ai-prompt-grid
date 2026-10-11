@@ -429,16 +429,17 @@ const merge: MergeSeed[] = [
     ],
     height: 340,
     targetSourcePhoto:
-      "Two separate photos uploaded together: person A first, person B second; formal outfits work best",
+      "Two separate everyday photos uploaded together: person A first, person B second",
     bestSourcePhoto: [
-      "Each person in formal or wedding clothes",
-      "Face large and sharp in each photo",
+      "One person per photo, face large and sharp",
+      "Ordinary home or casual photos work; outfits stay as uploaded",
       "Similar indoor light",
       "Original images should not be blurry",
     ],
-    altSource: "Bearded man in a cream patterned sherwani.",
+    altSource:
+      "Man in a plain olive-green tee standing in a living room, an ordinary everyday photo taken at home.",
     altSecond:
-      "Woman in a red bridal lehenga with gold jewellery, a maang tikka and hennaed hands.",
+      "Woman in a simple light floral kurti in a home room, an ordinary everyday photo, not wedding attire.",
     altResult: "Couple on a cream sofa before white and blush flowers with fairy lights.",
     template:
       "Merge the first uploaded photo and the second uploaded photo into one elegant {{subject}} photo of a couple seated together on a wedding stage. The first uploaded photo shows person A and the second uploaded photo shows person B. Follow the selected source-preservation settings: {{preserve}}. Always keep person A's face shape, eyes, nose, lips, hairline, hair, any beard, glasses, or head covering, apparent age, and exact skin tone as in the first uploaded photo, and person B's exactly as in the second uploaded photo. Treat them as two separate people; do not blend, swap, beautify, slim, de-age, or lighten either face, and keep natural skin texture. Keep the outfit and jewelry each person wears in their own photo. If group arrangement and pose are not preserved, seat them side by side on a cream sofa, close together, smiling at the camera, at realistic relative heights. Light both with the same warm, soft stage light. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair and clothing. Do not add extra people, text, lettering, or logos. Compose for {{ratio}} without cropping either face.",
@@ -501,12 +502,13 @@ const merge: MergeSeed[] = [
     targetSourcePhoto: "Two separate photos uploaded together: person A first, person B second",
     bestSourcePhoto: [
       "One person per photo, face large and sharp",
-      "Similar light in both photos (both daylight or both indoors)",
-      "Similar head angle and framing, ideally chest-up",
+      "Ordinary home or casual photos work; jackets are added in the edit",
+      "Similar indoor or daylight in both",
       "Original images should not be blurry",
     ],
-    altSource: "Bearded man in a black puffer at a railing with mountains.",
-    altSecond: "Woman in a maroon puffer with a fur-trimmed hood and cream scarf.",
+    altSource:
+      "Man in a navy sweater sitting in a living room, an ordinary photo taken at home.",
+    altSecond: "Woman in a cream sweater in a bedroom, an ordinary photo taken at home.",
     altResult: "Couple in warm jackets at a railing with pines, a green valley and snowy peaks.",
     template:
       "Merge the first uploaded photo and the second uploaded photo into one natural travel {{subject}} photo of a couple at a mountain viewpoint. The first uploaded photo shows person A and the second uploaded photo shows person B. Follow the selected source-preservation settings: {{preserve}}. Always keep person A's face shape, eyes, nose, lips, hairline, hair, any beard, glasses, or head covering, apparent age, and exact skin tone as in the first uploaded photo, and person B's exactly as in the second uploaded photo. Treat them as two separate people; do not blend, swap, beautify, slim, de-age, or lighten either face, and keep natural skin texture. Dress both in plain, unbranded warm jackets over their own clothes, keeping any head covering. If group arrangement and pose are not preserved, stand them side by side at a railing, smiling at the camera, at realistic relative heights. Light both with the same crisp daylight from one direction and matching shadows. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair and clothing. Do not add extra people, text, lettering, or logos. Compose for {{ratio}} without cropping either face.",
