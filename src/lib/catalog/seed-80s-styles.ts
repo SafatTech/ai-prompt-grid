@@ -191,40 +191,6 @@ const eighties: EightiesSeed[] = [
       "Edit the uploaded {{subject}} into a candid 1980s street snapshot walking through a city market, shot like a 35mm point-and-shoot photo with visible film grain and slightly off-center framing. Follow the selected source-preservation settings: {{preserve}}. If clothing is not preserved, dress them in a denim jacket, high-waisted jeans, and white sneakers, with a portable cassette player with foam headphones around the neck. If pose is not preserved, show them mid-walk. Apply {{mood}} color grading in bright afternoon sun with warm faded colors. Replace the background with {{background}}, keeping clean edges around hair and clothing. Do not add people, lettering, or logos. Compose for {{ratio}} without cropping the face.",
   },
   {
-    n: "52",
-    id: "80s-aerobics-studio",
-    title: "80s Aerobics Studio",
-    note: "Neon workout look in a mirrored studio",
-    description:
-      "Turn a photo into a bright 1980s aerobics studio portrait with neon workout clothes, a headband, and a pastel mirrored wall.",
-    subject: "Person",
-    intent: "Full scene transformation",
-    mood: "Flashy nostalgic",
-    background: "Mirrored aerobics studio wall with a pastel gradient backdrop",
-    keepClothing: false,
-    keepPose: false,
-    changes: [
-      "Neon workout outfit and big hair",
-      "Mirrored studio",
-      "Bright flash and saturated color",
-    ],
-    stays: ["Face and identity", "Body shape", "Age", "Skin tone"],
-    height: 360,
-    targetSourcePhoto: "One clear photo of a person standing or smiling, face visible",
-    bestSourcePhoto: [
-      "Face visible",
-      "Standing or three-quarter body works best",
-      "Do not use a photo that is only a tight face crop if you want the outfit",
-      "Original image should not be blurry",
-    ],
-    altSource:
-      "AI-generated photo of a smiling young woman with dark hair in a ponytail, in a black tee and leggings.",
-    altResult:
-      "AI edit as a 1980s aerobics portrait in a neon outfit, in a mirrored studio with a pastel backdrop.",
-    template:
-      "Edit the uploaded {{subject}} into a 1980s aerobics studio portrait with big hair, a soft glow, and light film grain. Follow the selected source-preservation settings: {{preserve}}. If clothing is not preserved, dress them in a neon leotard or tracksuit with a headband and leg warmers. If pose is not preserved, pose them mid-stretch. Do not slim or reshape the body. Apply {{mood}} color grading with bright studio flash and saturated colors. Replace the background with {{background}}, keeping clean edges around hair and clothing. Do not add people, lettering, or logos. Compose for {{ratio}} without cropping the face.",
-  },
-  {
     n: "53",
     id: "80s-bedroom-cassette",
     title: "80s Bedroom Cassette",

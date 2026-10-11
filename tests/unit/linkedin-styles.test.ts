@@ -26,8 +26,8 @@ const passportNote =
   "Official passport, visa and ID photos have strict rules, and many authorities reject AI-edited or digitally altered photos. Check your issuing authority's requirements; this prompt does not produce a compliant ID photo.";
 
 describe("LinkedIn headshot style pages", () => {
-  it("publishes 15 professional portrait styles numbered 60 through 74", () => {
-    assert.equal(seedLinkedinStyles.length, 15);
+  it("publishes 14 professional portrait styles numbered 60–70 and 72–74", () => {
+    assert.equal(seedLinkedinStyles.length, 14);
     assert.ok(
       seedLinkedinStyles.every((style) => style.category === "Professional portraits"),
     );
@@ -45,11 +45,16 @@ describe("LinkedIn headshot style pages", () => {
       "68",
       "69",
       "70",
-      "71",
       "72",
       "73",
       "74",
     ]);
+    assert.equal(
+      seedLinkedinStyles.some(
+        (style) => style.id === "saree-office-linkedin-profile-picture-prompt-gemini-women",
+      ),
+      false,
+    );
   });
 
   it("keeps style titles and document titles within 60 characters", () => {

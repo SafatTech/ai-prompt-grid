@@ -263,7 +263,6 @@ export const backgroundLabels: Record<string, string> = {
   "Hand-painted sunset sky with empty space at the top": "Painted sunset",
   "Soft blue 1980s laser-style studio backdrop": "Blue laser studio",
   "Busy 1980s city market street in bright afternoon sun": "Market street",
-  "Mirrored aerobics studio wall with a pastel gradient backdrop": "Aerobics studio",
   "1980s teenager bedroom with a cassette player, a stack of tapes, and a patterned bedspread":
     "Cassette bedroom",
   "Dark roller rink with neon lights": "Neon roller rink",

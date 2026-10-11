@@ -79,7 +79,8 @@ export function firstDimensionedPairSrcs(markdown: string): string[] {
   return [];
 }
 
-const GUIDE_INPUT_SRC = /(?:-before(?:-[bcd])?\.|\/source-\d+[bcd]?\.)/;
+const GUIDE_INPUT_SRC =
+  /(?:-before(?:-[bcd])?\.|-input-[^./]+\.|\/source-\d+[bcd]?\.)/;
 const GUIDE_RESULT_SRC = /(?:-after\.|\/result-\d+[bcd]?\.)/;
 
 /**

@@ -23,8 +23,8 @@ import {
 const TOKEN = /\{\{[a-zA-Z]+\}\}/;
 
 describe("1980s style pages", () => {
-  it("publishes 12 vintage styles numbered 48 through 59", () => {
-    assert.equal(seedEightiesStyles.length, 12);
+  it("publishes 11 vintage styles numbered 48–51 and 53–59", () => {
+    assert.equal(seedEightiesStyles.length, 11);
     assert.ok(seedEightiesStyles.every((style) => style.category === "Vintage"));
     assert.ok(seedEightiesStyles.every((style) => style.status === "published"));
     assert.ok(seedEightiesStyles.every((style) => style.requirement === "One photo"));
@@ -37,7 +37,6 @@ describe("1980s style pages", () => {
       "49",
       "50",
       "51",
-      "52",
       "53",
       "54",
       "55",
@@ -46,6 +45,10 @@ describe("1980s style pages", () => {
       "58",
       "59",
     ]);
+    assert.equal(
+      seedEightiesStyles.some((style) => style.id === "80s-aerobics-studio"),
+      false,
+    );
   });
 
   it("keeps SEO titles in the look pattern and under 60 characters", () => {

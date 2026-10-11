@@ -99,23 +99,38 @@ describe("classify guide image groups", () => {
     assert.equal(classified.inputs.length, 2);
     assert.equal(classified.result?.width, 1200);
     assert.equal(classified.result?.height, 1200);
-    const guide = fs.readFileSync(
-      path.join(process.cwd(), "content/guides/how-to-merge-two-photos-in-gemini.mdx"),
-      "utf8",
-    );
-    const resultLine = guide
-      .split("\n")
-      .find((line) => line.includes("result-77.webp"));
-    assert.match(resultLine ?? "", /"1200x1200"/);
-    assert.equal(
-      headingForImageSrc(guide, resultLine?.match(/\(([^)\s]+)/)?.[1] ?? ""),
-      "3. Two photos in one frame",
-    );
     assert.deepEqual(resultPresentation(1200, 1200), {
       aspectRatio: "1200 / 1200",
       contain: true,
     });
     assert.equal(resultPresentation(1122, 1402).contain, false);
+  });
+
+  it("docks local -input- guide files with a remote result", () => {
+    const classified = classifyPairImages([
+      { src: "/guides/how-to-merge-two-photos-in-gemini/wedding-stage-input-man.png" },
+      { src: "/guides/how-to-merge-two-photos-in-gemini/wedding-stage-input-woman.png" },
+      {
+        src: "https://example.com/storage/result-84.webp",
+      },
+    ]);
+    assert.equal(classified.inputs.length, 2);
+    assert.match(classified.result?.src ?? "", /result-84\.webp$/);
+    const guide = fs.readFileSync(
+      path.join(process.cwd(), "content/guides/how-to-merge-two-photos-in-gemini.mdx"),
+      "utf8",
+    );
+    assert.doesNotMatch(guide, /Two photos in one frame|You and your pet/);
+    assert.equal(
+      headingForImageSrc(
+        guide,
+        "/guides/how-to-merge-two-photos-in-gemini/wedding-stage-input-man.png",
+      ),
+      "8. Wedding stage",
+    );
+    assert.match(guide, /ordinary everyday photo taken at home/);
+    assert.match(guide, /ordinary photo taken at home/);
+    assert.doesNotMatch(guide, /source-84|source-86|sherwani|lehenga|black puffer/);
   });
 
   it("keeps two separate results on the old grid", () => {
