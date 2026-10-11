@@ -1,0 +1,316 @@
+- generic [active] [ref=f8e1]:
+  - banner [ref=f8e2]:
+    - generic [ref=f8e3]:
+      - link "AI Prompt Grid home" [ref=f8e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f8e9]: AI Prompt Grid
+      - navigation "Main navigation" [ref=f8e10]:
+        - link "Explore styles" [ref=f8e11] [cursor=pointer]:
+          - /url: /explore
+        - button "Categories" [ref=f8e12] [cursor=pointer]
+        - link "How it works" [ref=f8e15] [cursor=pointer]:
+          - /url: /how-it-works
+        - link "Guides" [ref=f8e16] [cursor=pointer]:
+          - /url: /guides
+        - button "For creators" [ref=f8e18] [cursor=pointer]
+      - generic [ref=f8e21]:
+        - button "Search styles" [ref=f8e22] [cursor=pointer]
+        - button "Sign in" [ref=f8e26] [cursor=pointer]
+        - link "Explore styles" [ref=f8e27] [cursor=pointer]:
+          - /url: /explore
+  - main [ref=f8e28]:
+    - generic [ref=f8e29]:
+      - generic [ref=f8e30]:
+        - generic [ref=f8e31]:
+          - generic [ref=f8e32]:
+            - link "Back to explore" [ref=f8e33] [cursor=pointer]:
+              - /url: /explore
+              - text: ←
+            - generic [ref=f8e34]:
+              - link "Explore" [ref=f8e35] [cursor=pointer]:
+                - /url: /explore
+              - text: /
+              - link "Professional portraits" [ref=f8e36] [cursor=pointer]:
+                - /url: /explore?category=Professional%20portraits
+              - text: "/ CV Photo AI Prompt: Plain Background Resume Headshot"
+          - generic [ref=f8e37]:
+            - button "Save style" [ref=f8e38] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f8e39]: ♡
+            - button "Share" [ref=f8e41] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f8e42]: ↗
+        - generic [ref=f8e45]:
+          - generic [ref=f8e46]:
+            - button "Slider" [ref=f8e47] [cursor=pointer]
+            - button "Side by side" [ref=f8e48] [cursor=pointer]
+          - generic [ref=f8e49]:
+            - img "Woman with glasses in a lavender knit sweater, in a bedroom."
+          - generic [ref=f8e50]:
+            - img "Woman with glasses in the same lavender knit sweater, plain cream wall."
+          - generic: Source photo
+          - generic: AI result
+          - generic [aria-hidden]: ↔
+          - generic [ref=f8e51]: Move to compare source photo and AI result
+          - slider "Compare source photo and AI result" [ref=f8e52]: "50"
+      - generic [ref=f8e53]:
+        - article [ref=f8e54]:
+          - generic [ref=f8e55]:
+            - generic [ref=f8e56]: Professional portraits
+            - generic [ref=f8e57]: Person
+            - generic [ref=f8e58]: One photo
+            - generic [ref=f8e59]: ChatGPT Image
+            - generic [ref=f8e60]: "Mode: Image edit / transform with uploaded photo"
+          - 'heading "CV Photo AI Prompt: Plain Background Resume Headshot" [level=1] [ref=f8e61]'
+          - paragraph [ref=f8e62]: Gives a clean, plain-background CV or resume photo, keeping their own clothes.
+          - paragraph [ref=f8e63]: "Target photo: One recent, front-facing head-and-shoulders photo. Inputs: source photo (1). Prompt v1.0.0."
+          - generic [ref=f8e64]:
+            - heading "Best source photo" [level=2] [ref=f8e65]
+            - generic [ref=f8e66]:
+              - generic [ref=f8e67]:
+                - generic [ref=f8e68]: ✓
+                - text: Facing the camera
+              - generic [ref=f8e69]:
+                - generic [ref=f8e70]: ✓
+                - text: No shadows across the face
+              - generic [ref=f8e71]:
+                - generic [ref=f8e72]: ✓
+                - text: Slight natural smile
+              - generic [ref=f8e73]:
+                - generic [ref=f8e74]: ✓
+                - text: Original image should not be blurry
+          - generic [ref=f8e75]:
+            - heading "What changes" [level=2] [ref=f8e76]
+            - generic [ref=f8e77]:
+              - generic [ref=f8e78]: Plain cream wall
+              - generic [ref=f8e80]: Shadow-free even light
+          - generic [ref=f8e82]:
+            - heading "What should stay recognizable" [level=2] [ref=f8e83]
+            - generic [ref=f8e84]:
+              - generic [ref=f8e85]:
+                - generic [ref=f8e86]: ✓
+                - text: Face and identity
+              - generic [ref=f8e87]:
+                - generic [ref=f8e88]: ✓
+                - text: Own clothing
+              - generic [ref=f8e89]:
+                - generic [ref=f8e90]: ✓
+                - text: Skin tone
+              - generic [ref=f8e91]:
+                - generic [ref=f8e92]: ✓
+                - text: Glasses
+            - generic [ref=f8e93]: AI tools can still change small details. Review the final result before using it professionally.
+          - generic [ref=f8e94]:
+            - heading "Limitations" [level=2] [ref=f8e95]
+            - list [ref=f8e96]:
+              - listitem [ref=f8e97]: Example people in the before photo are AI-generated, not real people.
+              - listitem [ref=f8e98]: Heavy face occlusion can weaken identity fidelity
+        - complementary [ref=f8e99]:
+          - heading "Customize this prompt" [level=2] [ref=f8e100]
+          - paragraph [ref=f8e101]: Adjust the details, then copy the prompt to ChatGPT Image.
+          - generic [ref=f8e102]:
+            - generic [ref=f8e103]:
+              - generic [ref=f8e104]: Color mood
+              - combobox [aria-hidden] [ref=f8e105]
+              - button "Bright neutral" [ref=f8e106] [cursor=pointer]
+            - generic [ref=f8e111]:
+              - generic [ref=f8e112]: Background
+              - combobox [aria-hidden] [ref=f8e113]
+              - button "Cream wall" [ref=f8e114] [cursor=pointer]
+            - generic [ref=f8e119]:
+              - generic [ref=f8e120]: Output ratio
+              - combobox [aria-hidden] [ref=f8e121]
+              - button "4:5 Portrait" [ref=f8e122] [cursor=pointer]
+          - generic [ref=f8e127]:
+            - generic [ref=f8e128]: Keep clothing from original photo
+            - generic [ref=f8e129]:
+              - checkbox [checked]
+              - generic [ref=f8e130] [cursor=pointer]
+          - generic [ref=f8e132]:
+            - generic [ref=f8e133]: Keep original pose
+            - generic [ref=f8e134]:
+              - checkbox
+              - generic [ref=f8e135] [cursor=pointer]
+          - generic [ref=f8e137]: "Edit the uploaded person into a clean CV photo with soft, even lighting, no shadows on the face, and sharp focus. Follow the selected source-preservation settings: recognizable identity, proportions, defining features, expression, and clothing. If clothing is preserved, keep their own clothes. If pose is not preserved, have them face the camera with a slight friendly smile, framed from head to upper shoulders. Keep their face shape, eyes, nose, lips, hairline, any beard, glasses, or head covering, apparent age, and exact skin tone; do not beautify, slim, de-age, or lighten the skin, and keep natural skin texture. Apply bright neutral color grading. Replace the background with minimal cream wall, keeping clean edges around hair and clothing. Do not add people, text, lettering, or logos. Compose for 4:5 Portrait without cropping the face."
+          - generic [ref=f8e138]:
+            - button "Copy prompt" [ref=f8e139] [cursor=pointer]
+            - button "Save to collection" [ref=f8e143] [cursor=pointer]
+            - button "Save your result" [ref=f8e144] [cursor=pointer]
+            - link "Try another style" [ref=f8e145] [cursor=pointer]:
+              - /url: /explore
+          - generic [ref=f8e146]:
+            - heading "Use this prompt" [level=3] [ref=f8e147]
+            - list [ref=f8e148]:
+              - listitem [ref=f8e149]: Open ChatGPT Image in Image edit / transform with uploaded photo
+              - listitem [ref=f8e150]: Upload source photo
+              - listitem [ref=f8e151]: Paste this prompt
+              - listitem [ref=f8e152]: Generate and check your result
+            - button "Why does this use an external tool?" [ref=f8e153] [cursor=pointer]
+      - generic [ref=f8e154]:
+        - heading "More examples" [level=2] [ref=f8e155]
+        - generic [ref=f8e157]:
+          - generic [ref=f8e158]:
+            - img "Woman with glasses in a lavender knit sweater, in a bedroom." [ref=f8e159]
+            - generic [ref=f8e160]: Source photo
+          - generic [ref=f8e161]:
+            - img "Woman with glasses in the same lavender knit sweater, plain cream wall." [ref=f8e162]
+            - generic [ref=f8e163]: AI result
+      - generic [ref=f8e164]:
+        - generic [ref=f8e165]:
+          - heading "Related styles" [level=2] [ref=f8e166]
+          - generic [ref=f8e167]:
+            - link "More Professional portraits styles →" [ref=f8e168] [cursor=pointer]:
+              - /url: /explore?category=Professional%20portraits
+            - link "Explore all →" [ref=f8e169] [cursor=pointer]:
+              - /url: /explore
+        - generic [ref=f8e170]:
+          - article [ref=f8e171]:
+            - generic [ref=f8e172]:
+              - generic [ref=f8e173]:
+                - generic [ref=f8e174]:
+                  - img "Source photo for Modern Office LinkedIn Photo Prompt for Gemini"
+                - generic [ref=f8e175]:
+                  - img "AI result showing Modern Office LinkedIn Photo Prompt for Gemini"
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=f8e176]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=f8e177]: "50"
+              - button "Save Modern Office LinkedIn Photo Prompt for Gemini" [ref=f8e178] [cursor=pointer]: ♡
+            - link "Open Modern Office LinkedIn Photo Prompt for Gemini" [ref=f8e179] [cursor=pointer]:
+              - /url: /styles/modern-office-linkedin-profile-picture-prompt-gemini
+              - generic [ref=f8e180]:
+                - generic [ref=f8e181]: Professional portraits
+                - generic [ref=f8e182]: Person
+                - generic [ref=f8e183]: ChatGPT Image
+              - heading "Modern Office LinkedIn Photo Prompt for Gemini" [level=3] [ref=f8e184]
+              - paragraph [ref=f8e185]: Blurred glass office, window light
+          - article [ref=f8e186]:
+            - generic [ref=f8e187]:
+              - generic [ref=f8e188]:
+                - generic [ref=f8e189]:
+                  - img "Source photo for Outdoor Natural Light LinkedIn Photo Prompt for Gemini"
+                - generic [ref=f8e190]:
+                  - img "AI result showing Outdoor Natural Light LinkedIn Photo Prompt for Gemini"
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=f8e191]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=f8e192]: "50"
+              - button "Save Outdoor Natural Light LinkedIn Photo Prompt for Gemini" [ref=f8e193] [cursor=pointer]: ♡
+            - link "Open Outdoor Natural Light LinkedIn Photo Prompt for Gemini" [ref=f8e194] [cursor=pointer]:
+              - /url: /styles/outdoor-natural-light-linkedin-profile-picture-prompt-gemini
+              - generic [ref=f8e195]:
+                - generic [ref=f8e196]: Professional portraits
+                - generic [ref=f8e197]: Person
+                - generic [ref=f8e198]: ChatGPT Image
+              - heading "Outdoor Natural Light LinkedIn Photo Prompt for Gemini" [level=3] [ref=f8e199]
+              - paragraph [ref=f8e200]: Blurred trees, late-afternoon light, warm smile
+          - article [ref=f8e201]:
+            - generic [ref=f8e202]:
+              - generic [ref=f8e203]:
+                - generic [ref=f8e204]:
+                  - img "Source photo for LinkedIn Photo Clean-Up AI Prompt for Gemini (Keep Outfit)"
+                - generic [ref=f8e205]:
+                  - img "AI result showing LinkedIn Photo Clean-Up AI Prompt for Gemini (Keep Outfit)"
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=f8e206]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=f8e207]: "50"
+              - button "Save LinkedIn Photo Clean-Up AI Prompt for Gemini (Keep Outfit)" [ref=f8e208] [cursor=pointer]: ♡
+            - link "Open LinkedIn Photo Clean-Up AI Prompt for Gemini (Keep Outfit)" [ref=f8e209] [cursor=pointer]:
+              - /url: /styles/linkedin-photo-clean-up-ai-prompt-gemini-keep-outfit
+              - generic [ref=f8e210]:
+                - generic [ref=f8e211]: Professional portraits
+                - generic [ref=f8e212]: Person
+                - generic [ref=f8e213]: ChatGPT Image
+              - heading "LinkedIn Photo Clean-Up AI Prompt for Gemini (Keep Outfit)" [level=3] [ref=f8e214]
+              - paragraph [ref=f8e215]: "Minimal edit: plain grey, tidy, even light"
+          - article [ref=f8e216]:
+            - generic [ref=f8e217]:
+              - generic [ref=f8e218]:
+                - generic [ref=f8e219]:
+                  - img "Source photo for Matching Team Headshot AI Prompt for Gemini (Company Page)"
+                - generic [ref=f8e220]:
+                  - img "AI result showing Matching Team Headshot AI Prompt for Gemini (Company Page)"
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=f8e221]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=f8e222]: "50"
+              - button "Save Matching Team Headshot AI Prompt for Gemini (Company Page)" [ref=f8e223] [cursor=pointer]: ♡
+            - link "Open Matching Team Headshot AI Prompt for Gemini (Company Page)" [ref=f8e224] [cursor=pointer]:
+              - /url: /styles/matching-team-headshot-ai-prompt-gemini-company-page
+              - generic [ref=f8e225]:
+                - generic [ref=f8e226]: Professional portraits
+                - generic [ref=f8e227]: Person
+                - generic [ref=f8e228]: ChatGPT Image
+              - heading "Matching Team Headshot AI Prompt for Gemini (Company Page)" [level=3] [ref=f8e229]
+              - paragraph [ref=f8e230]: Consistent grey studio look for team pages
+          - article [ref=f8e231]:
+            - generic [ref=f8e232]:
+              - generic [ref=f8e233]:
+                - generic [ref=f8e234]:
+                  - img "Source photo for Saree Office LinkedIn Photo Prompt for Gemini (Women)"
+                - generic [ref=f8e235]:
+                  - img "AI result showing Saree Office LinkedIn Photo Prompt for Gemini (Women)"
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=f8e236]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=f8e237]: "50"
+              - button "Save Saree Office LinkedIn Photo Prompt for Gemini (Women)" [ref=f8e238] [cursor=pointer]: ♡
+            - link "Open Saree Office LinkedIn Photo Prompt for Gemini (Women)" [ref=f8e239] [cursor=pointer]:
+              - /url: /styles/saree-office-linkedin-profile-picture-prompt-gemini-women
+              - generic [ref=f8e240]:
+                - generic [ref=f8e241]: Professional portraits
+                - generic [ref=f8e242]: Person
+                - generic [ref=f8e243]: ChatGPT Image
+              - heading "Saree Office LinkedIn Photo Prompt for Gemini (Women)" [level=3] [ref=f8e244]
+              - paragraph [ref=f8e245]: Plain silk-cotton saree, fitted blouse, grey studio
+          - article [ref=f8e246]:
+            - generic [ref=f8e247]:
+              - generic [ref=f8e248]:
+                - generic [ref=f8e249]:
+                  - img "Source photo for Passport Size Photo AI Prompt for Gemini (White Background)"
+                - generic [ref=f8e250]:
+                  - img "AI result showing Passport Size Photo AI Prompt for Gemini (White Background)"
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=f8e251]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=f8e252]: "50"
+              - button "Save Passport Size Photo AI Prompt for Gemini (White Background)" [ref=f8e253] [cursor=pointer]: ♡
+            - link "Open Passport Size Photo AI Prompt for Gemini (White Background)" [ref=f8e254] [cursor=pointer]:
+              - /url: /styles/passport-size-photo-ai-prompt-gemini-white-background
+              - generic [ref=f8e255]:
+                - generic [ref=f8e256]: Professional portraits
+                - generic [ref=f8e257]: Person
+                - generic [ref=f8e258]: ChatGPT Image
+              - heading "Passport Size Photo AI Prompt for Gemini (White Background)" [level=3] [ref=f8e259]
+              - paragraph [ref=f8e260]: Plain white, front-facing, for CVs and forms
+      - generic [ref=f8e261]:
+        - generic [ref=f8e262]: ✓
+        - generic [ref=f8e263]:
+          - heading "Created with your photo in mind" [level=2] [ref=f8e264]
+          - paragraph [ref=f8e265]: Only upload photos you own or have permission to use. Keep recognizable people informed about how their images are edited.
+  - contentinfo [ref=f8e266]:
+    - generic [ref=f8e267]:
+      - generic [ref=f8e268]: AI Prompt Grid
+      - generic [ref=f8e273]:
+        - generic [ref=f8e274]: Discover tested styles. Transform your photo in an external AI editor.
+        - link "Guides" [ref=f8e275] [cursor=pointer]:
+          - /url: /guides
+        - link "About" [ref=f8e276] [cursor=pointer]:
+          - /url: /about
+        - link "Contact" [ref=f8e277] [cursor=pointer]:
+          - /url: /contact
+        - link "hello@aipromptgrid.com" [ref=f8e278] [cursor=pointer]:
+          - /url: mailto:hello@aipromptgrid.com
+        - link "Privacy" [ref=f8e279] [cursor=pointer]:
+          - /url: /privacy-policy
+        - link "Cookie policy" [ref=f8e280] [cursor=pointer]:
+          - /url: /cookie-policy
+        - link "Disclaimer" [ref=f8e281] [cursor=pointer]:
+          - /url: /disclaimer
+        - link "Terms" [ref=f8e282] [cursor=pointer]:
+          - /url: /terms-of-service

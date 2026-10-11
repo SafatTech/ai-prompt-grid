@@ -1,0 +1,316 @@
+- generic [active] [ref=f4e1]:
+  - banner [ref=f4e2]:
+    - generic [ref=f4e3]:
+      - link "AI Prompt Grid home" [ref=f4e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f4e9]: AI Prompt Grid
+      - navigation "Main navigation" [ref=f4e10]:
+        - link "Explore styles" [ref=f4e11] [cursor=pointer]:
+          - /url: /explore
+        - button "Categories" [ref=f4e12] [cursor=pointer]
+        - link "How it works" [ref=f4e15] [cursor=pointer]:
+          - /url: /how-it-works
+        - link "Guides" [ref=f4e16] [cursor=pointer]:
+          - /url: /guides
+        - button "For creators" [ref=f4e18] [cursor=pointer]
+      - generic [ref=f4e21]:
+        - button "Search styles" [ref=f4e22] [cursor=pointer]
+        - button "Sign in" [ref=f4e26] [cursor=pointer]
+        - link "Explore styles" [ref=f4e27] [cursor=pointer]:
+          - /url: /explore
+  - main [ref=f4e28]:
+    - generic [ref=f4e430]:
+      - generic [ref=f4e431]:
+        - generic [ref=f4e432]:
+          - generic [ref=f4e433]:
+            - link "Back to explore" [ref=f4e434] [cursor=pointer]:
+              - /url: /explore
+              - text: ←
+            - generic [ref=f4e435]:
+              - link "Explore" [ref=f4e436] [cursor=pointer]:
+                - /url: /explore
+              - text: /
+              - link "Professional portraits" [ref=f4e437] [cursor=pointer]:
+                - /url: /explore?category=Professional%20portraits
+              - text: / Navy Blazer LinkedIn Profile Picture Prompt for Gemini (Men & Women)
+          - generic [ref=f4e438]:
+            - button "Save style" [ref=f4e439] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f4e440]: ♡
+            - button "Share" [ref=f4e442] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f4e443]: ↗
+        - generic [ref=f4e446]:
+          - generic [ref=f4e447]:
+            - button "Slider" [ref=f4e448] [cursor=pointer]
+            - button "Side by side" [ref=f4e449] [cursor=pointer]
+          - generic [ref=f4e450]:
+            - generic [ref=f4e451]:
+              - img "Man with wavy hair and a short beard in an untucked white shirt and navy trousers, in a living room with a TV, sofa and plants." [ref=f4e452]
+              - generic [ref=f4e453]: Source photo
+            - generic [ref=f4e454]:
+              - img "Man in a navy blazer over a white shirt, light-grey studio." [ref=f4e455]
+              - generic [ref=f4e456]: AI result
+      - generic [ref=f4e457]:
+        - article [ref=f4e458]:
+          - generic [ref=f4e459]:
+            - generic [ref=f4e460]: Professional portraits
+            - generic [ref=f4e461]: Person
+            - generic [ref=f4e462]: One photo
+            - generic [ref=f4e463]: ChatGPT Image
+            - generic [ref=f4e464]: "Mode: Image edit / transform with uploaded photo"
+          - heading "Navy Blazer LinkedIn Profile Picture Prompt for Gemini (Men & Women)" [level=1] [ref=f4e465]
+          - paragraph [ref=f4e466]: Turn a casual selfie into a classic LinkedIn profile picture with a navy blazer, white shirt, and a soft light-grey studio backdrop, keeping your face unchanged.
+          - paragraph [ref=f4e467]: "Target photo: One recent, front-facing head-and-shoulders photo in even light. Inputs: source photo (1). Prompt v1.0.0."
+          - generic [ref=f4e468]:
+            - heading "Best source photo" [level=2] [ref=f4e469]
+            - generic [ref=f4e470]:
+              - generic [ref=f4e471]:
+                - generic [ref=f4e472]: ✓
+                - text: Face the camera, eyes visible
+              - generic [ref=f4e473]:
+                - generic [ref=f4e474]: ✓
+                - text: Even daylight, no harsh shadows
+              - generic [ref=f4e475]:
+                - generic [ref=f4e476]: ✓
+                - text: No sunglasses or other people
+              - generic [ref=f4e477]:
+                - generic [ref=f4e478]: ✓
+                - text: Original image should not be blurry
+          - generic [ref=f4e479]:
+            - heading "What changes" [level=2] [ref=f4e480]
+            - generic [ref=f4e481]:
+              - generic [ref=f4e482]: Navy blazer and white shirt
+              - generic [ref=f4e484]: Light-grey studio backdrop
+              - generic [ref=f4e486]: Soft even studio light
+          - generic [ref=f4e488]:
+            - heading "What should stay recognizable" [level=2] [ref=f4e489]
+            - generic [ref=f4e490]:
+              - generic [ref=f4e491]:
+                - generic [ref=f4e492]: ✓
+                - text: Face and identity
+              - generic [ref=f4e493]:
+                - generic [ref=f4e494]: ✓
+                - text: Skin tone
+              - generic [ref=f4e495]:
+                - generic [ref=f4e496]: ✓
+                - text: Hairstyle
+              - generic [ref=f4e497]:
+                - generic [ref=f4e498]: ✓
+                - text: Expression
+            - generic [ref=f4e499]: AI tools can still change small details. Review the final result before using it professionally.
+          - generic [ref=f4e500]:
+            - heading "Limitations" [level=2] [ref=f4e501]
+            - list [ref=f4e502]:
+              - listitem [ref=f4e503]: Example people in the before photo are AI-generated, not real people.
+              - listitem [ref=f4e504]: Heavy face occlusion can weaken identity fidelity
+        - complementary [ref=f4e505]:
+          - heading "Customize this prompt" [level=2] [ref=f4e506]
+          - paragraph [ref=f4e507]: Adjust the details, then copy the prompt to ChatGPT Image.
+          - generic [ref=f4e508]:
+            - generic [ref=f4e509]:
+              - generic [ref=f4e510]: Color mood
+              - combobox [aria-hidden] [ref=f4e511]
+              - button "Bright neutral" [ref=f4e512] [cursor=pointer]
+            - generic [ref=f4e517]:
+              - generic [ref=f4e518]: Background
+              - combobox [aria-hidden] [ref=f4e519]
+              - button "Even grey studio" [ref=f4e520] [cursor=pointer]
+            - generic [ref=f4e525]:
+              - generic [ref=f4e526]: Output ratio
+              - combobox [aria-hidden] [ref=f4e527]
+              - button "1:1 Square" [ref=f4e528] [cursor=pointer]
+          - generic [ref=f4e533]:
+            - generic [ref=f4e534]: Keep clothing from original photo
+            - generic [ref=f4e535]:
+              - checkbox
+              - generic [ref=f4e536] [cursor=pointer]
+          - generic [ref=f4e538]:
+            - generic [ref=f4e539]: Keep original pose
+            - generic [ref=f4e540]:
+              - checkbox
+              - generic [ref=f4e541] [cursor=pointer]
+          - generic [ref=f4e543]: "Edit the uploaded person into a professional LinkedIn headshot with flattering soft studio light and sharp focus on the eyes. Follow the selected source-preservation settings: recognizable identity, proportions, defining features, and expression. If clothing is not preserved, dress them in a well-fitted navy blazer over a plain white shirt. If pose is not preserved, use straight head-and-shoulders framing facing the camera. Keep their face shape, eyes, nose, lips, hairline, any beard, glasses, or head covering, apparent age, and exact skin tone; do not beautify, slim, de-age, or lighten the skin, and keep natural skin texture. Apply bright neutral color grading with soft, even light. Replace the background with soft evenly lit light-grey studio backdrop, keeping clean edges around hair and clothing. Do not add people, text, lettering, or logos. Compose for 1:1 Square without cropping the face."
+          - generic [ref=f4e544]:
+            - button "Copy prompt" [ref=f4e545] [cursor=pointer]
+            - button "Save to collection" [ref=f4e549] [cursor=pointer]
+            - button "Save your result" [ref=f4e550] [cursor=pointer]
+            - link "Try another style" [ref=f4e551] [cursor=pointer]:
+              - /url: /explore
+          - generic [ref=f4e552]:
+            - heading "Use this prompt" [level=3] [ref=f4e553]
+            - list [ref=f4e554]:
+              - listitem [ref=f4e555]: Open ChatGPT Image in Image edit / transform with uploaded photo
+              - listitem [ref=f4e556]: Upload source photo
+              - listitem [ref=f4e557]: Paste this prompt
+              - listitem [ref=f4e558]: Generate and check your result
+            - button "Why does this use an external tool?" [ref=f4e559] [cursor=pointer]
+      - generic [ref=f4e560]:
+        - heading "More examples" [level=2] [ref=f4e561]
+        - generic [ref=f4e563]:
+          - generic [ref=f4e564]:
+            - img "Man with wavy hair and a short beard in an untucked white shirt and navy trousers, in a living room with a TV, sofa and plants." [ref=f4e565]
+            - generic [ref=f4e566]: Source photo
+          - generic [ref=f4e567]:
+            - img "Man in a navy blazer over a white shirt, light-grey studio." [ref=f4e568]
+            - generic [ref=f4e569]: AI result
+      - generic [ref=f4e570]:
+        - generic [ref=f4e571]:
+          - heading "Related styles" [level=2] [ref=f4e572]
+          - generic [ref=f4e573]:
+            - link "More Professional portraits styles →" [ref=f4e574] [cursor=pointer]:
+              - /url: /explore?category=Professional%20portraits
+            - link "Explore all →" [ref=f4e575] [cursor=pointer]:
+              - /url: /explore
+        - generic [ref=f4e576]:
+          - article [ref=f4e577]:
+            - generic [ref=f4e578]:
+              - generic [ref=f4e579]:
+                - generic [ref=f4e580]:
+                  - img "Source photo for Charcoal Suit Corporate LinkedIn Profile Picture Prompt for Gemini (Men)"
+                - generic [ref=f4e581]:
+                  - img "AI result showing Charcoal Suit Corporate LinkedIn Profile Picture Prompt for Gemini (Men)"
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=f4e582]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=f4e583]: "50"
+              - button "Save Charcoal Suit Corporate LinkedIn Profile Picture Prompt for Gemini (Men)" [ref=f4e584] [cursor=pointer]: ♡
+            - link "Open Charcoal Suit Corporate LinkedIn Profile Picture Prompt for Gemini (Men)" [ref=f4e585] [cursor=pointer]:
+              - /url: /styles/charcoal-suit-corporate-linkedin-profile-picture-prompt-gemini-men
+              - generic [ref=f4e586]:
+                - generic [ref=f4e587]: Professional portraits
+                - generic [ref=f4e588]: Person
+                - generic [ref=f4e589]: ChatGPT Image
+              - heading "Charcoal Suit Corporate LinkedIn Profile Picture Prompt for Gemini (Men)" [level=3] [ref=f4e590]
+              - paragraph [ref=f4e591]: Coat pant, light blue shirt, dark tie
+          - article [ref=f4e592]:
+            - generic [ref=f4e593]:
+              - generic [ref=f4e594]:
+                - generic [ref=f4e595]:
+                  - img "Source photo for Black Blazer LinkedIn Profile Picture Prompt for Gemini (Women)"
+                - generic [ref=f4e596]:
+                  - img "AI result showing Black Blazer LinkedIn Profile Picture Prompt for Gemini (Women)"
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=f4e597]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=f4e598]: "50"
+              - button "Save Black Blazer LinkedIn Profile Picture Prompt for Gemini (Women)" [ref=f4e599] [cursor=pointer]: ♡
+            - link "Open Black Blazer LinkedIn Profile Picture Prompt for Gemini (Women)" [ref=f4e600] [cursor=pointer]:
+              - /url: /styles/black-blazer-linkedin-profile-picture-prompt-gemini-women
+              - generic [ref=f4e601]:
+                - generic [ref=f4e602]: Professional portraits
+                - generic [ref=f4e603]: Person
+                - generic [ref=f4e604]: ChatGPT Image
+              - heading "Black Blazer LinkedIn Profile Picture Prompt for Gemini (Women)" [level=3] [ref=f4e605]
+              - paragraph [ref=f4e606]: Black blazer, cream high-neck top, beige studio
+          - article [ref=f4e607]:
+            - generic [ref=f4e608]:
+              - generic [ref=f4e609]:
+                - generic [ref=f4e610]:
+                  - img "Source photo for Hijab Office LinkedIn Profile Picture Prompt for Gemini (Women)"
+                - generic [ref=f4e611]:
+                  - img "AI result showing Hijab Office LinkedIn Profile Picture Prompt for Gemini (Women)"
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=f4e612]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=f4e613]: "50"
+              - button "Save Hijab Office LinkedIn Profile Picture Prompt for Gemini (Women)" [ref=f4e614] [cursor=pointer]: ♡
+            - link "Open Hijab Office LinkedIn Profile Picture Prompt for Gemini (Women)" [ref=f4e615] [cursor=pointer]:
+              - /url: /styles/hijab-office-linkedin-profile-picture-prompt-gemini-women
+              - generic [ref=f4e616]:
+                - generic [ref=f4e617]: Professional portraits
+                - generic [ref=f4e618]: Person
+                - generic [ref=f4e619]: ChatGPT Image
+              - heading "Hijab Office LinkedIn Profile Picture Prompt for Gemini (Women)" [level=3] [ref=f4e620]
+              - paragraph [ref=f4e621]: Dusty-rose hijab, navy blazer, grey studio
+          - article [ref=f4e622]:
+            - generic [ref=f4e623]:
+              - generic [ref=f4e624]:
+                - generic [ref=f4e625]:
+                  - img "Source photo for Dupatta Office LinkedIn Profile Picture Prompt for Gemini (Women)"
+                - generic [ref=f4e626]:
+                  - img "AI result showing Dupatta Office LinkedIn Profile Picture Prompt for Gemini (Women)"
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=f4e627]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=f4e628]: "50"
+              - button "Save Dupatta Office LinkedIn Profile Picture Prompt for Gemini (Women)" [ref=f4e629] [cursor=pointer]: ♡
+            - link "Open Dupatta Office LinkedIn Profile Picture Prompt for Gemini (Women)" [ref=f4e630] [cursor=pointer]:
+              - /url: /styles/dupatta-office-linkedin-profile-picture-prompt-gemini-women
+              - generic [ref=f4e631]:
+                - generic [ref=f4e632]: Professional portraits
+                - generic [ref=f4e633]: Person
+                - generic [ref=f4e634]: ChatGPT Image
+              - heading "Dupatta Office LinkedIn Profile Picture Prompt for Gemini (Women)" [level=3] [ref=f4e635]
+              - paragraph [ref=f4e636]: Off-white kurta, beige blazer, draped dupatta
+          - article [ref=f4e637]:
+            - generic [ref=f4e638]:
+              - generic [ref=f4e639]:
+                - generic [ref=f4e640]:
+                  - img "Source photo for Shalwar Kameez Waistcoat LinkedIn Profile Picture Prompt for Gemini (Men)"
+                - generic [ref=f4e641]:
+                  - img "AI result showing Shalwar Kameez Waistcoat LinkedIn Profile Picture Prompt for Gemini (Men)"
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=f4e642]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=f4e643]: "50"
+              - button "Save Shalwar Kameez Waistcoat LinkedIn Profile Picture Prompt for Gemini (Men)" [ref=f4e644] [cursor=pointer]: ♡
+            - link "Open Shalwar Kameez Waistcoat LinkedIn Profile Picture Prompt for Gemini (Men)" [ref=f4e645] [cursor=pointer]:
+              - /url: /styles/shalwar-kameez-linkedin-profile-picture-prompt-gemini-men
+              - generic [ref=f4e646]:
+                - generic [ref=f4e647]: Professional portraits
+                - generic [ref=f4e648]: Person
+                - generic [ref=f4e649]: ChatGPT Image
+              - heading "Shalwar Kameez Waistcoat LinkedIn Profile Picture Prompt for Gemini (Men)" [level=3] [ref=f4e650]
+              - paragraph [ref=f4e651]: White kameez, navy waistcoat, grey studio
+          - article [ref=f4e652]:
+            - generic [ref=f4e653]:
+              - generic [ref=f4e654]:
+                - generic [ref=f4e655]:
+                  - 'img "Source photo for CV Photo AI Prompt: Plain Background Resume Headshot"'
+                - generic [ref=f4e656]:
+                  - 'img "AI result showing CV Photo AI Prompt: Plain Background Resume Headshot"'
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=f4e657]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=f4e658]: "50"
+              - 'button "Save CV Photo AI Prompt: Plain Background Resume Headshot" [ref=f4e659] [cursor=pointer]': ♡
+            - 'link "Open CV Photo AI Prompt: Plain Background Resume Headshot" [ref=f4e660] [cursor=pointer]':
+              - /url: /styles/cv-photo-ai-prompt-plain-background-resume-headshot
+              - generic [ref=f4e661]:
+                - generic [ref=f4e662]: Professional portraits
+                - generic [ref=f4e663]: Person
+                - generic [ref=f4e664]: ChatGPT Image
+              - 'heading "CV Photo AI Prompt: Plain Background Resume Headshot" [level=3] [ref=f4e665]'
+              - paragraph [ref=f4e666]: Plain light backdrop, smart formal, slight smile
+      - generic [ref=f4e667]:
+        - generic [ref=f4e668]: ✓
+        - generic [ref=f4e669]:
+          - heading "Created with your photo in mind" [level=2] [ref=f4e670]
+          - paragraph [ref=f4e671]: Only upload photos you own or have permission to use. Keep recognizable people informed about how their images are edited.
+  - contentinfo [ref=f4e412]:
+    - generic [ref=f4e413]:
+      - generic [ref=f4e414]: AI Prompt Grid
+      - generic [ref=f4e419]:
+        - generic [ref=f4e420]: Discover tested styles. Transform your photo in an external AI editor.
+        - link "Guides" [ref=f4e421] [cursor=pointer]:
+          - /url: /guides
+        - link "About" [ref=f4e422] [cursor=pointer]:
+          - /url: /about
+        - link "Contact" [ref=f4e423] [cursor=pointer]:
+          - /url: /contact
+        - link "hello@aipromptgrid.com" [ref=f4e424] [cursor=pointer]:
+          - /url: mailto:hello@aipromptgrid.com
+        - link "Privacy" [ref=f4e425] [cursor=pointer]:
+          - /url: /privacy-policy
+        - link "Cookie policy" [ref=f4e426] [cursor=pointer]:
+          - /url: /cookie-policy
+        - link "Disclaimer" [ref=f4e427] [cursor=pointer]:
+          - /url: /disclaimer
+        - link "Terms" [ref=f4e428] [cursor=pointer]:
+          - /url: /terms-of-service
+  - alert [ref=f4e429]: Navy Blazer LinkedIn Profile Picture Prompt for Gemini (Men & Women)

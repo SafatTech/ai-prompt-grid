@@ -410,7 +410,7 @@ const merge: MergeSeed[] = [
     title: "Wedding Stage Merge Two Photos Prompt for Gemini (Couple)",
     note: "Bride and groom seated together on a decorated stage",
     description:
-      "Merge two separate photos into one wedding stage photo of a couple seated together on a floral stage, each face kept exactly as in their own photo.",
+      "Merge two separate photos into one wedding stage photo of a couple in wedding outfits seated together on a floral stage, each face kept exactly as in their own photo.",
     category: "Cinematic",
     subject: "Group",
     intent: "Full scene transformation",
@@ -420,20 +420,24 @@ const merge: MergeSeed[] = [
     ratio: "4:5 Portrait",
     keepClothing: true,
     keepPose: false,
-    changes: ["Both seated on one stage", "Floral wedding backdrop", "Warm stage lighting"],
+    changes: [
+      "Both seated on one stage",
+      "Cream sherwani and red bridal lehenga",
+      "Floral wedding backdrop",
+      "Warm stage lighting",
+    ],
     stays: [
       "Person A's face from photo 1",
       "Person B's face from photo 2",
       "Each skin tone",
-      "Each person's own outfit",
+      "Any head covering",
     ],
     height: 340,
-    targetSourcePhoto:
-      "Two separate everyday photos uploaded together: person A first, person B second",
+    targetSourcePhoto: "Two separate photos uploaded together: person A first, person B second",
     bestSourcePhoto: [
       "One person per photo, face large and sharp",
-      "Ordinary home or casual photos work; outfits stay as uploaded",
-      "Similar indoor light",
+      "Similar light in both photos",
+      "Similar head angle and framing, ideally chest-up",
       "Original images should not be blurry",
     ],
     altSource:
@@ -442,7 +446,7 @@ const merge: MergeSeed[] = [
       "Woman in a simple light floral kurti in a home room, an ordinary everyday photo, not wedding attire.",
     altResult: "Couple on a cream sofa before white and blush flowers with fairy lights.",
     template:
-      "Merge the first uploaded photo and the second uploaded photo into one elegant {{subject}} photo of a couple seated together on a wedding stage. The first uploaded photo shows person A and the second uploaded photo shows person B. Follow the selected source-preservation settings: {{preserve}}. Always keep person A's face shape, eyes, nose, lips, hairline, hair, any beard, glasses, or head covering, apparent age, and exact skin tone as in the first uploaded photo, and person B's exactly as in the second uploaded photo. Treat them as two separate people; do not blend, swap, beautify, slim, de-age, or lighten either face, and keep natural skin texture. Keep the outfit and jewelry each person wears in their own photo. If group arrangement and pose are not preserved, seat them side by side on a cream sofa, close together, smiling at the camera, at realistic relative heights. Light both with the same warm, soft stage light. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair and clothing. Do not add extra people, text, lettering, or logos. Compose for {{ratio}} without cropping either face.",
+      "Merge the first uploaded photo and the second uploaded photo into one elegant {{subject}} photo of a couple seated together on a wedding stage. The first uploaded photo shows person A and the second uploaded photo shows person B. Follow the selected source-preservation settings: {{preserve}}. Always keep person A's face shape, eyes, nose, lips, hairline, hair, any beard, glasses, or head covering, apparent age, and exact skin tone as in the first uploaded photo, and person B's exactly as in the second uploaded photo. Treat them as two separate people; do not blend, swap, beautify, slim, de-age, or lighten either face, and keep natural skin texture. Dress person A in a cream patterned sherwani and person B in a red bridal lehenga with gold jewellery, a maang tikka, and hennaed hands; do not keep the casual clothes from the uploaded photos. If group arrangement and pose are not preserved, seat them side by side on a cream sofa, close together, smiling at the camera, at realistic relative heights. Light both with the same warm, soft stage light. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair and clothing. Do not add extra people, text, lettering, or logos. Compose for {{ratio}} without cropping either face.",
   },
   {
     n: "85",
@@ -482,7 +486,7 @@ const merge: MergeSeed[] = [
     title: "Mountain Trip Merge Two Photos Prompt for Gemini (Couple)",
     note: "Together at a mountain viewpoint in warm jackets",
     description:
-      "Merge two separate photos into one travel photo of a couple at a mountain viewpoint, in warm jackets, with crisp daylight matched on both faces.",
+      "Merge two separate photos into one travel photo of a couple at a mountain viewpoint, dressed in warm winter puffer jackets, with crisp daylight matched on both faces.",
     category: "Travel",
     subject: "Group",
     intent: "Full scene transformation",
@@ -491,7 +495,11 @@ const merge: MergeSeed[] = [
     ratio: "4:5 Portrait",
     keepClothing: true,
     keepPose: false,
-    changes: ["Both at one mountain viewpoint", "Plain warm jackets", "Crisp shared daylight"],
+    changes: [
+      "Both at one mountain viewpoint",
+      "Warm winter puffer jackets and a scarf",
+      "Crisp shared daylight",
+    ],
     stays: [
       "Person A's face from photo 1",
       "Person B's face from photo 2",
@@ -502,8 +510,8 @@ const merge: MergeSeed[] = [
     targetSourcePhoto: "Two separate photos uploaded together: person A first, person B second",
     bestSourcePhoto: [
       "One person per photo, face large and sharp",
-      "Ordinary home or casual photos work; jackets are added in the edit",
-      "Similar indoor or daylight in both",
+      "Similar light in both photos (both daylight or both indoors)",
+      "Similar head angle and framing, ideally chest-up",
       "Original images should not be blurry",
     ],
     altSource:
@@ -511,7 +519,7 @@ const merge: MergeSeed[] = [
     altSecond: "Woman in a cream sweater in a bedroom, an ordinary photo taken at home.",
     altResult: "Couple in warm jackets at a railing with pines, a green valley and snowy peaks.",
     template:
-      "Merge the first uploaded photo and the second uploaded photo into one natural travel {{subject}} photo of a couple at a mountain viewpoint. The first uploaded photo shows person A and the second uploaded photo shows person B. Follow the selected source-preservation settings: {{preserve}}. Always keep person A's face shape, eyes, nose, lips, hairline, hair, any beard, glasses, or head covering, apparent age, and exact skin tone as in the first uploaded photo, and person B's exactly as in the second uploaded photo. Treat them as two separate people; do not blend, swap, beautify, slim, de-age, or lighten either face, and keep natural skin texture. Dress both in plain, unbranded warm jackets over their own clothes, keeping any head covering. If group arrangement and pose are not preserved, stand them side by side at a railing, smiling at the camera, at realistic relative heights. Light both with the same crisp daylight from one direction and matching shadows. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair and clothing. Do not add extra people, text, lettering, or logos. Compose for {{ratio}} without cropping either face.",
+      "Merge the first uploaded photo and the second uploaded photo into one natural travel {{subject}} photo of a couple at a mountain viewpoint. The first uploaded photo shows person A and the second uploaded photo shows person B. Follow the selected source-preservation settings: {{preserve}}. Always keep person A's face shape, eyes, nose, lips, hairline, hair, any beard, glasses, or head covering, apparent age, and exact skin tone as in the first uploaded photo, and person B's exactly as in the second uploaded photo. Treat them as two separate people; do not blend, swap, beautify, slim, de-age, or lighten either face, and keep natural skin texture. Dress both in plain, unbranded warm winter puffer jackets, and give person B a cream scarf, keeping any head covering; do not keep the indoor clothes from the uploaded photos. If group arrangement and pose are not preserved, stand them side by side at a railing, smiling at the camera, at realistic relative heights. Light both with the same crisp daylight from one direction and matching shadows. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair and clothing. Do not add extra people, text, lettering, or logos. Compose for {{ratio}} without cropping either face.",
   },
 ];
 

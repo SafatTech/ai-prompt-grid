@@ -1,0 +1,363 @@
+- generic [active] [ref=f4e1]:
+  - banner [ref=f4e2]:
+    - generic [ref=f4e3]:
+      - link "AI Prompt Grid home" [ref=f4e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f4e9]: AI Prompt Grid
+      - navigation "Main navigation" [ref=f4e10]:
+        - link "Explore styles" [ref=f4e11] [cursor=pointer]:
+          - /url: /explore
+        - button "Categories" [ref=f4e12] [cursor=pointer]
+        - link "How it works" [ref=f4e15] [cursor=pointer]:
+          - /url: /how-it-works
+        - link "Guides" [ref=f4e16] [cursor=pointer]:
+          - /url: /guides
+        - button "For creators" [ref=f4e18] [cursor=pointer]
+      - generic [ref=f4e21]:
+        - button "Search styles" [ref=f4e22] [cursor=pointer]
+        - button "Sign in" [ref=f4e26] [cursor=pointer]
+        - link "Explore styles" [ref=f4e27] [cursor=pointer]:
+          - /url: /explore
+  - main [ref=f4e28]:
+    - article [ref=f4e29]:
+      - navigation "Breadcrumb" [ref=f4e30]:
+        - list [ref=f4e31]:
+          - listitem [ref=f4e32]:
+            - link "Home" [ref=f4e33] [cursor=pointer]:
+              - /url: /
+          - listitem [aria-hidden] [ref=f4e34]: /
+          - listitem [ref=f4e35]:
+            - link "Guides" [ref=f4e36] [cursor=pointer]:
+              - /url: /guides
+          - listitem [aria-hidden] [ref=f4e37]: /
+          - listitem [ref=f4e38]: Gemini LinkedIn Profile Picture Prompts for CV & Office Photos
+      - heading "Gemini LinkedIn Profile Picture Prompts for CV & Office Photos" [level=1] [ref=f4e39]
+      - paragraph [ref=f4e40]: Copy-paste Gemini and ChatGPT prompts to turn a selfie into a professional LinkedIn headshot, a CV or resume photo, or an office portrait.
+      - paragraph [ref=f4e41]: Updated October 9, 2026 · AI Prompt Grid editorial
+      - generic [ref=f4e42]:
+        - paragraph [ref=f4e43]:
+          - strong [ref=f4e44]: "Quick answer:"
+          - text: A LinkedIn profile picture prompt for Gemini starts with "edit this photo," then names the clothes, the backdrop, and the light, and tells the model to keep the face. The same wording works as a LinkedIn profile picture prompt for ChatGPT. Use a recent, front-facing photo in even light. These looks are for LinkedIn, a CV or resume, a company page, and email. A passport-size version is included for forms that accept one, and official ID rules are called out below.
+        - heading "Before you paste" [level=2] [ref=f4e45]
+        - list [ref=f4e46]:
+          - listitem [ref=f4e47]: Face the camera. Daylight from a window is enough. Skip sunglasses and heavy shadows.
+          - listitem [ref=f4e48]: Keep head and shoulders in frame, and crop other people out first.
+          - listitem [ref=f4e49]: Change the setting, not the person. Ask for the same face, age, skin tone, beard, glasses, and head covering.
+        - heading "Studio headshots" [level=2] [ref=f4e50]
+        - heading "1. Navy blazer" [level=3] [ref=f4e51]
+        - paragraph [ref=f4e52]: "A straightforward Gemini professional photo prompt: navy blazer, white shirt, light-grey studio. It is a useful professional headshot AI prompt when you want one look that works for men and women."
+        - generic [ref=f4e53]:
+          - generic [ref=f4e54]:
+            - generic [ref=f4e55]: Prompt
+            - button "Copy prompt" [ref=f4e56] [cursor=pointer]
+          - code [ref=f4e61]: Edit this photo into a professional LinkedIn headshot. Keep the face shape, eyes, nose, lips, hairline, any beard, glasses or head covering, age and exact skin tone. Do not beautify, slim or lighten the skin. Dress them in a well-fitted navy blazer over a plain white shirt, facing the camera, head and shoulders. Soft even light, sharp eyes, light-grey studio backdrop. Square crop. Do not add people, text or logos.
+        - generic [ref=f4e62]:
+          - figure "Before" [ref=f4e63]:
+            - img "Man with wavy hair and a short beard in an untucked white shirt and navy trousers, in a living room with a TV, sofa and plants." [ref=f4e64]
+          - figure "After" [ref=f4e66]:
+            - img "Man in a navy blazer over a white shirt, light-grey studio." [ref=f4e67]
+        - paragraph [ref=f4e69]: The people in the "before" photos are AI-generated, not real people. Every "after" image on this page is an AI edit of that source.
+        - paragraph [ref=f4e70]:
+          - link "Customize this prompt" [ref=f4e71] [cursor=pointer]:
+            - /url: /styles/navy-blazer-linkedin-profile-picture-prompt-gemini
+        - heading "2. Charcoal suit" [level=3] [ref=f4e72]
+        - paragraph [ref=f4e73]: "A corporate headshot AI prompt for men: charcoal suit, light-blue shirt, dark plain tie, and a blurred grey backdrop. ChatGPT handles this longer list well."
+        - generic [ref=f4e74]:
+          - generic [ref=f4e75]:
+            - generic [ref=f4e76]: Prompt
+            - button "Copy prompt" [ref=f4e77] [cursor=pointer]
+          - code [ref=f4e82]: Edit this photo into a corporate headshot. Keep the face shape, eyes, nose, lips, hairline, any beard, glasses or head covering, age and exact skin tone. Do not beautify, slim or lighten the skin. Dress them in a charcoal grey two-piece suit with a light-blue shirt and a dark plain tie, head and shoulders at a slight angle. Soft studio light from the front left, no harsh shadows, sharp eyes, soft out-of-focus neutral grey backdrop. Square crop. Do not add people, text or logos.
+        - generic [ref=f4e83]:
+          - figure "Before" [ref=f4e84]:
+            - img "Man with curly hair and a salt-and-pepper beard in an olive polo, at an office desk with a monitor." [ref=f4e85]
+          - figure "After" [ref=f4e87]:
+            - img "Man in a charcoal suit, light-blue shirt and dark plain tie, blurred grey backdrop." [ref=f4e88]
+        - paragraph [ref=f4e90]:
+          - link "Customize this prompt" [ref=f4e91] [cursor=pointer]:
+            - /url: /styles/charcoal-suit-corporate-linkedin-profile-picture-prompt-gemini-men
+        - heading "3. Black blazer" [level=3] [ref=f4e92]
+        - paragraph [ref=f4e93]: "A LinkedIn profile picture prompt for women: black blazer, cream high-neck top, beige backdrop, light makeup only."
+        - generic [ref=f4e94]:
+          - generic [ref=f4e95]:
+            - generic [ref=f4e96]: Prompt
+            - button "Copy prompt" [ref=f4e97] [cursor=pointer]
+          - code [ref=f4e102]: Edit this photo into a professional LinkedIn headshot. Keep the face shape, eyes, nose, lips, hairline, any beard, glasses or head covering, age and exact skin tone. Do not beautify, slim or lighten the skin. Dress them in a tailored black blazer over a cream high-neck top, facing the camera, head and shoulders. Gentle even light, light natural makeup only, soft beige studio backdrop. Square crop. Do not add people, text or logos.
+        - generic [ref=f4e103]:
+          - figure "Before" [ref=f4e104]:
+            - img "Woman with long wavy hair in a pink and white floral kurta, in a kitchen." [ref=f4e105]
+          - figure "After" [ref=f4e107]:
+            - img "Woman in a black blazer over a cream high-neck top, beige backdrop." [ref=f4e108]
+        - paragraph [ref=f4e110]:
+          - link "Customize this prompt" [ref=f4e111] [cursor=pointer]:
+            - /url: /styles/black-blazer-linkedin-profile-picture-prompt-gemini-women
+        - heading "Hijab, dupatta, shalwar kameez and saree" [level=2] [ref=f4e112]
+        - heading "4. Hijab for the office" [level=3] [ref=f4e113]
+        - paragraph [ref=f4e114]: Keep the hijab on. This version uses a neatly wrapped dusty-rose hijab, a navy blazer, and a grey backdrop, with the full face and chin visible.
+        - generic [ref=f4e115]:
+          - generic [ref=f4e116]:
+            - generic [ref=f4e117]: Prompt
+            - button "Copy prompt" [ref=f4e118] [cursor=pointer]
+          - code [ref=f4e123]: Edit this photo into a professional headshot. Keep the hijab on, neatly wrapped, with the full face and chin visible. Keep the face shape, eyes, nose, lips, hairline, any glasses, age and exact skin tone. Do not beautify, slim or lighten the skin. Make the hijab a solid dusty-rose color and pair it with a well-fitted navy blazer over a plain top, facing the camera, head and shoulders. Even light, plain soft grey studio backdrop. Do not add people, text or logos.
+        - generic [ref=f4e124]:
+          - figure "Before" [ref=f4e125]:
+            - img "Woman in a dusty-mauve hijab and a cream floral shalwar kameez, in a hallway with curtains." [ref=f4e126]
+          - figure "After" [ref=f4e128]:
+            - img "Woman in a neatly wrapped dusty-rose hijab and navy blazer, grey backdrop." [ref=f4e129]
+        - paragraph [ref=f4e131]:
+          - link "Customize this prompt" [ref=f4e132] [cursor=pointer]:
+            - /url: /styles/hijab-office-linkedin-profile-picture-prompt-gemini-women
+        - heading "5. Dupatta and blazer" [level=3] [ref=f4e133]
+        - paragraph [ref=f4e134]: Off-white kurta, beige blazer, and a plain light dupatta on a light-grey backdrop. If the original photo covers the head, keep it covered.
+        - generic [ref=f4e135]:
+          - generic [ref=f4e136]:
+            - generic [ref=f4e137]: Prompt
+            - button "Copy prompt" [ref=f4e138] [cursor=pointer]
+          - code [ref=f4e143]: Edit this photo into a professional office headshot. Keep the face shape, eyes, nose, lips, hairline, any glasses or head covering, age and exact skin tone. Do not beautify, slim or lighten the skin. Dress them in a plain off-white kurta with a fitted beige blazer and a light solid-color dupatta draped over both shoulders, or over the head if the head is covered in the original photo. Facing the camera, head and shoulders, even daylight-style light, plain light-grey studio backdrop. Do not add people, text or logos.
+        - generic [ref=f4e144]:
+          - figure "Before" [ref=f4e145]:
+            - img "Woman with long hair in a pink printed drape and a gold necklace, on a balcony with plants." [ref=f4e146]
+          - figure "After" [ref=f4e148]:
+            - img "Woman in an off-white kurta, beige blazer and a plain light dupatta, light-grey backdrop." [ref=f4e149]
+        - paragraph [ref=f4e151]:
+          - link "Customize this prompt" [ref=f4e152] [cursor=pointer]:
+            - /url: /styles/dupatta-office-linkedin-profile-picture-prompt-gemini-women
+        - heading "6. Shalwar kameez and waistcoat" [level=3] [ref=f4e153]
+        - paragraph [ref=f4e154]: "A LinkedIn profile picture prompt for men in national dress: crisp white shalwar kameez, navy waistcoat, light-grey backdrop."
+        - generic [ref=f4e155]:
+          - generic [ref=f4e156]:
+            - generic [ref=f4e157]: Prompt
+            - button "Copy prompt" [ref=f4e158] [cursor=pointer]
+          - code [ref=f4e163]: Edit this photo into a formal professional headshot. Keep the face shape, eyes, nose, lips, hairline, any beard, glasses or head covering, age and exact skin tone. Do not beautify, slim or lighten the skin. Dress them in a crisp white shalwar kameez with a well-fitted navy waistcoat, facing the camera, head and shoulders. Soft even light, confident relaxed look, plain light-grey studio backdrop. Square crop. Do not add people, text or logos.
+        - generic [ref=f4e164]:
+          - figure "Before" [ref=f4e165]:
+            - img "Bearded man in a light-grey shalwar kameez, in a courtyard with plants, a cot and a gate." [ref=f4e166]
+          - figure "After" [ref=f4e168]:
+            - img "Bearded man in a crisp white shalwar kameez and navy waistcoat, light-grey backdrop." [ref=f4e169]
+        - paragraph [ref=f4e171]:
+          - link "Customize this prompt" [ref=f4e172] [cursor=pointer]:
+            - /url: /styles/shalwar-kameez-linkedin-profile-picture-prompt-gemini-men
+        - heading "7. Office saree" [level=3] [ref=f4e173]
+        - paragraph [ref=f4e174]: A deep-teal saree with a thin border and a matching blouse, pallu pinned, light-grey backdrop.
+        - generic [ref=f4e175]:
+          - generic [ref=f4e176]:
+            - generic [ref=f4e177]: Prompt
+            - button "Copy prompt" [ref=f4e178] [cursor=pointer]
+          - code [ref=f4e183]: Edit this photo into a professional office headshot. Keep the face shape, eyes, nose, lips, hairline, any glasses or head covering, age and exact skin tone. Do not beautify, slim or lighten the skin. Dress them in a plain solid deep-teal silk-cotton saree with a thin border, a matching elbow-sleeve blouse, and the pallu neatly pinned over the left shoulder, with small stud earrings only. Facing the camera, head and shoulders, soft even light, plain light-grey studio backdrop. Do not add people, text or logos.
+        - generic [ref=f4e184]:
+          - figure "Before" [ref=f4e185]:
+            - img "Woman with long hair in a pink sleeveless top with a printed drape, in a living room." [ref=f4e186]
+          - figure "After" [ref=f4e188]:
+            - img "Woman in a deep-teal saree with a thin border and matching blouse, light-grey backdrop." [ref=f4e189]
+        - paragraph [ref=f4e191]:
+          - link "Customize this prompt" [ref=f4e192] [cursor=pointer]:
+            - /url: /styles/saree-office-linkedin-profile-picture-prompt-gemini-women
+        - heading "CV, resume and passport-size photos" [level=2] [ref=f4e193]
+        - heading "8. Plain-background CV photo" [level=3] [ref=f4e194]
+        - paragraph [ref=f4e195]: "A CV photo AI prompt, and the same idea as a resume photo AI prompt: glasses stay, a smart top, a plain cream wall, a slight smile. This Gemini AI CV photo prompt is for job portals and applications. It is not an ID photo."
+        - generic [ref=f4e196]:
+          - generic [ref=f4e197]:
+            - generic [ref=f4e198]: Prompt
+            - button "Copy prompt" [ref=f4e199] [cursor=pointer]
+          - code [ref=f4e204]: Edit this photo into a clean CV photo. Keep the face shape, eyes, nose, lips, hairline, any beard, glasses or head covering, age and exact skin tone. Do not beautify, slim or lighten the skin. Dress them in smart formal clothing in a plain solid color. Face the camera with a slight friendly smile, head to upper shoulders, soft even light with no shadows on the face, plain cream wall. Do not add people, text or logos.
+        - generic [ref=f4e205]:
+          - figure "Before" [ref=f4e206]:
+            - img "Woman with glasses in a lavender knit sweater, in a bedroom." [ref=f4e207]
+          - figure "After" [ref=f4e209]:
+            - img "Woman with glasses in a smart top, plain cream wall." [ref=f4e210]
+        - paragraph [ref=f4e212]:
+          - link "Customize this prompt" [ref=f4e213] [cursor=pointer]:
+            - /url: /styles/cv-photo-ai-prompt-plain-background-resume-headshot
+        - heading "9. Passport-size photo for a form" [level=3] [ref=f4e214]
+        - paragraph [ref=f4e215]: "A passport size photo AI prompt for Gemini: plain dark shirt, pure white background, neutral expression, own clothes kept unless you turn that off. Use it for a CV or a form that accepts a white-background photo."
+        - paragraph [ref=f4e216]: Official ID photo rules vary by country, so check yours before using an edited photo on a passport, visa, or national ID. Some offices reject edited or AI photos.
+        - generic [ref=f4e217]:
+          - generic [ref=f4e218]:
+            - generic [ref=f4e219]: Prompt
+            - button "Copy prompt" [ref=f4e220] [cursor=pointer]
+          - code [ref=f4e225]: Edit this photo into a passport-size style photo for a CV or application form. Keep the face shape, eyes, nose, lips, hairline, any beard, glasses or head covering, age, exact skin tone and the clothing. Do not beautify, slim or lighten the skin. Center the head and upper shoulders, facing the camera, neutral expression, mouth closed, eyes open. Keep any head covering worn for religious reasons, with the full face visible from chin to forehead. Even shadow-free light, pure white background. Do not add people, text or logos.
+        - generic [ref=f4e226]:
+          - figure "Before" [ref=f4e227]:
+            - img "Man with curly hair and a salt-and-pepper beard in a black shirt, against a plain light wall." [ref=f4e228]
+          - figure "After" [ref=f4e230]:
+            - img "Man in a plain dark shirt, pure white background, neutral expression." [ref=f4e231]
+        - paragraph [ref=f4e233]:
+          - link "Customize this prompt" [ref=f4e234] [cursor=pointer]:
+            - /url: /styles/passport-size-photo-ai-prompt-gemini-white-background
+        - heading "Office, outdoor and home, without a new outfit" [level=2] [ref=f4e235]
+        - paragraph [ref=f4e236]: These three keep the person's own clothes. They change the place and the light.
+        - heading "10. Modern office" [level=3] [ref=f4e237]
+        - paragraph [ref=f4e238]: "A Gemini AI office photo prompt: the same blue shirt, with a blurred bright office, glass and plants behind."
+        - generic [ref=f4e239]:
+          - generic [ref=f4e240]:
+            - generic [ref=f4e241]: Prompt
+            - button "Copy prompt" [ref=f4e242] [cursor=pointer]
+          - code [ref=f4e247]: Edit this photo into an office headshot and keep their own clothes. Keep the face shape, eyes, nose, lips, hairline, any beard, glasses or head covering, age and exact skin tone. Do not beautify, slim or lighten the skin. Head and shoulders, turned slightly toward the camera. Natural window light, shallow depth of field, softly blurred bright modern office with glass walls and plants. Do not add people, text or logos.
+        - generic [ref=f4e248]:
+          - figure "Before" [ref=f4e249]:
+            - img "Man with curly hair and a goatee in a light-blue shirt, on a city street." [ref=f4e250]
+          - figure "After" [ref=f4e252]:
+            - img "Man in a smart blue shirt, blurred bright office with glass and plants." [ref=f4e253]
+        - paragraph [ref=f4e255]:
+          - link "Customize this prompt" [ref=f4e256] [cursor=pointer]:
+            - /url: /styles/modern-office-linkedin-profile-picture-prompt-gemini
+        - heading "11. Outdoor light" [level=3] [ref=f4e257]
+        - paragraph [ref=f4e258]: For freelancers, teachers and creatives. Her blue printed kurta stays. The backdrop becomes blurred green trees in warm light.
+        - generic [ref=f4e259]:
+          - generic [ref=f4e260]:
+            - generic [ref=f4e261]: Prompt
+            - button "Copy prompt" [ref=f4e262] [cursor=pointer]
+          - code [ref=f4e267]: Edit this photo into an approachable outdoor headshot and keep their own clothes. Keep the face shape, eyes, nose, lips, hairline, any beard, glasses or head covering, age and exact skin tone. Do not beautify, slim or lighten the skin. Relaxed head and shoulders, a natural warm smile. Soft late-afternoon light, shallow depth of field, softly blurred green trees. Do not add people, text or logos.
+        - generic [ref=f4e268]:
+          - figure "Before" [ref=f4e269]:
+            - img "Woman with her hair pulled back in a blue and white printed kurta, in a park with trees and a bench." [ref=f4e270]
+          - figure "After" [ref=f4e272]:
+            - img "Woman in her blue printed kurta, blurred green trees in warm light." [ref=f4e273]
+        - paragraph [ref=f4e275]:
+          - link "Customize this prompt" [ref=f4e276] [cursor=pointer]:
+            - /url: /styles/outdoor-natural-light-linkedin-profile-picture-prompt-gemini
+        - heading "12. Home office" [level=3] [ref=f4e277]
+        - paragraph [ref=f4e278]: The lilac sweater stays. The cluttered desk becomes a blurred home office with a laptop, mug, lamp, books and plants. Useful for a remote-work profile or a video-call photo.
+        - generic [ref=f4e279]:
+          - generic [ref=f4e280]:
+            - generic [ref=f4e281]: Prompt
+            - button "Copy prompt" [ref=f4e282] [cursor=pointer]
+          - code [ref=f4e287]: "Edit this photo into a friendly remote-work headshot and keep their own clothes. Keep the face shape, eyes, nose, lips, hairline, any beard, glasses or head covering, age and exact skin tone. Do not beautify, slim or lighten the skin. Head and shoulders, facing the camera, a warm natural smile. Soft window light, background well out of focus: a cozy home office desk with a laptop, coffee mug, notebook, warm lamp light, books and soft greenery. Do not add people, text or logos."
+        - generic [ref=f4e288]:
+          - figure "Before" [ref=f4e289]:
+            - img "Woman in a lilac sweater with her hand on her cheek, at a cluttered desk with a laptop, mug and plants." [ref=f4e290]
+          - figure "After" [ref=f4e292]:
+            - img "Woman in a purple sweater, blurred cozy home office with a laptop, mug, lamp, books and plants." [ref=f4e293]
+        - paragraph [ref=f4e295]:
+          - link "Customize this prompt" [ref=f4e296] [cursor=pointer]:
+            - /url: /styles/home-office-linkedin-profile-picture-prompt-gemini
+        - heading "Tidy the photo you already like" [level=2] [ref=f4e297]
+        - heading "13. Clean-up only" [level=3] [ref=f4e298]
+        - paragraph [ref=f4e299]: The smallest edit. The light-blue shirt stays, tidied, on a plain soft-grey backdrop. Stray hairs and lint go. The face does not.
+        - generic [ref=f4e300]:
+          - generic [ref=f4e301]:
+            - generic [ref=f4e302]: Prompt
+            - button "Copy prompt" [ref=f4e303] [cursor=pointer]
+          - code [ref=f4e308]: Edit this photo with minimal changes into a tidy professional headshot. Keep the face, clothes and pose. Even out the lighting and remove small stray hairs and lint. No skin smoothing, slimming or makeup changes. Keep the face shape, eyes, nose, lips, hairline, any beard, glasses or head covering, age and exact skin tone. Plain soft grey studio backdrop. Do not add people, text or logos.
+        - generic [ref=f4e309]:
+          - figure "Before" [ref=f4e310]:
+            - img "Man with a salt-and-pepper beard in a messy open light-blue shirt, in front of cluttered shelves." [ref=f4e311]
+          - figure "After" [ref=f4e313]:
+            - img "Man in the same light-blue shirt tidied, plain soft-grey backdrop." [ref=f4e314]
+        - paragraph [ref=f4e316]:
+          - link "Customize this prompt" [ref=f4e317] [cursor=pointer]:
+            - /url: /styles/linkedin-photo-clean-up-ai-prompt-gemini-keep-outfit
+        - heading "14. Matching team headshots" [level=3] [ref=f4e318]
+        - paragraph [ref=f4e319]: Run this once per person, in separate chats, with the same wording. Each person keeps their own top. The collar is neatened, and the light-grey studio stays the same so a company page matches.
+        - generic [ref=f4e320]:
+          - generic [ref=f4e321]:
+            - generic [ref=f4e322]: Prompt
+            - button "Copy prompt" [ref=f4e323] [cursor=pointer]
+          - code [ref=f4e328]: Edit this person's photo into a company team headshot. Keep their face, features, skin tone, hairstyle and own outfit, and neaten the collar. Do not beautify, slim or lighten the skin. Even front lighting, head and shoulders facing the camera, eyes about one-third from the top, square crop, soft evenly lit light-grey studio backdrop. Do not add people, text or logos.
+        - generic [ref=f4e329]:
+          - figure "Before" [ref=f4e330]:
+            - img "Woman with long hair in a maroon henley, in a hallway." [ref=f4e331]
+          - figure "After" [ref=f4e333]:
+            - img "Woman in a maroon top with a neat collar, light-grey studio." [ref=f4e334]
+          - figure "Before" [ref=f4e336]:
+            - img "Bearded man in a blue plaid shirt, on a street." [ref=f4e337]
+          - figure "After" [ref=f4e339]:
+            - img "Bearded man in a plaid shirt with a neat collar, light-grey studio." [ref=f4e340]
+        - paragraph [ref=f4e342]:
+          - link "Customize this prompt" [ref=f4e343] [cursor=pointer]:
+            - /url: /styles/matching-team-headshot-ai-prompt-gemini-company-page
+        - heading "15. Executive dark studio" [level=3] [ref=f4e344]
+        - paragraph [ref=f4e345]: "A darker corporate look: dark suit, light shirt, charcoal backdrop, and a little rim light so the hair separates from the background."
+        - generic [ref=f4e346]:
+          - generic [ref=f4e347]:
+            - generic [ref=f4e348]: Prompt
+            - button "Copy prompt" [ref=f4e349] [cursor=pointer]
+          - code [ref=f4e354]: Edit this photo into a confident executive headshot. Keep the face shape, eyes, nose, lips, hairline, any beard, glasses or head covering, age and exact skin tone. Do not beautify, slim or lighten the skin. Dress them in a well-fitted dark suit with a plain light shirt, head and shoulders at a slight angle, face toward the camera. Soft low-key light from one side, a gentle rim light on the hair, dark charcoal studio backdrop with a soft gradient. Do not add people, text or logos.
+        - generic [ref=f4e355]:
+          - figure "Before" [ref=f4e356]:
+            - img "Man in his 50s with grey hair, glasses and a grey mustache in a checked shirt, in a bedroom." [ref=f4e357]
+          - figure "After" [ref=f4e359]:
+            - img "Man in a dark suit and light shirt, dark charcoal backdrop with rim light." [ref=f4e360]
+        - paragraph [ref=f4e362]:
+          - link "Customize this prompt" [ref=f4e363] [cursor=pointer]:
+            - /url: /styles/executive-corporate-linkedin-profile-picture-prompt-gemini
+        - heading "If it does not look like you" [level=2] [ref=f4e364]
+        - paragraph [ref=f4e365]: Send this in the same chat. It keeps the new clothes, backdrop and light, and only asks for the face back.
+        - generic [ref=f4e366]:
+          - generic [ref=f4e367]:
+            - generic [ref=f4e368]: Prompt
+            - button "Copy prompt" [ref=f4e369] [cursor=pointer]
+          - code [ref=f4e374]: "Keep the clothes, background and lighting exactly as they are. Only fix the face so it matches the original photo: same eyes, nose, lips, jawline, age and natural skin tone. Remove any skin smoothing or lightening."
+        - paragraph [ref=f4e375]: "A few things that usually cause the drift:"
+        - list [ref=f4e376]:
+          - listitem [ref=f4e377]: Plastic skin. Ask for natural skin texture.
+          - listitem [ref=f4e378]: A lighter skin tone than the photo. Say "keep the skin tone exactly the same."
+          - listitem [ref=f4e379]: A younger face. Say the age stays.
+          - listitem [ref=f4e380]: A busy backdrop. Soft and plain reads more clearly on a small profile circle.
+          - listitem [ref=f4e381]: A missing hijab, glasses or beard. If they wear them day to day, say so.
+        - paragraph [ref=f4e382]: "Gemini's image model is sometimes called Nano Banana. The same LinkedIn profile picture prompt works there: attach the photo, paste the prompt, and fix the face in that chat if it drifts. In ChatGPT you can comment on one spot, such as \"straighten the collar,\" instead of rewriting the whole prompt."
+        - heading "FAQ" [level=2] [ref=f4e383]
+        - heading "What is a good LinkedIn profile picture prompt for Gemini?" [level=3] [ref=f4e384]
+        - paragraph [ref=f4e385]: Start with the navy blazer prompt. It changes the outfit and the backdrop and keeps the face. Women can use the black blazer, hijab, dupatta or saree prompts. Men who want a suit can use the charcoal suit prompt.
+        - heading "Can I use the same prompt in ChatGPT?" [level=3] [ref=f4e386]
+        - paragraph [ref=f4e387]: Yes. Paste it with the photo attached. The charcoal suit prompt is written as a longer list, which ChatGPT follows closely.
+        - heading "Is this a Gemini AI resume photo prompt?" [level=3] [ref=f4e388]
+        - paragraph [ref=f4e389]: The plain-background CV prompt is the one to use for a resume or job portal. Keep the glasses if you wear them. It is still not an official ID photo.
+        - heading "Can I make a passport-size photo with Gemini?" [level=3] [ref=f4e390]
+        - paragraph [ref=f4e391]: You can make a white-background, front-facing photo for a CV or a form that accepts one. Official ID photo rules vary by country, so check yours. Do not assume an edited photo will be accepted on a passport, visa, or national ID.
+        - heading "What if the office photo changes my shirt?" [level=3] [ref=f4e392]
+        - paragraph [ref=f4e393]: The modern office, outdoor and home office prompts are written to keep the clothes. If the shirt still changes, send a follow-up that says "keep the original clothing exactly."
+        - heading "What size should a LinkedIn photo be?" [level=3] [ref=f4e394]
+        - paragraph [ref=f4e395]: Square crops work well for the profile circle. LinkedIn accepts a large PNG or JPG. A 1:1 result is the simplest starting point.
+        - heading "More on AI Prompt Grid" [level=2] [ref=f4e396]
+        - list [ref=f4e397]:
+          - listitem [ref=f4e398]:
+            - text: Open any prompt above with
+            - strong [ref=f4e399]: Customize this prompt
+            - text: to change the backdrop, the crop, or whether clothes stay.
+          - listitem [ref=f4e400]:
+            - text: Browse
+            - strong [ref=f4e401]:
+              - link "Professional portraits" [ref=f4e402] [cursor=pointer]:
+                - /url: /explore?category=Professional%20portraits
+            - text: .
+          - listitem [ref=f4e403]:
+            - text: If the face keeps drifting, read
+            - strong [ref=f4e404]: How to Keep Your Face the Same in Gemini
+            - text: .
+        - paragraph [ref=f4e405]:
+          - emphasis [ref=f4e406]:
+            - text: AI tools change often. If a prompt stops working the way it's described here, email
+            - link "hello@aipromptgrid.com" [ref=f4e407] [cursor=pointer]:
+              - /url: mailto:hello@aipromptgrid.com
+            - text: or use our
+            - link "contact page" [ref=f4e408] [cursor=pointer]:
+              - /url: /contact
+            - text: .
+      - paragraph [ref=f4e409]:
+        - link "All guides" [ref=f4e410] [cursor=pointer]:
+          - /url: /guides
+        - text: ·
+        - link "Explore styles" [ref=f4e411] [cursor=pointer]:
+          - /url: /explore
+  - contentinfo [ref=f4e412]:
+    - generic [ref=f4e413]:
+      - generic [ref=f4e414]: AI Prompt Grid
+      - generic [ref=f4e419]:
+        - generic [ref=f4e420]: Discover tested styles. Transform your photo in an external AI editor.
+        - link "Guides" [ref=f4e421] [cursor=pointer]:
+          - /url: /guides
+        - link "About" [ref=f4e422] [cursor=pointer]:
+          - /url: /about
+        - link "Contact" [ref=f4e423] [cursor=pointer]:
+          - /url: /contact
+        - link "hello@aipromptgrid.com" [ref=f4e424] [cursor=pointer]:
+          - /url: mailto:hello@aipromptgrid.com
+        - link "Privacy" [ref=f4e425] [cursor=pointer]:
+          - /url: /privacy-policy
+        - link "Cookie policy" [ref=f4e426] [cursor=pointer]:
+          - /url: /cookie-policy
+        - link "Disclaimer" [ref=f4e427] [cursor=pointer]:
+          - /url: /disclaimer
+        - link "Terms" [ref=f4e428] [cursor=pointer]:
+          - /url: /terms-of-service
+  - alert [ref=f4e429]

@@ -1,0 +1,331 @@
+- generic [active] [ref=f2e1]:
+  - banner [ref=f2e2]:
+    - generic [ref=f2e3]:
+      - link "AI Prompt Grid home" [ref=f2e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f2e9]: AI Prompt Grid
+      - navigation "Main navigation" [ref=f2e10]:
+        - link "Explore styles" [ref=f2e11] [cursor=pointer]:
+          - /url: /explore
+        - button "Categories" [ref=f2e12] [cursor=pointer]
+        - link "How it works" [ref=f2e15] [cursor=pointer]:
+          - /url: /how-it-works
+        - link "Guides" [ref=f2e16] [cursor=pointer]:
+          - /url: /guides
+        - button "For creators" [ref=f2e18] [cursor=pointer]
+      - generic [ref=f2e21]:
+        - button "Search styles" [ref=f2e22] [cursor=pointer]
+        - button "Sign in" [ref=f2e26] [cursor=pointer]
+        - link "Explore styles" [ref=f2e27] [cursor=pointer]:
+          - /url: /explore
+  - main [ref=f2e28]:
+    - generic [ref=f2e29]:
+      - generic [ref=f2e30]:
+        - generic [ref=f2e31]:
+          - generic [ref=f2e32]:
+            - link "Back to explore" [ref=f2e33] [cursor=pointer]:
+              - /url: /explore
+              - text: ←
+            - generic [ref=f2e34]:
+              - link "Explore" [ref=f2e35] [cursor=pointer]:
+                - /url: /explore
+              - text: /
+              - link "Fantasy" [ref=f2e36] [cursor=pointer]:
+                - /url: /explore?category=Fantasy
+              - text: / Separate Photos Couple
+          - generic [ref=f2e37]:
+            - button "Save style" [ref=f2e38] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f2e39]: ♡
+            - button "Share" [ref=f2e41] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f2e42]: ↗
+        - generic [ref=f2e45]:
+          - generic [ref=f2e46]:
+            - button "Slider" [ref=f2e47] [cursor=pointer]
+            - button "Side by side" [ref=f2e48] [cursor=pointer]
+          - generic [ref=f2e49]:
+            - img "Source for Separate Photos Couple"
+          - generic [ref=f2e50]:
+            - img "Separate Photos Couple result"
+          - generic: Source photo
+          - generic: AI result
+          - generic [aria-hidden]: ↔
+          - generic [ref=f2e51]: Move to compare source photo and AI result
+          - slider "Compare source photo and AI result" [ref=f2e52]: "50"
+      - generic [ref=f2e53]:
+        - article [ref=f2e54]:
+          - generic [ref=f2e55]:
+            - generic [ref=f2e56]: Fantasy
+            - generic [ref=f2e57]: Group
+            - generic [ref=f2e58]: One photo
+            - generic [ref=f2e59]: ChatGPT Image
+            - generic [ref=f2e60]: "Mode: Image edit / transform with uploaded photo"
+          - heading "Separate Photos Couple" [level=1] [ref=f2e61]
+          - paragraph [ref=f2e62]: Combine separate person photos into one cohesive Diwali couple portrait with coordinated festive outfits and sparklers on a lamp-lit rooftop.
+          - paragraph [ref=f2e63]:
+            - link "How to merge two photos in Gemini" [ref=f2e64] [cursor=pointer]:
+              - /url: /guides/how-to-merge-two-photos-in-gemini
+            - text: is the guide for couple, family, and pet merges. This page keeps its own look.
+          - paragraph [ref=f2e65]: "Target photo: Two clear individual portraits (or a couple photo) with readable faces. Inputs: source photo (1). Last verified 2026-10-05. Prompt v1.0.0."
+          - generic [ref=f2e66]:
+            - heading "Best source photo" [level=2] [ref=f2e67]
+            - generic [ref=f2e68]:
+              - generic [ref=f2e69]:
+                - generic [ref=f2e70]: ✓
+                - text: Each face clearly visible
+              - generic [ref=f2e71]:
+                - generic [ref=f2e72]: ✓
+                - text: Similar camera height when possible
+              - generic [ref=f2e73]:
+                - generic [ref=f2e74]: ✓
+                - text: Good lighting on skin
+              - generic [ref=f2e75]:
+                - generic [ref=f2e76]: ✓
+                - text: Original images should not be blurry
+          - generic [ref=f2e77]:
+            - heading "What changes" [level=2] [ref=f2e78]
+            - generic [ref=f2e79]:
+              - generic [ref=f2e80]: Composite merge
+              - generic [ref=f2e82]: Outfit
+              - generic [ref=f2e84]: Pose
+              - generic [ref=f2e86]: Background
+              - generic [ref=f2e88]: Lighting
+          - generic [ref=f2e90]:
+            - heading "What should stay recognizable" [level=2] [ref=f2e91]
+            - generic [ref=f2e92]:
+              - generic [ref=f2e93]:
+                - generic [ref=f2e94]: ✓
+                - text: Each person's exact face from their source
+              - generic [ref=f2e95]:
+                - generic [ref=f2e96]: ✓
+                - text: Skin tone
+              - generic [ref=f2e97]:
+                - generic [ref=f2e98]: ✓
+                - text: Age
+              - generic [ref=f2e99]:
+                - generic [ref=f2e100]: ✓
+                - text: Hairstyle
+            - generic [ref=f2e101]: AI tools can still change small details. Review the final result before using it professionally.
+          - generic [ref=f2e102]:
+            - heading "Limitations" [level=2] [ref=f2e103]
+            - list [ref=f2e104]:
+              - listitem [ref=f2e105]: Heavy face occlusion can weaken identity fidelity
+              - listitem [ref=f2e106]: Very tight crops leave little room for festive outfit and decor framing
+        - complementary [ref=f2e107]:
+          - heading "Customize this prompt" [level=2] [ref=f2e108]
+          - paragraph [ref=f2e109]: Adjust the details, then copy the prompt to ChatGPT Image.
+          - generic [ref=f2e110]:
+            - generic [ref=f2e111]:
+              - generic [ref=f2e112]: Color mood
+              - combobox [aria-hidden] [ref=f2e113]
+              - button "Romantic festive" [ref=f2e114] [cursor=pointer]
+            - generic [ref=f2e119]:
+              - generic [ref=f2e120]: Background
+              - combobox [aria-hidden] [ref=f2e121]
+              - button "Rooftop terrace" [ref=f2e122] [cursor=pointer]
+            - generic [ref=f2e127]:
+              - generic [ref=f2e128]: Output ratio
+              - combobox [aria-hidden] [ref=f2e129]
+              - button "4:5 Portrait" [ref=f2e130] [cursor=pointer]
+          - generic [ref=f2e135]:
+            - generic [ref=f2e136]: Identities & facial features
+            - generic [ref=f2e137]:
+              - checkbox
+              - generic [ref=f2e138] [cursor=pointer]
+          - generic [ref=f2e140]:
+            - generic [ref=f2e141]: Group arrangement & pose
+            - generic [ref=f2e142]:
+              - checkbox
+              - generic [ref=f2e143] [cursor=pointer]
+          - generic [ref=f2e145]: "Use the uploaded source images to create one cohesive Diwali portrait of the group together. Treat each uploaded person as a separate identity reference. Preserve Person A's exact face, hairstyle, skin tone, age, and recognizable features from their source image, and preserve Person B's exact face, hairstyle, skin tone, age, and recognizable features from their source image. Never blend, swap, average, or mix facial characteristics between them. Follow the selected source-preservation settings: no additional preserve requirements. If clothing is not preserved, dress both people in coordinated festive South Asian outfits that complement each other without looking identical. If pose is not preserved, place them naturally side by side holding individual sparklers with relaxed, affectionate body language, as though they were genuinely photographed together. Place the couple in a lamp-lit rooftop terrace at diwali night with subtle diya illumination, warm ambient lights, and soft distant fireworks in the evening sky. Match perspective, body scale, camera angle, depth of field, environmental reflections, and especially the direction and intensity of light across both people so the final image looks like one authentic photograph rather than two composited portraits. Apply warm romantic festive color grading and lighting consistently across both subjects. Maintain natural skin texture and true-to-source skin tones, and ensure neither person's face becomes more dominant, stylized, or altered than the other. Do not create mismatched lighting, floating limbs, duplicated hands, extra people, facial blending, text, logos, or watermarks. Compose the merged portrait for 4:5 Portrait, keeping both people clearly visible and naturally balanced within the frame."
+          - generic [ref=f2e146]:
+            - button "Copy prompt" [ref=f2e147] [cursor=pointer]
+            - button "Save to collection" [ref=f2e151] [cursor=pointer]
+            - button "Save your result" [ref=f2e152] [cursor=pointer]
+            - link "Try another style" [ref=f2e153] [cursor=pointer]:
+              - /url: /explore
+          - generic [ref=f2e154]:
+            - heading "Use this prompt" [level=3] [ref=f2e155]
+            - list [ref=f2e156]:
+              - listitem [ref=f2e157]: Open ChatGPT Image in Image edit / transform with uploaded photo
+              - listitem [ref=f2e158]: Upload source photo
+              - listitem [ref=f2e159]: Paste this prompt
+              - listitem [ref=f2e160]: Generate and check your result
+            - button "Why does this use an external tool?" [ref=f2e161] [cursor=pointer]
+      - generic [ref=f2e162]:
+        - heading "More examples" [level=2] [ref=f2e163]
+        - generic [ref=f2e164]:
+          - generic [ref=f2e165]:
+            - generic [ref=f2e166]:
+              - img "Source for Separate Photos Couple" [ref=f2e167]
+              - generic [ref=f2e168]: Source photo
+            - generic [ref=f2e169]:
+              - img "Separate Photos Couple result" [ref=f2e170]
+              - generic [ref=f2e171]: AI result
+          - generic [ref=f2e172]:
+            - generic [ref=f2e173]:
+              - img "Source for Separate Photos Couple (detail)" [ref=f2e174]
+              - generic [ref=f2e175]: Source photo
+            - generic [ref=f2e176]:
+              - img "Separate Photos Couple result (detail)" [ref=f2e177]
+              - generic [ref=f2e178]: AI result
+      - generic [ref=f2e179]:
+        - generic [ref=f2e180]:
+          - heading "Related styles" [level=2] [ref=f2e181]
+          - generic [ref=f2e182]:
+            - link "More Fantasy styles →" [ref=f2e183] [cursor=pointer]:
+              - /url: /explore?category=Fantasy
+            - link "Explore all →" [ref=f2e184] [cursor=pointer]:
+              - /url: /explore
+        - generic [ref=f2e185]:
+          - article [ref=f2e186]:
+            - generic [ref=f2e187]:
+              - generic [ref=f2e188]:
+                - generic [ref=f2e189]:
+                  - img "Source photo for Fairy-Light Portrait"
+                - generic [ref=f2e190]:
+                  - img "AI result showing Fairy-Light Portrait"
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=f2e191]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=f2e192]: "50"
+              - button "Save Fairy-Light Portrait" [ref=f2e193] [cursor=pointer]: ♡
+            - link "Open Fairy-Light Portrait" [ref=f2e194] [cursor=pointer]:
+              - /url: /styles/fairy-light-portrait
+              - generic [ref=f2e195]:
+                - generic [ref=f2e196]: Fantasy
+                - generic [ref=f2e197]: Person
+                - generic [ref=f2e198]: ChatGPT Image
+              - heading "Fairy-Light Portrait" [level=3] [ref=f2e199]
+              - paragraph [ref=f2e200]: Graceful Diwali night portrait with soft fairy-light glow
+          - article [ref=f2e201]:
+            - generic [ref=f2e202]:
+              - generic [ref=f2e203]:
+                - generic [ref=f2e204]:
+                  - img "Source photo for Golden-Hour Sparkler Shot"
+                - generic [ref=f2e205]:
+                  - img "AI result showing Golden-Hour Sparkler Shot"
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=f2e206]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=f2e207]: "50"
+              - button "Save Golden-Hour Sparkler Shot" [ref=f2e208] [cursor=pointer]: ♡
+            - link "Open Golden-Hour Sparkler Shot" [ref=f2e209] [cursor=pointer]:
+              - /url: /styles/golden-hour-sparkler-shot
+              - generic [ref=f2e210]:
+                - generic [ref=f2e211]: Fantasy
+                - generic [ref=f2e212]: Person
+                - generic [ref=f2e213]: ChatGPT Image
+              - heading "Golden-Hour Sparkler Shot" [level=3] [ref=f2e214]
+              - paragraph [ref=f2e215]: Festive dusk portrait holding a lit sparkler
+          - article [ref=f2e216]:
+            - generic [ref=f2e217]:
+              - generic [ref=f2e218]:
+                - generic [ref=f2e219]:
+                  - img "Source photo for Kurta and Nehru Jacket with Lanterns"
+                - generic [ref=f2e220]:
+                  - img "AI result showing Kurta and Nehru Jacket with Lanterns"
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=f2e221]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=f2e222]: "50"
+              - button "Save Kurta and Nehru Jacket with Lanterns" [ref=f2e223] [cursor=pointer]: ♡
+            - link "Open Kurta and Nehru Jacket with Lanterns" [ref=f2e224] [cursor=pointer]:
+              - /url: /styles/kurta-and-nehru-jacket-with-lanterns
+              - generic [ref=f2e225]:
+                - generic [ref=f2e226]: Fantasy
+                - generic [ref=f2e227]: Person
+                - generic [ref=f2e228]: ChatGPT Image
+              - heading "Kurta and Nehru Jacket with Lanterns" [level=3] [ref=f2e229]
+              - paragraph [ref=f2e230]: Stylish rooftop Diwali portrait with paper lanterns
+          - article [ref=f2e231]:
+            - generic [ref=f2e232]:
+              - generic [ref=f2e233]:
+                - generic [ref=f2e234]:
+                  - img "Source photo for Candid Phuljhadi Moment"
+                - generic [ref=f2e235]:
+                  - img "AI result showing Candid Phuljhadi Moment"
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=f2e236]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=f2e237]: "50"
+              - button "Save Candid Phuljhadi Moment" [ref=f2e238] [cursor=pointer]: ♡
+            - link "Open Candid Phuljhadi Moment" [ref=f2e239] [cursor=pointer]:
+              - /url: /styles/candid-phuljhadi-moment
+              - generic [ref=f2e240]:
+                - generic [ref=f2e241]: Fantasy
+                - generic [ref=f2e242]: Person
+                - generic [ref=f2e243]: ChatGPT Image
+              - heading "Candid Phuljhadi Moment" [level=3] [ref=f2e244]
+              - paragraph [ref=f2e245]: Spontaneous street-night sparkler laugh
+          - article [ref=f2e246]:
+            - generic [ref=f2e247]:
+              - generic [ref=f2e248]:
+                - generic [ref=f2e249]:
+                  - img "Source photo for Family Lakshmi Puja Photo"
+                - generic [ref=f2e250]:
+                  - img "AI result showing Family Lakshmi Puja Photo"
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=f2e251]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=f2e252]: "50"
+              - button "Save Family Lakshmi Puja Photo" [ref=f2e253] [cursor=pointer]: ♡
+            - link "Open Family Lakshmi Puja Photo" [ref=f2e254] [cursor=pointer]:
+              - /url: /styles/family-lakshmi-puja-photo
+              - generic [ref=f2e255]:
+                - generic [ref=f2e256]: Fantasy
+                - generic [ref=f2e257]: Group
+                - generic [ref=f2e258]: ChatGPT Image
+              - heading "Family Lakshmi Puja Photo" [level=3] [ref=f2e259]
+              - paragraph [ref=f2e260]: Warm family portrait at a decorated Lakshmi Puja entrance
+          - article [ref=f2e261]:
+            - generic [ref=f2e262]:
+              - generic [ref=f2e263]:
+                - generic [ref=f2e264]:
+                  - img "Source photo for Baby's First Diwali"
+                - generic [ref=f2e265]:
+                  - img "AI result showing Baby's First Diwali"
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=f2e266]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=f2e267]: "50"
+              - button "Save Baby's First Diwali" [ref=f2e268] [cursor=pointer]: ♡
+            - link "Open Baby's First Diwali" [ref=f2e269] [cursor=pointer]:
+              - /url: /styles/babys-first-diwali
+              - generic [ref=f2e270]:
+                - generic [ref=f2e271]: Fantasy
+                - generic [ref=f2e272]: Person
+                - generic [ref=f2e273]: ChatGPT Image
+              - heading "Baby's First Diwali" [level=3] [ref=f2e274]
+              - paragraph [ref=f2e275]: Soft baby's-first-Diwali portrait with safe festive styling
+      - generic [ref=f2e276]:
+        - generic [ref=f2e277]: ✓
+        - generic [ref=f2e278]:
+          - heading "Created with your photo in mind" [level=2] [ref=f2e279]
+          - paragraph [ref=f2e280]: Only upload photos you own or have permission to use. Keep recognizable people informed about how their images are edited.
+  - contentinfo [ref=f2e281]:
+    - generic [ref=f2e282]:
+      - generic [ref=f2e283]: AI Prompt Grid
+      - generic [ref=f2e288]:
+        - generic [ref=f2e289]: Discover tested styles. Transform your photo in an external AI editor.
+        - link "Guides" [ref=f2e290] [cursor=pointer]:
+          - /url: /guides
+        - link "About" [ref=f2e291] [cursor=pointer]:
+          - /url: /about
+        - link "Contact" [ref=f2e292] [cursor=pointer]:
+          - /url: /contact
+        - link "hello@aipromptgrid.com" [ref=f2e293] [cursor=pointer]:
+          - /url: mailto:hello@aipromptgrid.com
+        - link "Privacy" [ref=f2e294] [cursor=pointer]:
+          - /url: /privacy-policy
+        - link "Cookie policy" [ref=f2e295] [cursor=pointer]:
+          - /url: /cookie-policy
+        - link "Disclaimer" [ref=f2e296] [cursor=pointer]:
+          - /url: /disclaimer
+        - link "Terms" [ref=f2e297] [cursor=pointer]:
+          - /url: /terms-of-service

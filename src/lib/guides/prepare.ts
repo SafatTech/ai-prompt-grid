@@ -126,6 +126,116 @@ export type GuideOgImage = {
 };
 
 /**
+ * Optional full-bleed article hero from frontmatter.
+ * `position` is a CSS `object-position` value (for example `50% 30%`).
+ */
+export type GuideHeroImage = {
+  url: string;
+  alt: string;
+  position?: string;
+};
+
+export type GuideDisplayHero =
+  | { kind: "image"; url: string; alt: string; position: string }
+  | { kind: "gradient" };
+
+/**
+ * Article hero only. Explicit `heroImage` wins, then `ogImage`, then a
+ * gradient. Never auto-picks an inline body image.
+ */
+export function resolveGuideDisplayHero(guide: {
+  heroImage?: GuideHeroImage;
+  ogImage?: GuideOgImage;
+}): GuideDisplayHero {
+  if (guide.heroImage) {
+    return {
+      kind: "image",
+      url: guide.heroImage.url,
+      alt: guide.heroImage.alt,
+      position: guide.heroImage.position ?? "50% 35%",
+    };
+  }
+  if (guide.ogImage) {
+    return {
+      kind: "image",
+      url: guide.ogImage.url,
+      alt: guide.ogImage.alt,
+      position: "50% 35%",
+    };
+  }
+  return { kind: "gradient" };
+}
+
+export type GuideTocItem = {
+  id: string;
+  text: string;
+  level: 2 | 3;
+};
+
+/** H2/H3 headings outside fenced code, with stable unique ids. */
+export function extractGuideToc(markdown: string): GuideTocItem[] {
+  const items: GuideTocItem[] = [];
+  const used = new Map<string, number>();
+  const outsideFences = markdown
+    .split(/(```[\s\S]*?```)/g)
+    .filter((_, index) => index % 2 === 0)
+    .join("\n");
+
+  for (const line of outsideFences.split("\n")) {
+    const match = /^(#{2,3})\s+(.+?)\s*$/.exec(line);
+    if (!match) continue;
+    const level = match[1]!.length === 2 ? 2 : 3;
+    const text = match[2]!.replace(/#+\s*$/, "").trim();
+    if (!text) continue;
+    const id = uniqueHeadingId(text, used);
+    items.push({ id, text, level });
+  }
+  return items;
+}
+
+export function estimateReadingMinutes(markdown: string): number {
+  const plain = markdown
+    .replace(/```[\s\S]*?```/g, " ")
+    .replace(/!\[[^\]]*\]\([^)]+\)/g, " ")
+    .replace(/\[[^\]]*\]\([^)]+\)/g, " ")
+    .replace(/[#>*_`~-]/g, " ");
+  const words = plain.split(/\s+/).filter(Boolean).length;
+  return Math.max(1, Math.round(words / 220));
+}
+
+export function formatGuideDateShort(isoDate: string): string {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(isoDate);
+  if (!match) return isoDate;
+  const year = Number(match[1]);
+  const month = Number(match[2]);
+  const day = Number(match[3]);
+  const date = new Date(Date.UTC(year, month - 1, day));
+  return new Intl.DateTimeFormat("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
+    timeZone: "UTC",
+  }).format(date);
+}
+
+export function slugifyHeading(text: string): string {
+  return text
+    .toLowerCase()
+    .normalize("NFKD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .replace(/[^a-z0-9]+/g, "-")
+    .replace(/^-+|-+$/g, "")
+    .slice(0, 80);
+}
+
+function uniqueHeadingId(text: string, used: Map<string, number>): string {
+  const base = slugifyHeading(text) || "section";
+  const count = used.get(base) ?? 0;
+  used.set(base, count + 1);
+  return count === 0 ? base : `${base}-${count + 1}`;
+}
+
+/**
  * Open Graph / Twitter image. A frontmatter `ogImage` wins; otherwise the
  * first real image in the body, then the site card.
  */

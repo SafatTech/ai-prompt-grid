@@ -1,0 +1,313 @@
+- generic [active] [ref=f17e1]:
+  - banner [ref=f17e2]:
+    - generic [ref=f17e3]:
+      - link "AI Prompt Grid home" [ref=f17e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f17e9]: AI Prompt Grid
+      - navigation "Main navigation" [ref=f17e10]:
+        - link "Explore styles" [ref=f17e11] [cursor=pointer]:
+          - /url: /explore
+        - button "Categories" [ref=f17e12] [cursor=pointer]
+        - link "How it works" [ref=f17e15] [cursor=pointer]:
+          - /url: /how-it-works
+        - link "Guides" [ref=f17e16] [cursor=pointer]:
+          - /url: /guides
+        - button "For creators" [ref=f17e18] [cursor=pointer]
+      - generic [ref=f17e21]:
+        - button "Search styles" [ref=f17e22] [cursor=pointer]
+        - button "Sign in" [ref=f17e26] [cursor=pointer]
+        - link "Explore styles" [ref=f17e27] [cursor=pointer]:
+          - /url: /explore
+  - main [ref=f17e28]:
+    - generic [ref=f17e29]:
+      - generic [ref=f17e30]:
+        - generic [ref=f17e31]:
+          - generic [ref=f17e32]:
+            - link "Back to explore" [ref=f17e33] [cursor=pointer]:
+              - /url: /explore
+              - text: ←
+            - generic [ref=f17e34]:
+              - link "Explore" [ref=f17e35] [cursor=pointer]:
+                - /url: /explore
+              - text: /
+              - link "Vintage" [ref=f17e36] [cursor=pointer]:
+                - /url: /explore?category=Vintage
+              - text: / Two Photos, One 80s Couple
+          - generic [ref=f17e37]:
+            - button "Save style" [ref=f17e38] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f17e39]: ♡
+            - button "Share" [ref=f17e41] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f17e42]: ↗
+        - 'group "Two Photos, One 80s Couple: one input photo and the result" [ref=f17e45]':
+          - generic [ref=f17e47]:
+            - generic [ref=f17e49]:
+              - img "AI-generated portrait of a woman with glasses in a blue shirt." [ref=f17e51]
+              - generic [aria-hidden] [ref=f17e52]: Before
+            - generic [ref=f17e56]:
+              - img "AI edit of that portrait into a 1980s outdoor couple photo in a park at golden hour." [ref=f17e57]
+              - generic [aria-hidden] [ref=f17e58]: Result
+      - generic [ref=f17e59]:
+        - article [ref=f17e60]:
+          - generic [ref=f17e61]:
+            - generic [ref=f17e62]: Vintage
+            - generic [ref=f17e63]: Group
+            - generic [ref=f17e64]: One photo
+            - generic [ref=f17e65]: ChatGPT Image
+            - generic [ref=f17e66]: "Mode: Image edit / transform with uploaded photo"
+          - heading "Two Photos, One 80s Couple" [level=1] [ref=f17e67]
+          - paragraph [ref=f17e68]: Combine two photos into one 1980s outdoor couple photo at golden hour, keeping each face matched to its source.
+          - paragraph [ref=f17e69]:
+            - link "How to merge two photos in Gemini" [ref=f17e70] [cursor=pointer]:
+              - /url: /guides/how-to-merge-two-photos-in-gemini
+            - text: is the guide for couple, family, and pet merges. This page keeps its own look.
+          - paragraph [ref=f17e71]: "Target photo: Two clear portraits, one of each person, attached in the same message. Inputs: person A → person B (2). Prompt v1.0.0."
+          - generic [ref=f17e72]:
+            - heading "Best source photo" [level=2] [ref=f17e73]
+            - generic [ref=f17e74]:
+              - generic [ref=f17e75]:
+                - generic [ref=f17e76]: ✓
+                - text: Each face large and sharp
+              - generic [ref=f17e77]:
+                - generic [ref=f17e78]: ✓
+                - text: Even lighting on both faces
+              - generic [ref=f17e79]:
+                - generic [ref=f17e80]: ✓
+                - text: Straightforward head angles
+              - generic [ref=f17e81]:
+                - generic [ref=f17e82]: ✓
+                - text: Original images should not be blurry
+          - generic [ref=f17e83]:
+            - heading "What changes" [level=2] [ref=f17e84]
+            - generic [ref=f17e85]:
+              - generic [ref=f17e86]: Combined couple scene
+              - generic [ref=f17e88]: Period outfits
+              - generic [ref=f17e90]: Matched golden-hour light
+          - generic [ref=f17e92]:
+            - heading "What should stay recognizable" [level=2] [ref=f17e93]
+            - generic [ref=f17e94]:
+              - generic [ref=f17e95]:
+                - generic [ref=f17e96]: ✓
+                - text: Person A's face from photo 1
+              - generic [ref=f17e97]:
+                - generic [ref=f17e98]: ✓
+                - text: Person B's face from photo 2
+              - generic [ref=f17e99]:
+                - generic [ref=f17e100]: ✓
+                - text: Each hair texture
+              - generic [ref=f17e101]:
+                - generic [ref=f17e102]: ✓
+                - text: Each skin tone
+            - generic [ref=f17e103]: AI tools can still change small details. Review the final result before using it professionally.
+          - generic [ref=f17e104]:
+            - heading "Limitations" [level=2] [ref=f17e105]
+            - list [ref=f17e106]:
+              - listitem [ref=f17e107]: Example people in the before photo are AI-generated, not real people.
+              - listitem [ref=f17e108]: Heavy face occlusion can weaken identity fidelity
+        - complementary [ref=f17e109]:
+          - heading "Customize this prompt" [level=2] [ref=f17e110]
+          - paragraph [ref=f17e111]: Adjust the details, then copy the prompt to ChatGPT Image.
+          - generic [ref=f17e112]:
+            - generic [ref=f17e113]:
+              - generic [ref=f17e114]: Color mood
+              - combobox [aria-hidden] [ref=f17e115]
+              - button "Nostalgic sunlight" [ref=f17e116] [cursor=pointer]
+            - generic [ref=f17e121]:
+              - generic [ref=f17e122]: Background
+              - combobox [aria-hidden] [ref=f17e123]
+              - button "Golden hour park" [ref=f17e124] [cursor=pointer]
+            - generic [ref=f17e129]:
+              - generic [ref=f17e130]: Output ratio
+              - combobox [aria-hidden] [ref=f17e131]
+              - button "4:5 Portrait" [ref=f17e132] [cursor=pointer]
+          - generic [ref=f17e137]:
+            - generic [ref=f17e138]: Identities & facial features
+            - generic [ref=f17e139]:
+              - checkbox
+              - generic [ref=f17e140] [cursor=pointer]
+          - generic [ref=f17e142]:
+            - generic [ref=f17e143]: Group arrangement & pose
+            - generic [ref=f17e144]:
+              - checkbox
+              - generic [ref=f17e145] [cursor=pointer]
+          - generic [ref=f17e147]: "The upload is two photos of the group: the first is person A and the second is person B. Create one new 1980s outdoor couple photograph of them standing side by side, matching lighting and camera angle so they look photographed together, with warm faded film colors, soft grain, and 35mm snapshot framing. Keep person A's face, hair texture, and skin tone exactly as in photo 1, and person B's exactly as in photo 2. Do not mix their features. Follow the selected source-preservation settings: no additional preserve requirements. If clothing is not preserved, dress both in 1980s period outfits. If pose is not preserved, stand them side by side. Apply warm nostalgic cinematic sunlight with soft vintage tones, gentle film grain, creamy highlights, and cozy shadow depth color grading. Replace the background with park at golden hour with soft trees, keeping clean edges around hair and clothing. Do not add extra people, lettering, or logos. Compose for 4:5 Portrait without cropping either face."
+          - generic [ref=f17e148]:
+            - button "Copy prompt" [ref=f17e149] [cursor=pointer]
+            - button "Save to collection" [ref=f17e153] [cursor=pointer]
+            - button "Save your result" [ref=f17e154] [cursor=pointer]
+            - link "Try another style" [ref=f17e155] [cursor=pointer]:
+              - /url: /explore
+          - generic [ref=f17e156]:
+            - heading "Use this prompt" [level=3] [ref=f17e157]
+            - list [ref=f17e158]:
+              - listitem [ref=f17e159]: Open ChatGPT Image in Image edit / transform with uploaded photo
+              - listitem [ref=f17e160]: Upload Photo 1, then Photo 2
+              - listitem [ref=f17e161]: Paste this prompt
+              - listitem [ref=f17e162]: Generate and check your result
+            - button "Why does this use an external tool?" [ref=f17e163] [cursor=pointer]
+      - generic [ref=f17e164]:
+        - heading "More examples" [level=2] [ref=f17e165]
+        - generic [ref=f17e167]:
+          - generic [ref=f17e168]:
+            - img "AI-generated portrait of a woman with glasses in a blue shirt." [ref=f17e169]
+            - generic [ref=f17e170]: Source photo
+          - generic [ref=f17e171]:
+            - img "AI edit of that portrait into a 1980s outdoor couple photo in a park at golden hour." [ref=f17e172]
+            - generic [ref=f17e173]: AI result
+      - generic [ref=f17e174]:
+        - generic [ref=f17e175]:
+          - heading "Related styles" [level=2] [ref=f17e176]
+          - generic [ref=f17e177]:
+            - link "More Vintage styles →" [ref=f17e178] [cursor=pointer]:
+              - /url: /explore?category=Vintage
+            - link "Explore all →" [ref=f17e179] [cursor=pointer]:
+              - /url: /explore
+        - generic [ref=f17e180]:
+          - article [ref=f17e181]:
+            - generic [ref=f17e182]:
+              - generic [ref=f17e183]:
+                - generic [ref=f17e184]:
+                  - img "Source photo for 80s Wedding Album"
+                - generic [ref=f17e185]:
+                  - img "AI result showing 80s Wedding Album"
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=f17e186]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=f17e187]: "50"
+              - button "Save 80s Wedding Album" [ref=f17e188] [cursor=pointer]: ♡
+            - link "Open 80s Wedding Album" [ref=f17e189] [cursor=pointer]:
+              - /url: /styles/80s-wedding-album
+              - generic [ref=f17e190]:
+                - generic [ref=f17e191]: Vintage
+                - generic [ref=f17e192]: Group
+                - generic [ref=f17e193]: ChatGPT Image
+              - heading "80s Wedding Album" [level=3] [ref=f17e194]
+              - paragraph [ref=f17e195]: Formal flash portrait, yellowed print
+          - article [ref=f17e196]:
+            - generic [ref=f17e197]:
+              - 'group "Keepsake Frame Merge Two Photos Prompt for Gemini (Couple): 2 input photos combined into one result" [ref=f17e198]':
+                - img "The two original photos of the couple side by side on cream paper with a thin gold divider." [ref=f17e201]
+                - generic [ref=f17e202]:
+                  - img "Woman with wavy hair in a brown scoop-neck top, indoors." [ref=f17e204]
+                  - img "Young man with tousled dark hair and a light moustache in an olive-green tee, indoors." [ref=f17e206]
+              - button "Save Keepsake Frame Merge Two Photos Prompt for Gemini (Couple)" [ref=f17e207] [cursor=pointer]: ♡
+            - link "Open Keepsake Frame Merge Two Photos Prompt for Gemini (Couple)" [ref=f17e208] [cursor=pointer]:
+              - /url: /styles/side-by-side-keepsake-frame-merge-two-photos-prompt-gemini-couple
+              - generic [ref=f17e209]:
+                - generic [ref=f17e210]: Vintage
+                - generic [ref=f17e211]: Group
+                - generic [ref=f17e212]: ChatGPT Image
+              - heading "Keepsake Frame Merge Two Photos Prompt for Gemini (Couple)" [level=3] [ref=f17e213]
+              - paragraph [ref=f17e214]: Both photos kept as-is in one framed keepsake
+              - paragraph [ref=f17e215]: Merge · 2 photos
+          - article [ref=f17e216]:
+            - generic [ref=f17e217]:
+              - generic [ref=f17e218]:
+                - generic [ref=f17e219]:
+                  - img "Source photo for After Hours Polaroid"
+                - generic [ref=f17e220]:
+                  - img "AI result showing After Hours Polaroid"
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=f17e221]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=f17e222]: "50"
+              - button "Save After Hours Polaroid" [ref=f17e223] [cursor=pointer]: ♡
+            - link "Open After Hours Polaroid" [ref=f17e224] [cursor=pointer]:
+              - /url: /styles/after-hours-polaroid
+              - generic [ref=f17e225]:
+                - generic [ref=f17e226]: Vintage
+                - generic [ref=f17e227]: Group
+                - generic [ref=f17e228]: ChatGPT Image
+              - heading "After Hours Polaroid" [level=3] [ref=f17e229]
+              - paragraph [ref=f17e230]: Candid instant-film evening friends photo
+          - article [ref=f17e231]:
+            - generic [ref=f17e232]:
+              - generic [ref=f17e233]:
+                - generic [ref=f17e234]:
+                  - img "Source photo for 90s Yearbook Crew"
+                - generic [ref=f17e235]:
+                  - img "AI result showing 90s Yearbook Crew"
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=f17e236]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=f17e237]: "50"
+              - button "Save 90s Yearbook Crew" [ref=f17e238] [cursor=pointer]: ♡
+            - link "Open 90s Yearbook Crew" [ref=f17e239] [cursor=pointer]:
+              - /url: /styles/90s-yearbook-crew
+              - generic [ref=f17e240]:
+                - generic [ref=f17e241]: Vintage
+                - generic [ref=f17e242]: Group
+                - generic [ref=f17e243]: ChatGPT Image
+              - heading "90s Yearbook Crew" [level=3] [ref=f17e244]
+              - paragraph [ref=f17e245]: Coordinated 1990s school yearbook portrait
+          - article [ref=f17e246]:
+            - generic [ref=f17e247]:
+              - generic [ref=f17e248]:
+                - generic [ref=f17e249]:
+                  - img "Source photo for Friendship Scrapbook"
+                - generic [ref=f17e250]:
+                  - img "AI result showing Friendship Scrapbook"
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=f17e251]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=f17e252]: "50"
+              - button "Save Friendship Scrapbook" [ref=f17e253] [cursor=pointer]: ♡
+            - link "Open Friendship Scrapbook" [ref=f17e254] [cursor=pointer]:
+              - /url: /styles/friendship-scrapbook
+              - generic [ref=f17e255]:
+                - generic [ref=f17e256]: Vintage
+                - generic [ref=f17e257]: Group
+                - generic [ref=f17e258]: ChatGPT Image
+              - heading "Friendship Scrapbook" [level=3] [ref=f17e259]
+              - paragraph [ref=f17e260]: Handmade scrapbook memory-page collage
+          - article [ref=f17e261]:
+            - generic [ref=f17e262]:
+              - generic [ref=f17e263]:
+                - generic [ref=f17e264]:
+                  - img "Source photo for Y2K Digicam Party"
+                - generic [ref=f17e265]:
+                  - img "AI result showing Y2K Digicam Party"
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=f17e266]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=f17e267]: "50"
+              - button "Save Y2K Digicam Party" [ref=f17e268] [cursor=pointer]: ♡
+            - link "Open Y2K Digicam Party" [ref=f17e269] [cursor=pointer]:
+              - /url: /styles/y2k-digicam-party
+              - generic [ref=f17e270]:
+                - generic [ref=f17e271]: Vintage
+                - generic [ref=f17e272]: Group
+                - generic [ref=f17e273]: ChatGPT Image
+              - heading "Y2K Digicam Party" [level=3] [ref=f17e274]
+              - paragraph [ref=f17e275]: Early-2000s direct-flash digicam snapshot
+      - generic [ref=f17e276]:
+        - generic [ref=f17e277]: ✓
+        - generic [ref=f17e278]:
+          - heading "Created with your photo in mind" [level=2] [ref=f17e279]
+          - paragraph [ref=f17e280]: Only upload photos you own or have permission to use. Keep recognizable people informed about how their images are edited.
+  - contentinfo [ref=f17e281]:
+    - generic [ref=f17e282]:
+      - generic [ref=f17e283]: AI Prompt Grid
+      - generic [ref=f17e288]:
+        - generic [ref=f17e289]: Discover tested styles. Transform your photo in an external AI editor.
+        - link "Guides" [ref=f17e290] [cursor=pointer]:
+          - /url: /guides
+        - link "About" [ref=f17e291] [cursor=pointer]:
+          - /url: /about
+        - link "Contact" [ref=f17e292] [cursor=pointer]:
+          - /url: /contact
+        - link "hello@aipromptgrid.com" [ref=f17e293] [cursor=pointer]:
+          - /url: mailto:hello@aipromptgrid.com
+        - link "Privacy" [ref=f17e294] [cursor=pointer]:
+          - /url: /privacy-policy
+        - link "Cookie policy" [ref=f17e295] [cursor=pointer]:
+          - /url: /cookie-policy
+        - link "Disclaimer" [ref=f17e296] [cursor=pointer]:
+          - /url: /disclaimer
+        - link "Terms" [ref=f17e297] [cursor=pointer]:
+          - /url: /terms-of-service
+  - alert [ref=f17e298]

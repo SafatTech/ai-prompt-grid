@@ -1,0 +1,288 @@
+- generic [active] [ref=f23e1]:
+  - banner [ref=f23e2]:
+    - generic [ref=f23e3]:
+      - link "AI Prompt Grid home" [ref=f23e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=f23e9]: AI Prompt Grid
+      - button "Open menu" [ref=f23e11] [cursor=pointer]
+  - main [ref=f23e14]:
+    - generic [ref=f23e15]:
+      - generic [ref=f23e16]:
+        - generic [ref=f23e17]:
+          - generic [ref=f23e18]:
+            - link "Back to explore" [ref=f23e19] [cursor=pointer]:
+              - /url: /explore
+              - text: ←
+            - generic [ref=f23e20]:
+              - link "Explore" [ref=f23e21] [cursor=pointer]:
+                - /url: /explore
+              - text: /
+              - link "Cinematic" [ref=f23e22] [cursor=pointer]:
+                - /url: /explore?category=Cinematic
+              - text: / Riverside Merge Two Photos Prompt for Gemini (Couple)
+          - generic [ref=f23e23]:
+            - button "Save style" [ref=f23e24] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f23e25]: ♡
+            - button "Share" [ref=f23e27] [cursor=pointer]:
+              - generic [aria-hidden] [ref=f23e28]: ↗
+        - 'group "Riverside Merge Two Photos Prompt for Gemini (Couple): 2 input photos combined into one result" [ref=f23e31]':
+          - generic [ref=f23e33]:
+            - generic [ref=f23e34]:
+              - generic [ref=f23e35]:
+                - img "Woman in her late 20s in a sage-green jacket over a black top, on a riverside walkway." [ref=f23e37]
+                - generic [aria-hidden] [ref=f23e38]: Photo 1
+              - generic [ref=f23e39]:
+                - img "Man with stubble in a dark-green jacket over a black tee, on a rocky riverbank." [ref=f23e41]
+                - generic [aria-hidden] [ref=f23e42]: Photo 2
+            - generic [ref=f23e46]:
+              - img "Couple on a riverside promenade at golden hour, his arm around her shoulder." [ref=f23e47]
+              - generic [aria-hidden] [ref=f23e48]: Result
+      - generic [ref=f23e49]:
+        - article [ref=f23e50]:
+          - generic [ref=f23e51]:
+            - generic [ref=f23e52]: Cinematic
+            - generic [ref=f23e53]: Group
+            - generic [ref=f23e54]: Two photos
+            - generic [ref=f23e55]: ChatGPT Image
+            - generic [ref=f23e56]: "Mode: Image edit / transform with uploaded photo"
+          - heading "Riverside Merge Two Photos Prompt for Gemini (Couple)" [level=1] [ref=f23e57]
+          - paragraph [ref=f23e58]: Merge two separate photos into one natural couple photo standing side by side on a riverside promenade in late-afternoon light, one arm around the other's shoulder, both faces kept exactly as in their own photos.
+          - paragraph [ref=f23e59]: "Target photo: Two separate photos uploaded together in one message: person A first, person B second. Inputs: first photo → second photo (2). Prompt v1.0.0."
+          - generic [ref=f23e60]:
+            - heading "Best source photo" [level=2] [ref=f23e61]
+            - generic [ref=f23e62]:
+              - generic [ref=f23e63]:
+                - generic [ref=f23e64]: ✓
+                - text: One person per photo, face large and sharp
+              - generic [ref=f23e65]:
+                - generic [ref=f23e66]: ✓
+                - text: Similar light in both photos (both daylight or both indoors)
+              - generic [ref=f23e67]:
+                - generic [ref=f23e68]: ✓
+                - text: Similar head angle and framing, ideally chest-up
+              - generic [ref=f23e69]:
+                - generic [ref=f23e70]: ✓
+                - text: Original images should not be blurry
+          - generic [ref=f23e71]:
+            - heading "What changes" [level=2] [ref=f23e72]
+            - generic [ref=f23e73]:
+              - generic [ref=f23e74]: Both people in one photo
+              - generic [ref=f23e76]: Riverside setting
+              - generic [ref=f23e78]: One shared warm light from the left
+              - generic [ref=f23e80]: Arm-around-shoulder pose
+          - generic [ref=f23e82]:
+            - heading "What should stay recognizable" [level=2] [ref=f23e83]
+            - generic [ref=f23e84]:
+              - generic [ref=f23e85]:
+                - generic [ref=f23e86]: ✓
+                - text: Person A's face from photo 1
+              - generic [ref=f23e87]:
+                - generic [ref=f23e88]: ✓
+                - text: Person B's face from photo 2
+              - generic [ref=f23e89]:
+                - generic [ref=f23e90]: ✓
+                - text: Each skin tone
+              - generic [ref=f23e91]:
+                - generic [ref=f23e92]: ✓
+                - text: Each person's own outfit
+            - generic [ref=f23e93]: AI tools can still change small details. Review the final result before using it professionally.
+          - generic [ref=f23e94]:
+            - heading "Limitations" [level=2] [ref=f23e95]
+            - list [ref=f23e96]:
+              - listitem [ref=f23e97]: Example people and animals in the before photos are AI-generated, not real.
+        - complementary [ref=f23e98]:
+          - heading "Customize this prompt" [level=2] [ref=f23e99]
+          - paragraph [ref=f23e100]: Adjust the details, then copy the prompt to ChatGPT Image.
+          - generic [ref=f23e101]:
+            - generic [ref=f23e102]:
+              - generic [ref=f23e103]: Color mood
+              - combobox [aria-hidden] [ref=f23e104]
+              - button "Golden hour" [ref=f23e105] [cursor=pointer]
+            - generic [ref=f23e110]:
+              - generic [ref=f23e111]: Background
+              - combobox [aria-hidden] [ref=f23e112]
+              - button "Riverside promenade" [ref=f23e113] [cursor=pointer]
+            - generic [ref=f23e118]:
+              - generic [ref=f23e119]: Output ratio
+              - combobox [aria-hidden] [ref=f23e120]
+              - button "4:5 Portrait" [ref=f23e121] [cursor=pointer]
+          - generic [ref=f23e126]:
+            - generic [ref=f23e127]: Identities & facial features
+            - generic [ref=f23e128]:
+              - checkbox [checked]
+              - generic [ref=f23e129] [cursor=pointer]
+          - generic [ref=f23e131]:
+            - generic [ref=f23e132]: Group arrangement & pose
+            - generic [ref=f23e133]:
+              - checkbox
+              - generic [ref=f23e134] [cursor=pointer]
+          - generic [ref=f23e136]: "Merge the first uploaded photo and the second uploaded photo into one natural group photo of a couple standing side by side. The first uploaded photo shows person A and the second uploaded photo shows person B. Follow the selected source-preservation settings: identities and facial features. Always keep person A's face shape, eyes, nose, lips, hairline, hair, any beard, glasses, or head covering, apparent age, and exact skin tone as in the first uploaded photo, and person B's exactly as in the second uploaded photo. Treat them as two separate people; do not blend, swap, beautify, slim, de-age, or lighten either face, and keep natural skin texture. Keep the outfit each person wears in their own photo. If group arrangement and pose are not preserved, stand them close together, one arm around the other's shoulder, both smiling at the camera, with realistic relative heights. Light both people with one warm, low sun from the left so they look photographed together, with matching shadows and color temperature. Apply luminous golden-hour warmth color grading. Replace the background with riverside promenade with a calm river, trees along the bank, and warm late-afternoon light, keeping clean edges around hair and clothing. Do not add extra people, text, lettering, or logos. Compose for 4:5 Portrait without cropping either face."
+          - generic [ref=f23e137]:
+            - button "Copy prompt" [ref=f23e138] [cursor=pointer]
+            - button "Save to collection" [ref=f23e142] [cursor=pointer]
+            - button "Save your result" [ref=f23e143] [cursor=pointer]
+            - link "Try another style" [ref=f23e144] [cursor=pointer]:
+              - /url: /explore
+          - generic [ref=f23e145]:
+            - heading "Use this prompt" [level=3] [ref=f23e146]
+            - list [ref=f23e147]:
+              - listitem [ref=f23e148]: Open ChatGPT Image in Image edit / transform with uploaded photo
+              - listitem [ref=f23e149]: Upload Photo 1, then Photo 2
+              - listitem [ref=f23e150]: Paste this prompt
+              - listitem [ref=f23e151]: Generate and check your result
+            - button "Why does this use an external tool?" [ref=f23e152] [cursor=pointer]
+      - generic [ref=f23e153]:
+        - heading "More examples" [level=2] [ref=f23e154]
+        - generic [ref=f23e155]:
+          - generic [ref=f23e156]:
+            - generic [ref=f23e157]:
+              - img "Woman in her late 20s in a sage-green jacket over a black top, on a riverside walkway." [ref=f23e158]
+              - generic [ref=f23e159]: Photo 1
+            - generic [ref=f23e160]:
+              - img "Couple on a riverside promenade at golden hour, his arm around her shoulder." [ref=f23e161]
+              - generic [ref=f23e162]: AI result
+          - generic [ref=f23e163]:
+            - generic [ref=f23e164]:
+              - img "Man with stubble in a dark-green jacket over a black tee, on a rocky riverbank." [ref=f23e165]
+              - generic [ref=f23e166]: Photo 2
+            - generic [ref=f23e167]:
+              - img "Couple on a riverside promenade at golden hour, his arm around her shoulder." [ref=f23e168]
+              - generic [ref=f23e169]: AI result
+      - generic [ref=f23e170]:
+        - generic [ref=f23e171]:
+          - heading "Related styles" [level=2] [ref=f23e172]
+          - generic [ref=f23e173]:
+            - link "More Cinematic styles →" [ref=f23e174] [cursor=pointer]:
+              - /url: /explore?category=Cinematic
+            - link "Explore all →" [ref=f23e175] [cursor=pointer]:
+              - /url: /explore
+        - generic [ref=f23e176]:
+          - article [ref=f23e177]:
+            - generic [ref=f23e178]:
+              - 'group "Cafe Window Merge Two Photos Prompt for Gemini (Couple): 2 input photos combined into one result" [ref=f23e179]':
+                - img "Couple at a cafe window table with plain cups, warm interior." [ref=f23e182]
+                - generic [ref=f23e183]:
+                  - img "Bearded man in a grey button-up at a cafe table by a window." [ref=f23e185]
+                  - img "Woman in a lilac embroidered kurti, hand at her chin, at a cafe table." [ref=f23e187]
+              - button "Save Cafe Window Merge Two Photos Prompt for Gemini (Couple)" [ref=f23e188] [cursor=pointer]: ♡
+            - link "Open Cafe Window Merge Two Photos Prompt for Gemini (Couple)" [ref=f23e189] [cursor=pointer]:
+              - /url: /styles/cafe-window-merge-two-photos-prompt-gemini-couple
+              - generic [ref=f23e190]:
+                - generic [ref=f23e191]: Cinematic
+                - generic [ref=f23e192]: Group
+                - generic [ref=f23e193]: ChatGPT Image
+              - heading "Cafe Window Merge Two Photos Prompt for Gemini (Couple)" [level=3] [ref=f23e194]
+              - paragraph [ref=f23e195]: Seated together at a cafe window table
+              - paragraph [ref=f23e196]: Merge · 2 photos
+          - article [ref=f23e197]:
+            - generic [ref=f23e198]:
+              - 'group "Add Missing Person to Group Photo AI Prompt (Gemini): 2 input photos combined into one result" [ref=f23e199]':
+                - img "Young man added at the right end of the family of four at the viewpoint." [ref=f23e202]
+                - generic [ref=f23e203]:
+                  - 'img "Family of four at an outdoor viewpoint: father in a dark-green polo, mother in pink floral, son in a navy tee, daughter in white and blue floral." [ref=f23e205]'
+                  - img "Young man in a navy sweatshirt and light jeans, with greenery and water behind." [ref=f23e207]
+              - button "Save Add Missing Person to Group Photo AI Prompt (Gemini)" [ref=f23e208] [cursor=pointer]: ♡
+            - link "Open Add Missing Person to Group Photo AI Prompt (Gemini)" [ref=f23e209] [cursor=pointer]:
+              - /url: /styles/add-missing-person-to-group-photo-merge-two-photos-prompt-gemini-family
+              - generic [ref=f23e210]:
+                - generic [ref=f23e211]: Cinematic
+                - generic [ref=f23e212]: Group
+                - generic [ref=f23e213]: ChatGPT Image
+              - heading "Add Missing Person to Group Photo AI Prompt (Gemini)" [level=3] [ref=f23e214]
+              - paragraph [ref=f23e215]: Add one person to an existing group photo
+              - paragraph [ref=f23e216]: Merge · 2 photos
+          - article [ref=f23e217]:
+            - generic [ref=f23e218]:
+              - 'group "Eid Family Frame Merge Two Photos Prompt for Gemini (Family): 2 input photos combined into one result" [ref=f23e219]':
+                - img "Family of four in festive clothes, parents seated with the children standing behind them, string lights and crescent lanterns." [ref=f23e222]
+                - generic [ref=f23e223]:
+                  - img "Couple in their 40s in a living room, him in a sage-green shirt and her in a cream and blue floral kurti." [ref=f23e225]
+                  - img "Two children, a girl in a lavender knit and a boy in a navy top." [ref=f23e227]
+              - button "Save Eid Family Frame Merge Two Photos Prompt for Gemini (Family)" [ref=f23e228] [cursor=pointer]: ♡
+            - link "Open Eid Family Frame Merge Two Photos Prompt for Gemini (Family)" [ref=f23e229] [cursor=pointer]:
+              - /url: /styles/eid-family-frame-merge-two-photos-prompt-gemini-family
+              - generic [ref=f23e230]:
+                - generic [ref=f23e231]: Cinematic
+                - generic [ref=f23e232]: Group
+                - generic [ref=f23e233]: ChatGPT Image
+              - heading "Eid Family Frame Merge Two Photos Prompt for Gemini (Family)" [level=3] [ref=f23e234]
+              - paragraph [ref=f23e235]: Parents' photo and kids' photo combined for Eid
+              - paragraph [ref=f23e236]: Merge · 2 photos
+          - article [ref=f23e237]:
+            - generic [ref=f23e238]:
+              - 'group "Rooftop Reunion Merge Two Photos Prompt for Gemini (Group): 2 input photos combined into one result" [ref=f23e239]':
+                - img "Two friends at a rooftop dinner table at dusk with fairy lights and a blurred skyline." [ref=f23e242]
+                - generic [ref=f23e243]:
+                  - img "Woman in a purple top, rooftop selfie at sunset." [ref=f23e245]
+                  - img "Woman in a dusty-rose hijab and floral dress, rooftop selfie at dusk." [ref=f23e247]
+              - button "Save Rooftop Reunion Merge Two Photos Prompt for Gemini (Group)" [ref=f23e248] [cursor=pointer]: ♡
+            - link "Open Rooftop Reunion Merge Two Photos Prompt for Gemini (Group)" [ref=f23e249] [cursor=pointer]:
+              - /url: /styles/rooftop-friends-reunion-merge-two-photos-prompt-gemini-group
+              - generic [ref=f23e250]:
+                - generic [ref=f23e251]: Cinematic
+                - generic [ref=f23e252]: Group
+                - generic [ref=f23e253]: ChatGPT Image
+              - heading "Rooftop Reunion Merge Two Photos Prompt for Gemini (Group)" [level=3] [ref=f23e254]
+              - paragraph [ref=f23e255]: Two friends reunited at a rooftop dinner
+              - paragraph [ref=f23e256]: Merge · 2 photos
+          - article [ref=f23e257]:
+            - generic [ref=f23e258]:
+              - 'group "Grandparent Merge Two Photos Prompt for Gemini (Family): 2 input photos combined into one result" [ref=f23e259]':
+                - img "Grandmother and teen granddaughter seated on a charpai in a sunny courtyard, the grandmother holding a plain book." [ref=f23e262]
+                - generic [ref=f23e263]:
+                  - img "Grandmother about 70 with grey hair in a pink floral sari, in a courtyard garden." [ref=f23e265]
+                  - img "Teen girl in a white and blue floral kurti and navy dupatta, on a garden path." [ref=f23e267]
+              - button "Save Grandparent Merge Two Photos Prompt for Gemini (Family)" [ref=f23e268] [cursor=pointer]: ♡
+            - link "Open Grandparent Merge Two Photos Prompt for Gemini (Family)" [ref=f23e269] [cursor=pointer]:
+              - /url: /styles/grandparent-and-grandchild-courtyard-merge-two-photos-prompt-gemini-family
+              - generic [ref=f23e270]:
+                - generic [ref=f23e271]: Cinematic
+                - generic [ref=f23e272]: Group
+                - generic [ref=f23e273]: ChatGPT Image
+              - heading "Grandparent Merge Two Photos Prompt for Gemini (Family)" [level=3] [ref=f23e274]
+              - paragraph [ref=f23e275]: Grandparent reading to a grandchild on a charpai
+              - paragraph [ref=f23e276]: Merge · 2 photos
+          - article [ref=f23e277]:
+            - generic [ref=f23e278]:
+              - 'group "Wedding Stage Merge Two Photos Prompt for Gemini (Couple): 2 input photos combined into one result" [ref=f23e279]':
+                - img "Couple on a cream sofa before white and blush flowers with fairy lights." [ref=f23e282]
+                - generic [ref=f23e283]:
+                  - img "Bearded man in a cream patterned sherwani." [ref=f23e285]
+                  - img "Woman in a red bridal lehenga with gold jewellery, a maang tikka and hennaed hands." [ref=f23e287]
+              - button "Save Wedding Stage Merge Two Photos Prompt for Gemini (Couple)" [ref=f23e288] [cursor=pointer]: ♡
+            - link "Open Wedding Stage Merge Two Photos Prompt for Gemini (Couple)" [ref=f23e289] [cursor=pointer]:
+              - /url: /styles/wedding-stage-merge-two-photos-prompt-gemini-couple
+              - generic [ref=f23e290]:
+                - generic [ref=f23e291]: Cinematic
+                - generic [ref=f23e292]: Group
+                - generic [ref=f23e293]: ChatGPT Image
+              - heading "Wedding Stage Merge Two Photos Prompt for Gemini (Couple)" [level=3] [ref=f23e294]
+              - paragraph [ref=f23e295]: Bride and groom seated together on a decorated stage
+              - paragraph [ref=f23e296]: Merge · 2 photos
+      - generic [ref=f23e297]:
+        - generic [ref=f23e298]: ✓
+        - generic [ref=f23e299]:
+          - heading "Created with your photo in mind" [level=2] [ref=f23e300]
+          - paragraph [ref=f23e301]: Only upload photos you own or have permission to use. Keep recognizable people informed about how their images are edited.
+  - contentinfo [ref=f23e302]:
+    - generic [ref=f23e303]:
+      - generic [ref=f23e304]: AI Prompt Grid
+      - generic [ref=f23e309]:
+        - generic [ref=f23e310]: Discover tested styles. Transform your photo in an external AI editor.
+        - link "Guides" [ref=f23e311] [cursor=pointer]:
+          - /url: /guides
+        - link "About" [ref=f23e312] [cursor=pointer]:
+          - /url: /about
+        - link "Contact" [ref=f23e313] [cursor=pointer]:
+          - /url: /contact
+        - link "hello@aipromptgrid.com" [ref=f23e314] [cursor=pointer]:
+          - /url: mailto:hello@aipromptgrid.com
+        - link "Privacy" [ref=f23e315] [cursor=pointer]:
+          - /url: /privacy-policy
+        - link "Cookie policy" [ref=f23e316] [cursor=pointer]:
+          - /url: /cookie-policy
+        - link "Disclaimer" [ref=f23e317] [cursor=pointer]:
+          - /url: /disclaimer
+        - link "Terms" [ref=f23e318] [cursor=pointer]:
+          - /url: /terms-of-service
+  - alert [ref=f23e319]

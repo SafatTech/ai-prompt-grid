@@ -1,0 +1,325 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e3]:
+      - link "AI Prompt Grid home" [ref=e4] [cursor=pointer]:
+        - /url: /
+        - generic [ref=e9]: AI Prompt Grid
+      - navigation "Main navigation" [ref=e10]:
+        - link "Explore styles" [ref=e11] [cursor=pointer]:
+          - /url: /explore
+        - button "Categories" [ref=e12] [cursor=pointer]
+        - link "How it works" [ref=e15] [cursor=pointer]:
+          - /url: /how-it-works
+        - link "Guides" [ref=e16] [cursor=pointer]:
+          - /url: /guides
+        - button "For creators" [ref=e18] [cursor=pointer]
+      - generic [ref=e21]:
+        - button "Search styles" [ref=e22] [cursor=pointer]
+        - button "Sign in" [ref=e26] [cursor=pointer]
+        - link "Explore styles" [ref=e27] [cursor=pointer]:
+          - /url: /explore
+  - main [ref=e28]:
+    - generic [ref=e29]:
+      - generic [ref=e30]:
+        - generic [ref=e31]:
+          - generic [ref=e32]:
+            - link "Back to explore" [ref=e33] [cursor=pointer]:
+              - /url: /explore
+              - text: ←
+            - generic [ref=e34]:
+              - link "Explore" [ref=e35] [cursor=pointer]:
+                - /url: /explore
+              - text: /
+              - link "Vintage" [ref=e36] [cursor=pointer]:
+                - /url: /explore?category=Vintage
+              - text: / 1985 Studio Portrait
+          - generic [ref=e37]:
+            - button "Save style" [ref=e38] [cursor=pointer]:
+              - generic [aria-hidden] [ref=e39]: ♡
+            - button "Share" [ref=e41] [cursor=pointer]:
+              - generic [aria-hidden] [ref=e42]: ↗
+        - generic [ref=e45]:
+          - generic [ref=e46]:
+            - button "Slider" [ref=e47] [cursor=pointer]
+            - button "Side by side" [ref=e48] [cursor=pointer]
+          - generic [ref=e49]:
+            - generic [ref=e50]:
+              - img "AI-generated portrait of a young woman with long dark hair, wearing a cream sweater, against a light indoor background." [ref=e51]
+              - generic [ref=e52]: Source photo
+            - generic [ref=e53]:
+              - img "AI edit of that portrait as a 1985 studio photo, with feathered hair, a dusty-rose sweater, and a mottled backdrop." [ref=e54]
+              - generic [ref=e55]: AI result
+      - generic [ref=e56]:
+        - article [ref=e57]:
+          - generic [ref=e58]:
+            - generic [ref=e59]: Vintage
+            - generic [ref=e60]: Person
+            - generic [ref=e61]: One photo
+            - generic [ref=e62]: ChatGPT Image
+            - generic [ref=e63]: "Mode: Image edit / transform with uploaded photo"
+          - heading "1985 Studio Portrait" [level=1] [ref=e64]
+          - paragraph [ref=e65]: Turn a portrait into a 1985 studio photo with feathered hair, period clothes, a mottled backdrop, and warm faded film.
+          - paragraph [ref=e66]: "Target photo: One clear head-and-shoulders portrait with the face large and sharp. Inputs: source photo (1). Last verified 2026-10-09. Prompt v1.0.0."
+          - generic [ref=e67]:
+            - heading "Best source photo" [level=2] [ref=e68]
+            - generic [ref=e69]:
+              - generic [ref=e70]:
+                - generic [ref=e71]: ✓
+                - text: Face visible, no sunglasses
+              - generic [ref=e72]:
+                - generic [ref=e73]: ✓
+                - text: Even lighting, no heavy shadows
+              - generic [ref=e74]:
+                - generic [ref=e75]: ✓
+                - text: Face reasonably large in the frame
+              - generic [ref=e76]:
+                - generic [ref=e77]: ✓
+                - text: Original image should not be blurry
+          - generic [ref=e78]:
+            - heading "What changes" [level=2] [ref=e79]
+            - generic [ref=e80]:
+              - generic [ref=e81]: 1980s hair and clothing
+              - generic [ref=e83]: Studio backdrop
+              - generic [ref=e85]: Soft flash and faded film color
+          - generic [ref=e87]:
+            - heading "What should stay recognizable" [level=2] [ref=e88]
+            - generic [ref=e89]:
+              - generic [ref=e90]:
+                - generic [ref=e91]: ✓
+                - text: Face and identity
+              - generic [ref=e92]:
+                - generic [ref=e93]: ✓
+                - text: Age
+              - generic [ref=e94]:
+                - generic [ref=e95]: ✓
+                - text: Skin tone
+              - generic [ref=e96]:
+                - generic [ref=e97]: ✓
+                - text: Expression
+            - generic [ref=e98]: AI tools can still change small details. Review the final result before using it professionally.
+          - generic [ref=e99]:
+            - heading "Limitations" [level=2] [ref=e100]
+            - list [ref=e101]:
+              - listitem [ref=e102]: Example people in the before photo are AI-generated, not real people.
+              - listitem [ref=e103]: Heavy face occlusion can weaken identity fidelity
+        - complementary [ref=e104]:
+          - heading "Customize this prompt" [level=2] [ref=e105]
+          - paragraph [ref=e106]: Adjust the details, then copy the prompt to ChatGPT Image.
+          - generic [ref=e107]:
+            - generic [ref=e108]:
+              - generic [ref=e109]: Color mood
+              - combobox [aria-hidden] [ref=e110]
+              - button "Soft analog film" [ref=e111] [cursor=pointer]
+            - generic [ref=e116]:
+              - generic [ref=e117]: Background
+              - combobox [aria-hidden] [ref=e118]
+              - button "Mottled studio" [ref=e119] [cursor=pointer]
+            - generic [ref=e124]:
+              - generic [ref=e125]: Output ratio
+              - combobox [aria-hidden] [ref=e126]
+              - button "4:5 Portrait" [ref=e127] [cursor=pointer]
+          - generic [ref=e132]:
+            - generic [ref=e133]: Keep clothing from original photo
+            - generic [ref=e134]:
+              - checkbox
+              - generic [ref=e135] [cursor=pointer]
+          - generic [ref=e137]:
+            - generic [ref=e138]: Keep original pose
+            - generic [ref=e139]:
+              - checkbox
+              - generic [ref=e140] [cursor=pointer]
+          - generic [ref=e142]: "Edit the uploaded person into a 1985 professional studio portrait with voluminous feathered hair and light film grain. Follow the selected source-preservation settings: recognizable identity, proportions, defining features, and expression. If clothing is not preserved, dress them in 1980s period clothing. If pose is not preserved, use a simple frontal studio pose. Do not beautify or change their features. Apply soft sunlit analog warmth with a slightly faded film look color grading with soft frontal flash. Replace the background with classic mottled studio backdrop, keeping clean edges around hair and clothing. Do not add people, lettering, or logos. Compose for 4:5 Portrait without cropping the face."
+          - generic [ref=e143]:
+            - button "Copy prompt" [ref=e144] [cursor=pointer]
+            - button "Save to collection" [ref=e148] [cursor=pointer]
+            - button "Save your result" [ref=e149] [cursor=pointer]
+            - link "Try another style" [ref=e150] [cursor=pointer]:
+              - /url: /explore
+          - generic [ref=e151]:
+            - heading "Use this prompt" [level=3] [ref=e152]
+            - list [ref=e153]:
+              - listitem [ref=e154]: Open ChatGPT Image in Image edit / transform with uploaded photo
+              - listitem [ref=e155]: Upload source photo
+              - listitem [ref=e156]: Paste this prompt
+              - listitem [ref=e157]: Generate and check your result
+            - button "Why does this use an external tool?" [ref=e158] [cursor=pointer]
+      - generic [ref=e159]:
+        - heading "More examples" [level=2] [ref=e160]
+        - generic [ref=e161]:
+          - generic [ref=e162]:
+            - generic [ref=e163]:
+              - img "AI-generated portrait of a young woman with long dark hair, wearing a cream sweater, against a light indoor background." [ref=e164]
+              - generic [ref=e165]: Source photo
+            - generic [ref=e166]:
+              - img "AI edit of that portrait as a 1985 studio photo, with feathered hair, a dusty-rose sweater, and a mottled backdrop." [ref=e167]
+              - generic [ref=e168]: AI result
+          - generic [ref=e169]:
+            - generic [ref=e170]:
+              - img "AI-generated portrait of a young woman with long dark hair, wearing a cream sweater, against a light indoor background. (detail)" [ref=e171]
+              - generic [ref=e172]: Source photo
+            - generic [ref=e173]:
+              - img "AI edit of that portrait as a 1985 studio photo, with feathered hair, a dusty-rose sweater, and a mottled backdrop. (detail)" [ref=e174]
+              - generic [ref=e175]: AI result
+      - generic [ref=e176]:
+        - generic [ref=e177]:
+          - heading "Related styles" [level=2] [ref=e178]
+          - generic [ref=e179]:
+            - link "More Vintage styles →" [ref=e180] [cursor=pointer]:
+              - /url: /explore?category=Vintage
+            - link "Explore all →" [ref=e181] [cursor=pointer]:
+              - /url: /explore
+        - generic [ref=e182]:
+          - article [ref=e183]:
+            - generic [ref=e184]:
+              - generic [ref=e185]:
+                - generic [ref=e186]:
+                  - img "Source photo for 80s Film Poster Lead"
+                - generic [ref=e187]:
+                  - img "AI result showing 80s Film Poster Lead"
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=e188]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=e189]: "50"
+              - button "Save 80s Film Poster Lead" [ref=e190] [cursor=pointer]: ♡
+            - link "Open 80s Film Poster Lead" [ref=e191] [cursor=pointer]:
+              - /url: /styles/80s-film-poster-lead
+              - generic [ref=e192]:
+                - generic [ref=e193]: Vintage
+                - generic [ref=e194]: Person
+                - generic [ref=e195]: ChatGPT Image
+              - heading "80s Film Poster Lead" [level=3] [ref=e196]
+              - paragraph [ref=e197]: Hand-painted South Asian poster, one lead
+          - article [ref=e198]:
+            - generic [ref=e199]:
+              - generic [ref=e200]:
+                - generic [ref=e201]:
+                  - img "Source photo for 1986 School Yearbook"
+                - generic [ref=e202]:
+                  - img "AI result showing 1986 School Yearbook"
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=e203]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=e204]: "50"
+              - button "Save 1986 School Yearbook" [ref=e205] [cursor=pointer]: ♡
+            - link "Open 1986 School Yearbook" [ref=e206] [cursor=pointer]:
+              - /url: /styles/1986-school-yearbook
+              - generic [ref=e207]:
+                - generic [ref=e208]: Vintage
+                - generic [ref=e209]: Person
+                - generic [ref=e210]: ChatGPT Image
+              - heading "1986 School Yearbook" [level=3] [ref=e211]
+              - paragraph [ref=e212]: Laser backdrop yearbook headshot
+          - article [ref=e213]:
+            - generic [ref=e214]:
+              - generic [ref=e215]:
+                - generic [ref=e216]:
+                  - img "Source photo for Walkman Street Snapshot"
+                - generic [ref=e217]:
+                  - img "AI result showing Walkman Street Snapshot"
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=e218]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=e219]: "50"
+              - button "Save Walkman Street Snapshot" [ref=e220] [cursor=pointer]: ♡
+            - link "Open Walkman Street Snapshot" [ref=e221] [cursor=pointer]:
+              - /url: /styles/walkman-street-snapshot
+              - generic [ref=e222]:
+                - generic [ref=e223]: Vintage
+                - generic [ref=e224]: Person
+                - generic [ref=e225]: ChatGPT Image
+              - heading "Walkman Street Snapshot" [level=3] [ref=e226]
+              - paragraph [ref=e227]: Candid market walk with a Walkman
+          - article [ref=e228]:
+            - generic [ref=e229]:
+              - generic [ref=e230]:
+                - generic [ref=e231]:
+                  - img "Source photo for 80s Aerobics Studio"
+                - generic [ref=e232]:
+                  - img "AI result showing 80s Aerobics Studio"
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=e233]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=e234]: "50"
+              - button "Save 80s Aerobics Studio" [ref=e235] [cursor=pointer]: ♡
+            - link "Open 80s Aerobics Studio" [ref=e236] [cursor=pointer]:
+              - /url: /styles/80s-aerobics-studio
+              - generic [ref=e237]:
+                - generic [ref=e238]: Vintage
+                - generic [ref=e239]: Person
+                - generic [ref=e240]: ChatGPT Image
+              - heading "80s Aerobics Studio" [level=3] [ref=e241]
+              - paragraph [ref=e242]: Neon workout look in a mirrored studio
+          - article [ref=e243]:
+            - generic [ref=e244]:
+              - generic [ref=e245]:
+                - generic [ref=e246]:
+                  - img "Source photo for 80s Bedroom Cassette"
+                - generic [ref=e247]:
+                  - img "AI result showing 80s Bedroom Cassette"
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=e248]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=e249]: "50"
+              - button "Save 80s Bedroom Cassette" [ref=e250] [cursor=pointer]: ♡
+            - link "Open 80s Bedroom Cassette" [ref=e251] [cursor=pointer]:
+              - /url: /styles/80s-bedroom-cassette
+              - generic [ref=e252]:
+                - generic [ref=e253]: Vintage
+                - generic [ref=e254]: Person
+                - generic [ref=e255]: ChatGPT Image
+              - heading "80s Bedroom Cassette" [level=3] [ref=e256]
+              - paragraph [ref=e257]: Flash snapshot on a teenager's bed
+          - article [ref=e258]:
+            - generic [ref=e259]:
+              - generic [ref=e260]:
+                - generic [ref=e261]:
+                  - img "Source photo for 1985 Studio Couple"
+                - generic [ref=e262]:
+                  - img "AI result showing 1985 Studio Couple"
+                - generic: Source photo
+                - generic: AI result
+                - generic [aria-hidden]: ↔
+                - generic [ref=e263]: Move to compare source photo and AI result
+                - slider "Compare source photo and AI result" [ref=e264]: "50"
+              - button "Save 1985 Studio Couple" [ref=e265] [cursor=pointer]: ♡
+            - link "Open 1985 Studio Couple" [ref=e266] [cursor=pointer]:
+              - /url: /styles/1985-studio-couple
+              - generic [ref=e267]:
+                - generic [ref=e268]: Vintage
+                - generic [ref=e269]: Group
+                - generic [ref=e270]: ChatGPT Image
+              - heading "1985 Studio Couple" [level=3] [ref=e271]
+              - paragraph [ref=e272]: Mottled-backdrop couple studio portrait
+      - generic [ref=e273]:
+        - generic [ref=e274]: ✓
+        - generic [ref=e275]:
+          - heading "Created with your photo in mind" [level=2] [ref=e276]
+          - paragraph [ref=e277]: Only upload photos you own or have permission to use. Keep recognizable people informed about how their images are edited.
+  - contentinfo [ref=e278]:
+    - generic [ref=e279]:
+      - generic [ref=e280]: AI Prompt Grid
+      - generic [ref=e285]:
+        - generic [ref=e286]: Discover tested styles. Transform your photo in an external AI editor.
+        - link "Guides" [ref=e287] [cursor=pointer]:
+          - /url: /guides
+        - link "About" [ref=e288] [cursor=pointer]:
+          - /url: /about
+        - link "Contact" [ref=e289] [cursor=pointer]:
+          - /url: /contact
+        - link "hello@aipromptgrid.com" [ref=e290] [cursor=pointer]:
+          - /url: mailto:hello@aipromptgrid.com
+        - link "Privacy" [ref=e291] [cursor=pointer]:
+          - /url: /privacy-policy
+        - link "Cookie policy" [ref=e292] [cursor=pointer]:
+          - /url: /cookie-policy
+        - link "Disclaimer" [ref=e293] [cursor=pointer]:
+          - /url: /disclaimer
+        - link "Terms" [ref=e294] [cursor=pointer]:
+          - /url: /terms-of-service
+  - button "Open Next.js Dev Tools" [ref=e300] [cursor=pointer]
+  - alert [ref=e304]
