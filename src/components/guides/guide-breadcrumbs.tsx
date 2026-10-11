@@ -1,8 +1,17 @@
 import Link from "next/link";
 
-export function GuideBreadcrumbs({ current }: { current?: string }) {
+export function GuideBreadcrumbs({
+  current,
+  className = "mb-6",
+}: {
+  current?: string;
+  className?: string;
+}) {
   return (
-    <nav aria-label="Breadcrumb" className="mb-6 text-sm text-[var(--muted)]">
+    <nav
+      aria-label="Breadcrumb"
+      className={["text-sm text-[var(--muted)]", className].filter(Boolean).join(" ")}
+    >
       <ol className="m-0 flex list-none flex-wrap items-center gap-x-2 gap-y-1 p-0">
         <li>
           <Link

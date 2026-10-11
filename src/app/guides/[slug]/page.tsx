@@ -149,7 +149,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
       />
       <div className="border-b border-[var(--line)]">
         <div className="mx-auto max-w-[1380px] px-5 py-3">
-          <GuideBreadcrumbs current={guide.heading} />
+          <GuideBreadcrumbs current={guide.heading} className="mb-0" />
         </div>
       </div>
       {guide.draft ? (
