@@ -2,6 +2,7 @@ import { createServerClient } from "@supabase/ssr";
 import { NextResponse, type NextRequest } from "next/server";
 import { legalCanonicalPath } from "@/lib/http/legal-redirects";
 import { classifyLegacyRequest } from "@/lib/http/legacy-wordpress";
+import { retiredStyleRedirectPath } from "@/lib/http/retired-style-redirects";
 
 /**
  * Retire leftover WordPress URLs before trailing-slash normalization can
@@ -59,6 +60,13 @@ function legalCanonicalRedirect(request: NextRequest): NextResponse | null {
   return redirectToPath(request, target, 301);
 }
 
+/** 301 retired style pages to their parent guide, including a trailing slash. */
+function retiredStyleRedirect(request: NextRequest): NextResponse | null {
+  const target = retiredStyleRedirectPath(request.nextUrl.pathname);
+  if (!target) return null;
+  return redirectToPath(request, target, 301, "");
+}
+
 /**
  * Refreshes the Auth session cookies on each matched request.
  * Gates `/admin` to editor/admin profiles when Supabase is configured.
@@ -70,6 +78,9 @@ export async function middleware(request: NextRequest) {
 
   const legal = legalCanonicalRedirect(request);
   if (legal) return legal;
+
+  const retired = retiredStyleRedirect(request);
+  if (retired) return retired;
 
   const slash = trailingSlashRedirect(request);
   if (slash) return slash;

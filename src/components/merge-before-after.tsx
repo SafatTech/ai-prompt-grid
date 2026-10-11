@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 export type MergeImage = {
@@ -33,10 +32,6 @@ export function resultPresentation(
   return { aspectRatio: `${frameWidth} / ${frameHeight}`, contain };
 }
 
-function isRemoteSrc(src: string): boolean {
-  return src.startsWith("https://") || src.startsWith("http://");
-}
-
 function FrameImage({
   image,
   sizes,
@@ -53,23 +48,10 @@ function FrameImage({
   const width = image.width ?? DEFAULT_WIDTH;
   const height = image.height ?? DEFAULT_HEIGHT;
   const shared = cn("absolute inset-0 h-full w-full object-cover", className);
-  if (!isRemoteSrc(image.src) && image.src.startsWith("/")) {
-    return (
-      <Image
-        src={image.src}
-        alt={image.alt}
-        width={width}
-        height={height}
-        sizes={sizes}
-        priority={priority}
-        fetchPriority={highPriority ? "high" : "auto"}
-        className={shared}
-      />
-    );
-  }
+  // Public guide files and remote catalog WebPs both use a plain img so
+  // inputs keep rendering when /_next/image is unavailable.
+  // eslint-disable-next-line @next/next/no-img-element
   return (
-    // Original catalog WebPs. Width, height, and sizes reserve the box.
-    // eslint-disable-next-line @next/next/no-img-element
     <img
       src={image.src}
       alt={image.alt}

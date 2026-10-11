@@ -19,7 +19,6 @@ const pairs = [
   { n: "49", slug: "80s-film-poster-lead" },
   { n: "50", slug: "1986-school-yearbook" },
   { n: "51", slug: "cassette-player-street-snapshot" },
-  { n: "52", slug: "80s-aerobics-studio" },
   { n: "53", slug: "80s-bedroom-cassette" },
   { n: "54", slug: "1985-studio-couple" },
   { n: "55", slug: "80s-film-poster-couple" },

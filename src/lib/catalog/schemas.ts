@@ -204,7 +204,6 @@ export const backgroundSchema = z.enum([
   "Hand-painted sunset sky with empty space at the top",
   "Soft blue 1980s laser-style studio backdrop",
   "Busy 1980s city market street in bright afternoon sun",
-  "Mirrored aerobics studio wall with a pastel gradient backdrop",
   "1980s teenager bedroom with a cassette player, a stack of tapes, and a patterned bedspread",
   "Dark roller rink with neon lights",
   "Purple and blue laser-beam mall photo-studio backdrop",

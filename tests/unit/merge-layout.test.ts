@@ -99,23 +99,38 @@ describe("classify guide image groups", () => {
     assert.equal(classified.inputs.length, 2);
     assert.equal(classified.result?.width, 1200);
     assert.equal(classified.result?.height, 1200);
-    const guide = fs.readFileSync(
-      path.join(process.cwd(), "content/guides/how-to-merge-two-photos-in-gemini.mdx"),
-      "utf8",
-    );
-    const resultLine = guide
-      .split("\n")
-      .find((line) => line.includes("result-77.webp"));
-    assert.match(resultLine ?? "", /"1200x1200"/);
-    assert.equal(
-      headingForImageSrc(guide, resultLine?.match(/\(([^)\s]+)/)?.[1] ?? ""),
-      "3. Two photos in one frame",
-    );
     assert.deepEqual(resultPresentation(1200, 1200), {
       aspectRatio: "1200 / 1200",
       contain: true,
     });
     assert.equal(resultPresentation(1122, 1402).contain, false);
+  });
+
+  it("docks wedding and mountain everyday inputs with remote results", () => {
+    const classified = classifyPairImages([
+      { src: "https://example.com/storage/source-84.webp" },
+      { src: "https://example.com/storage/source-84b.webp" },
+      { src: "https://example.com/storage/result-84.webp" },
+    ]);
+    assert.equal(classified.inputs.length, 2);
+    assert.match(classified.result?.src ?? "", /result-84\.webp$/);
+    const guide = fs.readFileSync(
+      path.join(process.cwd(), "content/guides/how-to-merge-two-photos-in-gemini.mdx"),
+      "utf8",
+    );
+    assert.doesNotMatch(guide, /Two photos in one frame|You and your pet/);
+    assert.equal(
+      headingForImageSrc(
+        guide,
+        "https://rbmirzmppbytorbhncxj.supabase.co/storage/v1/object/public/catalog-public/seed/catalog/editorial/source-84.webp",
+      ),
+      "8. Wedding stage",
+    );
+    assert.match(guide, /ordinary everyday photo taken at home/);
+    assert.match(guide, /ordinary photo taken at home/);
+    assert.match(guide, /source-84\.webp/);
+    assert.match(guide, /source-86\.webp/);
+    assert.doesNotMatch(guide, /sherwani|lehenga|black puffer|wedding-stage-input/);
   });
 
   it("keeps two separate results on the old grid", () => {

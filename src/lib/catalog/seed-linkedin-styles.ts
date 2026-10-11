@@ -387,36 +387,6 @@ const linkedin: LinkedinSeed[] = [
       "Edit the uploaded {{subject}} into a company team headshot with even front lighting and the eyes about one-third from the top of the frame. Follow the selected source-preservation settings: {{preserve}}. If clothing is preserved, keep their own outfit but neaten the collar. If clothing is not preserved, dress them in a plain smart top or shirt in a neutral color. If pose is not preserved, use straight head-and-shoulders framing facing the camera. Keep their face shape, eyes, nose, lips, hairline, any beard, glasses, or head covering, apparent age, and exact skin tone; do not beautify, slim, de-age, or lighten the skin, and keep natural skin texture. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair and clothing. Do not add people, text, lettering, or logos. Compose for {{ratio}} without cropping the face.",
   },
   {
-    n: "71",
-    id: "saree-office-linkedin-profile-picture-prompt-gemini-women",
-    title: "Saree Office LinkedIn Photo Prompt for Gemini (Women)",
-    note: "Plain silk-cotton saree, fitted blouse, grey studio",
-    description:
-      "Turn a portrait into an elegant office headshot for women in a plain solid-color saree with a neatly pinned pallu, on a soft light-grey backdrop.",
-    intent: "New outfit or theme",
-    mood: "Warm natural neutral",
-    background: "Plain light-grey studio backdrop",
-    ratio: "4:5 Portrait",
-    keepClothing: false,
-    keepPose: false,
-    changes: ["Plain office saree and blouse", "Light-grey studio backdrop", "Soft even light"],
-    stays: ["Face and identity", "Skin tone", "Hairstyle or head covering", "Expression"],
-    height: 360,
-    targetSourcePhoto: "One clear head-and-shoulders photo, front-facing",
-    bestSourcePhoto: [
-      "Face fully visible",
-      "Even lighting, no heavy shadows",
-      "Hair as you wear it to work",
-      "Original image should not be blurry",
-    ],
-    altSource:
-      "Woman with long hair in a pink sleeveless top with a printed drape, in a living room.",
-    altResult:
-      "Woman in a deep-teal saree with a thin border and matching blouse, light-grey backdrop.",
-    template:
-      "Edit the uploaded {{subject}} into a professional office headshot with soft, even studio light and a modest, polished look. Follow the selected source-preservation settings: {{preserve}}. If clothing is not preserved, dress them in a plain solid deep-teal silk-cotton saree with a thin understated border, a matching elbow-sleeve blouse, and the pallu neatly pinned over the left shoulder, with small simple stud earrings only. If pose is not preserved, use straight head-and-shoulders framing facing the camera. Keep their face shape, eyes, nose, lips, hairline, any beard, glasses, or head covering, apparent age, and exact skin tone; do not beautify, slim, de-age, or lighten the skin, and keep natural skin texture. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair and clothing. Do not add people, text, lettering, or logos. Compose for {{ratio}} without cropping the face.",
-  },
-  {
     n: "72",
     id: "passport-size-photo-ai-prompt-gemini-white-background",
     title: "Passport Size Photo AI Prompt for Gemini (White Background)",
