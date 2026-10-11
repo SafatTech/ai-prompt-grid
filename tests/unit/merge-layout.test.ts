@@ -130,7 +130,15 @@ describe("classify guide image groups", () => {
     assert.match(guide, /ordinary photo taken at home/);
     assert.match(guide, /source-84\.webp/);
     assert.match(guide, /source-86\.webp/);
-    assert.doesNotMatch(guide, /sherwani|lehenga|black puffer|wedding-stage-input/);
+    assert.match(guide, /cream patterned sherwani/);
+    assert.match(guide, /red bridal lehenga/);
+    assert.match(guide, /warm winter puffer jackets/);
+    assert.match(guide, /cream scarf/);
+    assert.doesNotMatch(guide, /black puffer|wedding-stage-input/);
+    assert.doesNotMatch(
+      guide,
+      /!\[(?:[^\]]*sherwani|[^\]]*lehenga|[^\]]*black puffer)[^\]]*\]/,
+    );
   });
 
   it("keeps two separate results on the old grid", () => {

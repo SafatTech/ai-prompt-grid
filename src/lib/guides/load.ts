@@ -5,6 +5,7 @@ import { getPublishedStyles } from "@/lib/catalog/styles";
 import {
   prepareGuideMarkdown,
   showsDraftGuides,
+  type GuideHeroImage,
   type GuideOgImage,
   type StyleMention,
 } from "@/lib/guides/prepare";
@@ -21,8 +22,15 @@ export type Guide = {
   date: string;
   updated: string;
   draft: boolean;
+  /** When true, the article shows the “Tested prompts” badge. */
+  promptsTested: boolean;
   /** Social card from frontmatter. Absent guides fall back to the body hero. */
   ogImage?: GuideOgImage;
+  /**
+   * Full-bleed article hero. Absent guides fall back to `ogImage`, then a
+   * gradient — never an auto-picked inline body image.
+   */
+  heroImage?: GuideHeroImage;
   /** Markdown body with the duplicate H1 removed and placeholders normalized. */
   body: string;
 };
@@ -87,8 +95,46 @@ function parseGuideFile(file: string, styles: readonly StyleMention[]): Guide {
         ? requireDate(data.date, "date", file)
         : requireDate(data.updated, "updated", file),
     draft: requireDraft(data.draft, file),
+    promptsTested: requireOptionalBoolean(data.promptsTested, "promptsTested", file),
     ogImage: parseGuideOgImage(data.ogImage, file),
+    heroImage: parseGuideHeroImage(data.heroImage, file),
     body: prepareGuideMarkdown(parsed.content, styles),
+  };
+}
+
+/** Optional `heroImage` frontmatter. Missing means fall back to ogImage/gradient. */
+export function parseGuideHeroImage(
+  value: unknown,
+  file: string,
+): GuideHeroImage | undefined {
+  if (value == null) return undefined;
+  if (typeof value !== "object" || Array.isArray(value)) {
+    throw new Error(
+      `${file}: frontmatter heroImage must be an object with url and alt`,
+    );
+  }
+  const record = value as Record<string, unknown>;
+  const url = requireString(record.url, "heroImage.url", file);
+  if (url.startsWith("//") || url.includes("..")) {
+    throw new Error(
+      `${file}: frontmatter heroImage.url must not be protocol-relative or contain ..`,
+    );
+  }
+  if (!url.startsWith("/") && !/^https?:\/\//i.test(url)) {
+    throw new Error(
+      `${file}: frontmatter heroImage.url must be a root-relative or absolute URL`,
+    );
+  }
+  const position = optionalString(record.position);
+  if (position && !/^[\w%.\s,-]+$/u.test(position)) {
+    throw new Error(
+      `${file}: frontmatter heroImage.position must be a CSS object-position value`,
+    );
+  }
+  return {
+    url,
+    alt: requireString(record.alt, "heroImage.alt", file),
+    ...(position ? { position } : {}),
   };
 }
 
@@ -146,6 +192,18 @@ function requireString(value: unknown, field: string, file: string): string {
 function requireDraft(value: unknown, file: string): boolean {
   if (typeof value !== "boolean") {
     throw new Error(`${file}: frontmatter draft must be true or false`);
+  }
+  return value;
+}
+
+function requireOptionalBoolean(
+  value: unknown,
+  field: string,
+  file: string,
+): boolean {
+  if (value == null) return false;
+  if (typeof value !== "boolean") {
+    throw new Error(`${file}: frontmatter ${field} must be true or false`);
   }
   return value;
 }

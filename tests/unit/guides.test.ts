@@ -11,7 +11,11 @@ import {
   isFirstDimensionedPair,
   parseDimensionTitle,
 } from "../../src/lib/guides/image-pairs";
-import { loadAllGuides, parseGuideOgImage } from "../../src/lib/guides/load";
+import {
+  loadAllGuides,
+  parseGuideHeroImage,
+  parseGuideOgImage,
+} from "../../src/lib/guides/load";
 import {
   publishedGuideFromMatter,
   publishedSlugFromMatter,
@@ -30,7 +34,10 @@ import {
   isGuideVisible,
   linkStyleMentions,
   prepareGuideMarkdown,
+  estimateReadingMinutes,
+  extractGuideToc,
   resolveGuideArticleImage,
+  resolveGuideDisplayHero,
   resolveGuideSocialImage,
   showsDraftGuides,
   stripLeadingH1,
@@ -300,6 +307,61 @@ describe("guide publishing rules", () => {
     );
     assert.throws(() => parseGuideOgImage(["/card.webp"], "guide.mdx"), /ogImage/);
   });
+
+  it("resolves the article hero from heroImage, then ogImage, then a gradient", () => {
+    const ogImage = {
+      url: "/guides/example/card.webp",
+      width: 1200,
+      height: 630,
+      alt: "Festival card",
+    };
+    const heroImage = {
+      url: "/guides/example/hero-wide.webp",
+      alt: "Wide hero",
+      position: "50% 20%",
+    };
+    assert.deepEqual(resolveGuideDisplayHero({ heroImage, ogImage }), {
+      kind: "image",
+      url: heroImage.url,
+      alt: heroImage.alt,
+      position: "50% 20%",
+    });
+    assert.deepEqual(resolveGuideDisplayHero({ ogImage }), {
+      kind: "image",
+      url: ogImage.url,
+      alt: ogImage.alt,
+      position: "50% 35%",
+    });
+    assert.deepEqual(resolveGuideDisplayHero({}), { kind: "gradient" });
+    assert.deepEqual(parseGuideHeroImage(heroImage, "guide.mdx"), heroImage);
+    assert.equal(parseGuideHeroImage(undefined, "guide.mdx"), undefined);
+    assert.throws(
+      () => parseGuideHeroImage({ url: "hero.webp", alt: "x" }, "guide.mdx"),
+      /heroImage.url/,
+    );
+  });
+
+  it("builds a TOC and reading time from the guide body", () => {
+    const markdown = [
+      "## First section",
+      "",
+      "Hello world ".repeat(120),
+      "",
+      "### Nested",
+      "",
+      "```",
+      "## Inside fence",
+      "```",
+      "",
+      "## Second section",
+    ].join("\n");
+    assert.deepEqual(extractGuideToc(markdown), [
+      { id: "first-section", text: "First section", level: 2 },
+      { id: "nested", text: "Nested", level: 3 },
+      { id: "second-section", text: "Second section", level: 2 },
+    ]);
+    assert.ok(estimateReadingMinutes(markdown) >= 1);
+  });
 });
 
 describe("guide files", () => {
@@ -326,6 +388,15 @@ describe("guide files", () => {
       assert.ok(guide.description.length <= 160);
       assert.ok(documentTitle(guide.title).length <= 60);
       assert.match(guide.date, /^\d{4}-\d{2}-\d{2}$/);
+      assert.equal(typeof guide.promptsTested, "boolean");
+      if (!guide.draft) {
+        const hero = resolveGuideDisplayHero(guide);
+        assert.ok(hero.kind === "image" || hero.kind === "gradient");
+        if (hero.kind === "image") {
+          assert.notEqual(hero.url, "");
+          assert.notEqual(hero.alt, "");
+        }
+      }
     }
   });
 

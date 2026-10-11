@@ -1,16 +1,28 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
+import { CopyLinkButton } from "@/components/guides/copy-link-button";
 import { GuideBreadcrumbs } from "@/components/guides/guide-breadcrumbs";
+import { GuideHero } from "@/components/guides/guide-hero";
 import { GuideMarkdown } from "@/components/guides/guide-markdown";
-import { getGuide, listVisibleGuides, visibleGuideSlugs } from "@/lib/guides/load";
+import { GuideRelated } from "@/components/guides/guide-related";
+import { GuideTocDesktop, GuideTocMobile } from "@/components/guides/guide-toc";
+import {
+  getGuide,
+  listIndexableGuides,
+  listVisibleGuides,
+  visibleGuideSlugs,
+} from "@/lib/guides/load";
 import {
   canonicalGuideUrl,
   documentTitle,
-  formatGuideDate,
+  estimateReadingMinutes,
+  extractGuideToc,
+  formatGuideDateShort,
   guideMetadataTitle,
   guideRobots,
   resolveGuideArticleImage,
+  resolveGuideDisplayHero,
   resolveGuideSocialImage,
   showsDraftGuides,
 } from "@/lib/guides/prepare";
@@ -66,6 +78,13 @@ export default async function GuidePage({ params }: GuidePageProps) {
   const canonical = canonicalGuideUrl(guide.slug);
   const visibleSlugs = visibleGuideSlugs();
   const articleImage = resolveGuideArticleImage(guide);
+  const hero = resolveGuideDisplayHero(guide);
+  const toc = extractGuideToc(guide.body);
+  const readingMinutes = estimateReadingMinutes(guide.body);
+  const related = listIndexableGuides()
+    .filter((item) => item.slug !== guide.slug)
+    .slice(0, 3);
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -78,7 +97,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
         ...(articleImage ? { image: articleImage } : {}),
         author: {
           "@type": "Organization",
-          name: "AI Prompt Grid",
+          name: "Safat Tech",
           url: "https://aipromptgrid.com/",
         },
         publisher: {
@@ -121,46 +140,66 @@ export default async function GuidePage({ params }: GuidePageProps) {
   };
 
   return (
-    <article className="container max-w-[760px] py-10 pb-16 sm:py-14 sm:pb-[100px]">
+    <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c"),
         }}
       />
-      <GuideBreadcrumbs current={guide.heading} />
+      <div className="border-b border-[var(--line)]">
+        <div className="mx-auto max-w-[1380px] px-5 py-3">
+          <GuideBreadcrumbs current={guide.heading} className="mb-0" />
+        </div>
+      </div>
       {guide.draft ? (
-        <p className="m-0 mb-4 rounded-2xl border border-dashed border-[#8b6cff] bg-[#15151E] px-4 py-3 text-sm leading-relaxed text-[var(--muted)]">
+        <p className="mx-auto mt-4 mb-0 max-w-[1380px] rounded-2xl border border-dashed border-[#8b6cff] bg-[#15151E] px-5 py-3 text-sm leading-relaxed text-[var(--muted)]">
           Draft. This URL returns 404 in production, and it is excluded from the index and
           the sitemap, until <code className="text-[var(--text)]">draft: false</code> is
           set in the guide file.
         </p>
       ) : null}
-      <h1 className="m-0 mb-3 text-[clamp(32px,4.5vw,48px)] leading-[1.05] tracking-[-0.04em]">
-        {guide.heading}
-      </h1>
-      <p className="m-0 mb-2 text-[17px] leading-relaxed text-[var(--muted)]">
-        {guide.description}
-      </p>
-      <p className="m-0 mb-8 text-xs text-[var(--muted)]">
-        Updated {formatGuideDate(guide.updated)} · AI Prompt Grid editorial
-      </p>
-      <GuideMarkdown markdown={guide.body} visibleSlugs={visibleSlugs} />
-      <p className="mt-12 mb-0 text-sm text-[var(--muted)]">
-        <Link
-          href="/guides"
-          className="font-bold text-[var(--text)] underline-offset-2 hover:underline"
-        >
-          All guides
-        </Link>
-        {" · "}
-        <Link
-          href="/explore"
-          className="font-bold text-[var(--text)] underline-offset-2 hover:underline"
-        >
-          Explore styles
-        </Link>
-      </p>
-    </article>
+      <GuideHero
+        hero={hero}
+        label="Guide"
+        heading={guide.heading}
+        description={guide.description}
+        dateLabel={formatGuideDateShort(guide.date)}
+        readingMinutes={readingMinutes}
+        promptsTested={guide.promptsTested}
+        shareActions={
+          <div className="flex gap-2">
+            <CopyLinkButton url={canonical} />
+          </div>
+        }
+      />
+      <div className="mx-auto mt-12 grid max-w-[1380px] gap-14 px-5 pb-16 lg:grid-cols-[1fr_320px] sm:pb-[100px]">
+        <article className="max-w-3xl min-w-0">
+          <GuideTocMobile items={toc} />
+          <GuideMarkdown
+            markdown={guide.body}
+            visibleSlugs={visibleSlugs}
+            eagerFirstPair={false}
+          />
+          <p className="mt-12 mb-0 text-sm text-[var(--muted)]">
+            <Link
+              href="/guides"
+              className="font-bold text-[var(--text)] underline-offset-2 hover:underline"
+            >
+              All guides
+            </Link>
+            {" · "}
+            <Link
+              href="/explore"
+              className="font-bold text-[var(--text)] underline-offset-2 hover:underline"
+            >
+              Explore styles
+            </Link>
+          </p>
+        </article>
+        <GuideTocDesktop items={toc} />
+      </div>
+      <GuideRelated guides={related} />
+    </>
   );
 }
