@@ -110,6 +110,11 @@ export const moodLabels: Record<string, string> = {
     "Poster sunset",
   "Warm sunset backlight with soft golden haze": "Sunset backlight",
   "Match the original photo's colors": "Match original colors",
+  "Crisp icy blue with warm natural skin tones and bright snow highlights": "Crisp icy blue",
+  "Warm amber tea-stall glow against cool blue snowy dusk": "Amber tea glow",
+  "Soft winter pastel with rose-pink accents, creamy whites, and natural warm skin tones":
+    "Soft winter pastel",
+  "Warm cozy winter glow with soft amber highlights and cool snowy shadows": "Cozy winter glow",
 };
 
 /** Short 2–3 word UI labels for full background prompt strings. */
@@ -293,6 +298,30 @@ export const backgroundLabels: Record<string, string> = {
   "Sunny campus lawn with trees and softly blurred academic buildings": "Campus lawn",
   "Mountain viewpoint with pine trees, a green valley, and distant snowy peaks":
     "Mountain viewpoint",
+  "Snowy northern mountain valley with tall snow-covered pine trees, distant white peaks, and a clear blue sky":
+    "Snowy pine valley",
+  "Snowy hill-station roadside with a small wooden tea stall, warm bulb lights, and pine trees at dusk":
+    "Snowy tea stall",
+  "Snowy city street at night with warm streetlights, soft bokeh, and snow-covered parked cars":
+    "Night snow street",
+  "Cozy wooden cabin interior beside a frosted window with snow falling outside and warm fairy lights":
+    "Cabin window",
+  "Snowy Kashmir-style valley garden with bare chinar-style trees, a wooden fence, and soft misty mountains":
+    "Snowy valley garden",
+  "Wooden hill-station balcony overlooking snowy pine-covered hills under a soft grey winter sky":
+    "Snowy balcony",
+  "Snowy tree-lined avenue with frosted bare branches, old lamp posts, and soft distant bokeh":
+    "Snowy avenue",
+  "Cozy bedroom corner at night beside a frosted window with snow outside and warm fairy lights":
+    "Fairy-light bedroom",
+  "Snowy hill-station viewpoint with a wooden railing, snow-covered pine slopes, and distant white peaks":
+    "Snowy viewpoint",
+  "Snow-covered wooden cottage porch at dusk with a warm lantern, pine trees, and soft snowfall":
+    "Snowy cottage porch",
+  "Quiet snowy pine forest path with fresh snow, frosted branches, and soft winter mist":
+    "Snowy pine path",
+  "Snowy northern mountain valley with a frozen river, small stone houses, bare poplar trees, and towering white peaks":
+    "Frozen river valley",
 };
 
 const genericMoodPresets = [

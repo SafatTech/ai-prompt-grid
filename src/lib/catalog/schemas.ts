@@ -108,6 +108,10 @@ export const moodSchema = z.enum([
   "Rich saturated sunset colors with painted-poster warmth and slight print wear",
   "Warm sunset backlight with soft golden haze",
   "Match the original photo's colors",
+  "Crisp icy blue with warm natural skin tones and bright snow highlights",
+  "Warm amber tea-stall glow against cool blue snowy dusk",
+  "Soft winter pastel with rose-pink accents, creamy whites, and natural warm skin tones",
+  "Warm cozy winter glow with soft amber highlights and cool snowy shadows",
 ]);
 
 export const backgroundSchema = z.enum([
@@ -227,6 +231,18 @@ export const backgroundSchema = z.enum([
   "Wedding stage with a floral backdrop of white and blush flowers, warm fairy lights, and a cream sofa",
   "Sunny campus lawn with trees and softly blurred academic buildings",
   "Mountain viewpoint with pine trees, a green valley, and distant snowy peaks",
+  "Snowy northern mountain valley with tall snow-covered pine trees, distant white peaks, and a clear blue sky",
+  "Snowy hill-station roadside with a small wooden tea stall, warm bulb lights, and pine trees at dusk",
+  "Snowy city street at night with warm streetlights, soft bokeh, and snow-covered parked cars",
+  "Cozy wooden cabin interior beside a frosted window with snow falling outside and warm fairy lights",
+  "Snowy Kashmir-style valley garden with bare chinar-style trees, a wooden fence, and soft misty mountains",
+  "Wooden hill-station balcony overlooking snowy pine-covered hills under a soft grey winter sky",
+  "Snowy tree-lined avenue with frosted bare branches, old lamp posts, and soft distant bokeh",
+  "Cozy bedroom corner at night beside a frosted window with snow outside and warm fairy lights",
+  "Snowy hill-station viewpoint with a wooden railing, snow-covered pine slopes, and distant white peaks",
+  "Snow-covered wooden cottage porch at dusk with a warm lantern, pine trees, and soft snowfall",
+  "Quiet snowy pine forest path with fresh snow, frosted branches, and soft winter mist",
+  "Snowy northern mountain valley with a frozen river, small stone houses, bare poplar trees, and towering white peaks",
 ]);
 
 export const ratioSchema = z.enum(["4:5 Portrait", "1:1 Square", "9:16 Story"]);
