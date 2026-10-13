@@ -44,10 +44,10 @@ const products: ProductSeed[] = [
   {
     n: "01",
     id: "pure-white-packshot",
-    title: "Pure White Packshot",
+    title: "White Background E-commerce Product Photography AI Prompt",
     note: "Clean marketplace-ready studio packshot",
     description:
-      "Turn a product photo into a clean, marketplace-ready packshot on a seamless white studio background with soft even lighting.",
+      "E commerce product photography AI prompt: a clean, marketplace-ready white studio packshot from any phone photo. Copy-paste free in Gemini.",
     intent: "Change background",
     mood: "Bright neutral",
     background: "Pure white seamless infinity studio background",
@@ -64,10 +64,10 @@ Do not add props, hands, extra products, decorative objects, text, logos, waterm
   {
     n: "02",
     id: "color-pop-pedestal",
-    title: "Color Pop Pedestal",
+    title: "Color Pop Pedestal Product Photography AI Prompt",
     note: "Bold monochrome pedestal campaign look",
     description:
-      "Create a bold modern product campaign image on a monochrome coral pedestal with clean studio highlights and sculpted shadows.",
+      "Product photography AI prompts for campaigns: a bold monochrome pedestal set that makes your item pop. Free to copy for Gemini and ChatGPT.",
     intent: "Full scene transformation",
     mood: "Warm neutral",
     background: "Monochrome coral seamless studio backdrop with a circular coral pedestal",
@@ -84,10 +84,10 @@ Compose for {{ratio}}. Do not add text, logos, watermarks, hands, extra products
   {
     n: "03",
     id: "soft-daylight-lifestyle",
-    title: "Soft Daylight Lifestyle",
+    title: "Window Light Lifestyle Product AI Prompt (Gemini)",
     note: "Natural window-lit lifestyle product scene",
     description:
-      "Stage a product in a calm, sunlit desk lifestyle scene with soft diffused daylight and a shallow depth of field.",
+      "Product shoot AI prompt with daylight: a natural window-lit lifestyle scene for your item, from one plain photo. Copy-paste free for Gemini.",
     intent: "Change background",
     mood: "Warm neutral",
     background:
@@ -105,10 +105,10 @@ Compose for {{ratio}}. Do not add text, logos, watermarks, hands, extra copies o
   {
     n: "04",
     id: "editorial-flat-lay",
-    title: "Editorial Flat Lay",
+    title: "Flat Lay Product Photography AI Prompts (Reddit Fave)",
     note: "Premium overhead flat-lay composition",
     description:
-      "Create a refined top-down editorial flat lay with restrained props, soft daylight, and generous negative space.",
+      "Flat lay product photography AI prompts: a premium overhead composition of your item with props and soft shadow. Free for Gemini and ChatGPT.",
     intent: "Artistic restyle",
     mood: "Warm neutral",
     background:
@@ -126,10 +126,10 @@ Compose for {{ratio}}. Do not add text, logos, watermarks, hands, duplicate prod
   {
     n: "05",
     id: "botanical-wellness-still-life",
-    title: "Botanical Wellness Still Life",
+    title: "Botanical Still Life Professional Product AI Prompt",
     note: "Calm botanical still-life product set",
     description:
-      "Place a product in a quiet botanical still life with stone, linen, and soft natural daylight for a high-end wellness feel.",
+      "Professional product photography AI prompt: a calm botanical still-life set for skincare and wellness items. Copy-paste free for Gemini.",
     intent: "Artistic restyle",
     mood: "Warm neutral",
     background:
@@ -147,10 +147,10 @@ Compose for {{ratio}}. Do not add text, logos, watermarks, hands, people, duplic
   {
     n: "06",
     id: "midnight-luxury-spotlight",
-    title: "Midnight Luxury Spotlight",
+    title: "Luxury Jewellery Product Photography AI Prompt",
     note: "Dark cinematic luxury product spotlight",
     description:
-      "Isolate a product in a dark charcoal studio with rim lighting, deep shadows, and a subtle reflective plinth.",
+      "Jewellery product photography AI prompt: a dark cinematic spotlight that makes rings, watches or perfume look premium. Free to copy-paste.",
     intent: "Change lighting",
     mood: "Dark cool neutral",
     background: "Deep charcoal-black seamless studio with a low black reflective plinth",
@@ -167,10 +167,10 @@ Compose for {{ratio}}. Do not add text, logos, watermarks, hands, duplicate prod
   {
     n: "07",
     id: "floating-motion-hero",
-    title: "Floating Motion Hero",
+    title: "Floating Product Photography AI Prompt (Free)",
     note: "Dynamic floating product with light trails",
     description:
-      "Suspend a product against a soft sage-to-cream gradient with subtle motion light trails while keeping the product tack sharp.",
+      "Product photography AI prompts free: a dynamic floating hero shot with light trails for ads and banners. Copy-paste into Gemini or ChatGPT.",
     intent: "Full scene transformation",
     mood: "Warm neutral",
     background: "Pale sage-to-cream gradient studio background with subtle curved light trails",
@@ -187,10 +187,10 @@ Compose for {{ratio}}. Do not add text, logos, watermarks, hands, cords, duplica
   {
     n: "08",
     id: "tactile-macro-detail",
-    title: "Tactile Macro Detail",
+    title: "Macro Product Shoot AI Prompt (Texture Close-Up)",
     note: "Close-up macro texture product shot",
     description:
-      "Frame the product’s most tactile details in a high-detail macro shot on a warm ivory microsuede surface.",
+      "Product shoot AI prompt for macro detail: close-up texture shots that show materials and finish. Free to copy for Gemini and ChatGPT sellers.",
     intent: "Artistic restyle",
     mood: "Warm golden neutral",
     background: "Warm ivory microsuede surface with a subtle fine matte-stone texture",
@@ -207,10 +207,10 @@ Compose for {{ratio}}. Do not add text, logos, watermarks, hands, people, duplic
   {
     n: "09",
     id: "everyday-in-hand-scale",
-    title: "Everyday In-Hand Scale",
+    title: "In-Hand Product Picture AI Prompt (Scale Shot)",
     note: "Natural in-hand scale reference photo",
     description:
-      "Show the product held naturally in one adult hand so everyday size and scale are immediately clear.",
+      "Product picture AI prompt for scale: show your item naturally held in a hand so buyers see its true size. Copy-paste free for Gemini and ChatGPT.",
     intent: "Full scene transformation",
     mood: "Warm neutral",
     background: "A softly blurred neutral bathroom vanity beside a sunlit window",
@@ -227,10 +227,10 @@ Compose for {{ratio}}. Do not add text, logos, watermarks, duplicate products, e
   {
     n: "10",
     id: "warm-home-editorial",
-    title: "Warm Home Editorial",
+    title: "Home Lifestyle Product Photography AI Prompt",
     note: "Sunlit home editorial product scene",
     description:
-      "Stage a product in a warm, inviting home editorial setting with natural window light and soft depth of field.",
+      "Product photography AI prompts for a sunlit home scene: place your product in a warm editorial interior from one photo. Free to copy for Gemini.",
     intent: "Change background",
     mood: "Warm golden neutral",
     background:

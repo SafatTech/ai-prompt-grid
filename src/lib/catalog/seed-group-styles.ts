@@ -44,11 +44,11 @@ const groups: GroupSeed[] = [
   {
     n: "01",
     id: "after-hours-polaroid",
-    title: "After Hours Polaroid",
+    title: "Polaroid Friends AI Photo Prompt for Gemini (Night)",
     category: "Vintage",
     note: "Candid instant-film evening friends photo",
     description:
-      "Turn a group photo into a candid after-hours instant-film look with warm nostalgia, soft grain, and city-light bokeh.",
+      "Polaroid AI photo prompt for friends: a candid instant-film evening snapshot with flash and white border. Copy-paste free for Gemini and ChatGPT.",
     intent: "Artistic restyle",
     mood: "Warm nostalgic",
     background: "Evening city lights with soft distant bokeh",
@@ -67,11 +67,11 @@ Do not add text, dates, captions, logos, watermarks, UI elements, decorative fra
   {
     n: "02",
     id: "90s-yearbook-crew",
-    title: "90s Yearbook Crew",
+    title: "90s Yearbook Group AI Photo Prompt (Friends)",
     category: "Vintage",
     note: "Coordinated 1990s school yearbook portrait",
     description:
-      "Restyle a group into a classic 1990s yearbook portrait with coordinated retro casual clothing and soft flash lighting.",
+      "AI 90s yearbook photo prompt for friends: a coordinated 1990s school group portrait where everyone stays recognisable. Copy-paste free for Gemini.",
     intent: "New outfit or theme",
     mood: "Soft nostalgic",
     background: "Classic mottled studio backdrop",
@@ -90,11 +90,11 @@ Do not add text, school names, dates, logos, watermarks, decorative borders, or 
   {
     n: "03",
     id: "cinematic-ensemble",
-    title: "Cinematic Ensemble",
+    title: "Cinematic Movie Cast AI Photo Prompt (Group)",
     category: "Cinematic",
     note: "Dramatic movie-cast ensemble portrait",
     description:
-      "Elevate a group into a polished cinematic ensemble portrait with atmospheric lighting and film-style color grading.",
+      "Movie AI photo prompt for groups: a dramatic movie-cast ensemble portrait with cinematic lighting, made from your photo. Copy-paste free in Gemini.",
     intent: "Full scene transformation",
     mood: "Moody cinematic",
     background: "Luxury rooftop at sunset with city lights",
@@ -113,11 +113,11 @@ Do not add text, title treatments, credits, logos, watermarks, poster typography
   {
     n: "04",
     id: "friendship-scrapbook",
-    title: "Friendship Scrapbook",
+    title: "Best Friends Scrapbook AI Photo Prompt (Collage)",
     category: "Vintage",
     note: "Handmade scrapbook memory-page collage",
     description:
-      "Reimagine a group as a premium handmade friendship scrapbook page with layered paper, tape, and warm nostalgic tones.",
+      "Best friends AI photo prompt: a handmade scrapbook memory page collaging your photos with stickers and notes. Copy-paste free for Gemini and ChatGPT.",
     intent: "Artistic restyle",
     mood: "Warm nostalgic",
     background:
@@ -137,11 +137,11 @@ Do not add brand logos, watermarks, unrelated objects, or large blocks of readab
   {
     n: "05",
     id: "anime-squad",
-    title: "Anime Squad",
+    title: "Anime Group AI Photo Prompt for Gemini (Friends Squad)",
     category: "Anime",
     note: "Polished contemporary anime group portrait",
     description:
-      "Transform a group into a premium contemporary anime ensemble while keeping every member individually recognizable.",
+      "Anime AI photo prompt for friends: turn a group picture into a polished anime squad portrait where everyone stays recognisable. Copy-paste free.",
     intent: "Artistic restyle",
     mood: "Vibrant cinematic",
     background: "Detailed scenic outdoor adventure setting",
@@ -160,11 +160,11 @@ Do not add text, logos, watermarks, speech bubbles, manga panels, subtitles, or 
   {
     n: "06",
     id: "y2k-digicam-party",
-    title: "Y2K Digicam Party",
+    title: "Y2K Digicam Party AI Photo Prompt (Trend, Free)",
     category: "Vintage",
     note: "Early-2000s direct-flash digicam snapshot",
     description:
-      "Restyle a group as an early-2000s digicam party photo with hard flash, punchy contrast, and nostalgic social energy.",
+      "Y2K AI photo prompt trend: an early-2000s direct-flash digicam party snapshot from your photo, grainy and fun. Copy-paste free into Gemini or ChatGPT.",
     intent: "Artistic restyle",
     mood: "Flashy nostalgic",
     background: "Sunset beach hangout with casual party vibe",
@@ -183,11 +183,11 @@ Do not add text, timestamps, camera UI, logos, watermarks, stickers, or decorati
   {
     n: "07",
     id: "luxury-editorial-crew",
-    title: "Luxury Editorial Crew",
+    title: "Luxury Magazine Group AI Photo Prompt (Fashion Crew)",
     category: "Professional portraits",
     note: "High-fashion magazine campaign group look",
     description:
-      "Elevate a group into a luxury editorial campaign portrait with coordinated styling and golden-hour garden light.",
+      "Gemini AI group photo prompt copy paste: a high-fashion magazine campaign look for your crew, every face kept true. Free for Gemini and ChatGPT.",
     intent: "New outfit or theme",
     mood: "Elegant warm editorial",
     background: "Luxury garden picnic with soft golden-hour light",
@@ -206,11 +206,11 @@ Do not add text, magazine mastheads, cover lines, logos, watermarks, or decorati
   {
     n: "08",
     id: "retro-sitcom-cast",
-    title: "Retro Sitcom Cast",
+    title: "Retro Sitcom Cast Family Group AI Photo Prompt",
     category: "Vintage",
     note: "Cozy 80s/90s sitcom cast promo still",
     description:
-      "Reimagine a group as a cheerful retro sitcom cast portrait with warm analog softness and lived-in set lighting.",
+      "Family group photo AI prompt: a cozy 80s/90s sitcom cast promo still of your family or friends on a living-room set. Free for Gemini and ChatGPT.",
     intent: "Artistic restyle",
     mood: "Warm nostalgic",
     background: "Cozy retro living-room set with warm ambient lights",
@@ -229,11 +229,11 @@ Do not add text, show titles, logos, credits, watermarks, decorative borders, or
   {
     n: "09",
     id: "clay-crew",
-    title: "Clay Crew",
+    title: "Clay 3D Group AI Photo Prompt for Gemini (Friends)",
     category: "3D avatars",
     note: "Handcrafted 3D clay group portrait",
     description:
-      "Turn a group into charming handcrafted clay figures in a miniature diorama scene while keeping identities clear.",
+      "Group AI photo prompt for a handcrafted 3D clay look: your friends turned into claymation figures in one portrait. Free to copy for Gemini.",
     intent: "Artistic restyle",
     mood: "Cozy playful",
     background: "Miniature snowy village scene with handcrafted depth",
@@ -252,11 +252,11 @@ Do not add text, logos, watermarks, decorative borders, toy packaging, or unrela
   {
     n: "10",
     id: "photo-booth-chaos",
-    title: "Photo Booth Chaos",
+    title: "Photo Booth Strip AI Photo Prompt (Friends Group)",
     category: "Vintage",
     note: "Playful multi-frame photo-booth strip",
     description:
-      "Create a playful multi-frame photo-booth print of the group with candid expressions, direct flash, and print texture.",
+      "Friends group photo AI prompt: a playful multi-frame photo-booth strip with silly poses, made from your group picture. Free to copy for Gemini.",
     intent: "Artistic restyle",
     mood: "Playful nostalgic",
     background: "Cozy indoor celebration setting with subtle booth-style atmosphere",

@@ -33,7 +33,7 @@ const nonePreserve = {
 export const seedEditorialStyles10to30: CatalogStyle[] = [
   {
     id: "golden-motion-glamour",
-    title: "Golden Motion Glamour",
+    title: "Golden Saree AI Photo Editing Prompt (Motion Blur Glam)",
     category: "Professional portraits",
     subject: "Person",
     intent: "New outfit or theme",
@@ -46,7 +46,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
     result: asset("result-10.png"),
     status: "published",
     targetSourcePhoto: "One clear portrait with a visible face",
-    description: "Transform a portrait into an elegant festive-fashion look with champagne-gold traditional attire and glowing horizontal motion light.",
+    description: "AI saree photo editing prompt: a champagne-gold saree with golden motion blur for a glamorous editorial shot from your selfie. Free for Gemini.",
     bestSourcePhoto: [
       "One visible face",
       "Good lighting on skin",
@@ -83,7 +83,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
   },
   {
     id: "silver-rim-noir",
-    title: "Silver Rim Noir",
+    title: "Black & White AI Photo Prompt for Men (Silver Rim)",
     category: "Cinematic",
     subject: "Person",
     intent: "Change lighting",
@@ -96,7 +96,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
     result: asset("result-11.png"),
     status: "published",
     targetSourcePhoto: "One clear portrait with a visible face",
-    description: "Restyle a portrait into an elegant black-and-white beauty image with luminous silver rim light and soft satin styling.",
+    description: "Black and white AI photo prompt for men: monochrome portrait with silver rim light and deep shadows, keeping your face. Copy-paste free for Gemini.",
     bestSourcePhoto: [
       "One visible face",
       "Good lighting on skin",
@@ -133,7 +133,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
   },
   {
     id: "crimson-bloom-shadows",
-    title: "Crimson Bloom Shadows",
+    title: "Rose Shadow AI Photo Prompt for Gemini (Close-Up)",
     category: "Cinematic",
     subject: "Person",
     intent: "Artistic restyle",
@@ -146,7 +146,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
     result: asset("result-12.png"),
     status: "published",
     targetSourcePhoto: "One clear portrait with a visible face",
-    description: "Create an intimate sunlit floral beauty portrait with a crimson rose, baby’s-breath, and dramatic flower-cast shadows.",
+    description: "Gemini AI photo prompts rose flower lovers want: a close floral beauty shot with crimson rose shadows across your face. Free to copy-paste.",
     bestSourcePhoto: [
       "One visible face",
       "Good lighting on skin",
@@ -183,7 +183,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
   },
   {
     id: "golden-flora-triptych",
-    title: "Golden Flora Triptych",
+    title: "Floral Triptych AI Photo Editing Prompt (3 Panels)",
     category: "Professional portraits",
     subject: "Person",
     intent: "Artistic restyle",
@@ -196,7 +196,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
     result: asset("result-13.png"),
     status: "published",
     targetSourcePhoto: "One clear portrait with a visible face",
-    description: "Build a romantic three-panel editorial collage with traditional ivory styling, jasmine flowers, and gold jewellery details.",
+    description: "Triptych AI photo editing prompt: a three-panel floral fashion collage made from your selfie, with golden light. Free to copy for Gemini and ChatGPT.",
     bestSourcePhoto: [
       "One visible face",
       "Good lighting on skin",
@@ -233,7 +233,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
   },
   {
     id: "golden-bouquet-glow",
-    title: "Golden Bouquet Glow",
+    title: "Rose Bouquet AI Photo Prompt (Warm Amber Glow)",
     category: "Cinematic",
     subject: "Person",
     intent: "Artistic restyle",
@@ -246,7 +246,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
     result: asset("result-14.png"),
     status: "published",
     targetSourcePhoto: "One clear portrait with a visible face",
-    description: "Create a warm romantic cinematic portrait with a large rose bouquet, golden rim light, and intimate dark surroundings.",
+    description: "Rose bouquet prompt AI photo: a warm amber portrait holding a lush bouquet, built from one selfie. Copy-paste free for Gemini or ChatGPT.",
     bestSourcePhoto: [
       "One visible face",
       "Good lighting on skin",
@@ -283,7 +283,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
   },
   {
     id: "blue-note-scrapbook",
-    title: "Blue Note Scrapbook",
+    title: "Retro Scrapbook AI Photo Prompt (Pastel Aesthetic)",
     category: "Vintage",
     subject: "Person",
     intent: "Artistic restyle",
@@ -296,7 +296,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
     result: asset("result-15.png"),
     status: "published",
     targetSourcePhoto: "One clear portrait with a visible face",
-    description: "Arrange a playful scrapbook-style portrait collage with multiple lifestyle crops, torn notes, and soft pastel accents.",
+    description: "Retro AI photo prompt aesthetic: a pastel scrapbook collage of your photos with tape, notes and doodles. Free to copy for Gemini and ChatGPT.",
     bestSourcePhoto: [
       "One visible face",
       "Good lighting on skin",
@@ -333,7 +333,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
   },
   {
     id: "dreamy-floral-warp",
-    title: "Dreamy Floral Warp",
+    title: "Dreamy Flower AI Photo Prompt (Liquid Warp Selfie)",
     category: "Fantasy",
     subject: "Person",
     intent: "Full scene transformation",
@@ -346,7 +346,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
     result: asset("result-16.png"),
     status: "published",
     targetSourcePhoto: "One clear portrait with a visible face",
-    description: "Turn a portrait into a joyful wide-angle floral selfie surrounded by pink blossoms and flowing environmental warp.",
+    description: "AI flower photo prompt for selfies: a dreamy floral frame with soft liquid warp that keeps your face sharp. Free to copy into Gemini and ChatGPT.",
     bestSourcePhoto: [
       "One visible face",
       "Good lighting on skin",
@@ -383,7 +383,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
   },
   {
     id: "velvet-rose-noir",
-    title: "Velvet Rose Noir",
+    title: "Red Rose Noir AI Photo Prompt (Low-Light Portrait)",
     category: "Cinematic",
     subject: "Person",
     intent: "Change lighting",
@@ -396,7 +396,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
     result: asset("result-17.png"),
     status: "published",
     targetSourcePhoto: "One clear portrait with a visible face",
-    description: "Create an intimate low-light cinematic portrait with warm chiaroscuro lighting and a single crimson rose accent.",
+    description: "Trending AI photo prompt rose flower: a moody low-light portrait holding a single red rose, made from your selfie. Copy-paste free for Gemini.",
     bestSourcePhoto: [
       "One visible face",
       "Good lighting on skin",
@@ -433,7 +433,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
   },
   {
     id: "sunlit-bouquet-triptych",
-    title: "Sunlit Bouquet Triptych",
+    title: "Sunlit Flower Triptych Gemini AI Photo Prompt",
     category: "Cinematic",
     subject: "Person",
     intent: "Artistic restyle",
@@ -446,7 +446,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
     result: asset("result-18.png"),
     status: "published",
     targetSourcePhoto: "One clear portrait with a visible face",
-    description: "Compose a warm nostalgic three-panel portrait story with a bouquet, window shadows, and soft vintage sunlight.",
+    description: "Gemini AI flower photo prompt: a sunlit three-panel bouquet story that turns one selfie into a soft editorial set. Copy-paste free, face kept real.",
     bestSourcePhoto: [
       "One visible face",
       "Good lighting on skin",
@@ -483,7 +483,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
   },
   {
     id: "monochrome-echo-trio",
-    title: "Monochrome Echo Trio",
+    title: "Black and White AI Photo Prompt (3-Panel Echo)",
     category: "Cinematic",
     subject: "Person",
     intent: "Artistic restyle",
@@ -496,7 +496,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
     result: asset("result-19.png"),
     status: "published",
     targetSourcePhoto: "One clear portrait with a visible face",
-    description: "Create a timeless high-contrast monochrome three-panel beauty collage with soft studio atmosphere.",
+    description: "Black and white AI photo prompt: a monochrome three-panel beauty echo from one selfie, sharp and editorial. Free to copy for Gemini and ChatGPT.",
     bestSourcePhoto: [
       "One visible face",
       "Good lighting on skin",
@@ -533,7 +533,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
   },
   {
     id: "shadowed-saree-noir",
-    title: "Shadowed Saree Noir",
+    title: "Black & White Saree AI Photo Prompt for Gemini (Leaf Shadow)",
     category: "Professional portraits",
     subject: "Person",
     intent: "New outfit or theme",
@@ -546,7 +546,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
     result: asset("result-20.png"),
     status: "published",
     targetSourcePhoto: "One clear portrait with a visible face",
-    description: "Restyle a portrait into a soft monochrome saree editorial with dramatic natural leaf shadows on a textured wall.",
+    description: "Saree AI photo prompt for a monochrome look: drape, leaf shadows and soft light added to your own photo in Gemini. Copy-paste free and keep your face.",
     bestSourcePhoto: [
       "One visible face",
       "Good lighting on skin",
@@ -583,7 +583,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
   },
   {
     id: "sunlit-daisy-drift",
-    title: "Sunlit Daisy Drift",
+    title: "Daisy Field AI Photo Prompt for Gemini (Blue Sky)",
     category: "Travel",
     subject: "Person",
     intent: "Full scene transformation",
@@ -596,7 +596,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
     result: asset("result-21.png"),
     status: "published",
     targetSourcePhoto: "One clear portrait with a visible face",
-    description: "Create a bright sunlit outdoor editorial with daisy accents, vivid sky, and an airy cinematic color grade.",
+    description: "Gemini AI flower photo prompt copy paste: a bright outdoor daisy portrait against blue sky, made from your selfie. Free for Gemini and ChatGPT.",
     bestSourcePhoto: [
       "One visible face",
       "Good lighting on skin",
@@ -633,7 +633,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
   },
   {
     id: "amber-shadow-triptych",
-    title: "Amber Shadow Triptych",
+    title: "Amber Light Triptych Fashion AI Photo Prompt (Gemini)",
     category: "Professional portraits",
     subject: "Person",
     intent: "Artistic restyle",
@@ -646,7 +646,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
     result: asset("result-22.png"),
     status: "published",
     targetSourcePhoto: "One clear portrait with a visible face",
-    description: "Build a warm amber-brown editorial triptych with strong directional wall light and refined fashion styling.",
+    description: "Triptych AI photo editing prompt for fashion: three amber wall-light panels from one photo, moody and editorial. Copy-paste free for Gemini.",
     bestSourcePhoto: [
       "One visible face",
       "Good lighting on skin",
@@ -683,7 +683,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
   },
   {
     id: "chibi-daydream-collage",
-    title: "Chibi Daydream Collage",
+    title: "Chibi AI Photo Prompt: Daydream Scrapbook Collage (Free)",
     category: "Vintage",
     subject: "Person",
     intent: "Artistic restyle",
@@ -696,7 +696,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
     result: asset("result-23.png"),
     status: "published",
     targetSourcePhoto: "One clear portrait with a visible face",
-    description: "Arrange a soft lifestyle scrapbook collage with cream paper layers, tilted Polaroids, and warm daylight portraits.",
+    description: "Chibi AI photo prompt free to copy: turn your selfie into a cute chibi daydream scrapbook collage with doodles. Works in Gemini and ChatGPT.",
     bestSourcePhoto: [
       "One visible face",
       "Good lighting on skin",
@@ -733,7 +733,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
   },
   {
     id: "golden-boho-storyboard",
-    title: "Golden Boho Storyboard",
+    title: "Boho Street AI Photo Prompt for Gemini (Golden Hour)",
     category: "Travel",
     subject: "Person",
     intent: "Full scene transformation",
@@ -746,7 +746,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
     result: asset("result-24.png"),
     status: "published",
     targetSourcePhoto: "One clear portrait with a visible face",
-    description: "Create a warm nostalgic golden-hour lifestyle storyboard on a peaceful tree-lined residential street.",
+    description: "Cinematic AI photo prompt for a boho look: a golden-hour street storyboard with flowing outfit and warm light. Copy-paste free into Gemini.",
     bestSourcePhoto: [
       "One visible face",
       "Good lighting on skin",
@@ -783,7 +783,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
   },
   {
     id: "royal-blue-rose-storyboard",
-    title: "Royal Blue Rose Storyboard",
+    title: "Royal Blue Saree AI Photo Prompt (Courtyard Storyboard)",
     category: "Professional portraits",
     subject: "Person",
     intent: "New outfit or theme",
@@ -796,7 +796,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
     result: asset("result-25.png"),
     status: "published",
     targetSourcePhoto: "One clear portrait with a visible face",
-    description: "Compose a heritage cinematic storyboard with rich royal blue styling in a historic sandstone courtyard.",
+    description: "Saree AI photo prompt for a royal blue look: a heritage courtyard storyboard with roses, made from one photo. Free to copy into Gemini and ChatGPT.",
     bestSourcePhoto: [
       "One visible face",
       "Good lighting on skin",
@@ -833,7 +833,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
   },
   {
     id: "midnight-glove-noir",
-    title: "Midnight Glove Noir",
+    title: "Noir Gloves Black and White AI Photo Prompt (Free)",
     category: "Cinematic",
     subject: "Person",
     intent: "New outfit or theme",
@@ -846,7 +846,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
     result: asset("result-26.png"),
     status: "published",
     targetSourcePhoto: "One clear portrait with a visible face",
-    description: "Restyle a portrait into a luxurious monochrome evening look with elegant gloves and soft circular bokeh.",
+    description: "Black and white AI photo prompt free: a luxurious monochrome portrait with evening gloves and soft shadow, made from your selfie in Gemini.",
     bestSourcePhoto: [
       "One visible face",
       "Good lighting on skin",
@@ -883,7 +883,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
   },
   {
     id: "golden-twirl-storyboard",
-    title: "Golden Twirl Storyboard",
+    title: "Golden Hour Twirl AI Photo Prompt for Girls",
     category: "Travel",
     subject: "Person",
     intent: "Full scene transformation",
@@ -896,7 +896,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
     result: asset("result-27.png"),
     status: "published",
     targetSourcePhoto: "One clear portrait with a visible face",
-    description: "Create a warm golden-hour street storyboard with flowing fabric motion and honey-amber sunlight.",
+    description: "Cinematic AI photo prompts made by ChatGPT fans: a golden-hour twirl storyboard on a city street from your selfie, face kept real. Free in Gemini.",
     bestSourcePhoto: [
       "One visible face",
       "Good lighting on skin",
@@ -933,7 +933,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
   },
   {
     id: "varanasi-sunset-voyage",
-    title: "Varanasi Sunset Voyage",
+    title: "Varanasi Sunset Lehenga AI Photo Prompt (Riverside Boat)",
     category: "Travel",
     subject: "Person",
     intent: "Full scene transformation",
@@ -946,7 +946,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
     result: asset("result-28.png"),
     status: "published",
     targetSourcePhoto: "One clear portrait with a visible face",
-    description: "Transform a portrait into a golden sunset travel-poster scene beside Varanasi-inspired riverside ghats.",
+    description: "Lehenga AI photo prompt for a Varanasi sunset: a riverside boat voyage at golden hour in a red-orange skirt look, built from your selfie. Copy-paste for Gemini or ChatGPT free.",
     bestSourcePhoto: [
       "One visible face",
       "Good lighting on skin",
@@ -983,7 +983,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
   },
   {
     id: "crimson-bangle-reverie",
-    title: "Crimson Bangle Reverie",
+    title: "Red Bangles Saree AI Photo Prompt for Girls (Triptych)",
     category: "Professional portraits",
     subject: "Person",
     intent: "Artistic restyle",
@@ -996,7 +996,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
     result: asset("result-29.png"),
     status: "published",
     targetSourcePhoto: "One clear portrait with a visible face",
-    description: "Build an intimate three-panel jewellery editorial with white embroidery, crimson bangles, and warm window light.",
+    description: "Saree AI photo prompt for girl portraits: a window-lit three-panel story with crimson bangles, styled from one selfie. Copy-paste free into Gemini.",
     bestSourcePhoto: [
       "One visible face",
       "Good lighting on skin",
@@ -1033,7 +1033,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
   },
   {
     id: "meadow-reverie",
-    title: "Meadow Reverie",
+    title: "Moody Meadow Cinematic AI Photo Prompt (Tall Grass)",
     category: "Cinematic",
     subject: "Person",
     intent: "Full scene transformation",
@@ -1046,7 +1046,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
     result: asset("result-30.png"),
     status: "published",
     targetSourcePhoto: "One clear portrait with a visible face",
-    description: "Place a portrait in a moody outdoor meadow with tall wild grass, a bare tree, and muted earthy grading.",
+    description: "Cinematic AI image prompt for nature: a moody meadow portrait in tall grass with soft wind, made from your selfie. Free for Gemini and ChatGPT.",
     bestSourcePhoto: [
       "One visible face",
       "Good lighting on skin",

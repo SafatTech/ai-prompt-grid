@@ -19,7 +19,8 @@ test.describe("phase 2 guest catalog", () => {
     await expect(page.getByTestId("explore-search")).toBeVisible();
     await expect(page.getByTestId("results-count")).toContainText("135 styles");
 
-    await page.getByTestId("explore-search").fill("Meadow Reverie");
+    // Title was retitled to "Moody Meadow Cinematic AI Photo Prompt (Tall Grass)".
+    await page.getByTestId("explore-search").fill("Moody Meadow");
     await expect(page.getByTestId("results-count")).toContainText("1 style");
     await expect(page.getByTestId("style-card-meadow-reverie")).toBeVisible();
 
@@ -28,7 +29,7 @@ test.describe("phase 2 guest catalog", () => {
     await page.getByTestId("clear-filters").click();
     await expect(page.getByTestId("results-count")).toContainText("135 styles");
 
-    await page.getByTestId("explore-search").fill("Meadow Reverie");
+    await page.getByTestId("explore-search").fill("Moody Meadow");
     await page.getByTestId("style-card-meadow-reverie").click();
     await expect(page).toHaveURL(/\/styles\/meadow-reverie/);
     await expect(page.getByTestId("prompt-box")).toBeVisible();

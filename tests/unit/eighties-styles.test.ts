@@ -51,12 +51,20 @@ describe("1980s style pages", () => {
     );
   });
 
-  it("keeps SEO titles in the look pattern and under 60 characters", () => {
+  it("keeps document titles under 60 characters for retitled and legacy looks", () => {
     for (const style of seedEightiesStyles) {
+      assert.ok(
+        style.title.length <= 60,
+        `${style.id} catalog title is ${style.title.length}: ${style.title}`,
+      );
       const social = styleSocialTitle(style);
       assert.ok(social.length <= 60, `${style.id} title is ${social.length}: ${social}`);
-      assert.match(social, / AI Photo Prompt/);
-      assert.equal(social.split("(").length, 1);
+      assert.match(social, /\bPrompt\b/);
+      if (!/\bPrompt\b/.test(style.title)) {
+        // Legacy short looks still append " AI Photo Prompt" and avoid parentheses.
+        assert.match(social, / AI Photo Prompt/);
+        assert.equal(social.split("(").length, 1);
+      }
       const description = stylePageDescription(style.note, style.title);
       assert.match(description, /\.$/);
       const metadata = styleMetadataTitle(style);

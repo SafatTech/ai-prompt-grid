@@ -4,6 +4,7 @@ import path from "node:path";
 import { describe, it } from "node:test";
 import sitemap from "../../src/app/sitemap";
 import { publishedGuides } from "../../src/lib/guides/published-slugs.generated";
+import { retiredStyleSlugs } from "../../src/lib/http/retired-style-redirects";
 import { guideSitemapEntries } from "../../src/lib/seo/guide-sitemap";
 import { absoluteUrl } from "../../src/lib/site-url";
 
@@ -74,6 +75,14 @@ describe("sitemap handler", () => {
       if (entry.lastModified instanceof Date) {
         assert.equal(Number.isNaN(entry.lastModified.getTime()), false);
       }
+    }
+  });
+
+  it("omits every retired style slug from the sitemap", async () => {
+    const entries = await sitemap();
+    const urls = new Set(entries.map((entry) => entry.url));
+    for (const slug of retiredStyleSlugs) {
+      assert.equal(urls.has(absoluteUrl(`/styles/${slug}`)), false, slug);
     }
   });
 });

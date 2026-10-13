@@ -31,7 +31,7 @@ export async function generateMetadata({
   }
 
   const description = stylePageDescription(
-    style.note || style.description || "",
+    style.description || style.note || "",
     style.title,
   );
 

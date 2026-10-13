@@ -8,6 +8,15 @@ const RETIRED_STYLE_PATHS: Record<string, string> = {
   "/styles/80s-aerobics-studio": "/guides/80s-ai-photo-prompts-solo-couple",
 };
 
+/** Slugs that 301 away from `/styles/:slug` and must stay out of the sitemap. */
+export const retiredStyleSlugs: ReadonlySet<string> = new Set(
+  Object.keys(RETIRED_STYLE_PATHS).map((path) => path.slice("/styles/".length)),
+);
+
+export function isRetiredStyleSlug(slug: string): boolean {
+  return retiredStyleSlugs.has(slug.trim());
+}
+
 /** 301 target for a retired `/styles/:slug` path, or null when the path is still live. */
 export function retiredStyleRedirectPath(pathname: string): string | null {
   let path = pathname || "/";

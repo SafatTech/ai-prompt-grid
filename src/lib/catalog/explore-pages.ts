@@ -50,6 +50,44 @@ export function explorePageHref(query: ExploreQuery, page: number): string {
   return qs ? `/explore?${qs}` : "/explore";
 }
 
+/** True when the listing uses filters, search, or a non-default sort. */
+export function exploreQueryHasFacets(query: ExploreQuery): boolean {
+  return (
+    query.q.trim().length > 0 ||
+    query.sort !== "Trending" ||
+    query.category.length > 0 ||
+    query.subject.length > 0 ||
+    query.intent.length > 0 ||
+    query.requirement.length > 0 ||
+    query.tool.length > 0
+  );
+}
+
+/**
+ * Indexable explore URLs are only the unfiltered page list.
+ * Faceted URLs (`?category=…`, search, etc.) canonicalize to `/explore`.
+ */
+export function exploreCanonicalHref(query: ExploreQuery, page: number): string {
+  if (exploreQueryHasFacets(query)) return "/explore";
+  return explorePageHref(query, page);
+}
+
+export function exploreListingTitle(page: number): string {
+  return page > 1 ? `Explore styles, Page ${page}` : "Explore styles";
+}
+
+export function exploreListingDescription(page: number): string {
+  const base =
+    "Browse tested AI photo-transformation styles for portraits, pets, places, products, and more. Copy prompts for ChatGPT, Gemini, and other editors.";
+  return page > 1 ? `${base} Page ${page}.` : base;
+}
+
+export function exploreListingHeading(page: number): string {
+  return page > 1
+    ? `Find a style for your photo, Page ${page}`
+    : "Find a style for your photo";
+}
+
 export function explorePageSlice<T>(items: T[], page: number): T[] {
   const start = (page - 1) * EXPLORE_PAGE_SIZE;
   return items.slice(start, start + EXPLORE_PAGE_SIZE);

@@ -44,10 +44,10 @@ const places: PlaceSeed[] = [
   {
     n: "01",
     id: "cozy-dream-room",
-    title: "Cozy Dream Room",
+    title: "Cozy Bedroom Interior Design AI Prompt (Dream Room)",
     note: "Furnished dream-room makeover for plain spaces",
     description:
-      "Transform a plain or unfurnished room into a realistically furnished, comfortable living space while keeping the original architecture recognizable.",
+      "Room interior design AI prompt: furnish a plain bedroom photo into a cozy dream room with warm textiles. Free to copy for Gemini and ChatGPT.",
     intent: "Full scene transformation",
     mood: "Warm neutral",
     background:
@@ -66,10 +66,10 @@ Do not introduce people, text, logos, watermarks, distorted furniture, impossibl
   {
     n: "02",
     id: "modern-virtual-staging",
-    title: "Modern Virtual Staging",
+    title: "Virtual Staging AI Prompt for Empty Rooms (Gemini)",
     note: "Move-in-ready real-estate staging look",
     description:
-      "Convert an empty or nearly empty room into a realistic, professionally staged interior while keeping the property recognizable.",
+      "Virtual staging AI prompt: turn an empty room photo into a move-in-ready staged listing in Gemini or ChatGPT. Free to copy for agents and owners.",
     intent: "Full scene transformation",
     mood: "Warm neutral",
     background:
@@ -89,10 +89,10 @@ Do not add people, text, logos, watermarks, impossible geometry, oversized furni
   {
     n: "03",
     id: "refined-luxury-living",
-    title: "Refined Luxury Living",
+    title: "Luxury Home Interior Design AI Prompt (Gemini)",
     note: "Sophisticated premium residential interior",
     description:
-      "Upgrade a room into a sophisticated luxury living space with refined furniture, layered lighting, and polished materials.",
+      "Home interior design AI prompt: restyle a plain room photo as a sophisticated luxury living space with premium finishes. Copy-paste free for Gemini.",
     intent: "Full scene transformation",
     mood: "Warm elegant neutral",
     background:
@@ -112,10 +112,10 @@ Do not add people, text, logos, watermarks, impossible geometry, floating furnit
   {
     n: "04",
     id: "garden-lawn-makeover",
-    title: "Garden & Lawn Makeover",
+    title: "Garden Design AI Prompt: Lawn Makeover",
     note: "Natural residential garden landscaping",
     description:
-      "Improve an outdoor space into a naturally landscaped, well-maintained garden with healthy lawn and layered planting.",
+      "Garden design AI prompt: transform a photo of your yard into natural residential landscaping with lawn and beds. Free to copy for Gemini.",
     intent: "Full scene transformation",
     mood: "Fresh natural green",
     background:
@@ -135,10 +135,10 @@ Do not add people, text, logos, watermarks, impossible vegetation, oversized flo
   {
     n: "05",
     id: "outdoor-living-oasis",
-    title: "Outdoor Living Oasis",
+    title: "Patio & Rooftop Outdoor AI Prompt (Gemini)",
     note: "Polished patio or rooftop outdoor living",
     description:
-      "Design a comfortable outdoor living oasis with lounge seating, shade, ambient lighting, and layered greenery.",
+      "Prompt AI outdoor living ideas: turn a bare patio or rooftop photo into a polished lounge with plants and lights. Copy-paste free for Gemini.",
     intent: "Full scene transformation",
     mood: "Warm golden evening",
     background:
@@ -160,10 +160,10 @@ Do not add people, text, logos, watermarks, impossible structures, unsupported p
   {
     n: "06",
     id: "modern-curb-refresh",
-    title: "Modern Curb Refresh",
+    title: "Home Exterior AI Prompt: Modern Curb Appeal",
     note: "Polished curb-appeal exterior makeover",
     description:
-      "Refresh a home’s curb appeal with refined exterior finishes, healthier front landscaping, and warm entry lighting.",
+      "Home exterior AI prompt for curb appeal: refresh your house front with paint, lighting and landscaping in one edit. Free for Gemini and ChatGPT.",
     intent: "Full scene transformation",
     mood: "Warm golden evening",
     background:
@@ -184,10 +184,10 @@ Do not add people, text, logos, watermarks, impossible architectural extensions,
   {
     n: "07",
     id: "kitchen-remodel-vision",
-    title: "Kitchen Remodel Vision",
+    title: "Modern Kitchen AI Prompt: Remodel Your Photo",
     note: "Realistic contemporary kitchen renovation",
     description:
-      "Modernize a kitchen with cohesive cabinetry, countertops, lighting, and finishes while keeping the original layout recognizable.",
+      "Modern kitchen AI prompt: see a realistic contemporary renovation of your own kitchen photo before you spend. Copy-paste free for Gemini.",
     intent: "Full scene transformation",
     mood: "Warm natural neutral",
     background:
@@ -209,10 +209,10 @@ Do not add people, text, logos, watermarks, impossible cabinet geometry, blocked
   {
     n: "08",
     id: "bathroom-spa-upgrade",
-    title: "Bathroom Spa Upgrade",
+    title: "Spa Bathroom Design AI Prompt for Gemini",
     note: "Calm spa-inspired bathroom renovation",
     description:
-      "Upgrade a bathroom into a calm contemporary spa-inspired space with refined tile, vanity, and soft integrated lighting.",
+      "Bathroom design AI prompt: upgrade a photo of your bathroom into a calm spa-style renovation with stone and soft light. Free to copy-paste.",
     intent: "Full scene transformation",
     mood: "Warm spa neutral",
     background:
@@ -233,10 +233,10 @@ Do not add people, text, logos, watermarks, impossible plumbing, floating fixtur
   {
     n: "09",
     id: "street-beautification",
-    title: "Street Beautification",
+    title: "Street Makeover AI Prompt (Outdoor Render)",
     note: "Walkable neighborhood streetscape upgrade",
     description:
-      "Improve a street into a cleaner, more walkable neighborhood with better sidewalks, trees, planters, and organized edges.",
+      "Exterior render AI prompt for streets: turn a plain road into a walkable, tree-lined neighbourhood. Copy-paste free for Gemini and ChatGPT.",
     intent: "Full scene transformation",
     mood: "Fresh clean daylight",
     background:
@@ -256,10 +256,10 @@ Do not add people, text, logos, watermarks, impossible architecture, oversized t
   {
     n: "10",
     id: "historic-revival",
-    title: "Historic Revival",
+    title: "Historic Facade Exterior Design AI Prompt",
     note: "Careful heritage façade restoration",
     description:
-      "Restore a historic property with repaired materials and preserved ornament while keeping the building’s architectural identity.",
+      "Exterior design AI prompt for heritage buildings: a careful façade restoration render from one photo of the building. Free to copy for Gemini.",
     intent: "Artistic restyle",
     mood: "Warm heritage neutral",
     background:
