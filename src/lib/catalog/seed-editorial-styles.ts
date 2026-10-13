@@ -33,7 +33,7 @@ const nonePreserve = {
 export const seedEditorialStyles: CatalogStyle[] = [
   {
     id: "south-asian-fashion-editorial",
-    title: "South Asian Fashion Editorial",
+    title: "Saree Gemini AI Photo Prompt (Copy-Paste Editorial)",
     category: "Professional portraits",
     subject: "Person",
     intent: "New outfit or theme",
@@ -47,7 +47,7 @@ export const seedEditorialStyles: CatalogStyle[] = [
     status: "published",
     targetSourcePhoto: "One clear frontal or three-quarter portrait",
     description:
-      "Transform a portrait into an elegant South Asian fashion editorial with refined traditional attire, jewellery, and luminous cinematic grading.",
+      "Saree Gemini AI photo prompt copy paste: an elegant fashion editorial in traditional attire and jewellery that keeps your real face. Works in ChatGPT.",
     bestSourcePhoto: [
       "One visible face",
       "Good lighting on skin",
@@ -88,7 +88,7 @@ Place the scene in {{background}} with a soft, premium editorial atmosphere. Do 
   },
   {
     id: "urban-street-fashion-editorial",
-    title: "Urban Street Fashion Editorial",
+    title: "Urban Street Fashion AI Photo Prompt for Men",
     category: "Cinematic",
     subject: "Person",
     intent: "Full scene transformation",
@@ -102,7 +102,7 @@ Place the scene in {{background}} with a soft, premium editorial atmosphere. Do 
     status: "published",
     targetSourcePhoto: "Clear portrait suitable for a three-quarter fashion crop",
     description:
-      "Restyle a portrait into a high-fashion urban editorial with dark streetwear, cinematic contrast, and a moving blurred crowd.",
+      "Cinematic AI photo prompt for street style: a high-fashion city look with motion blur, made from your selfie with your face kept. Free for Gemini.",
     bestSourcePhoto: [
       "One visible face",
       "Subject facing camera or three-quarter",
@@ -143,7 +143,7 @@ Interpret {{background}} as a sophisticated city or street-style setting while k
   },
   {
     id: "joyful-outdoor-lifestyle",
-    title: "Joyful Outdoor Lifestyle",
+    title: "Confetti Outdoor AI Photo Prompt for Gemini (Candid)",
     category: "Cinematic",
     subject: "Person",
     intent: "Artistic restyle",
@@ -157,7 +157,7 @@ Interpret {{background}} as a sophisticated city or street-style setting while k
     status: "published",
     targetSourcePhoto: "Clear outdoor-friendly portrait with visible face",
     description:
-      "Turn a portrait into a joyful outdoor lifestyle editorial with light clothing, a notebook prop, and soft celebratory confetti.",
+      "Friends AI image prompt for a joyful candid: a bright outdoor portrait with flying confetti, solo or with friends, faces kept real. Free in Gemini.",
     bestSourcePhoto: [
       "One visible face",
       "Natural expression preferred",
@@ -199,7 +199,7 @@ Build the setting from {{background}} while retaining a fresh celebratory atmosp
   },
   {
     id: "vintage-pulp-comic-hero",
-    title: "Vintage Pulp Comic Hero",
+    title: "Comic Book AI Photo Prompt for Gemini (Retro Pulp Hero)",
     category: "Vintage",
     subject: "Person",
     intent: "Artistic restyle",
@@ -213,7 +213,7 @@ Build the setting from {{background}} while retaining a fresh celebratory atmosp
     status: "published",
     targetSourcePhoto: "Clear portrait with a strong facial silhouette",
     description:
-      "Illustrate a portrait as an original vintage pulp-comic hero with bold ink, halftone shading, and a retro roadside scene.",
+      "Comic photo AI prompt: turn your selfie into a retro pulp comic-book hero with halftone ink and bold colour, keeping your face. Copy-paste free.",
     bestSourcePhoto: [
       "One visible face",
       "Clear facial contours",
@@ -254,7 +254,7 @@ Adapt the scene around {{background}} while keeping the subject as the central c
   },
   {
     id: "intimate-cinematic-portrait",
-    title: "Intimate Cinematic Portrait",
+    title: "Cinematic AI Photo Prompt Free: Indie Film Portrait",
     category: "Cinematic",
     subject: "Person",
     intent: "Change lighting",
@@ -268,7 +268,7 @@ Adapt the scene around {{background}} while keeping the subject as the central c
     status: "published",
     targetSourcePhoto: "Clear portrait that can crop to a seated three-quarter",
     description:
-      "Restyle a portrait into an intimate cinematic editorial with filtered side light, reflective mood, and a quiet studio atmosphere.",
+      "AI cinematic photo prompt free to copy: a quiet indie-film seated portrait with soft window light, keeping your face true. Works in Gemini.",
     bestSourcePhoto: [
       "One visible face",
       "Soft or even lighting preferred",
@@ -309,7 +309,7 @@ Use {{background}} as a creative studio or reading-room-inspired setting with su
   },
   {
     id: "travel-fashion-bouquet",
-    title: "Travel Fashion Bouquet",
+    title: "Wildflower Travel AI Photo Prompt (Trending)",
     category: "Travel",
     subject: "Person",
     intent: "Full scene transformation",
@@ -323,7 +323,7 @@ Use {{background}} as a creative studio or reading-room-inspired setting with su
     status: "published",
     targetSourcePhoto: "Clear portrait with room for a walking crop",
     description:
-      "Create a joyful cinematic travel-fashion portrait with flowing summer clothing, a wildflower bouquet, and a romantic old-city street.",
+      "Trending AI photo prompt flower lovers share: golden-hour travel fashion with wildflowers, made from your photo. Copy-paste free into Gemini.",
     bestSourcePhoto: [
       "One visible face",
       "Good daylight or window light",
@@ -365,7 +365,7 @@ Build the scene around {{background}} with a romantic old-city-street feeling an
   },
   {
     id: "dark-crowd-editorial",
-    title: "Dark Crowd Editorial",
+    title: "Night Crowd Editorial Cinematic Photo AI Prompt",
     category: "Cinematic",
     subject: "Person",
     intent: "Full scene transformation",
@@ -379,7 +379,7 @@ Build the scene around {{background}} with a romantic old-city-street feeling an
     status: "published",
     targetSourcePhoto: "Clear three-quarter portrait with visible face",
     description:
-      "Place a portrait in a dark cinematic crowd scene with a hooded jacket, dramatic contrast, and heavy motion blur around anonymous passersby.",
+      "Cinematic photo AI prompt for a night editorial: you in sharp focus within a blurred city crowd. Copy-paste free for Gemini and ChatGPT.",
     bestSourcePhoto: [
       "One visible face",
       "Face turned toward camera",
@@ -420,7 +420,7 @@ Interpret {{background}} as a dense urban crowd environment while keeping the su
   },
   {
     id: "south-asian-editorial-collage",
-    title: "South Asian Editorial Collage",
+    title: "Traditional Saree AI Photo Prompt: 3-Panel Collage",
     category: "Professional portraits",
     subject: "Person",
     intent: "Artistic restyle",
@@ -434,7 +434,7 @@ Interpret {{background}} as a dense urban crowd environment while keeping the su
     status: "published",
     targetSourcePhoto: "Clear portrait with visible eyes and face",
     description:
-      "Create a vertical three-panel South Asian editorial collage with consistent identity, traditional styling, and cinematic window light.",
+      "Trending saree AI photo prompt: a three-panel traditional editorial collage with jewellery and warm light, made from your photo. Free to copy-paste.",
     bestSourcePhoto: [
       "One visible face",
       "Eyes clearly visible",
@@ -475,7 +475,7 @@ Use {{background}} consistently behind all three panels with a soft window-lit e
   },
   {
     id: "analog-street-fashion",
-    title: "Analog Street Fashion",
+    title: "Film Look Street Fashion AI Photo Prompt (Candid)",
     category: "Vintage",
     subject: "Person",
     intent: "New outfit or theme",
@@ -489,7 +489,7 @@ Use {{background}} consistently behind all three panels with a soft window-lit e
     status: "published",
     targetSourcePhoto: "Clear portrait with space for a walking full/half-body crop",
     description:
-      "Restyle a portrait into a candid analog street-fashion walk with roses, soft daylight flare, and gentle film grain.",
+      "Cinematic AI picture prompt for street style: a candid film-look fashion walk with grain and warm tones, from one photo. Copy-paste free.",
     bestSourcePhoto: [
       "One visible face",
       "Subject not tightly head-cropped",

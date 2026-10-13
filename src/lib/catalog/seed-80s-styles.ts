@@ -55,10 +55,10 @@ const eighties: EightiesSeed[] = [
   {
     n: "48",
     id: "1985-studio-portrait",
-    title: "1985 Studio Portrait",
+    title: "1985 Studio Portrait Retro AI Photo Prompt for Gemini",
     note: "Mottled backdrop, soft flash, warm faded film",
     description:
-      "Turn a portrait into a 1985 studio photo with feathered hair, period clothes, a mottled backdrop, and warm faded film.",
+      "Retro AI photo prompt Gemini users love: a 1985 studio portrait with mottled backdrop, soft flash and warm faded film. Copy-paste free, face kept.",
     subject: "Person",
     intent: "New outfit or theme",
     mood: "Soft sunlit analog warmth with a slightly faded film look",
@@ -90,10 +90,10 @@ const eighties: EightiesSeed[] = [
   {
     n: "49",
     id: "80s-film-poster-lead",
-    title: "80s Film Poster Lead",
+    title: "80s Film Poster AI Photo Prompt for Boys (Solo Lead)",
     note: "Hand-painted South Asian poster, one lead",
     description:
-      "Recreate a portrait as the lead on a hand-painted 1980s South Asian film poster, with period styling and no title text.",
+      "80s AI photo prompt for boys: a hand-painted South Asian movie poster with you as the solo lead, keeping your face. Copy-paste into Gemini free.",
     subject: "Person",
     intent: "Full scene transformation",
     mood: "Rich saturated sunset colors with painted-poster warmth and slight print wear",
@@ -125,10 +125,10 @@ const eighties: EightiesSeed[] = [
   {
     n: "50",
     id: "1986-school-yearbook",
-    title: "1986 School Yearbook",
+    title: "1986 Yearbook AI Photo Prompt (Laser Backdrop)",
     note: "Laser backdrop yearbook headshot",
     description:
-      "Turn a portrait into a 1986 school yearbook photo with big hair, a period sweater or shirt, and a blue laser backdrop.",
+      "Yearbook photo AI prompt: a 1986 school headshot on a laser backdrop with retro hair and soft flash, from one selfie. Free for Gemini and ChatGPT.",
     subject: "Person",
     intent: "New outfit or theme",
     mood: "Soft nostalgic",
@@ -193,10 +193,10 @@ const eighties: EightiesSeed[] = [
   {
     n: "53",
     id: "80s-bedroom-cassette",
-    title: "80s Bedroom Cassette",
+    title: "80s Bedroom AI Photo Prompt for Girls (Cassette Flash)",
     note: "Flash snapshot on a teenager's bed",
     description:
-      "Recreate a photo as a casual 1980s bedroom snapshot on the bed, with posters, tapes, and direct flash.",
+      "80s AI photo prompt for girls: a flash snapshot on a teenager's bedroom floor with cassettes and posters, made from your selfie. Copy-paste free.",
     subject: "Person",
     intent: "Full scene transformation",
     mood: "Warm nostalgic",
@@ -225,10 +225,10 @@ const eighties: EightiesSeed[] = [
   {
     n: "54",
     id: "1985-studio-couple",
-    title: "1985 Studio Couple",
+    title: "1985 Studio Couple AI Photo Prompt for Gemini",
     note: "Mottled-backdrop couple studio portrait",
     description:
-      "Turn a couple photo into a 1985 studio portrait with feathered hair, period clothes, and warm faded film, keeping both faces separate.",
+      "Couple AI photo prompt for Gemini: a 1985 studio portrait on a mottled backdrop with soft flash and warm faded film. Free to copy, faces stay true.",
     subject: "Group",
     intent: "New outfit or theme",
     mood: "Soft sunlit analog warmth with a slightly faded film look",
@@ -265,10 +265,10 @@ const eighties: EightiesSeed[] = [
   {
     n: "55",
     id: "80s-film-poster-couple",
-    title: "80s Film Poster Couple",
+    title: "Retro Bollywood Poster Couple AI Photo Prompt (80s)",
     note: "Hand-painted poster of a lead pair",
     description:
-      "Recreate a couple as the lead pair on a hand-painted 1980s South Asian film poster, with no title text.",
+      "Couple AI photo prompt Indian film fans love: a hand-painted 80s movie poster of you both as the lead pair. Copy-paste into Gemini or ChatGPT free.",
     subject: "Group",
     intent: "Full scene transformation",
     mood: "Rich saturated sunset colors with painted-poster warmth and slight print wear",
@@ -334,10 +334,10 @@ const eighties: EightiesSeed[] = [
   {
     n: "57",
     id: "mall-laser-backdrop-couple",
-    title: "Mall Laser Backdrop Couple",
+    title: "80s Mall Studio Couple AI Prompt (Laser Backdrop)",
     note: "Cheek-to-cheek mall studio portrait",
     description:
-      "Turn a couple photo into a 1980s mall studio portrait with perms, pastels, and a purple-and-blue laser backdrop.",
+      "Couple AI photo prompt for an 80s mall studio: cheek-to-cheek portrait on a laser backdrop, keeping both faces real. Copy-paste free for Gemini.",
     subject: "Group",
     intent: "New outfit or theme",
     mood: "Soft nostalgic",
@@ -369,10 +369,10 @@ const eighties: EightiesSeed[] = [
   {
     n: "58",
     id: "combine-two-photos-80s-couple",
-    title: "Two Photos, One 80s Couple",
+    title: "80s Couple AI Photo Prompt: Combine Two Photos",
     note: "Two photos into one 1980s outdoor couple",
     description:
-      "Combine two photos into one 1980s outdoor couple photo at golden hour, keeping each face matched to its source.",
+      "Retro AI photo prompt for couples: combine two separate photos into one 1980s outdoor couple picture with faded film. Free for Gemini and ChatGPT.",
     subject: "Group",
     intent: "Full scene transformation",
     mood: "Warm nostalgic cinematic sunlight with soft vintage tones, gentle film grain, creamy highlights, and cozy shadow depth",
@@ -407,10 +407,10 @@ const eighties: EightiesSeed[] = [
   {
     n: "59",
     id: "80s-wedding-album",
-    title: "80s Wedding Album",
+    title: "80s Wedding Album AI Photo Prompt (Couple, Gemini)",
     note: "Formal flash portrait, yellowed print",
     description:
-      "Recreate a couple photo as a page from a 1980s wedding album, with formal outfits, a floral stage, and a slightly yellowed print.",
+      "80s AI photo prompt for couples: a formal flash wedding portrait on a yellowed album print, from your own photos. Copy-paste into Gemini or ChatGPT.",
     subject: "Group",
     intent: "Full scene transformation",
     mood: "Warm nostalgic",

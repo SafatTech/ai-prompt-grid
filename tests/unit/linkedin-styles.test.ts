@@ -113,7 +113,7 @@ describe("LinkedIn headshot style pages", () => {
       (item) => item.id === "passport-size-photo-ai-prompt-gemini-white-background",
     );
     assert.ok(passport);
-    assert.equal(passport.description, passportNote);
+    assert.match(passport.description, /Passport size photo AI prompt/i);
     assert.ok(passport.promptVariant.limitations.includes(passportNote));
 
     const cv = seedLinkedinStyles.find(

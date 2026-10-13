@@ -55,10 +55,10 @@ const diwali: DiwaliSeed[] = [
   {
     n: "36",
     id: "diya-lit-balcony",
-    title: "Diya-Lit Balcony",
+    title: "Diya Balcony Couple AI Photo Prompt for Gemini (Diwali)",
     note: "Elegant Diwali evening couple on a diya-lined balcony",
     description:
-      "Restyle a couple into an elegant Diwali balcony portrait with glowing clay diyas, warm string lights, and coordinated festive attire.",
+      "Gemini AI Diwali couple photo prompt: an elegant evening portrait on a diya-lined balcony, keeping both your faces. Copy-paste and create it free.",
     subject: "Group",
     intent: "New outfit or theme",
     mood: "Warm golden festive",
@@ -89,10 +89,10 @@ Do not add extra people, distorted hands, duplicated facial features, text, logo
   {
     n: "37",
     id: "finishing-the-rangoli-together",
-    title: "Finishing the Rangoli Together",
+    title: "Rangoli Couple Diwali AI Photo Editing Prompt (Candid)",
     note: "Candid couple finishing a rangoli at the doorway",
     description:
-      "Create a candid Diwali moment of a couple finishing a rangoli together in coordinated festive clothing at a welcoming home entrance.",
+      "Diwali couple AI photo editing prompt: a candid shot of you both finishing a rangoli at the doorway, made from your photos. Free for Gemini and ChatGPT.",
     subject: "Group",
     intent: "Full scene transformation",
     mood: "Warm candid festive",
@@ -123,10 +123,10 @@ Avoid an overly polished or artificial studio look. Do not add extra people, dup
   {
     n: "38",
     id: "first-diwali-as-a-married-couple",
-    title: "First Diwali as a Married Couple",
+    title: "First Diwali Married Couple AI Photo Prompt for Gemini",
     note: "Newlywed Diwali portrait with bridal-inspired festive styling",
     description:
-      "Transform a couple into an elegant first-Diwali-as-married portrait with sherwani-inspired and lehenga styling amid marigold torans and glowing diyas.",
+      "Diwali couple AI photo prompt for newlyweds: your first Diwali portrait with bridal-inspired festive styling, both faces kept real. Copy-paste free.",
     subject: "Group",
     intent: "New outfit or theme",
     mood: "Rich warm celebratory",
@@ -159,10 +159,10 @@ Do not add extra people, excessive jewellery, distorted hands, text, logos, or w
   {
     n: "39",
     id: "separate-photos-couple",
-    title: "Separate Photos Couple",
+    title: "Merge Two Photos Diwali Couple AI Prompt (Gemini Sparkler)",
     note: "Merge two people into one cohesive Diwali sparkler portrait",
     description:
-      "Combine separate person photos into one cohesive Diwali couple portrait with coordinated festive outfits and sparklers on a lamp-lit rooftop.",
+      "Diwali couple AI photo prompt that merges two separate photos into one sparkler portrait, so you can be together even when apart. Copy-paste for Gemini.",
     subject: "Group",
     intent: "Full scene transformation",
     mood: "Warm romantic festive",
@@ -193,10 +193,10 @@ Do not create mismatched lighting, floating limbs, duplicated hands, extra peopl
   {
     n: "40",
     id: "fairy-light-portrait",
-    title: "Fairy-Light Portrait",
+    title: "Fairy Light Diwali AI Photo Prompt for Girls (Gemini)",
     note: "Graceful Diwali night portrait with soft fairy-light glow",
     description:
-      "Restyle a portrait into a graceful Diwali night look with a pastel pink anarkali, elegant jhumkas, and soft golden fairy-light bokeh.",
+      "Diwali AI photo prompt for girls: a graceful night portrait in soft fairy-light glow, turning one selfie into a festive picture. Free to copy-paste.",
     subject: "Person",
     intent: "New outfit or theme",
     mood: "Soft warm festive",
@@ -227,10 +227,10 @@ Do not add extra people, distorted hands, duplicated features, text, logos, or w
   {
     n: "41",
     id: "golden-hour-sparkler-shot",
-    title: "Golden-Hour Sparkler Shot",
+    title: "Sparkler Diwali AI Photo Editing Prompt for Girls",
     note: "Festive dusk portrait holding a lit sparkler",
     description:
-      "Create a festive Diwali dusk portrait in an emerald silk lehenga with a lit sparkler among glowing diyas and marigold garlands.",
+      "Diwali AI photo editing prompt for girls: a festive golden-hour portrait in an emerald lehenga holding a lit sparkler, keeping your real face. Copy-paste into Gemini free.",
     subject: "Person",
     intent: "New outfit or theme",
     mood: "Warm golden festive",
@@ -261,10 +261,10 @@ Do not add extra people, text, logos, or watermarks. Avoid distorted hands, malf
   {
     n: "42",
     id: "kurta-and-nehru-jacket-with-lanterns",
-    title: "Kurta and Nehru Jacket with Lanterns",
+    title: "Kurta & Nehru Jacket Diwali AI Photo Prompt for Boys",
     note: "Stylish rooftop Diwali portrait with paper lanterns",
     description:
-      "Restyle a portrait into a stylish Diwali rooftop look with a navy kurta, mustard Nehru jacket, paper lanterns, and distant fireworks.",
+      "Diwali AI photo prompt for boys: a stylish rooftop portrait in kurta and Nehru jacket under paper lanterns, made from your selfie. Copy-paste, free.",
     subject: "Person",
     intent: "New outfit or theme",
     mood: "Warm evening festive",
@@ -295,10 +295,10 @@ Do not add extra people, text, logos, or watermarks. Avoid awkward cropping, dis
   {
     n: "43",
     id: "candid-phuljhadi-moment",
-    title: "Candid Phuljhadi Moment",
+    title: "Phuljhadi Diwali AI Photo Prompt (Candid Street Laugh)",
     note: "Spontaneous street-night sparkler laugh",
     description:
-      "Create a candid Diwali street-night portrait in a white chikankari kurta with a laughing phuljhadi moment and lively festive atmosphere.",
+      "Diwali AI photo prompt free to copy: a spontaneous phuljhadi sparkler laugh on a festive street at night, made from your selfie in Gemini or ChatGPT.",
     subject: "Person",
     intent: "Full scene transformation",
     mood: "Warm candid festive",
@@ -329,10 +329,10 @@ Do not add extra people, text, logos, or watermarks. Avoid distorted hands, brok
   {
     n: "44",
     id: "family-lakshmi-puja-photo",
-    title: "Family Lakshmi Puja Photo",
+    title: "Family Puja Diwali AI Photo Prompt for Gemini (Doorway)",
     note: "Warm family portrait at a decorated Lakshmi Puja entrance",
     description:
-      "Restyle a family into a warm Lakshmi Puja Diwali portrait with coordinated festive outfits, marigold torans, rangoli, and glowing diyas.",
+      "Diwali AI image prompt for the whole family: a warm portrait at a decorated puja entrance with diyas and rangoli, faces kept accurate. Free in Gemini.",
     subject: "Group",
     intent: "New outfit or theme",
     mood: "Warm joyful festive",
@@ -369,10 +369,10 @@ Do not add extra people, text, logos, or watermarks. Avoid distorted hands, dupl
   {
     n: "45",
     id: "babys-first-diwali",
-    title: "Baby's First Diwali",
+    title: "Baby's First Diwali AI Photo Prompt (Baby Boy & Girl)",
     note: "Soft baby's-first-Diwali portrait with safe festive styling",
     description:
-      "Create a soft baby's-first-Diwali portrait with a tiny festive outfit, marigold petals, soft cushions, and distant diyas kept safely away.",
+      "Diwali AI photo editing prompt for a baby boy or girl: a soft first-Diwali portrait with safe, gentle festive styling from one photo. Free to copy.",
     subject: "Person",
     intent: "New outfit or theme",
     mood: "Soft warm dreamy",
@@ -403,10 +403,10 @@ Do not place open flames, sparklers, or unsafe objects within the baby's reach. 
   {
     n: "46",
     id: "family-diwali-in-karachi-or-sindh",
-    title: "Family Diwali in Karachi or Sindh",
+    title: "Karachi Family Diwali AI Photo Prompt for Gemini",
     note: "Joyful family portrait in a historic Karachi or Sindh courtyard",
     description:
-      "Restyle a family into a joyful Diwali portrait in a historic stone courtyard with diyas, rangoli, mithai, and culturally appropriate festive outfits.",
+      "Diwali AI photo editing prompt for families: a joyful group portrait in a historic Karachi or Sindh courtyard, with every face kept true. Copy-paste.",
     subject: "Group",
     intent: "Full scene transformation",
     mood: "Warm joyful festive",
@@ -442,10 +442,10 @@ Do not add extra people, alter ages, merge faces, distort hands, or create unsaf
   {
     n: "47",
     id: "diaspora-diwali-in-a-cold-city",
-    title: "Diaspora Diwali in a Cold City",
+    title: "Diwali Abroad AI Photo Prompt for Gemini (Winter Coats)",
     note: "Cozy Diwali abroad with festive wear under wool coats",
     description:
-      "Create a cozy diaspora Diwali-night portrait with festive kurtas and a saree layered under warm coats on a cold-city street of terraced houses.",
+      "Diwali AI photo prompt for celebrating abroad: festive wear under wool coats on a cold city street, built from your own photo. Free for Gemini.",
     subject: "Group",
     intent: "New outfit or theme",
     mood: "Cozy warm winter festive",

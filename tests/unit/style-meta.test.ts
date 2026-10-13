@@ -69,4 +69,16 @@ describe("document title word boundary", () => {
     assert.equal(metadata.absolute, "Word ".repeat(12).trimEnd());
     assert.equal(metadata.absolute.split(" ").length, 12);
   });
+
+  it("does not append Prompt again when the catalog title already includes it", () => {
+    const title = "Pumpkin Patch Halloween AI Photo Prompt for Gemini (Girls)";
+    const metadata = styleMetadataTitle({
+      id: "cozy-pumpkin-patch-portrait",
+      title,
+    });
+    assert.equal(typeof metadata, "object");
+    if (typeof metadata === "string") return;
+    assert.equal(metadata.absolute, title);
+    assert.equal(metadata.absolute.includes("Prompt Prompt"), false);
+  });
 });

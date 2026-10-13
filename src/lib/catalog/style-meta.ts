@@ -46,14 +46,19 @@ function fitDocumentTitle(look: string): string | { absolute: string } {
 }
 
 /**
- * Style document titles. 1980s pages use "[Look] AI Photo Prompt".
- * LinkedIn, merge, and winter pages already use a full prompt title, so nothing extra is added.
- * Other styles keep the existing "[Look] Prompt" title. All stay within 60 characters.
+ * Style document titles. When the catalog title is already a full SEO prompt
+ * title (contains "Prompt"), use it as-is via fitDocumentTitle so the root
+ * ` · AI Prompt Grid` template does not double-append past 60 characters.
+ * Legacy short 1980s looks still get " AI Photo Prompt"; other short looks get
+ * " Prompt". LinkedIn, merge, and winter titles stay unchanged.
  */
 export function styleMetadataTitle(style: {
   id: string;
   title: string;
 }): string | { absolute: string } {
+  if (/\bPrompt\b/i.test(style.title)) {
+    return fitDocumentTitle(style.title);
+  }
   if (eightiesStyleIds.has(style.id)) {
     return fitDocumentTitle(`${style.title} AI Photo Prompt`);
   }
@@ -64,7 +69,7 @@ export function styleMetadataTitle(style: {
   ) {
     return fitDocumentTitle(style.title);
   }
-  return `${style.title} Prompt`;
+  return fitDocumentTitle(`${style.title} Prompt`);
 }
 
 /** Open Graph / Twitter title, including the brand suffix when it fits. */

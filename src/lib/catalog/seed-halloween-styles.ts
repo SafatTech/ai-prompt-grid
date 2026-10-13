@@ -52,10 +52,10 @@ const halloween: HalloweenSeed[] = [
   {
     n: "31",
     id: "cozy-pumpkin-patch-portrait",
-    title: "Cozy Pumpkin Patch Portrait",
+    title: "Pumpkin Patch Halloween AI Photo Prompt for Gemini (Girls)",
     note: "Warm autumn portrait among pumpkins",
     description:
-      "Turn a portrait into a cozy autumn pumpkin-patch scene with a chunky cream knit sweater, golden-hour light, and a warm Halloween feel.",
+      "Halloween AI photo prompt for a cozy pumpkin patch portrait: turn one selfie into a warm autumn shot among pumpkins while keeping your real face.",
     intent: "New outfit or theme",
     mood: "Warm golden",
     background: "Pumpkin patch",
@@ -73,10 +73,10 @@ Apply {{mood}} color grading with warm low sunlight coming from behind the subje
   {
     n: "32",
     id: "recognizable-zombie-portrait",
-    title: "Recognizable Zombie Portrait",
+    title: "Zombie Halloween AI Prompt for Selfies (Keeps Your Face)",
     note: "Spooky zombie styling that keeps your face",
     description:
-      "Restyle a portrait into a spooky but recognizable zombie look with pale skin, torn clothing, and a foggy abandoned street at night.",
+      "Halloween AI prompt for selfies: spooky zombie styling with grey skin and torn clothes that still keeps your face recognisable. Free for Gemini.",
     intent: "Artistic restyle",
     mood: "Eerie cool",
     background: "Abandoned street at night",
@@ -94,10 +94,10 @@ Build the setting from {{background}}, interpreted as a foggy abandoned street a
   {
     n: "33",
     id: "friendly-glowing-witch-portrait",
-    title: "Friendly Glowing Witch Portrait",
+    title: "Witch AI Photo Prompt for Gemini: Glowing Hand Halloween",
     note: "Charming witch with a magical glowing hand",
     description:
-      "Transform a portrait into a friendly Halloween witch with a tall black hat, dark green velvet dress, and a soft magical glow from one hand.",
+      "Witch AI photo prompt for Gemini: become a charming Halloween witch with a magical glowing hand. Copy-paste, free, and your face stays recognisable.",
     intent: "New outfit or theme",
     mood: "Warm magical",
     background: "Cozy cottage kitchen",
@@ -115,10 +115,10 @@ Build the environment from {{background}}, interpreted as a cozy cottage kitchen
   {
     n: "34",
     id: "elegant-gothic-vampire-portrait",
-    title: "Elegant Gothic Vampire Portrait",
+    title: "Gothic Vampire Halloween AI Photo Prompt (Gemini & ChatGPT)",
     note: "Refined vampire look in a candlelit library",
     description:
-      "Restyle a portrait into an elegant gothic vampire with a black velvet high-collar coat, subtle pale complexion, and a candlelit library setting.",
+      "AI vampire photo prompt for Halloween: a refined gothic look in a candlelit library, made from your own selfie in Gemini or ChatGPT. Free to copy.",
     intent: "New outfit or theme",
     mood: "Moody gothic",
     background: "Candlelit gothic library",
@@ -142,10 +142,10 @@ Apply a polished vampire treatment with a softly pale complexion, subtle dark un
   {
     n: "35",
     id: "skeleton-face-paint-portrait",
-    title: "Skeleton Face Paint Portrait",
+    title: "Skeleton Face Paint Halloween AI Prompt for Men & Women",
     note: "Realistic skeleton makeup on your face",
     description:
-      "Add detailed skeleton face paint to a portrait while keeping identity, pose, and clothing intact against a plain dark studio background.",
+      "Halloween AI prompts for men and women: realistic skeleton face paint added to your own photo, no makeup kit needed. Copy-paste for Gemini, free.",
     intent: "Artistic restyle",
     mood: "Soft dramatic",
     background: "Plain dark background",

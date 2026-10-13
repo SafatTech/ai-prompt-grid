@@ -45,11 +45,11 @@ const pets: PetSeed[] = [
   {
     n: "01",
     id: "cute-3d-toon-pet",
-    title: "Cute 3D Toon Pet",
+    title: "3D Pet AI Photo Prompt for Gemini (Cute Toon Character)",
     category: "3D avatars",
     note: "Polished expressive 3D animated pet character",
     description:
-      "Transform the pet into a polished, expressive 3D animated character with soft detailed fur and cinematic family-animation lighting while retaining recognizable identity.",
+      "3D AI photo prompt for pets: turn your pet into an expressive, polished 3D animated character with its real markings. Free to copy-paste.",
     intent: "Artistic restyle",
     mood: "Warm cheerful",
     background: "Cozy softly lit home interior",
@@ -70,11 +70,11 @@ Compose the final image for {{ratio}}, keeping the pet comfortably framed and en
   {
     n: "02",
     id: "hand-painted-watercolor-pet",
-    title: "Hand-Painted Watercolor Pet",
+    title: "Watercolor Pet Portrait AI Prompt for Gemini",
     category: "Painting",
     note: "Soft watercolor pet portrait on paper",
     description:
-      "Transform the pet into a soft handcrafted watercolor portrait with translucent brushwork, textured paper, and a light botanical backdrop.",
+      "Pet portrait AI prompt for watercolor: a soft hand-painted portrait of your dog or cat on textured paper, true to its face. Free to copy-paste.",
     intent: "Artistic restyle",
     mood: "Soft warm natural",
     background:
@@ -96,11 +96,11 @@ Compose the final artwork for {{ratio}}, keeping the pet’s face, ears, body, p
   {
     n: "03",
     id: "cozy-plushie-pet",
-    title: "Cozy Plushie Pet",
+    title: "Plush Toy Pet AI Photo Prompt (Gemini & ChatGPT)",
     category: "3D avatars",
     note: "Handcrafted plush-toy pet makeover",
     description:
-      "Reimagine the pet as an adorable handcrafted plush toy with soft fuzzy fabric, rounded proportions, and a warm cozy-room setting.",
+      "Pet AI photo prompt for a plushie makeover: your pet reimagined as a handcrafted plush toy with stitched details. Copy-paste free for Gemini.",
     intent: "Artistic restyle",
     mood: "Warm cozy pastel",
     background:
@@ -122,11 +122,11 @@ Compose the final image for {{ratio}}, keeping the plush pet comfortably framed 
   {
     n: "04",
     id: "cartoon-animation-pet",
-    title: "Cartoon & Animation Pet",
+    title: "Cartoon Pet AI Photo Prompt for Gemini (Animated Film)",
     category: "Anime",
     note: "Polished animated-film pet character",
     description:
-      "Transform the pet into a polished animated character with expressive features, clean stylized shapes, and cinematic color.",
+      "Cartoon AI photo prompt for pets: make your dog or cat an animated-film character with big expressive eyes, keeping its markings. Copy-paste free.",
     intent: "Artistic restyle",
     mood: "Bright cheerful cinematic",
     background:
@@ -148,11 +148,11 @@ Compose the final image for {{ratio}}, keeping important features such as the fa
   {
     n: "05",
     id: "anime-companion",
-    title: "Anime Companion",
+    title: "Anime Pet AI Photo Prompt (Gemini Copy-Paste)",
     category: "Anime",
     note: "Polished anime companion pet portrait",
     description:
-      "Transform the pet into a polished anime companion with expressive features, clean cel shading, and a whimsical storybook environment.",
+      "Gemini AI anime photo prompt copy paste: transform your dog or cat into a polished anime companion portrait. Free for Gemini and ChatGPT.",
     intent: "Artistic restyle",
     mood: "Warm adventurous",
     background:
@@ -174,11 +174,11 @@ Compose the final image for {{ratio}}, keeping the face, ears, paws, wings, mane
   {
     n: "06",
     id: "mini-collectible-figure",
-    title: "Mini Collectible Figure",
+    title: "3D Collectible Figure AI Photo Prompt (Free, Copy-Paste)",
     category: "Product and objects",
     note: "Premium collectible figurine presentation",
     description:
-      "Turn the pet into a premium collectible figurine with molded details, miniature proportions, and product-style presentation.",
+      "3D AI photo prompt free to copy: turn your photo into a premium collectible figurine on a display stand with packaging. Works in Gemini and ChatGPT.",
     intent: "Artistic restyle",
     mood: "Warm premium display",
     background:
@@ -200,11 +200,11 @@ Compose the final image for {{ratio}}, ensuring the figure, base, and important 
   {
     n: "07",
     id: "storybook-adventure-pet",
-    title: "Storybook Adventure Pet",
+    title: "Storybook Dog Portrait AI Prompt (Illustrated Adventure)",
     category: "Fantasy",
     note: "Whimsical illustrated adventure companion",
     description:
-      "Place the recognizable pet into a whimsical illustrated adventure scene as a charming explorer or fantasy companion.",
+      "Dog portrait AI prompt for a whimsical storybook: your pet as an illustrated adventure companion, true to its markings. Free for Gemini and ChatGPT.",
     intent: "Full scene transformation",
     mood: "Warm magical adventurous",
     background:
@@ -226,11 +226,11 @@ Compose the final image for {{ratio}}, keeping the pet’s face, body, and any k
   {
     n: "08",
     id: "funny-everyday-pet",
-    title: "Funny Everyday Pet",
+    title: "Funny Dog AI Photo Prompt for Gemini (Everyday Life)",
     category: "Pets",
     note: "Humorous everyday lifestyle pet portrait",
     description:
-      "Place the recognizable pet into a humorous everyday lifestyle scenario while keeping the animal clearly recognizable and charming.",
+      "Dog AI photo prompt for funny portraits: your pet in a humorous everyday lifestyle scene, keeping its real look. Free copy-paste for Gemini.",
     intent: "Full scene transformation",
     mood: "Warm cozy humorous",
     background:
@@ -252,11 +252,11 @@ Compose the final image for {{ratio}}, keeping the pet’s face, body, and impor
   {
     n: "09",
     id: "dreamy-memorial-portrait",
-    title: "Dreamy Memorial Portrait",
+    title: "Pet Memorial AI Photo Prompt (Gentle Remembrance)",
     category: "Pets",
     note: "Soft emotional remembrance pet portrait",
     description:
-      "Create a soft, emotional remembrance portrait with peaceful scenery, delicate flowers, and warm natural light while preserving the pet’s likeness.",
+      "AI pet picture prompt for remembrance: a soft, emotional memorial portrait of a beloved pet from one old photo. Copy-paste for Gemini or ChatGPT.",
     intent: "Artistic restyle",
     mood: "Soft warm peaceful",
     background:

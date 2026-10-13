@@ -60,10 +60,10 @@ const linkedin: LinkedinSeed[] = [
   {
     n: "60",
     id: "navy-blazer-linkedin-profile-picture-prompt-gemini",
-    title: "Navy Blazer LinkedIn Photo Prompt for Gemini (Men & Women)",
+    title: "Navy Blazer LinkedIn Profile Picture Prompt (Gemini Free)",
     note: "Navy blazer, white shirt, light-grey studio",
     description:
-      "Turn a casual selfie into a classic LinkedIn profile picture with a navy blazer, white shirt, and a soft light-grey studio backdrop, keeping your face unchanged.",
+      "LinkedIn profile picture prompt Gemini free: navy blazer, white shirt and light-grey studio for men and women, made from one selfie. Copy-paste.",
     intent: "New outfit or theme",
     mood: "Bright neutral",
     background: "Soft evenly lit light-grey studio backdrop",
@@ -92,7 +92,7 @@ const linkedin: LinkedinSeed[] = [
     title: "Charcoal Suit LinkedIn Photo Prompt for Gemini (Men)",
     note: "Coat pant, light blue shirt, dark tie",
     description:
-      "Turn a portrait into a corporate headshot for men in a charcoal two-piece suit (coat pant), light blue shirt, and dark tie, with soft front-left studio light.",
+      "Gemini AI LinkedIn profile picture prompt for men: charcoal coat pant, light blue shirt and dark tie on a corporate backdrop. Copy-paste free.",
     intent: "New outfit or theme",
     mood: "Bright neutral",
     background: "Soft out-of-focus neutral grey studio backdrop",
@@ -119,10 +119,10 @@ const linkedin: LinkedinSeed[] = [
   {
     n: "62",
     id: "black-blazer-linkedin-profile-picture-prompt-gemini-women",
-    title: "Black Blazer LinkedIn Photo Prompt for Gemini (Women)",
+    title: "Black Blazer Google Gemini LinkedIn Photo Prompt (Women)",
     note: "Black blazer, cream high-neck top, beige studio",
     description:
-      "Turn a portrait into a polished LinkedIn profile picture for women with a tailored black blazer, cream high-neck top, light natural makeup, and a soft beige backdrop.",
+      "Google Gemini LinkedIn profile picture prompt: black blazer, cream high-neck top and beige studio for a crisp women's headshot. Free to copy.",
     intent: "New outfit or theme",
     mood: "Warm neutral",
     background: "Soft beige studio backdrop",
@@ -150,7 +150,7 @@ const linkedin: LinkedinSeed[] = [
     title: "Hijab Office LinkedIn Photo Prompt for Gemini (Women)",
     note: "Dusty-rose hijab, navy blazer, grey studio",
     description:
-      "Turn a hijab portrait into a professional LinkedIn headshot with a neatly wrapped dusty-rose hijab, navy blazer, and a soft grey studio backdrop.",
+      "LinkedIn profile picture prompt for female professionals in hijab: dusty-rose hijab, navy blazer and grey studio. Copy-paste free in Gemini.",
     intent: "New outfit or theme",
     mood: "Bright neutral",
     background: "Plain soft grey studio backdrop",
@@ -176,10 +176,10 @@ const linkedin: LinkedinSeed[] = [
   {
     n: "64",
     id: "dupatta-office-linkedin-profile-picture-prompt-gemini-women",
-    title: "Dupatta Office LinkedIn Photo Prompt for Gemini (Women)",
+    title: "Dupatta & Kurta LinkedIn Headshot Prompt for Women",
     note: "Off-white kurta, beige blazer, draped dupatta",
     description:
-      "Turn a portrait into an office headshot for women with an off-white kurta, fitted beige blazer, and a neatly draped solid dupatta on a light-grey backdrop.",
+      "Professional headshot AI prompt for women in kurta: off-white kurta, beige blazer and draped dupatta, office-ready. Free to copy for Gemini.",
     intent: "New outfit or theme",
     mood: "Fresh clean daylight",
     background: "Plain light-grey studio backdrop",
@@ -209,7 +209,7 @@ const linkedin: LinkedinSeed[] = [
     title: "Shalwar Kameez LinkedIn Photo Prompt for Gemini (Men)",
     note: "White kameez, navy waistcoat, grey studio",
     description:
-      "Turn a portrait into a formal LinkedIn headshot for men in a crisp white shalwar kameez and navy waistcoat, with soft even light on a light-grey backdrop.",
+      "LinkedIn profile picture prompt for men in shalwar kameez: white kameez, navy waistcoat and grey studio from your selfie. Copy-paste free.",
     intent: "New outfit or theme",
     mood: "Bright neutral",
     background: "Plain light-grey studio backdrop",
@@ -239,7 +239,7 @@ const linkedin: LinkedinSeed[] = [
     title: "CV Photo AI Prompt: Plain Background Resume Headshot",
     note: "Plain cream wall, own clothes, slight smile",
     description:
-      "Gives a clean, plain-background CV or resume photo, keeping their own clothes.",
+      "Professional headshot AI prompt ChatGPT and Gemini can run for a CV: plain cream wall, your own clothes, slight smile. Copy-paste free.",
     intent: "Change background",
     mood: "Bright neutral",
     background: "Minimal cream wall",
@@ -264,10 +264,10 @@ const linkedin: LinkedinSeed[] = [
   {
     n: "67",
     id: "modern-office-linkedin-profile-picture-prompt-gemini",
-    title: "Modern Office LinkedIn Photo Prompt for Gemini",
+    title: "Glass Office Window LinkedIn Profile Pic Prompt (Gemini)",
     note: "Blurred glass office, window light",
     description:
-      "Place a portrait in a bright modern office with glass walls and plants softly blurred behind, keeping their own clothes, with natural window light.",
+      "Gemini LinkedIn profile pic prompt: a blurred glass office with window light behind you, sharp and corporate. Free to copy, your face kept real.",
     intent: "Full scene transformation",
     mood: "Fresh clean daylight",
     background: "Softly blurred bright modern office with glass walls and plants",
@@ -293,10 +293,10 @@ const linkedin: LinkedinSeed[] = [
   {
     n: "68",
     id: "outdoor-natural-light-linkedin-profile-picture-prompt-gemini",
-    title: "Outdoor Natural Light LinkedIn Photo Prompt for Gemini",
+    title: "Outdoor Natural Light LinkedIn Headshot Prompt (Gemini)",
     note: "Blurred trees, late-afternoon light, warm smile",
     description:
-      "Turn a portrait into an approachable outdoor headshot for freelancers, teachers, and creatives, keeping their own clothes, with blurred green trees and late-afternoon light.",
+      "Professional headshot AI prompt free for outdoor light: blurred trees, late-afternoon glow and a warm smile from your selfie. Copy-paste in Gemini.",
     intent: "Full scene transformation",
     mood: "Soft warm natural",
     background: "Softly blurred green trees in late-afternoon light",
@@ -325,7 +325,7 @@ const linkedin: LinkedinSeed[] = [
     title: "LinkedIn Photo Clean-Up AI Prompt for Gemini (Keep Outfit)",
     note: "Minimal edit: plain grey, tidy, even light",
     description:
-      "Keep your own photo and outfit, and only swap in a plain soft grey backdrop, even out the light, and tidy stray hairs and lint.",
+      "Linkedin profile picture prompt for ChatGPT or Gemini that only cleans up: plain grey backdrop, tidy hair, even light, your own outfit kept. Free.",
     intent: "Change background",
     mood: "Warm natural neutral",
     background: "Plain soft grey studio backdrop",
@@ -354,7 +354,7 @@ const linkedin: LinkedinSeed[] = [
     title: "Matching Team Headshot AI Prompt for Gemini (Company Page)",
     note: "Consistent grey studio look for team pages",
     description:
-      "Make consistent company team-page headshots: same light-grey backdrop, even front light, and eye-line framing, keeping each person's own outfit.",
+      "Team photo AI prompt for company pages: give every staff headshot the same grey studio look so the page matches. Copy-paste free for Gemini.",
     intent: "Change background",
     mood: "Bright neutral",
     background: "Soft evenly lit light-grey studio backdrop",
@@ -391,7 +391,8 @@ const linkedin: LinkedinSeed[] = [
     id: "passport-size-photo-ai-prompt-gemini-white-background",
     title: "Passport Size Photo AI Prompt for Gemini (White Background)",
     note: "Plain white, front-facing, for CVs and forms",
-    description: passportLimit,
+    description:
+      "Passport size photo AI prompt: a plain white, front-facing photo for CVs and forms from one selfie. Copy-paste free in Gemini, check rules first.",
     intent: "Change background",
     mood: "Bright neutral",
     background: "Pure white seamless infinity studio background",
@@ -418,10 +419,10 @@ const linkedin: LinkedinSeed[] = [
   {
     n: "73",
     id: "executive-corporate-linkedin-profile-picture-prompt-gemini",
-    title: "Executive Dark Studio LinkedIn Photo Prompt for Gemini",
+    title: "Executive Dark Studio Headshot AI Prompt (Gemini)",
     note: "Low-key charcoal backdrop, soft side light",
     description:
-      "Turn a portrait into a confident executive headshot with a dark charcoal studio backdrop, dark formal outfit, and soft low-key side light.",
+      "Professional headshot AI prompt for executives: low-key charcoal backdrop and soft side light from your selfie. Free to copy for Gemini.",
     intent: "New outfit or theme",
     mood: "Dark cool neutral",
     background: "Dark charcoal studio backdrop with a soft gradient",
@@ -450,7 +451,7 @@ const linkedin: LinkedinSeed[] = [
     title: "Home Office LinkedIn Photo Prompt for Gemini (Remote Work)",
     note: "Blurred home-office desk, warm lamp light",
     description:
-      "Place a portrait in a softly blurred home office for remote-work profiles, freelancer pages, and video-call avatars, keeping their own clothes.",
+      "Home office LinkedIn photo prompt: a blurred desk and warm lamp light behind you, ideal for remote workers. Copy-paste free in Gemini, face kept.",
     intent: "Full scene transformation",
     mood: "Soft warm natural",
     background:
