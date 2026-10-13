@@ -18,6 +18,7 @@ import {
 import { promptOptionsSchema } from "../../src/lib/catalog/schemas";
 import { eightiesStyleIds } from "../../src/lib/catalog/seed-80s-styles";
 import { linkedinStyleIds } from "../../src/lib/catalog/seed-linkedin-styles";
+import { winterStyleIds } from "../../src/lib/catalog/seed-winter-styles";
 import { getPublishedStyles, getStyleById } from "../../src/lib/catalog/styles";
 import { cn } from "../../src/lib/utils";
 
@@ -28,15 +29,17 @@ describe("cn", () => {
 });
 
 describe("published catalog seed", () => {
-  it("exposes 123 published styles with recipe fields", () => {
+  it("exposes 135 published styles with recipe fields", () => {
     const published = getPublishedStyles();
-    assert.equal(published.length, 123);
+    assert.equal(published.length, 135);
     for (const style of published) {
       assert.equal(style.status, "published");
       assert.ok(style.promptVariant.template.includes("{{mood}}"));
       assert.ok(style.promptVariant.mode.length > 0);
       const singlePair =
-        eightiesStyleIds.has(style.id) || linkedinStyleIds.has(style.id);
+        eightiesStyleIds.has(style.id) ||
+        linkedinStyleIds.has(style.id) ||
+        (winterStyleIds.has(style.id) && style.promptVariant.inputImageCount === 1);
       assert.ok(style.examplePairs.length >= (singlePair ? 1 : 2));
       assert.ok(style.promptVariant.limitations.length >= 1);
     }
