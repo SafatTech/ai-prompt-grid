@@ -118,12 +118,12 @@ describe("winter AI photo style pages", () => {
     assert.equal(style.examplePairs[0]?.resultHeight, 1672);
   });
 
-  it("keeps Hunza-Style in the friends/siblings merge title", () => {
+  it("keeps Hunza Valley in the friends/siblings merge title", () => {
     const style = seedWinterStyles.find(
       (item) => item.id === "hunza-style-valley-merge-two-photos-winter-prompt",
     );
     assert.ok(style);
-    assert.match(style.title, /Hunza-Style/);
+    assert.match(style.title, /Hunza Valley/);
     const result = assemblePrompt(style, defaultsForStyle(style));
     assert.equal(result.ok, true);
     if (!result.ok) return;
