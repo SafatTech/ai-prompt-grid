@@ -16,6 +16,7 @@ import {
   labeledOptionsForStyle,
 } from "../../src/lib/catalog/prompt-option-presets";
 import { promptOptionsSchema } from "../../src/lib/catalog/schemas";
+import { animeStyleIds } from "../../src/lib/catalog/seed-anime-styles";
 import { eightiesStyleIds } from "../../src/lib/catalog/seed-80s-styles";
 import { linkedinStyleIds } from "../../src/lib/catalog/seed-linkedin-styles";
 import { winterStyleIds } from "../../src/lib/catalog/seed-winter-styles";
@@ -29,9 +30,9 @@ describe("cn", () => {
 });
 
 describe("published catalog seed", () => {
-  it("exposes 135 published styles with recipe fields", () => {
+  it("exposes 147 published styles with recipe fields", () => {
     const published = getPublishedStyles();
-    assert.equal(published.length, 135);
+    assert.equal(published.length, 147);
     for (const style of published) {
       assert.equal(style.status, "published");
       assert.ok(style.promptVariant.template.includes("{{mood}}"));
@@ -39,7 +40,10 @@ describe("published catalog seed", () => {
       const singlePair =
         eightiesStyleIds.has(style.id) ||
         linkedinStyleIds.has(style.id) ||
-        (winterStyleIds.has(style.id) && style.promptVariant.inputImageCount === 1);
+        (winterStyleIds.has(style.id) &&
+          style.promptVariant.inputImageCount === 1) ||
+        (animeStyleIds.has(style.id) &&
+          style.promptVariant.inputImageCount === 1);
       assert.ok(style.examplePairs.length >= (singlePair ? 1 : 2));
       assert.ok(style.promptVariant.limitations.length >= 1);
     }

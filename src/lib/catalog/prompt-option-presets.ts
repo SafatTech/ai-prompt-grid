@@ -115,6 +115,8 @@ export const moodLabels: Record<string, string> = {
   "Soft winter pastel with rose-pink accents, creamy whites, and natural warm skin tones":
     "Soft winter pastel",
   "Warm cozy winter glow with soft amber highlights and cool snowy shadows": "Cozy winter glow",
+  "Warm festive cel-shaded glow with saffron, magenta, and gold accents and soft evening highlights":
+    "Festive cel glow",
 };
 
 /** Short 2–3 word UI labels for full background prompt strings. */
@@ -322,6 +324,24 @@ export const backgroundLabels: Record<string, string> = {
     "Snowy pine path",
   "Snowy northern mountain valley with a frozen river, small stone houses, bare poplar trees, and towering white peaks":
     "Frozen river valley",
+  "Plain soft pastel backdrop with tiny sparkles and hearts around a white die-cut sticker border":
+    "Pastel sticker sheet",
+  "Sunlit anime college campus with brick buildings, blossom trees, a wide path, and pink petals drifting in the air":
+    "Anime college campus",
+  "Anime courtyard at dusk with carved arches, hanging marigold garlands, and glowing lanterns":
+    "Anime courtyard dusk",
+  "Dramatic anime rooftop at sunset with swirling clouds, glowing energy sparks, and a distant city skyline":
+    "Energy rooftop",
+  "Rainy anime city street at night with glowing signs without readable text, wet pavement reflections, and falling rain":
+    "Rainy neon street",
+  "Sunlit anime cricket ground with a green outfield, white boundary rope, and a softly blurred empty stand":
+    "Anime cricket ground",
+  "Quiet anime neighborhood street at golden hour with power lines, small houses, and a glowing sunset sky":
+    "Neighborhood sunset",
+  "Anime city rooftop at sunset with a low railing, warm string lights, and an orange sky over distant buildings":
+    "Friends rooftop",
+  "Anime park path lined with pink cherry blossom trees, falling petals, and a soft blue sky":
+    "Blossom park path",
 };
 
 const genericMoodPresets = [
