@@ -2,14 +2,20 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
   EXPLORE_PAGE_SIZE,
+  exploreCanonicalHref,
+  exploreListingDescription,
+  exploreListingHeading,
+  exploreListingTitle,
   explorePageCount,
   explorePageHref,
   explorePageSlice,
+  exploreQueryHasFacets,
   isExplicitFirstExplorePage,
   parseExplorePage,
 } from "../../src/lib/catalog/explore-pages";
 import { relatedStylesFor } from "../../src/lib/catalog/related-styles";
 import { getPublishedStyles } from "../../src/lib/catalog/styles";
+import { isRetiredStyleSlug } from "../../src/lib/http/retired-style-redirects";
 import {
   dedupedStylePaths,
   explorePaginationPaths,
@@ -40,6 +46,31 @@ describe("explore pagination", () => {
     );
   });
 
+  it("uses Page N copy and noindex-friendly canonicals for faceted URLs", () => {
+    assert.equal(exploreListingTitle(1), "Explore styles");
+    assert.equal(exploreListingTitle(2), "Explore styles, Page 2");
+    assert.match(exploreListingDescription(3), /Page 3\./);
+    assert.equal(exploreListingHeading(1), "Find a style for your photo");
+    assert.equal(
+      exploreListingHeading(4),
+      "Find a style for your photo, Page 4",
+    );
+    assert.equal(exploreQueryHasFacets(emptyQuery), false);
+    assert.equal(
+      exploreQueryHasFacets({ ...emptyQuery, category: ["Cinematic"] }),
+      true,
+    );
+    assert.equal(exploreCanonicalHref(emptyQuery, 2), "/explore?page=2");
+    assert.equal(
+      exploreCanonicalHref({ ...emptyQuery, category: ["Cinematic"] }, 1),
+      "/explore",
+    );
+    assert.equal(
+      exploreCanonicalHref({ ...emptyQuery, category: ["Cinematic"] }, 2),
+      "/explore",
+    );
+  });
+
   it("covers every published style across server pages and the sitemap", () => {
     const styles = getPublishedStyles();
     assert.equal(styles.length, 135);
@@ -59,6 +90,9 @@ describe("explore pagination", () => {
     const stylePaths = dedupedStylePaths(styles.map((style) => style.id));
     assert.equal(stylePaths.length, 135);
     assert.ok(stylePaths.includes("/styles/meadow-reverie"));
+    for (const style of styles) {
+      assert.equal(isRetiredStyleSlug(style.id), false, style.id);
+    }
     assert.deepEqual(explorePaginationPaths(styles.length), [
       "/explore?page=2",
       "/explore?page=3",

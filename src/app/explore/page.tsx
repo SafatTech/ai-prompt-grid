@@ -3,8 +3,13 @@ import { cache } from "react";
 import { notFound, permanentRedirect } from "next/navigation";
 import { ExploreClient } from "@/components/explore/explore-client";
 import {
+  exploreCanonicalHref,
+  exploreListingDescription,
+  exploreListingHeading,
+  exploreListingTitle,
   explorePageCount,
   explorePageHref,
+  exploreQueryHasFacets,
   isExplicitFirstExplorePage,
   parseExplorePage,
 } from "@/lib/catalog/explore-pages";
@@ -17,9 +22,6 @@ import { listPublishedStyles } from "@/lib/catalog/repository";
 import type { ExploreQuery } from "@/lib/catalog/schemas";
 
 const getCatalog = cache(listPublishedStyles);
-
-const description =
-  "Browse tested AI photo-transformation styles for portraits, pets, places, products, and more. Copy prompts for ChatGPT, Gemini, and other editors.";
 
 function searchParamsToURLSearchParams(
   raw: Record<string, string | string[] | undefined>,
@@ -71,18 +73,19 @@ export async function generateMetadata({
   const page = listing.page ?? 1;
   const pageCount = explorePageCount(listing.matchCount);
   const outOfRange = listing.page === null || listing.page > pageCount;
-  const canonical = explorePageHref(listing.query, outOfRange ? 1 : page);
-  const title =
-    !outOfRange && page > 1 ? `Explore styles, page ${page}` : "Explore styles";
+  const faceted = exploreQueryHasFacets(listing.query);
+  const canonical = exploreCanonicalHref(listing.query, outOfRange ? 1 : page);
+  const title = exploreListingTitle(outOfRange ? 1 : page);
+  const description = exploreListingDescription(outOfRange ? 1 : page);
+  const noindex = faceted || outOfRange || page > 1;
 
   return {
     title,
     description,
     alternates: { canonical },
-    robots:
-      listing.query.q.trim() || outOfRange
-        ? { index: false, follow: true }
-        : { index: true, follow: true },
+    robots: noindex
+      ? { index: false, follow: true }
+      : { index: true, follow: true },
   };
 }
 
@@ -109,6 +112,7 @@ export default async function ExplorePage({
       initialQuery={listing.query}
       initialPage={listing.page}
       initialQueryString={listing.params.toString()}
+      heading={exploreListingHeading(listing.page)}
     />
   );
 }

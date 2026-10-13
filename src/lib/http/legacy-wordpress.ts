@@ -11,6 +11,9 @@ const CONTENT_REDIRECTS: Record<string, string> = {
   "/contact-us": "/contact",
 };
 
+/** Retired public paths that should answer 410 Gone (with or without a trailing slash). */
+const GONE_PATHS = new Set(["/best-ai-seo-tools-2025"]);
+
 /**
  * Real pages this change must leave to their own routes, including trailing
  * slashes and `?p=` permalinks. `/terms-of-service` and `/privacy-policy` are
@@ -132,6 +135,6 @@ export function classifyLegacyRequest(
 
   const redirectTo = CONTENT_REDIRECTS[path];
   if (redirectTo) return { kind: "redirect", pathname: redirectTo };
-  if (isWordPressGonePath(path)) return { kind: "gone" };
+  if (GONE_PATHS.has(path) || isWordPressGonePath(path)) return { kind: "gone" };
   return { kind: "ignore" };
 }

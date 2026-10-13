@@ -41,6 +41,7 @@ type Props = {
   initialQuery: ExploreQuery;
   initialPage: number;
   initialQueryString: string;
+  heading: string;
 };
 
 export function ExploreClient({
@@ -48,6 +49,7 @@ export function ExploreClient({
   initialQuery,
   initialPage,
   initialQueryString,
+  heading,
 }: Props) {
   const router = useRouter();
   const [search, setSearch] = useState(initialQuery.q);
@@ -282,7 +284,7 @@ export function ExploreClient({
       </Suspense>
       <section className="container pt-10 pb-9 sm:pt-16">
         <h1 className="m-0 mb-2.5 text-[clamp(32px,8vw,70px)] leading-none tracking-[-0.055em]">
-          Find a style for your photo
+          {heading}
         </h1>
         <p className="m-0 text-[15px] text-[var(--muted)] sm:text-[17px]">
           Browse {catalog.length} tested styles for portraits, pets, places, objects, and

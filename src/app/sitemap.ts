@@ -1,6 +1,7 @@
 import type { MetadataRoute } from "next";
 import { listPublishedStyleSitemapEntries } from "@/lib/catalog/repository";
 import { publishedGuides } from "@/lib/guides/published-slugs.generated";
+import { isRetiredStyleSlug } from "@/lib/http/retired-style-redirects";
 import { guideSitemapEntries } from "@/lib/seo/guide-sitemap";
 import { dedupedStylePaths, explorePaginationPaths } from "@/lib/seo/public-paths";
 import { absoluteUrl } from "@/lib/site-url";
@@ -59,7 +60,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const lastModifiedBySlug = new Map<string, Date>();
     for (const style of styles) {
       const slug = style.slug?.trim();
-      if (!slug || lastModifiedBySlug.has(slug)) continue;
+      if (!slug || isRetiredStyleSlug(slug) || lastModifiedBySlug.has(slug)) continue;
       lastModifiedBySlug.set(slug, safeLastModified(style.lastModified));
     }
 
