@@ -482,7 +482,7 @@ const winter: WinterSeed[] = [
   {
     n: "97",
     id: "snowfall-merge-two-photos-winter-ai-prompt-couple",
-    title: "Snowfall Merge Two Photos Winter AI Prompt (Couple)",
+    title: "Snowfall Couple Winter AI Photo Prompt (Merge 2 Photos)",
     note: "Two separate selfies, one snowy couple photo",
     description:
       "Merge two separate photos into one winter AI couple photo walking hand in hand on a snowy pine path in matching jackets, both faces kept exactly.",
@@ -531,7 +531,7 @@ const winter: WinterSeed[] = [
   {
     n: "98",
     id: "hunza-style-valley-merge-two-photos-winter-prompt",
-    title: "Hunza-Style Valley Merge Two Photos Winter Prompt",
+    title: "Hunza Valley Winter AI Photo Prompt (Merge 2 Photos)",
     note: "Two people, two photos, one snowy northern-valley trip photo",
     description:
       "Merge two separate photos of friends or siblings into one winter trip photo in a snowy Hunza-style valley with frozen river and stone houses.",
