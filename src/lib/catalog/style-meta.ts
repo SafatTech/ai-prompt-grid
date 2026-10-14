@@ -1,4 +1,5 @@
 import { animeStyleIds } from "./seed-anime-styles";
+import { birthdayStyleIds } from "./seed-birthday-styles";
 import { eightiesStyleIds } from "./seed-80s-styles";
 import { linkedinStyleIds } from "./seed-linkedin-styles";
 import { mergeStyleIds } from "./seed-merge-styles";
@@ -51,7 +52,7 @@ function fitDocumentTitle(look: string): string | { absolute: string } {
  * title (contains "Prompt"), use it as-is via fitDocumentTitle so the root
  * ` · AI Prompt Grid` template does not double-append past 60 characters.
  * Legacy short 1980s looks still get " AI Photo Prompt"; other short looks get
- * " Prompt". LinkedIn, merge, winter, and anime titles stay unchanged.
+ * " Prompt". LinkedIn, merge, winter, anime, and birthday titles stay unchanged.
  */
 export function styleMetadataTitle(style: {
   id: string;
@@ -67,7 +68,8 @@ export function styleMetadataTitle(style: {
     linkedinStyleIds.has(style.id) ||
     mergeStyleIds.has(style.id) ||
     winterStyleIds.has(style.id) ||
-    animeStyleIds.has(style.id)
+    animeStyleIds.has(style.id) ||
+    birthdayStyleIds.has(style.id)
   ) {
     return fitDocumentTitle(style.title);
   }

@@ -2,6 +2,7 @@
 export const publishedGuideSlugs: readonly string[] = [
   "80s-ai-photo-prompts-solo-couple",
   "anime-ai-photo-prompts",
+  "birthday-ai-photo-prompts",
   "diwali-couple-ai-photo-editing-prompts",
   "gemini-headshot-cv-photo-prompts",
   "halloween-ai-prompts-for-selfies",
@@ -11,6 +12,7 @@ export const publishedGuideSlugs: readonly string[] = [
 export const publishedGuides: readonly { slug: string; updated: string }[] = [
   { slug: "80s-ai-photo-prompts-solo-couple", updated: "2026-10-11" },
   { slug: "anime-ai-photo-prompts", updated: "2026-10-13" },
+  { slug: "birthday-ai-photo-prompts", updated: "2026-10-14" },
   { slug: "diwali-couple-ai-photo-editing-prompts", updated: "2026-10-05" },
   { slug: "gemini-headshot-cv-photo-prompts", updated: "2026-10-11" },
   { slug: "halloween-ai-prompts-for-selfies", updated: "2026-10-03" },

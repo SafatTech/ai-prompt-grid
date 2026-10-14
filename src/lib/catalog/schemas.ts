@@ -113,6 +113,16 @@ export const moodSchema = z.enum([
   "Soft winter pastel with rose-pink accents, creamy whites, and natural warm skin tones",
   "Warm cozy winter glow with soft amber highlights and cool snowy shadows",
   "Warm festive cel-shaded glow with saffron, magenta, and gold accents and soft evening highlights",
+  "Luxe black and gold",
+  "Soft baby blue",
+  "Neon pink glow",
+  "Warm cinematic night",
+  "Vibrant party",
+  "Warm aesthetic",
+  "Fresh natural sunny",
+  "Soft romantic floral",
+  "Bold vibrant",
+  "Warm nostalgic film",
 ]);
 
 export const backgroundSchema = z.enum([
@@ -253,6 +263,18 @@ export const backgroundSchema = z.enum([
   "Quiet anime neighborhood street at golden hour with power lines, small houses, and a glowing sunset sky",
   "Anime city rooftop at sunset with a low railing, warm string lights, and an orange sky over distant buildings",
   "Anime park path lined with pink cherry blossom trees, falling petals, and a soft blue sky",
+  "Pastel pink, lilac and cream balloon garland wall with fairy lights",
+  "Black and metallic gold balloon arch with gold confetti on the floor",
+  "Soft baby-blue and white balloon backdrop with falling paper confetti",
+  "Dark moody party wall with a glowing pink neon sign and soft bokeh lights",
+  "Night city rooftop with string lights, glowing skyline bokeh and a dark blue sky",
+  "Colorful party room with balloon clusters, streamers and a big confetti burst in the air",
+  "Cozy bedroom with an arched full-length mirror, ceiling full of floating pastel balloons with ribbons, and fairy lights",
+  "Plain dark charcoal studio backdrop fading to black",
+  "Sunny green garden with flowers, a wooden picnic setup and pastel balloons tied to a tree",
+  "Cream textured paper with watercolor roses, peonies and green leaves around the edges",
+  "Deep royal blue gradient poster background with floating 3D balloons, stars and confetti",
+  "Warm cream scrapbook page with washi tape, small paper hearts and dried flowers",
 ]);
 
 export const ratioSchema = z.enum(["4:5 Portrait", "1:1 Square", "9:16 Story"]);
