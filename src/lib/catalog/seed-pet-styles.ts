@@ -152,7 +152,7 @@ Compose the final image for {{ratio}}, keeping important features such as the fa
     category: "Anime",
     note: "Polished anime companion pet portrait",
     description:
-      "Gemini AI anime photo prompt copy paste: transform your dog or cat into a polished anime companion portrait. Free for Gemini and ChatGPT.",
+      "Anime pet photo prompt for Gemini: transform your dog or cat into a polished anime companion portrait. Free to copy-paste in Gemini and ChatGPT.",
     intent: "Artistic restyle",
     mood: "Warm adventurous",
     background:

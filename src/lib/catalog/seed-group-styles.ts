@@ -141,7 +141,7 @@ Do not add brand logos, watermarks, unrelated objects, or large blocks of readab
     category: "Anime",
     note: "Polished contemporary anime group portrait",
     description:
-      "Anime AI photo prompt for friends: turn a group picture into a polished anime squad portrait where everyone stays recognisable. Copy-paste free.",
+      "Anime group photo prompt for friends: turn a squad picture into a polished anime friends portrait where everyone stays recognisable. Copy-paste free for Gemini.",
     intent: "Artistic restyle",
     mood: "Vibrant cinematic",
     background: "Detailed scenic outdoor adventure setting",

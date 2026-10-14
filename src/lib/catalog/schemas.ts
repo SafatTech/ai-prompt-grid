@@ -112,6 +112,7 @@ export const moodSchema = z.enum([
   "Warm amber tea-stall glow against cool blue snowy dusk",
   "Soft winter pastel with rose-pink accents, creamy whites, and natural warm skin tones",
   "Warm cozy winter glow with soft amber highlights and cool snowy shadows",
+  "Warm festive cel-shaded glow with saffron, magenta, and gold accents and soft evening highlights",
 ]);
 
 export const backgroundSchema = z.enum([
@@ -243,6 +244,15 @@ export const backgroundSchema = z.enum([
   "Snow-covered wooden cottage porch at dusk with a warm lantern, pine trees, and soft snowfall",
   "Quiet snowy pine forest path with fresh snow, frosted branches, and soft winter mist",
   "Snowy northern mountain valley with a frozen river, small stone houses, bare poplar trees, and towering white peaks",
+  "Plain soft pastel backdrop with tiny sparkles and hearts around a white die-cut sticker border",
+  "Sunlit anime college campus with brick buildings, blossom trees, a wide path, and pink petals drifting in the air",
+  "Anime courtyard at dusk with carved arches, hanging marigold garlands, and glowing lanterns",
+  "Dramatic anime rooftop at sunset with swirling clouds, glowing energy sparks, and a distant city skyline",
+  "Rainy anime city street at night with glowing signs without readable text, wet pavement reflections, and falling rain",
+  "Sunlit anime cricket ground with a green outfield, white boundary rope, and a softly blurred empty stand",
+  "Quiet anime neighborhood street at golden hour with power lines, small houses, and a glowing sunset sky",
+  "Anime city rooftop at sunset with a low railing, warm string lights, and an orange sky over distant buildings",
+  "Anime park path lined with pink cherry blossom trees, falling petals, and a soft blue sky",
 ]);
 
 export const ratioSchema = z.enum(["4:5 Portrait", "1:1 Square", "9:16 Story"]);
