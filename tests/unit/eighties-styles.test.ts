@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { seedEightiesStyles } from "../../src/lib/catalog/seed-80s-styles";
+import { birthdayStyleIds } from "../../src/lib/catalog/seed-birthday-styles";
 import { mergeStyleIds } from "../../src/lib/catalog/seed-merge-styles";
 import {
   assemblePrompt,
@@ -180,7 +181,8 @@ describe("1980s style pages", () => {
       (style) =>
         style.category === "Vintage" &&
         !seedEightiesStyles.some((item) => item.id === style.id) &&
-        !mergeStyleIds.has(style.id),
+        !mergeStyleIds.has(style.id) &&
+        !birthdayStyleIds.has(style.id),
     );
     assert.equal(existing.length, 10);
     for (const style of existing) {

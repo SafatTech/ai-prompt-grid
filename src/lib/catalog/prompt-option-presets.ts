@@ -117,6 +117,16 @@ export const moodLabels: Record<string, string> = {
   "Warm cozy winter glow with soft amber highlights and cool snowy shadows": "Cozy winter glow",
   "Warm festive cel-shaded glow with saffron, magenta, and gold accents and soft evening highlights":
     "Festive cel glow",
+  "Luxe black and gold": "Luxe black gold",
+  "Soft baby blue": "Soft baby blue",
+  "Neon pink glow": "Neon pink glow",
+  "Warm cinematic night": "Cinematic night",
+  "Vibrant party": "Vibrant party",
+  "Warm aesthetic": "Warm aesthetic",
+  "Fresh natural sunny": "Fresh sunny",
+  "Soft romantic floral": "Romantic floral",
+  "Bold vibrant": "Bold vibrant",
+  "Warm nostalgic film": "Nostalgic film",
 };
 
 /** Short 2–3 word UI labels for full background prompt strings. */
@@ -342,6 +352,29 @@ export const backgroundLabels: Record<string, string> = {
     "Friends rooftop",
   "Anime park path lined with pink cherry blossom trees, falling petals, and a soft blue sky":
     "Blossom park path",
+  "Pastel pink, lilac and cream balloon garland wall with fairy lights":
+    "Pastel balloon wall",
+  "Black and metallic gold balloon arch with gold confetti on the floor":
+    "Black gold balloons",
+  "Soft baby-blue and white balloon backdrop with falling paper confetti":
+    "Baby blue balloons",
+  "Dark moody party wall with a glowing pink neon sign and soft bokeh lights":
+    "Neon party wall",
+  "Night city rooftop with string lights, glowing skyline bokeh and a dark blue sky":
+    "Night rooftop",
+  "Colorful party room with balloon clusters, streamers and a big confetti burst in the air":
+    "Party confetti room",
+  "Cozy bedroom with an arched full-length mirror, ceiling full of floating pastel balloons with ribbons, and fairy lights":
+    "Balloon bedroom",
+  "Plain dark charcoal studio backdrop fading to black": "Dark charcoal studio",
+  "Sunny green garden with flowers, a wooden picnic setup and pastel balloons tied to a tree":
+    "Garden picnic party",
+  "Cream textured paper with watercolor roses, peonies and green leaves around the edges":
+    "Floral card paper",
+  "Deep royal blue gradient poster background with floating 3D balloons, stars and confetti":
+    "3D poster blue",
+  "Warm cream scrapbook page with washi tape, small paper hearts and dried flowers":
+    "Cream scrapbook",
 };
 
 const genericMoodPresets = [
