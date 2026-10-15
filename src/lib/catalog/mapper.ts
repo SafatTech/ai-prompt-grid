@@ -64,6 +64,8 @@ export type DbStyleAsset = {
   alt_text: string;
   sort_order: number;
   provenance?: unknown;
+  /** Inline 32×40 WebP data URI for ambient hero blur. */
+  result_blur_data_url?: string | null;
 };
 
 export type DbStyleRow = {
@@ -192,12 +194,18 @@ function mapExamplePairs(
       `Result example ${index + 1}`;
     const resultWidth = numberField(provenance, "resultWidth");
     const resultHeight = numberField(provenance, "resultHeight");
+    const resultBlur =
+      typeof asset.result_blur_data_url === "string" &&
+      asset.result_blur_data_url.startsWith("data:image/")
+        ? asset.result_blur_data_url
+        : undefined;
     return {
       source: resolveAssetUrl(asset.source_storage_key, publicBaseUrl),
       result: resolveAssetUrl(asset.result_storage_key, publicBaseUrl),
       altSource,
       altResult,
       ...(resultWidth && resultHeight ? { resultWidth, resultHeight } : {}),
+      ...(resultBlur ? { resultBlur } : {}),
     };
   });
 }

@@ -3,6 +3,11 @@ import path from "node:path";
 import matter from "gray-matter";
 import { getPublishedStyles } from "@/lib/catalog/styles";
 import {
+  getGuideCategory,
+  isGuideCategorySlug,
+  type GuideCategorySlug,
+} from "@/lib/guides/categories";
+import {
   prepareGuideMarkdown,
   showsDraftGuides,
   type GuideHeroImage,
@@ -11,6 +16,7 @@ import {
 } from "@/lib/guides/prepare";
 
 const GUIDES_DIR = path.join(process.cwd(), "content", "guides");
+const DEFAULT_AUTHOR = "Safat Tech";
 
 export type Guide = {
   slug: string;
@@ -24,6 +30,19 @@ export type Guide = {
   draft: boolean;
   /** When true, the article shows the “Tested prompts” badge. */
   promptsTested: boolean;
+  /** Category slug from `GUIDE_CATEGORIES`. Required for published guides. */
+  category: GuideCategorySlug;
+  /** Optional topic tags for list cards (1–3). */
+  tags: string[];
+  /** Display byline. Defaults to Safat Tech. */
+  author: string;
+  /** Count of `###` headings in the body, or a front-matter override. */
+  promptCount: number;
+  /** Estimated minutes; at least 3 for list pages. */
+  readMinutes: number;
+  /** Optional SEO keywords used by list search. */
+  primaryKeyword?: string;
+  secondaryKeywords: string[];
   /** Social card from frontmatter. Absent guides fall back to the body hero. */
   ogImage?: GuideOgImage;
   /**
@@ -72,6 +91,60 @@ export function visibleGuideSlugs(): Set<string> {
   return new Set(listVisibleGuides().map((guide) => guide.slug));
 }
 
+export function listGuidesByCategory(slug: GuideCategorySlug): Guide[] {
+  return listVisibleGuides().filter((guide) => guide.category === slug);
+}
+
+export function listIndexableGuidesByCategory(slug: GuideCategorySlug): Guide[] {
+  return listIndexableGuides().filter((guide) => guide.category === slug);
+}
+
+/** Categories that currently have at least one visible guide. */
+export function listPopulatedGuideCategories() {
+  const counts = new Map<GuideCategorySlug, number>();
+  for (const guide of listVisibleGuides()) {
+    counts.set(guide.category, (counts.get(guide.category) ?? 0) + 1);
+  }
+  return counts;
+}
+
+/**
+ * Case-insensitive substring search over title, description, tags, and keywords.
+ */
+export function searchGuides(query: string, guides = listVisibleGuides()): Guide[] {
+  const needle = query.trim().toLowerCase();
+  if (!needle) return guides;
+  return guides.filter((guide) => {
+    const haystack = [
+      guide.title,
+      guide.description,
+      guide.primaryKeyword ?? "",
+      ...guide.tags,
+      ...guide.secondaryKeywords,
+      getGuideCategory(guide.category)?.label ?? "",
+    ]
+      .join("\n")
+      .toLowerCase();
+    return haystack.includes(needle);
+  });
+}
+
+export function countPromptHeadings(markdown: string): number {
+  const matches = markdown.match(/^###\s+\S/gm);
+  return matches?.length ?? 0;
+}
+
+/** List/card reading time: at least 3 minutes. */
+export function estimateGuideListReadMinutes(markdown: string): number {
+  const plain = markdown
+    .replace(/```[\s\S]*?```/g, " ")
+    .replace(/!\[[^\]]*\]\([^)]+\)/g, " ")
+    .replace(/\[[^\]]*\]\([^)]+\)/g, " ")
+    .replace(/[#>*_`~-]/g, " ");
+  const words = plain.split(/\s+/).filter(Boolean).length;
+  return Math.max(3, Math.round(words / 220));
+}
+
 function parseGuideFile(file: string, styles: readonly StyleMention[]): Guide {
   const slug = file.slice(0, -".mdx".length);
   if (!/^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(slug)) {
@@ -81,8 +154,12 @@ function parseGuideFile(file: string, styles: readonly StyleMention[]): Guide {
   const raw = fs.readFileSync(path.join(GUIDES_DIR, file), "utf8");
   const parsed = matter(raw);
   const data = parsed.data;
+  const body = prepareGuideMarkdown(parsed.content, styles);
 
   const title = requireString(data.title, "title", file);
+  const draft = requireDraft(data.draft, file);
+  const category = requireCategory(data.category, draft, file);
+  const promptOverride = optionalPositiveInt(data.promptCount, "promptCount", file);
 
   return {
     slug,
@@ -94,11 +171,18 @@ function parseGuideFile(file: string, styles: readonly StyleMention[]): Guide {
       data.updated == null
         ? requireDate(data.date, "date", file)
         : requireDate(data.updated, "updated", file),
-    draft: requireDraft(data.draft, file),
+    draft,
     promptsTested: requireOptionalBoolean(data.promptsTested, "promptsTested", file),
+    category,
+    tags: parseTags(data.tags, file),
+    author: optionalString(data.author) ?? DEFAULT_AUTHOR,
+    promptCount: promptOverride ?? countPromptHeadings(body),
+    readMinutes: estimateGuideListReadMinutes(body),
+    primaryKeyword: optionalString(data.primaryKeyword),
+    secondaryKeywords: parseStringArray(data.secondaryKeywords, "secondaryKeywords", file),
     ogImage: parseGuideOgImage(data.ogImage, file),
     heroImage: parseGuideHeroImage(data.heroImage, file),
-    body: prepareGuideMarkdown(parsed.content, styles),
+    body,
   };
 }
 
@@ -125,16 +209,21 @@ export function parseGuideHeroImage(
       `${file}: frontmatter heroImage.url must be a root-relative or absolute URL`,
     );
   }
-  const position = optionalString(record.position);
+  const focus = optionalString(record.focus);
+  const position = optionalString(record.position) ?? focus;
   if (position && !/^[\w%.\s,-]+$/u.test(position)) {
     throw new Error(
       `${file}: frontmatter heroImage.position must be a CSS object-position value`,
     );
   }
+  const width = optionalPositiveInt(record.width, "heroImage.width", file);
+  const height = optionalPositiveInt(record.height, "heroImage.height", file);
   return {
     url,
     alt: requireString(record.alt, "heroImage.alt", file),
     ...(position ? { position } : {}),
+    ...(width ? { width } : {}),
+    ...(height ? { height } : {}),
   };
 }
 
@@ -169,11 +258,76 @@ export function parseGuideOgImage(
   };
 }
 
+function requireCategory(
+  value: unknown,
+  draft: boolean,
+  file: string,
+): GuideCategorySlug {
+  if (value == null) {
+    if (draft) {
+      // Drafts without a category still need a slug for typing; treat as styles.
+      return "styles";
+    }
+    throw new Error(
+      `${file}: frontmatter category is required for published guides`,
+    );
+  }
+  if (typeof value !== "string" || !isGuideCategorySlug(value)) {
+    throw new Error(
+      `${file}: frontmatter category must be one of ${GUIDE_CATEGORY_SLUGS.join(", ")}`,
+    );
+  }
+  return value;
+}
+
+const GUIDE_CATEGORY_SLUGS = [
+  "festivals",
+  "couples-family",
+  "trends",
+  "seasonal",
+  "occasions",
+  "professional",
+  "styles",
+] as const;
+
+function parseTags(value: unknown, file: string): string[] {
+  if (value == null) return [];
+  const tags = parseStringArray(value, "tags", file);
+  if (tags.length > 3) {
+    throw new Error(`${file}: frontmatter tags must have at most 3 items`);
+  }
+  return tags;
+}
+
+function parseStringArray(value: unknown, field: string, file: string): string[] {
+  if (value == null) return [];
+  if (!Array.isArray(value)) {
+    throw new Error(`${file}: frontmatter ${field} must be an array of strings`);
+  }
+  return value.map((item, index) => {
+    if (typeof item !== "string" || item.trim() === "") {
+      throw new Error(
+        `${file}: frontmatter ${field}[${index}] must be a non-empty string`,
+      );
+    }
+    return item.trim();
+  });
+}
+
 function requirePositiveInt(value: unknown, field: string, file: string): number {
   if (typeof value !== "number" || !Number.isInteger(value) || value < 1) {
     throw new Error(`${file}: frontmatter ${field} must be a positive integer`);
   }
   return value;
+}
+
+function optionalPositiveInt(
+  value: unknown,
+  field: string,
+  file: string,
+): number | undefined {
+  if (value == null) return undefined;
+  return requirePositiveInt(value, field, file);
 }
 
 function optionalString(value: unknown): string | undefined {

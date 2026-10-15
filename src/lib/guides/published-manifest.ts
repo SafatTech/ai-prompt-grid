@@ -12,6 +12,8 @@ export type PublishedGuideRecord = {
   slug: string;
   /** YYYY-MM-DD from `updated` or `date`, or "" when the frontmatter has neither. */
   updated: string;
+  /** Category slug from frontmatter, or "" when missing/invalid. */
+  category: string;
 };
 
 /**
@@ -42,13 +44,22 @@ export function publishedGuideUpdatedFromMatter(value: unknown): string {
 
 export function publishedGuideFromMatter(
   fileName: string,
-  data: { draft?: unknown; updated?: unknown; date?: unknown },
+  data: {
+    draft?: unknown;
+    updated?: unknown;
+    date?: unknown;
+    category?: unknown;
+  },
 ): PublishedGuideRecord | null {
   const slug = publishedSlugFromMatter(fileName, data.draft);
   if (!slug) return null;
   return {
     slug,
     updated: publishedGuideUpdatedFromMatter(data.updated ?? data.date),
+    category:
+      typeof data.category === "string" && data.category.trim()
+        ? data.category.trim()
+        : "",
   };
 }
 
@@ -93,10 +104,10 @@ export function renderPublishedGuideManifest(
       : `[\n${guides
           .map(
             (guide) =>
-              `  { slug: ${JSON.stringify(guide.slug)}, updated: ${JSON.stringify(guide.updated)} },`,
+              `  { slug: ${JSON.stringify(guide.slug)}, updated: ${JSON.stringify(guide.updated)}, category: ${JSON.stringify(guide.category)} },`,
           )
           .join("\n")}\n]`;
-  return `// Generated from content/guides by next.config.ts. Do not edit.\nexport const publishedGuideSlugs: readonly string[] = ${slugs};\nexport const publishedGuides: readonly { slug: string; updated: string }[] = ${records};\n`;
+  return `// Generated from content/guides by next.config.ts. Do not edit.\nexport const publishedGuideSlugs: readonly string[] = ${slugs};\nexport const publishedGuides: readonly { slug: string; updated: string; category: string }[] = ${records};\n`;
 }
 
 /** Writes the layout manifest when the published set changes. Returns the slugs. */

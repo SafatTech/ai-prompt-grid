@@ -5,6 +5,8 @@ export type MergeImage = {
   alt: string;
   width?: number;
   height?: number;
+  /** Tiny data-URI (or URL) for the ambient hero blur. Optional. */
+  blurSrc?: string;
 };
 
 type Props = {
@@ -38,20 +40,22 @@ function FrameImage({
   priority = false,
   highPriority = false,
   className,
+  objectPosition,
 }: {
   image: MergeImage;
   sizes: string;
   priority?: boolean;
   highPriority?: boolean;
   className?: string;
+  objectPosition?: string;
 }) {
   const width = image.width ?? DEFAULT_WIDTH;
   const height = image.height ?? DEFAULT_HEIGHT;
   const shared = cn("absolute inset-0 h-full w-full object-cover", className);
   // Public guide files and remote catalog WebPs both use a plain img so
   // inputs keep rendering when /_next/image is unavailable.
-  // eslint-disable-next-line @next/next/no-img-element
   return (
+    // eslint-disable-next-line @next/next/no-img-element -- remote catalog / guide assets
     <img
       src={image.src}
       alt={image.alt}
@@ -62,6 +66,7 @@ function FrameImage({
       fetchPriority={highPriority ? "high" : "auto"}
       decoding="async"
       className={shared}
+      style={objectPosition ? { objectPosition } : undefined}
     />
   );
 }
@@ -105,8 +110,19 @@ function summary(title: string, count: number): string {
   return `${title}: ${count} input photos combined into one result`;
 }
 
+function AmbientBlur({ src }: { src: string }) {
+  return (
+    <div className="mba-ambient" aria-hidden="true">
+      {/* Tiny 32×40 asset — next/image would add an unnecessary request. */}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={src} alt="" width={32} height={40} decoding="async" />
+    </div>
+  );
+}
+
 /**
- * Multi-photo before/after. Hero is the print stack. Guide and card are docked.
+ * Multi-photo before/after.
+ * Hero = print stack + ambient blur. Guide = docked. Card = split thumbnail.
  * No client JavaScript: hover is CSS, and single-photo callers stay on CompareSlider.
  */
 export function MergeBeforeAfter({
@@ -127,45 +143,60 @@ export function MergeBeforeAfter({
     sizes ??
     (variant === "card" ? "(max-width: 768px) 100vw, 360px" : "(max-width: 768px) 100vw, 560px");
   const inputSizes =
-    variant === "card" ? "46px" : variant === "guide" ? "150px" : "(max-width: 768px) 50vw, 320px";
+    variant === "card"
+      ? "(max-width:767px) 18vw, 110px"
+      : variant === "guide"
+        ? "150px"
+        : "(max-width: 768px) 50vw, 320px";
   const resultFrame = resultPresentation(result.width, result.height);
+  const ambientSrc = result.blurSrc ?? null;
 
   if (variant === "card") {
-    const chips = inputs.slice(0, 3);
-    const extra = inputs.length - chips.length;
+    const tiles = inputs.slice(0, 2);
+    const extra = Math.max(0, inputs.length - 2);
+    const groupLabel = `${title}: Photo 1 and Photo 2 merged into the result`;
     return (
       <figure
         role="group"
-        aria-label={label}
+        aria-label={groupLabel}
         data-testid="merge-before-after"
         data-variant="card"
         className={cn("absolute inset-0 m-0", className)}
       >
-        <figcaption className="sr-only">{label}</figcaption>
-        <div className={cn("absolute inset-0", resultFrame.contain && "bg-[#f5f3ee]")}>
-          <FrameImage
-            image={{ ...result, alt: resultAlt(result, title) }}
-            sizes={resultSizes}
-            priority={priority}
-            highPriority={priority}
-            className={resultFrame.contain ? "object-contain" : undefined}
-          />
-        </div>
-        <div className="absolute bottom-2 left-2 z-3 flex">
-          {chips.map((input, index) => (
-            <div key={`${input.src}-${index}`} className="mba-card-chip relative">
-              <FrameImage
-                image={{ ...input, alt: inputAlt(input, title, index, inputs.length) }}
-                sizes={inputSizes}
-                priority={priority}
-              />
-            </div>
-          ))}
-          {extra > 0 ? (
-            <span className="mba-card-more" aria-hidden="true">
-              +{extra}
-            </span>
-          ) : null}
+        <figcaption className="sr-only">{groupLabel}</figcaption>
+        <div className="mba-split">
+          <div className="mba-split__inputs">
+            {tiles.map((input, index) => (
+              <div key={`${input.src}-${index}`} className="relative overflow-hidden">
+                <FrameImage
+                  image={{ ...input, alt: inputAlt(input, title, index, inputs.length) }}
+                  sizes={inputSizes}
+                  priority={priority}
+                  objectPosition="50% 30%"
+                />
+                <span className="mba-split__tag" aria-hidden="true">
+                  {index + 1}
+                </span>
+                {index === 1 && extra > 0 ? (
+                  <span className="mba-split__plus" aria-hidden="true">
+                    +{extra}
+                  </span>
+                ) : null}
+              </div>
+            ))}
+          </div>
+          <div className={cn("relative overflow-hidden", resultFrame.contain && "bg-[#f5f3ee]")}>
+            <FrameImage
+              image={{ ...result, alt: resultAlt(result, title) }}
+              sizes="(max-width:767px) 40vw, 240px"
+              priority={priority}
+              highPriority={priority}
+              className={resultFrame.contain ? "object-contain" : undefined}
+            />
+          </div>
+          <span className="mba-split__seam" aria-hidden="true">
+            →
+          </span>
         </div>
       </figure>
     );
@@ -235,6 +266,7 @@ export function MergeBeforeAfter({
       className={cn("m-0", className)}
     >
       <figcaption className="sr-only">{label}</figcaption>
+      {ambientSrc ? <AmbientBlur src={ambientSrc} /> : null}
       <div className="mba-hero">
         <div
           className={cn("mba-stack", shown.length === 1 && "mba-stack-single")}

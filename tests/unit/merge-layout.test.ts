@@ -9,7 +9,12 @@ import {
   usesMergeStack,
 } from "../../src/lib/catalog/merge-inputs";
 import { getStyleById } from "../../src/lib/catalog/styles";
-import { resultPresentation } from "../../src/components/merge-before-after";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import {
+  MergeBeforeAfter,
+  resultPresentation,
+} from "../../src/components/merge-before-after";
 import { classifyPairImages, headingForImageSrc } from "../../src/lib/guides/image-pairs";
 
 describe("merge input photos", () => {
@@ -149,5 +154,54 @@ describe("classify guide image groups", () => {
       { src: "https://example.com/result-70b.webp" },
     ]);
     assert.deepEqual(classified, { inputs: [], result: null });
+  });
+});
+
+describe("MergeBeforeAfter variants", () => {
+  const inputs = [
+    { src: "https://example.com/source-1.webp", alt: "Photo 1" },
+    { src: "https://example.com/source-2.webp", alt: "Photo 2" },
+  ];
+  const result = {
+    src: "https://example.com/result.webp",
+    alt: "Result",
+    blurSrc: "data:image/webp;base64,AA==",
+  };
+
+  it("renders the split card variant instead of docked chips", () => {
+    const html = renderToStaticMarkup(
+      createElement(MergeBeforeAfter, {
+        variant: "card",
+        title: "Riverside",
+        inputs,
+        result,
+      }),
+    );
+    assert.match(html, /mba-split/);
+    assert.match(html, /mba-split__seam/);
+    assert.doesNotMatch(html, /mba-card-chip/);
+  });
+
+  it("renders ambient blur when blurSrc is present and omits it when null", () => {
+    const withBlur = renderToStaticMarkup(
+      createElement(MergeBeforeAfter, {
+        variant: "hero",
+        title: "Riverside",
+        inputs,
+        result,
+      }),
+    );
+    assert.match(withBlur, /mba-ambient/);
+    assert.match(withBlur, /data:image\/webp;base64,AA==/);
+
+    const withoutBlur = renderToStaticMarkup(
+      createElement(MergeBeforeAfter, {
+        variant: "hero",
+        title: "Riverside",
+        inputs,
+        result: { src: result.src, alt: result.alt },
+      }),
+    );
+    assert.doesNotMatch(withoutBlur, /mba-ambient/);
   });
 });

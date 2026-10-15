@@ -23,11 +23,14 @@ export function mergeResultImage(style: CatalogStyle): {
   alt: string;
   width: number;
   height: number;
+  blurSrc?: string;
 } {
+  const blurSrc = style.examplePairs[0]?.resultBlur;
   return {
     src: style.result,
     alt: style.examplePairs[0]?.altResult ?? "",
     ...mergeResultSize(style),
+    ...(blurSrc ? { blurSrc } : {}),
   };
 }
 

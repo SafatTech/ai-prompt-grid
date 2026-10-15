@@ -3,6 +3,7 @@ import fs from "node:fs";
 import path from "node:path";
 import { describe, it } from "node:test";
 import sitemap from "../../src/app/sitemap";
+import { GUIDE_CATEGORIES } from "../../src/lib/guides/categories";
 import { publishedGuides } from "../../src/lib/guides/published-slugs.generated";
 import { retiredStyleSlugs } from "../../src/lib/http/retired-style-redirects";
 import { guideSitemapEntries } from "../../src/lib/seo/guide-sitemap";
@@ -18,20 +19,24 @@ describe("sitemap guide entries", () => {
     assert.deepEqual(guideSitemapEntries([], new Date("2026-10-03T00:00:00.000Z")), []);
   });
 
-  it("lists the index and each published guide, ignoring a blank slug", () => {
+  it("lists the index, category pages, and each published guide, ignoring a blank slug", () => {
     const now = new Date("2026-10-03T00:00:00.000Z");
     const entries = guideSitemapEntries(
       [
-        { slug: "published-one", updated: "2026-10-01" },
-        { slug: "  ", updated: "2026-10-01" },
+        { slug: "published-one", updated: "2026-10-01", category: "trends" },
+        { slug: "  ", updated: "2026-10-01", category: "trends" },
       ],
       now,
     );
     assert.deepEqual(
       entries.map((entry) => entry.url),
-      [absoluteUrl("/guides"), absoluteUrl("/guides/published-one")],
+      [
+        absoluteUrl("/guides"),
+        absoluteUrl("/guides/category/trends"),
+        absoluteUrl("/guides/published-one"),
+      ],
     );
-    assert.equal(lastModifiedIso(entries[1]?.lastModified), "2026-10-01T00:00:00.000Z");
+    assert.equal(lastModifiedIso(entries[2]?.lastModified), "2026-10-01T00:00:00.000Z");
   });
 
   it("replaces an unusable guide date instead of throwing", () => {
@@ -63,10 +68,19 @@ describe("sitemap handler", () => {
       assert.ok(urls.includes(absoluteUrl(path)), path);
     }
     const guideUrls = urls.filter((url) => url.includes("/guides"));
+    const populatedCategories = new Set(
+      publishedGuides
+        .map((guide) => guide.category.trim())
+        .filter((category) => category.length > 0),
+    );
+    const categoryUrls = GUIDE_CATEGORIES.filter((category) =>
+      populatedCategories.has(category.slug),
+    ).map((category) => absoluteUrl(`/guides/category/${category.slug}`));
     const expected =
       publishedGuides.length > 0
         ? [
             absoluteUrl("/guides"),
+            ...categoryUrls,
             ...publishedGuides.map((guide) => absoluteUrl("/guides/" + guide.slug)),
           ]
         : [];

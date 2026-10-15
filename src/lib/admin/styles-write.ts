@@ -3,6 +3,7 @@ import type { SupabaseClient } from "@supabase/supabase-js";
 import type { AdminStyleContentInput } from "@/lib/admin/schemas";
 import type { AdminStyleEditorPayload } from "@/lib/admin/styles-read";
 import { fetchAdminStyleById } from "@/lib/admin/styles-read";
+import { buildResultBlurDataUrlFromUrl } from "@/lib/catalog/result-blur";
 
 function slugify(value: string): string {
   return value
@@ -82,6 +83,11 @@ async function replaceAssets(
 ) {
   await client.from("style_assets").delete().eq("style_id", styleId);
 
+  const cardBlur = await buildResultBlurDataUrlFromUrl(input.cardResultUrl);
+  const exampleBlurs = await Promise.all(
+    input.examplePairs.map((pair) => buildResultBlurDataUrlFromUrl(pair.resultUrl)),
+  );
+
   const assets = [
     {
       id: randomUUID(),
@@ -92,6 +98,7 @@ async function replaceAssets(
       alt_text: `${input.title} card pair`,
       provenance,
       sort_order: 0,
+      result_blur_data_url: cardBlur,
     },
     ...input.examplePairs.map((pair, index) => ({
       id: randomUUID(),
@@ -102,6 +109,7 @@ async function replaceAssets(
       alt_text: pair.altSource,
       provenance,
       sort_order: index + 1,
+      result_blur_data_url: exampleBlurs[index] ?? null,
     })),
   ];
 
