@@ -67,5 +67,10 @@ export type CatalogStyle = {
   stays: string[];
   targetSourcePhoto: string;
   examplePairs: ExamplePair[];
+  /**
+   * Ambient hero blur for the card/result image. Prefer examplePairs[].resultBlur;
+   * this is a fallback when only a card/hero asset carries the data URI.
+   */
+  resultBlur?: string;
   promptVariant: PromptVariant;
 };

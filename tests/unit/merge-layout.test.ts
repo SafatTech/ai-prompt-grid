@@ -4,6 +4,8 @@ import path from "node:path";
 import { describe, it } from "node:test";
 import {
   mergeInputPhotos,
+  mergeResultBlurSrc,
+  mergeResultImage,
   mergeResultSize,
   usesMergeHero,
   usesMergeStack,
@@ -154,6 +156,39 @@ describe("classify guide image groups", () => {
       { src: "https://example.com/result-70b.webp" },
     ]);
     assert.deepEqual(classified, { inputs: [], result: null });
+  });
+});
+
+describe("merge result blur resolution", () => {
+  it("prefers blur from the pair that shares the card result, then style.resultBlur", () => {
+    const style = getStyleById("ai-birthday-photo-collage-prompt-friends-or-partner");
+    assert.ok(style);
+    // Seed has no blur; inject like the mapper does after backfill.
+    const withBlur = {
+      ...style,
+      examplePairs: style.examplePairs.map((pair, index) =>
+        index === 0
+          ? { ...pair, resultBlur: "data:image/webp;base64,PAIR" }
+          : pair,
+      ),
+      resultBlur: "data:image/webp;base64,CARD",
+    };
+    assert.equal(mergeResultBlurSrc(withBlur), "data:image/webp;base64,PAIR");
+    assert.equal(mergeResultImage(withBlur).blurSrc, "data:image/webp;base64,PAIR");
+
+    const cardOnly = {
+      ...style,
+      examplePairs: style.examplePairs.map((pair) => ({
+        source: pair.source,
+        result: pair.result,
+        altSource: pair.altSource,
+        altResult: pair.altResult,
+        resultWidth: pair.resultWidth,
+        resultHeight: pair.resultHeight,
+      })),
+      resultBlur: "data:image/webp;base64,CARD",
+    };
+    assert.equal(mergeResultBlurSrc(cardOnly), "data:image/webp;base64,CARD");
   });
 });
 

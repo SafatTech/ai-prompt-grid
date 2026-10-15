@@ -1118,6 +1118,8 @@ textarea:focus-visible,
 
 /* Multi-photo before/after. Tape and the hover fan-out are not expressible as utilities. */
 .mba-hero {
+  position: relative;
+  z-index: 1;
   display: grid;
   grid-template-columns: 1fr;
   align-items: center;
@@ -1335,10 +1337,19 @@ textarea:focus-visible,
   text-transform: uppercase;
 }
 
+/* Surface fallback when blur is missing; transparent so .mba-ambient can show. */
+.mba-hero-panel {
+  background: var(--surface);
+}
+
+.mba-hero-panel:has(.mba-ambient) {
+  background: transparent;
+}
+
 .mba-ambient {
   position: absolute;
   inset: 0;
-  z-index: -1;
+  z-index: 0;
   pointer-events: none;
   overflow: hidden;
 }

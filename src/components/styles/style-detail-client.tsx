@@ -204,7 +204,7 @@ export function StyleDetailClient({ style, children }: Props) {
           </div>
         </div>
         {usesMergeHero(style) ? (
-          <div className="relative isolate overflow-hidden rounded-[22px] border border-[var(--line)] bg-[var(--surface)] px-6 py-8 shadow-[var(--shadow)] md:px-12 md:py-10 lg:px-8 lg:py-8">
+          <div className="mba-hero-panel relative isolate overflow-hidden rounded-[22px] border border-[var(--line)] px-6 py-8 shadow-[var(--shadow)] md:px-12 md:py-10 lg:px-8 lg:py-8">
             <MergeBeforeAfter
               variant="hero"
               priority

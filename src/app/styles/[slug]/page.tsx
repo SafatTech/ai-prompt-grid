@@ -11,6 +11,9 @@ import {
 } from "@/lib/catalog/style-meta";
 import { absoluteUrl } from "@/lib/site-url";
 
+/** Refresh after catalog asset edits (e.g. blur backfill) without a full redeploy. */
+export const revalidate = 60;
+
 export async function generateStaticParams() {
   const styles = await listPublishedStyles();
   return styles.map((style) => ({ slug: style.id }));
