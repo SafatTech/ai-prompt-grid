@@ -73,22 +73,22 @@ describe("explore pagination", () => {
 
   it("covers every published style across server pages and the sitemap", () => {
     const styles = getPublishedStyles();
-    assert.equal(styles.length, 159);
+    assert.equal(styles.length, 171);
     assert.equal(EXPLORE_PAGE_SIZE, 18);
 
     const seen = new Set<string>();
     const pages = explorePageCount(styles.length);
-    assert.equal(pages, 9);
+    assert.equal(pages, 10);
     for (let page = 1; page <= pages; page += 1) {
       const slice = explorePageSlice(styles, page);
       assert.ok(slice.length > 0);
       assert.ok(slice.length <= EXPLORE_PAGE_SIZE);
       for (const style of slice) seen.add(style.id);
     }
-    assert.equal(seen.size, 159);
+    assert.equal(seen.size, 171);
 
     const stylePaths = dedupedStylePaths(styles.map((style) => style.id));
-    assert.equal(stylePaths.length, 159);
+    assert.equal(stylePaths.length, 171);
     assert.ok(stylePaths.includes("/styles/meadow-reverie"));
     for (const style of styles) {
       assert.equal(isRetiredStyleSlug(style.id), false, style.id);
@@ -102,6 +102,7 @@ describe("explore pagination", () => {
       "/explore?page=7",
       "/explore?page=8",
       "/explore?page=9",
+      "/explore?page=10",
     ]);
   });
 

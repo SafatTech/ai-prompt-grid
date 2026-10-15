@@ -123,6 +123,18 @@ export const moodSchema = z.enum([
   "Soft romantic floral",
   "Bold vibrant",
   "Warm nostalgic film",
+  "Cool cinematic night",
+  "Warm romantic daylight",
+  "Warm golden dusk",
+  "Moody blue and amber",
+  "Golden sunset",
+  "Faded 90s film",
+  "Golden hazy sunset",
+  "High-contrast urban",
+  "Warm heritage sunlight",
+  "Neon pink and blue",
+  "Fresh monsoon",
+  "Natural golden hour",
 ]);
 
 export const backgroundSchema = z.enum([
@@ -275,6 +287,18 @@ export const backgroundSchema = z.enum([
   "Cream textured paper with watercolor roses, peonies and green leaves around the edges",
   "Deep royal blue gradient poster background with floating 3D balloons, stars and confetti",
   "Warm cream scrapbook page with washi tape, small paper hearts and dried flowers",
+  "Wet city road at night with neon and streetlight reflections on the asphalt and soft bokeh",
+  "Sunny old-town street with cream walls, green plants and soft background blur",
+  "City rooftop terrace at dusk with warm string lights overhead and a softly blurred skyline",
+  "Dim room at night with a rain-streaked window, blurred city lights outside and a small warm table lamp",
+  "Winding mountain highway at sunset with layered peaks and a glowing orange sky",
+  "Dusty countryside road with dry grass, a lone tree and a pale afternoon sky",
+  "Calm sandy beach at sunset with soft waves, a low glowing sun and golden haze",
+  "Raw grey concrete city wall with hard afternoon shadows",
+  "Old-city haveli courtyard with carved wooden doors, arched sandstone walls and worn stone steps",
+  "Plain dark studio backdrop with a soft gradient glow",
+  "Rainy monsoon street with wet road reflections, green trees, and small shops with plain signboards",
+  "Open wheat field at golden hour with tall grass and a soft warm sky",
 ]);
 
 export const ratioSchema = z.enum(["4:5 Portrait", "1:1 Square", "9:16 Story"]);

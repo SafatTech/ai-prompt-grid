@@ -7,6 +7,7 @@ export const publishedGuideSlugs: readonly string[] = [
   "gemini-headshot-cv-photo-prompts",
   "halloween-ai-prompts-for-selfies",
   "how-to-merge-two-photos-in-gemini",
+  "trending-ai-photo-prompts-for-boys",
   "winter-ai-photo-prompts",
 ];
 export const publishedGuides: readonly { slug: string; updated: string }[] = [
@@ -17,5 +18,6 @@ export const publishedGuides: readonly { slug: string; updated: string }[] = [
   { slug: "gemini-headshot-cv-photo-prompts", updated: "2026-10-11" },
   { slug: "halloween-ai-prompts-for-selfies", updated: "2026-10-03" },
   { slug: "how-to-merge-two-photos-in-gemini", updated: "2026-10-11" },
+  { slug: "trending-ai-photo-prompts-for-boys", updated: "2026-10-15" },
   { slug: "winter-ai-photo-prompts", updated: "2026-10-12" },
 ];
