@@ -127,6 +127,18 @@ export const moodLabels: Record<string, string> = {
   "Soft romantic floral": "Romantic floral",
   "Bold vibrant": "Bold vibrant",
   "Warm nostalgic film": "Nostalgic film",
+  "Cool cinematic night": "Cool night",
+  "Warm romantic daylight": "Romantic daylight",
+  "Warm golden dusk": "Golden dusk",
+  "Moody blue and amber": "Blue amber",
+  "Golden sunset": "Golden sunset",
+  "Faded 90s film": "Faded 90s",
+  "Golden hazy sunset": "Hazy sunset",
+  "High-contrast urban": "High contrast",
+  "Warm heritage sunlight": "Heritage sunlight",
+  "Neon pink and blue": "Neon pink blue",
+  "Fresh monsoon": "Fresh monsoon",
+  "Natural golden hour": "Natural golden",
 };
 
 /** Short 2–3 word UI labels for full background prompt strings. */
@@ -375,6 +387,28 @@ export const backgroundLabels: Record<string, string> = {
     "3D poster blue",
   "Warm cream scrapbook page with washi tape, small paper hearts and dried flowers":
     "Cream scrapbook",
+  "Wet city road at night with neon and streetlight reflections on the asphalt and soft bokeh":
+    "Wet neon road",
+  "Sunny old-town street with cream walls, green plants and soft background blur":
+    "Sunny old town",
+  "City rooftop terrace at dusk with warm string lights overhead and a softly blurred skyline":
+    "Dusk rooftop",
+  "Dim room at night with a rain-streaked window, blurred city lights outside and a small warm table lamp":
+    "Rainy window room",
+  "Winding mountain highway at sunset with layered peaks and a glowing orange sky":
+    "Mountain highway",
+  "Dusty countryside road with dry grass, a lone tree and a pale afternoon sky":
+    "Dusty country road",
+  "Calm sandy beach at sunset with soft waves, a low glowing sun and golden haze":
+    "Calm sunset beach",
+  "Raw grey concrete city wall with hard afternoon shadows": "Concrete city wall",
+  "Old-city haveli courtyard with carved wooden doors, arched sandstone walls and worn stone steps":
+    "Haveli courtyard",
+  "Plain dark studio backdrop with a soft gradient glow": "Dark studio glow",
+  "Rainy monsoon street with wet road reflections, green trees, and small shops with plain signboards":
+    "Monsoon street",
+  "Open wheat field at golden hour with tall grass and a soft warm sky":
+    "Golden wheat field",
 };
 
 const genericMoodPresets = [
