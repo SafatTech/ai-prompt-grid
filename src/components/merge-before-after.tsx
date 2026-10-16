@@ -263,7 +263,7 @@ export function MergeBeforeAfter({
       aria-label={label}
       data-testid="merge-before-after"
       data-variant="hero"
-      className={cn("relative m-0", className)}
+      className={cn("relative m-0 w-full", className)}
     >
       <figcaption className="sr-only">{label}</figcaption>
       {ambientSrc ? <AmbientBlur src={ambientSrc} /> : null}
