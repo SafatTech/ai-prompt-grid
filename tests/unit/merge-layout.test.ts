@@ -4,12 +4,19 @@ import path from "node:path";
 import { describe, it } from "node:test";
 import {
   mergeInputPhotos,
+  mergeResultBlurSrc,
+  mergeResultImage,
   mergeResultSize,
   usesMergeHero,
   usesMergeStack,
 } from "../../src/lib/catalog/merge-inputs";
 import { getStyleById } from "../../src/lib/catalog/styles";
-import { resultPresentation } from "../../src/components/merge-before-after";
+import { createElement } from "react";
+import { renderToStaticMarkup } from "react-dom/server";
+import {
+  MergeBeforeAfter,
+  resultPresentation,
+} from "../../src/components/merge-before-after";
 import { classifyPairImages, headingForImageSrc } from "../../src/lib/guides/image-pairs";
 
 describe("merge input photos", () => {
@@ -149,5 +156,87 @@ describe("classify guide image groups", () => {
       { src: "https://example.com/result-70b.webp" },
     ]);
     assert.deepEqual(classified, { inputs: [], result: null });
+  });
+});
+
+describe("merge result blur resolution", () => {
+  it("prefers blur from the pair that shares the card result, then style.resultBlur", () => {
+    const style = getStyleById("ai-birthday-photo-collage-prompt-friends-or-partner");
+    assert.ok(style);
+    // Seed has no blur; inject like the mapper does after backfill.
+    const withBlur = {
+      ...style,
+      examplePairs: style.examplePairs.map((pair, index) =>
+        index === 0
+          ? { ...pair, resultBlur: "data:image/webp;base64,PAIR" }
+          : pair,
+      ),
+      resultBlur: "data:image/webp;base64,CARD",
+    };
+    assert.equal(mergeResultBlurSrc(withBlur), "data:image/webp;base64,PAIR");
+    assert.equal(mergeResultImage(withBlur).blurSrc, "data:image/webp;base64,PAIR");
+
+    const cardOnly = {
+      ...style,
+      examplePairs: style.examplePairs.map((pair) => ({
+        source: pair.source,
+        result: pair.result,
+        altSource: pair.altSource,
+        altResult: pair.altResult,
+        resultWidth: pair.resultWidth,
+        resultHeight: pair.resultHeight,
+      })),
+      resultBlur: "data:image/webp;base64,CARD",
+    };
+    assert.equal(mergeResultBlurSrc(cardOnly), "data:image/webp;base64,CARD");
+  });
+});
+
+describe("MergeBeforeAfter variants", () => {
+  const inputs = [
+    { src: "https://example.com/source-1.webp", alt: "Photo 1" },
+    { src: "https://example.com/source-2.webp", alt: "Photo 2" },
+  ];
+  const result = {
+    src: "https://example.com/result.webp",
+    alt: "Result",
+    blurSrc: "data:image/webp;base64,AA==",
+  };
+
+  it("renders the split card variant instead of docked chips", () => {
+    const html = renderToStaticMarkup(
+      createElement(MergeBeforeAfter, {
+        variant: "card",
+        title: "Riverside",
+        inputs,
+        result,
+      }),
+    );
+    assert.match(html, /mba-split/);
+    assert.match(html, /mba-split__seam/);
+    assert.doesNotMatch(html, /mba-card-chip/);
+  });
+
+  it("renders ambient blur when blurSrc is present and omits it when null", () => {
+    const withBlur = renderToStaticMarkup(
+      createElement(MergeBeforeAfter, {
+        variant: "hero",
+        title: "Riverside",
+        inputs,
+        result,
+      }),
+    );
+    assert.match(withBlur, /mba-ambient/);
+    assert.match(withBlur, /data:image\/webp;base64,AA==/);
+
+    const withoutBlur = renderToStaticMarkup(
+      createElement(MergeBeforeAfter, {
+        variant: "hero",
+        title: "Riverside",
+        inputs,
+        result: { src: result.src, alt: result.alt },
+      }),
+    );
+    assert.doesNotMatch(withoutBlur, /mba-ambient/);
   });
 });

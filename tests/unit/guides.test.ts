@@ -22,6 +22,7 @@ import {
   readPublishedGuides,
   readPublishedGuideSlugs,
   renderPublishedGuideManifest,
+  writePublishedGuideManifest,
 } from "../../src/lib/guides/published-manifest";
 import {
   defaultOgImage,
@@ -360,7 +361,7 @@ describe("guide publishing rules", () => {
       { id: "nested", text: "Nested", level: 3 },
       { id: "second-section", text: "Second section", level: 2 },
     ]);
-    assert.ok(estimateReadingMinutes(markdown) >= 1);
+    assert.ok(estimateReadingMinutes(markdown) >= 3);
   });
 });
 
@@ -511,7 +512,7 @@ describe("published guide manifest", () => {
     fs.writeFileSync(path.join(dir, "notes.txt"), "draft: false\n");
     assert.deepEqual(readPublishedGuideSlugs(dir), ["published-one"]);
     assert.deepEqual(readPublishedGuides(dir), [
-      { slug: "published-one", updated: "2026-10-01" },
+      { slug: "published-one", updated: "2026-10-01", category: "" },
     ]);
     assert.equal(
       publishedGuideFromMatter("still-draft.mdx", { draft: true, updated: "nope" }),
@@ -530,13 +531,17 @@ describe("published guide manifest", () => {
         .map((guide) => guide.slug)
         .sort(),
     );
+    // Regenerate so the checked-in file includes category after front-matter edits.
+    writePublishedGuideManifest();
     const manifest = fs.readFileSync(
       path.join(process.cwd(), "src/lib/guides/published-slugs.generated.ts"),
       "utf8",
     );
     assert.equal(manifest, renderPublishedGuideManifest(guides));
     assert.match(
-      renderPublishedGuideManifest([{ slug: "beta-guide", updated: "2026-10-01" }]),
+      renderPublishedGuideManifest([
+        { slug: "beta-guide", updated: "2026-10-01", category: "trends" },
+      ]),
       /beta-guide/,
     );
   });

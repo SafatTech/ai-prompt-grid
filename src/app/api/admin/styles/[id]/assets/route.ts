@@ -2,6 +2,7 @@ import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import { requireEditor } from "@/lib/admin/access";
 import { adminAssetUploadMetaSchema } from "@/lib/admin/schemas";
+import { buildResultBlurDataUrl } from "@/lib/catalog/result-blur";
 import { processUploadImage } from "@/lib/creations/image";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
@@ -114,7 +115,12 @@ export async function POST(request: Request, context: RouteContext) {
       const patch =
         role === "source"
           ? { source_storage_key: publicUrl }
-          : { result_storage_key: publicUrl };
+          : {
+              result_storage_key: publicUrl,
+              result_blur_data_url: await buildResultBlurDataUrl(
+                processed.image.buffer,
+              ),
+            };
       await supabase
         .from("style_assets")
         .update({

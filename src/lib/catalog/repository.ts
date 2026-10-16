@@ -4,6 +4,18 @@ import { mapDbStyleToCatalog, type DbStyleRow } from "./mapper";
 import { getPublishedStyleById, getPublishedStyles } from "./styles";
 import type { CatalogStyle } from "./types";
 
+/** Nested asset columns must stay explicit so new fields (blur) are never dropped by a stale schema cache. */
+const STYLE_ASSET_SELECT = `
+  id,
+  kind,
+  source_storage_key,
+  result_storage_key,
+  alt_text,
+  sort_order,
+  provenance,
+  result_blur_data_url
+`;
+
 const STYLE_SELECT = `
   id,
   slug,
@@ -22,7 +34,7 @@ const STYLE_SELECT = `
   status,
   categories ( name, slug ),
   prompt_variants ( * ),
-  style_assets ( * )
+  style_assets ( ${STYLE_ASSET_SELECT} )
 `;
 
 function publicBaseUrl(): string | null {

@@ -24,6 +24,8 @@ export type ExamplePair = {
   /** Pixel size of the result file, when known. Optional so older rows still map. */
   resultWidth?: number;
   resultHeight?: number;
+  /** Tiny WebP data URI for the merge hero ambient blur. Null/absent = surface fallback. */
+  resultBlur?: string;
 };
 
 export type PromptVariant = {
@@ -65,5 +67,10 @@ export type CatalogStyle = {
   stays: string[];
   targetSourcePhoto: string;
   examplePairs: ExamplePair[];
+  /**
+   * Ambient hero blur for the card/result image. Prefer examplePairs[].resultBlur;
+   * this is a fallback when only a card/hero asset carries the data URI.
+   */
+  resultBlur?: string;
   promptVariant: PromptVariant;
 };

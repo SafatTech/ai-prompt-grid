@@ -18,16 +18,31 @@ export function mergeResultSize(style: CatalogStyle): { width: number; height: n
   return PORTRAIT_RESULT;
 }
 
+export function mergeResultBlurSrc(style: CatalogStyle): string | undefined {
+  const resultUrl = style.result;
+  const matching = style.examplePairs.find(
+    (pair) => pair.resultBlur && pair.result === resultUrl,
+  )?.resultBlur;
+  if (matching) return matching;
+  return (
+    style.examplePairs.find((pair) => pair.resultBlur)?.resultBlur ??
+    style.resultBlur
+  );
+}
+
 export function mergeResultImage(style: CatalogStyle): {
   src: string;
   alt: string;
   width: number;
   height: number;
+  blurSrc?: string;
 } {
+  const blurSrc = mergeResultBlurSrc(style);
   return {
     src: style.result,
     alt: style.examplePairs[0]?.altResult ?? "",
     ...mergeResultSize(style),
+    ...(blurSrc ? { blurSrc } : {}),
   };
 }
 

@@ -133,6 +133,8 @@ export type GuideHeroImage = {
   url: string;
   alt: string;
   position?: string;
+  width?: number;
+  height?: number;
 };
 
 export type GuideDisplayHero =
@@ -200,7 +202,13 @@ export function estimateReadingMinutes(markdown: string): number {
     .replace(/\[[^\]]*\]\([^)]+\)/g, " ")
     .replace(/[#>*_`~-]/g, " ");
   const words = plain.split(/\s+/).filter(Boolean).length;
-  return Math.max(1, Math.round(words / 220));
+  return Math.max(3, Math.round(words / 220));
+}
+
+/** "7 min read" for list cards and featured bylines. */
+export function formatReadTime(minutes: number): string {
+  const value = Math.max(1, Math.round(minutes));
+  return `${value} min read`;
 }
 
 export function formatGuideDateShort(isoDate: string): string {

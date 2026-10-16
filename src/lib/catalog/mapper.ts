@@ -64,6 +64,8 @@ export type DbStyleAsset = {
   alt_text: string;
   sort_order: number;
   provenance?: unknown;
+  /** Inline 32×40 WebP data URI for ambient hero blur. */
+  result_blur_data_url?: string | null;
 };
 
 export type DbStyleRow = {
@@ -192,12 +194,14 @@ function mapExamplePairs(
       `Result example ${index + 1}`;
     const resultWidth = numberField(provenance, "resultWidth");
     const resultHeight = numberField(provenance, "resultHeight");
+    const resultBlur = parseResultBlur(asset.result_blur_data_url);
     return {
       source: resolveAssetUrl(asset.source_storage_key, publicBaseUrl),
       result: resolveAssetUrl(asset.result_storage_key, publicBaseUrl),
       altSource,
       altResult,
       ...(resultWidth && resultHeight ? { resultWidth, resultHeight } : {}),
+      ...(resultBlur ? { resultBlur } : {}),
     };
   });
 }
@@ -212,21 +216,45 @@ function numberField(record: Record<string, unknown>, key: string): number | und
   return typeof value === "number" && Number.isFinite(value) && value > 0 ? value : undefined;
 }
 
+function parseResultBlur(value: unknown): string | undefined {
+  return typeof value === "string" && value.startsWith("data:image/")
+    ? value
+    : undefined;
+}
+
 function mapCardMedia(
   assets: DbStyleAsset[] | null,
   publicBaseUrl: string | null,
-): { source: string; result: string } {
+): { source: string; result: string; resultBlur?: string } {
   const list = assets ?? [];
   const card =
     list.find((a) => a.kind === "card_pair") ??
+    list.find((a) => a.kind === "hero") ??
     list.find((a) => a.kind === "example_pair") ??
     null;
 
   if (!card) return { source: "", result: "" };
+  const resultBlur = parseResultBlur(card.result_blur_data_url);
   return {
     source: resolveAssetUrl(card.source_storage_key, publicBaseUrl),
     result: resolveAssetUrl(card.result_storage_key, publicBaseUrl),
+    ...(resultBlur ? { resultBlur } : {}),
   };
+}
+
+/** Prefer blur from the pair that matches the card result, then any pair, then card/hero. */
+export function resolveStyleResultBlur(
+  examplePairs: readonly ExamplePair[],
+  resultUrl: string,
+  cardBlur?: string,
+): string | undefined {
+  const matching = examplePairs.find(
+    (pair) => pair.resultBlur && pair.result === resultUrl,
+  )?.resultBlur;
+  if (matching) return matching;
+  const anyPair = examplePairs.find((pair) => pair.resultBlur)?.resultBlur;
+  if (anyPair) return anyPair;
+  return cardBlur;
 }
 
 /**
@@ -245,6 +273,19 @@ export function mapDbStyleToCatalog(
   const card = mapCardMedia(row.style_assets, publicBaseUrl);
   const examplePairs = mapExamplePairs(row.style_assets, publicBaseUrl);
   const promptVariant = mapPromptVariant(variantRow);
+  const pairs =
+    examplePairs.length > 0
+      ? examplePairs
+      : [
+          {
+            source: card.source,
+            result: card.result,
+            altSource: `${row.title} source`,
+            altResult: `${row.title} result`,
+            ...(card.resultBlur ? { resultBlur: card.resultBlur } : {}),
+          },
+        ];
+  const resultBlur = resolveStyleResultBlur(pairs, card.result, card.resultBlur);
 
   return {
     id: row.slug,
@@ -265,17 +306,8 @@ export function mapDbStyleToCatalog(
     changes: row.change_targets ?? [],
     stays: row.preservation_targets ?? [],
     targetSourcePhoto: row.target_source_photo,
-    examplePairs:
-      examplePairs.length > 0
-        ? examplePairs
-        : [
-            {
-              source: card.source,
-              result: card.result,
-              altSource: `${row.title} source`,
-              altResult: `${row.title} result`,
-            },
-          ],
+    examplePairs: pairs,
+    ...(resultBlur ? { resultBlur } : {}),
     promptVariant,
   };
 }
