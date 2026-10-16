@@ -1121,11 +1121,16 @@ textarea:focus-visible,
   position: relative;
   z-index: 1;
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: minmax(0, 1fr);
   align-items: center;
+  justify-content: center;
   gap: 0;
+  box-sizing: border-box;
+  width: 100%;
   max-width: 1180px;
   margin-inline: auto;
+  /* Padding lives here (not on the panel) so .mba-ambient can fill the panel edge-to-edge. */
+  padding: 32px 28px;
 }
 
 .mba-stack {
@@ -1192,7 +1197,7 @@ textarea:focus-visible,
 .mba-stack[data-count="2"] .mba-print[data-photo="1"],
 .mba-stack[data-count="3"] .mba-print[data-photo="1"],
 .mba-stack[data-count="4"] .mba-print[data-photo="1"] {
-  left: 2%;
+  left: 5%;
   top: 4%;
   z-index: 1;
   transform: rotate(-7deg);
@@ -1201,7 +1206,7 @@ textarea:focus-visible,
 .mba-stack[data-count="2"] .mba-print[data-photo="2"],
 .mba-stack[data-count="3"] .mba-print[data-photo="2"],
 .mba-stack[data-count="4"] .mba-print[data-photo="2"] {
-  right: 2%;
+  right: 5%;
   top: 16%;
   z-index: 2;
   transform: rotate(5deg);
@@ -1337,7 +1342,8 @@ textarea:focus-visible,
   text-transform: uppercase;
 }
 
-/* Surface fallback when blur is missing; transparent so .mba-ambient can show. */
+/* Surface fallback when blur is missing; transparent so .mba-ambient can show.
+   No padding here — horizontal/vertical inset is on .mba-hero so ambient is edge-to-edge. */
 .mba-hero-panel {
   background: var(--surface);
 }
@@ -1352,6 +1358,7 @@ textarea:focus-visible,
   z-index: 0;
   pointer-events: none;
   overflow: hidden;
+  border-radius: inherit;
 }
 
 .mba-ambient img {
@@ -1458,12 +1465,14 @@ textarea:focus-visible,
 
 @media (min-width: 768px) {
   .mba-hero {
-    grid-template-columns: 1fr 64px 1fr;
+    grid-template-columns: minmax(0, 1fr) 64px minmax(0, 1fr);
     gap: 8px;
+    padding: 40px 48px;
   }
 
   .mba-stack {
     width: auto;
+    max-width: 100%;
     margin-inline: 0;
     aspect-ratio: 1 / 1.02;
   }
@@ -1658,18 +1667,19 @@ textarea:focus-visible,
   font-size: 44px;
   letter-spacing: -0.025em;
   font-weight: 700;
+  flex: 1;
+  min-width: 0;
 }
 
-.guides-latest-head {
+.guides-latest-title-row {
   display: flex;
   justify-content: space-between;
-  align-items: flex-end;
-  gap: 40px;
-  margin: 14px 0 26px;
+  align-items: center;
+  gap: 32px;
 }
 
-.guides-latest-head p {
-  margin: 0;
+.guides-latest-intro {
+  margin: 14px 0 26px;
   color: var(--muted);
   font-size: 16px;
   line-height: 1.6;
@@ -1897,6 +1907,9 @@ textarea:focus-visible,
 }
 
 .guides-text-card {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   background: var(--surface);
   border: 1px solid rgba(255, 255, 255, 0.08);
   border-radius: 20px;
@@ -1905,7 +1918,7 @@ textarea:focus-visible,
   flex-direction: column;
   gap: 14px;
   min-height: 280px;
-  color: inherit;
+  color: var(--text);
   text-decoration: none;
   transition: border-color 0.2s ease;
 }
@@ -1914,9 +1927,41 @@ textarea:focus-visible,
   border-color: rgba(139, 108, 255, 0.5);
 }
 
+.guides-text-card-media,
+.guides-text-card-fallback {
+  z-index: 0;
+}
+
+.guides-text-card-fallback {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #1d1d29, #2a1a1f);
+}
+
+.guides-text-card-scrim {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(11, 11, 16, 0.55) 0%,
+      rgba(11, 11, 16, 0.72) 45%,
+      rgba(11, 11, 16, 0.92) 100%
+    );
+}
+
+.guides-text-card time,
+.guides-text-card h3,
+.guides-text-card-foot {
+  position: relative;
+  z-index: 2;
+}
+
 .guides-text-card time {
   font-size: 12px;
-  color: var(--muted);
+  color: rgba(245, 243, 238, 0.78);
 }
 
 .guides-text-card h3 {
@@ -1925,6 +1970,8 @@ textarea:focus-visible,
   line-height: 1.35;
   flex: 1;
   font-weight: 700;
+  color: var(--text);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.35);
 }
 
 .guides-text-card-foot {
@@ -1932,8 +1979,8 @@ textarea:focus-visible,
   align-items: center;
   gap: 10px;
   font-size: 13px;
-  color: #cfcbe0;
-  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  color: #e4e0f0;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
   padding-top: 14px;
 }
 
@@ -1941,11 +1988,21 @@ textarea:focus-visible,
   width: 28px;
   height: 28px;
   border-radius: var(--pill);
-  background: rgba(139, 108, 255, 0.18);
-  color: #c4b6ff;
+  background: rgba(139, 108, 255, 0.28);
+  color: #ddd4ff;
   display: grid;
   place-items: center;
   flex-shrink: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .guides-text-card-media {
+    transition: transform 400ms ease;
+  }
+
+  .guides-text-card:hover .guides-text-card-media {
+    transform: scale(1.03);
+  }
 }
 
 .guides-cta {
@@ -2053,13 +2110,15 @@ textarea:focus-visible,
     font-size: 32px;
   }
 
-  .guides-latest-head {
+  .guides-latest-title-row {
     flex-direction: column;
     align-items: center;
     gap: 18px;
   }
 
-  .guides-latest-head p {
+  .guides-latest-intro {
+    margin-left: auto;
+    margin-right: auto;
     font-size: 14px;
   }
 

@@ -54,19 +54,19 @@ export default async function GuidesSearchPage({ searchParams }: Props) {
     <div className="guides-list-page">
       <section className="guides-latest guides-category">
         <div className="guides-wrap">
-          <h1>
-            {query
-              ? `Results for “${query}” (${results.length})`
-              : "Search guides"}
-          </h1>
-          <div className="guides-latest-head">
-            <p>
+          <div className="guides-latest-title-row">
+            <h1>
               {query
-                ? "Matching guides by title, description, tags, and keywords."
-                : description}
-            </p>
+                ? `Results for “${query}” (${results.length})`
+                : "Search guides"}
+            </h1>
             <GuidesSearchForm defaultValue={query} />
           </div>
+          <p className="guides-latest-intro">
+            {query
+              ? "Matching guides by title, description, tags, and keywords."
+              : description}
+          </p>
           <GuideCategoryChips active="all" populated={populated} />
 
           {results.length === 0 ? (

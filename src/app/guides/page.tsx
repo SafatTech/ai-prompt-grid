@@ -1,12 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { AdSlot } from "@/components/ad-slot";
 import { GuideCard } from "@/components/guides/guide-card";
 import { GuideCategoryChips } from "@/components/guides/guide-category-chips";
 import { GuideFeatured } from "@/components/guides/guide-featured";
 import { GuideTextCard } from "@/components/guides/guide-text-card";
 import { GuidesCta } from "@/components/guides/guides-cta";
 import { GuidesSearchForm } from "@/components/guides/guides-search-form";
+// AdSlot kept in src/components/ad-slot.tsx for post-AdSense approval; not rendered yet.
 import type { GuideCategorySlug } from "@/lib/guides/categories";
 import {
   listIndexableGuides,
@@ -145,11 +145,11 @@ export default async function GuidesIndexPage({ searchParams }: Props) {
 
       <section className="guides-latest">
         <div className="guides-wrap">
-          <h1>{title}</h1>
-          <div className="guides-latest-head">
-            <p>{description}</p>
+          <div className="guides-latest-title-row">
+            <h1>{title}</h1>
             <GuidesSearchForm />
           </div>
+          <p className="guides-latest-intro">{description}</p>
           <GuideCategoryChips active="all" populated={populated} />
 
           {guides.length === 0 ? (
@@ -159,19 +159,9 @@ export default async function GuidesIndexPage({ searchParams }: Props) {
           ) : (
             <>
               <div className="guides-grid">
-                {pageGuides.flatMap((guide, index) => {
-                  const card = <GuideCard key={guide.slug} guide={guide} />;
-                  if (index === 2) {
-                    return [
-                      card,
-                      <AdSlot key="guides-list-ad" slot="guides-list-infeed" />,
-                    ];
-                  }
-                  return [card];
-                })}
-                {pageGuides.length > 0 && pageGuides.length < 3 ? (
-                  <AdSlot key="guides-list-ad-tail" slot="guides-list-infeed" />
-                ) : null}
+                {pageGuides.map((guide) => (
+                  <GuideCard key={guide.slug} guide={guide} />
+                ))}
               </div>
               {hasMore ? (
                 <div className="guides-more">
