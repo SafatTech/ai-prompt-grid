@@ -60,13 +60,11 @@ export default async function HomePage() {
     professional,
     trends,
     explorePage1,
-    explorePage2,
-    explorePage3,
     guides,
   ] = await Promise.all([
     countPublishedStyles(),
     listTrendingStyles(TRENDING_RAIL.limit),
-    listHeroWallImages(30, season?.styleSlugs ?? []),
+    listHeroWallImages(18, season?.styleSlugs ?? []),
     listStylesBySlugs(season?.styleSlugs ?? []),
     season
       ? listStylesMatchingQuery(season.ctaCategoryQuery, 200)
@@ -76,8 +74,6 @@ export default async function HomePage() {
     listStylesByCategory(HOME_RAILS[2]!.category!, HOME_RAILS[2]!.limit),
     listStylesMatchingQuery(HOME_RAILS[3]!.q!, HOME_RAILS[3]!.limit),
     listExploreFeed({ page: 1, pageSize: 24 }),
-    listExploreFeed({ page: 2, pageSize: 24 }),
-    listExploreFeed({ page: 3, pageSize: 24 }),
     Promise.resolve(
       [...listVisibleGuides()]
         .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0))
@@ -181,7 +177,6 @@ export default async function HomePage() {
           styles={explorePage1.styles}
           total={explorePage1.total}
           pageSize={explorePage1.pageSize}
-          extraPages={[explorePage2.styles, explorePage3.styles]}
         />
 
         <TrustStrip publishedCount={publishedCount} />

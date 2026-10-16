@@ -97,6 +97,12 @@ export function StyleCard({
                 result={mergeResultImage(style)}
                 sizes={sizes}
               />
+              {promptPreview ? (
+                <div className="style-card-hover-preview" aria-hidden="true">
+                  <p>{promptPreview}</p>
+                  <span>Before → After</span>
+                </div>
+              ) : null}
             </Link>
           ) : (
             <Link

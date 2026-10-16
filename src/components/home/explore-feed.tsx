@@ -8,10 +8,9 @@ type Props = {
   styles: CatalogStyle[];
   total: number;
   pageSize: number;
-  extraPages: CatalogStyle[][];
 };
 
-export function ExploreFeed({ styles, total, pageSize, extraPages }: Props) {
+export function ExploreFeed({ styles, total, pageSize }: Props) {
   return (
     <section className="home-section" aria-labelledby="home-explore-heading">
       <div className="home-section-header">
@@ -37,7 +36,6 @@ export function ExploreFeed({ styles, total, pageSize, extraPages }: Props) {
         initialCount={styles.length}
         total={total}
         pageSize={pageSize}
-        extraPages={extraPages}
       />
     </section>
   );

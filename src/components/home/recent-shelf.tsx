@@ -24,6 +24,10 @@ type Props = {
   catalog: Array<{ id: string; title: string; result: string }>;
 };
 
+const EMPTY_RECENT: RecentView[] = [];
+let cachedRaw: string | null | undefined;
+let cachedRecent: RecentView[] = EMPTY_RECENT;
+
 function subscribeRecent(onStoreChange: () => void) {
   function onStorage(event: StorageEvent) {
     if (event.key === RECENT_VIEWS_KEY || event.key === null) onStoreChange();
@@ -33,11 +37,19 @@ function subscribeRecent(onStoreChange: () => void) {
 }
 
 function getRecentSnapshot(): RecentView[] {
-  return readRecentViews();
+  try {
+    const raw = localStorage.getItem(RECENT_VIEWS_KEY);
+    if (raw === cachedRaw) return cachedRecent;
+    cachedRaw = raw;
+    cachedRecent = readRecentViews();
+    return cachedRecent;
+  } catch {
+    return cachedRecent;
+  }
 }
 
 function getServerSnapshot(): RecentView[] {
-  return [];
+  return EMPTY_RECENT;
 }
 
 export function RecentShelf({ catalog }: Props) {
