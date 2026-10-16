@@ -35,6 +35,7 @@ import {
   ratioOptions,
   type PromptOptions,
 } from "@/lib/catalog/prompts";
+import { recordRecentView } from "@/lib/recent/views";
 import { labeledOptionsForStyle } from "@/lib/catalog/prompt-option-presets";
 import { getStyleProfile, type CatalogStyle } from "@/lib/catalog/styles";
 import { cn } from "@/lib/utils";
@@ -68,7 +69,12 @@ export function StyleDetailClient({ style, children }: Props) {
 
   useEffect(() => {
     track("style_view", { style_id: style.id, category: style.category });
-  }, [style.id, style.category]);
+    recordRecentView({
+      slug: style.id,
+      title: style.title,
+      result: style.result,
+    });
+  }, [style.id, style.category, style.title, style.result]);
 
   useEffect(() => {
     const mq = window.matchMedia("(min-width: 1024px)");

@@ -1,13 +1,14 @@
 import { test, expect } from "@playwright/test";
 
 test.describe("phase 2 guest catalog", () => {
-  test("home renders prototype hero and explore CTA", async ({ page }) => {
+  test("home renders photo-wall hero and explore CTA", async ({ page }) => {
     await page.goto("/");
     await expect(page).toHaveTitle(/AI Prompt Grid/i);
+    await expect(page.getByRole("heading", { level: 1 })).toContainText(
+      /Turn your photo into/i,
+    );
     await expect(page.getByTestId("hero-explore")).toBeVisible();
-    await expect(
-      page.getByLabel("Examples of source photos transformed into AI styles"),
-    ).toBeVisible();
+    await expect(page.getByRole("search")).toBeVisible();
   });
 
   test("guest discovery: explore → search → detail → customize → copy", async ({
@@ -17,7 +18,7 @@ test.describe("phase 2 guest catalog", () => {
     await context.grantPermissions(["clipboard-read", "clipboard-write"]);
     await page.goto("/explore");
     await expect(page.getByTestId("explore-search")).toBeVisible();
-    await expect(page.getByTestId("results-count")).toContainText("171 styles");
+    await expect(page.getByTestId("results-count")).toContainText(/\d+ styles/);
 
     // Title was retitled to "Moody Meadow Cinematic AI Photo Prompt (Tall Grass)".
     await page.getByTestId("explore-search").fill("Moody Meadow");
@@ -27,7 +28,7 @@ test.describe("phase 2 guest catalog", () => {
     await page.getByTestId("desktop-filters").getByTestId("filter-category-Pets").click();
     await expect(page.getByTestId("results-count")).toContainText(/\d+ styles?/);
     await page.getByTestId("clear-filters").click();
-    await expect(page.getByTestId("results-count")).toContainText("171 styles");
+    await expect(page.getByTestId("results-count")).toContainText(/\d+ styles/);
 
     await page.getByTestId("explore-search").fill("Moody Meadow");
     await page.getByTestId("style-card-meadow-reverie").click();

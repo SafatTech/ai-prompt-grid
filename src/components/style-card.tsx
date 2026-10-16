@@ -1,10 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import type { MouseEvent } from "react";
 import { CompareSlider } from "@/components/compare-slider";
+import { CopyPromptButton } from "@/components/home/copy-prompt-button";
 import { MergeBeforeAfter } from "@/components/merge-before-after";
 import { mergeInputPhotos, mergeResultImage, usesMergeStack } from "@/lib/catalog/merge-inputs";
+import { previewPrompt, defaultsForStyle } from "@/lib/catalog/prompts";
 import { useLibrary } from "@/components/providers/library-provider";
 import { useToast } from "@/components/providers/toast-provider";
 import { useUiModals } from "@/components/providers/ui-modal-provider";
@@ -14,15 +17,30 @@ import { cn } from "@/lib/utils";
 type Props = {
   style: CatalogStyle;
   compact?: boolean;
+  /** Homepage rails / masonry — 4:5 media, copy button, hover preview. */
+  variant?: "default" | "rail" | "masonry";
+  /** Trending rank badge (1-based). */
+  rank?: number;
 };
 
-export function StyleCard({ style, compact = false }: Props) {
+export function StyleCard({
+  style,
+  compact = false,
+  variant = "default",
+  rank,
+}: Props) {
   const { signedIn, isSaved, toggleSave, setPendingAction } = useLibrary();
   const { toast } = useToast();
   const { openSignIn } = useUiModals();
   const saved = isSaved(style.id);
   const height = compact ? Math.min(style.height, 320) : style.height;
   const mergePhotos = usesMergeStack(style) ? mergeInputPhotos(style) : [];
+  const isRail = variant === "rail" || variant === "masonry";
+  const promptPreview = previewPrompt(style, defaultsForStyle(style));
+  const pair =
+    style.examplePairs.find((p) => p.result === style.result) ?? style.examplePairs[0];
+  const mediaWidth = pair?.resultWidth && pair.resultWidth > 0 ? pair.resultWidth : 800;
+  const mediaHeight = pair?.resultHeight && pair.resultHeight > 0 ? pair.resultHeight : 1000;
 
   function handleSave(event: MouseEvent) {
     event.preventDefault();
@@ -36,6 +54,101 @@ export function StyleCard({ style, compact = false }: Props) {
     toggleSave(style.id);
     toast(
       nowSaved ? "Style saved to your library." : "Style removed from your library.",
+    );
+  }
+
+  if (isRail) {
+    const sizes =
+      variant === "masonry"
+        ? "(max-width:700px) 50vw, 240px"
+        : "(max-width:700px) 62vw, 250px";
+
+    return (
+      <article
+        className={cn(
+          "style-card-rail group relative overflow-hidden rounded-[var(--radius)] border border-[var(--line)] bg-[var(--surface)]",
+          variant === "masonry" && "style-card-masonry",
+        )}
+        data-testid={`style-card-${style.id}`}
+      >
+        <div
+          className="style-card-rail-media relative overflow-hidden bg-[var(--surface-2)]"
+          style={
+            variant === "masonry"
+              ? { aspectRatio: `${mediaWidth} / ${mediaHeight}` }
+              : { aspectRatio: "4 / 5" }
+          }
+        >
+          {rank != null ? (
+            <span className="style-card-rank" aria-hidden="true">
+              {rank}
+            </span>
+          ) : null}
+          {mergePhotos.length >= 2 ? (
+            <Link
+              href={`/styles/${style.id}`}
+              className="absolute inset-0 block"
+              aria-label={`Open ${style.title}`}
+            >
+              <MergeBeforeAfter
+                variant="card"
+                title={style.title}
+                inputs={mergePhotos}
+                result={mergeResultImage(style)}
+                sizes={sizes}
+              />
+            </Link>
+          ) : (
+            <Link
+              href={`/styles/${style.id}`}
+              className="absolute inset-0 block"
+              aria-label={`Open ${style.title}`}
+            >
+              <Image
+                src={style.result}
+                alt={`${style.title} AI photo result`}
+                fill
+                sizes={sizes}
+                className="object-cover"
+                loading="lazy"
+                placeholder={style.resultBlur ? "blur" : "empty"}
+                blurDataURL={style.resultBlur}
+              />
+              {promptPreview ? (
+                <div className="style-card-hover-preview" aria-hidden="true">
+                  <p>{promptPreview}</p>
+                  <span>Before → After</span>
+                </div>
+              ) : null}
+            </Link>
+          )}
+          <button
+            type="button"
+            className={cn(
+              "style-card-heart absolute top-2.5 right-2.5 z-4 flex h-[38px] w-[38px] cursor-pointer items-center justify-center rounded-[11px] border border-[rgba(255,255,255,0.22)] bg-[rgba(11,11,16,0.72)] text-base text-[var(--text)] backdrop-blur-sm",
+              saved && "bg-[rgba(255,155,130,0.12)] text-[var(--peach)]",
+            )}
+            aria-label={saved ? `Unsave ${style.title}` : `Save ${style.title}`}
+            data-testid={`save-style-${style.id}`}
+            onClick={handleSave}
+          >
+            {saved ? "♥" : "♡"}
+          </button>
+        </div>
+        <div className="style-card-rail-body px-3.5 pt-3 pb-3.5">
+          <h3 className="m-0 truncate text-[15px] font-semibold leading-snug tracking-[-0.01em]">
+            <Link href={`/styles/${style.id}`}>{style.title}</Link>
+          </h3>
+          <div className="style-card-rail-row mt-2 flex items-center justify-between gap-2">
+            <span className="min-w-0 truncate text-xs text-[var(--muted)]">
+              {mergePhotos.length >= 2
+                ? `Merge · ${mergePhotos.length} photos`
+                : style.category}
+            </span>
+            <CopyPromptButton style={style} />
+          </div>
+        </div>
+      </article>
     );
   }
 

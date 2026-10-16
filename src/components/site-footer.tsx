@@ -4,67 +4,60 @@ import { CONTACT_EMAIL, CONTACT_MAILTO } from "@/lib/site-contact";
 
 export function SiteFooter({ showGuidesLink }: { showGuidesLink: boolean }) {
   return (
-    <footer className="border-t border-[var(--line)] py-8 text-xs text-[var(--muted)]">
-      <div className="container flex flex-col items-start justify-between gap-5 sm:flex-row sm:items-center">
-        <div className="flex items-center gap-2 font-bold text-[var(--text)]">
-          <StoryShiftMark className="h-6 w-[35px]" />
-          AI Prompt Grid
+    <footer className="border-t border-[var(--line)] text-xs text-[var(--muted)]">
+      <div className="site-footer-grid">
+        <div>
+          <div className="site-footer-brand">
+            <StoryShiftMark className="h-6 w-[35px]" />
+            AI Prompt Grid
+          </div>
+          <p>Tested AI photo prompts for festivals, portraits, and everyday looks.</p>
         </div>
-        <div className="flex flex-wrap items-center gap-x-4 gap-y-2">
-          <span className="sm:mr-2">
-            Discover tested styles. Transform your photo in an external AI editor.
-          </span>
+        <div>
+          <h4>Categories</h4>
+          <Link href={`/explore?category=${encodeURIComponent("Professional portraits")}`}>
+            Professional
+          </Link>
+          <Link href="/explore?q=couple">Couples &amp; Shaadi</Link>
+          <Link href="/explore?q=family">Family &amp; Eid</Link>
+          <Link href="/explore?q=anime">Trends</Link>
+        </div>
+        <div>
+          <h4>Festivals</h4>
+          <Link href="/guides/diwali-couple-ai-photo-editing-prompts">Diwali prompts</Link>
+          <Link href="/explore?q=Eid">Eid prompts</Link>
+          <Link href="/guides/halloween-ai-prompts-for-selfies">Halloween</Link>
+          <Link href="/guides/winter-ai-photo-prompts">Winter</Link>
+        </div>
+        <div>
+          <h4>Guides</h4>
           {showGuidesLink ? (
-            <Link
-              href="/guides"
-              className="font-bold text-[var(--text)] underline-offset-2 hover:underline"
-            >
-              Guides
-            </Link>
-          ) : null}
-          <Link
-            href="/about"
-            className="font-bold text-[var(--text)] underline-offset-2 hover:underline"
-          >
-            About
-          </Link>
-          <Link
-            href="/contact"
-            className="font-bold text-[var(--text)] underline-offset-2 hover:underline"
-          >
-            Contact
-          </Link>
-          <a
-            href={CONTACT_MAILTO}
-            className="font-bold text-[var(--text)] underline-offset-2 hover:underline"
-          >
-            {CONTACT_EMAIL}
-          </a>
-          <Link
-            href="/privacy-policy"
-            className="font-bold text-[var(--text)] underline-offset-2 hover:underline"
-          >
-            Privacy
-          </Link>
-          <Link
-            href="/cookie-policy"
-            className="font-bold text-[var(--text)] underline-offset-2 hover:underline"
-          >
-            Cookie policy
-          </Link>
-          <Link
-            href="/disclaimer"
-            className="font-bold text-[var(--text)] underline-offset-2 hover:underline"
-          >
-            Disclaimer
-          </Link>
-          <Link
-            href="/terms-of-service"
-            className="font-bold text-[var(--text)] underline-offset-2 hover:underline"
-          >
-            Terms
-          </Link>
+            <>
+              <Link href="/guides/how-to-merge-two-photos-in-gemini">Merge two photos</Link>
+              <Link href="/guides/gemini-headshot-cv-photo-prompts">LinkedIn headshot</Link>
+              <Link href="/guides/how-to-keep-face-same-in-gemini-ai">Keep your face the same</Link>
+              <Link href="/guides">All guides</Link>
+            </>
+          ) : (
+            <Link href="/how-it-works">How it works</Link>
+          )}
         </div>
+      </div>
+      <div className="site-footer-legal">
+        © {new Date().getFullYear()} AI Prompt Grid ·{" "}
+        <Link href="/about">About</Link>
+        {" · "}
+        <Link href="/contact">Contact</Link>
+        {" · "}
+        <a href={CONTACT_MAILTO}>{CONTACT_EMAIL}</a>
+        {" · "}
+        <Link href="/privacy-policy">Privacy</Link>
+        {" · "}
+        <Link href="/cookie-policy">Cookie policy</Link>
+        {" · "}
+        <Link href="/disclaimer">Disclaimer</Link>
+        {" · "}
+        <Link href="/terms-of-service">Terms</Link>
       </div>
     </footer>
   );
