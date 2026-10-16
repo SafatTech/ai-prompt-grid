@@ -124,11 +124,11 @@ export default async function GuideCategoryPage({ params }: Props) {
 
       <section className="guides-latest guides-category">
         <div className="guides-wrap">
-          <h1>{title}</h1>
-          <div className="guides-latest-head">
-            <p>{category.intro}</p>
+          <div className="guides-latest-title-row">
+            <h1>{title}</h1>
             <GuidesSearchForm />
           </div>
+          <p className="guides-latest-intro">{category.intro}</p>
           <GuideCategoryChips active={category.slug} populated={populated} />
 
           {guides.length === 0 ? (
