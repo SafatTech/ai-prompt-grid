@@ -314,6 +314,40 @@ export function SiteHeader({ showGuidesLink }: { showGuidesLink: boolean }) {
               >
                 {avatarInitials}
               </button>
+              {panel === "account" ? (
+                <div
+                  id={accountId}
+                  className="nav-panel-in absolute top-[calc(100%+8px)] right-0 z-40 w-[230px] rounded-[18px] border border-[rgba(255,255,255,0.10)] bg-[#15151E] p-2 shadow-[0_18px_50px_rgba(0,0,0,0.38)]"
+                  role="menu"
+                  onMouseEnter={clearLeave}
+                >
+                  <p className="px-3 py-2 text-xs text-[#A6A4B2]">
+                    {userName || userEmail || "Signed in"}
+                  </p>
+                  <AccountLink href="/library" onClick={closePanels}>
+                    My library
+                  </AccountLink>
+                  <AccountLink href="/library#saved" onClick={closePanels}>
+                    Saved styles
+                  </AccountLink>
+                  <AccountLink href="/library#creations" onClick={closePanels}>
+                    My creations
+                  </AccountLink>
+                  {isEditor ? (
+                    <AccountLink href="/admin" onClick={closePanels}>
+                      Editorial admin
+                    </AccountLink>
+                  ) : null}
+                  <button
+                    type="button"
+                    role="menuitem"
+                    className="min-h-11 w-full cursor-pointer rounded-[12px] border-0 bg-transparent px-3 text-left text-sm text-[#F5F3EE] hover:bg-[#2A1A31]"
+                    onClick={signOutAndLeave}
+                  >
+                    Sign out
+                  </button>
+                </div>
+              ) : null}
             </div>
           ) : (
             <Button
@@ -393,45 +427,6 @@ export function SiteHeader({ showGuidesLink }: { showGuidesLink: boolean }) {
               ))}
             </ul>
             <FeaturedStyle onNavigate={closePanels} />
-          </div>
-        </div>
-      ) : null}
-
-      {panel === "account" && signedIn ? (
-        <div
-          className="absolute top-full right-6 z-40 hidden pt-2 lg:block"
-          onMouseEnter={clearLeave}
-        >
-          <div
-            id={accountId}
-            className="nav-panel-in w-[230px] rounded-[18px] border border-[rgba(255,255,255,0.10)] bg-[#15151E] p-2 shadow-[0_18px_50px_rgba(0,0,0,0.38)]"
-            role="menu"
-          >
-            <p className="px-3 py-2 text-xs text-[#A6A4B2]">
-              {userName || userEmail || "Signed in"}
-            </p>
-            <AccountLink href="/library" onClick={closePanels}>
-              My library
-            </AccountLink>
-            <AccountLink href="/library#saved" onClick={closePanels}>
-              Saved styles
-            </AccountLink>
-            <AccountLink href="/library#creations" onClick={closePanels}>
-              My creations
-            </AccountLink>
-            {isEditor ? (
-              <AccountLink href="/admin" onClick={closePanels}>
-                Editorial admin
-              </AccountLink>
-            ) : null}
-            <button
-              type="button"
-              role="menuitem"
-              className="min-h-11 w-full cursor-pointer rounded-[12px] border-0 bg-transparent px-3 text-left text-sm text-[#F5F3EE] hover:bg-[#2A1A31]"
-              onClick={signOutAndLeave}
-            >
-              Sign out
-            </button>
           </div>
         </div>
       ) : null}
