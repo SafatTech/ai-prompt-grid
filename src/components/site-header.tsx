@@ -68,6 +68,8 @@ export function SiteHeader({ showGuidesLink }: { showGuidesLink: boolean }) {
   const [creatorsOpen, setCreatorsOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [routeKey, setRouteKey] = useState(pathname);
+  const [heroScrolled, setHeroScrolled] = useState(false);
+  const isHome = pathname === "/";
 
   if (pathname !== routeKey) {
     setRouteKey(pathname);
@@ -77,6 +79,7 @@ export function SiteHeader({ showGuidesLink }: { showGuidesLink: boolean }) {
     setCreatorsOpen(false);
     setCategoriesOpen(false);
     setMobileGroup(null);
+    setHeroScrolled(false);
   }
 
   const exploreActive = pathname.startsWith("/explore") || pathname.startsWith("/styles");
@@ -84,6 +87,16 @@ export function SiteHeader({ showGuidesLink }: { showGuidesLink: boolean }) {
   const guidesActive = pathname.startsWith("/guides");
   const selectedGroup =
     categoryGroups.find((group) => group.id === activeGroup) ?? categoryGroups[0];
+
+  useEffect(() => {
+    if (!isHome) return;
+    function onScroll() {
+      setHeroScrolled(window.scrollY > 40);
+    }
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [isHome]);
 
   useEffect(() => {
     function onPointerDown(event: PointerEvent) {
@@ -201,11 +214,21 @@ export function SiteHeader({ showGuidesLink }: { showGuidesLink: boolean }) {
   return (
     <header
       ref={rootRef}
-      className="sticky top-0 z-40 border-b border-[rgba(255,255,255,0.10)] bg-[rgba(11,11,16,0.94)] backdrop-blur-[8px]"
+      className={cn(
+        "z-40 border-b border-[rgba(255,255,255,0.10)] bg-[rgba(11,11,16,0.94)] backdrop-blur-[8px]",
+        isHome
+          ? cn("site-header--hero", heroScrolled && "site-header--scrolled")
+          : "sticky top-0",
+      )}
       onMouseEnter={clearLeave}
       onMouseLeave={scheduleClose}
     >
-      <div className="mx-auto flex h-[var(--header)] w-full max-w-[1440px] items-center gap-3 px-6 max-lg:px-4">
+      <div
+        className={cn(
+          "mx-auto flex h-[var(--header)] w-full max-w-[1440px] items-center gap-3 px-6 max-lg:px-4",
+          "site-header-inner--wide",
+        )}
+      >
         <Link
           href="/"
           className="inline-flex shrink-0 items-center gap-2.5 text-[16px] font-bold tracking-[-0.03em] text-[#F5F3EE]"

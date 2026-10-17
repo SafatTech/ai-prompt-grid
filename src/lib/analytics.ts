@@ -6,6 +6,7 @@ type EventName =
   | "style_view"
   | "comparison_interaction"
   | "prompt_copy"
+  | "copy_prompt"
   | "style_share"
   | "external_tool_click"
   | "sign_in_started"

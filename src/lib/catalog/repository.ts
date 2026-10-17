@@ -1,3 +1,4 @@
+import { cache } from "react";
 import { getPublicSupabaseConfig, isSupabaseConfigured } from "@/lib/env";
 import { createPublicSupabaseClient } from "@/lib/supabase/public";
 import { mapDbStyleToCatalog, type DbStyleRow } from "./mapper";
@@ -31,6 +32,7 @@ const STYLE_SELECT = `
   target_source_photo,
   card_height,
   save_count,
+  trending_rank,
   status,
   categories ( name, slug ),
   prompt_variants ( * ),
@@ -53,8 +55,9 @@ function mapRows(rows: DbStyleRow[]): CatalogStyle[] {
  * Published catalog for guest UI.
  * Prefers Supabase when configured; falls back to static seed otherwise.
  * Uses a cookie-free anon client so catalog pages can prerender.
+ * Cached per request so homepage rails share one fetch.
  */
-export async function listPublishedStyles(): Promise<CatalogStyle[]> {
+export const listPublishedStyles = cache(async (): Promise<CatalogStyle[]> => {
   if (!isSupabaseConfigured()) {
     return getPublishedStyles();
   }
@@ -88,14 +91,14 @@ export async function listPublishedStyles(): Promise<CatalogStyle[]> {
     console.warn("[catalog] Unexpected catalog error; using seed fallback.", err);
     return getPublishedStyles();
   }
-}
+});
 
 /**
- * Homepage "Trending transformations" (max 6).
+ * Homepage trending rail (up to 10).
  * Uses editor-assigned trending_rank when set; otherwise falls back to top published styles.
  */
 export async function listTrendingStyles(limit = 6): Promise<CatalogStyle[]> {
-  const capped = Math.min(Math.max(limit, 1), 6);
+  const capped = Math.min(Math.max(limit, 1), 10);
   const all = await listPublishedStyles();
 
   if (!isSupabaseConfigured()) {
@@ -126,10 +129,175 @@ export async function listTrendingStyles(limit = 6): Promise<CatalogStyle[]> {
     if (mapped.length === 0) {
       return all.slice(0, capped);
     }
+
+    if (mapped.length < capped) {
+      const seen = new Set(mapped.map((style) => style.id));
+      for (const style of all) {
+        if (seen.has(style.id)) continue;
+        mapped.push(style);
+        if (mapped.length >= capped) break;
+      }
+    }
     return mapped;
   } catch (err) {
     console.warn("[catalog] Unexpected trending error; using catalog fallback.", err);
     return all.slice(0, capped);
+  }
+}
+
+export type HeroWallImage = {
+  src: string;
+  width: number;
+  height: number;
+  blurDataURL?: string;
+};
+
+/**
+ * Full-bleed hero wall tiles: published card_pair results, trending first, then save_count.
+ * Optionally mixes in ~8 season style slugs when provided.
+ */
+export async function listHeroWallImages(
+  limit = 30,
+  preferSlugs: string[] = [],
+): Promise<HeroWallImage[]> {
+  const styles = await listPublishedStyles();
+  const bySlug = new Map(styles.map((style) => [style.id, style]));
+  const picked: CatalogStyle[] = [];
+  const seen = new Set<string>();
+
+  for (const slug of preferSlugs) {
+    const style = bySlug.get(slug);
+    if (!style || !style.result || seen.has(style.id)) continue;
+    picked.push(style);
+    seen.add(style.id);
+    if (picked.length >= Math.min(8, limit)) break;
+  }
+
+  const ranked = [...styles].sort((a, b) => (b.saved ?? 0) - (a.saved ?? 0));
+  for (const style of ranked) {
+    if (!style.result || seen.has(style.id)) continue;
+    picked.push(style);
+    seen.add(style.id);
+    if (picked.length >= limit) break;
+  }
+
+  return picked.slice(0, limit).map((style) => {
+    const pair = style.examplePairs.find((p) => p.result === style.result) ?? style.examplePairs[0];
+    const width = pair?.resultWidth && pair.resultWidth > 0 ? pair.resultWidth : 800;
+    const height = pair?.resultHeight && pair.resultHeight > 0 ? pair.resultHeight : 1000;
+    return {
+      src: style.result,
+      width,
+      height,
+      ...(style.resultBlur ? { blurDataURL: style.resultBlur } : {}),
+    };
+  });
+}
+
+/** Published styles in a category, ordered by save_count desc. */
+export async function listStylesByCategory(
+  category: string,
+  limit = 10,
+): Promise<CatalogStyle[]> {
+  const capped = Math.min(Math.max(limit, 1), 24);
+  if (!category.trim()) return [];
+  return (await listPublishedStyles())
+    .filter((style) => style.category === category)
+    .slice(0, capped);
+}
+
+/** Thematic rail: case-insensitive match on title/summary/slug tokens. */
+export async function listStylesMatchingQuery(
+  query: string,
+  limit = 10,
+): Promise<CatalogStyle[]> {
+  const capped = Math.min(Math.max(limit, 1), 24);
+  const q = query.trim().toLowerCase();
+  if (!q) return [];
+
+  const all = await listPublishedStyles();
+  return all
+    .filter((style) => {
+      const hay = [
+        style.id,
+        style.title,
+        style.note,
+        style.description,
+        style.category,
+      ]
+        .join(" ")
+        .toLowerCase();
+      return hay.includes(q);
+    })
+    .slice(0, capped);
+}
+
+export async function listStylesBySlugs(slugs: string[]): Promise<CatalogStyle[]> {
+  if (slugs.length === 0) return [];
+  const all = await listPublishedStyles();
+  const bySlug = new Map(all.map((style) => [style.id, style]));
+  return slugs
+    .map((slug) => bySlug.get(slug))
+    .filter((style): style is CatalogStyle => style !== undefined);
+}
+
+export type ExploreFeedPage = {
+  styles: CatalogStyle[];
+  page: number;
+  pageSize: number;
+  total: number;
+};
+
+/** Paginated explore masonry feed for the homepage. */
+export async function listExploreFeed(options?: {
+  page?: number;
+  pageSize?: number;
+  category?: string;
+}): Promise<ExploreFeedPage> {
+  const page = Math.max(1, options?.page ?? 1);
+  const pageSize = Math.min(Math.max(options?.pageSize ?? 24, 1), 48);
+  const category = options?.category?.trim() || "";
+
+  let all = await listPublishedStyles();
+  if (category) {
+    all = all.filter((style) => style.category === category);
+  }
+
+  const total = all.length;
+  const start = (page - 1) * pageSize;
+  return {
+    styles: all.slice(start, start + pageSize),
+    page,
+    pageSize,
+    total,
+  };
+}
+
+/** Exact published style count for trust / CTA copy (no made-up padding). */
+export async function countPublishedStyles(): Promise<number> {
+  if (!isSupabaseConfigured()) {
+    return (await listPublishedStyles()).length;
+  }
+
+  try {
+    const supabase = createPublicSupabaseClient();
+    if (!supabase) return (await listPublishedStyles()).length;
+
+    const { count, error } = await supabase
+      .from("styles")
+      .select("id", { count: "exact", head: true })
+      .eq("status", "published");
+
+    if (error || count == null) {
+      if (error) {
+        console.warn("[catalog] Published count failed; using list length.", error.message);
+      }
+      return (await listPublishedStyles()).length;
+    }
+    return count;
+  } catch (err) {
+    console.warn("[catalog] Unexpected published count error; using list length.", err);
+    return (await listPublishedStyles()).length;
   }
 }
 
