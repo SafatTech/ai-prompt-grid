@@ -39,13 +39,8 @@ export function StyleRail({ id, title, subtitle, href, styles, ranked = false }:
         tabIndex={0}
         aria-label={`${title} styles, scroll sideways`}
       >
-        {styles.map((style, index) => (
-          <StyleCard
-            key={style.id}
-            style={style}
-            variant="rail"
-            rank={ranked ? index + 1 : undefined}
-          />
+        {styles.map((style) => (
+          <StyleCard key={style.id} style={style} variant="rail" />
         ))}
       </div>
     </section>

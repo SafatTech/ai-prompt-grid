@@ -19,15 +19,12 @@ type Props = {
   compact?: boolean;
   /** Homepage rails / masonry — 4:5 media, copy button, hover preview. */
   variant?: "default" | "rail" | "masonry";
-  /** Trending rank badge (1-based). */
-  rank?: number;
 };
 
 export function StyleCard({
   style,
   compact = false,
   variant = "default",
-  rank,
 }: Props) {
   const { signedIn, isSaved, toggleSave, setPendingAction } = useLibrary();
   const { toast } = useToast();
@@ -79,11 +76,6 @@ export function StyleCard({
               : { aspectRatio: "4 / 5" }
           }
         >
-          {rank != null ? (
-            <span className="style-card-rank" aria-hidden="true">
-              {rank}
-            </span>
-          ) : null}
           {mergePhotos.length >= 2 ? (
             <Link
               href={`/styles/${style.id}`}
