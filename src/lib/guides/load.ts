@@ -92,17 +92,17 @@ export function visibleGuideSlugs(): Set<string> {
 }
 
 export function listGuidesByCategory(slug: GuideCategorySlug): Guide[] {
-  return listVisibleGuides().filter((guide) => guide.category === slug);
+  return listIndexableGuides().filter((guide) => guide.category === slug);
 }
 
 export function listIndexableGuidesByCategory(slug: GuideCategorySlug): Guide[] {
   return listIndexableGuides().filter((guide) => guide.category === slug);
 }
 
-/** Categories that currently have at least one visible guide. */
+/** Categories that currently have at least one published guide. */
 export function listPopulatedGuideCategories() {
   const counts = new Map<GuideCategorySlug, number>();
-  for (const guide of listVisibleGuides()) {
+  for (const guide of listIndexableGuides()) {
     counts.set(guide.category, (counts.get(guide.category) ?? 0) + 1);
   }
   return counts;
@@ -111,7 +111,7 @@ export function listPopulatedGuideCategories() {
 /**
  * Case-insensitive substring search over title, description, tags, and keywords.
  */
-export function searchGuides(query: string, guides = listVisibleGuides()): Guide[] {
+export function searchGuides(query: string, guides = listIndexableGuides()): Guide[] {
   const needle = query.trim().toLowerCase();
   if (!needle) return guides;
   return guides.filter((guide) => {

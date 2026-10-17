@@ -7,13 +7,11 @@ import { GuideTextCard } from "@/components/guides/guide-text-card";
 import { GuidesCta } from "@/components/guides/guides-cta";
 import { GuidesSearchForm } from "@/components/guides/guides-search-form";
 // AdSlot kept in src/components/ad-slot.tsx for post-AdSense approval; not rendered yet.
-import type { GuideCategorySlug } from "@/lib/guides/categories";
 import {
-  listIndexableGuides,
-  listPopulatedGuideCategories,
-  listVisibleGuides,
-  type Guide,
-} from "@/lib/guides/load";
+  GUIDE_CATEGORIES,
+  type GuideCategorySlug,
+} from "@/lib/guides/categories";
+import { listIndexableGuides, type Guide } from "@/lib/guides/load";
 import {
   canonicalGuideUrl,
   defaultOgImage,
@@ -62,11 +60,14 @@ export async function generateMetadata({ searchParams }: Props): Promise<Metadat
 
 export default async function GuidesIndexPage({ searchParams }: Props) {
   const page = parsePage((await searchParams).page);
-  const guides = listVisibleGuides();
-  const showingDrafts = guides.some((guide) => guide.draft);
+  // Public listing is published-only so a draft is never linked from /guides.
+  // Local/preview draft reading still works via direct /guides/[slug] URLs.
+  const guides = listIndexableGuides();
   const populated = new Set(
-    [...listPopulatedGuideCategories().keys()] as GuideCategorySlug[],
-  );
+    GUIDE_CATEGORIES.filter((category) =>
+      guides.some((guide) => guide.category === category.slug),
+    ).map((category) => category.slug),
+  ) as Set<GuideCategorySlug>;
 
   const featured = page === 1 ? guides[0] : undefined;
   const remaining = featured ? guides.slice(1) : guides;
@@ -130,16 +131,6 @@ export default async function GuidesIndexPage({ searchParams }: Props) {
           __html: JSON.stringify(itemListLd).replace(/</g, "\\u003c"),
         }}
       />
-
-      {showingDrafts ? (
-        <div className="guides-wrap pt-6">
-          <p className="m-0 rounded-2xl border border-dashed border-[#8b6cff] bg-[#15151E] px-4 py-3 text-sm leading-relaxed text-[var(--muted)]">
-            Draft preview. These guides stay off the public index, sitemap, and production
-            URLs until <code className="text-[var(--text)]">draft</code> is set to{" "}
-            <code className="text-[var(--text)]">false</code>.
-          </p>
-        </div>
-      ) : null}
 
       {featured ? <GuideFeatured guide={featured} /> : null}
 

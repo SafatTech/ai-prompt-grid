@@ -209,7 +209,7 @@ Build the setting from {{background}} while retaining a fresh celebratory atmosp
     height: 370,
     saved: 112,
     source: asset("source-04.png"),
-    result: asset("result-04.png"),
+    result: asset("result-04.webp"),
     status: "published",
     targetSourcePhoto: "Clear portrait with a strong facial silhouette",
     description:
@@ -222,11 +222,20 @@ Build the setting from {{background}} while retaining a fresh celebratory atmosp
     ],
     changes: ["Art medium", "Outfit", "Background", "Print color treatment"],
     stays: ["Recognisable identity", "Facial features", "Natural complexion", "Likeness"],
-    examplePairs: evidence(
-      "04",
-      "Source portrait for pulp comic hero",
-      "Vintage pulp comic hero result",
-    ),
+    examplePairs: [
+      {
+        source: asset("source-04.png"),
+        result: asset("result-04.webp"),
+        altSource: "Source portrait for pulp comic hero",
+        altResult: "Vintage pulp comic hero result",
+      },
+      {
+        source: asset("source-04.png"),
+        result: asset("result-04.webp"),
+        altSource: "Source portrait for pulp comic hero (detail)",
+        altResult: "Vintage pulp comic hero result (detail)",
+      },
+    ],
     promptVariant: {
       id: "vintage-pulp-comic-hero-v1",
       version: "1.0.0",

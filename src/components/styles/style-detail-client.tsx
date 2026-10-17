@@ -230,6 +230,7 @@ export function StyleDetailClient({ style, children }: Props) {
               altSource={style.examplePairs[0]?.altSource}
               altResult={style.examplePairs[0]?.altResult}
               large
+              priority
               showModeToggle
               defaultMode={compareDefault}
             />

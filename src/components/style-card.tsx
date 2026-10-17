@@ -19,12 +19,15 @@ type Props = {
   compact?: boolean;
   /** Homepage rails / masonry — 4:5 media, copy button, hover preview. */
   variant?: "default" | "rail" | "masonry";
+  /** First above-the-fold card: eager LCP image. */
+  priority?: boolean;
 };
 
 export function StyleCard({
   style,
   compact = false,
   variant = "default",
+  priority = false,
 }: Props) {
   const { signedIn, isSaved, toggleSave, setPendingAction } = useLibrary();
   const { toast } = useToast();
@@ -88,6 +91,7 @@ export function StyleCard({
                 inputs={mergePhotos}
                 result={mergeResultImage(style)}
                 sizes={sizes}
+                priority={priority}
               />
               {promptPreview ? (
                 <div className="style-card-hover-preview" aria-hidden="true">
@@ -108,7 +112,9 @@ export function StyleCard({
                 fill
                 sizes={sizes}
                 className="object-cover"
-                loading="lazy"
+                priority={priority}
+                loading={priority ? undefined : "lazy"}
+                fetchPriority={priority ? "high" : "auto"}
                 placeholder={style.resultBlur ? "blur" : "empty"}
                 blurDataURL={style.resultBlur}
               />
@@ -164,6 +170,7 @@ export function StyleCard({
             title={style.title}
             inputs={mergePhotos}
             result={mergeResultImage(style)}
+            priority={priority}
           />
         ) : (
           <CompareSlider
@@ -171,6 +178,7 @@ export function StyleCard({
             result={style.result}
             title={style.title}
             styleId={style.id}
+            priority={priority}
           />
         )}
         <button

@@ -206,14 +206,17 @@ export const SEASONS: Season[] = [
   },
 ];
 
-const DEFAULT_POPULAR = [
+/** Fallback Popular chips when no season is active (also used by chip search tests). */
+export const DEFAULT_POPULAR_QUERIES = [
   "Diwali couple",
   "Shaadi",
   "Eid family",
   "LinkedIn",
   "Ghibli",
   "80s retro",
-];
+] as const;
+
+const DEFAULT_POPULAR: string[] = [...DEFAULT_POPULAR_QUERIES];
 
 /** Calendar date string in Asia/Karachi for comparison with season ISO dates. */
 export function karachiDateString(now = new Date()): string {

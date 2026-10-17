@@ -11,7 +11,6 @@ import {
   getGuide,
   listIndexableGuides,
   listVisibleGuides,
-  visibleGuideSlugs,
 } from "@/lib/guides/load";
 import {
   canonicalGuideUrl,
@@ -26,7 +25,11 @@ import {
   resolveGuideSocialImage,
   showsDraftGuides,
 } from "@/lib/guides/prepare";
+import { publishedGuideSlugs } from "@/lib/guides/published-slugs.generated";
 import { absoluteUrl } from "@/lib/site-url";
+
+/** In-body guide hrefs only resolve when the target is published — never a draft. */
+const publishedSlugSet = new Set(publishedGuideSlugs);
 
 type GuidePageProps = {
   params: Promise<{ slug: string }>;
@@ -76,7 +79,6 @@ export default async function GuidePage({ params }: GuidePageProps) {
   if (!guide || (guide.draft && !showsDraftGuides())) notFound();
 
   const canonical = canonicalGuideUrl(guide.slug);
-  const visibleSlugs = visibleGuideSlugs();
   const articleImage = resolveGuideArticleImage(guide);
   const hero = resolveGuideDisplayHero(guide);
   const toc = extractGuideToc(guide.body);
@@ -178,7 +180,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
           <GuideTocMobile items={toc} />
           <GuideMarkdown
             markdown={guide.body}
-            visibleSlugs={visibleSlugs}
+            visibleSlugs={publishedSlugSet}
             eagerFirstPair={false}
           />
           <p className="mt-12 mb-0 text-sm text-[var(--muted)]">

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import { cn } from "@/lib/utils";
 
 export type MergeImage = {
@@ -49,20 +50,15 @@ function FrameImage({
   className?: string;
   objectPosition?: string;
 }) {
-  const width = image.width ?? DEFAULT_WIDTH;
-  const height = image.height ?? DEFAULT_HEIGHT;
-  const shared = cn("absolute inset-0 h-full w-full object-cover", className);
-  // Public guide files and remote catalog WebPs both use a plain img so
-  // inputs keep rendering when /_next/image is unavailable.
+  const shared = cn("object-cover", className);
   return (
-    // eslint-disable-next-line @next/next/no-img-element -- remote catalog / guide assets
-    <img
+    <Image
       src={image.src}
       alt={image.alt}
-      width={width}
-      height={height}
+      fill
       sizes={sizes}
-      loading={priority ? "eager" : "lazy"}
+      priority={priority}
+      loading={priority ? undefined : "lazy"}
       fetchPriority={highPriority ? "high" : "auto"}
       decoding="async"
       className={shared}

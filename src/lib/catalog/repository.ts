@@ -1,6 +1,7 @@
 import { cache } from "react";
 import { getPublicSupabaseConfig, isSupabaseConfigured } from "@/lib/env";
 import { createPublicSupabaseClient } from "@/lib/supabase/public";
+import { createEmptyFilters, filterStyles } from "./filters";
 import { mapDbStyleToCatalog, type DbStyleRow } from "./mapper";
 import { getPublishedStyleById, getPublishedStyles } from "./styles";
 import type { CatalogStyle } from "./types";
@@ -216,20 +217,7 @@ export async function listStylesMatchingQuery(
   if (!q) return [];
 
   const all = await listPublishedStyles();
-  return all
-    .filter((style) => {
-      const hay = [
-        style.id,
-        style.title,
-        style.note,
-        style.description,
-        style.category,
-      ]
-        .join(" ")
-        .toLowerCase();
-      return hay.includes(q);
-    })
-    .slice(0, capped);
+  return filterStyles(all, createEmptyFilters(), q, "Trending").slice(0, capped);
 }
 
 export async function listStylesBySlugs(slugs: string[]): Promise<CatalogStyle[]> {
