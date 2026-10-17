@@ -2304,6 +2304,13 @@ textarea:focus-visible,
   margin-top: -120px;
 }
 
+/* Same 6-column markup on SSR and client; hide the desktop-only cols on small screens. */
+@media (max-width: 699px) {
+  .hero-wall-col:nth-child(n + 4) {
+    display: none;
+  }
+}
+
 .hero-wall-track {
   display: flex;
   flex-direction: column;

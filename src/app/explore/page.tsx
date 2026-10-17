@@ -3,12 +3,14 @@ import { cache } from "react";
 import { notFound, permanentRedirect } from "next/navigation";
 import { ExploreClient } from "@/components/explore/explore-client";
 import {
+  EXPLORE_PAGE_SIZE,
   exploreCanonicalHref,
   exploreListingDescription,
   exploreListingHeading,
   exploreListingTitle,
   explorePageCount,
   explorePageHref,
+  explorePageSlice,
   exploreQueryHasFacets,
   isExplicitFirstExplorePage,
   parseExplorePage,
@@ -47,21 +49,37 @@ async function resolveExploreListing(
   query: ExploreQuery;
   page: number | null;
   matchCount: number;
+  pageStyles: Awaited<ReturnType<typeof getCatalog>>;
+  catalogCount: number;
 }> {
   const params = searchParamsToURLSearchParams(raw);
   const query = parseExploreSearchParams(params);
   const page = parseExplorePage(params);
-  if (page === null) {
-    return { params, query, page, matchCount: 0 };
-  }
   const styles = await getCatalog();
+  if (page === null) {
+    return {
+      params,
+      query,
+      page,
+      matchCount: 0,
+      pageStyles: [],
+      catalogCount: styles.length,
+    };
+  }
   const matches = filterStyles(
     styles,
     filtersFromExploreQuery(query),
     query.q,
     query.sort,
   );
-  return { params, query, page, matchCount: matches.length };
+  return {
+    params,
+    query,
+    page,
+    matchCount: matches.length,
+    pageStyles: explorePageSlice(matches, page),
+    catalogCount: styles.length,
+  };
 }
 
 export async function generateMetadata({
@@ -104,11 +122,12 @@ export default async function ExplorePage({
   const pageCount = explorePageCount(listing.matchCount);
   if (listing.page > pageCount) notFound();
 
-  const styles = await getCatalog();
-
   return (
     <ExploreClient
-      styles={styles}
+      styles={listing.pageStyles}
+      matchCount={listing.matchCount}
+      catalogCount={listing.catalogCount}
+      pageSize={EXPLORE_PAGE_SIZE}
       initialQuery={listing.query}
       initialPage={listing.page}
       initialQueryString={listing.params.toString()}

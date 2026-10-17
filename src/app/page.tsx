@@ -20,7 +20,7 @@ import {
 } from "@/lib/catalog/repository";
 import { HOME_RAILS, TRENDING_RAIL } from "@/lib/home/rails";
 import { activeSeason } from "@/lib/home/seasons";
-import { listVisibleGuides } from "@/lib/guides/load";
+import { listIndexableGuides } from "@/lib/guides/load";
 import { absoluteUrl } from "@/lib/site-url";
 
 /** ISR safety net so homepage trending catches up even without an admin save. */
@@ -75,7 +75,7 @@ export default async function HomePage() {
     listStylesMatchingQuery(HOME_RAILS[3]!.q!, HOME_RAILS[3]!.limit),
     listExploreFeed({ page: 1, pageSize: 24 }),
     Promise.resolve(
-      [...listVisibleGuides()]
+      [...listIndexableGuides()]
         .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0))
         .slice(0, 4),
     ),

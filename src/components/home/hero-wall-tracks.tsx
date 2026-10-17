@@ -1,27 +1,19 @@
 "use client";
 
 import Image from "next/image";
-import { useSyncExternalStore, type CSSProperties } from "react";
+import type { CSSProperties } from "react";
 import type { HeroWallImage } from "@/lib/catalog/repository";
 
+const COLUMN_COUNT = 6;
 const COLUMN_DURATIONS = [70, 90, 62, 84, 76, 96];
 const IMAGES_PER_COLUMN = 6;
+/** Mobile only paints 3 columns; keep sizes small so hidden cols 4–6 stay cheap if fetched. */
 const WALL_SIZES = "(max-width:699px) 34vw, (min-width:1600px) 400px, 300px";
 
-function subscribeMobile(onChange: () => void) {
-  const mq = window.matchMedia("(max-width:699px)");
-  mq.addEventListener("change", onChange);
-  return () => mq.removeEventListener("change", onChange);
-}
-
-function isMobileViewport() {
-  return window.matchMedia("(max-width:699px)").matches;
-}
-
-function chunkColumns(images: HeroWallImage[], columnCount: number): HeroWallImage[][] {
+function chunkColumns(images: HeroWallImage[]): HeroWallImage[][] {
   const pool = images.length > 0 ? images : [];
   const columns: HeroWallImage[][] = [];
-  for (let col = 0; col < columnCount; col++) {
+  for (let col = 0; col < COLUMN_COUNT; col++) {
     const slice: HeroWallImage[] = [];
     for (let i = 0; i < IMAGES_PER_COLUMN; i++) {
       const img = pool[(col * IMAGES_PER_COLUMN + i) % Math.max(pool.length, 1)];
@@ -40,20 +32,20 @@ type Props = {
 };
 
 /**
- * Renders 3 columns on mobile (SSR + client) and upgrades to 6 on desktop after
- * hydrate, so hidden mobile columns are never in the DOM / downloaded.
+ * Always render six columns so SSR and the client share the same markup (no CLS).
+ * Columns 4–6 are display:none under 699px; those images stay lazy so mobile
+ * typically never downloads them.
  */
 export function HeroWallTracks({ images }: Props) {
-  // SSR assumes mobile so columns 4–6 are not in the initial HTML.
-  const mobile = useSyncExternalStore(subscribeMobile, isMobileViewport, () => true);
-  const columnCount = mobile ? 3 : 6;
-  const columns = chunkColumns(images, columnCount);
+  const columns = chunkColumns(images);
 
   return (
     <div className="hero-wall-layer" aria-hidden="true">
       {columns.map((colImages, colIndex) => {
         const duration = COLUMN_DURATIONS[colIndex] ?? 70;
         const dir = colIndex % 2 === 0 ? "hero-wall-down" : "hero-wall-up";
+        // Desktop-only columns: never eager, so mobile/hidden cols stay off the network.
+        const desktopOnly = colIndex >= 3;
         return (
           <div
             key={colIndex}
@@ -68,7 +60,7 @@ export function HeroWallTracks({ images }: Props) {
             <div className="hero-wall-track">
               <div>
                 {colImages.map((image, imgIndex) => {
-                  const eager = imgIndex < 2;
+                  const eager = !desktopOnly && imgIndex < 2;
                   const high = colIndex < 2 && imgIndex === 0;
                   return (
                     <Image

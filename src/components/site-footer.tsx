@@ -1,9 +1,15 @@
 import Link from "next/link";
 import { StoryShiftMark } from "@/components/story-shift-mark";
+import {
+  publishedFooterFestivalLinks,
+  publishedFooterGuideLinks,
+} from "@/lib/guides/footer-links";
 import { CONTACT_EMAIL, CONTACT_MAILTO } from "@/lib/site-contact";
 
 export function SiteFooter({ showGuidesLink }: { showGuidesLink: boolean }) {
   const year = new Date().getFullYear();
+  const guideLinks = publishedFooterGuideLinks();
+  const festivalLinks = publishedFooterFestivalLinks();
 
   return (
     <footer className="site-footer">
@@ -54,18 +60,11 @@ export function SiteFooter({ showGuidesLink }: { showGuidesLink: boolean }) {
             <div className="site-footer-grp">
               <h3 id="footer-fest">Festivals</h3>
               <ul aria-labelledby="footer-fest">
-                <li>
-                  <Link href="/guides/diwali-couple-ai-photo-editing-prompts">Diwali prompts</Link>
-                </li>
-                <li>
-                  <Link href="/explore?q=Eid">Eid prompts</Link>
-                </li>
-                <li>
-                  <Link href="/guides/halloween-ai-prompts-for-selfies">Halloween</Link>
-                </li>
-                <li>
-                  <Link href="/guides/winter-ai-photo-prompts">Winter</Link>
-                </li>
+                {festivalLinks.map((link) => (
+                  <li key={link.href}>
+                    <Link href={link.href}>{link.label}</Link>
+                  </li>
+                ))}
               </ul>
             </div>
 
@@ -74,17 +73,11 @@ export function SiteFooter({ showGuidesLink }: { showGuidesLink: boolean }) {
               <ul aria-labelledby="footer-guides">
                 {showGuidesLink ? (
                   <>
-                    <li>
-                      <Link href="/guides/how-to-merge-two-photos-in-gemini">Merge two photos</Link>
-                    </li>
-                    <li>
-                      <Link href="/guides/gemini-headshot-cv-photo-prompts">LinkedIn headshot</Link>
-                    </li>
-                    <li>
-                      <Link href="/guides/how-to-keep-face-same-in-gemini-ai">
-                        Keep your face the same
-                      </Link>
-                    </li>
+                    {guideLinks.map((link) => (
+                      <li key={link.slug}>
+                        <Link href={`/guides/${link.slug}`}>{link.label}</Link>
+                      </li>
+                    ))}
                     <li>
                       <Link href="/guides">All guides</Link>
                     </li>

@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRef, useState, type PointerEvent } from "react";
 import { track } from "@/lib/analytics";
 import { cn } from "@/lib/utils";
@@ -18,6 +19,9 @@ type Props = {
   defaultMode?: CompareMode;
   altSource?: string;
   altResult?: string;
+  /** First above-the-fold card / hero: eager + high fetch priority. */
+  priority?: boolean;
+  sizes?: string;
 };
 
 type ActiveDrag =
@@ -38,6 +42,10 @@ function clamp(n: number, min: number, max: number) {
 /** Half-width of the compare-handle hit zone, in CSS pixels. */
 const HANDLE_HIT_PX = 28;
 
+const CARD_SIZES =
+  "(max-width:640px) 100vw, (max-width:1024px) 50vw, (max-width:1280px) 33vw, 302px";
+const DETAIL_SIZES = "(max-width:1024px) 100vw, 560px";
+
 export function CompareSlider({
   source,
   result,
@@ -49,6 +57,8 @@ export function CompareSlider({
   defaultMode = "slider",
   altSource,
   altResult,
+  priority = false,
+  sizes,
 }: Props) {
   const sourceAlt = altSource || `Source photo for ${title}`;
   const resultAlt = altResult || `AI result showing ${title}`;
@@ -64,6 +74,7 @@ export function CompareSlider({
   /** Image pan is only for the detail-page slider (where cover crop is noticeable). */
   const allowPan = showModeToggle;
   const objectPosition = allowPan ? `${pan.x}% ${pan.y}%` : undefined;
+  const imageSizes = sizes ?? (large ? DETAIL_SIZES : CARD_SIZES);
 
   function onInteract() {
     if (styleId) {
@@ -189,12 +200,15 @@ export function CompareSlider({
         ) : null}
         <div className="grid h-full grid-cols-1 gap-0.5 lg:grid-cols-2">
           <div className="relative min-h-0 bg-[linear-gradient(135deg,#292836,#15151e)]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={source}
               alt={sourceAlt}
-              className="h-full w-full object-cover"
-              loading={large ? "eager" : "lazy"}
+              fill
+              sizes={imageSizes}
+              className="object-cover"
+              priority={priority}
+              loading={priority ? undefined : "lazy"}
+              fetchPriority={priority ? "high" : "auto"}
               draggable={false}
             />
             <span className="absolute bottom-3 left-3 rounded-lg bg-[rgba(11,11,16,0.72)] px-2 py-1 text-[10px] font-extrabold backdrop-blur-sm">
@@ -202,12 +216,15 @@ export function CompareSlider({
             </span>
           </div>
           <div className="relative min-h-0 bg-[linear-gradient(135deg,#292836,#15151e)]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
+            <Image
               src={result}
               alt={resultAlt}
-              className="h-full w-full object-cover"
-              loading={large ? "eager" : "lazy"}
+              fill
+              sizes={imageSizes}
+              className="object-cover"
+              priority={priority}
+              loading={priority ? undefined : "lazy"}
+              fetchPriority={priority ? "high" : "auto"}
               draggable={false}
             />
             <span className="absolute right-3 bottom-3 rounded-lg bg-[rgba(11,11,16,0.72)] px-2 py-1 text-[10px] font-extrabold backdrop-blur-sm">
@@ -239,13 +256,16 @@ export function CompareSlider({
     >
       {showModeToggle ? <ModeToggle mode={mode} onChange={setMode} /> : null}
       <div className="absolute inset-0 bg-[linear-gradient(135deg,#292836,#15151e)]">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src={source}
           alt={sourceAlt}
-          className="pointer-events-none h-full w-full object-cover"
+          fill
+          sizes={imageSizes}
+          className="pointer-events-none object-cover"
           style={objectPosition ? { objectPosition } : undefined}
-          loading={large ? "eager" : "lazy"}
+          priority={priority}
+          loading={priority ? undefined : "lazy"}
+          fetchPriority={priority ? "high" : "auto"}
           draggable={false}
         />
       </div>
@@ -253,13 +273,16 @@ export function CompareSlider({
         className="absolute inset-0"
         style={{ clipPath: `inset(0 0 0 ${value}%)` }}
       >
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
+        <Image
           src={result}
           alt={resultAlt}
-          className="pointer-events-none h-full w-full object-cover"
+          fill
+          sizes={imageSizes}
+          className="pointer-events-none object-cover"
           style={objectPosition ? { objectPosition } : undefined}
-          loading={large ? "eager" : "lazy"}
+          priority={priority}
+          loading={priority ? undefined : "lazy"}
+          fetchPriority={priority ? "high" : "auto"}
           draggable={false}
         />
       </div>

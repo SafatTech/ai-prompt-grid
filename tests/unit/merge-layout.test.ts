@@ -194,11 +194,11 @@ describe("merge result blur resolution", () => {
 
 describe("MergeBeforeAfter variants", () => {
   const inputs = [
-    { src: "https://example.com/source-1.webp", alt: "Photo 1" },
-    { src: "https://example.com/source-2.webp", alt: "Photo 2" },
+    { src: "/catalog/editorial/source-01.png", alt: "Photo 1" },
+    { src: "/catalog/editorial/source-02.png", alt: "Photo 2" },
   ];
   const result = {
-    src: "https://example.com/result.webp",
+    src: "/catalog/editorial/result-01.png",
     alt: "Result",
     blurSrc: "data:image/webp;base64,AA==",
   };

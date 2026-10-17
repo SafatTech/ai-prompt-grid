@@ -1,11 +1,18 @@
 import { NextResponse } from "next/server";
-import { listExploreFeed } from "@/lib/catalog/repository";
+import { EXPLORE_PAGE_SIZE } from "@/lib/catalog/explore-pages";
+import {
+  filterStyles,
+  filtersFromExploreQuery,
+  parseExploreSearchParams,
+} from "@/lib/catalog/filters";
+import { listExploreFeed, listPublishedStyles } from "@/lib/catalog/repository";
 
-const PAGE_SIZE = 24;
+const HOME_PAGE_SIZE = 24;
 
 /**
- * Homepage explore masonry pages after the server-rendered first page.
- * Query: ?page=2 (1-based). Page 1 is SSR'd on `/`.
+ * Paginated explore feed.
+ * - Homepage masonry: `?page=2` (pageSize 24). Page 1 is SSR'd on `/`.
+ * - /explore Load more: `?page=2&pageSize=18` plus optional filter query params.
  */
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -15,10 +22,53 @@ export async function GET(request: Request) {
   }
   const page = Number(raw);
   if (page < 2) {
-    return NextResponse.json({ error: "Use SSR page 1 on the homepage" }, { status: 400 });
+    return NextResponse.json(
+      { error: "Use SSR page 1 on the homepage or /explore" },
+      { status: 400 },
+    );
   }
 
-  const feed = await listExploreFeed({ page, pageSize: PAGE_SIZE });
+  const rawPageSize = searchParams.get("pageSize");
+  const hasExploreFacets =
+    Boolean(searchParams.get("q")?.trim()) ||
+    searchParams.has("sort") ||
+    searchParams.has("category") ||
+    searchParams.has("subject") ||
+    searchParams.has("intent") ||
+    searchParams.has("requirement") ||
+    searchParams.has("tool") ||
+    rawPageSize === String(EXPLORE_PAGE_SIZE);
+
+  if (hasExploreFacets) {
+    const pageSize =
+      rawPageSize && /^[1-9]\d*$/.test(rawPageSize)
+        ? Math.min(Number(rawPageSize), 48)
+        : EXPLORE_PAGE_SIZE;
+    const query = parseExploreSearchParams(searchParams);
+    const styles = await listPublishedStyles();
+    const matches = filterStyles(
+      styles,
+      filtersFromExploreQuery(query),
+      query.q,
+      query.sort,
+    );
+    const start = (page - 1) * pageSize;
+    return NextResponse.json(
+      {
+        styles: matches.slice(start, start + pageSize),
+        page,
+        pageSize,
+        total: matches.length,
+      },
+      {
+        headers: {
+          "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300",
+        },
+      },
+    );
+  }
+
+  const feed = await listExploreFeed({ page, pageSize: HOME_PAGE_SIZE });
   return NextResponse.json(
     {
       styles: feed.styles,

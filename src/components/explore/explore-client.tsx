@@ -15,7 +15,6 @@ import { ExploreUrlSync } from "@/components/explore/explore-url-sync";
 import { StyleCard } from "@/components/style-card";
 import { Button } from "@/components/ui/button";
 import {
-  EXPLORE_PAGE_SIZE,
   explorePageCount,
   explorePageHref,
   exploreQueryFromFilters,
@@ -25,7 +24,6 @@ import {
   activeFilterEntries,
   createEmptyFilters,
   exploreQueryToSearchParams,
-  filterStyles,
   filtersFromExploreQuery,
   parseExploreSearchParams,
   type FilterState,
@@ -37,7 +35,11 @@ import type { CatalogStyle } from "@/lib/catalog/types";
 import { cn } from "@/lib/utils";
 
 type Props = {
+  /** Current SSR page of filtered styles only — not the full catalog. */
   styles: CatalogStyle[];
+  matchCount: number;
+  catalogCount: number;
+  pageSize: number;
   initialQuery: ExploreQuery;
   initialPage: number;
   initialQueryString: string;
@@ -46,6 +48,9 @@ type Props = {
 
 export function ExploreClient({
   styles,
+  matchCount,
+  catalogCount,
+  pageSize,
   initialQuery,
   initialPage,
   initialQueryString,
@@ -59,25 +64,33 @@ export function ExploreClient({
   );
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [pageOverride, setPageOverride] = useState<number | null>(null);
-  const [extraPages, setExtraPages] = useState(0);
+  const [extraStyles, setExtraStyles] = useState<CatalogStyle[]>([]);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [seenQuery, setSeenQuery] = useState(initialQueryString);
   if (seenQuery !== initialQueryString) {
     setSeenQuery(initialQueryString);
     setPageOverride(null);
-    setExtraPages(0);
+    setExtraStyles([]);
   }
   const urlPage = pageOverride ?? initialPage;
   const appliedQuery = useRef<string | null>(initialQueryString);
+  const loadMoreInFlight = useRef(false);
 
-  const catalog = styles;
-  const results = useMemo(
-    () => filterStyles(catalog, filters, search, sort),
-    [catalog, filters, search, sort],
-  );
-  const pageCount = explorePageCount(results.length);
+  const pageCount = explorePageCount(matchCount);
   const safePage = Math.min(urlPage, pageCount);
-  const start = (safePage - 1) * EXPLORE_PAGE_SIZE;
-  const visible = results.slice(start, start + EXPLORE_PAGE_SIZE * (1 + extraPages));
+  const visible = useMemo(() => {
+    const seen = new Set<string>();
+    const merged: CatalogStyle[] = [];
+    for (const style of [...styles, ...extraStyles]) {
+      if (seen.has(style.id)) continue;
+      seen.add(style.id);
+      merged.push(style);
+    }
+    return merged;
+  }, [styles, extraStyles]);
+  const hasMore = visible.length < matchCount;
+  const nextFetchPage =
+    initialPage + Math.ceil(extraStyles.length / Math.max(pageSize, 1)) + 1;
   const active = activeFilterEntries(filters);
   const listingQuery = exploreQueryFromFilters(filters, search, sort);
 
@@ -110,13 +123,42 @@ export function ExploreClient({
         setSort(query.sort);
         setFilters(filtersFromExploreQuery(query));
         setPageOverride(parseExplorePage(parsed) ?? 1);
-        setExtraPages(0);
+        setExtraStyles([]);
       }
     }
     if (focusSearch) {
       document.getElementById("mainSearch")?.focus();
     }
   }, []);
+
+  async function loadMore() {
+    if (!hasMore || loadMoreInFlight.current || loadingMore) return;
+    loadMoreInFlight.current = true;
+    setLoadingMore(true);
+    try {
+      const params = exploreQueryToSearchParams(listingQuery);
+      params.set("page", String(nextFetchPage));
+      params.set("pageSize", String(pageSize));
+      const res = await fetch(`/api/home/explore?${params.toString()}`);
+      if (!res.ok) return;
+      const data = (await res.json()) as { styles?: CatalogStyle[] };
+      const batch = Array.isArray(data.styles) ? data.styles : [];
+      setExtraStyles((prev) => {
+        const seen = new Set(prev.map((style) => style.id));
+        for (const style of styles) seen.add(style.id);
+        const merged = [...prev];
+        for (const style of batch) {
+          if (seen.has(style.id)) continue;
+          seen.add(style.id);
+          merged.push(style);
+        }
+        return merged;
+      });
+    } finally {
+      loadMoreInFlight.current = false;
+      setLoadingMore(false);
+    }
+  }
 
   function toggleFilter(group: keyof FilterState, value: string) {
     const next: FilterState = {
@@ -130,7 +172,7 @@ export function ExploreClient({
     else next[group].add(value);
     setFilters(next);
     setPageOverride(1);
-    setExtraPages(0);
+    setExtraStyles([]);
     syncUrl({ q: search, sort, filters: next });
   }
 
@@ -140,7 +182,7 @@ export function ExploreClient({
     setSearch("");
     setSort("Trending");
     setPageOverride(1);
-    setExtraPages(0);
+    setExtraStyles([]);
     appliedQuery.current = "";
     router.replace("/explore", { scroll: false });
   }
@@ -162,14 +204,14 @@ export function ExploreClient({
   function onSortChange(nextSort: SortOption) {
     setSort(nextSort);
     setPageOverride(1);
-    setExtraPages(0);
+    setExtraStyles([]);
     syncUrl({ q: search, sort: nextSort, filters });
   }
 
   function onSearchChange(value: string) {
     setSearch(value);
     setPageOverride(1);
-    setExtraPages(0);
+    setExtraStyles([]);
     syncUrl({ q: value, sort, filters });
   }
 
@@ -270,7 +312,7 @@ export function ExploreClient({
       {isDrawer ? (
         <div className="border-t border-[var(--line)] p-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
           <Button className="w-full" onClick={() => setDrawerOpen(false)}>
-            Show {results.length} {results.length === 1 ? "style" : "styles"}
+            Show {matchCount} {matchCount === 1 ? "style" : "styles"}
           </Button>
         </div>
       ) : null}
@@ -287,7 +329,7 @@ export function ExploreClient({
           {heading}
         </h1>
         <p className="m-0 text-[15px] text-[var(--muted)] sm:text-[17px]">
-          Browse {catalog.length} tested styles for portraits, pets, places, objects, and
+          Browse {catalogCount} tested styles for portraits, pets, places, objects, and
           more.
         </p>
         <form
@@ -340,28 +382,34 @@ export function ExploreClient({
         <div>
           <div className="mb-[18px] flex items-center justify-between gap-4">
             <span className="text-[13px] text-[var(--muted)]" data-testid="results-count">
-              {results.length} {results.length === 1 ? "style" : "styles"}
+              {matchCount} {matchCount === 1 ? "style" : "styles"}
             </span>
             <SortSelect value={sort} onChange={onSortChange} />
           </div>
-          {results.length ? (
+          {matchCount ? (
             <>
               <div
                 className="grid grid-cols-1 items-start gap-[18px] sm:grid-cols-2 lg:grid-cols-3"
                 data-testid="style-results"
               >
-                {visible.map((style) => (
-                  <StyleCard key={style.id} style={style} compact />
+                {visible.map((style, index) => (
+                  <StyleCard
+                    key={style.id}
+                    style={style}
+                    compact
+                    priority={index === 0 && initialPage === 1}
+                  />
                 ))}
               </div>
-              {start + visible.length < results.length ? (
+              {hasMore ? (
                 <div className="mt-8 flex justify-center">
                   <Button
                     variant="secondary"
                     data-testid="load-more"
-                    onClick={() => setExtraPages((current) => current + 1)}
+                    disabled={loadingMore}
+                    onClick={() => void loadMore()}
                   >
-                    Load more styles
+                    {loadingMore ? "Loading…" : "Load more styles"}
                   </Button>
                 </div>
               ) : null}
