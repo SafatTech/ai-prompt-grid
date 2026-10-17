@@ -117,6 +117,7 @@ export default async function HomePage() {
           <SeasonBanner
             season={season}
             styles={seasonStyles}
+            matchedStyles={seasonMatched}
             seasonStyleCount={seasonStyleCount}
           />
         ) : null}

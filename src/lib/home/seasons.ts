@@ -7,6 +7,13 @@
 
 export type SeasonTheme = "amber" | "rose" | "emerald" | "indigo";
 
+export type SeasonChip = {
+  label: string;
+  /** Explore search query for this chip. */
+  q: string;
+  icon: "couple" | "family" | "sparkle";
+};
+
 export type Season = {
   id: string;
   start: string;
@@ -20,6 +27,9 @@ export type Season = {
   ctaGuide?: string;
   ctaCategoryQuery: string;
   styleSlugs: string[];
+  /** Short labels for featured style links (slug → label). */
+  styleLabels?: Record<string, string>;
+  chips?: SeasonChip[];
   heroChip: string;
   popularQueries: string[];
   next?: string;
@@ -45,6 +55,18 @@ export const SEASONS: Season[] = [
       "first-diwali-as-a-married-couple",
       "golden-hour-sparkler-shot",
       "babys-first-diwali",
+    ],
+    styleLabels: {
+      "diya-lit-balcony": "Diya-lit balcony",
+      "finishing-the-rangoli-together": "Rangoli together",
+      "first-diwali-as-a-married-couple": "First Diwali, married",
+      "golden-hour-sparkler-shot": "Golden-hour sparkler",
+      "babys-first-diwali": "Baby's first Diwali",
+    },
+    chips: [
+      { label: "Couple", q: "Diwali couple", icon: "couple" },
+      { label: "Family", q: "Diwali family", icon: "family" },
+      { label: "Rangoli", q: "Diwali rangoli", icon: "sparkle" },
     ],
     heroChip: "Diwali",
     popularQueries: [
@@ -220,4 +242,20 @@ export function daysUntilFestival(season: Season, now = new Date()): number | nu
   const end = Date.parse(`${season.festivalDate}T00:00:00+05:00`);
   if (!Number.isFinite(start) || !Number.isFinite(end)) return null;
   return Math.max(0, Math.round((end - start) / 86_400_000));
+}
+
+/** Short weekday + month day in Asia/Karachi, e.g. "Sun, Nov 8". */
+export function formatFestivalDay(festivalDate: string): string {
+  const date = new Date(`${festivalDate}T12:00:00+05:00`);
+  if (!Number.isFinite(date.getTime())) return festivalDate;
+  return new Intl.DateTimeFormat("en-US", {
+    timeZone: "Asia/Karachi",
+    weekday: "short",
+    month: "short",
+    day: "numeric",
+  }).format(date);
+}
+
+export function styleLabelForSeason(season: Season, styleId: string, fallbackTitle: string): string {
+  return season.styleLabels?.[styleId] ?? fallbackTitle;
 }
