@@ -1,6 +1,5 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -10,6 +9,7 @@ import {
   useMemo,
   useRef,
   useState,
+  type ComponentType,
   type ReactNode,
 } from "react";
 import { CompareSlider } from "@/components/compare-slider";
@@ -41,11 +41,12 @@ import { getStyleProfile, type CatalogStyle } from "@/lib/catalog/styles";
 import { recordRecentView } from "@/lib/recent/views";
 import { cn } from "@/lib/utils";
 
-const ShareModal = dynamic(
-  () =>
-    import("@/components/modals/share-modal").then((mod) => mod.ShareModal),
-  { ssr: false },
-);
+type ShareModalProps = {
+  url: string;
+  title: string;
+  styleId: string;
+  onClose: () => void;
+};
 
 type Props = { style: CatalogStyle; children?: ReactNode };
 
@@ -59,6 +60,9 @@ export function StyleDetailClient({ style, children }: Props) {
   const [compareDefault, setCompareDefault] = useState<"slider" | "side">("slider");
   const [showStickyCopy, setShowStickyCopy] = useState(false);
   const [shareOpen, setShareOpen] = useState(false);
+  const [ShareModal, setShareModal] = useState<ComponentType<ShareModalProps> | null>(
+    null,
+  );
   if (style.id !== optionsStyleId) {
     setOptionsStyleId(style.id);
     setOptions(defaultsForStyle(style));
@@ -182,13 +186,16 @@ export function StyleDetailClient({ style, children }: Props) {
               ←
             </Link>
             <span className="truncate text-xs text-[var(--muted)]">
-              <Link href="/explore" className="hover:text-[var(--text)]">
+              <Link
+                href="/explore"
+                className="style-breadcrumb-link relative inline-flex items-center hover:text-[var(--text)] after:absolute after:inset-[-14px_-8px]"
+              >
                 Explore
               </Link>
               {" / "}
               <Link
                 href={`/explore?category=${encodeURIComponent(style.category)}`}
-                className="hover:text-[var(--text)]"
+                className="style-breadcrumb-link relative inline-flex items-center hover:text-[var(--text)] after:absolute after:inset-[-14px_-8px]"
               >
                 {style.category}
               </Link>
@@ -209,7 +216,12 @@ export function StyleDetailClient({ style, children }: Props) {
             <Button
               variant="ghost"
               className="gap-2.5"
-              onClick={() => setShareOpen(true)}
+              onClick={() => {
+                void import("@/components/modals/share-modal").then((mod) => {
+                  setShareModal(() => mod.ShareModal);
+                  setShareOpen(true);
+                });
+              }}
             >
               <span aria-hidden="true">↗</span>
               <span>Share</span>
@@ -531,7 +543,7 @@ export function StyleDetailClient({ style, children }: Props) {
         </div>
       ) : null}
 
-      {shareOpen ? (
+      {shareOpen && ShareModal ? (
         <ShareModal
           url={`${window.location.origin}/styles/${style.id}`}
           title={style.title}

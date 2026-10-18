@@ -14,8 +14,6 @@ type Props = {
 };
 
 const AUTO_FETCH_PAGES = 2;
-/** Approx. masonry row height at 1440 (4–5 columns). */
-const MASONRY_ROW_PX = 300;
 
 function mergeUnique(
   prev: StyleCardData[],
@@ -37,34 +35,26 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
   const [nextPage, setNextPage] = useState(2);
   const [loading, setLoading] = useState(false);
   const [autoFetches, setAutoFetches] = useState(0);
-  const [page2Ready, setPage2Ready] = useState(false);
   const inFlight = useRef(false);
   const page2Cache = useRef<StyleCardData[] | null>(null);
   const page2Handled = useRef(false);
+  const primedRef = useRef(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const shown = initialCount + extraStyles.length;
   const hasMore = shown < total;
   const autoDone = autoFetches >= AUTO_FETCH_PAGES || !hasMore;
   const exploreFallbackPage = homeExploreFallbackPage(shown);
-  // Reserve space for auto-fetched pages + in-flight skeletons so trust strip CLS ≈ 0.
-  const remainingAutoCards = Math.max(
-    0,
-    (AUTO_FETCH_PAGES - autoFetches) * pageSize,
-  );
-  const reservedCards = Math.max(pendingCount, remainingAutoCards);
-  const reservedMinHeight =
-    reservedCards > 0
-      ? Math.ceil(reservedCards / 4) * MASONRY_ROW_PX
-      : !page2Ready && extraStyles.length === 0
-        ? Math.ceil(pageSize / 4) * MASONRY_ROW_PX
-        : undefined;
 
   function commitPage(page: number, styles: StyleCardData[]) {
-    if (page === 2) setPage2Ready(true);
     setExtraStyles((prev) => mergeUnique(prev, styles));
     setNextPage(page + 1);
-    setAutoFetches((n) => n + 1);
-    setPendingCount(0);
+    setAutoFetches((n) => {
+      const next = n + 1;
+      // Keep one page of skeleton slots for the next auto-fetch so load-more
+      // / trust do not jump when page 3 arrives.
+      setPendingCount(next < AUTO_FETCH_PAGES ? pageSize : 0);
+      return next;
+    });
   }
 
   async function fetchPage(page: number) {
@@ -80,8 +70,7 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
 
     inFlight.current = true;
     setLoading(true);
-    // Reserve masonry space immediately so trust/newsletter below do not jump later.
-    setPendingCount(pageSize);
+    if (pendingCount < pageSize) setPendingCount(pageSize);
     try {
       const res = await fetch(`/api/home/explore?page=${page}`);
       if (!res.ok) {
@@ -98,7 +87,7 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
     }
   }
 
-  // Prefetch page 2 while idle and append early so space is reserved off-screen.
+  // Prefetch page 2 into cache while idle (no layout change until primed).
   useEffect(() => {
     let cancelled = false;
 
@@ -112,12 +101,7 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
           const data = (await res.json()) as { styles?: StyleCardData[] };
           const styles = Array.isArray(data.styles) ? data.styles : [];
           if (cancelled || styles.length === 0) return;
-          if (page2Handled.current) {
-            page2Cache.current = styles;
-            return;
-          }
-          page2Handled.current = true;
-          commitPage(2, styles);
+          page2Cache.current = styles;
         } catch {
           /* network blips — sentinel fetch will retry */
         } finally {
@@ -145,23 +129,39 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
     if (autoDone) return;
     const node = sentinelRef.current;
     if (!node) return;
-    const io = new IntersectionObserver(
+
+    // Prime skeleton slots well before they enter the viewport so the append
+    // shift happens off-screen (CLS ≈ 0) and no empty dark reserve remains.
+    const primeIo = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting || primedRef.current) return;
+        primedRef.current = true;
+        setPendingCount((n) => Math.max(n, pageSize));
+      },
+      { rootMargin: "900px 0px" },
+    );
+    primeIo.observe(node);
+
+    const fetchIo = new IntersectionObserver(
       ([entry]) => {
         if (!entry?.isIntersecting || inFlight.current) return;
         void fetchPage(nextPage);
       },
-      { rootMargin: "200px 0px" },
+      { rootMargin: "240px 0px" },
     );
-    io.observe(node);
-    return () => io.disconnect();
+    fetchIo.observe(node);
+
+    return () => {
+      primeIo.disconnect();
+      fetchIo.disconnect();
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps -- IO rebinds when next page / auto state changes
-  }, [autoDone, nextPage]);
+  }, [autoDone, nextPage, pageSize]);
 
   return (
     <>
       <div
         className="home-masonry home-masonry-extra"
-        style={reservedMinHeight ? { minHeight: reservedMinHeight } : undefined}
         aria-busy={pendingCount > 0 || undefined}
       >
         {extraStyles.map((style) => (

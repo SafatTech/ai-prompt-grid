@@ -1,43 +1,21 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import {
   createContext,
   useCallback,
   useContext,
   useMemo,
   useState,
+  type ComponentType,
   type ReactNode,
 } from "react";
 
-const SignInModal = dynamic(
-  () =>
-    import("@/components/modals/sign-in-modal").then((mod) => mod.SignInModal),
-  { ssr: false },
-);
-const CollectionModal = dynamic(
-  () =>
-    import("@/components/modals/collection-modal").then(
-      (mod) => mod.CollectionModal,
-    ),
-  { ssr: false },
-);
-const ExternalInfoModal = dynamic(
-  () =>
-    import("@/components/modals/external-info-modal").then(
-      (mod) => mod.ExternalInfoModal,
-    ),
-  { ssr: false },
-);
-const SaveResultModal = dynamic(
-  () =>
-    import("@/components/modals/save-result-modal").then(
-      (mod) => mod.SaveResultModal,
-    ),
-  { ssr: false },
-);
-
 type ModalType = "signin" | "collection" | "external-info" | "save-result" | null;
+
+type SignInProps = { onClose: () => void };
+type CollectionProps = { onClose: () => void };
+type ExternalInfoProps = { onClose: () => void };
+type SaveResultProps = { styleId: string; onClose: () => void };
 
 type UiModalContextValue = {
   openSignIn: () => void;
@@ -49,9 +27,25 @@ type UiModalContextValue = {
 
 const UiModalContext = createContext<UiModalContextValue | null>(null);
 
+/**
+ * Modals are imported only when opened so guide pages do not download the
+ * modal chunk at startup (N2).
+ */
 export function UiModalProvider({ children }: { children: ReactNode }) {
   const [modal, setModal] = useState<ModalType>(null);
   const [saveStyleId, setSaveStyleId] = useState<string | null>(null);
+  const [SignInModal, setSignInModal] = useState<ComponentType<SignInProps> | null>(
+    null,
+  );
+  const [CollectionModal, setCollectionModal] = useState<ComponentType<
+    CollectionProps
+  > | null>(null);
+  const [ExternalInfoModal, setExternalInfoModal] = useState<ComponentType<
+    ExternalInfoProps
+  > | null>(null);
+  const [SaveResultModal, setSaveResultModal] = useState<ComponentType<
+    SaveResultProps
+  > | null>(null);
 
   const closeModal = useCallback(() => {
     setModal(null);
@@ -66,12 +60,30 @@ export function UiModalProvider({ children }: { children: ReactNode }) {
 
   const value = useMemo(
     () => ({
-      openSignIn: () => open("signin"),
-      openCollection: () => open("collection"),
-      openExternalInfo: () => open("external-info"),
+      openSignIn: () => {
+        void import("@/components/modals/sign-in-modal").then((mod) => {
+          setSignInModal(() => mod.SignInModal);
+          open("signin");
+        });
+      },
+      openCollection: () => {
+        void import("@/components/modals/collection-modal").then((mod) => {
+          setCollectionModal(() => mod.CollectionModal);
+          open("collection");
+        });
+      },
+      openExternalInfo: () => {
+        void import("@/components/modals/external-info-modal").then((mod) => {
+          setExternalInfoModal(() => mod.ExternalInfoModal);
+          open("external-info");
+        });
+      },
       openSaveResult: (styleId: string) => {
         setSaveStyleId(styleId);
-        open("save-result");
+        void import("@/components/modals/save-result-modal").then((mod) => {
+          setSaveResultModal(() => mod.SaveResultModal);
+          open("save-result");
+        });
       },
       closeModal,
     }),
@@ -81,12 +93,16 @@ export function UiModalProvider({ children }: { children: ReactNode }) {
   return (
     <UiModalContext.Provider value={value}>
       {children}
-      {modal === "signin" && <SignInModal onClose={closeModal} />}
-      {modal === "collection" && <CollectionModal onClose={closeModal} />}
-      {modal === "external-info" && <ExternalInfoModal onClose={closeModal} />}
-      {modal === "save-result" && saveStyleId && (
+      {modal === "signin" && SignInModal ? <SignInModal onClose={closeModal} /> : null}
+      {modal === "collection" && CollectionModal ? (
+        <CollectionModal onClose={closeModal} />
+      ) : null}
+      {modal === "external-info" && ExternalInfoModal ? (
+        <ExternalInfoModal onClose={closeModal} />
+      ) : null}
+      {modal === "save-result" && SaveResultModal && saveStyleId ? (
         <SaveResultModal styleId={saveStyleId} onClose={closeModal} />
-      )}
+      ) : null}
     </UiModalContext.Provider>
   );
 }

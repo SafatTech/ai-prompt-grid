@@ -50,11 +50,9 @@ describe("explore pagination", () => {
     assert.equal(exploreListingTitle(1), "Explore styles");
     assert.equal(exploreListingTitle(2), "Explore styles, Page 2");
     assert.match(exploreListingDescription(3), /Page 3\./);
-    assert.equal(exploreListingHeading(1), "Find a style for your photo");
-    assert.equal(
-      exploreListingHeading(4),
-      "Find a style for your photo, Page 4",
-    );
+    assert.equal(exploreListingHeading(), "Find a style for your photo");
+    // Paginated listings keep the same visible H1 (Page N stays in title/description).
+    assert.equal(exploreListingHeading(), "Find a style for your photo");
     assert.equal(exploreQueryHasFacets(emptyQuery), false);
     assert.equal(
       exploreQueryHasFacets({ ...emptyQuery, category: ["Cinematic"] }),

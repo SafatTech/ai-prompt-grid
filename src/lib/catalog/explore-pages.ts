@@ -91,10 +91,9 @@ export function exploreListingDescription(page: number): string {
   return page > 1 ? `${base} Page ${page}.` : base;
 }
 
-export function exploreListingHeading(page: number): string {
-  return page > 1
-    ? `Find a style for your photo, Page ${page}`
-    : "Find a style for your photo";
+/** Visible H1 — same on every page; Page N belongs in title/description only. */
+export function exploreListingHeading(): string {
+  return "Find a style for your photo";
 }
 
 export function explorePageSlice<T>(items: T[], page: number): T[] {

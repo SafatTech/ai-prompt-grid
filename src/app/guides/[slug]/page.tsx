@@ -1,5 +1,4 @@
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CopyLinkButton } from "@/components/guides/copy-link-button";
@@ -7,12 +6,7 @@ import { GuideBreadcrumbs } from "@/components/guides/guide-breadcrumbs";
 import { GuideHero } from "@/components/guides/guide-hero";
 import { GuideMarkdown } from "@/components/guides/guide-markdown";
 import { GuideTocDesktop, GuideTocMobile } from "@/components/guides/guide-toc";
-
-const GuideRelated = dynamic(
-  () =>
-    import("@/components/guides/guide-related").then((mod) => mod.GuideRelated),
-  { ssr: true },
-);
+import { GuideRelatedLazy } from "@/components/guides/guide-related-lazy";
 import {
   getGuide,
   listIndexableGuides,
@@ -207,7 +201,7 @@ export default async function GuidePage({ params }: GuidePageProps) {
         </article>
         <GuideTocDesktop items={toc} />
       </div>
-      <GuideRelated guides={related} />
+      <GuideRelatedLazy guides={related} />
     </>
   );
 }

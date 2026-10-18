@@ -239,6 +239,7 @@ body.no-scroll {
 }
 
 .filter-chip {
+  position: relative;
   display: inline-flex;
   min-height: 36px;
   align-items: center;
@@ -256,6 +257,13 @@ body.no-scroll {
     background-color 180ms ease,
     color 180ms ease,
     transform 180ms ease;
+}
+
+/* ≥44px hit area without changing the visible chip. */
+.filter-chip::after {
+  content: "";
+  position: absolute;
+  inset: -4px 0;
 }
 
 .filter-chip:hover {
@@ -2406,6 +2414,13 @@ textarea:focus-visible,
   cursor: pointer;
 }
 
+.hero-wall-pause::after {
+  content: "";
+  position: absolute;
+  /* 34px visual → ≥44px hit area */
+  inset: -5px -4px;
+}
+
 .hero-wall-content {
   position: relative;
   height: 100%;
@@ -2536,12 +2551,19 @@ textarea:focus-visible,
 }
 
 .hero-wall-popular a {
+  position: relative;
   color: #e9e6f3;
   background: rgba(29, 29, 41, 0.75);
   border: 1px solid rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(8px);
   padding: 7px 13px;
   border-radius: var(--pill);
+}
+
+.hero-wall-popular a::after {
+  content: "";
+  position: absolute;
+  inset: -4px 0;
 }
 
 .hero-wall-popular a:hover {
@@ -2830,6 +2852,7 @@ textarea:focus-visible,
 }
 
 .home-season-chip {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -2841,6 +2864,12 @@ textarea:focus-visible,
   border: 1px solid rgba(255, 255, 255, 0.12);
   color: #ece7e1;
   text-decoration: none;
+}
+
+.home-season-chip::after {
+  content: "";
+  position: absolute;
+  inset: -6px 0;
 }
 
 .home-season-chip:hover {
@@ -2990,10 +3019,25 @@ textarea:focus-visible,
 }
 
 .style-card-heart {
+  position: relative;
   z-index: 5;
 }
 
+.style-card-heart::after {
+  content: "";
+  position: absolute;
+  inset: -5px;
+}
+
+.site-logo-link::after {
+  content: "";
+  position: absolute;
+  /* 28px mark + label → ≥44px hit area without growing the header. */
+  inset: -8px -6px;
+}
+
 .style-card-copy {
+  position: relative;
   flex: none;
   border: 1px solid rgba(255, 255, 255, 0.16);
   background: var(--surface-2);
@@ -3002,6 +3046,13 @@ textarea:focus-visible,
   padding: 7px 11px;
   border-radius: var(--pill);
   cursor: pointer;
+}
+
+.style-card-copy::after {
+  content: "";
+  position: absolute;
+  /* 32px visual → ≥44px hit area */
+  inset: -6px -4px;
 }
 
 .style-card-hover-preview {
@@ -3040,6 +3091,11 @@ textarea:focus-visible,
 
 .style-card-title-link {
   position: relative;
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   color: inherit;
   text-decoration: none;
 }
@@ -3047,8 +3103,8 @@ textarea:focus-visible,
 .style-card-title-link::after {
   content: "";
   position: absolute;
-  /* Enlarge the ~17–20px title to a 44px tap target without changing type. */
-  inset: -12px -8px;
+  /* Enlarge the ~17–20px title to a ≥44px tap target without changing type. */
+  inset: -13px -8px;
 }
 
 /* Sticky chips — full-bleed frosted bar; chips row matches section headings */
@@ -3087,6 +3143,7 @@ textarea:focus-visible,
 }
 
 .home-chip {
+  position: relative;
   white-space: nowrap;
   font-size: 14px;
   padding: 9px 16px;
@@ -3094,6 +3151,13 @@ textarea:focus-visible,
   background: var(--surface-2);
   border: 1px solid rgba(255, 255, 255, 0.1);
   color: #d9d6e6;
+}
+
+.home-chip::after {
+  content: "";
+  position: absolute;
+  /* ~32–41px visual chips → ≥44px hit area */
+  inset: -6px 0;
 }
 
 .home-chip--on {
@@ -3162,9 +3226,10 @@ textarea:focus-visible,
 
 .home-masonry-extra {
   margin-top: 18px;
-  /* Keep a stable block so trust strip below does not jump when pages 2–3 arrive. */
-  content-visibility: auto;
-  contain-intrinsic-size: auto 2800px;
+  /* Contain column children so they cannot paint over load-more / trust. */
+  overflow: hidden;
+  position: relative;
+  z-index: 0;
 }
 
 .home-feed-ad {
@@ -3172,6 +3237,8 @@ textarea:focus-visible,
 }
 
 .home-load-more {
+  position: relative;
+  z-index: 2;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -3207,6 +3274,8 @@ textarea:focus-visible,
 
 /* Trust strip v3-B — type-only */
 .home-below > .home-section.home-trust {
+  position: relative;
+  z-index: 2;
   margin-top: 64px;
 }
 
@@ -3961,15 +4030,18 @@ textarea:focus-visible,
 
   .style-card-rail-body h3 a {
     position: relative;
-    display: inline-block;
+    display: block;
     max-width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .style-card-rail-body h3 a::after {
     content: "";
     position: absolute;
-    /* Grow the 17px-tall title link to a 44px tap target. */
-    inset: -13px -10px;
+    /* Grow the ~17px-tall title link to a ≥44px tap target. */
+    inset: -14px -10px;
   }
 
   .style-card-rail-row {
@@ -3979,6 +4051,7 @@ textarea:focus-visible,
   }
 
   .style-card-heart {
+    position: relative;
     width: 34px;
     height: 34px;
     top: 8px;
@@ -3988,6 +4061,7 @@ textarea:focus-visible,
   .style-card-heart::after {
     content: "";
     position: absolute;
+    /* 34×34 visual → ≥44×44 hit area */
     inset: -5px;
   }
 
