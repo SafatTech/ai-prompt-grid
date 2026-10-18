@@ -133,7 +133,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
   },
   {
     id: "crimson-bloom-shadows",
-    title: "Rose Shadow AI Photo Prompt for Gemini (Close-Up)",
+    title: "Rose Shadow AI Photo Prompt (Close-Up)",
     category: "Cinematic",
     subject: "Person",
     intent: "Artistic restyle",
@@ -433,7 +433,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
   },
   {
     id: "sunlit-bouquet-triptych",
-    title: "Sunlit Flower Triptych Gemini AI Photo Prompt",
+    title: "Sunlit Flower Triptych AI Photo Prompt",
     category: "Cinematic",
     subject: "Person",
     intent: "Artistic restyle",
@@ -533,7 +533,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
   },
   {
     id: "shadowed-saree-noir",
-    title: "Black & White Saree AI Photo Prompt for Gemini (Leaf Shadow)",
+    title: "Black & White Saree AI Photo Prompt (Leaf Shadow)",
     category: "Professional portraits",
     subject: "Person",
     intent: "New outfit or theme",
@@ -583,7 +583,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
   },
   {
     id: "sunlit-daisy-drift",
-    title: "Daisy Field AI Photo Prompt for Gemini (Blue Sky)",
+    title: "Daisy Field AI Photo Prompt (Blue Sky)",
     category: "Travel",
     subject: "Person",
     intent: "Full scene transformation",
@@ -633,7 +633,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
   },
   {
     id: "amber-shadow-triptych",
-    title: "Amber Light Triptych Fashion AI Photo Prompt (Gemini)",
+    title: "Amber Light Triptych Fashion AI Photo Prompt",
     category: "Professional portraits",
     subject: "Person",
     intent: "Artistic restyle",
@@ -733,7 +733,7 @@ export const seedEditorialStyles10to30: CatalogStyle[] = [
   },
   {
     id: "golden-boho-storyboard",
-    title: "Boho Street AI Photo Prompt for Gemini (Golden Hour)",
+    title: "Boho Street AI Photo Prompt (Golden Hour)",
     category: "Travel",
     subject: "Person",
     intent: "Full scene transformation",

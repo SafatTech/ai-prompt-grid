@@ -33,7 +33,7 @@ const nonePreserve = {
 export const seedEditorialStyles: CatalogStyle[] = [
   {
     id: "south-asian-fashion-editorial",
-    title: "Saree Gemini AI Photo Prompt (Copy-Paste Editorial)",
+    title: "Saree AI Photo Prompt (Copy-Paste Editorial)",
     category: "Professional portraits",
     subject: "Person",
     intent: "New outfit or theme",
@@ -143,7 +143,7 @@ Interpret {{background}} as a sophisticated city or street-style setting while k
   },
   {
     id: "joyful-outdoor-lifestyle",
-    title: "Confetti Outdoor AI Photo Prompt for Gemini (Candid)",
+    title: "Confetti Outdoor AI Photo Prompt (Candid)",
     category: "Cinematic",
     subject: "Person",
     intent: "Artistic restyle",
@@ -199,7 +199,7 @@ Build the setting from {{background}} while retaining a fresh celebratory atmosp
   },
   {
     id: "vintage-pulp-comic-hero",
-    title: "Comic Book AI Photo Prompt for Gemini (Retro Pulp Hero)",
+    title: "Comic Book AI Photo Prompt (Retro Pulp Hero)",
     category: "Vintage",
     subject: "Person",
     intent: "Artistic restyle",

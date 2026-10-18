@@ -66,7 +66,7 @@ Do not introduce people, text, logos, watermarks, distorted furniture, impossibl
   {
     n: "02",
     id: "modern-virtual-staging",
-    title: "Virtual Staging AI Prompt for Empty Rooms (Gemini)",
+    title: "Virtual Staging AI Prompt for Empty Rooms",
     note: "Move-in-ready real-estate staging look",
     description:
       "Virtual staging AI prompt: turn an empty room photo into a move-in-ready staged listing in Gemini or ChatGPT. Free to copy for agents and owners.",
@@ -89,7 +89,7 @@ Do not add people, text, logos, watermarks, impossible geometry, oversized furni
   {
     n: "03",
     id: "refined-luxury-living",
-    title: "Luxury Home Interior Design AI Prompt (Gemini)",
+    title: "Luxury Home Interior Design AI Prompt",
     note: "Sophisticated premium residential interior",
     description:
       "Home interior design AI prompt: restyle a plain room photo as a sophisticated luxury living space with premium finishes. Copy-paste free for Gemini.",
@@ -135,7 +135,7 @@ Do not add people, text, logos, watermarks, impossible vegetation, oversized flo
   {
     n: "05",
     id: "outdoor-living-oasis",
-    title: "Patio & Rooftop Outdoor AI Prompt (Gemini)",
+    title: "Patio & Rooftop Outdoor AI Prompt",
     note: "Polished patio or rooftop outdoor living",
     description:
       "Prompt AI outdoor living ideas: turn a bare patio or rooftop photo into a polished lounge with plants and lights. Copy-paste free for Gemini.",
@@ -209,7 +209,7 @@ Do not add people, text, logos, watermarks, impossible cabinet geometry, blocked
   {
     n: "08",
     id: "bathroom-spa-upgrade",
-    title: "Spa Bathroom Design AI Prompt for Gemini",
+    title: "Spa Bathroom Design AI Prompt",
     note: "Calm spa-inspired bathroom renovation",
     description:
       "Bathroom design AI prompt: upgrade a photo of your bathroom into a calm spa-style renovation with stone and soft light. Free to copy-paste.",

@@ -55,7 +55,7 @@ const diwali: DiwaliSeed[] = [
   {
     n: "36",
     id: "diya-lit-balcony",
-    title: "Diya Balcony Couple AI Photo Prompt for Gemini (Diwali)",
+    title: "Diya Balcony Couple AI Photo Prompt (Diwali)",
     note: "Elegant Diwali evening couple on a diya-lined balcony",
     description:
       "Gemini AI Diwali couple photo prompt: an elegant evening portrait on a diya-lined balcony, keeping both your faces. Copy-paste and create it free.",
@@ -123,7 +123,7 @@ Avoid an overly polished or artificial studio look. Do not add extra people, dup
   {
     n: "38",
     id: "first-diwali-as-a-married-couple",
-    title: "First Diwali Married Couple AI Photo Prompt for Gemini",
+    title: "First Diwali Married Couple AI Photo Prompt",
     note: "Newlywed Diwali portrait with bridal-inspired festive styling",
     description:
       "Diwali couple AI photo prompt for newlyweds: your first Diwali portrait with bridal-inspired festive styling, both faces kept real. Copy-paste free.",
@@ -159,7 +159,7 @@ Do not add extra people, excessive jewellery, distorted hands, text, logos, or w
   {
     n: "39",
     id: "separate-photos-couple",
-    title: "Merge Two Photos Diwali Couple AI Prompt (Gemini Sparkler)",
+    title: "Merge Two Photos Diwali Couple AI Prompt (Sparkler)",
     note: "Merge two people into one cohesive Diwali sparkler portrait",
     description:
       "Diwali couple AI photo prompt that merges two separate photos into one sparkler portrait, so you can be together even when apart. Copy-paste for Gemini.",
@@ -193,7 +193,7 @@ Do not create mismatched lighting, floating limbs, duplicated hands, extra peopl
   {
     n: "40",
     id: "fairy-light-portrait",
-    title: "Fairy Light Diwali AI Photo Prompt for Girls (Gemini)",
+    title: "Fairy Light Diwali AI Photo Prompt for Girls",
     note: "Graceful Diwali night portrait with soft fairy-light glow",
     description:
       "Diwali AI photo prompt for girls: a graceful night portrait in soft fairy-light glow, turning one selfie into a festive picture. Free to copy-paste.",
@@ -329,7 +329,7 @@ Do not add extra people, text, logos, or watermarks. Avoid distorted hands, brok
   {
     n: "44",
     id: "family-lakshmi-puja-photo",
-    title: "Family Puja Diwali AI Photo Prompt for Gemini (Doorway)",
+    title: "Family Puja Diwali AI Photo Prompt (Doorway)",
     note: "Warm family portrait at a decorated Lakshmi Puja entrance",
     description:
       "Diwali AI image prompt for the whole family: a warm portrait at a decorated puja entrance with diyas and rangoli, faces kept accurate. Free in Gemini.",
@@ -403,7 +403,7 @@ Do not place open flames, sparklers, or unsafe objects within the baby's reach. 
   {
     n: "46",
     id: "family-diwali-in-karachi-or-sindh",
-    title: "Karachi Family Diwali AI Photo Prompt for Gemini",
+    title: "Karachi Family Diwali AI Photo Prompt",
     note: "Joyful family portrait in a historic Karachi or Sindh courtyard",
     description:
       "Diwali AI photo editing prompt for families: a joyful group portrait in a historic Karachi or Sindh courtyard, with every face kept true. Copy-paste.",
@@ -442,7 +442,7 @@ Do not add extra people, alter ages, merge faces, distort hands, or create unsaf
   {
     n: "47",
     id: "diaspora-diwali-in-a-cold-city",
-    title: "Diwali Abroad AI Photo Prompt for Gemini (Winter Coats)",
+    title: "Diwali Abroad AI Photo Prompt (Winter Coats)",
     note: "Cozy Diwali abroad with festive wear under wool coats",
     description:
       "Diwali AI photo prompt for celebrating abroad: festive wear under wool coats on a cold city street, built from your own photo. Free for Gemini.",

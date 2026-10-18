@@ -44,7 +44,7 @@ const groups: GroupSeed[] = [
   {
     n: "01",
     id: "after-hours-polaroid",
-    title: "Polaroid Friends AI Photo Prompt for Gemini (Night)",
+    title: "Polaroid Friends AI Photo Prompt (Night)",
     category: "Vintage",
     note: "Candid instant-film evening friends photo",
     description:
@@ -229,7 +229,7 @@ Do not add text, show titles, logos, credits, watermarks, decorative borders, or
   {
     n: "09",
     id: "clay-crew",
-    title: "Clay 3D Group AI Photo Prompt for Gemini (Friends)",
+    title: "Clay 3D Group AI Photo Prompt (Friends)",
     category: "3D avatars",
     note: "Handcrafted 3D clay group portrait",
     description:

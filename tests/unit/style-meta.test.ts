@@ -71,7 +71,7 @@ describe("document title word boundary", () => {
   });
 
   it("does not append Prompt again when the catalog title already includes it", () => {
-    const title = "Pumpkin Patch Halloween AI Photo Prompt for Gemini (Girls)";
+    const title = "Pumpkin Patch Halloween AI Photo Prompt (Girls)";
     const metadata = styleMetadataTitle({
       id: "cozy-pumpkin-patch-portrait",
       title,

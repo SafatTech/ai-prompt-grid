@@ -52,7 +52,7 @@ const halloween: HalloweenSeed[] = [
   {
     n: "31",
     id: "cozy-pumpkin-patch-portrait",
-    title: "Pumpkin Patch Halloween AI Photo Prompt for Gemini (Girls)",
+    title: "Pumpkin Patch Halloween AI Photo Prompt (Girls)",
     note: "Warm autumn portrait among pumpkins",
     description:
       "Halloween AI photo prompt for a cozy pumpkin patch portrait: turn one selfie into a warm autumn shot among pumpkins while keeping your real face.",
@@ -94,7 +94,7 @@ Build the setting from {{background}}, interpreted as a foggy abandoned street a
   {
     n: "33",
     id: "friendly-glowing-witch-portrait",
-    title: "Witch AI Photo Prompt for Gemini: Glowing Hand Halloween",
+    title: "Witch AI Photo Prompt: Glowing Hand Halloween",
     note: "Charming witch with a magical glowing hand",
     description:
       "Witch AI photo prompt for Gemini: become a charming Halloween witch with a magical glowing hand. Copy-paste, free, and your face stays recognisable.",
@@ -115,7 +115,7 @@ Build the environment from {{background}}, interpreted as a cozy cottage kitchen
   {
     n: "34",
     id: "elegant-gothic-vampire-portrait",
-    title: "Gothic Vampire Halloween AI Photo Prompt (Gemini & ChatGPT)",
+    title: "Gothic Vampire Halloween AI Photo Prompt",
     note: "Refined vampire look in a candlelit library",
     description:
       "AI vampire photo prompt for Halloween: a refined gothic look in a candlelit library, made from your own selfie in Gemini or ChatGPT. Free to copy.",

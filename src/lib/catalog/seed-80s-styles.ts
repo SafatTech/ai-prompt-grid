@@ -55,7 +55,7 @@ const eighties: EightiesSeed[] = [
   {
     n: "48",
     id: "1985-studio-portrait",
-    title: "1985 Studio Portrait Retro AI Photo Prompt for Gemini",
+    title: "1985 Studio Portrait Retro AI Photo Prompt",
     note: "Mottled backdrop, soft flash, warm faded film",
     description:
       "Retro AI photo prompt Gemini users love: a 1985 studio portrait with mottled backdrop, soft flash and warm faded film. Copy-paste free, face kept.",
@@ -225,7 +225,7 @@ const eighties: EightiesSeed[] = [
   {
     n: "54",
     id: "1985-studio-couple",
-    title: "1985 Studio Couple AI Photo Prompt for Gemini",
+    title: "1985 Studio Couple AI Photo Prompt",
     note: "Mottled-backdrop couple studio portrait",
     description:
       "Couple AI photo prompt for Gemini: a 1985 studio portrait on a mottled backdrop with soft flash and warm faded film. Free to copy, faces stay true.",
@@ -407,7 +407,7 @@ const eighties: EightiesSeed[] = [
   {
     n: "59",
     id: "80s-wedding-album",
-    title: "80s Wedding Album AI Photo Prompt (Couple, Gemini)",
+    title: "80s Wedding Album AI Photo Prompt (Couple)",
     note: "Formal flash portrait, yellowed print",
     description:
       "80s AI photo prompt for couples: a formal flash wedding portrait on a yellowed album print, from your own photos. Copy-paste into Gemini or ChatGPT.",
