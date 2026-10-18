@@ -54,7 +54,7 @@ const anime: AnimeSeed[] = [
   {
     n: "99",
     id: "anime-girl-ai-photo-prompt-gemini-meadow",
-    title: "Anime Girl AI Photo Prompt for Gemini (Meadow)",
+    title: "Anime Girl AI Photo Prompt (Meadow)",
     note: "Soft hand-painted film-style girl in a windy meadow",
     description:
       "Turn your photo into an anime girl in a soft hand-painted film style, standing in a breezy summer meadow with fluffy clouds, keeping your real face.",
@@ -86,7 +86,7 @@ const anime: AnimeSeed[] = [
   {
     n: "100",
     id: "anime-boy-ai-photo-prompt-gemini-power-aura",
-    title: "Anime Boy AI Photo Prompt for Gemini (Power Aura)",
+    title: "Anime Boy AI Photo Prompt (Power Aura)",
     note: "Action-genre anime hero with a glowing energy aura",
     description:
       "A prompt for a Gemini AI boy anime look: you as an action anime hero with a glowing energy aura, wind-blown hair and speed lines.",
@@ -214,7 +214,7 @@ const anime: AnimeSeed[] = [
   {
     n: "104",
     id: "cherry-blossom-anime-couple-prompt-gemini",
-    title: "Cherry Blossom Anime Couple Prompt for Gemini",
+    title: "Cherry Blossom Anime Couple Prompt",
     note: "Two separate photos, one anime couple under blossom trees",
     description:
       "A couple anime prompt for Gemini AI: merge two photos into one soft anime scene of a couple walking under pink blossom trees.",
