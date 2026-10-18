@@ -16,8 +16,11 @@ export function RailArrows({ railId }: Props) {
 
     function update() {
       if (!rail) return;
-      setAtStart(rail.scrollLeft < 4);
+      const start = rail.scrollLeft < 4;
+      setAtStart(start);
       setAtEnd(rail.scrollLeft + rail.clientWidth >= rail.scrollWidth - 4);
+      // Drives the left-edge mask fade once the rail has scrolled.
+      rail.dataset.atStart = start ? "true" : "false";
     }
 
     update();

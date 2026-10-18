@@ -135,11 +135,7 @@ export default async function HomePage() {
         dangerouslySetInnerHTML={{ __html: JSON.stringify(trendingJsonLd) }}
       />
 
-      <HeroWall
-        images={heroImages}
-        season={season}
-        publishedCount={publishedCount}
-      />
+      <HeroWall images={heroImages} season={season} />
 
       <div className="home-below">
         {season ? (

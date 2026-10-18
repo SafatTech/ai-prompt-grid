@@ -8,13 +8,10 @@ import { popularQueriesForSeason } from "@/lib/home/seasons";
 type Props = {
   images: HeroWallImage[];
   season: Season | null;
-  publishedCount: number;
 };
 
-export function HeroWall({ images, season, publishedCount }: Props) {
+export function HeroWall({ images, season }: Props) {
   const popular = popularQueriesForSeason(season);
-  const countLabel =
-    publishedCount > 0 ? `Explore ${publishedCount} styles →` : "Explore styles →";
 
   return (
     <section className="hero-wall" data-hero-wall>
@@ -70,7 +67,7 @@ export function HeroWall({ images, season, publishedCount }: Props) {
         </div>
         <div className="hero-wall-ctas">
           <Link href="/explore" data-testid="hero-explore" className="hero-wall-cta-primary">
-            {countLabel}
+            Explore the collection →
           </Link>
           <Link href="/how-it-works" className="hero-wall-cta-secondary">
             How it works
