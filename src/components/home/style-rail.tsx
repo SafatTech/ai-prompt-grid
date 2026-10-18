@@ -1,14 +1,14 @@
 import Link from "next/link";
 import { RailArrows } from "@/components/home/rail-arrows";
 import { StyleCard } from "@/components/style-card";
-import type { CatalogStyle } from "@/lib/catalog/types";
+import type { StyleCardData } from "@/lib/catalog/style-card-data";
 
 type Props = {
   id: string;
   title: string;
   subtitle: string;
   href: string;
-  styles: CatalogStyle[];
+  styles: StyleCardData[];
   ranked?: boolean;
 };
 
@@ -39,8 +39,13 @@ export function StyleRail({ id, title, subtitle, href, styles, ranked = false }:
         tabIndex={0}
         aria-label={`${title} styles, scroll sideways`}
       >
-        {styles.map((style) => (
-          <StyleCard key={style.id} style={style} variant="rail" />
+        {styles.map((style, index) => (
+          <StyleCard
+            key={style.id}
+            style={style}
+            variant="rail"
+            priority={ranked && index === 0}
+          />
         ))}
       </div>
     </section>

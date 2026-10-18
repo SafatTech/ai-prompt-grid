@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 import type { Guide } from "@/lib/guides/load";
 import {
@@ -34,19 +35,17 @@ export function GuideRelated({
               <Link
                 key={guide.slug}
                 href={`/guides/${guide.slug}`}
+                prefetch={false}
                 className="guide-related-card relative w-[80%] shrink-0 snap-start overflow-hidden rounded-3xl bg-[var(--bg)] transition-transform duration-300 hover:-translate-y-1 md:w-auto"
               >
                 <div className="relative aspect-[4/5] overflow-hidden bg-[#15151E]">
                   {hasRealImage ? (
-                    // eslint-disable-next-line @next/next/no-img-element
-                    <img
+                    <Image
                       src={image.url}
                       alt={image.alt}
-                      width={image.width ?? 1200}
-                      height={image.height ?? 630}
-                      loading="lazy"
-                      decoding="async"
-                      className="h-full w-full object-cover"
+                      fill
+                      sizes="(max-width: 768px) 100vw, 440px"
+                      className="object-cover"
                     />
                   ) : (
                     <div

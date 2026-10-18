@@ -16,9 +16,11 @@ import { StyleCard } from "@/components/style-card";
 import { StyleCardSkeleton } from "@/components/style-card-skeleton";
 import { Button } from "@/components/ui/button";
 import {
+  exploreListingHeading,
   explorePageCount,
   explorePageHref,
   exploreQueryFromFilters,
+  isExplicitFirstExplorePage,
   parseExplorePage,
 } from "@/lib/catalog/explore-pages";
 import {
@@ -31,13 +33,13 @@ import {
   type SortOption,
 } from "@/lib/catalog/filters";
 import type { ExploreQuery } from "@/lib/catalog/schemas";
+import type { StyleCardData } from "@/lib/catalog/style-card-data";
 import { filterGroups, groupLabels } from "@/lib/catalog/styles";
-import type { CatalogStyle } from "@/lib/catalog/types";
 import { cn } from "@/lib/utils";
 
 type Props = {
-  /** Current SSR page of filtered styles only — not the full catalog. */
-  styles: CatalogStyle[];
+  /** Default (no-param) SSR page — filters load via /api/home/explore. */
+  styles: StyleCardData[];
   matchCount: number;
   catalogCount: number;
   pageSize: number;
@@ -47,16 +49,24 @@ type Props = {
   heading: string;
 };
 
+type ListingPayload = {
+  styles: StyleCardData[];
+  matchCount: number;
+  page: number;
+  heading: string;
+};
+
 export function ExploreClient({
-  styles,
-  matchCount,
+  styles: ssrStyles,
+  matchCount: ssrMatchCount,
   catalogCount,
   pageSize,
   initialQuery,
   initialPage,
-  initialQueryString,
-  heading,
+  initialQueryString: _initialQueryString,
+  heading: ssrHeading,
 }: Props) {
+  void _initialQueryString;
   const router = useRouter();
   const [search, setSearch] = useState(initialQuery.q);
   const [sort, setSort] = useState<SortOption>(initialQuery.sort);
@@ -64,38 +74,88 @@ export function ExploreClient({
     filtersFromExploreQuery(initialQuery),
   );
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const [pageOverride, setPageOverride] = useState<number | null>(null);
-  const [extraStyles, setExtraStyles] = useState<CatalogStyle[]>([]);
+  const [listing, setListing] = useState<ListingPayload>({
+    styles: ssrStyles,
+    matchCount: ssrMatchCount,
+    page: initialPage,
+    heading: ssrHeading,
+  });
+  const [extraStyles, setExtraStyles] = useState<StyleCardData[]>([]);
   const [pendingCount, setPendingCount] = useState(0);
   const [loadingMore, setLoadingMore] = useState(false);
-  const [seenQuery, setSeenQuery] = useState(initialQueryString);
-  if (seenQuery !== initialQueryString) {
-    setSeenQuery(initialQueryString);
-    setPageOverride(null);
-    setExtraStyles([]);
-    setPendingCount(0);
-  }
-  const urlPage = pageOverride ?? initialPage;
-  const appliedQuery = useRef<string | null>(initialQueryString);
+  const [listingLoading, setListingLoading] = useState(false);
+  const appliedQuery = useRef<string | null>(null);
   const loadMoreInFlight = useRef(false);
+  const fetchSeq = useRef(0);
 
-  const pageCount = explorePageCount(matchCount);
-  const safePage = Math.min(urlPage, pageCount);
+  const pageCount = explorePageCount(listing.matchCount);
+  const safePage = Math.min(listing.page, pageCount);
   const visible = useMemo(() => {
     const seen = new Set<string>();
-    const merged: CatalogStyle[] = [];
-    for (const style of [...styles, ...extraStyles]) {
+    const merged: StyleCardData[] = [];
+    for (const style of [...listing.styles, ...extraStyles]) {
       if (seen.has(style.id)) continue;
       seen.add(style.id);
       merged.push(style);
     }
     return merged;
-  }, [styles, extraStyles]);
-  const hasMore = visible.length < matchCount;
+  }, [listing.styles, extraStyles]);
+  const hasMore = visible.length < listing.matchCount;
   const nextFetchPage =
-    initialPage + Math.ceil(extraStyles.length / Math.max(pageSize, 1)) + 1;
+    listing.page + Math.ceil(extraStyles.length / Math.max(pageSize, 1)) + 1;
   const active = activeFilterEntries(filters);
   const listingQuery = exploreQueryFromFilters(filters, search, sort);
+  const matchCount = listing.matchCount;
+  const heading = listing.heading;
+
+  const fetchListing = useCallback(
+    async (queryString: string) => {
+      const parsed = new URLSearchParams(queryString);
+      if (isExplicitFirstExplorePage(parsed)) {
+        parsed.delete("page");
+        const cleaned = parsed.toString();
+        router.replace(cleaned ? `/explore?${cleaned}` : "/explore", { scroll: false });
+        return;
+      }
+      const page = parseExplorePage(parsed);
+      if (page === null) {
+        setListing({
+          styles: [],
+          matchCount: 0,
+          page: 1,
+          heading: exploreListingHeading(1),
+        });
+        setExtraStyles([]);
+        setPendingCount(0);
+        return;
+      }
+      const query = parseExploreSearchParams(parsed);
+      const params = exploreQueryToSearchParams(query);
+      params.set("page", String(page));
+      params.set("pageSize", String(pageSize));
+      const seq = ++fetchSeq.current;
+      setListingLoading(true);
+      setExtraStyles([]);
+      setPendingCount(0);
+      try {
+        const res = await fetch(`/api/home/explore?${params.toString()}`);
+        if (!res.ok || seq !== fetchSeq.current) return;
+        const data = (await res.json()) as {
+          styles?: StyleCardData[];
+          total?: number;
+        };
+        setListing({
+          styles: Array.isArray(data.styles) ? data.styles : [],
+          matchCount: typeof data.total === "number" ? data.total : 0,
+          page,
+          heading: exploreListingHeading(page),
+        });
+      } finally {
+        if (seq === fetchSeq.current) setListingLoading(false);
+      }
+    },
+    [pageSize, router],
+  );
 
   const syncUrl = useCallback(
     (next: { q: string; sort: SortOption; filters: FilterState }) => {
@@ -111,29 +171,50 @@ export function ExploreClient({
       const qs = params.toString();
       appliedQuery.current = qs;
       router.replace(qs ? `/explore?${qs}` : "/explore", { scroll: false });
+      if (!qs) {
+        setListing({
+          styles: ssrStyles,
+          matchCount: ssrMatchCount,
+          page: 1,
+          heading: ssrHeading,
+        });
+        setExtraStyles([]);
+        setPendingCount(0);
+        return;
+      }
+      void fetchListing(qs);
     },
-    [router],
+    [router, fetchListing, ssrStyles, ssrMatchCount, ssrHeading],
   );
 
-  const onUrlQueryString = useCallback((next: string, focusSearch: boolean) => {
-    const first = appliedQuery.current === null;
-    if (appliedQuery.current !== next) {
-      appliedQuery.current = next;
-      if (!first) {
+  const onUrlQueryString = useCallback(
+    (next: string, focusSearch: boolean) => {
+      if (appliedQuery.current !== next) {
+        appliedQuery.current = next;
         const parsed = new URLSearchParams(next);
         const query = parseExploreSearchParams(parsed);
         setSearch(query.q);
         setSort(query.sort);
         setFilters(filtersFromExploreQuery(query));
-        setPageOverride(parseExplorePage(parsed) ?? 1);
         setExtraStyles([]);
         setPendingCount(0);
+        if (!next) {
+          setListing({
+            styles: ssrStyles,
+            matchCount: ssrMatchCount,
+            page: 1,
+            heading: ssrHeading,
+          });
+        } else {
+          void fetchListing(next);
+        }
       }
-    }
-    if (focusSearch) {
-      document.getElementById("mainSearch")?.focus();
-    }
-  }, []);
+      if (focusSearch) {
+        document.getElementById("mainSearch")?.focus();
+      }
+    },
+    [fetchListing, ssrStyles, ssrMatchCount, ssrHeading],
+  );
 
   async function loadMore() {
     if (!hasMore || loadMoreInFlight.current || loadingMore) return;
@@ -150,11 +231,11 @@ export function ExploreClient({
         setPendingCount(0);
         return;
       }
-      const data = (await res.json()) as { styles?: CatalogStyle[] };
+      const data = (await res.json()) as { styles?: StyleCardData[] };
       const batch = Array.isArray(data.styles) ? data.styles : [];
       setExtraStyles((prev) => {
         const seen = new Set(prev.map((style) => style.id));
-        for (const style of styles) seen.add(style.id);
+        for (const style of listing.styles) seen.add(style.id);
         const merged = [...prev];
         for (const style of batch) {
           if (seen.has(style.id)) continue;
@@ -181,7 +262,6 @@ export function ExploreClient({
     if (next[group].has(value)) next[group].delete(value);
     else next[group].add(value);
     setFilters(next);
-    setPageOverride(1);
     setExtraStyles([]);
     setPendingCount(0);
     syncUrl({ q: search, sort, filters: next });
@@ -192,10 +272,15 @@ export function ExploreClient({
     setFilters(empty);
     setSearch("");
     setSort("Trending");
-    setPageOverride(1);
     setExtraStyles([]);
     setPendingCount(0);
     appliedQuery.current = "";
+    setListing({
+      styles: ssrStyles,
+      matchCount: ssrMatchCount,
+      page: 1,
+      heading: ssrHeading,
+    });
     router.replace("/explore", { scroll: false });
   }
 
@@ -215,7 +300,6 @@ export function ExploreClient({
 
   function onSortChange(nextSort: SortOption) {
     setSort(nextSort);
-    setPageOverride(1);
     setExtraStyles([]);
     setPendingCount(0);
     syncUrl({ q: search, sort: nextSort, filters });
@@ -223,7 +307,6 @@ export function ExploreClient({
 
   function onSearchChange(value: string) {
     setSearch(value);
-    setPageOverride(1);
     setExtraStyles([]);
     setPendingCount(0);
     syncUrl({ q: value, sort, filters });
@@ -360,7 +443,7 @@ export function ExploreClient({
             value={search}
             onChange={(event) => onSearchChange(event.target.value)}
             data-testid="explore-search"
-            className="h-14 rounded-[14px] border border-[var(--line)] bg-[var(--surface)] px-[18px] text-base text-[var(--text)] placeholder:text-[#858391]"
+            className="h-14 rounded-[14px] border border-[var(--line)] bg-[var(--surface)] px-[18px] text-base text-[var(--text)] placeholder:text-[#858391] focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[rgba(139,108,255,0.55)]"
           />
           <Button
             type="button"
@@ -400,7 +483,22 @@ export function ExploreClient({
             </span>
             <SortSelect value={sort} onChange={onSortChange} />
           </div>
-          {matchCount ? (
+          <h2 className="sr-only">Style results</h2>
+          {listingLoading ? (
+            <div
+              className="grid grid-cols-1 items-start gap-[18px] sm:grid-cols-2 lg:grid-cols-3"
+              data-testid="style-results"
+              aria-busy="true"
+            >
+              {Array.from({ length: pageSize }, (_, index) => (
+                <StyleCardSkeleton
+                  key={`explore-listing-${index}`}
+                  variant="compact"
+                  index={index}
+                />
+              ))}
+            </div>
+          ) : matchCount ? (
             <>
               <div
                 className="grid grid-cols-1 items-start gap-[18px] sm:grid-cols-2 lg:grid-cols-3"
@@ -412,7 +510,7 @@ export function ExploreClient({
                     key={style.id}
                     style={style}
                     compact
-                    priority={index === 0 && initialPage === 1}
+                    priority={index === 0 && listing.page === 1}
                   />
                 ))}
                 {Array.from({ length: pendingCount }, (_, index) => (

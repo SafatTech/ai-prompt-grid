@@ -1,14 +1,11 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { AdSlot } from "@/components/ad-slot";
 import { CategoryChipsBar } from "@/components/home/category-chips-bar";
 import { ExploreFeed } from "@/components/home/explore-feed";
 import { HeroWall } from "@/components/home/hero-wall";
-import { LatestGuides } from "@/components/home/latest-guides";
-import { NewsletterBand } from "@/components/home/newsletter-band";
-import { RecentShelf } from "@/components/home/recent-shelf";
 import { SeasonBanner } from "@/components/home/season-banner";
 import { StyleRail } from "@/components/home/style-rail";
-import { TrustStrip } from "@/components/home/trust-strip";
 import {
   countPublishedStyles,
   listExploreFeed,
@@ -18,10 +15,28 @@ import {
   listStylesMatchingQuery,
   listTrendingStyles,
 } from "@/lib/catalog/repository";
+import { toStyleCardDataList } from "@/lib/catalog/style-card-data";
 import { HOME_RAILS, TRENDING_RAIL } from "@/lib/home/rails";
 import { activeSeason } from "@/lib/home/seasons";
 import { listIndexableGuides } from "@/lib/guides/load";
 import { absoluteUrl } from "@/lib/site-url";
+
+const LatestGuides = dynamic(
+  () => import("@/components/home/latest-guides").then((mod) => mod.LatestGuides),
+  { ssr: true },
+);
+const RecentShelf = dynamic(
+  () => import("@/components/home/recent-shelf").then((mod) => mod.RecentShelf),
+  { ssr: true },
+);
+const TrustStrip = dynamic(
+  () => import("@/components/home/trust-strip").then((mod) => mod.TrustStrip),
+  { ssr: true },
+);
+const NewsletterBand = dynamic(
+  () => import("@/components/home/newsletter-band").then((mod) => mod.NewsletterBand),
+  { ssr: true },
+);
 
 /** ISR safety net so homepage trending catches up even without an admin save. */
 export const revalidate = 60;
@@ -83,6 +98,20 @@ export default async function HomePage() {
 
   const seasonStyleCount = seasonMatched.length;
 
+  // Slim DTOs for client rails: unique blur / embedded copy text only above the fold.
+  const trendingCards = toStyleCardDataList(trending, {
+    blurCount: 4,
+    copyPromptCount: 4,
+  });
+  const couplesCards = toStyleCardDataList(couples, { sharedBlur: true });
+  const familyCards = toStyleCardDataList(family, { sharedBlur: true });
+  const professionalCards = toStyleCardDataList(professional, { sharedBlur: true });
+  const trendsCards = toStyleCardDataList(trends, { sharedBlur: true });
+  const exploreCards = toStyleCardDataList(explorePage1.styles, {
+    blurCount: 6,
+    sharedBlur: true,
+  });
+
   const recentCatalog = explorePage1.styles
     .concat(trending)
     .map((style) => ({ id: style.id, title: style.title, result: style.result }));
@@ -127,7 +156,7 @@ export default async function HomePage() {
           title={TRENDING_RAIL.title}
           subtitle={TRENDING_RAIL.subtitle}
           href={TRENDING_RAIL.href}
-          styles={trending}
+          styles={trendingCards}
           ranked
         />
 
@@ -138,7 +167,7 @@ export default async function HomePage() {
           title={HOME_RAILS[0]!.title}
           subtitle={HOME_RAILS[0]!.subtitle}
           href={HOME_RAILS[0]!.href}
-          styles={couples}
+          styles={couplesCards}
         />
 
         <StyleRail
@@ -146,7 +175,7 @@ export default async function HomePage() {
           title={HOME_RAILS[1]!.title}
           subtitle={HOME_RAILS[1]!.subtitle}
           href={HOME_RAILS[1]!.href}
-          styles={family}
+          styles={familyCards}
         />
 
         <AdSlot
@@ -159,7 +188,7 @@ export default async function HomePage() {
           title={HOME_RAILS[2]!.title}
           subtitle={HOME_RAILS[2]!.subtitle}
           href={HOME_RAILS[2]!.href}
-          styles={professional}
+          styles={professionalCards}
         />
 
         <StyleRail
@@ -167,7 +196,7 @@ export default async function HomePage() {
           title={HOME_RAILS[3]!.title}
           subtitle={HOME_RAILS[3]!.subtitle}
           href={HOME_RAILS[3]!.href}
-          styles={trends}
+          styles={trendsCards}
         />
 
         <LatestGuides guides={guides} />
@@ -175,7 +204,7 @@ export default async function HomePage() {
         <RecentShelf catalog={recentCatalog} />
 
         <ExploreFeed
-          styles={explorePage1.styles}
+          styles={exploreCards}
           total={explorePage1.total}
           pageSize={explorePage1.pageSize}
         />

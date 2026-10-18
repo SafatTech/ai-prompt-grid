@@ -67,6 +67,21 @@ function FrameImage({
   );
 }
 
+/** Result is the LCP candidate; inputs stay lazy even when the hero is prioritized. */
+function resultPriorityFlags(priority: boolean) {
+  return {
+    priority,
+    highPriority: priority,
+  };
+}
+
+function inputPriorityFlags() {
+  return {
+    priority: false,
+    highPriority: false,
+  };
+}
+
 function Arrow() {
   return (
     <svg
@@ -167,7 +182,7 @@ export function MergeBeforeAfter({
                 <FrameImage
                   image={{ ...input, alt: inputAlt(input, title, index, inputs.length) }}
                   sizes={inputSizes}
-                  priority={priority}
+                  {...inputPriorityFlags()}
                   objectPosition="50% 30%"
                 />
                 <span className="mba-split__tag" aria-hidden="true">
@@ -185,8 +200,7 @@ export function MergeBeforeAfter({
             <FrameImage
               image={{ ...result, alt: resultAlt(result, title) }}
               sizes="(max-width:767px) 40vw, 240px"
-              priority={priority}
-              highPriority={priority}
+              {...resultPriorityFlags(priority)}
               className={resultFrame.contain ? "object-contain" : undefined}
             />
           </div>
@@ -222,8 +236,7 @@ export function MergeBeforeAfter({
           <FrameImage
             image={{ ...result, alt: resultAlt(result, title) }}
             sizes={resultSizes}
-            priority={priority}
-            highPriority={priority}
+            {...resultPriorityFlags(priority)}
             className={resultFrame.contain ? "object-contain" : undefined}
           />
           <span className="mba-pill mba-pill-result mba-pill-result-end" aria-hidden="true">
@@ -239,7 +252,7 @@ export function MergeBeforeAfter({
               <FrameImage
                 image={{ ...input, alt: inputAlt(input, title, index, shown.length) }}
                 sizes={inputSizes}
-                priority={priority}
+                {...inputPriorityFlags()}
               />
               <span className="mba-chip-label" aria-hidden="true">
                 {shown.length === 1 ? "Before" : `Photo ${index + 1}`}
@@ -280,7 +293,7 @@ export function MergeBeforeAfter({
                   <FrameImage
                     image={{ ...input, alt: inputAlt(input, title, index, shown.length) }}
                     sizes={inputSizes}
-                    priority={priority}
+                    {...inputPriorityFlags()}
                   />
                 </div>
                 <span className="mba-lip" aria-hidden="true">
@@ -306,8 +319,7 @@ export function MergeBeforeAfter({
           <FrameImage
             image={{ ...result, alt: resultAlt(result, title) }}
             sizes={resultSizes}
-            priority={priority}
-            highPriority={priority}
+            {...resultPriorityFlags(priority)}
             className={resultFrame.contain ? "object-contain" : undefined}
           />
           <span className="mba-pill mba-pill-result" aria-hidden="true">

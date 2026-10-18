@@ -1706,7 +1706,14 @@ textarea:focus-visible,
   color: var(--text);
   font: inherit;
   font-size: 14px;
+  min-height: 44px;
   outline: none;
+}
+
+.guides-search input:focus-visible {
+  outline: 3px solid rgba(139, 108, 255, 0.55);
+  outline-offset: 2px;
+  border-radius: 8px;
 }
 
 .guides-search input::placeholder {
@@ -1714,8 +1721,8 @@ textarea:focus-visible,
 }
 
 .guides-search button {
-  width: 28px;
-  height: 28px;
+  width: 44px;
+  height: 44px;
   border: 0;
   border-radius: var(--pill);
   background: var(--violet);
@@ -1772,7 +1779,7 @@ textarea:focus-visible,
   margin-top: 56px;
 }
 
-.guides-card h3 {
+.guides-card h2 {
   margin: 0 0 10px;
   font-size: 20px;
   line-height: 1.35;
@@ -1784,7 +1791,7 @@ textarea:focus-visible,
   overflow: hidden;
 }
 
-.guides-card h3 a {
+.guides-card h2 a {
   color: inherit;
   text-decoration: none;
 }
@@ -2146,7 +2153,7 @@ textarea:focus-visible,
     text-align: left;
   }
 
-  .guides-card h3 {
+  .guides-card h2 {
     font-size: 18px;
   }
 
@@ -2401,7 +2408,8 @@ textarea:focus-visible,
 }
 
 .hero-wall-eyebrow span {
-  background: var(--violet);
+  /* Darker than --violet so white 11px text clears 4.5:1 contrast. */
+  background: #5538c8;
   color: #fff;
   font-weight: 700;
   font-size: 11px;
@@ -2463,6 +2471,19 @@ textarea:focus-visible,
   font: inherit;
   font-size: 16px;
   padding: 10px 4px;
+}
+
+.hero-wall-search input:focus-visible {
+  outline: 3px solid rgba(139, 108, 255, 0.55);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+.hero-wall-search:focus-within {
+  border-color: rgba(139, 108, 255, 0.45);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.45),
+    0 0 0 3px rgba(139, 108, 255, 0.28);
 }
 
 .hero-wall-search input::placeholder {
@@ -3070,6 +3091,9 @@ textarea:focus-visible,
 
 .home-masonry-extra {
   margin-top: 18px;
+  /* Keep a stable block so trust strip below does not jump when page 2 arrives. */
+  content-visibility: auto;
+  contain-intrinsic-size: auto 1200px;
 }
 
 .home-feed-ad {
@@ -3082,6 +3106,7 @@ textarea:focus-visible,
   align-items: center;
   gap: 10px;
   margin-top: 28px;
+  min-height: 88px;
 }
 
 .home-load-more a {

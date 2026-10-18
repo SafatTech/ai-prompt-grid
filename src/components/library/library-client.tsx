@@ -8,12 +8,12 @@ import { Button } from "@/components/ui/button";
 import { useLibrary } from "@/components/providers/library-provider";
 import { useUiModals } from "@/components/providers/ui-modal-provider";
 import { useToast } from "@/components/providers/toast-provider";
-import type { CatalogStyle } from "@/lib/catalog/types";
+import type { StyleCardData } from "@/lib/catalog/style-card-data";
 import { cn } from "@/lib/utils";
 
 type Tab = "saved" | "collections" | "creations";
 
-type Props = { styles: CatalogStyle[] };
+type Props = { styles: StyleCardData[] };
 
 export function LibraryClient({ styles }: Props) {
   const {

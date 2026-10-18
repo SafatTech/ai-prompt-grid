@@ -17,6 +17,7 @@ const nextConfig: NextConfig = {
     // Catalog originals are at most ~1200–1600px wide, so the 2048/3840
     // defaults only bloat every srcset (the homepage wall alone had 36+ of them).
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    formats: ["image/avif", "image/webp"],
     remotePatterns: [
       {
         protocol: "https",

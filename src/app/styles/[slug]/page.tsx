@@ -4,6 +4,7 @@ import { RelatedStyles } from "@/components/styles/related-styles";
 import { StyleDetailClient } from "@/components/styles/style-detail-client";
 import { relatedStylesFor } from "@/lib/catalog/related-styles";
 import { getPublishedStyleBySlug, listPublishedStyles } from "@/lib/catalog/repository";
+import { toStyleCardDataList } from "@/lib/catalog/style-card-data";
 import {
   styleMetadataTitle,
   stylePageDescription,
@@ -78,7 +79,10 @@ export default async function StyleDetailPage({
   ]);
   if (!style) notFound();
 
-  const relatedStyles = relatedStylesFor(style.id, style.category, catalog);
+  const relatedStyles = toStyleCardDataList(
+    relatedStylesFor(style.id, style.category, catalog),
+    { sharedBlur: true },
+  );
   const pageUrl = absoluteUrl(`/styles/${style.id}`);
   const jsonLd = {
     "@context": "https://schema.org",

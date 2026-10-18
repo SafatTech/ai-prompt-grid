@@ -19,7 +19,11 @@ export function GuideCard({ guide }: Props) {
 
   return (
     <article className="guides-card">
-      <Link href={href} className="guides-card-media">
+      <Link
+        href={href}
+        className="guides-card-media"
+        aria-label={guide.title}
+      >
         {hero.kind === "image" ? (
           <Image
             src={hero.url}
@@ -34,9 +38,9 @@ export function GuideCard({ guide }: Props) {
           <span className="guides-card-placeholder" aria-hidden="true" />
         )}
       </Link>
-      <h3>
+      <h2>
         <Link href={href}>{guide.title}</Link>
-      </h3>
+      </h2>
       <p>{guide.description}</p>
       <div className="guides-tags">
         <span className="guides-tag guides-tag-cat">

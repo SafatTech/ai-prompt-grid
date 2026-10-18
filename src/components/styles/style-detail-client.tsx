@@ -446,46 +446,55 @@ export function StyleDetailClient({ style, children }: Props) {
         </aside>
       </section>
 
-      <section className="container py-12 sm:py-16">
-        <h2 className="mb-7 text-[clamp(28px,3vw,42px)] tracking-[-0.035em]">
-          More examples
-        </h2>
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {style.examplePairs.map((example, index) => (
-            <div
-              key={`${style.id}-example-${index}`}
-              className="grid h-[220px] grid-cols-2 gap-0.5 overflow-hidden rounded-[var(--radius)] border border-[var(--line)] md:h-[260px] lg:h-[280px]"
-            >
-              <div className="relative">
-                <Image
-                  src={example.source}
-                  alt={example.altSource}
-                  fill
-                  sizes="(max-width:640px) 50vw, 220px"
-                  className="object-cover"
-                  loading="lazy"
-                />
-                <span className="absolute bottom-3 left-3 rounded-lg bg-[rgba(11,11,16,0.72)] px-2 py-1 text-[10px] font-extrabold">
-                  {usesMergeStack(style) ? `Photo ${index + 1}` : "Source photo"}
-                </span>
-              </div>
-              <div className={cn("relative", resultFit.contain && "bg-[#f5f3ee]")}>
-                <Image
-                  src={example.result}
-                  alt={example.altResult}
-                  fill
-                  sizes="(max-width:640px) 50vw, 220px"
-                  className={resultFit.contain ? "object-contain" : "object-cover"}
-                  loading="lazy"
-                />
-                <span className="absolute right-3 bottom-3 rounded-lg bg-[rgba(11,11,16,0.72)] px-2 py-1 text-[10px] font-extrabold">
-                  AI result
-                </span>
-              </div>
+      {(() => {
+        const extraExamples = style.examplePairs.filter(
+          (example) =>
+            !(example.source === style.source && example.result === style.result),
+        );
+        if (extraExamples.length === 0) return null;
+        return (
+          <section className="container py-12 sm:py-16">
+            <h2 className="mb-7 text-[clamp(28px,3vw,42px)] tracking-[-0.035em]">
+              More examples
+            </h2>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+              {extraExamples.map((example, index) => (
+                <div
+                  key={`${style.id}-example-${index}`}
+                  className="grid h-[220px] grid-cols-2 gap-0.5 overflow-hidden rounded-[var(--radius)] border border-[var(--line)] md:h-[260px] lg:h-[280px]"
+                >
+                  <div className="relative">
+                    <Image
+                      src={example.source}
+                      alt={example.altSource}
+                      fill
+                      sizes="(max-width:1024px) 100vw, 560px"
+                      className="object-cover"
+                      loading="lazy"
+                    />
+                    <span className="absolute bottom-3 left-3 rounded-lg bg-[rgba(11,11,16,0.72)] px-2 py-1 text-[10px] font-extrabold">
+                      {usesMergeStack(style) ? `Photo ${index + 1}` : "Source photo"}
+                    </span>
+                  </div>
+                  <div className={cn("relative", resultFit.contain && "bg-[#f5f3ee]")}>
+                    <Image
+                      src={example.result}
+                      alt={example.altResult}
+                      fill
+                      sizes="(max-width:1024px) 100vw, 560px"
+                      className={resultFit.contain ? "object-contain" : "object-cover"}
+                      loading="lazy"
+                    />
+                    <span className="absolute right-3 bottom-3 rounded-lg bg-[rgba(11,11,16,0.72)] px-2 py-1 text-[10px] font-extrabold">
+                      AI result
+                    </span>
+                  </div>
+                </div>
+              ))}
             </div>
-          ))}
-        </div>
-      </section>
+          </section>
+        );
+      })()}
 
       {children}
 
@@ -834,16 +843,17 @@ function Toggle({
 }) {
   return (
     <div className="flex min-h-11 items-center justify-between gap-3 py-1 text-[13px]">
-      <span>{label}</span>
-      <label className="relative h-6 w-[42px] shrink-0">
+      <span id={`toggle-label-${label.replace(/\s+/g, "-").toLowerCase()}`}>{label}</span>
+      <label className="relative h-11 w-11 shrink-0 cursor-pointer">
         <input
           type="checkbox"
           className="h-0 w-0 opacity-0"
           checked={checked}
+          aria-label={label}
           onChange={(event) => onChange(event.target.checked)}
         />
         <span
-          className={`absolute inset-0 cursor-pointer rounded-[var(--pill)] border border-[var(--line)] transition ${
+          className={`absolute top-1/2 left-1/2 h-6 w-[42px] -translate-x-1/2 -translate-y-1/2 rounded-[var(--pill)] border border-[var(--line)] transition ${
             checked ? "bg-[var(--violet)]" : "bg-[#373644]"
           }`}
         >

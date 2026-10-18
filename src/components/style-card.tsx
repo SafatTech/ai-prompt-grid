@@ -6,16 +6,14 @@ import type { MouseEvent } from "react";
 import { CompareSlider } from "@/components/compare-slider";
 import { CopyPromptButton } from "@/components/home/copy-prompt-button";
 import { MergeBeforeAfter } from "@/components/merge-before-after";
-import { mergeInputPhotos, mergeResultImage, usesMergeStack } from "@/lib/catalog/merge-inputs";
-import { previewPrompt, defaultsForStyle } from "@/lib/catalog/prompts";
 import { useLibrary } from "@/components/providers/library-provider";
 import { useToast } from "@/components/providers/toast-provider";
 import { useUiModals } from "@/components/providers/ui-modal-provider";
-import type { CatalogStyle } from "@/lib/catalog/styles";
+import type { StyleCardData } from "@/lib/catalog/style-card-data";
 import { cn } from "@/lib/utils";
 
 type Props = {
-  style: CatalogStyle;
+  style: StyleCardData;
   compact?: boolean;
   /** Homepage rails / masonry — 4:5 media, copy button, hover preview. */
   variant?: "default" | "rail" | "masonry";
@@ -34,13 +32,11 @@ export function StyleCard({
   const { openSignIn } = useUiModals();
   const saved = isSaved(style.id);
   const height = compact ? Math.min(style.height, 320) : style.height;
-  const mergePhotos = usesMergeStack(style) ? mergeInputPhotos(style) : [];
+  const mergePhotos = style.mergePhotos;
   const isRail = variant === "rail" || variant === "masonry";
-  const promptPreview = previewPrompt(style, defaultsForStyle(style));
-  const pair =
-    style.examplePairs.find((p) => p.result === style.result) ?? style.examplePairs[0];
-  const mediaWidth = pair?.resultWidth && pair.resultWidth > 0 ? pair.resultWidth : 800;
-  const mediaHeight = pair?.resultHeight && pair.resultHeight > 0 ? pair.resultHeight : 1000;
+  const promptPreview = style.promptPreview;
+  const mediaWidth = style.mediaWidth;
+  const mediaHeight = style.mediaHeight;
 
   function handleSave(event: MouseEvent) {
     event.preventDefault();
@@ -79,7 +75,7 @@ export function StyleCard({
               : { aspectRatio: "4 / 5" }
           }
         >
-          {mergePhotos.length >= 2 ? (
+          {mergePhotos.length >= 2 && style.mergeResult ? (
             <Link
               href={`/styles/${style.id}`}
               className="absolute inset-0 block"
@@ -89,7 +85,7 @@ export function StyleCard({
                 variant="card"
                 title={style.title}
                 inputs={mergePhotos}
-                result={mergeResultImage(style)}
+                result={style.mergeResult}
                 sizes={sizes}
                 priority={priority}
               />
@@ -160,16 +156,17 @@ export function StyleCard({
     <article
       className={cn(
         "group relative overflow-hidden rounded-[var(--radius)] border border-[var(--line)] bg-[var(--surface)] transition-[transform,border-color] duration-280 hover:-translate-y-1 hover:border-[rgba(255,255,255,0.2)]",
+        "style-card-explore",
       )}
     >
       {/* Compare lives outside the link so dragging the handle isn't a browser link-drag. */}
       <div className="relative overflow-hidden bg-[#242331]" style={{ height }}>
-        {mergePhotos.length >= 2 ? (
+        {mergePhotos.length >= 2 && style.mergeResult ? (
           <MergeBeforeAfter
             variant="card"
             title={style.title}
             inputs={mergePhotos}
-            result={mergeResultImage(style)}
+            result={style.mergeResult}
             priority={priority}
           />
         ) : (
@@ -196,7 +193,7 @@ export function StyleCard({
       </div>
       <Link
         href={`/styles/${style.id}`}
-        className="block p-[17px]"
+        className="style-card-explore-body block min-h-[170px] p-[17px]"
         data-testid={`style-card-${style.id}`}
         aria-label={`Open ${style.title}`}
       >
@@ -211,8 +208,10 @@ export function StyleCard({
             {style.tool}
           </span>
         </div>
-        <h3 className="m-0 mb-2 text-[19px] tracking-[-0.02em]">{style.title}</h3>
-        <p className="m-0 text-xs text-[var(--muted)]">{style.note}</p>
+        <h2 className="m-0 mb-2 line-clamp-2 text-[19px] tracking-[-0.02em]">
+          {style.title}
+        </h2>
+        <p className="m-0 line-clamp-2 text-xs text-[var(--muted)]">{style.note}</p>
         {mergePhotos.length >= 2 ? (
           <p className="mt-2 mb-0 text-xs font-semibold text-[var(--muted)]">
             Merge · {mergePhotos.length} photos
