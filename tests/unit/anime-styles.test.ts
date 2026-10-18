@@ -15,6 +15,8 @@ import { styleSocialTitle } from "../../src/lib/catalog/style-meta";
 
 const TOKEN = /\{\{[a-zA-Z]+\}\}/;
 
+const APP_NAME = /\b(gemini|chatgpt|saad)\b/i;
+
 const TRADEMARK =
   /\b(ghibli|studio\s+ghibli|naruto|one\s+piece|demon\s+slayer|dragon\s+ball|pokemon|pokémon)\b/i;
 
@@ -50,7 +52,7 @@ describe("anime AI photo style pages", () => {
     );
   });
 
-  it("keeps style titles and document titles within 60 characters", () => {
+  it("keeps style titles and document titles within 60 characters, with no app names", () => {
     for (const style of seedAnimeStyles) {
       assert.ok(
         style.title.length <= 60,
@@ -63,6 +65,7 @@ describe("anime AI photo style pages", () => {
       );
       assert.equal(social.endsWith("Prompt Prompt"), false);
       assert.equal(social.includes(style.title.slice(0, 20)), true);
+      assert.equal(APP_NAME.test(style.title), false, style.id);
     }
   });
 

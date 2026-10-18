@@ -1,6 +1,7 @@
 import { seedAnimeStyles } from "./seed-anime-styles";
 import { seedBirthdayStyles } from "./seed-birthday-styles";
 import { seedBoysStyles } from "./seed-boys-styles";
+import { seedChristmasStyles } from "./seed-christmas-styles";
 import { seedDiwaliStyles } from "./seed-diwali-styles";
 import { seedEightiesStyles } from "./seed-80s-styles";
 import { seedLinkedinStyles } from "./seed-linkedin-styles";
@@ -17,7 +18,7 @@ import type { CatalogStyle } from "./types";
 
 /**
  * Published catalog seed =
- * person/group editorial 1–134 (Halloween 31–35 + Diwali 36–47 + 1980s 48–59 + LinkedIn 60–74 + merge 75–86 + winter 87–98 + anime 99–110 + birthday 111–122 + boys 123–134)
+ * person/group/pet editorial 1–146 (Halloween 31–35 + Diwali 36–47 + 1980s 48–59 + LinkedIn 60–74 + merge 75–86 + winter 87–98 + anime 99–110 + birthday 111–122 + boys 123–134 + Christmas 135–146)
  * + product 1–10 + group 1–10 + place 1–10 + pet 1–9.
  */
 export const seedStyles: CatalogStyle[] = [
@@ -32,6 +33,7 @@ export const seedStyles: CatalogStyle[] = [
   ...seedAnimeStyles,
   ...seedBirthdayStyles,
   ...seedBoysStyles,
+  ...seedChristmasStyles,
   ...seedProductStyles,
   ...seedGroupStyles,
   ...seedPlaceStyles,

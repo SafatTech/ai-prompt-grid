@@ -135,6 +135,18 @@ export const moodSchema = z.enum([
   "Neon pink and blue",
   "Fresh monsoon",
   "Natural golden hour",
+  "Warm festive red and gold",
+  "Soft festive cream and red",
+  "Warm fireside amber",
+  "Rich festive jewel tones",
+  "Warm classic Christmas",
+  "Bright peppermint red and white",
+  "Soft romantic Christmas",
+  "Cheerful warm kitchen",
+  "Magical gold and emerald",
+  "Faded 70s film",
+  "Cozy festive warm",
+  "Festive red and green evening",
 ]);
 
 export const backgroundSchema = z.enum([
@@ -299,6 +311,18 @@ export const backgroundSchema = z.enum([
   "Plain dark studio backdrop with a soft gradient glow",
   "Rainy monsoon street with wet road reflections, green trees, and small shops with plain signboards",
   "Open wheat field at golden hour with tall grass and a soft warm sky",
+  "Cozy living room with a tall green Christmas tree, red and gold ornaments, and a wooden floor",
+  "Bright cream studio set with a small decorated Christmas tree, stacked wrapped gift boxes with satin ribbons, and a soft white rug",
+  "Stone fireplace with a crackling fire, a garland mantel with plain red stockings, and wrapped gifts on the floor",
+  "Grand hallway with a huge Christmas tree covered in red, gold and silver glass ornaments and ribbon bows",
+  "Warm living room with a large decorated Christmas tree, a pile of wrapped gifts and a red-and-green plaid throw on the sofa",
+  "Bright red-and-white peppermint-striped studio backdrop with giant candy canes and scattered wrapped candies",
+  "Cozy room with a decorated Christmas tree, wrapped gifts underneath, and warm candle lanterns on a side table",
+  "Festive home kitchen with a small tree on the counter, trays of gingerbread cookies, red-and-white candy canes in a jar and a window",
+  "Close-up of a huge pine branch with red and gold baubles and a soft blurred Christmas tree glow",
+  "Retro 1970s living room with wood paneling, a tinsel Christmas tree with big colored bulbs, and gifts in patterned paper",
+  "Under a decorated Christmas tree with wrapped gifts, red and gold ornaments and a soft plaid blanket",
+  "Festive outdoor lane at dusk lined with giant candy canes, oversized wrapped gift-box displays and decorated pine trees",
 ]);
 
 export const ratioSchema = z.enum(["4:5 Portrait", "1:1 Square", "9:16 Story"]);

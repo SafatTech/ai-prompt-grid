@@ -446,7 +446,7 @@ export const seedEightiesStyles: CatalogStyle[] = eighties.map((item, index) => 
   category: "Vintage",
   subject: item.subject,
   intent: item.intent,
-  requirement: "One photo",
+  requirement: (item.inputImageCount ?? 1) === 2 ? "Two photos" : "One photo",
   tool: "ChatGPT Image",
   note: item.note,
   height: item.height,
