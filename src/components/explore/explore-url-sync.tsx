@@ -6,14 +6,21 @@ import { useSearchParams } from "next/navigation";
 const INDEXABLE = "index, follow";
 const NOINDEX = "noindex, follow";
 
+/** Update the existing robots meta; never leave duplicates after client nav. */
 function setRobotsMeta(content: string) {
-  let meta = document.querySelector('meta[name="robots"]');
-  if (!meta) {
-    meta = document.createElement("meta");
+  const metas = document.head.querySelectorAll('meta[name="robots"]');
+  if (metas.length === 0) {
+    const meta = document.createElement("meta");
     meta.setAttribute("name", "robots");
+    meta.setAttribute("content", content);
     document.head.appendChild(meta);
+    return;
   }
-  meta.setAttribute("content", content);
+  const primary = metas[0]!;
+  primary.setAttribute("content", content);
+  for (let i = 1; i < metas.length; i++) {
+    metas[i]!.remove();
+  }
 }
 
 /**

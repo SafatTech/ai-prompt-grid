@@ -136,7 +136,7 @@ export function StyleCard({
           </button>
         </div>
         <div className="style-card-rail-body px-3.5 pt-3 pb-3.5">
-          <h3 className="m-0 truncate text-[15px] font-semibold leading-snug tracking-[-0.01em]">
+          <h3 className="m-0 text-[15px] font-semibold leading-snug tracking-[-0.01em]">
             <Link
               href={`/styles/${style.id}`}
               className="style-card-title-link"

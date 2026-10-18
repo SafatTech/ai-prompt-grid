@@ -74,6 +74,11 @@ export function ExploreClient({
     filtersFromExploreQuery(initialQuery),
   );
   const [drawerOpen, setDrawerOpen] = useState(false);
+  /** Staged drawer filters — URL sync only on "Show N styles" (N-15). */
+  const [draftFilters, setDraftFilters] = useState<FilterState>(() =>
+    filtersFromExploreQuery(initialQuery),
+  );
+  const [draftMatchCount, setDraftMatchCount] = useState(ssrMatchCount);
   const [listing, setListing] = useState<ListingPayload>({
     styles: ssrStyles,
     matchCount: ssrMatchCount,
@@ -87,6 +92,7 @@ export function ExploreClient({
   const appliedQuery = useRef<string | null>(null);
   const loadMoreInFlight = useRef(false);
   const fetchSeq = useRef(0);
+  const draftCountSeq = useRef(0);
 
   const pageCount = explorePageCount(listing.matchCount);
   const safePage = Math.min(listing.page, pageCount);
@@ -144,12 +150,14 @@ export function ExploreClient({
           styles?: StyleCardData[];
           total?: number;
         };
+        const total = typeof data.total === "number" ? data.total : 0;
         setListing({
           styles: Array.isArray(data.styles) ? data.styles : [],
-          matchCount: typeof data.total === "number" ? data.total : 0,
+          matchCount: total,
           page,
           heading: exploreListingHeading(page),
         });
+        setDraftMatchCount(total);
       } finally {
         if (seq === fetchSeq.current) setListingLoading(false);
       }
@@ -193,9 +201,11 @@ export function ExploreClient({
         appliedQuery.current = next;
         const parsed = new URLSearchParams(next);
         const query = parseExploreSearchParams(parsed);
+        const nextFilters = filtersFromExploreQuery(query);
         setSearch(query.q);
         setSort(query.sort);
-        setFilters(filtersFromExploreQuery(query));
+        setFilters(nextFilters);
+        setDraftFilters(nextFilters);
         setExtraStyles([]);
         setPendingCount(0);
         if (!next) {
@@ -205,6 +215,7 @@ export function ExploreClient({
             page: 1,
             heading: ssrHeading,
           });
+          setDraftMatchCount(ssrMatchCount);
         } else {
           void fetchListing(next);
         }
@@ -214,6 +225,32 @@ export function ExploreClient({
       }
     },
     [fetchListing, ssrStyles, ssrMatchCount, ssrHeading],
+  );
+
+  const previewDraftCount = useCallback(
+    async (nextFilters: FilterState, nextSearch: string, nextSort: SortOption) => {
+      const params = exploreQueryToSearchParams({
+        q: nextSearch,
+        sort: nextSort,
+        category: [...nextFilters.category],
+        subject: [...nextFilters.subject],
+        intent: [...nextFilters.intent],
+        requirement: [...nextFilters.requirement],
+        tool: [...nextFilters.tool],
+      });
+      params.set("page", "1");
+      params.set("pageSize", "1");
+      const seq = ++draftCountSeq.current;
+      try {
+        const res = await fetch(`/api/home/explore?${params.toString()}`);
+        if (!res.ok || seq !== draftCountSeq.current) return;
+        const data = (await res.json()) as { total?: number };
+        if (typeof data.total === "number") setDraftMatchCount(data.total);
+      } catch {
+        /* keep prior draft count */
+      }
+    },
+    [],
   );
 
   async function loadMore() {
@@ -251,25 +288,54 @@ export function ExploreClient({
     }
   }
 
-  function toggleFilter(group: keyof FilterState, value: string) {
+  function toggleFilter(group: keyof FilterState, value: string, stageOnly = false) {
+    const source = stageOnly ? draftFilters : filters;
     const next: FilterState = {
-      category: new Set(filters.category),
-      subject: new Set(filters.subject),
-      intent: new Set(filters.intent),
-      requirement: new Set(filters.requirement),
-      tool: new Set(filters.tool),
+      category: new Set(source.category),
+      subject: new Set(source.subject),
+      intent: new Set(source.intent),
+      requirement: new Set(source.requirement),
+      tool: new Set(source.tool),
     };
     if (next[group].has(value)) next[group].delete(value);
     else next[group].add(value);
+    if (stageOnly) {
+      setDraftFilters(next);
+      void previewDraftCount(next, search, sort);
+      return;
+    }
     setFilters(next);
+    setDraftFilters(next);
     setExtraStyles([]);
     setPendingCount(0);
     syncUrl({ q: search, sort, filters: next });
   }
 
+  function applyDraftFilters() {
+    setFilters(draftFilters);
+    setExtraStyles([]);
+    setPendingCount(0);
+    setDrawerOpen(false);
+    syncUrl({ q: search, sort, filters: draftFilters });
+  }
+
+  function openDrawer() {
+    setDraftFilters({
+      category: new Set(filters.category),
+      subject: new Set(filters.subject),
+      intent: new Set(filters.intent),
+      requirement: new Set(filters.requirement),
+      tool: new Set(filters.tool),
+    });
+    setDraftMatchCount(matchCount);
+    setDrawerOpen(true);
+  }
+
   function clearFilters() {
     const empty = createEmptyFilters();
     setFilters(empty);
+    setDraftFilters(empty);
+    setDraftMatchCount(ssrMatchCount);
     setSearch("");
     setSort("Trending");
     setExtraStyles([]);
@@ -313,8 +379,17 @@ export function ExploreClient({
   }
 
   const activeCount = active.length;
+  const panelFilters = (isDrawer: boolean) => (isDrawer ? draftFilters : filters);
+  const panelActiveCount = (isDrawer: boolean) =>
+    isDrawer ? activeFilterEntries(draftFilters).length : activeCount;
+  const panelMatchCount = (isDrawer: boolean) =>
+    isDrawer ? draftMatchCount : matchCount;
 
-  const filterPanel = (isDrawer = false) => (
+  const filterPanel = (isDrawer = false) => {
+    const shownFilters = panelFilters(isDrawer);
+    const shownActive = panelActiveCount(isDrawer);
+    const shownMatch = panelMatchCount(isDrawer);
+    return (
     <div
       className={cn(
         "filter-side-block",
@@ -330,15 +405,23 @@ export function ExploreClient({
         <div className="min-w-0">
           <h2 className="m-0 text-[15px] font-bold tracking-[-0.02em]">Filters</h2>
           <p className="m-0 mt-0.5 text-[11px] text-[var(--muted)]">
-            {activeCount ? `${activeCount} active` : "Refine the catalog"}
+            {shownActive ? `${shownActive} active` : "Refine the catalog"}
           </p>
         </div>
         <div className="flex shrink-0 items-center gap-1.5">
-          {activeCount ? (
+          {shownActive ? (
             <button
               type="button"
               className="cursor-pointer rounded-[10px] border-0 bg-transparent px-2.5 py-2 text-xs font-bold text-[#b9abff] hover:bg-[rgba(139,108,255,0.1)]"
-              onClick={clearFilters}
+              onClick={() => {
+                if (isDrawer) {
+                  const empty = createEmptyFilters();
+                  setDraftFilters(empty);
+                  setDraftMatchCount(catalogCount);
+                  return;
+                }
+                clearFilters();
+              }}
               data-testid="clear-filters"
             >
               Clear
@@ -347,7 +430,15 @@ export function ExploreClient({
             <button
               type="button"
               className="sr-only"
-              onClick={clearFilters}
+              onClick={() => {
+                if (isDrawer) {
+                  const empty = createEmptyFilters();
+                  setDraftFilters(empty);
+                  setDraftMatchCount(catalogCount);
+                  return;
+                }
+                clearFilters();
+              }}
               data-testid="clear-filters"
             >
               Clear all
@@ -356,7 +447,7 @@ export function ExploreClient({
           {isDrawer ? (
             <button
               type="button"
-              className="grid h-10 w-10 place-items-center rounded-[12px] border border-[var(--line)] bg-[var(--surface-2)] text-lg leading-none text-[var(--muted)]"
+              className="grid h-11 w-11 place-items-center rounded-[12px] border border-[var(--line)] bg-[var(--surface-2)] text-lg leading-none text-[var(--muted)]"
               aria-label="Close filters"
               onClick={() => setDrawerOpen(false)}
             >
@@ -368,7 +459,7 @@ export function ExploreClient({
 
       <div className="filter-side-block__body scroll-panel">
         {(Object.keys(filterGroups) as (keyof typeof filterGroups)[]).map((key) => {
-          const groupActive = filters[key].size;
+          const groupActive = shownFilters[key].size;
           return (
             <section key={key} className="filter-side-block__group">
               <div className="mb-3 flex items-center justify-between gap-2">
@@ -383,14 +474,14 @@ export function ExploreClient({
               </div>
               <div className="flex flex-wrap gap-1.5">
                 {filterGroups[key].map((value) => {
-                  const activeChip = filters[key].has(value);
+                  const activeChip = shownFilters[key].has(value);
                   return (
                     <button
                       key={value}
                       type="button"
                       aria-pressed={activeChip}
                       data-testid={`filter-${key}-${value}`}
-                      onClick={() => toggleFilter(key, value)}
+                      onClick={() => toggleFilter(key, value, isDrawer)}
                       className="filter-chip"
                     >
                       <span className="filter-chip__mark" aria-hidden>
@@ -408,13 +499,14 @@ export function ExploreClient({
 
       {isDrawer ? (
         <div className="border-t border-[var(--line)] p-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
-          <Button className="w-full" onClick={() => setDrawerOpen(false)}>
-            Show {matchCount} {matchCount === 1 ? "style" : "styles"}
+          <Button className="w-full" onClick={applyDraftFilters}>
+            Show {shownMatch} {shownMatch === 1 ? "style" : "styles"}
           </Button>
         </div>
       ) : null}
     </div>
-  );
+    );
+  };
 
   return (
     <div>
@@ -450,7 +542,7 @@ export function ExploreClient({
             variant="secondary"
             className="md:hidden"
             data-testid="open-filters"
-            onClick={() => setDrawerOpen(true)}
+            onClick={openDrawer}
           >
             Filters{activeCount ? ` · ${activeCount}` : ""}
           </Button>
@@ -477,14 +569,16 @@ export function ExploreClient({
           {filterPanel()}
         </aside>
         <div>
-          <div className="mb-[18px] flex items-center justify-between gap-4">
+          <div className="explore-toolbar mb-[18px] flex min-h-11 items-center justify-between gap-4">
             <span
-              className="inline-block min-w-[7.5rem] text-[13px] text-[var(--muted)] tabular-nums"
+              className="explore-results-count inline-block w-[12ch] shrink-0 text-[13px] text-[var(--muted)] tabular-nums"
               data-testid="results-count"
             >
               {matchCount} {matchCount === 1 ? "style" : "styles"}
             </span>
-            <SortSelect value={sort} onChange={onSortChange} />
+            <div className="ml-auto flex items-center gap-2">
+              <SortSelect value={sort} onChange={onSortChange} />
+            </div>
           </div>
           <h2 className="sr-only">Style results</h2>
           {listingLoading ? (
@@ -513,7 +607,8 @@ export function ExploreClient({
                     key={style.id}
                     style={style}
                     compact
-                    priority={index === 0 && listing.page === 1}
+                    /* First desktop row is 3 cols; eager+priority avoids lazy LCP. */
+                    priority={listing.page === 1 && index < 3}
                   />
                 ))}
                 {Array.from({ length: pendingCount }, (_, index) => (
@@ -684,7 +779,7 @@ function SortSelect({
         aria-label={`Sort styles: ${value}`}
         onClick={() => setOpen((current) => !current)}
         className={cn(
-          "flex min-h-10 min-w-[148px] cursor-pointer items-center justify-between gap-2 rounded-[12px] border px-3 text-[13px] transition-colors duration-150",
+          "flex min-h-11 min-w-[148px] cursor-pointer items-center justify-between gap-2 rounded-[12px] border px-3 text-[13px] transition-colors duration-150",
           open
             ? "border-[var(--line-strong)] bg-[var(--surface-2)]"
             : "border-[var(--line)] bg-[var(--surface)] hover:border-[var(--line-strong)]",

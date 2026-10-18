@@ -4,6 +4,7 @@ import {
   createContext,
   useCallback,
   useContext,
+  useEffect,
   useMemo,
   useState,
   type ReactNode,
@@ -22,6 +23,24 @@ const TOAST_MS = 3800;
 
 export function ToastProvider({ children }: { children: ReactNode }) {
   const [toasts, setToasts] = useState<Toast[]>([]);
+  /** Lift toasts above bottom sheets (share / filters) so Copy link stays tappable. */
+  const [elevated, setElevated] = useState(false);
+
+  useEffect(() => {
+    function sync() {
+      const openDialog = document.querySelector('[role="dialog"][aria-modal="true"]');
+      setElevated(Boolean(openDialog) || document.body.classList.contains("no-scroll"));
+    }
+    sync();
+    const observer = new MutationObserver(sync);
+    observer.observe(document.body, {
+      attributes: true,
+      attributeFilter: ["class"],
+      childList: true,
+      subtree: true,
+    });
+    return () => observer.disconnect();
+  }, []);
 
   const dismiss = useCallback((id: string) => {
     setToasts((prev) => prev.filter((t) => t.id !== id));
@@ -41,7 +60,12 @@ export function ToastProvider({ children }: { children: ReactNode }) {
     <ToastContext.Provider value={value}>
       {children}
       <div
-        className="pointer-events-none fixed inset-x-0 bottom-0 z-[100] flex flex-col items-end gap-3 p-5 sm:p-6"
+        className={cn(
+          "pointer-events-none fixed inset-x-0 z-[100] flex flex-col items-end gap-3 p-5 sm:p-6",
+          elevated
+            ? "bottom-[min(52dvh,28rem)] sm:bottom-0"
+            : "bottom-0",
+        )}
         aria-live="polite"
         aria-atomic="true"
       >

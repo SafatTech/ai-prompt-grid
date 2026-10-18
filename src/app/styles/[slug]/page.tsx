@@ -1,13 +1,7 @@
 import type { Metadata } from "next";
-import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
+import { RelatedStylesLazy } from "@/components/styles/related-styles-lazy";
 import { StyleDetailClient } from "@/components/styles/style-detail-client";
-
-const RelatedStyles = dynamic(
-  () =>
-    import("@/components/styles/related-styles").then((mod) => mod.RelatedStyles),
-  { ssr: true },
-);
 import { relatedStylesFor } from "@/lib/catalog/related-styles";
 import { getPublishedStyleBySlug, listPublishedStyles } from "@/lib/catalog/repository";
 import { toStyleCardDataList } from "@/lib/catalog/style-card-data";
@@ -115,7 +109,7 @@ export default async function StyleDetailPage({
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       <StyleDetailClient style={style}>
-        <RelatedStyles styles={relatedStyles} category={style.category} />
+        <RelatedStylesLazy styles={relatedStyles} category={style.category} />
       </StyleDetailClient>
     </>
   );

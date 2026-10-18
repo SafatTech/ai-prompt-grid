@@ -233,7 +233,7 @@ export function SiteHeader({ showGuidesLink }: { showGuidesLink: boolean }) {
       >
         <Link
           href="/"
-          className="inline-flex shrink-0 items-center gap-2.5 text-[16px] font-bold tracking-[-0.03em] text-[#F5F3EE]"
+          className="site-logo-link relative inline-flex shrink-0 items-center gap-2.5 text-[16px] font-bold tracking-[-0.03em] text-[#F5F3EE]"
           aria-label="AI Prompt Grid home"
           onMouseEnter={closePanels}
         >
@@ -469,6 +469,9 @@ export function SiteHeader({ showGuidesLink }: { showGuidesLink: boolean }) {
           />
           <div
             id={drawerId}
+            role="dialog"
+            aria-modal="true"
+            aria-label="Site menu"
             className="nav-panel-in absolute top-0 right-0 flex h-dvh w-[min(92vw,420px)] flex-col bg-[#15151E] pt-[max(1rem,env(safe-area-inset-top))] shadow-[-16px_0_40px_rgba(0,0,0,0.4)]"
           >
             <div className="flex items-center justify-end px-4 pt-4">
