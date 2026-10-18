@@ -1,12 +1,18 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { CopyLinkButton } from "@/components/guides/copy-link-button";
 import { GuideBreadcrumbs } from "@/components/guides/guide-breadcrumbs";
 import { GuideHero } from "@/components/guides/guide-hero";
 import { GuideMarkdown } from "@/components/guides/guide-markdown";
-import { GuideRelated } from "@/components/guides/guide-related";
 import { GuideTocDesktop, GuideTocMobile } from "@/components/guides/guide-toc";
+
+const GuideRelated = dynamic(
+  () =>
+    import("@/components/guides/guide-related").then((mod) => mod.GuideRelated),
+  { ssr: true },
+);
 import {
   getGuide,
   listIndexableGuides,

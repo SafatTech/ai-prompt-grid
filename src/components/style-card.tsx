@@ -137,7 +137,12 @@ export function StyleCard({
         </div>
         <div className="style-card-rail-body px-3.5 pt-3 pb-3.5">
           <h3 className="m-0 truncate text-[15px] font-semibold leading-snug tracking-[-0.01em]">
-            <Link href={`/styles/${style.id}`}>{style.title}</Link>
+            <Link
+              href={`/styles/${style.id}`}
+              className="style-card-title-link"
+            >
+              {style.title}
+            </Link>
           </h3>
           <div className="style-card-rail-row mt-2 flex items-center justify-between gap-2">
             <span className="min-w-0 truncate text-xs text-[var(--muted)]">

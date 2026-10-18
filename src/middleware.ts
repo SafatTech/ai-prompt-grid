@@ -70,7 +70,8 @@ function retiredStyleRedirect(request: NextRequest): NextResponse | null {
 /**
  * `/guides?page=N` stays the public URL (SEO), but is served from the ISR
  * path `/guides/p/N` so the listing is cacheable and bf-cache eligible.
- * `/explore` with query params stays on the static shell; robots noindex via header.
+ * `/explore?*` rewrites to `/explore/faceted` so meta robots is noindex,follow
+ * (matching x-robots-tag) without making the bare listing dynamic.
  */
 function guidesPageRewrite(request: NextRequest): NextResponse | null {
   if (request.nextUrl.pathname !== "/guides") return null;
@@ -86,12 +87,14 @@ function guidesPageRewrite(request: NextRequest): NextResponse | null {
   return NextResponse.rewrite(destination);
 }
 
-function exploreFacetRobots(request: NextRequest): Headers | null {
+function exploreFacetRewrite(request: NextRequest): NextResponse | null {
   if (request.nextUrl.pathname !== "/explore") return null;
   if (![...request.nextUrl.searchParams.keys()].length) return null;
-  const headers = new Headers();
-  headers.set("x-robots-tag", "noindex, follow");
-  return headers;
+  const destination = request.nextUrl.clone();
+  destination.pathname = "/explore/faceted";
+  const response = NextResponse.rewrite(destination);
+  response.headers.set("x-robots-tag", "noindex, follow");
+  return response;
 }
 
 /**
@@ -115,18 +118,13 @@ export async function middleware(request: NextRequest) {
   const guidesRewrite = guidesPageRewrite(request);
   if (guidesRewrite) return guidesRewrite;
 
-  const facetRobots = exploreFacetRobots(request);
+  const exploreRewrite = exploreFacetRewrite(request);
+  if (exploreRewrite) return exploreRewrite;
 
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!url || !anonKey) {
-    const response = NextResponse.next();
-    if (facetRobots) {
-      facetRobots.forEach((value, key) => {
-        response.headers.set(key, value);
-      });
-    }
-    return response;
+    return NextResponse.next();
   }
 
   let supabaseResponse = NextResponse.next({ request });
@@ -177,12 +175,6 @@ export async function middleware(request: NextRequest) {
       }
       // Let the page render the access-denied UI for clearer messaging.
     }
-  }
-
-  if (facetRobots) {
-    facetRobots.forEach((value, key) => {
-      supabaseResponse.headers.set(key, value);
-    });
   }
 
   return supabaseResponse;

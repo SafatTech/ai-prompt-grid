@@ -16,7 +16,7 @@ export function GuideBreadcrumbs({
         <li>
           <Link
             href="/"
-            className="font-bold text-[var(--text)] underline-offset-2 hover:underline"
+            className="relative inline-flex min-h-11 items-center font-bold text-[var(--text)] underline-offset-2 hover:underline"
           >
             Home
           </Link>
@@ -26,7 +26,7 @@ export function GuideBreadcrumbs({
           {current ? (
             <Link
               href="/guides"
-              className="font-bold text-[var(--text)] underline-offset-2 hover:underline"
+              className="relative inline-flex min-h-11 items-center font-bold text-[var(--text)] underline-offset-2 hover:underline"
             >
               Guides
             </Link>

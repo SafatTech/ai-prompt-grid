@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { StyleCard } from "@/components/style-card";
 import { StyleCardSkeleton } from "@/components/style-card-skeleton";
+import { homeExploreFallbackPage } from "@/lib/catalog/explore-pages";
 import type { StyleCardData } from "@/lib/catalog/style-card-data";
 
 type Props = {
@@ -13,6 +14,8 @@ type Props = {
 };
 
 const AUTO_FETCH_PAGES = 2;
+/** Approx. masonry row height at 1440 (4–5 columns). */
+const MASONRY_ROW_PX = 300;
 
 function mergeUnique(
   prev: StyleCardData[],
@@ -42,12 +45,19 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
   const shown = initialCount + extraStyles.length;
   const hasMore = shown < total;
   const autoDone = autoFetches >= AUTO_FETCH_PAGES || !hasMore;
-  const exploreFallbackPage = Math.max(2, Math.floor(shown / pageSize) + 1);
-  // Reserve approximate masonry height for the next page so trust strip does not jump (CLS).
+  const exploreFallbackPage = homeExploreFallbackPage(shown);
+  // Reserve space for auto-fetched pages + in-flight skeletons so trust strip CLS ≈ 0.
+  const remainingAutoCards = Math.max(
+    0,
+    (AUTO_FETCH_PAGES - autoFetches) * pageSize,
+  );
+  const reservedCards = Math.max(pendingCount, remainingAutoCards);
   const reservedMinHeight =
-    !page2Ready && extraStyles.length === 0
-      ? Math.ceil(pageSize / 4) * 280
-      : undefined;
+    reservedCards > 0
+      ? Math.ceil(reservedCards / 4) * MASONRY_ROW_PX
+      : !page2Ready && extraStyles.length === 0
+        ? Math.ceil(pageSize / 4) * MASONRY_ROW_PX
+        : undefined;
 
   function commitPage(page: number, styles: StyleCardData[]) {
     if (page === 2) setPage2Ready(true);

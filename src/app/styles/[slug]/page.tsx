@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
+import dynamic from "next/dynamic";
 import { notFound } from "next/navigation";
-import { RelatedStyles } from "@/components/styles/related-styles";
 import { StyleDetailClient } from "@/components/styles/style-detail-client";
+
+const RelatedStyles = dynamic(
+  () =>
+    import("@/components/styles/related-styles").then((mod) => mod.RelatedStyles),
+  { ssr: true },
+);
 import { relatedStylesFor } from "@/lib/catalog/related-styles";
 import { getPublishedStyleBySlug, listPublishedStyles } from "@/lib/catalog/repository";
 import { toStyleCardDataList } from "@/lib/catalog/style-card-data";

@@ -478,7 +478,10 @@ export function ExploreClient({
         </aside>
         <div>
           <div className="mb-[18px] flex items-center justify-between gap-4">
-            <span className="text-[13px] text-[var(--muted)]" data-testid="results-count">
+            <span
+              className="inline-block min-w-[7.5rem] text-[13px] text-[var(--muted)] tabular-nums"
+              data-testid="results-count"
+            >
               {matchCount} {matchCount === 1 ? "style" : "styles"}
             </span>
             <SortSelect value={sort} onChange={onSortChange} />
@@ -681,7 +684,7 @@ function SortSelect({
         aria-label={`Sort styles: ${value}`}
         onClick={() => setOpen((current) => !current)}
         className={cn(
-          "flex min-h-10 cursor-pointer items-center gap-2 rounded-[12px] border px-3 text-[13px] transition-colors duration-150",
+          "flex min-h-10 min-w-[148px] cursor-pointer items-center justify-between gap-2 rounded-[12px] border px-3 text-[13px] transition-colors duration-150",
           open
             ? "border-[var(--line-strong)] bg-[var(--surface-2)]"
             : "border-[var(--line)] bg-[var(--surface)] hover:border-[var(--line-strong)]",

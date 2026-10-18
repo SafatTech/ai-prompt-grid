@@ -35,8 +35,10 @@ export function GuidesIndex({ page }: { page: number }) {
     ).map((category) => category.slug),
   ) as Set<GuideCategorySlug>;
 
+  // Featured is always guides[0]; page 2+ must page through the rest only
+  // so the last card on page 1 is not repeated.
   const featured = page === 1 ? guides[0] : undefined;
-  const remaining = featured ? guides.slice(1) : guides;
+  const remaining = guides.slice(1);
   const start = (page - 1) * GUIDES_PAGE_SIZE;
   const pageGuides = remaining.slice(start, start + GUIDES_PAGE_SIZE);
   const hasMore = start + GUIDES_PAGE_SIZE < remaining.length;
