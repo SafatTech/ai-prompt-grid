@@ -256,21 +256,25 @@ describe("guide publishing rules", () => {
     const imgs = [...html.matchAll(/<img\b[^>]*>/g)].map((match) => match[0]);
     assert.equal(imgs.length, 5);
     for (const img of imgs.slice(0, 2)) {
-      assert.match(img, /loading="eager"/);
+      // next/image `priority` omits loading="eager" but keeps fetchPriority high.
+      assert.equal(/loading="lazy"/.test(img), false);
       assert.match(img, /fetchPriority="high"/);
       assert.match(img, /width="1122"/);
       assert.match(img, /height="1402"/);
       assert.match(img, /sizes="\(max-width: 640px\) calc\(100vw - 24px\), 360px"/);
+      assert.match(img, /\/_next\/image\?/);
     }
     for (const img of imgs.slice(2, 4)) {
       assert.match(img, /loading="lazy"/);
       assert.match(img, /fetchPriority="auto"/);
       assert.match(img, /width="1122"/);
       assert.match(img, /height="1402"/);
+      assert.match(img, /\/_next\/image\?/);
     }
     assert.match(imgs[4] ?? "", /width="1200"/);
     assert.match(imgs[4] ?? "", /height="630"/);
     assert.match(imgs[4] ?? "", /sizes="\(max-width: 760px\) 100vw, 760px"/);
+    assert.match(imgs[4] ?? "", /\/_next\/image\?/);
     assert.equal(html.match(/<figcaption[^>]*>Before<\/figcaption>/g)?.length, 2);
     assert.equal(html.match(/<figcaption[^>]*>After<\/figcaption>/g)?.length, 2);
   });

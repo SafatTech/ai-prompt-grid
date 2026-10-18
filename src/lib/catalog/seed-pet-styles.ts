@@ -148,7 +148,7 @@ Compose the final image for {{ratio}}, keeping important features such as the fa
   {
     n: "05",
     id: "anime-companion",
-    title: "Anime Pet AI Photo Prompt (Gemini Copy-Paste)",
+    title: "Anime Pet AI Photo Prompt (Copy-Paste)",
     category: "Anime",
     note: "Polished anime companion pet portrait",
     description:

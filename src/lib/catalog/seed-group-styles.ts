@@ -137,7 +137,7 @@ Do not add brand logos, watermarks, unrelated objects, or large blocks of readab
   {
     n: "05",
     id: "anime-squad",
-    title: "Anime Group AI Photo Prompt for Gemini (Friends Squad)",
+    title: "Anime Group AI Photo Prompt (Friends Squad)",
     category: "Anime",
     note: "Polished contemporary anime group portrait",
     description:

@@ -10,7 +10,6 @@ import {
   firstDimensionedPairSrcs,
   headingForImageSrc,
   isFirstDimensionedPair,
-  isLocalGuideSrc,
   isSizedGuideSrc,
   parseDimensionTitle,
 } from "@/lib/guides/image-pairs";
@@ -229,34 +228,19 @@ function GuideBeforeAfter({
     <div className="my-6 grid grid-cols-1 gap-4 sm:grid-cols-2">
       {images.map((image) => {
         const label = frameLabel(image.src);
-        const loading = eager ? "eager" : "lazy";
-        const fetchPriority = eager ? "high" : "auto";
         return (
           <figure key={image.src} className="m-0">
-            {isLocalGuideSrc(image.src) ? (
-              <Image
-                src={image.src}
-                alt={image.alt}
-                width={image.width}
-                height={image.height}
-                sizes="(max-width: 640px) calc(100vw - 24px), 360px"
-                className="h-auto w-full rounded-2xl bg-[#15151E]"
-                loading={loading}
-                fetchPriority={fetchPriority}
-              />
-            ) : (
-              // Remote catalog files stay on Supabase, so they are not optimized here.
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={image.src}
-                alt={image.alt}
-                width={image.width}
-                height={image.height}
-                loading={loading}
-                fetchPriority={fetchPriority}
-                className="h-auto w-full rounded-2xl bg-[#15151E]"
-              />
-            )}
+            <Image
+              src={image.src}
+              alt={image.alt}
+              width={image.width}
+              height={image.height}
+              sizes="(max-width: 640px) calc(100vw - 24px), 360px"
+              className="h-auto w-full rounded-2xl bg-[#15151E]"
+              priority={eager}
+              loading={eager ? undefined : "lazy"}
+              fetchPriority={eager ? "high" : "auto"}
+            />
             {label ? (
               <figcaption className="mt-2 text-center text-xs text-[var(--muted)]">
                 {label}
@@ -288,7 +272,7 @@ function GuideFigure({ src, alt, title }: { src: string; alt: string; title?: st
   }
 
   const dimensions = parseDimensionTitle(title);
-  if (dimensions && isLocalGuideSrc(src)) {
+  if (dimensions && isSizedGuideSrc(src)) {
     const label = frameLabel(src);
     return (
       <figure className="my-6">
@@ -309,7 +293,7 @@ function GuideFigure({ src, alt, title }: { src: string; alt: string; title?: st
     );
   }
 
-  if (isLocalGuideSrc(src)) {
+  if (isSizedGuideSrc(src)) {
     return (
       <figure className="my-6">
         <div className="relative aspect-[3/2] overflow-hidden rounded-2xl bg-[#15151E]">
@@ -332,13 +316,12 @@ function GuideFigure({ src, alt, title }: { src: string; alt: string; title?: st
 
   return (
     <figure className="my-6">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={src} alt={alt} className="h-auto w-full rounded-2xl" />
-      {alt ? (
-        <figcaption className="mt-2 text-center text-xs text-[var(--muted)]">
-          {alt}
-        </figcaption>
-      ) : null}
+      <div className="relative aspect-[3/2] overflow-hidden rounded-2xl bg-[#15151E]">
+        {/* Fallback shell for non-https / invalid src — keeps layout stable. */}
+        <div className="grid h-full place-items-center px-6 text-center text-sm text-[var(--muted)]">
+          {alt || "Image unavailable"}
+        </div>
+      </div>
     </figure>
   );
 }

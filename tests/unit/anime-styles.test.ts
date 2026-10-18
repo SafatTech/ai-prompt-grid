@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import { seedAnimeStyles } from "../../src/lib/catalog/seed-anime-styles";
+import { seedStyles } from "../../src/lib/catalog/seed-styles";
 import {
   assemblePrompt,
   defaultsForStyle,
@@ -19,6 +20,72 @@ const APP_NAME = /\b(gemini|chatgpt|saad)\b/i;
 
 const TRADEMARK =
   /\b(ghibli|studio\s+ghibli|naruto|one\s+piece|demon\s+slayer|dragon\s+ball|pokemon|pokémon)\b/i;
+
+/**
+ * Remaining catalog titles that still name an app. Tracked so the catalog-wide
+ * check stays green while Anime (and future) retitles land. Do not add the
+ * anime-companion / anime-squad slugs here — those titles are cleaned.
+ */
+const ALLOWED_APP_NAME_TITLE_IDS = new Set([
+  "south-asian-fashion-editorial",
+  "joyful-outdoor-lifestyle",
+  "vintage-pulp-comic-hero",
+  "crimson-bloom-shadows",
+  "sunlit-bouquet-triptych",
+  "shadowed-saree-noir",
+  "sunlit-daisy-drift",
+  "amber-shadow-triptych",
+  "golden-boho-storyboard",
+  "cozy-pumpkin-patch-portrait",
+  "friendly-glowing-witch-portrait",
+  "elegant-gothic-vampire-portrait",
+  "diya-lit-balcony",
+  "first-diwali-as-a-married-couple",
+  "separate-photos-couple",
+  "fairy-light-portrait",
+  "family-lakshmi-puja-photo",
+  "family-diwali-in-karachi-or-sindh",
+  "diaspora-diwali-in-a-cold-city",
+  "1985-studio-portrait",
+  "1985-studio-couple",
+  "80s-wedding-album",
+  "navy-blazer-linkedin-profile-picture-prompt-gemini",
+  "charcoal-suit-corporate-linkedin-profile-picture-prompt-gemini-men",
+  "black-blazer-linkedin-profile-picture-prompt-gemini-women",
+  "hijab-office-linkedin-profile-picture-prompt-gemini-women",
+  "shalwar-kameez-linkedin-profile-picture-prompt-gemini-men",
+  "modern-office-linkedin-profile-picture-prompt-gemini",
+  "outdoor-natural-light-linkedin-profile-picture-prompt-gemini",
+  "linkedin-photo-clean-up-ai-prompt-gemini-keep-outfit",
+  "matching-team-headshot-ai-prompt-gemini-company-page",
+  "passport-size-photo-ai-prompt-gemini-white-background",
+  "executive-corporate-linkedin-profile-picture-prompt-gemini",
+  "home-office-linkedin-profile-picture-prompt-gemini",
+  "riverside-merge-two-photos-prompt-gemini-couple",
+  "cafe-window-merge-two-photos-prompt-gemini-couple",
+  "side-by-side-keepsake-frame-merge-two-photos-prompt-gemini-couple",
+  "long-distance-sunset-beach-merge-two-photos-prompt-gemini-couple",
+  "add-missing-person-to-group-photo-merge-two-photos-prompt-gemini-family",
+  "eid-family-frame-merge-two-photos-prompt-gemini-family",
+  "rooftop-friends-reunion-merge-two-photos-prompt-gemini-group",
+  "grandparent-and-grandchild-courtyard-merge-two-photos-prompt-gemini-family",
+  "sofa-cuddle-with-your-pet-merge-two-photos-prompt-gemini-person-and-pet",
+  "wedding-stage-merge-two-photos-prompt-gemini-couple",
+  "graduation-day-merge-two-photos-prompt-gemini-family",
+  "mountain-viewpoint-trip-merge-two-photos-prompt-gemini-couple",
+  "soft-daylight-lifestyle",
+  "after-hours-polaroid",
+  "clay-crew",
+  "modern-virtual-staging",
+  "refined-luxury-living",
+  "outdoor-living-oasis",
+  "bathroom-spa-upgrade",
+  "cute-3d-toon-pet",
+  "hand-painted-watercolor-pet",
+  "cozy-plushie-pet",
+  "cartoon-animation-pet",
+  "funny-everyday-pet",
+]);
 
 describe("anime AI photo style pages", () => {
   it("publishes 12 styles numbered 99 through 110 in interleaved order", () => {
@@ -67,6 +134,41 @@ describe("anime AI photo style pages", () => {
       assert.equal(social.includes(style.title.slice(0, 20)), true);
       assert.equal(APP_NAME.test(style.title), false, style.id);
     }
+  });
+
+  it("keeps every catalog style title free of app names except known leftovers", () => {
+    const companion = seedStyles.find((style) => style.id === "anime-companion");
+    const squad = seedStyles.find((style) => style.id === "anime-squad");
+    assert.ok(companion);
+    assert.ok(squad);
+    assert.equal(companion.title, "Anime Pet AI Photo Prompt (Copy-Paste)");
+    assert.equal(squad.title, "Anime Group AI Photo Prompt (Friends Squad)");
+    assert.equal(APP_NAME.test(companion.title), false);
+    assert.equal(APP_NAME.test(squad.title), false);
+
+    const unexpected: string[] = [];
+    const staleAllow: string[] = [];
+    for (const style of seedStyles) {
+      const hasAppName = APP_NAME.test(style.title);
+      if (hasAppName && !ALLOWED_APP_NAME_TITLE_IDS.has(style.id)) {
+        unexpected.push(`${style.id}: ${style.title}`);
+      }
+      if (!hasAppName && ALLOWED_APP_NAME_TITLE_IDS.has(style.id)) {
+        staleAllow.push(style.id);
+      }
+    }
+    assert.deepEqual(
+      unexpected,
+      [],
+      `unexpected app-name titles:\n${unexpected.join("\n")}`,
+    );
+    assert.deepEqual(
+      staleAllow,
+      [],
+      `allowlist entries no longer match titles (remove them):\n${staleAllow.join("\n")}`,
+    );
+    assert.equal(ALLOWED_APP_NAME_TITLE_IDS.has("anime-companion"), false);
+    assert.equal(ALLOWED_APP_NAME_TITLE_IDS.has("anime-squad"), false);
   });
 
   it("uses schema moods and backgrounds without growing Anime preset lists", () => {
