@@ -42,9 +42,12 @@ function clamp(n: number, min: number, max: number) {
 /** Half-width of the compare-handle hit zone, in CSS pixels. */
 const HANDLE_HIT_PX = 28;
 
+/** Explore / card grid — tighter mobile sizes to avoid oversized w=750 downloads. */
 const CARD_SIZES =
-  "(max-width:640px) 100vw, (max-width:1024px) 50vw, (max-width:1280px) 33vw, 302px";
-const DETAIL_SIZES = "(max-width:1024px) 100vw, 560px";
+  "(max-width:640px) 92vw, (max-width:1024px) 45vw, (max-width:1280px) 30vw, 302px";
+/** Style-page hero and “More examples” share this so the same asset is not fetched twice. */
+export const DETAIL_COMPARE_SIZES = "(max-width:1024px) 100vw, 560px";
+const DETAIL_SIZES = DETAIL_COMPARE_SIZES;
 
 export function CompareSlider({
   source,
@@ -192,6 +195,11 @@ export function CompareSlider({
           : "cursor-grab"
         : "cursor-ew-resize";
 
+  // Only the result (LCP) gets priority/high fetchPriority. The source half
+  // stays lazy so both halves do not compete for bandwidth on style pages.
+  const resultPriority = priority;
+  const sourcePriority = false;
+
   if (mode === "side") {
     return (
       <div className={cn("relative h-full w-full", className)}>
@@ -206,9 +214,9 @@ export function CompareSlider({
               fill
               sizes={imageSizes}
               className="object-cover"
-              priority={priority}
-              loading={priority ? undefined : "lazy"}
-              fetchPriority={priority ? "high" : "auto"}
+              priority={sourcePriority}
+              loading="lazy"
+              fetchPriority="auto"
               draggable={false}
             />
             <span className="absolute bottom-3 left-3 rounded-lg bg-[rgba(11,11,16,0.72)] px-2 py-1 text-[10px] font-extrabold backdrop-blur-sm">
@@ -222,9 +230,9 @@ export function CompareSlider({
               fill
               sizes={imageSizes}
               className="object-cover"
-              priority={priority}
-              loading={priority ? undefined : "lazy"}
-              fetchPriority={priority ? "high" : "auto"}
+              priority={resultPriority}
+              loading={resultPriority ? undefined : "lazy"}
+              fetchPriority={resultPriority ? "high" : "auto"}
               draggable={false}
             />
             <span className="absolute right-3 bottom-3 rounded-lg bg-[rgba(11,11,16,0.72)] px-2 py-1 text-[10px] font-extrabold backdrop-blur-sm">
@@ -263,9 +271,9 @@ export function CompareSlider({
           sizes={imageSizes}
           className="pointer-events-none object-cover"
           style={objectPosition ? { objectPosition } : undefined}
-          priority={priority}
-          loading={priority ? undefined : "lazy"}
-          fetchPriority={priority ? "high" : "auto"}
+          priority={sourcePriority}
+          loading="lazy"
+          fetchPriority="auto"
           draggable={false}
         />
       </div>
@@ -280,9 +288,9 @@ export function CompareSlider({
           sizes={imageSizes}
           className="pointer-events-none object-cover"
           style={objectPosition ? { objectPosition } : undefined}
-          priority={priority}
-          loading={priority ? undefined : "lazy"}
-          fetchPriority={priority ? "high" : "auto"}
+          priority={resultPriority}
+          loading={resultPriority ? undefined : "lazy"}
+          fetchPriority={resultPriority ? "high" : "auto"}
           draggable={false}
         />
       </div>
@@ -345,7 +353,7 @@ function ModeToggle({
       <button
         type="button"
         className={cn(
-          "cursor-pointer border-0 px-2.5 py-1.5",
+          "min-h-11 cursor-pointer border-0 px-3 py-2.5",
           mode === "slider"
             ? "bg-[rgba(139,108,255,0.35)] text-[var(--text)]"
             : "bg-transparent text-[var(--muted)]",
@@ -357,7 +365,7 @@ function ModeToggle({
       <button
         type="button"
         className={cn(
-          "cursor-pointer border-0 px-2.5 py-1.5",
+          "min-h-11 cursor-pointer border-0 px-3 py-2.5",
           mode === "side"
             ? "bg-[rgba(139,108,255,0.35)] text-[var(--text)]"
             : "bg-transparent text-[var(--muted)]",

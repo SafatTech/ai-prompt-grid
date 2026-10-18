@@ -28,17 +28,19 @@ export function CategoryChipsBar({ season }: Props) {
 
   return (
     <div className="home-chips-sticky">
-      <nav className="home-chips" aria-label="Style categories">
-        {chips.map((chip) => (
-          <Link
-            key={chip.label + chip.href}
-            href={chip.href}
-            className={chip.active ? "home-chip home-chip--on" : "home-chip"}
-          >
-            {chip.label}
-          </Link>
-        ))}
-      </nav>
+      <div className="home-chips-wrap">
+        <nav className="home-chips" aria-label="Style categories">
+          {chips.map((chip) => (
+            <Link
+              key={chip.label + chip.href}
+              href={chip.href}
+              className={chip.active ? "home-chip home-chip--on" : "home-chip"}
+            >
+              {chip.label}
+            </Link>
+          ))}
+        </nav>
+      </div>
     </div>
   );
 }

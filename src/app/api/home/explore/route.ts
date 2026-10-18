@@ -6,13 +6,14 @@ import {
   parseExploreSearchParams,
 } from "@/lib/catalog/filters";
 import { listExploreFeed, listPublishedStyles } from "@/lib/catalog/repository";
+import { toStyleCardDataList } from "@/lib/catalog/style-card-data";
 
 const HOME_PAGE_SIZE = 24;
 
 /**
  * Paginated explore feed.
  * - Homepage masonry: `?page=2` (pageSize 24). Page 1 is SSR'd on `/`.
- * - /explore Load more: `?page=2&pageSize=18` plus optional filter query params.
+ * - /explore Load more / filter changes: `?page=1&pageSize=18` plus optional filter query params.
  */
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
@@ -21,12 +22,6 @@ export async function GET(request: Request) {
     return NextResponse.json({ error: "Invalid page" }, { status: 400 });
   }
   const page = Number(raw);
-  if (page < 2) {
-    return NextResponse.json(
-      { error: "Use SSR page 1 on the homepage or /explore" },
-      { status: 400 },
-    );
-  }
 
   const rawPageSize = searchParams.get("pageSize");
   const hasExploreFacets =
@@ -55,7 +50,9 @@ export async function GET(request: Request) {
     const start = (page - 1) * pageSize;
     return NextResponse.json(
       {
-        styles: matches.slice(start, start + pageSize),
+        styles: toStyleCardDataList(matches.slice(start, start + pageSize), {
+          sharedBlur: true,
+        }),
         page,
         pageSize,
         total: matches.length,
@@ -68,10 +65,17 @@ export async function GET(request: Request) {
     );
   }
 
+  if (page < 2) {
+    return NextResponse.json(
+      { error: "Use SSR page 1 on the homepage or /explore" },
+      { status: 400 },
+    );
+  }
+
   const feed = await listExploreFeed({ page, pageSize: HOME_PAGE_SIZE });
   return NextResponse.json(
     {
-      styles: feed.styles,
+      styles: toStyleCardDataList(feed.styles, { sharedBlur: true }),
       page: feed.page,
       pageSize: feed.pageSize,
       total: feed.total,

@@ -1,3 +1,4 @@
+import Image from "next/image";
 import type { ReactNode } from "react";
 import type { GuideDisplayHero } from "@/lib/guides/prepare";
 
@@ -23,17 +24,13 @@ export function GuideHero({
   return (
     <section className="guide-hero relative h-[min(86vh,820px)] min-h-[480px] w-full overflow-hidden sm:min-h-[560px]">
       {hero.kind === "image" ? (
-        // Remote catalog heroes stay on Supabase; fixed shell height avoids CLS.
-        // eslint-disable-next-line @next/next/no-img-element
-        <img
+        <Image
           src={hero.url}
           alt={hero.alt}
-          width={1600}
-          height={900}
-          decoding="async"
-          loading="eager"
-          fetchPriority="high"
-          className="absolute inset-0 h-full w-full object-cover"
+          fill
+          priority
+          sizes="100vw"
+          className="object-cover"
           style={{ objectPosition: hero.position }}
         />
       ) : (

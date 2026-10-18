@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { StyleCard } from "@/components/style-card";
 import { StyleCardSkeleton } from "@/components/style-card-skeleton";
-import type { CatalogStyle } from "@/lib/catalog/types";
+import type { StyleCardData } from "@/lib/catalog/style-card-data";
 
 type Props = {
   initialCount: number;
@@ -15,9 +15,9 @@ type Props = {
 const AUTO_FETCH_PAGES = 2;
 
 function mergeUnique(
-  prev: CatalogStyle[],
-  styles: CatalogStyle[],
-): CatalogStyle[] {
+  prev: StyleCardData[],
+  styles: StyleCardData[],
+): StyleCardData[] {
   const seen = new Set(prev.map((style) => style.id));
   const merged = [...prev];
   for (const style of styles) {
@@ -29,21 +29,28 @@ function mergeUnique(
 }
 
 export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
-  const [extraStyles, setExtraStyles] = useState<CatalogStyle[]>([]);
+  const [extraStyles, setExtraStyles] = useState<StyleCardData[]>([]);
   const [pendingCount, setPendingCount] = useState(0);
   const [nextPage, setNextPage] = useState(2);
   const [loading, setLoading] = useState(false);
   const [autoFetches, setAutoFetches] = useState(0);
+  const [page2Ready, setPage2Ready] = useState(false);
   const inFlight = useRef(false);
-  const page2Cache = useRef<CatalogStyle[] | null>(null);
+  const page2Cache = useRef<StyleCardData[] | null>(null);
   const page2Handled = useRef(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const shown = initialCount + extraStyles.length;
   const hasMore = shown < total;
   const autoDone = autoFetches >= AUTO_FETCH_PAGES || !hasMore;
   const exploreFallbackPage = Math.max(2, Math.floor(shown / pageSize) + 1);
+  // Reserve approximate masonry height for the next page so trust strip does not jump (CLS).
+  const reservedMinHeight =
+    !page2Ready && extraStyles.length === 0
+      ? Math.ceil(pageSize / 4) * 280
+      : undefined;
 
-  function commitPage(page: number, styles: CatalogStyle[]) {
+  function commitPage(page: number, styles: StyleCardData[]) {
+    if (page === 2) setPage2Ready(true);
     setExtraStyles((prev) => mergeUnique(prev, styles));
     setNextPage(page + 1);
     setAutoFetches((n) => n + 1);
@@ -71,7 +78,7 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
         setPendingCount(0);
         return;
       }
-      const data = (await res.json()) as { styles?: CatalogStyle[] };
+      const data = (await res.json()) as { styles?: StyleCardData[] };
       const styles = Array.isArray(data.styles) ? data.styles : [];
       if (page === 2) page2Handled.current = true;
       commitPage(page, styles);
@@ -92,7 +99,7 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
         try {
           const res = await fetch("/api/home/explore?page=2");
           if (!res.ok || cancelled) return;
-          const data = (await res.json()) as { styles?: CatalogStyle[] };
+          const data = (await res.json()) as { styles?: StyleCardData[] };
           const styles = Array.isArray(data.styles) ? data.styles : [];
           if (cancelled || styles.length === 0) return;
           if (page2Handled.current) {
@@ -142,23 +149,22 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
 
   return (
     <>
-      {extraStyles.length > 0 || pendingCount > 0 ? (
-        <div
-          className="home-masonry home-masonry-extra"
-          aria-busy={pendingCount > 0 || undefined}
-        >
-          {extraStyles.map((style) => (
-            <StyleCard key={style.id} style={style} variant="masonry" />
-          ))}
-          {Array.from({ length: pendingCount }, (_, index) => (
-            <StyleCardSkeleton
-              key={`home-pending-${index}`}
-              variant="masonry"
-              index={index}
-            />
-          ))}
-        </div>
-      ) : null}
+      <div
+        className="home-masonry home-masonry-extra"
+        style={reservedMinHeight ? { minHeight: reservedMinHeight } : undefined}
+        aria-busy={pendingCount > 0 || undefined}
+      >
+        {extraStyles.map((style) => (
+          <StyleCard key={style.id} style={style} variant="masonry" />
+        ))}
+        {Array.from({ length: pendingCount }, (_, index) => (
+          <StyleCardSkeleton
+            key={`home-pending-${index}`}
+            variant="masonry"
+            index={index}
+          />
+        ))}
+      </div>
       <div ref={sentinelRef} className="home-load-more" aria-live="polite">
         {hasMore ? (
           <Link href={`/explore?page=${exploreFallbackPage}`}>Load more styles</Link>

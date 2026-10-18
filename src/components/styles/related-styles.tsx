@@ -1,9 +1,9 @@
 import Link from "next/link";
 import { StyleCard } from "@/components/style-card";
-import type { CatalogStyle } from "@/lib/catalog/types";
+import type { StyleCardData } from "@/lib/catalog/style-card-data";
 
 type Props = {
-  styles: CatalogStyle[];
+  styles: StyleCardData[];
   category: string;
 };
 

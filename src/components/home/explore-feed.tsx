@@ -1,11 +1,17 @@
+import dynamic from "next/dynamic";
 import Link from "next/link";
 import { AdSlot } from "@/components/ad-slot";
-import { ExploreLoadMore } from "@/components/home/explore-load-more";
 import { StyleCard } from "@/components/style-card";
-import type { CatalogStyle } from "@/lib/catalog/types";
+import type { StyleCardData } from "@/lib/catalog/style-card-data";
+
+const ExploreLoadMore = dynamic(
+  () =>
+    import("@/components/home/explore-load-more").then((mod) => mod.ExploreLoadMore),
+  { ssr: true },
+);
 
 type Props = {
-  styles: CatalogStyle[];
+  styles: StyleCardData[];
   total: number;
   pageSize: number;
 };

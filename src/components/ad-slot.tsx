@@ -32,7 +32,7 @@ export function AdSlot({ slot, envSlot, className }: Props) {
         <Script
           id={`adsense-loader-${slot}`}
           src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(client)}`}
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           crossOrigin="anonymous"
         />
         <ins
