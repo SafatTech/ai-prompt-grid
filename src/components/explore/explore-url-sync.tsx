@@ -6,10 +6,16 @@ import { useSearchParams } from "next/navigation";
 const INDEXABLE = "index, follow";
 const NOINDEX = "noindex, follow";
 
-/** Update the existing robots meta; never leave duplicates after client nav. */
+/**
+ * Update an existing robots meta (or dedupe after Next head swaps).
+ * Never leave two identical tags after soft navigation (N-16 @ 390).
+ */
 function setRobotsMeta(content: string) {
-  const metas = document.head.querySelectorAll('meta[name="robots"]');
+  const metas = [
+    ...document.head.querySelectorAll<HTMLMetaElement>('meta[name="robots"]'),
+  ];
   if (metas.length === 0) {
+    // Prefer mutating Next's tag; only create if the framework left none.
     const meta = document.createElement("meta");
     meta.setAttribute("name", "robots");
     meta.setAttribute("content", content);
@@ -17,7 +23,9 @@ function setRobotsMeta(content: string) {
     return;
   }
   const primary = metas[0]!;
-  primary.setAttribute("content", content);
+  if (primary.getAttribute("content") !== content) {
+    primary.setAttribute("content", content);
+  }
   for (let i = 1; i < metas.length; i++) {
     metas[i]!.remove();
   }
@@ -41,7 +49,25 @@ export function ExploreUrlSync({
 
   useEffect(() => {
     const hasQuery = [...searchParams.keys()].length > 0;
-    setRobotsMeta(hasQuery ? NOINDEX : INDEXABLE);
+    const content = hasQuery ? NOINDEX : INDEXABLE;
+    setRobotsMeta(content);
+
+    // Next may inject another robots tag after our sync during soft nav
+    // (especially at mobile viewport when /explore ↔ /explore/faceted swaps).
+    const observer = new MutationObserver(() => {
+      const metas = document.head.querySelectorAll('meta[name="robots"]');
+      if (metas.length !== 1 || metas[0]?.getAttribute("content") !== content) {
+        setRobotsMeta(content);
+      }
+    });
+    observer.observe(document.head, { childList: true, subtree: true });
+
+    const settle = window.setTimeout(() => setRobotsMeta(content), 0);
+
+    return () => {
+      observer.disconnect();
+      window.clearTimeout(settle);
+    };
   }, [searchParams]);
 
   return null;
