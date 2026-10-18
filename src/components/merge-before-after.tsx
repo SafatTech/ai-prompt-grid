@@ -67,7 +67,7 @@ function FrameImage({
   );
 }
 
-/** Result is the LCP candidate; inputs stay lazy even when the hero is prioritized. */
+/** Result is an LCP candidate on desktop (side-by-side). */
 function resultPriorityFlags(priority: boolean) {
   return {
     priority,
@@ -75,10 +75,15 @@ function resultPriorityFlags(priority: boolean) {
   };
 }
 
-function inputPriorityFlags() {
+/**
+ * On mobile the merge hero stacks inputs above the result, so the first print
+ * is the LCP element — it must not stay lazy when the hero is prioritized.
+ */
+function inputPriorityFlags(priority: boolean, index: number) {
+  const eager = priority && index === 0;
   return {
-    priority: false,
-    highPriority: false,
+    priority: eager,
+    highPriority: eager,
   };
 }
 
@@ -152,13 +157,15 @@ export function MergeBeforeAfter({
   const label = summary(title, shown.length);
   const resultSizes =
     sizes ??
-    (variant === "card" ? "(max-width: 768px) 100vw, 360px" : "(max-width: 768px) 100vw, 560px");
+    (variant === "card"
+      ? "(max-width: 768px) 40vw, 240px"
+      : "(max-width: 768px) 92vw, 560px");
   const inputSizes =
     variant === "card"
       ? "(max-width:767px) 18vw, 110px"
       : variant === "guide"
         ? "150px"
-        : "(max-width: 768px) 50vw, 320px";
+        : "(max-width: 768px) 55vw, 320px";
   const resultFrame = resultPresentation(result.width, result.height);
   const ambientSrc = result.blurSrc ?? null;
 
@@ -182,7 +189,7 @@ export function MergeBeforeAfter({
                 <FrameImage
                   image={{ ...input, alt: inputAlt(input, title, index, inputs.length) }}
                   sizes={inputSizes}
-                  {...inputPriorityFlags()}
+                  {...inputPriorityFlags(priority, index)}
                   objectPosition="50% 30%"
                 />
                 <span className="mba-split__tag" aria-hidden="true">
@@ -252,7 +259,7 @@ export function MergeBeforeAfter({
               <FrameImage
                 image={{ ...input, alt: inputAlt(input, title, index, shown.length) }}
                 sizes={inputSizes}
-                {...inputPriorityFlags()}
+                {...inputPriorityFlags(false, index)}
               />
               <span className="mba-chip-label" aria-hidden="true">
                 {shown.length === 1 ? "Before" : `Photo ${index + 1}`}
@@ -293,7 +300,7 @@ export function MergeBeforeAfter({
                   <FrameImage
                     image={{ ...input, alt: inputAlt(input, title, index, shown.length) }}
                     sizes={inputSizes}
-                    {...inputPriorityFlags()}
+                    {...inputPriorityFlags(priority, index)}
                   />
                 </div>
                 <span className="mba-lip" aria-hidden="true">

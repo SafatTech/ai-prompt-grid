@@ -44,7 +44,8 @@ export function GuideRelated({
                       src={image.url}
                       alt={image.alt}
                       fill
-                      sizes="(max-width: 768px) 100vw, 440px"
+                      sizes="(max-width: 768px) 80vw, 440px"
+                      loading="lazy"
                       className="object-cover"
                     />
                   ) : (

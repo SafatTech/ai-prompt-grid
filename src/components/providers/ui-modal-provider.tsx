@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import {
   createContext,
   useCallback,
@@ -8,10 +9,33 @@ import {
   useState,
   type ReactNode,
 } from "react";
-import { SignInModal } from "@/components/modals/sign-in-modal";
-import { CollectionModal } from "@/components/modals/collection-modal";
-import { ExternalInfoModal } from "@/components/modals/external-info-modal";
-import { SaveResultModal } from "@/components/modals/save-result-modal";
+
+const SignInModal = dynamic(
+  () =>
+    import("@/components/modals/sign-in-modal").then((mod) => mod.SignInModal),
+  { ssr: false },
+);
+const CollectionModal = dynamic(
+  () =>
+    import("@/components/modals/collection-modal").then(
+      (mod) => mod.CollectionModal,
+    ),
+  { ssr: false },
+);
+const ExternalInfoModal = dynamic(
+  () =>
+    import("@/components/modals/external-info-modal").then(
+      (mod) => mod.ExternalInfoModal,
+    ),
+  { ssr: false },
+);
+const SaveResultModal = dynamic(
+  () =>
+    import("@/components/modals/save-result-modal").then(
+      (mod) => mod.SaveResultModal,
+    ),
+  { ssr: false },
+);
 
 type ModalType = "signin" | "collection" | "external-info" | "save-result" | null;
 

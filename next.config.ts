@@ -13,6 +13,10 @@ const nextConfig: NextConfig = {
   // Trailing-slash redirects are handled in middleware so legacy WordPress
   // URLs can return 410/301 directly instead of bouncing onto a 404.
   skipTrailingSlashRedirect: true,
+  experimental: {
+    // Tree-shake lucide icon imports (how-it-works pages) without polyfill bloat.
+    optimizePackageImports: ["lucide-react"],
+  },
   images: {
     // Catalog originals are at most ~1200–1600px wide, so the 2048/3840
     // defaults only bloat every srcset (the homepage wall alone had 36+ of them).

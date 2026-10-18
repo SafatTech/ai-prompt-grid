@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -12,7 +13,13 @@ import {
   type ReactNode,
 } from "react";
 import { CompareSlider } from "@/components/compare-slider";
+import { CopyIcon } from "@/components/icons";
 import { MergeBeforeAfter, resultPresentation } from "@/components/merge-before-after";
+import { useLibrary } from "@/components/providers/library-provider";
+import { useToast } from "@/components/providers/toast-provider";
+import { useUiModals } from "@/components/providers/ui-modal-provider";
+import { StyleSaveResultQuery } from "@/components/styles/style-save-result-query";
+import { Button } from "@/components/ui/button";
 import {
   mergeInputPhotos,
   mergeResultImage,
@@ -20,13 +27,6 @@ import {
   usesMergeHero,
   usesMergeStack,
 } from "@/lib/catalog/merge-inputs";
-import { CopyIcon } from "@/components/icons";
-import { ShareModal } from "@/components/modals/share-modal";
-import { StyleSaveResultQuery } from "@/components/styles/style-save-result-query";
-import { Button } from "@/components/ui/button";
-import { useLibrary } from "@/components/providers/library-provider";
-import { useToast } from "@/components/providers/toast-provider";
-import { useUiModals } from "@/components/providers/ui-modal-provider";
 import { track } from "@/lib/analytics";
 import {
   assemblePrompt,
@@ -36,10 +36,16 @@ import {
   ratioOptions,
   type PromptOptions,
 } from "@/lib/catalog/prompts";
-import { recordRecentView } from "@/lib/recent/views";
 import { labeledOptionsForStyle } from "@/lib/catalog/prompt-option-presets";
 import { getStyleProfile, type CatalogStyle } from "@/lib/catalog/styles";
+import { recordRecentView } from "@/lib/recent/views";
 import { cn } from "@/lib/utils";
+
+const ShareModal = dynamic(
+  () =>
+    import("@/components/modals/share-modal").then((mod) => mod.ShareModal),
+  { ssr: false },
+);
 
 type Props = { style: CatalogStyle; children?: ReactNode };
 
@@ -468,7 +474,7 @@ export function StyleDetailClient({ style, children }: Props) {
                       src={example.source}
                       alt={example.altSource}
                       fill
-                      sizes="(max-width:1024px) 100vw, 560px"
+                      sizes="(max-width:640px) 50vw, (max-width:1024px) 33vw, 220px"
                       className="object-cover"
                       loading="lazy"
                     />
@@ -481,7 +487,7 @@ export function StyleDetailClient({ style, children }: Props) {
                       src={example.result}
                       alt={example.altResult}
                       fill
-                      sizes="(max-width:1024px) 100vw, 560px"
+                      sizes="(max-width:640px) 50vw, (max-width:1024px) 33vw, 220px"
                       className={resultFit.contain ? "object-contain" : "object-cover"}
                       loading="lazy"
                     />

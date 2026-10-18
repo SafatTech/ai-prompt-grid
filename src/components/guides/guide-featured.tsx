@@ -38,6 +38,8 @@ export function GuideFeatured({ guide }: Props) {
               className="h-full w-full object-cover"
               style={{ objectPosition: hero.position }}
               priority
+              fetchPriority="high"
+              quality={75}
             />
           ) : (
             <span className="guides-card-placeholder" aria-hidden="true" />

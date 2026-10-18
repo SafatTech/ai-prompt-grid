@@ -323,71 +323,74 @@ export function SiteHeader({ showGuidesLink }: { showGuidesLink: boolean }) {
             </button>
           )}
 
-          {signedIn ? (
-            <div className="relative hidden lg:block">
-              <button
-                type="button"
-                className="grid h-10 w-10 cursor-pointer place-items-center rounded-full border border-[rgba(139,108,255,0.55)] bg-[linear-gradient(135deg,#8B6CFF,#FF9B82)] text-sm font-extrabold text-[#1a1020]"
-                aria-label={
-                  userName || userEmail
-                    ? `Open account menu for ${userName || userEmail}`
-                    : "Open account menu"
-                }
-                aria-expanded={panel === "account"}
-                aria-controls={accountId}
-                onClick={() => togglePanel("account")}
-              >
-                {avatarInitials}
-              </button>
-              {panel === "account" ? (
-                <div
-                  id={accountId}
-                  className="nav-panel-in absolute top-[calc(100%+8px)] right-0 z-40 w-[230px] rounded-[18px] border border-[rgba(255,255,255,0.10)] bg-[#15151E] p-2 shadow-[0_18px_50px_rgba(0,0,0,0.38)]"
-                  role="menu"
-                  onMouseEnter={clearLeave}
+          {/* Fixed width so Sign in ↔ avatar hydration does not shift the toolbar (CLS). */}
+          <div className="relative hidden min-h-10 min-w-[88px] items-center justify-end lg:flex">
+            {signedIn ? (
+              <div className="relative">
+                <button
+                  type="button"
+                  className="grid h-10 w-10 cursor-pointer place-items-center rounded-full border border-[rgba(139,108,255,0.55)] bg-[linear-gradient(135deg,#8B6CFF,#FF9B82)] text-sm font-extrabold text-[#1a1020]"
+                  aria-label={
+                    userName || userEmail
+                      ? `Open account menu for ${userName || userEmail}`
+                      : "Open account menu"
+                  }
+                  aria-expanded={panel === "account"}
+                  aria-controls={accountId}
+                  onClick={() => togglePanel("account")}
                 >
-                  <p className="px-3 py-2 text-xs text-[#A6A4B2]">
-                    {userName || userEmail || "Signed in"}
-                  </p>
-                  <AccountLink href="/library" onClick={closePanels}>
-                    My library
-                  </AccountLink>
-                  <AccountLink href="/library#saved" onClick={closePanels}>
-                    Saved styles
-                  </AccountLink>
-                  <AccountLink href="/library#creations" onClick={closePanels}>
-                    My creations
-                  </AccountLink>
-                  {isEditor ? (
-                    <AccountLink href="/admin" onClick={closePanels}>
-                      Editorial admin
-                    </AccountLink>
-                  ) : null}
-                  <button
-                    type="button"
-                    role="menuitem"
-                    className="min-h-11 w-full cursor-pointer rounded-[12px] border-0 bg-transparent px-3 text-left text-sm text-[#F5F3EE] hover:bg-[#2A1A31]"
-                    onClick={signOutAndLeave}
+                  {avatarInitials}
+                </button>
+                {panel === "account" ? (
+                  <div
+                    id={accountId}
+                    className="nav-panel-in absolute top-[calc(100%+8px)] right-0 z-40 w-[230px] rounded-[18px] border border-[rgba(255,255,255,0.10)] bg-[#15151E] p-2 shadow-[0_18px_50px_rgba(0,0,0,0.38)]"
+                    role="menu"
+                    onMouseEnter={clearLeave}
                   >
-                    Sign out
-                  </button>
-                </div>
-              ) : null}
-            </div>
-          ) : (
-            <Button
-              variant="ghost"
-              className="hidden lg:inline-flex"
-              data-testid="header-sign-in"
-              onClick={() => {
-                closePanels();
-                openSignIn();
-              }}
-              onMouseEnter={closePanels}
-            >
-              Sign in
-            </Button>
-          )}
+                    <p className="px-3 py-2 text-xs text-[#A6A4B2]">
+                      {userName || userEmail || "Signed in"}
+                    </p>
+                    <AccountLink href="/library" onClick={closePanels}>
+                      My library
+                    </AccountLink>
+                    <AccountLink href="/library#saved" onClick={closePanels}>
+                      Saved styles
+                    </AccountLink>
+                    <AccountLink href="/library#creations" onClick={closePanels}>
+                      My creations
+                    </AccountLink>
+                    {isEditor ? (
+                      <AccountLink href="/admin" onClick={closePanels}>
+                        Editorial admin
+                      </AccountLink>
+                    ) : null}
+                    <button
+                      type="button"
+                      role="menuitem"
+                      className="min-h-11 w-full cursor-pointer rounded-[12px] border-0 bg-transparent px-3 text-left text-sm text-[#F5F3EE] hover:bg-[#2A1A31]"
+                      onClick={signOutAndLeave}
+                    >
+                      Sign out
+                    </button>
+                  </div>
+                ) : null}
+              </div>
+            ) : (
+              <Button
+                variant="ghost"
+                className="inline-flex"
+                data-testid="header-sign-in"
+                onClick={() => {
+                  closePanels();
+                  openSignIn();
+                }}
+                onMouseEnter={closePanels}
+              >
+                Sign in
+              </Button>
+            )}
+          </div>
 
           <Link
             href="/explore"

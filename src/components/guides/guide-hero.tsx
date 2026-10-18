@@ -29,7 +29,9 @@ export function GuideHero({
           alt={hero.alt}
           fill
           priority
+          fetchPriority="high"
           sizes="100vw"
+          quality={75}
           className="object-cover"
           style={{ objectPosition: hero.position }}
         />

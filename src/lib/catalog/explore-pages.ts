@@ -5,6 +5,15 @@ import type { ExploreQuery } from "@/lib/catalog/schemas";
 export const EXPLORE_PAGE_SIZE = 18;
 
 /**
+ * Homepage masonry uses a larger page size (24) than `/explore` (18).
+ * After auto-load stops, "Load more styles" must land on the first explore page
+ * whose start index is ≥ shown (no repeated cards).
+ */
+export function homeExploreFallbackPage(shown: number): number {
+  return Math.max(2, Math.ceil(shown / EXPLORE_PAGE_SIZE) + 1);
+}
+
+/**
  * Page index from `?page=`.
  * Missing or blank means page 1. Anything that is not a positive integer is invalid.
  */
