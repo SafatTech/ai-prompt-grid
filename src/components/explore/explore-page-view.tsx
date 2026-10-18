@@ -37,7 +37,7 @@ export async function ExplorePageView() {
       }}
       initialPage={1}
       initialQueryString=""
-      heading={exploreListingHeading(1)}
+      heading={exploreListingHeading()}
     />
   );
 }

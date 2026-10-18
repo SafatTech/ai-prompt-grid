@@ -129,7 +129,7 @@ export function ExploreClient({
           styles: [],
           matchCount: 0,
           page: 1,
-          heading: exploreListingHeading(1),
+          heading: exploreListingHeading(),
         });
         setExtraStyles([]);
         setPendingCount(0);
@@ -155,7 +155,7 @@ export function ExploreClient({
           styles: Array.isArray(data.styles) ? data.styles : [],
           matchCount: total,
           page,
-          heading: exploreListingHeading(page),
+          heading: exploreListingHeading(),
         });
         setDraftMatchCount(total);
       } finally {
