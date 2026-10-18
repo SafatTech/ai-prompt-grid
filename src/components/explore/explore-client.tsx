@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 import { EmptyState } from "@/components/empty-state";
 import { ExploreUrlSync } from "@/components/explore/explore-url-sync";
 import { StyleCard } from "@/components/style-card";
+import { StyleCardSkeleton } from "@/components/style-card-skeleton";
 import { Button } from "@/components/ui/button";
 import {
   explorePageCount,
@@ -65,12 +66,14 @@ export function ExploreClient({
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [pageOverride, setPageOverride] = useState<number | null>(null);
   const [extraStyles, setExtraStyles] = useState<CatalogStyle[]>([]);
+  const [pendingCount, setPendingCount] = useState(0);
   const [loadingMore, setLoadingMore] = useState(false);
   const [seenQuery, setSeenQuery] = useState(initialQueryString);
   if (seenQuery !== initialQueryString) {
     setSeenQuery(initialQueryString);
     setPageOverride(null);
     setExtraStyles([]);
+    setPendingCount(0);
   }
   const urlPage = pageOverride ?? initialPage;
   const appliedQuery = useRef<string | null>(initialQueryString);
@@ -124,6 +127,7 @@ export function ExploreClient({
         setFilters(filtersFromExploreQuery(query));
         setPageOverride(parseExplorePage(parsed) ?? 1);
         setExtraStyles([]);
+        setPendingCount(0);
       }
     }
     if (focusSearch) {
@@ -135,12 +139,17 @@ export function ExploreClient({
     if (!hasMore || loadMoreInFlight.current || loadingMore) return;
     loadMoreInFlight.current = true;
     setLoadingMore(true);
+    // Insert placeholders in the click frame so footer CLS is excluded / avoided.
+    setPendingCount(pageSize);
     try {
       const params = exploreQueryToSearchParams(listingQuery);
       params.set("page", String(nextFetchPage));
       params.set("pageSize", String(pageSize));
       const res = await fetch(`/api/home/explore?${params.toString()}`);
-      if (!res.ok) return;
+      if (!res.ok) {
+        setPendingCount(0);
+        return;
+      }
       const data = (await res.json()) as { styles?: CatalogStyle[] };
       const batch = Array.isArray(data.styles) ? data.styles : [];
       setExtraStyles((prev) => {
@@ -154,6 +163,7 @@ export function ExploreClient({
         }
         return merged;
       });
+      setPendingCount(0);
     } finally {
       loadMoreInFlight.current = false;
       setLoadingMore(false);
@@ -173,6 +183,7 @@ export function ExploreClient({
     setFilters(next);
     setPageOverride(1);
     setExtraStyles([]);
+    setPendingCount(0);
     syncUrl({ q: search, sort, filters: next });
   }
 
@@ -183,6 +194,7 @@ export function ExploreClient({
     setSort("Trending");
     setPageOverride(1);
     setExtraStyles([]);
+    setPendingCount(0);
     appliedQuery.current = "";
     router.replace("/explore", { scroll: false });
   }
@@ -205,6 +217,7 @@ export function ExploreClient({
     setSort(nextSort);
     setPageOverride(1);
     setExtraStyles([]);
+    setPendingCount(0);
     syncUrl({ q: search, sort: nextSort, filters });
   }
 
@@ -212,6 +225,7 @@ export function ExploreClient({
     setSearch(value);
     setPageOverride(1);
     setExtraStyles([]);
+    setPendingCount(0);
     syncUrl({ q: value, sort, filters });
   }
 
@@ -391,6 +405,7 @@ export function ExploreClient({
               <div
                 className="grid grid-cols-1 items-start gap-[18px] sm:grid-cols-2 lg:grid-cols-3"
                 data-testid="style-results"
+                aria-busy={pendingCount > 0 || undefined}
               >
                 {visible.map((style, index) => (
                   <StyleCard
@@ -398,6 +413,13 @@ export function ExploreClient({
                     style={style}
                     compact
                     priority={index === 0 && initialPage === 1}
+                  />
+                ))}
+                {Array.from({ length: pendingCount }, (_, index) => (
+                  <StyleCardSkeleton
+                    key={`explore-pending-${index}`}
+                    variant="compact"
+                    index={index}
                   />
                 ))}
               </div>
