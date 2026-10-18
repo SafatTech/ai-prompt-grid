@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import {
   Suspense,
@@ -456,11 +457,12 @@ export function StyleDetailClient({ style, children }: Props) {
               className="grid h-[220px] grid-cols-2 gap-0.5 overflow-hidden rounded-[var(--radius)] border border-[var(--line)] md:h-[260px] lg:h-[280px]"
             >
               <div className="relative">
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={example.source}
                   alt={example.altSource}
-                  className="h-full w-full object-cover"
+                  fill
+                  sizes="(max-width:640px) 50vw, 220px"
+                  className="object-cover"
                   loading="lazy"
                 />
                 <span className="absolute bottom-3 left-3 rounded-lg bg-[rgba(11,11,16,0.72)] px-2 py-1 text-[10px] font-extrabold">
@@ -468,16 +470,12 @@ export function StyleDetailClient({ style, children }: Props) {
                 </span>
               </div>
               <div className={cn("relative", resultFit.contain && "bg-[#f5f3ee]")}>
-                {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <Image
                   src={example.result}
                   alt={example.altResult}
-                  width={example.resultWidth ?? resultSize.width}
-                  height={example.resultHeight ?? resultSize.height}
-                  className={cn(
-                    "h-full w-full",
-                    resultFit.contain ? "object-contain" : "object-cover",
-                  )}
+                  fill
+                  sizes="(max-width:640px) 50vw, 220px"
+                  className={resultFit.contain ? "object-contain" : "object-cover"}
                   loading="lazy"
                 />
                 <span className="absolute right-3 bottom-3 rounded-lg bg-[rgba(11,11,16,0.72)] px-2 py-1 text-[10px] font-extrabold">

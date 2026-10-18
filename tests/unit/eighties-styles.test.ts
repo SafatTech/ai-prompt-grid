@@ -28,7 +28,13 @@ describe("1980s style pages", () => {
     assert.equal(seedEightiesStyles.length, 11);
     assert.ok(seedEightiesStyles.every((style) => style.category === "Vintage"));
     assert.ok(seedEightiesStyles.every((style) => style.status === "published"));
-    assert.ok(seedEightiesStyles.every((style) => style.requirement === "One photo"));
+    for (const style of seedEightiesStyles) {
+      assert.equal(
+        style.requirement,
+        style.id === "combine-two-photos-80s-couple" ? "Two photos" : "One photo",
+        style.id,
+      );
+    }
     const numbers = seedEightiesStyles.map((style) => {
       const match = style.source.match(/source-(\d+)\./);
       return match?.[1];

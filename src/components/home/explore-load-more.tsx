@@ -61,7 +61,10 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
         if (!entry?.isIntersecting || inFlight.current) return;
         void fetchPage(nextPage);
       },
-      { rootMargin: "200px 0px" },
+      // Fetch well before the sentinel scrolls into view, so the sections below
+      // the feed (trust strip, newsletter) move while they are still off screen
+      // and the append does not count as a layout shift.
+      { rootMargin: "0px 0px 1600px 0px" },
     );
     io.observe(node);
     return () => io.disconnect();

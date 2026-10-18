@@ -69,7 +69,9 @@ export function SiteHeader({ showGuidesLink }: { showGuidesLink: boolean }) {
   const [search, setSearch] = useState("");
   const [routeKey, setRouteKey] = useState(pathname);
   const [heroScrolled, setHeroScrolled] = useState(false);
-  const isHome = pathname === "/";
+  // ISR regeneration of the homepage can report "/index" on the server; treat it
+  // as home so the SSR header is already the fixed hero header (no scroll CLS).
+  const isHome = pathname === "/" || pathname === "/index";
 
   if (pathname !== routeKey) {
     setRouteKey(pathname);

@@ -139,6 +139,18 @@ export const moodLabels: Record<string, string> = {
   "Neon pink and blue": "Neon pink blue",
   "Fresh monsoon": "Fresh monsoon",
   "Natural golden hour": "Natural golden",
+  "Warm festive red and gold": "Festive red gold",
+  "Soft festive cream and red": "Cream and red",
+  "Warm fireside amber": "Fireside amber",
+  "Rich festive jewel tones": "Jewel tones",
+  "Warm classic Christmas": "Classic Christmas",
+  "Bright peppermint red and white": "Peppermint red",
+  "Soft romantic Christmas": "Romantic Christmas",
+  "Cheerful warm kitchen": "Warm kitchen",
+  "Magical gold and emerald": "Gold emerald",
+  "Faded 70s film": "Faded 70s",
+  "Cozy festive warm": "Cozy festive",
+  "Festive red and green evening": "Red green evening",
 };
 
 /** Short 2–3 word UI labels for full background prompt strings. */
@@ -409,6 +421,30 @@ export const backgroundLabels: Record<string, string> = {
     "Monsoon street",
   "Open wheat field at golden hour with tall grass and a soft warm sky":
     "Golden wheat field",
+  "Cozy living room with a tall green Christmas tree, red and gold ornaments, and a wooden floor":
+    "Tree living room",
+  "Bright cream studio set with a small decorated Christmas tree, stacked wrapped gift boxes with satin ribbons, and a soft white rug":
+    "Gift box studio",
+  "Stone fireplace with a crackling fire, a garland mantel with plain red stockings, and wrapped gifts on the floor":
+    "Stocking fireplace",
+  "Grand hallway with a huge Christmas tree covered in red, gold and silver glass ornaments and ribbon bows":
+    "Ornament hallway",
+  "Warm living room with a large decorated Christmas tree, a pile of wrapped gifts and a red-and-green plaid throw on the sofa":
+    "Tree and gifts room",
+  "Bright red-and-white peppermint-striped studio backdrop with giant candy canes and scattered wrapped candies":
+    "Peppermint studio",
+  "Cozy room with a decorated Christmas tree, wrapped gifts underneath, and warm candle lanterns on a side table":
+    "Lantern tree room",
+  "Festive home kitchen with a small tree on the counter, trays of gingerbread cookies, red-and-white candy canes in a jar and a window":
+    "Festive kitchen",
+  "Close-up of a huge pine branch with red and gold baubles and a soft blurred Christmas tree glow":
+    "Ornament pine branch",
+  "Retro 1970s living room with wood paneling, a tinsel Christmas tree with big colored bulbs, and gifts in patterned paper":
+    "Retro 70s room",
+  "Under a decorated Christmas tree with wrapped gifts, red and gold ornaments and a soft plaid blanket":
+    "Under the tree",
+  "Festive outdoor lane at dusk lined with giant candy canes, oversized wrapped gift-box displays and decorated pine trees":
+    "Candy cane lane",
 };
 
 const genericMoodPresets = [
