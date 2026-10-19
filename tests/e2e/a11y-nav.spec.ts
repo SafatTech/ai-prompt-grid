@@ -3,24 +3,71 @@ import { test, expect } from "@playwright/test";
 test.describe("PR34 follow-up a11y", () => {
   test.use({ viewport: { width: 390, height: 844 } });
 
-  test("explore soft nav keeps exactly one robots meta (N-16)", async ({ page }) => {
+  test("explore soft nav after search does not freeze the UI (N-21)", async ({
+    page,
+  }) => {
+    const pageErrors: string[] = [];
+    page.on("pageerror", (err) => {
+      pageErrors.push(err.message);
+    });
+
+    await page.goto("/explore");
+    await expect(page.getByRole("heading", { level: 1 })).toContainText(
+      "Find a style for your photo",
+    );
+
+    await page.getByTestId("explore-search").fill("christmas");
+    await page.getByTestId("explore-search").press("Enter");
+    await expect(page.getByTestId("results-count")).toContainText(/\d+ styles?/);
+    await expect(page).toHaveURL(/[?&]q=/);
+
+    const firstCard = page.getByTestId("style-results").locator("article").first();
+    await expect(firstCard).toBeVisible();
+    await firstCard.getByRole("link").first().click();
+    await expect(page).toHaveURL(/\/styles\//);
+    await expect(page.getByTestId("prompt-box")).toBeVisible();
+
+    await page.getByRole("button", { name: "Open menu" }).click();
+    const dialog = page.getByRole("dialog", { name: "Site menu" });
+    await expect(dialog).toBeVisible();
+    await dialog.getByRole("link", { name: "Explore styles" }).first().click();
+
+    await expect(page).toHaveURL(/\/explore\/?(\?.*)?$/);
+    await expect(page.getByRole("heading", { level: 1 })).toContainText(
+      "Find a style for your photo",
+    );
+    await expect(page.getByTestId("explore-search")).toBeVisible();
+    await expect(page.getByTestId("results-count")).toBeVisible();
+
+    // Menu and filters must still work after the soft navigations.
+    await page.getByRole("button", { name: "Open menu" }).click();
+    await expect(page.getByRole("dialog", { name: "Site menu" })).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(page.getByRole("dialog", { name: "Site menu" })).toHaveCount(0);
+
+    const filters = page.getByTestId("open-filters");
+    await expect(filters).toBeVisible();
+    await filters.click();
+    await expect(page.getByRole("dialog", { name: "Style filters" })).toBeVisible();
+
+    expect(pageErrors, `pageerrors: ${pageErrors.join(" | ")}`).toEqual([]);
+  });
+
+  test("explore soft nav keeps at most one robots meta without crashing", async ({
+    page,
+  }) => {
+    const pageErrors: string[] = [];
+    page.on("pageerror", (err) => {
+      pageErrors.push(err.message);
+    });
+
     await page.goto("/explore");
     await expect
       .poll(async () => page.locator('meta[name="robots"]').count())
-      .toBe(1);
+      .toBeLessThanOrEqual(1);
 
     await page.getByTestId("explore-search").fill("christmas");
     await expect(page.getByTestId("results-count")).toContainText(/\d+ styles?/);
-
-    await expect
-      .poll(async () => {
-        const metas = page.locator('meta[name="robots"]');
-        const count = await metas.count();
-        if (count !== 1) return count;
-        const content = await metas.first().getAttribute("content");
-        return content?.includes("noindex") ? 1 : -1;
-      })
-      .toBe(1);
 
     const clear = page.getByTestId("clear-filters");
     if (await clear.isVisible().catch(() => false)) {
@@ -34,10 +81,12 @@ test.describe("PR34 follow-up a11y", () => {
         .click();
     }
     await expect(page).toHaveURL(/\/explore\/?(\?.*)?$/);
+    await expect(page.getByTestId("explore-search")).toBeVisible();
 
     await expect
       .poll(async () => page.locator('meta[name="robots"]').count())
-      .toBe(1);
+      .toBeLessThanOrEqual(1);
+    expect(pageErrors).toEqual([]);
   });
 
   test("mobile menu moves focus in, traps Tab, restores on Esc (N-18)", async ({

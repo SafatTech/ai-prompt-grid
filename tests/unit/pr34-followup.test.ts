@@ -11,12 +11,14 @@ function readSrc(rel: string) {
 }
 
 describe("PR34 follow-up: home feed soft-cap reserves (N-19 / R1)", () => {
-  it("reserves skeleton slots under the soft cap and never past it", () => {
+  it("reserves skeleton slots under the soft cap and freezes height after the last batch", () => {
     const src = readSrc("src/components/home/explore-load-more.tsx");
     assert.ok(src.includes("softCapFor"));
     assert.ok(src.includes("softCap - shown"));
     assert.ok(src.includes("AUTO_FETCH_PAGES = 2"));
     assert.ok(src.includes("gridMinHeight"));
+    assert.ok(src.includes("autoDone ? 0"));
+    assert.ok(src.includes("heightLocked"));
     assert.ok(!src.includes("primedRef"));
     assert.ok(!src.includes("contain-intrinsic-size"));
   });
@@ -40,13 +42,22 @@ describe("PR34 follow-up: related SSR links (N-17 / R2)", () => {
   });
 });
 
-describe("PR34 follow-up: robots meta dedupe (N-16)", () => {
-  it("dedupes robots meta and watches head for late inserts", () => {
+describe("PR34 follow-up: robots via metadata only (N-16 / N-21)", () => {
+  it("does not mutate head robots from the client (avoids removeChild crash)", () => {
     const src = readSrc("src/components/explore/explore-url-sync.tsx");
-    assert.ok(src.includes('querySelectorAll'));
-    assert.ok(src.includes('meta[name="robots"]'));
-    assert.ok(src.includes(".remove()"));
-    assert.ok(src.includes("MutationObserver"));
+    assert.ok(!src.includes("MutationObserver"));
+    assert.ok(!src.includes("setRobotsMeta"));
+    assert.ok(!src.includes('meta[name="robots"]'));
+    assert.ok(!src.includes(".remove()"));
+    assert.ok(src.includes("onQueryString"));
+
+    const explore = readSrc("src/app/explore/page.tsx");
+    assert.ok(explore.includes("robots: { index: true, follow: true }"));
+    const faceted = readSrc("src/app/explore/faceted/page.tsx");
+    assert.ok(faceted.includes("robots: { index: false, follow: true }"));
+    const middleware = readSrc("src/middleware.ts");
+    assert.ok(middleware.includes('x-robots-tag'));
+    assert.ok(middleware.includes("noindex, follow"));
   });
 });
 
@@ -81,5 +92,24 @@ describe("PR34 follow-up: tap targets not clipped (N-20 / R4)", () => {
     assert.ok(css.includes(".hero-wall-pause-hit"));
     const pause = readSrc("src/components/home/hero-wall-pause.tsx");
     assert.ok(pause.includes("hero-wall-pause-hit"));
+  });
+
+  it("gives the heart a ≥44px hit area without enlarging the visible button", () => {
+    const css = readSrc("src/app/globals.css");
+    const heartAfter = css.slice(
+      css.indexOf(".style-card-heart::after"),
+      css.indexOf(".site-logo-link::after"),
+    );
+    assert.ok(heartAfter.includes("width: 44px"));
+    assert.ok(heartAfter.includes("height: 44px"));
+    const card = readSrc("src/components/style-card.tsx");
+    assert.ok(card.includes("style-card-heart"));
+    assert.ok(card.includes("h-[38px] w-[38px]"));
+    // Article must not clip the ::after hit area.
+    assert.ok(
+      !card.includes(
+        '"style-card-rail group relative overflow-hidden rounded-[var(--radius)]',
+      ),
+    );
   });
 });

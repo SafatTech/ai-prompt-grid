@@ -3031,8 +3031,12 @@ textarea:focus-visible,
 .style-card-heart::after {
   content: "";
   position: absolute;
-  /* Unclipped: heart sits outside overflow:hidden media (N-20). */
-  inset: -5px;
+  /* Centered ≥44px hit on the smaller visual button (N-20). */
+  left: 50%;
+  top: 50%;
+  width: 44px;
+  height: 44px;
+  transform: translate(-50%, -50%);
 }
 
 .site-logo-link::after {
@@ -4082,7 +4086,11 @@ textarea:focus-visible,
   .style-card-heart::after {
     content: "";
     position: absolute;
-    inset: -5px;
+    left: 50%;
+    top: 50%;
+    width: 44px;
+    height: 44px;
+    transform: translate(-50%, -50%);
   }
 
   .site-footer-inner {

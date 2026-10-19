@@ -46,23 +46,36 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
   const inFlight = useRef(false);
   const page2Cache = useRef<StyleCardData[] | null>(null);
   const page2Handled = useRef(false);
+  const heightLocked = useRef(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
   const shown = initialCount + extraStyles.length;
   const hasMore = shown < total;
   const autoDone = autoFetches >= AUTO_FETCH_PAGES || shown >= softCap || !hasMore;
   const exploreFallbackPage = homeExploreFallbackPage(shown);
-  // Aspect-ratio placeholders for every card still under the soft cap (≤72).
-  // Never reserve past the known total or the cap.
-  const skeletons = Math.max(0, softCap - shown);
+  // Reserve aspect-ratio slots only while auto-fetch can still deliver cards.
+  // Once the soft cap / last batch is done, drop skeletons so min-height cannot
+  // keep ratcheting from empty reserved rows (N-19 @ 390).
+  const skeletons = autoDone ? 0 : Math.max(0, softCap - shown);
 
   useLayoutEffect(() => {
     const node = gridRef.current;
     if (!node) return;
+
+    if (autoDone) {
+      // Final content height only — never raise the lock after the last batch.
+      if (heightLocked.current) return;
+      const height = Math.ceil(node.getBoundingClientRect().height);
+      if (height <= 0) return;
+      heightLocked.current = true;
+      setGridMinHeight(height);
+      return;
+    }
+
     const height = Math.ceil(node.getBoundingClientRect().height);
     if (height <= 0) return;
     setGridMinHeight((prev) => Math.max(prev ?? 0, height));
-  }, [extraStyles.length, skeletons]);
+  }, [extraStyles.length, skeletons, autoDone]);
 
   function commitPage(page: number, styles: StyleCardData[]) {
     setExtraStyles((prev) => mergeUnique(prev, styles));

@@ -195,10 +195,11 @@ export function CompareSlider({
           : "cursor-grab"
         : "cursor-ew-resize";
 
-  // Only the result (LCP) gets priority/high fetchPriority. The source half
-  // stays lazy so both halves do not compete for bandwidth on style pages.
+  // Above-the-fold cards pass priority so the visible compare layers are
+  // eager+high. /explore LCP is often the source half (base layer), so it
+  // must not stay loading=lazy when priority is set.
   const resultPriority = priority;
-  const sourcePriority = false;
+  const sourcePriority = priority;
 
   if (mode === "side") {
     return (
@@ -215,8 +216,8 @@ export function CompareSlider({
               sizes={imageSizes}
               className="object-cover"
               priority={sourcePriority}
-              loading="lazy"
-              fetchPriority="auto"
+              loading={sourcePriority ? undefined : "lazy"}
+              fetchPriority={sourcePriority ? "high" : "auto"}
               draggable={false}
             />
             <span className="absolute bottom-3 left-3 rounded-lg bg-[rgba(11,11,16,0.72)] px-2 py-1 text-[10px] font-extrabold backdrop-blur-sm">
@@ -272,8 +273,8 @@ export function CompareSlider({
           className="pointer-events-none object-cover"
           style={objectPosition ? { objectPosition } : undefined}
           priority={sourcePriority}
-          loading="lazy"
-          fetchPriority="auto"
+          loading={sourcePriority ? undefined : "lazy"}
+          fetchPriority={sourcePriority ? "high" : "auto"}
           draggable={false}
         />
       </div>
