@@ -1,0 +1,967 @@
+{
+  "version": 1,
+  "widths": [
+    360,
+    540,
+    720,
+    1080
+  ],
+  "keys": {
+    "/catalog/product/result-01.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/product/result-02.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/product/result-03.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/product/result-04.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/product/result-05.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/product/result-06.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/product/result-07.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/product/result-08.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/product/result-09.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/product/result-10.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/product/source-01.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/product/source-02.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/product/source-03.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/product/source-04.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/product/source-05.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/product/source-06.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/product/source-07.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/product/source-08.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/product/source-09.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/product/source-10.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/place/result-01.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/place/result-02.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/place/result-03.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/place/result-04.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/place/result-05.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/place/result-06.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/place/result-07.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/place/result-08.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/place/result-09.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/place/result-10.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/place/source-01.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/place/source-02.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/place/source-03.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/place/source-04.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/place/source-05.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/place/source-06.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/place/source-07.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/place/source-08.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/place/source-09.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/place/source-10.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/pet/result-01.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/pet/result-02.png": [
+      360,
+      540,
+      720
+    ],
+    "/catalog/pet/result-03.png": [
+      360,
+      540,
+      720
+    ],
+    "/catalog/pet/result-04.png": [
+      360,
+      540,
+      720
+    ],
+    "/catalog/pet/result-05.png": [
+      360,
+      540,
+      720
+    ],
+    "/catalog/pet/result-06.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/pet/result-07.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/pet/result-08.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/pet/result-09.png": [
+      360,
+      540,
+      720
+    ],
+    "/catalog/group/result-01.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/group/result-02.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/group/result-03.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/group/result-04.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/group/result-05.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/group/result-06.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/group/result-07.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/group/result-08.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/group/result-09.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/group/result-10.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/group/source-01.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/group/source-02.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/group/source-03.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/group/source-04.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/group/source-05.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/group/source-06.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/group/source-07.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/group/source-08.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/group/source-09.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/group/source-10.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/result-01.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/result-02.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/result-03.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/result-04.webp": [
+      360,
+      540,
+      720
+    ],
+    "/catalog/editorial/result-05.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/result-06.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/result-07.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/result-08.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/result-09.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/result-10.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/result-11.png": [
+      360,
+      540,
+      720
+    ],
+    "/catalog/editorial/result-12.png": [
+      360,
+      540,
+      720
+    ],
+    "/catalog/editorial/result-13.png": [
+      360,
+      540,
+      720
+    ],
+    "/catalog/editorial/result-14.png": [
+      360,
+      540,
+      720
+    ],
+    "/catalog/editorial/result-15.png": [
+      360,
+      540,
+      720
+    ],
+    "/catalog/editorial/result-16.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/result-17.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/result-18.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/result-19.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/result-20.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/result-21.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/result-22.png": [
+      360,
+      540,
+      720
+    ],
+    "/catalog/editorial/result-23.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/result-24.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/result-25.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/result-26.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/result-27.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/result-28.png": [
+      360,
+      540,
+      720
+    ],
+    "/catalog/editorial/result-29.png": [
+      360,
+      540,
+      720
+    ],
+    "/catalog/editorial/result-30.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-01.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-02.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-03.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-04.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-05.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-06.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-07.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-08.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-09.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-10.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-11.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-12.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-13.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-14.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-15.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-16.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-17.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-18.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-19.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-20.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-21.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-22.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-23.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-24.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-25.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-26.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-27.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-28.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-29.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/catalog/editorial/source-30.png": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/guides/halloween-ai-prompts-for-selfies/friendly-witch-after.webp": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/guides/halloween-ai-prompts-for-selfies/friendly-witch-before.webp": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/guides/halloween-ai-prompts-for-selfies/gothic-vampire-after.webp": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/guides/halloween-ai-prompts-for-selfies/gothic-vampire-before.webp": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/guides/halloween-ai-prompts-for-selfies/pet-pumpkin-after.webp": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/guides/halloween-ai-prompts-for-selfies/pet-pumpkin-before.webp": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/guides/halloween-ai-prompts-for-selfies/pumpkin-patch-after.webp": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/guides/halloween-ai-prompts-for-selfies/pumpkin-patch-before.webp": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/guides/halloween-ai-prompts-for-selfies/pumpkin-patch-og.webp": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/guides/halloween-ai-prompts-for-selfies/skeleton-face-paint-after.webp": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/guides/halloween-ai-prompts-for-selfies/skeleton-face-paint-before.webp": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/guides/halloween-ai-prompts-for-selfies/victorian-ghost-after.webp": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/guides/halloween-ai-prompts-for-selfies/victorian-ghost-before.webp": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/guides/halloween-ai-prompts-for-selfies/zombie-after.webp": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/guides/halloween-ai-prompts-for-selfies/zombie-before.webp": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/guides/diwali-couple-ai-photo-editing-prompts/candid-phuljhadi-moment-after.webp": [
+      360,
+      540,
+      720
+    ],
+    "/guides/diwali-couple-ai-photo-editing-prompts/candid-phuljhadi-moment-before.webp": [
+      360,
+      540,
+      720
+    ],
+    "/guides/diwali-couple-ai-photo-editing-prompts/diaspora-diwali-cold-city-after.webp": [
+      360,
+      540,
+      720
+    ],
+    "/guides/diwali-couple-ai-photo-editing-prompts/diaspora-diwali-cold-city-before.webp": [
+      360,
+      540,
+      720
+    ],
+    "/guides/diwali-couple-ai-photo-editing-prompts/diya-lit-balcony-after.webp": [
+      360,
+      540,
+      720
+    ],
+    "/guides/diwali-couple-ai-photo-editing-prompts/diya-lit-balcony-before.webp": [
+      360,
+      540,
+      720
+    ],
+    "/guides/diwali-couple-ai-photo-editing-prompts/diya-lit-balcony-og.webp": [
+      360,
+      540,
+      720,
+      1080
+    ],
+    "/guides/diwali-couple-ai-photo-editing-prompts/fairy-light-portrait-after.webp": [
+      360,
+      540,
+      720
+    ],
+    "/guides/diwali-couple-ai-photo-editing-prompts/fairy-light-portrait-before.webp": [
+      360,
+      540,
+      720
+    ],
+    "/guides/diwali-couple-ai-photo-editing-prompts/family-diwali-karachi-after.webp": [
+      360,
+      540,
+      720
+    ],
+    "/guides/diwali-couple-ai-photo-editing-prompts/family-diwali-karachi-before.webp": [
+      360,
+      540,
+      720
+    ],
+    "/guides/diwali-couple-ai-photo-editing-prompts/finishing-rangoli-together-after.webp": [
+      360,
+      540,
+      720
+    ],
+    "/guides/diwali-couple-ai-photo-editing-prompts/finishing-rangoli-together-before.webp": [
+      360,
+      540,
+      720
+    ],
+    "/guides/diwali-couple-ai-photo-editing-prompts/first-diwali-married-couple-after.webp": [
+      360,
+      540,
+      720
+    ],
+    "/guides/diwali-couple-ai-photo-editing-prompts/first-diwali-married-couple-before.webp": [
+      360,
+      540,
+      720
+    ],
+    "/guides/diwali-couple-ai-photo-editing-prompts/golden-hour-sparkler-shot-after.webp": [
+      360,
+      540,
+      720
+    ],
+    "/guides/diwali-couple-ai-photo-editing-prompts/golden-hour-sparkler-shot-before.webp": [
+      360,
+      540,
+      720
+    ],
+    "/guides/diwali-couple-ai-photo-editing-prompts/kurta-nehru-jacket-lanterns-after.webp": [
+      360,
+      540,
+      720
+    ],
+    "/guides/diwali-couple-ai-photo-editing-prompts/kurta-nehru-jacket-lanterns-before.webp": [
+      360,
+      540,
+      720
+    ],
+    "/guides/diwali-couple-ai-photo-editing-prompts/separate-photos-couple-after.webp": [
+      360,
+      540,
+      720
+    ],
+    "/guides/diwali-couple-ai-photo-editing-prompts/separate-photos-couple-before.webp": [
+      360,
+      540,
+      720
+    ]
+  }
+}

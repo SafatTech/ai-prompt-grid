@@ -14,7 +14,7 @@ describe("PR37 follow-up: home scroll CLS reserve (N-19)", () => {
   it("pre-reserves soft-cap masonry height from real card metrics", () => {
     const loadMore = readSrc("src/components/home/explore-load-more.tsx");
     assert.ok(loadMore.includes("reserveMasonryHeight"));
-    assert.ok(loadMore.includes("extraSlots"));
+    assert.ok(loadMore.includes("remainingSlots"));
 
     const reserve = readSrc("src/lib/home/masonry-reserve.ts");
     assert.ok(reserve.includes("sampleMasonryCardHeights"));
@@ -25,6 +25,21 @@ describe("PR37 follow-up: home scroll CLS reserve (N-19)", () => {
     assert.ok(trust.includes("overflow-anchor: none"));
   });
 });
+
+describe("N-24: release over-reserved home feed height", () => {
+  it("measures final height with min-height cleared and reserves remaining slots only", () => {
+    const loadMore = readSrc("src/components/home/explore-load-more.tsx");
+    assert.ok(loadMore.includes("measureMasonryContentHeight"));
+    assert.ok(loadMore.includes("remainingSlots"));
+
+    const reserve = readSrc("src/lib/home/masonry-reserve.ts");
+    assert.ok(reserve.includes("measureMasonryContentHeight"));
+    assert.ok(reserve.includes('minHeight = "0px"'));
+    // No padded over-reserve (was ~8% and caused the blank band).
+    assert.ok(!reserve.includes("* 1.08"));
+  });
+});
+
 
 describe("PR37 follow-up: bare /explore stays ISR (N-23 reverted)", () => {
   it("hard-navigates off faceted explore to avoid stacked robots meta", () => {

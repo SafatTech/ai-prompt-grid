@@ -27,12 +27,14 @@ describe("Vercel image optimization toggle", () => {
     }
   });
 
-  it("wires images.unoptimized to the env toggle in next.config", () => {
+  it("wires the custom loader to the env toggle in next.config", () => {
     const config = readSrc("next.config.ts");
     assert.ok(config.includes("isVercelImageOptEnabled"));
-    assert.ok(config.includes("unoptimized: !isVercelImageOptEnabled()"));
+    assert.ok(config.includes('loader: "custom"'));
+    assert.ok(config.includes("supabase-image-loader.ts"));
     assert.ok(config.includes("NEXT_PUBLIC_VERCEL_IMAGE_OPT"));
   });
+
 
   it("documents the Pro re-enable switch in .env.example", () => {
     const env = readSrc(".env.example");

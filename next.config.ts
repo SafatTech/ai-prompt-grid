@@ -8,6 +8,8 @@ import { isVercelImageOptEnabled } from "./src/lib/images/vercel-image-opt";
 // markdown files and would otherwise drop the Guides link after publishing.
 writePublishedGuideManifest();
 
+const vercelImageOpt = isVercelImageOptEnabled();
+
 const nextConfig: NextConfig = {
   allowedDevOrigins: ["127.0.0.1", "localhost"],
   serverExternalPackages: ["sharp"],
@@ -19,12 +21,18 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ["lucide-react"],
   },
   images: {
-    // Hobby plan: skip /_next/image transforms (402 once the monthly cap hits).
-    // Set NEXT_PUBLIC_VERCEL_IMAGE_OPT=1 and redeploy on Pro to turn back on.
-    unoptimized: !isVercelImageOptEnabled(),
-    // Catalog originals are at most ~1200–1600px wide, so the 2048/3840
-    // defaults only bloat every srcset (the homepage wall alone had 36+ of them).
-    deviceSizes: [640, 750, 828, 1080, 1200, 1920],
+    // Hobby (default): custom loader → pre-generated `.w{n}.webp` on Supabase /
+    // local public (no /_next/image). Pro: set NEXT_PUBLIC_VERCEL_IMAGE_OPT=1.
+    ...(vercelImageOpt
+      ? {}
+      : {
+          loader: "custom" as const,
+          loaderFile: "./src/lib/images/supabase-image-loader.ts",
+        }),
+    // Srcset ladder matches generate-image-variants.ts (360/540/720/1080).
+    // When Vercel opt is on these still cap the optimizer request widths.
+    deviceSizes: [360, 540, 720, 1080],
+    imageSizes: [360, 540],
     formats: ["image/avif", "image/webp"],
     remotePatterns: [
       {

@@ -44,9 +44,9 @@ function clamp(n: number, min: number, max: number) {
 /** Half-width of the compare-handle hit zone, in CSS pixels. */
 const HANDLE_HIT_PX = 28;
 
-/** Explore / card grid — absolute px at 390 so srcset can pick ~384/640, not desktop w. */
+/** Explore / card grid — 1-col mobile ≈ 92vw; keep ≤360 CSS px so 2× picks ≤720w. */
 const CARD_SIZES =
-  "(max-width:430px) 360px, (max-width:640px) 92vw, (max-width:1024px) 45vw, (max-width:1280px) 30vw, 302px";
+  "(max-width:430px) 92vw, (max-width:640px) 92vw, (max-width:1024px) 45vw, (max-width:1280px) 30vw, 302px";
 /** Style-page hero and “More examples” share this so the same asset is not fetched twice. */
 export const DETAIL_COMPARE_SIZES = "(max-width:1024px) 100vw, 560px";
 const DETAIL_SIZES = DETAIL_COMPARE_SIZES;

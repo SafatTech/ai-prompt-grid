@@ -21,6 +21,7 @@
     "db:seed": "tsx --env-file=.env.local scripts/seed-catalog.ts",
     "db:upload-catalog": "tsx --env-file=.env.local scripts/upload-catalog-assets.ts",
     "db:generate-blur-thumbs": "tsx --env-file=.env.local scripts/generate-blur-thumbs.ts",
+    "db:generate-image-variants": "tsx --env-file=.env.local scripts/generate-image-variants.ts",
     "emails:build": "tsx scripts/build-email-templates.ts"
   },
   "dependencies": {
