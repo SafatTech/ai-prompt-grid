@@ -1,7 +1,10 @@
 import { cn } from "@/lib/utils";
 
-/** Varied masonry ratios so placeholder columns roughly match real cards. */
-const MASONRY_RATIOS = ["4 / 5", "3 / 4", "5 / 6", "4 / 5", "1 / 1", "3 / 4"] as const;
+/**
+ * Varied masonry ratios biased toward real catalog portraits (default 4:5).
+ * Avoid short 1:1 slots that under-reserve height at 390 (N-19).
+ */
+const MASONRY_RATIOS = ["4 / 5", "3 / 4", "5 / 6", "4 / 5", "2 / 3", "3 / 4"] as const;
 
 type Props = {
   /** Homepage masonry vs /explore compact grid. */

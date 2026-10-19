@@ -40,6 +40,18 @@ describe("GA4 bootstrap", () => {
     );
     assert.ok(loader > config);
   });
+
+  it("opts out when apg:internal is set via ?apg_internal=1", () => {
+    const script = buildGaBootstrap("G-TEST1234");
+    assert.match(script, /apg_internal/);
+    assert.match(script, /apg:internal/);
+    assert.match(script, /localStorage\.setItem/);
+    assert.match(script, /localStorage\.removeItem/);
+    // Opt-out check must run before gtag config / loader.
+    const gate = script.indexOf("apg:internal");
+    const config = script.indexOf("gtag('config'");
+    assert.ok(gate !== -1 && config !== -1 && gate < config);
+  });
 });
 
 describe("Consent Mode denied regions", () => {

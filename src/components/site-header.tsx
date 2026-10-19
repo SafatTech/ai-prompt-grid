@@ -27,6 +27,7 @@ import { useLibrary } from "@/components/providers/library-provider";
 import { useUiModals } from "@/components/providers/ui-modal-provider";
 import { useToast } from "@/components/providers/toast-provider";
 import { getAvatarInitials } from "@/lib/auth/avatar-initials";
+import { assignBareExploreIfFaceted } from "@/lib/navigation/bare-explore";
 import { cn } from "@/lib/utils";
 
 type Panel = "categories" | "creators" | "account" | "search";
@@ -541,7 +542,10 @@ export function SiteHeader({ showGuidesLink }: { showGuidesLink: boolean }) {
               <Link
                 href="/explore"
                 className="mt-2 flex h-12 items-center justify-center rounded-[16px] bg-[linear-gradient(135deg,#8B6CFF,#FF9B82)] text-sm font-bold text-[#1a1020]"
-                onClick={() => setMobileOpen(false)}
+                onClick={(event) => {
+                  setMobileOpen(false);
+                  if (assignBareExploreIfFaceted()) event.preventDefault();
+                }}
               >
                 Explore styles
               </Link>
@@ -563,7 +567,10 @@ export function SiteHeader({ showGuidesLink }: { showGuidesLink: boolean }) {
                       "flex min-h-11 items-center rounded-[12px] px-3 text-[#A6A4B2]",
                       exploreActive && "bg-[#2A1A31] text-[#F5F3EE]",
                     )}
-                    onClick={() => setMobileOpen(false)}
+                    onClick={(event) => {
+                      setMobileOpen(false);
+                      if (assignBareExploreIfFaceted()) event.preventDefault();
+                    }}
                   >
                     Explore styles
                   </Link>
