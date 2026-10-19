@@ -8,8 +8,8 @@ import { useSearchParams } from "next/navigation";
  * Syncs browser back/forward and `?focus=search` into client filter state.
  *
  * Robots is owned by Next metadata only:
- * - `/explore` → generateMetadata(searchParams) → index when bare, noindex when faceted
- * - Middleware sets `x-robots-tag: noindex, follow` for `/explore?*`
+ * - `/explore` → index,follow (`explore/page.tsx`)
+ * - `/explore?*` rewrite → `/explore/faceted` → noindex,follow + `x-robots-tag`
  * Do not mutate `<head>` here — removing/replacing Next-managed robots nodes
  * causes `removeChild` crashes on the next soft navigation (N-21).
  */

@@ -26,12 +26,21 @@ describe("PR37 follow-up: home scroll CLS reserve (N-19)", () => {
   });
 });
 
-describe("PR37 follow-up: robots generateMetadata (N-23)", () => {
-  it("drives explore robots from searchParams without client DOM sync", () => {
+describe("PR37 follow-up: bare /explore stays ISR (N-23 reverted)", () => {
+  it("keeps static explore metadata and the faceted rewrite", () => {
     const page = readSrc("src/app/explore/page.tsx");
-    assert.ok(page.includes("generateMetadata"));
-    assert.ok(page.includes("exploreRobots"));
-    assert.ok(!page.includes("export const metadata"));
+    assert.ok(page.includes("export const metadata"));
+    assert.ok(page.includes("robots: { index: true, follow: true }"));
+    assert.ok(!page.includes("generateMetadata"));
+    assert.ok(!page.includes("searchParams"));
+
+    const faceted = readSrc("src/app/explore/faceted/page.tsx");
+    assert.ok(faceted.includes("robots: { index: false, follow: true }"));
+
+    const middleware = readSrc("src/middleware.ts");
+    assert.ok(middleware.includes("exploreFacetRewrite"));
+    assert.ok(middleware.includes('/explore/faceted'));
+    assert.ok(middleware.includes("x-robots-tag"));
 
     const sync = readSrc("src/components/explore/explore-url-sync.tsx");
     assert.ok(!sync.includes('meta[name="robots"]'));

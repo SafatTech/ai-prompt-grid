@@ -50,7 +50,7 @@ describe("PR34 follow-up: related SSR links (N-17 / R2)", () => {
   });
 });
 
-describe("PR34 follow-up: robots via metadata only (N-16 / N-21 / N-23)", () => {
+describe("PR34 follow-up: robots via metadata only (N-16 / N-21)", () => {
   it("does not mutate head robots from the client (avoids removeChild crash)", () => {
     const src = readSrc("src/components/explore/explore-url-sync.tsx");
     assert.ok(!src.includes("MutationObserver"));
@@ -60,16 +60,12 @@ describe("PR34 follow-up: robots via metadata only (N-16 / N-21 / N-23)", () => 
     assert.ok(src.includes("onQueryString"));
 
     const explore = readSrc("src/app/explore/page.tsx");
-    assert.ok(explore.includes("generateMetadata"));
-    assert.ok(explore.includes("exploreRobots"));
-    assert.ok(explore.includes("searchParams"));
+    assert.ok(explore.includes("robots: { index: true, follow: true }"));
     const faceted = readSrc("src/app/explore/faceted/page.tsx");
     assert.ok(faceted.includes("robots: { index: false, follow: true }"));
     const middleware = readSrc("src/middleware.ts");
     assert.ok(middleware.includes("x-robots-tag"));
     assert.ok(middleware.includes("noindex, follow"));
-    assert.ok(middleware.includes("applyExploreRobotsHeader"));
-    assert.ok(!middleware.includes("/explore/faceted"));
   });
 });
 

@@ -6,9 +6,8 @@ import {
 } from "@/lib/catalog/explore-pages";
 
 /**
- * Legacy internal target kept for any stale rewrite/cache hits.
- * Soft-nav robots now come from `/explore` generateMetadata (searchParams).
- * Faceted public URLs are served by `/explore` + `x-robots-tag` in middleware.
+ * Internal rewrite target for `/explore?*` so meta robots is noindex,follow
+ * (matches the x-robots-tag header) without making the bare listing dynamic.
  */
 export const revalidate = 60;
 

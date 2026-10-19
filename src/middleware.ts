@@ -70,8 +70,8 @@ function retiredStyleRedirect(request: NextRequest): NextResponse | null {
 /**
  * `/guides?page=N` stays the public URL (SEO), but is served from the ISR
  * path `/guides/p/N` so the listing is cacheable and bf-cache eligible.
- * `/explore?*` keeps the `/explore` page so generateMetadata(searchParams)
- * can refresh robots on soft navigation (N-23); only the header is set here.
+ * `/explore?*` rewrites to `/explore/faceted` so meta robots is noindex,follow
+ * (matching x-robots-tag) without making the bare listing dynamic.
  */
 function guidesPageRewrite(request: NextRequest): NextResponse | null {
   if (request.nextUrl.pathname !== "/guides") return null;
@@ -87,14 +87,13 @@ function guidesPageRewrite(request: NextRequest): NextResponse | null {
   return NextResponse.rewrite(destination);
 }
 
-/** Faceted `/explore?*` always gets x-robots-tag; meta robots come from generateMetadata. */
-function applyExploreRobotsHeader(request: NextRequest, response: NextResponse): NextResponse {
-  if (
-    request.nextUrl.pathname === "/explore" &&
-    [...request.nextUrl.searchParams.keys()].length > 0
-  ) {
-    response.headers.set("x-robots-tag", "noindex, follow");
-  }
+function exploreFacetRewrite(request: NextRequest): NextResponse | null {
+  if (request.nextUrl.pathname !== "/explore") return null;
+  if (![...request.nextUrl.searchParams.keys()].length) return null;
+  const destination = request.nextUrl.clone();
+  destination.pathname = "/explore/faceted";
+  const response = NextResponse.rewrite(destination);
+  response.headers.set("x-robots-tag", "noindex, follow");
   return response;
 }
 
@@ -119,16 +118,16 @@ export async function middleware(request: NextRequest) {
   const guidesRewrite = guidesPageRewrite(request);
   if (guidesRewrite) return guidesRewrite;
 
+  const exploreRewrite = exploreFacetRewrite(request);
+  if (exploreRewrite) return exploreRewrite;
+
   const url = process.env.NEXT_PUBLIC_SUPABASE_URL;
   const anonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
   if (!url || !anonKey) {
-    return applyExploreRobotsHeader(request, NextResponse.next());
+    return NextResponse.next();
   }
 
-  let supabaseResponse = applyExploreRobotsHeader(
-    request,
-    NextResponse.next({ request }),
-  );
+  let supabaseResponse = NextResponse.next({ request });
 
   const supabase = createServerClient(url, anonKey, {
     cookies: {
@@ -139,10 +138,7 @@ export async function middleware(request: NextRequest) {
         cookiesToSet.forEach(({ name, value }) => {
           request.cookies.set(name, value);
         });
-        supabaseResponse = applyExploreRobotsHeader(
-          request,
-          NextResponse.next({ request }),
-        );
+        supabaseResponse = NextResponse.next({ request });
         cookiesToSet.forEach(({ name, value, options }) => {
           supabaseResponse.cookies.set(name, value, options);
         });
