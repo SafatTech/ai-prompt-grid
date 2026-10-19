@@ -6,6 +6,7 @@ import { StyleCard } from "@/components/style-card";
 import { StyleCardSkeleton } from "@/components/style-card-skeleton";
 import { homeExploreFallbackPage } from "@/lib/catalog/explore-pages";
 import type { StyleCardData } from "@/lib/catalog/style-card-data";
+import { reserveMasonryHeight } from "@/lib/home/masonry-reserve";
 
 type Props = {
   initialCount: number;
@@ -36,12 +37,15 @@ function mergeUnique(
 
 export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
   const softCap = softCapFor(initialCount, total, pageSize);
+  const extraSlots = Math.max(0, softCap - initialCount);
   const [extraStyles, setExtraStyles] = useState<StyleCardData[]>([]);
   const [nextPage, setNextPage] = useState(2);
   const [loading, setLoading] = useState(false);
   const [autoFetches, setAutoFetches] = useState(0);
   // Lock the tallest in-flow height seen while slots fill so masonry aspect
   // swaps cannot collapse trust / load-more / newsletter / footer (R1 / N-19).
+  // Prefers the full soft-cap reserve up front so batch commits do not grow
+  // the block while bottom sections are on screen (N-19 @ 390).
   const [gridMinHeight, setGridMinHeight] = useState<number | undefined>(undefined);
   const inFlight = useRef(false);
   const page2Cache = useRef<StyleCardData[] | null>(null);
@@ -72,10 +76,12 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
       return;
     }
 
-    const height = Math.ceil(node.getBoundingClientRect().height);
-    if (height <= 0) return;
-    setGridMinHeight((prev) => Math.max(prev ?? 0, height));
-  }, [extraStyles.length, skeletons, autoDone]);
+    const measured = Math.ceil(node.getBoundingClientRect().height);
+    const reserved = reserveMasonryHeight(node, extraSlots) ?? 0;
+    const next = Math.max(measured, reserved);
+    if (next <= 0) return;
+    setGridMinHeight((prev) => Math.max(prev ?? 0, next));
+  }, [extraStyles.length, skeletons, autoDone, extraSlots]);
 
   function commitPage(page: number, styles: StyleCardData[]) {
     setExtraStyles((prev) => mergeUnique(prev, styles));

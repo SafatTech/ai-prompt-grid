@@ -3265,6 +3265,8 @@ textarea:focus-visible,
   gap: 10px;
   margin-top: 28px;
   min-height: 88px;
+  /* Prevent scroll anchoring from “correcting” when masonry batches settle (N-19). */
+  overflow-anchor: none;
 }
 
 .home-load-more a {
@@ -3297,11 +3299,13 @@ textarea:focus-visible,
   position: relative;
   z-index: 2;
   margin-top: 64px;
+  overflow-anchor: none;
 }
 
 .home-trust {
   padding-top: 64px;
   border-top: 1px solid var(--line);
+  overflow-anchor: none;
 }
 
 .home-trust-grid {
@@ -3440,6 +3444,7 @@ textarea:focus-visible,
 .home-below > .home-section.home-newsletter {
   margin-top: 64px;
   margin-bottom: 72px;
+  overflow-anchor: none;
 }
 
 .home-newsletter {
@@ -3449,6 +3454,7 @@ textarea:focus-visible,
   border-top: 1px solid var(--line);
   border-bottom: 1px solid var(--line);
   background: none;
+  overflow-anchor: none;
 }
 
 .home-newsletter h2 {

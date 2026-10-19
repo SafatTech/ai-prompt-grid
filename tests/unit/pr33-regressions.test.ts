@@ -60,14 +60,16 @@ describe("PR33 regressions: modal / section deferred load (N2)", () => {
 });
 
 describe("PR33 regressions: explore LCP / toolbar", () => {
-  it("prioritises the first row of explore cards and fixes toolbar geometry", () => {
+  it("gives high priority only to card 1; cards 2–4 stay eager", () => {
     const src = readSrc("src/components/explore/explore-client.tsx");
-    assert.ok(src.includes("priority={listing.page === 1 && index < 4}"));
+    assert.ok(src.includes("priority={listing.page === 1 && index === 0}"));
+    assert.ok(src.includes("eager={listing.page === 1 && index > 0 && index < 4}"));
     assert.ok(src.includes("explore-results-count"));
     assert.ok(src.includes("w-[12ch]"));
 
     const compare = readSrc("src/components/compare-slider.tsx");
-    assert.ok(compare.includes("const sourcePriority = priority"));
-    assert.ok(compare.includes("loading={sourcePriority ? undefined : \"lazy\"}"));
+    assert.ok(compare.includes("const sourceHigh = priority"));
+    assert.ok(compare.includes("const sourceEager = priority || eager"));
+    assert.ok(compare.includes('(max-width:430px) 360px'));
   });
 });

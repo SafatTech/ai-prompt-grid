@@ -68,6 +68,15 @@ test.describe("PR34 follow-up a11y", () => {
 
     await page.getByTestId("explore-search").fill("christmas");
     await expect(page.getByTestId("results-count")).toContainText(/\d+ styles?/);
+    await expect(page).toHaveURL(/[?&]q=/);
+
+    // N-23: soft nav to a faceted URL must refresh robots via generateMetadata.
+    await expect
+      .poll(async () => {
+        const content = await page.locator('meta[name="robots"]').first().getAttribute("content");
+        return (content ?? "").toLowerCase();
+      })
+      .toMatch(/noindex/);
 
     const clear = page.getByTestId("clear-filters");
     if (await clear.isVisible().catch(() => false)) {

@@ -607,8 +607,9 @@ export function ExploreClient({
                     key={style.id}
                     style={style}
                     compact
-                    /* First ~row of cards (4) eager+high so /explore LCP is not lazy. */
-                    priority={listing.page === 1 && index < 4}
+                    /* Card 1 only: high fetchPriority. Cards 2–4: eager, normal priority (LCP). */
+                    priority={listing.page === 1 && index === 0}
+                    eager={listing.page === 1 && index > 0 && index < 4}
                   />
                 ))}
                 {Array.from({ length: pendingCount }, (_, index) => (

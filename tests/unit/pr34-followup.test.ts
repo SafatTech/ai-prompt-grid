@@ -19,8 +19,16 @@ describe("PR34 follow-up: home feed soft-cap reserves (N-19 / R1)", () => {
     assert.ok(src.includes("gridMinHeight"));
     assert.ok(src.includes("autoDone ? 0"));
     assert.ok(src.includes("heightLocked"));
+    assert.ok(src.includes("reserveMasonryHeight"));
+    assert.ok(src.includes("extraSlots"));
     assert.ok(!src.includes("primedRef"));
     assert.ok(!src.includes("contain-intrinsic-size"));
+
+    const css = readSrc("src/app/globals.css");
+    assert.ok(css.includes("overflow-anchor: none"));
+    assert.ok(css.includes(".home-load-more"));
+    assert.ok(css.includes(".home-trust"));
+    assert.ok(css.includes(".home-newsletter"));
   });
 });
 
@@ -42,7 +50,7 @@ describe("PR34 follow-up: related SSR links (N-17 / R2)", () => {
   });
 });
 
-describe("PR34 follow-up: robots via metadata only (N-16 / N-21)", () => {
+describe("PR34 follow-up: robots via metadata only (N-16 / N-21 / N-23)", () => {
   it("does not mutate head robots from the client (avoids removeChild crash)", () => {
     const src = readSrc("src/components/explore/explore-url-sync.tsx");
     assert.ok(!src.includes("MutationObserver"));
@@ -52,12 +60,16 @@ describe("PR34 follow-up: robots via metadata only (N-16 / N-21)", () => {
     assert.ok(src.includes("onQueryString"));
 
     const explore = readSrc("src/app/explore/page.tsx");
-    assert.ok(explore.includes("robots: { index: true, follow: true }"));
+    assert.ok(explore.includes("generateMetadata"));
+    assert.ok(explore.includes("exploreRobots"));
+    assert.ok(explore.includes("searchParams"));
     const faceted = readSrc("src/app/explore/faceted/page.tsx");
     assert.ok(faceted.includes("robots: { index: false, follow: true }"));
     const middleware = readSrc("src/middleware.ts");
-    assert.ok(middleware.includes('x-robots-tag'));
+    assert.ok(middleware.includes("x-robots-tag"));
     assert.ok(middleware.includes("noindex, follow"));
+    assert.ok(middleware.includes("applyExploreRobotsHeader"));
+    assert.ok(!middleware.includes("/explore/faceted"));
   });
 });
 

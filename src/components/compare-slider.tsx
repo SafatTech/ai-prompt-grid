@@ -21,6 +21,8 @@ type Props = {
   altResult?: string;
   /** First above-the-fold card / hero: eager + high fetch priority. */
   priority?: boolean;
+  /** Eager load without high fetchPriority (explore cards 2–4). */
+  eager?: boolean;
   sizes?: string;
 };
 
@@ -42,9 +44,9 @@ function clamp(n: number, min: number, max: number) {
 /** Half-width of the compare-handle hit zone, in CSS pixels. */
 const HANDLE_HIT_PX = 28;
 
-/** Explore / card grid — tighter mobile sizes to avoid oversized w=750 downloads. */
+/** Explore / card grid — absolute px at 390 so srcset can pick ~384/640, not desktop w. */
 const CARD_SIZES =
-  "(max-width:640px) 92vw, (max-width:1024px) 45vw, (max-width:1280px) 30vw, 302px";
+  "(max-width:430px) 360px, (max-width:640px) 92vw, (max-width:1024px) 45vw, (max-width:1280px) 30vw, 302px";
 /** Style-page hero and “More examples” share this so the same asset is not fetched twice. */
 export const DETAIL_COMPARE_SIZES = "(max-width:1024px) 100vw, 560px";
 const DETAIL_SIZES = DETAIL_COMPARE_SIZES;
@@ -61,6 +63,7 @@ export function CompareSlider({
   altSource,
   altResult,
   priority = false,
+  eager = false,
   sizes,
 }: Props) {
   const sourceAlt = altSource || `Source photo for ${title}`;
@@ -195,11 +198,11 @@ export function CompareSlider({
           : "cursor-grab"
         : "cursor-ew-resize";
 
-  // Above-the-fold cards pass priority so the visible compare layers are
-  // eager+high. /explore LCP is often the source half (base layer), so it
-  // must not stay loading=lazy when priority is set.
-  const resultPriority = priority;
-  const sourcePriority = priority;
+  // Card 1: eager + high. Cards 2–4: eager only so they do not compete for LCP bandwidth.
+  const resultHigh = priority;
+  const sourceHigh = priority;
+  const resultEager = priority || eager;
+  const sourceEager = priority || eager;
 
   if (mode === "side") {
     return (
@@ -215,9 +218,9 @@ export function CompareSlider({
               fill
               sizes={imageSizes}
               className="object-cover"
-              priority={sourcePriority}
-              loading={sourcePriority ? undefined : "lazy"}
-              fetchPriority={sourcePriority ? "high" : "auto"}
+              priority={sourceHigh}
+              loading={sourceHigh ? undefined : sourceEager ? "eager" : "lazy"}
+              fetchPriority={sourceHigh ? "high" : "auto"}
               draggable={false}
             />
             <span className="absolute bottom-3 left-3 rounded-lg bg-[rgba(11,11,16,0.72)] px-2 py-1 text-[10px] font-extrabold backdrop-blur-sm">
@@ -231,9 +234,9 @@ export function CompareSlider({
               fill
               sizes={imageSizes}
               className="object-cover"
-              priority={resultPriority}
-              loading={resultPriority ? undefined : "lazy"}
-              fetchPriority={resultPriority ? "high" : "auto"}
+              priority={resultHigh}
+              loading={resultHigh ? undefined : resultEager ? "eager" : "lazy"}
+              fetchPriority={resultHigh ? "high" : "auto"}
               draggable={false}
             />
             <span className="absolute right-3 bottom-3 rounded-lg bg-[rgba(11,11,16,0.72)] px-2 py-1 text-[10px] font-extrabold backdrop-blur-sm">
@@ -272,9 +275,9 @@ export function CompareSlider({
           sizes={imageSizes}
           className="pointer-events-none object-cover"
           style={objectPosition ? { objectPosition } : undefined}
-          priority={sourcePriority}
-          loading={sourcePriority ? undefined : "lazy"}
-          fetchPriority={sourcePriority ? "high" : "auto"}
+          priority={sourceHigh}
+          loading={sourceHigh ? undefined : sourceEager ? "eager" : "lazy"}
+          fetchPriority={sourceHigh ? "high" : "auto"}
           draggable={false}
         />
       </div>
@@ -289,9 +292,9 @@ export function CompareSlider({
           sizes={imageSizes}
           className="pointer-events-none object-cover"
           style={objectPosition ? { objectPosition } : undefined}
-          priority={resultPriority}
-          loading={resultPriority ? undefined : "lazy"}
-          fetchPriority={resultPriority ? "high" : "auto"}
+          priority={resultHigh}
+          loading={resultHigh ? undefined : resultEager ? "eager" : "lazy"}
+          fetchPriority={resultHigh ? "high" : "auto"}
           draggable={false}
         />
       </div>

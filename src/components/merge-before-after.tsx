@@ -16,6 +16,8 @@ type Props = {
   variant: "hero" | "guide" | "card";
   title: string;
   priority?: boolean;
+  /** Eager without high fetchPriority (explore cards 2–4). */
+  eager?: boolean;
   sizes?: string;
   className?: string;
 };
@@ -40,6 +42,7 @@ function FrameImage({
   sizes,
   priority = false,
   highPriority = false,
+  eager = false,
   className,
   objectPosition,
 }: {
@@ -47,6 +50,7 @@ function FrameImage({
   sizes: string;
   priority?: boolean;
   highPriority?: boolean;
+  eager?: boolean;
   className?: string;
   objectPosition?: string;
 }) {
@@ -58,7 +62,7 @@ function FrameImage({
       fill
       sizes={sizes}
       priority={priority}
-      loading={priority ? undefined : "lazy"}
+      loading={priority ? undefined : eager ? "eager" : "lazy"}
       fetchPriority={highPriority ? "high" : "auto"}
       decoding="async"
       className={shared}
@@ -68,10 +72,11 @@ function FrameImage({
 }
 
 /** Result is an LCP candidate on desktop (side-by-side). */
-function resultPriorityFlags(priority: boolean) {
+function resultPriorityFlags(priority: boolean, eager = false) {
   return {
     priority,
     highPriority: priority,
+    eager: priority || eager,
   };
 }
 
@@ -79,11 +84,13 @@ function resultPriorityFlags(priority: boolean) {
  * On mobile the merge hero stacks inputs above the result, so the first print
  * is the LCP element — it must not stay lazy when the hero is prioritized.
  */
-function inputPriorityFlags(priority: boolean, index: number) {
-  const eager = priority && index === 0;
+function inputPriorityFlags(priority: boolean, index: number, eager = false) {
+  const high = priority && index === 0;
+  const loadEager = high || (eager && index === 0);
   return {
-    priority: eager,
-    highPriority: eager,
+    priority: high,
+    highPriority: high,
+    eager: loadEager,
   };
 }
 
@@ -147,6 +154,7 @@ export function MergeBeforeAfter({
   variant,
   title,
   priority = false,
+  eager = false,
   sizes,
   className,
 }: Props) {
@@ -189,7 +197,7 @@ export function MergeBeforeAfter({
                 <FrameImage
                   image={{ ...input, alt: inputAlt(input, title, index, inputs.length) }}
                   sizes={inputSizes}
-                  {...inputPriorityFlags(priority, index)}
+                  {...inputPriorityFlags(priority, index, eager)}
                   objectPosition="50% 30%"
                 />
                 <span className="mba-split__tag" aria-hidden="true">
@@ -207,7 +215,7 @@ export function MergeBeforeAfter({
             <FrameImage
               image={{ ...result, alt: resultAlt(result, title) }}
               sizes="(max-width:767px) 40vw, 240px"
-              {...resultPriorityFlags(priority)}
+              {...resultPriorityFlags(priority, eager)}
               className={resultFrame.contain ? "object-contain" : undefined}
             />
           </div>
@@ -243,7 +251,7 @@ export function MergeBeforeAfter({
           <FrameImage
             image={{ ...result, alt: resultAlt(result, title) }}
             sizes={resultSizes}
-            {...resultPriorityFlags(priority)}
+            {...resultPriorityFlags(priority, eager)}
             className={resultFrame.contain ? "object-contain" : undefined}
           />
           <span className="mba-pill mba-pill-result mba-pill-result-end" aria-hidden="true">
@@ -300,7 +308,7 @@ export function MergeBeforeAfter({
                   <FrameImage
                     image={{ ...input, alt: inputAlt(input, title, index, shown.length) }}
                     sizes={inputSizes}
-                    {...inputPriorityFlags(priority, index)}
+                    {...inputPriorityFlags(priority, index, eager)}
                   />
                 </div>
                 <span className="mba-lip" aria-hidden="true">
@@ -326,7 +334,7 @@ export function MergeBeforeAfter({
           <FrameImage
             image={{ ...result, alt: resultAlt(result, title) }}
             sizes={resultSizes}
-            {...resultPriorityFlags(priority)}
+            {...resultPriorityFlags(priority, eager)}
             className={resultFrame.contain ? "object-contain" : undefined}
           />
           <span className="mba-pill mba-pill-result" aria-hidden="true">
