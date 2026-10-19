@@ -27,6 +27,16 @@ describe("PR37 follow-up: home scroll CLS reserve (N-19)", () => {
 });
 
 describe("PR37 follow-up: bare /explore stays ISR (N-23 reverted)", () => {
+  it("hard-navigates off faceted explore to avoid stacked robots meta", () => {
+    const helper = readSrc("src/lib/navigation/bare-explore.ts");
+    assert.ok(helper.includes("assignBareExploreIfFaceted"));
+    assert.ok(helper.includes("window.location.assign"));
+    const header = readSrc("src/components/site-header.tsx");
+    assert.ok(header.includes("assignBareExploreIfFaceted"));
+    const explore = readSrc("src/components/explore/explore-client.tsx");
+    assert.ok(explore.includes("assignBareExploreIfFaceted"));
+  });
+
   it("keeps static explore metadata and the faceted rewrite", () => {
     const page = readSrc("src/app/explore/page.tsx");
     assert.ok(page.includes("export const metadata"));
@@ -39,8 +49,12 @@ describe("PR37 follow-up: bare /explore stays ISR (N-23 reverted)", () => {
 
     const middleware = readSrc("src/middleware.ts");
     assert.ok(middleware.includes("exploreFacetRewrite"));
-    assert.ok(middleware.includes('/explore/faceted'));
+    assert.ok(middleware.includes("/explore/faceted"));
     assert.ok(middleware.includes("x-robots-tag"));
+    // Soft-nav (`sec-fetch-dest: empty`) must not rewrite, or robots meta stacks.
+    assert.ok(middleware.includes("shouldRewriteExploreFacet"));
+    assert.ok(middleware.includes("sec-fetch-dest"));
+    assert.ok(middleware.includes("exploreHasPublicSearchParams"));
 
     const sync = readSrc("src/components/explore/explore-url-sync.tsx");
     assert.ok(!sync.includes('meta[name="robots"]'));

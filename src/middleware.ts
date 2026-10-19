@@ -72,6 +72,10 @@ function retiredStyleRedirect(request: NextRequest): NextResponse | null {
  * path `/guides/p/N` so the listing is cacheable and bf-cache eligible.
  * `/explore?*` rewrites to `/explore/faceted` so meta robots is noindex,follow
  * (matching x-robots-tag) without making the bare listing dynamic.
+ *
+ * Soft-nav (RSC) requests skip the rewrite and stay on `/explore`: switching
+ * page segments under the same pathname stacks duplicate robots metas in the
+ * document head (Playwright N-21 smoke). Hard document loads still rewrite.
  */
 function guidesPageRewrite(request: NextRequest): NextResponse | null {
   if (request.nextUrl.pathname !== "/guides") return null;
@@ -87,11 +91,42 @@ function guidesPageRewrite(request: NextRequest): NextResponse | null {
   return NextResponse.rewrite(destination);
 }
 
+/** Next flight cache-busting query (stripped before middleware; still filter it). */
+const RSC_QUERY = "_rsc";
+
+function exploreHasPublicSearchParams(request: NextRequest): boolean {
+  for (const key of request.nextUrl.searchParams.keys()) {
+    if (key !== RSC_QUERY) return true;
+  }
+  return false;
+}
+
+/**
+ * Document navigations (and clients that omit Sec-Fetch-Dest, e.g. curl/crawlers)
+ * rewrite to `/explore/faceted`. App Router soft-nav / prefetch use
+ * `sec-fetch-dest: empty` — those must stay on `/explore` or Next stacks a
+ * second `<meta name="robots">` when returning to the bare listing (N-21 smoke).
+ */
+function shouldRewriteExploreFacet(request: NextRequest): boolean {
+  const dest = request.headers.get("sec-fetch-dest");
+  // Missing header → treat as document (crawlers, curl, older clients).
+  if (!dest || dest === "document") return true;
+  return false;
+}
+
 function exploreFacetRewrite(request: NextRequest): NextResponse | null {
   if (request.nextUrl.pathname !== "/explore") return null;
-  if (![...request.nextUrl.searchParams.keys()].length) return null;
+  if (!exploreHasPublicSearchParams(request)) return null;
+
+  if (!shouldRewriteExploreFacet(request)) {
+    const response = NextResponse.next();
+    response.headers.set("x-robots-tag", "noindex, follow");
+    return response;
+  }
+
   const destination = request.nextUrl.clone();
   destination.pathname = "/explore/faceted";
+  destination.searchParams.delete(RSC_QUERY);
   const response = NextResponse.rewrite(destination);
   response.headers.set("x-robots-tag", "noindex, follow");
   return response;

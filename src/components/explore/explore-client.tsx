@@ -35,6 +35,7 @@ import {
 import type { ExploreQuery } from "@/lib/catalog/schemas";
 import type { StyleCardData } from "@/lib/catalog/style-card-data";
 import { filterGroups, groupLabels } from "@/lib/catalog/styles";
+import { assignBareExploreIfFaceted } from "@/lib/navigation/bare-explore";
 import { cn } from "@/lib/utils";
 
 type Props = {
@@ -120,6 +121,7 @@ export function ExploreClient({
       if (isExplicitFirstExplorePage(parsed)) {
         parsed.delete("page");
         const cleaned = parsed.toString();
+        if (!cleaned && assignBareExploreIfFaceted()) return;
         router.replace(cleaned ? `/explore?${cleaned}` : "/explore", { scroll: false });
         return;
       }
@@ -178,8 +180,10 @@ export function ExploreClient({
       });
       const qs = params.toString();
       appliedQuery.current = qs;
-      router.replace(qs ? `/explore?${qs}` : "/explore", { scroll: false });
       if (!qs) {
+        // Soft-nav back to bare /explore can stack robots meta; hard-load instead.
+        if (assignBareExploreIfFaceted()) return;
+        router.replace("/explore", { scroll: false });
         setListing({
           styles: ssrStyles,
           matchCount: ssrMatchCount,
@@ -190,6 +194,7 @@ export function ExploreClient({
         setPendingCount(0);
         return;
       }
+      router.replace(`/explore?${qs}`, { scroll: false });
       void fetchListing(qs);
     },
     [router, fetchListing, ssrStyles, ssrMatchCount, ssrHeading],
@@ -347,6 +352,7 @@ export function ExploreClient({
       page: 1,
       heading: ssrHeading,
     });
+    if (assignBareExploreIfFaceted()) return;
     router.replace("/explore", { scroll: false });
   }
 
