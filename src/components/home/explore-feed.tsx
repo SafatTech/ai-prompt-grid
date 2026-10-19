@@ -29,8 +29,15 @@ export function ExploreFeed({ styles, total, pageSize }: Props) {
         </Link>
       </div>
       <div className="home-masonry">
-        {styles.map((style) => (
-          <StyleCard key={style.id} style={style} variant="masonry" />
+        {styles.map((style, index) => (
+          <StyleCard
+            key={style.id}
+            style={style}
+            variant="masonry"
+            /* First card owns LCP; first mobile row (2 cols @ 390) is eager. */
+            priority={index === 0}
+            eager={index > 0 && index < 2}
+          />
         ))}
       </div>
       <AdSlot

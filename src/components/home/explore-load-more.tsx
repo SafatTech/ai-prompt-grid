@@ -115,7 +115,8 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
     }
   }
 
-  // Prefetch page 2 into cache while idle (layout already reserved).
+  // Fetch page 2 while idle and commit as soon as it arrives (layout already
+  // reserved). Waiting for the sentinel left mobile on blur skeletons too long.
   useEffect(() => {
     let cancelled = false;
 
@@ -129,7 +130,9 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
           const data = (await res.json()) as { styles?: StyleCardData[] };
           const styles = Array.isArray(data.styles) ? data.styles : [];
           if (cancelled || styles.length === 0) return;
-          page2Cache.current = styles;
+          page2Handled.current = true;
+          page2Cache.current = null;
+          commitPage(2, styles);
         } catch {
           /* network blips — sentinel fetch will retry */
         } finally {
@@ -139,19 +142,20 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
     };
 
     if (typeof requestIdleCallback === "function") {
-      const id = requestIdleCallback(run, { timeout: 2500 });
+      const id = requestIdleCallback(run, { timeout: 1200 });
       return () => {
         cancelled = true;
         cancelIdleCallback(id);
       };
     }
 
-    const timer = window.setTimeout(run, 900);
+    const timer = window.setTimeout(run, 400);
     return () => {
       cancelled = true;
       window.clearTimeout(timer);
     };
   }, []);
+
 
   useEffect(() => {
     if (autoDone) return;
@@ -163,7 +167,9 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
         if (!entry?.isIntersecting || inFlight.current) return;
         void fetchPage(nextPage);
       },
-      { rootMargin: "240px 0px" },
+      // Start the next batch ~1–1.5 viewports early so mobile never hits empty
+      // skeletons while waiting on /api/home/explore.
+      { rootMargin: "1400px 0px" },
     );
     fetchIo.observe(node);
 

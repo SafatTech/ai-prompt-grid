@@ -31,6 +31,7 @@ test.describe("phase 2 guest catalog", () => {
     await expect(page.getByTestId("results-count")).toContainText(/\d+ styles/);
 
     await page.getByTestId("explore-search").fill("Moody Meadow");
+    await expect(page.getByTestId("style-card-meadow-reverie")).toBeVisible();
     await page.getByTestId("style-card-meadow-reverie").click();
     await expect(page).toHaveURL(/\/styles\/meadow-reverie/);
     await expect(page.getByTestId("prompt-box")).toBeVisible();
@@ -58,3 +59,5 @@ test.describe("phase 2 guest catalog", () => {
     await expect(page.getByTestId("style-results").locator("article")).toHaveCount(36);
   });
 });
+
+
