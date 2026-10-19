@@ -62,13 +62,14 @@ export function StyleCard({
     return (
       <article
         className={cn(
-          "style-card-rail group relative overflow-hidden rounded-[var(--radius)] border border-[var(--line)] bg-[var(--surface)]",
+          /* No overflow:hidden on the article — it clips the heart ::after hit area to ~42px (N-20). Media keeps its own clip. */
+          "style-card-rail group relative rounded-[var(--radius)] border border-[var(--line)] bg-[var(--surface)]",
           variant === "masonry" && "style-card-masonry",
         )}
         data-testid={`style-card-${style.id}`}
       >
         <div
-          className="style-card-rail-media relative overflow-hidden bg-[var(--surface-2)]"
+          className="style-card-rail-media relative overflow-hidden rounded-t-[var(--radius)] bg-[var(--surface-2)]"
           style={
             variant === "masonry"
               ? { aspectRatio: `${mediaWidth} / ${mediaHeight}` }

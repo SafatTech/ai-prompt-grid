@@ -35,13 +35,12 @@ describe("PR33 regressions: explore drawer staging (N-15)", () => {
   });
 });
 
-describe("PR33 regressions: robots meta dedupe (N-16)", () => {
-  it("removes duplicate robots meta tags when syncing", () => {
+describe("PR33 regressions: robots via route metadata (N-16 / N-21)", () => {
+  it("keeps robots on Next metadata / headers, not client DOM sync", () => {
     const src = readSrc("src/components/explore/explore-url-sync.tsx");
-    assert.ok(src.includes('meta[name="robots"]'));
-    assert.ok(src.includes("querySelectorAll"));
-    assert.ok(src.includes(".remove()"));
-    assert.ok(src.includes("MutationObserver"));
+    assert.ok(!src.includes("MutationObserver"));
+    assert.ok(!src.includes('meta[name="robots"]'));
+    assert.ok(src.includes("onQueryString"));
   });
 });
 
@@ -63,8 +62,12 @@ describe("PR33 regressions: modal / section deferred load (N2)", () => {
 describe("PR33 regressions: explore LCP / toolbar", () => {
   it("prioritises the first row of explore cards and fixes toolbar geometry", () => {
     const src = readSrc("src/components/explore/explore-client.tsx");
-    assert.ok(src.includes("priority={listing.page === 1 && index < 3}"));
+    assert.ok(src.includes("priority={listing.page === 1 && index < 4}"));
     assert.ok(src.includes("explore-results-count"));
     assert.ok(src.includes("w-[12ch]"));
+
+    const compare = readSrc("src/components/compare-slider.tsx");
+    assert.ok(compare.includes("const sourcePriority = priority"));
+    assert.ok(compare.includes("loading={sourcePriority ? undefined : \"lazy\"}"));
   });
 });
