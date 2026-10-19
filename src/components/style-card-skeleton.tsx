@@ -1,3 +1,4 @@
+import { SHARED_STYLE_BLUR } from "@/lib/catalog/style-card-data";
 import { cn } from "@/lib/utils";
 
 /**
@@ -12,18 +13,30 @@ type Props = {
   /** Used to vary masonry aspect ratios across a batch. */
   index?: number;
   className?: string;
+  /** Tiny blur / dominant-color placeholder so pending cards never look empty. */
+  blurDataURL?: string;
 };
 
 /**
  * Calm size-matched placeholders for load-more (no shimmer).
  * Shown as soon as a fetch starts so layout space is reserved.
  * Compact variant matches StyleCard explore body (~505 px) to avoid N-8 CLS.
+ * Media uses the shared blur data-URI (or a caller-supplied blur) instead of a
+ * flat empty surface so mobile galleries never flash blank cards.
  */
 export function StyleCardSkeleton({
   variant = "compact",
   index = 0,
   className,
+  blurDataURL = SHARED_STYLE_BLUR,
 }: Props) {
+  const mediaStyle = {
+    backgroundColor: "var(--surface-2)",
+    backgroundImage: `url(${blurDataURL})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  } as const;
+
   if (variant === "masonry") {
     return (
       <article
@@ -35,8 +48,11 @@ export function StyleCardSkeleton({
         data-testid="style-card-skeleton"
       >
         <div
-          className="style-card-rail-media bg-[var(--surface-2)]"
-          style={{ aspectRatio: MASONRY_RATIOS[index % MASONRY_RATIOS.length] }}
+          className="style-card-rail-media"
+          style={{
+            aspectRatio: MASONRY_RATIOS[index % MASONRY_RATIOS.length],
+            ...mediaStyle,
+          }}
         />
         <div className="style-card-rail-body px-3.5 pt-3 pb-3.5">
           <div className="h-4 w-[78%] rounded bg-[var(--surface-2)]" />
@@ -58,7 +74,7 @@ export function StyleCardSkeleton({
       aria-hidden
       data-testid="style-card-skeleton"
     >
-      <div className="bg-[var(--surface-2)]" style={{ height: 280 }} />
+      <div style={{ height: 280, ...mediaStyle }} />
       <div className="style-card-explore-body min-h-[170px] p-[17px]">
         <div className="mb-3 flex flex-wrap gap-1.5">
           <div className="h-[25px] w-16 rounded-[7px] bg-[var(--surface-2)]" />

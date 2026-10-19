@@ -3,14 +3,28 @@ import { test, expect } from "@playwright/test";
 test.describe("launch hardening", () => {
   test("privacy and terms pages are linked from the footer", async ({ page }) => {
     await page.goto("/");
-    await page.getByRole("contentinfo").getByRole("link", { name: "Privacy" }).click();
+    // Trigger the home gallery soft-cap fetch (large rootMargin) and wait until
+    // reserved skeletons clear before clicking legal links in the footer.
+    await page.locator(".home-load-more").scrollIntoViewIfNeeded();
+    await expect(page.getByTestId("style-card-skeleton")).toHaveCount(0, {
+      timeout: 20_000,
+    });
+    await page
+      .getByRole("contentinfo")
+      .getByRole("link", { name: "Privacy policy" })
+      .click();
     await expect(page).toHaveURL(/\/privacy-policy$/);
     await expect(page.getByRole("heading", { name: "Privacy policy" })).toBeVisible();
 
-    await page.getByRole("contentinfo").getByRole("link", { name: "Terms" }).click();
+    await page
+      .getByRole("contentinfo")
+      .getByRole("link", { name: "Terms of service" })
+      .click();
     await expect(page).toHaveURL(/\/terms-of-service$/);
     await expect(page.getByRole("heading", { name: "Terms of service" })).toBeVisible();
   });
+
+
 
   test("guest save opens sign-in; mock Google restores save", async ({
     page,

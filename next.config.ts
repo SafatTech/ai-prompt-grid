@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import { writePublishedGuideManifest } from "./src/lib/guides/published-manifest";
+import { isVercelImageOptEnabled } from "./src/lib/images/vercel-image-opt";
 
 // Bake published slugs into the layout bundle before compile. The root layout
 // imports that module instead of reading content/guides, because other
@@ -18,6 +19,9 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ["lucide-react"],
   },
   images: {
+    // Hobby plan: skip /_next/image transforms (402 once the monthly cap hits).
+    // Set NEXT_PUBLIC_VERCEL_IMAGE_OPT=1 and redeploy on Pro to turn back on.
+    unoptimized: !isVercelImageOptEnabled(),
     // Catalog originals are at most ~1200–1600px wide, so the 2048/3840
     // defaults only bloat every srcset (the homepage wall alone had 36+ of them).
     deviceSizes: [640, 750, 828, 1080, 1200, 1920],
