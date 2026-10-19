@@ -56,6 +56,8 @@ export function SiteHeader({ showGuidesLink }: { showGuidesLink: boolean }) {
   const rootRef = useRef<HTMLElement>(null);
   const searchRef = useRef<HTMLInputElement>(null);
   const mobileSearchRef = useRef<HTMLInputElement>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const drawerPanelRef = useRef<HTMLDivElement>(null);
   const hoverTimer = useRef<number | null>(null);
   const leaveTimer = useRef<number | null>(null);
   const [panel, setPanel] = useState<Panel | null>(null);
@@ -111,10 +113,12 @@ export function SiteHeader({ showGuidesLink }: { showGuidesLink: boolean }) {
       if (event.key === "Escape") {
         setPanel(null);
         setPanelPinned(false);
-        setMobileOpen(false);
         setCreatorsOpen(false);
         setCategoriesOpen(false);
         setMobileGroup(null);
+        // Mobile menu Escape is handled in the focus-trap effect so focus
+        // returns to the menu button (N-18).
+        if (!mobileOpen) return;
       }
     }
     document.addEventListener("pointerdown", onPointerDown);
@@ -123,11 +127,57 @@ export function SiteHeader({ showGuidesLink }: { showGuidesLink: boolean }) {
       document.removeEventListener("pointerdown", onPointerDown);
       document.removeEventListener("keydown", onKey);
     };
-  }, []);
+  }, [mobileOpen]);
 
   useEffect(() => {
     document.body.classList.toggle("no-scroll", mobileOpen);
     return () => document.body.classList.remove("no-scroll");
+  }, [mobileOpen]);
+
+  // N-18: move focus into the drawer on open, trap Tab, restore on close/Esc.
+  useEffect(() => {
+    if (!mobileOpen) return;
+    const panel = drawerPanelRef.current;
+    const trigger = menuButtonRef.current;
+    if (!panel) return;
+
+    const focusableSelector =
+      "button, input, select, textarea, a[href], [tabindex]:not([tabindex='-1'])";
+
+    function focusables() {
+      return [...panel!.querySelectorAll<HTMLElement>(focusableSelector)].filter(
+        (el) => !el.hasAttribute("disabled") && el.offsetParent !== null,
+      );
+    }
+
+    const first = focusables()[0];
+    first?.focus();
+
+    function onKey(event: globalThis.KeyboardEvent) {
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setMobileOpen(false);
+        return;
+      }
+      if (event.key !== "Tab") return;
+      const nodes = focusables();
+      if (!nodes.length) return;
+      const firstNode = nodes[0]!;
+      const lastNode = nodes[nodes.length - 1]!;
+      if (event.shiftKey && document.activeElement === firstNode) {
+        event.preventDefault();
+        lastNode.focus();
+      } else if (!event.shiftKey && document.activeElement === lastNode) {
+        event.preventDefault();
+        firstNode.focus();
+      }
+    }
+
+    document.addEventListener("keydown", onKey);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      trigger?.focus();
+    };
   }, [mobileOpen]);
 
   useEffect(() => {
@@ -401,6 +451,7 @@ export function SiteHeader({ showGuidesLink }: { showGuidesLink: boolean }) {
           </Link>
 
           <button
+            ref={menuButtonRef}
             type="button"
             className="grid h-11 w-11 cursor-pointer place-items-center rounded-xl border border-[rgba(255,255,255,0.10)] text-[#F5F3EE] lg:hidden"
             aria-label={mobileOpen ? "Close menu" : "Open menu"}
@@ -463,11 +514,13 @@ export function SiteHeader({ showGuidesLink }: { showGuidesLink: boolean }) {
         <div className="fixed inset-0 z-50 h-dvh lg:hidden">
           <button
             type="button"
+            tabIndex={-1}
             className="absolute inset-0 cursor-pointer border-0 bg-black/55"
             aria-label="Close menu"
             onClick={() => setMobileOpen(false)}
           />
           <div
+            ref={drawerPanelRef}
             id={drawerId}
             role="dialog"
             aria-modal="true"

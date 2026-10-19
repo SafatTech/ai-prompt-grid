@@ -11,15 +11,16 @@ function readSrc(rel: string) {
 }
 
 describe("PR33 regressions: card title truncation (N-14)", () => {
-  it("puts truncate on the title link as a block element", () => {
+  it("truncates on an inner span so the link hit area stays unclipped", () => {
     const css = readSrc("src/app/globals.css");
     assert.ok(css.includes(".style-card-title-link"));
+    assert.ok(css.includes(".style-card-title-text"));
     assert.ok(css.includes("text-overflow: ellipsis"));
-    const titleBlock = css.slice(
-      css.indexOf(".style-card-title-link"),
+    const textBlock = css.slice(
+      css.indexOf(".style-card-title-text"),
       css.indexOf(".style-card-title-link::after"),
     );
-    assert.ok(titleBlock.includes("display: block"));
+    assert.ok(textBlock.includes("overflow: hidden"));
     assert.ok(!css.includes("display: inline-block;\n  max-width: 100%;\n}\n\n.style-card-rail-body h3 a::after"));
   });
 });
@@ -37,8 +38,10 @@ describe("PR33 regressions: explore drawer staging (N-15)", () => {
 describe("PR33 regressions: robots meta dedupe (N-16)", () => {
   it("removes duplicate robots meta tags when syncing", () => {
     const src = readSrc("src/components/explore/explore-url-sync.tsx");
-    assert.ok(src.includes('querySelectorAll(\'meta[name="robots"]\')'));
+    assert.ok(src.includes('meta[name="robots"]'));
+    assert.ok(src.includes("querySelectorAll"));
     assert.ok(src.includes(".remove()"));
+    assert.ok(src.includes("MutationObserver"));
   });
 });
 

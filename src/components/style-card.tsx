@@ -122,26 +122,27 @@ export function StyleCard({
               ) : null}
             </Link>
           )}
-          <button
-            type="button"
-            className={cn(
-              "style-card-heart absolute top-2.5 right-2.5 z-4 flex h-[38px] w-[38px] cursor-pointer items-center justify-center rounded-[11px] border border-[rgba(255,255,255,0.22)] bg-[rgba(11,11,16,0.72)] text-base text-[var(--text)] backdrop-blur-sm",
-              saved && "bg-[rgba(255,155,130,0.12)] text-[var(--peach)]",
-            )}
-            aria-label={saved ? `Unsave ${style.title}` : `Save ${style.title}`}
-            data-testid={`save-style-${style.id}`}
-            onClick={handleSave}
-          >
-            {saved ? "♥" : "♡"}
-          </button>
         </div>
+        {/* Heart sits outside overflow:hidden media so the ≥44px hit area is not clipped (N-20). */}
+        <button
+          type="button"
+          className={cn(
+            "style-card-heart absolute top-2.5 right-2.5 z-4 flex h-[38px] w-[38px] cursor-pointer items-center justify-center rounded-[11px] border border-[rgba(255,255,255,0.22)] bg-[rgba(11,11,16,0.72)] text-base text-[var(--text)] backdrop-blur-sm",
+            saved && "bg-[rgba(255,155,130,0.12)] text-[var(--peach)]",
+          )}
+          aria-label={saved ? `Unsave ${style.title}` : `Save ${style.title}`}
+          data-testid={`save-style-${style.id}`}
+          onClick={handleSave}
+        >
+          {saved ? "♥" : "♡"}
+        </button>
         <div className="style-card-rail-body px-3.5 pt-3 pb-3.5">
           <h3 className="m-0 text-[15px] font-semibold leading-snug tracking-[-0.01em]">
             <Link
               href={`/styles/${style.id}`}
               className="style-card-title-link"
             >
-              {style.title}
+              <span className="style-card-title-text">{style.title}</span>
             </Link>
           </h3>
           <div className="style-card-rail-row mt-2 flex items-center justify-between gap-2">

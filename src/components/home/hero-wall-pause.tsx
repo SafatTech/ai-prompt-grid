@@ -79,12 +79,12 @@ export function HeroWallPause({ heroSelector = "[data-hero-wall]" }: Props) {
   return (
     <button
       type="button"
-      className="hero-wall-pause"
+      className="hero-wall-pause-hit"
       aria-pressed={paused}
       aria-label={paused ? "Play background animation" : "Pause background animation"}
       onClick={toggle}
     >
-      {paused ? "▶ Play" : "❚❚ Pause"}
+      <span className="hero-wall-pause">{paused ? "▶ Play" : "❚❚ Pause"}</span>
     </button>
   );
 }

@@ -2396,11 +2396,23 @@ textarea:focus-visible,
   background: var(--surface-2);
 }
 
-.hero-wall-pause {
+.hero-wall-pause-hit {
   position: absolute;
-  right: 24px;
-  bottom: 24px;
+  right: 20px;
+  bottom: 20px;
   z-index: 6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+
+.hero-wall-pause {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -2411,14 +2423,7 @@ textarea:focus-visible,
   border-radius: var(--pill);
   padding: 8px 14px;
   font: 600 12px var(--font-geist-sans), system-ui, sans-serif;
-  cursor: pointer;
-}
-
-.hero-wall-pause::after {
-  content: "";
-  position: absolute;
-  /* 34px visual → ≥44px hit area */
-  inset: -5px -4px;
+  pointer-events: none;
 }
 
 .hero-wall-content {
@@ -3019,13 +3024,14 @@ textarea:focus-visible,
 }
 
 .style-card-heart {
-  position: relative;
+  position: absolute;
   z-index: 5;
 }
 
 .style-card-heart::after {
   content: "";
   position: absolute;
+  /* Unclipped: heart sits outside overflow:hidden media (N-20). */
   inset: -5px;
 }
 
@@ -3093,11 +3099,18 @@ textarea:focus-visible,
   position: relative;
   display: block;
   max-width: 100%;
+  /* Keep overflow visible so the ::after hit area is not clipped (N-20 / R4). */
+  overflow: visible;
+  color: inherit;
+  text-decoration: none;
+}
+
+.style-card-title-text {
+  display: block;
+  max-width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  color: inherit;
-  text-decoration: none;
 }
 
 .style-card-title-link::after {
@@ -3135,6 +3148,9 @@ textarea:focus-visible,
   display: flex;
   gap: 8px;
   overflow-x: auto;
+  /* Vertical padding so .home-chip::after hit areas are not clipped (N-20). */
+  padding-block: 6px;
+  margin-block: -6px;
   scrollbar-width: none;
 }
 
@@ -3156,7 +3172,7 @@ textarea:focus-visible,
 .home-chip::after {
   content: "";
   position: absolute;
-  /* ~32–41px visual chips → ≥44px hit area */
+  /* ~32–41px visual chips → ≥44px hit area; scroller padding prevents clip. */
   inset: -6px 0;
 }
 
@@ -4032,6 +4048,12 @@ textarea:focus-visible,
     position: relative;
     display: block;
     max-width: 100%;
+    overflow: visible;
+  }
+
+  .style-card-rail-body h3 a .style-card-title-text {
+    display: block;
+    max-width: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
@@ -4051,7 +4073,6 @@ textarea:focus-visible,
   }
 
   .style-card-heart {
-    position: relative;
     width: 34px;
     height: 34px;
     top: 8px;
@@ -4061,7 +4082,6 @@ textarea:focus-visible,
   .style-card-heart::after {
     content: "";
     position: absolute;
-    /* 34×34 visual → ≥44×44 hit area */
     inset: -5px;
   }
 
@@ -4143,7 +4163,7 @@ textarea:focus-visible,
     transform: translateY(-12%);
   }
 
-  .hero-wall-pause {
+  .hero-wall-pause-hit {
     display: none;
   }
 

@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { StyleCard } from "@/components/style-card";
 import { StyleCardSkeleton } from "@/components/style-card-skeleton";
 import { homeExploreFallbackPage } from "@/lib/catalog/explore-pages";
@@ -13,7 +13,12 @@ type Props = {
   pageSize: number;
 };
 
+/** Soft cap for auto-appended home feed cards (SSR page + AUTO_FETCH_PAGES). */
 const AUTO_FETCH_PAGES = 2;
+
+function softCapFor(initialCount: number, total: number, pageSize: number) {
+  return Math.min(total, initialCount + AUTO_FETCH_PAGES * pageSize);
+}
 
 function mergeUnique(
   prev: StyleCardData[],
@@ -30,31 +35,39 @@ function mergeUnique(
 }
 
 export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
+  const softCap = softCapFor(initialCount, total, pageSize);
   const [extraStyles, setExtraStyles] = useState<StyleCardData[]>([]);
-  const [pendingCount, setPendingCount] = useState(0);
   const [nextPage, setNextPage] = useState(2);
   const [loading, setLoading] = useState(false);
   const [autoFetches, setAutoFetches] = useState(0);
+  // Lock the tallest in-flow height seen while slots fill so masonry aspect
+  // swaps cannot collapse trust / load-more / newsletter / footer (R1 / N-19).
+  const [gridMinHeight, setGridMinHeight] = useState<number | undefined>(undefined);
   const inFlight = useRef(false);
   const page2Cache = useRef<StyleCardData[] | null>(null);
   const page2Handled = useRef(false);
-  const primedRef = useRef(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
   const shown = initialCount + extraStyles.length;
   const hasMore = shown < total;
-  const autoDone = autoFetches >= AUTO_FETCH_PAGES || !hasMore;
+  const autoDone = autoFetches >= AUTO_FETCH_PAGES || shown >= softCap || !hasMore;
   const exploreFallbackPage = homeExploreFallbackPage(shown);
+  // Aspect-ratio placeholders for every card still under the soft cap (≤72).
+  // Never reserve past the known total or the cap.
+  const skeletons = Math.max(0, softCap - shown);
+
+  useLayoutEffect(() => {
+    const node = gridRef.current;
+    if (!node) return;
+    const height = Math.ceil(node.getBoundingClientRect().height);
+    if (height <= 0) return;
+    setGridMinHeight((prev) => Math.max(prev ?? 0, height));
+  }, [extraStyles.length, skeletons]);
 
   function commitPage(page: number, styles: StyleCardData[]) {
     setExtraStyles((prev) => mergeUnique(prev, styles));
     setNextPage(page + 1);
-    setAutoFetches((n) => {
-      const next = n + 1;
-      // Keep one page of skeleton slots for the next auto-fetch so load-more
-      // / trust do not jump when page 3 arrives.
-      setPendingCount(next < AUTO_FETCH_PAGES ? pageSize : 0);
-      return next;
-    });
+    setAutoFetches((n) => n + 1);
   }
 
   async function fetchPage(page: number) {
@@ -70,13 +83,9 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
 
     inFlight.current = true;
     setLoading(true);
-    if (pendingCount < pageSize) setPendingCount(pageSize);
     try {
       const res = await fetch(`/api/home/explore?page=${page}`);
-      if (!res.ok) {
-        setPendingCount(0);
-        return;
-      }
+      if (!res.ok) return;
       const data = (await res.json()) as { styles?: StyleCardData[] };
       const styles = Array.isArray(data.styles) ? data.styles : [];
       if (page === 2) page2Handled.current = true;
@@ -87,7 +96,7 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
     }
   }
 
-  // Prefetch page 2 into cache while idle (no layout change until primed).
+  // Prefetch page 2 into cache while idle (layout already reserved).
   useEffect(() => {
     let cancelled = false;
 
@@ -130,18 +139,6 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
     const node = sentinelRef.current;
     if (!node) return;
 
-    // Prime skeleton slots well before they enter the viewport so the append
-    // shift happens off-screen (CLS ≈ 0) and no empty dark reserve remains.
-    const primeIo = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry?.isIntersecting || primedRef.current) return;
-        primedRef.current = true;
-        setPendingCount((n) => Math.max(n, pageSize));
-      },
-      { rootMargin: "900px 0px" },
-    );
-    primeIo.observe(node);
-
     const fetchIo = new IntersectionObserver(
       ([entry]) => {
         if (!entry?.isIntersecting || inFlight.current) return;
@@ -152,7 +149,6 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
     fetchIo.observe(node);
 
     return () => {
-      primeIo.disconnect();
       fetchIo.disconnect();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps -- IO rebinds when next page / auto state changes
@@ -161,17 +157,19 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
   return (
     <>
       <div
+        ref={gridRef}
         className="home-masonry home-masonry-extra"
-        aria-busy={pendingCount > 0 || undefined}
+        aria-busy={skeletons > 0 || undefined}
+        style={gridMinHeight ? { minHeight: gridMinHeight } : undefined}
       >
         {extraStyles.map((style) => (
           <StyleCard key={style.id} style={style} variant="masonry" />
         ))}
-        {Array.from({ length: pendingCount }, (_, index) => (
+        {Array.from({ length: skeletons }, (_, index) => (
           <StyleCardSkeleton
             key={`home-pending-${index}`}
             variant="masonry"
-            index={index}
+            index={extraStyles.length + index}
           />
         ))}
       </div>

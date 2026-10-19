@@ -101,7 +101,7 @@ export function ShareModal({ url, title, styleId, onClose }: Props) {
             aria-label={copied ? "Copied" : "Copy link"}
             onClick={() => onCopyLink("button")}
             className={cn(
-              "relative grid h-10 w-10 shrink-0 cursor-pointer place-items-center rounded-[10px] border border-[var(--line-strong)] bg-[rgba(255,255,255,0.04)] text-[var(--text)] transition hover:bg-[rgba(255,255,255,0.08)] after:absolute after:inset-[-2px]",
+              "relative grid h-11 w-11 min-h-11 min-w-11 shrink-0 cursor-pointer place-items-center rounded-[10px] border border-[var(--line-strong)] bg-[rgba(255,255,255,0.04)] text-[var(--text)] transition hover:bg-[rgba(255,255,255,0.08)]",
               copied && "border-[rgba(103,216,178,0.45)] text-[var(--mint)]",
             )}
           >
