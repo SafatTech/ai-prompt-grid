@@ -57,6 +57,7 @@ export function StyleCard({
   }
 
   if (isRail) {
+    // 2-col masonry @ 390 → ~50vw; rail is slightly wider on small screens.
     const sizes =
       variant === "masonry"
         ? "(max-width:700px) 50vw, 240px"

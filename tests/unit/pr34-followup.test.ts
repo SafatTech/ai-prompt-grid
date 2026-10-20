@@ -20,9 +20,11 @@ describe("PR34 follow-up: home feed soft-cap reserves (N-19 / R1)", () => {
     assert.ok(src.includes("autoDone ? 0"));
     assert.ok(src.includes("heightLocked"));
     assert.ok(src.includes("reserveMasonryHeight"));
-    assert.ok(src.includes("extraSlots"));
+    assert.ok(src.includes("remainingSlots"));
+    assert.ok(src.includes("measureMasonryContentHeight"));
     assert.ok(!src.includes("primedRef"));
     assert.ok(!src.includes("contain-intrinsic-size"));
+
 
     const css = readSrc("src/app/globals.css");
     assert.ok(css.includes("overflow-anchor: none"));

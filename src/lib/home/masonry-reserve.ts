@@ -1,6 +1,7 @@
 /**
- * Estimate reserved height for homepage masonry auto-load slots (N-19).
+ * Estimate reserved height for homepage masonry auto-load slots (N-19 / N-24).
  * Skeletons under-measure real card height at 390, so we size from live cards.
+ * Use remaining slot count × measured average — no extra % buffer (N-24 blank band).
  */
 
 /** Prefer real masonry cards in the SSR grid; fall back to children already in the extra grid. */
@@ -33,9 +34,8 @@ export function estimateMasonryColumns(grid: HTMLElement, cardWidth: number): nu
 }
 
 /**
- * Height to reserve for `slotCount` masonry items so batch commits do not push
- * trust / load-more / newsletter (overflow-anchor still disabled on those).
- * Adds a small buffer so taller-than-average real cards still fit.
+ * Height to reserve for `slotCount` remaining masonry items (N-24: exact
+ * remaining × measured average card height, no 8% pad).
  */
 export function reserveMasonryHeight(
   grid: HTMLElement,
@@ -47,10 +47,6 @@ export function reserveMasonryHeight(
   if (heights.length === 0) return undefined;
 
   const avg = heights.reduce((sum, h) => sum + h, 0) / heights.length;
-  // Prefer a high percentile so portrait-heavy batches are covered.
-  const sorted = [...heights].sort((a, b) => a - b);
-  const p90 = sorted[Math.min(sorted.length - 1, Math.floor(sorted.length * 0.9))] ?? avg;
-  const cardH = Math.max(avg, p90);
 
   const sample =
     grid
@@ -61,9 +57,20 @@ export function reserveMasonryHeight(
   const marginBottom = sample
     ? Number.parseFloat(getComputedStyle(sample).marginBottom) || 0
     : 0;
-  const rowH = cardH + marginBottom;
+  const rowH = avg + marginBottom;
   const cols = estimateMasonryColumns(grid, cardWidth || grid.getBoundingClientRect().width);
   const rows = Math.ceil(slotCount / cols);
-  // ~8% buffer: QA saw ~330px shortfall on ~7000px (~4.7%); stay conservative.
-  return Math.ceil(rows * rowH * 1.08);
+  return Math.ceil(rows * rowH);
+}
+
+/**
+ * Read the grid's natural content height with min-height cleared so a prior
+ * soft-cap reserve cannot inflate the measurement (N-24 blank band).
+ */
+export function measureMasonryContentHeight(grid: HTMLElement): number {
+  const prev = grid.style.minHeight;
+  grid.style.minHeight = "0px";
+  const height = Math.ceil(grid.getBoundingClientRect().height);
+  grid.style.minHeight = prev;
+  return height;
 }

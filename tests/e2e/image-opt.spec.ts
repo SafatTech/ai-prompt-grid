@@ -1,6 +1,8 @@
 import { test, expect, type Page, type Request } from "@playwright/test";
 
 const MOBILE = { width: 390, height: 844 };
+/** Soft ceiling for a single gallery card image transfer at 390 CSS px (2× ≈ 720w). */
+const MAX_CARD_BYTES = 120_000;
 
 function trackNextImageRequests(page: Page) {
   const hits: string[] = [];
@@ -31,7 +33,6 @@ async function expectGalleryImagesLoaded(page: Page) {
         return {
           src: img.currentSrc || img.src,
           naturalWidth: img.naturalWidth,
-          complete: img.complete,
         };
       }),
   );
@@ -44,27 +45,84 @@ async function expectGalleryImagesLoaded(page: Page) {
     );
     expect(img.naturalWidth, `image failed to decode: ${img.src}`).toBeGreaterThan(0);
   }
+  return withSrc;
 }
 
-test.describe("direct Supabase images (Vercel opt off)", () => {
+async function expectCardTransfersBounded(page: Page) {
+  const imgs = page.locator(
+    '[data-testid="style-results"] img, .home-masonry .style-card-rail-media img, .style-card-explore img',
+  );
+  const srcs = await imgs.evaluateAll((nodes) =>
+    nodes.slice(0, 12).map((node) => {
+      const img = node as HTMLImageElement;
+      return (img.currentSrc || img.src).split("?")[0]!;
+    }),
+  );
+
+  const checked = srcs.filter((src) => src && !src.startsWith("data:"));
+  expect(checked.length).toBeGreaterThan(0);
+
+  // Local catalog cards must use rewritten `.w*.webp` variants (not full PNGs).
+  const fullLocal = checked.filter((src) =>
+    /\/catalog\/.+\.(png|jpe?g)$/i.test(src),
+  );
+  expect(fullLocal, `expected local catalog variants, got:\n${fullLocal.join("\n")}`).toEqual(
+    [],
+  );
+
+  const variantSrcs = checked.filter((src) =>
+    /\.w(360|540|720|1080)\.webp$/i.test(src),
+  );
+  expect(
+    variantSrcs.length,
+    "expected at least one pre-generated .w*.webp card image",
+  ).toBeGreaterThan(0);
+
+  // Fetch byte sizes via the page so memory-cache hits still return body length.
+  const measured = await page.evaluate(async (urls) => {
+    const out: { src: string; bytes: number }[] = [];
+    for (const src of urls) {
+      const res = await fetch(src, { cache: "force-cache" });
+      const buf = await res.arrayBuffer();
+      out.push({ src, bytes: buf.byteLength });
+    }
+    return out;
+  }, variantSrcs);
+
+  for (const { src, bytes } of measured) {
+    expect(bytes, `empty body for ${src}`).toBeGreaterThan(0);
+    expect(bytes, `card image too large (${bytes} B): ${src}`).toBeLessThanOrEqual(
+      MAX_CARD_BYTES,
+    );
+  }
+}
+
+test.describe("catalog image variants (Vercel opt off)", () => {
   test.use({ viewport: MOBILE });
 
-  test("home serves gallery images without /_next/image", async ({ page }) => {
+  test("home serves gallery images without /_next/image and under ~120KB", async ({
+    page,
+  }) => {
     const tracker = trackNextImageRequests(page);
     try {
       await page.goto("/", { waitUntil: "networkidle" });
-      await expect(page.getByRole("heading", { level: 2, name: /Explore everything/i })).toBeVisible();
+      await expect(
+        page.getByRole("heading", { level: 2, name: /Explore everything/i }),
+      ).toBeVisible();
       await expectGalleryImagesLoaded(page);
       expect(
         tracker.hits,
         `unexpected /_next/image requests:\n${tracker.hits.join("\n")}`,
       ).toEqual([]);
+      await expectCardTransfersBounded(page);
     } finally {
       tracker.dispose();
     }
   });
 
-  test("explore serves gallery images without /_next/image", async ({ page }) => {
+  test("explore serves gallery images without /_next/image and under ~120KB", async ({
+    page,
+  }) => {
     const tracker = trackNextImageRequests(page);
     try {
       await page.goto("/explore", { waitUntil: "networkidle" });
@@ -74,6 +132,7 @@ test.describe("direct Supabase images (Vercel opt off)", () => {
         tracker.hits,
         `unexpected /_next/image requests:\n${tracker.hits.join("\n")}`,
       ).toEqual([]);
+      await expectCardTransfersBounded(page);
     } finally {
       tracker.dispose();
     }

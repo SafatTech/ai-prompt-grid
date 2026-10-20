@@ -70,6 +70,6 @@ describe("PR33 regressions: explore LCP / toolbar", () => {
     const compare = readSrc("src/components/compare-slider.tsx");
     assert.ok(compare.includes("const sourceHigh = priority"));
     assert.ok(compare.includes("const sourceEager = priority || eager"));
-    assert.ok(compare.includes('(max-width:430px) 360px'));
+    assert.ok(compare.includes("(max-width:430px) 92vw"));
   });
 });

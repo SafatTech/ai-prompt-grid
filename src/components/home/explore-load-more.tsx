@@ -6,7 +6,10 @@ import { StyleCard } from "@/components/style-card";
 import { StyleCardSkeleton } from "@/components/style-card-skeleton";
 import { homeExploreFallbackPage } from "@/lib/catalog/explore-pages";
 import type { StyleCardData } from "@/lib/catalog/style-card-data";
-import { reserveMasonryHeight } from "@/lib/home/masonry-reserve";
+import {
+  measureMasonryContentHeight,
+  reserveMasonryHeight,
+} from "@/lib/home/masonry-reserve";
 
 type Props = {
   initialCount: number;
@@ -37,15 +40,14 @@ function mergeUnique(
 
 export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
   const softCap = softCapFor(initialCount, total, pageSize);
-  const extraSlots = Math.max(0, softCap - initialCount);
   const [extraStyles, setExtraStyles] = useState<StyleCardData[]>([]);
   const [nextPage, setNextPage] = useState(2);
   const [loading, setLoading] = useState(false);
   const [autoFetches, setAutoFetches] = useState(0);
-  // Lock the tallest in-flow height seen while slots fill so masonry aspect
-  // swaps cannot collapse trust / load-more / newsletter / footer (R1 / N-19).
-  // Prefers the full soft-cap reserve up front so batch commits do not grow
-  // the block while bottom sections are on screen (N-19 @ 390).
+  // While slots fill, floor min-height so batch commits cannot collapse trust /
+  // load-more / newsletter (R1 / N-19). Reserve remaining slots × measured
+  // card height only — then release to natural content once the last batch
+  // lands so we do not leave a blank band above "Load more" (N-24).
   const [gridMinHeight, setGridMinHeight] = useState<number | undefined>(undefined);
   const inFlight = useRef(false);
   const page2Cache = useRef<StyleCardData[] | null>(null);
@@ -60,16 +62,18 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
   // Reserve aspect-ratio slots only while auto-fetch can still deliver cards.
   // Once the soft cap / last batch is done, drop skeletons so min-height cannot
   // keep ratcheting from empty reserved rows (N-19 @ 390).
-  const skeletons = autoDone ? 0 : Math.max(0, softCap - shown);
+  const remainingSlots = Math.max(0, softCap - shown);
+  const skeletons = autoDone ? 0 : remainingSlots;
 
   useLayoutEffect(() => {
     const node = gridRef.current;
     if (!node) return;
 
     if (autoDone) {
-      // Final content height only — never raise the lock after the last batch.
+      // N-24: measure with min-height cleared so a prior soft-cap floor cannot
+      // inflate the lock and leave a blank band above "Load more styles".
       if (heightLocked.current) return;
-      const height = Math.ceil(node.getBoundingClientRect().height);
+      const height = measureMasonryContentHeight(node);
       if (height <= 0) return;
       heightLocked.current = true;
       setGridMinHeight(height);
@@ -77,11 +81,11 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
     }
 
     const measured = Math.ceil(node.getBoundingClientRect().height);
-    const reserved = reserveMasonryHeight(node, extraSlots) ?? 0;
+    const reserved = reserveMasonryHeight(node, remainingSlots) ?? 0;
     const next = Math.max(measured, reserved);
     if (next <= 0) return;
     setGridMinHeight((prev) => Math.max(prev ?? 0, next));
-  }, [extraStyles.length, skeletons, autoDone, extraSlots]);
+  }, [extraStyles.length, skeletons, autoDone, remainingSlots]);
 
   function commitPage(page: number, styles: StyleCardData[]) {
     setExtraStyles((prev) => mergeUnique(prev, styles));
