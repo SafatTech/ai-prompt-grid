@@ -1,6 +1,6 @@
 import { createBrowserClient } from "@supabase/ssr";
 import type { SupabaseClient } from "@supabase/supabase-js";
-import { getPublicSupabaseConfig } from "@/lib/env";
+import { getPublicSupabaseConfig } from "@/lib/env-public";
 
 /**
  * Browser Supabase client. Returns null when env is not configured

@@ -1,7 +1,6 @@
-import { backgroundSchema, moodSchema } from "./schemas";
-import { categories } from "./styles";
+import { categories } from "./filter-constants";
 import type { CatalogStyle } from "./types";
-import { defaultsForStyle } from "./prompts";
+import { defaultsForStyleCore } from "./prompt-core";
 
 export type LabeledOption = { value: string; label: string };
 
@@ -739,7 +738,7 @@ export function labeledOptionsForStyle(
   style: CatalogStyle,
   kind: "mood" | "background",
 ): LabeledOption[] {
-  const defaults = defaultsForStyle(style);
+  const defaults = defaultsForStyleCore(style);
   const defaultValue = kind === "mood" ? defaults.mood : defaults.background;
   const presets = presetsFor(style.category, kind);
 
@@ -756,21 +755,3 @@ export function labeledOptionsForStyle(
   }));
 }
 
-/** Dev/test helper: ensure preset values exist in the schema enums. */
-export function assertPresetValuesInSchema(): void {
-  const moodSet = new Set<string>(moodSchema.options);
-  const backgroundSet = new Set<string>(backgroundSchema.options);
-
-  for (const category of categories) {
-    for (const mood of categoryMoodPresets[category]) {
-      if (!moodSet.has(mood)) {
-        throw new Error(`Unknown mood preset for ${category}: ${mood}`);
-      }
-    }
-    for (const background of categoryBackgroundPresets[category]) {
-      if (!backgroundSet.has(background)) {
-        throw new Error(`Unknown background preset for ${category}: ${background}`);
-      }
-    }
-  }
-}

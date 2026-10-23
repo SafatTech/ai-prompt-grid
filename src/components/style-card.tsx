@@ -57,11 +57,11 @@ export function StyleCard({
   }
 
   if (isRail) {
-    // 2-col masonry @ 390 → ~50vw; rail is slightly wider on small screens.
+    // Match CSS: masonry columns 2 @ ≤699 (≈50vw) / 236px; rails 62% @ ≤767 / 250px.
     const sizes =
       variant === "masonry"
-        ? "(max-width:700px) 50vw, 240px"
-        : "(max-width:700px) 62vw, 250px";
+        ? "(max-width:699px) 48vw, 236px"
+        : "(max-width:767px) 62vw, 250px";
 
     return (
       <article

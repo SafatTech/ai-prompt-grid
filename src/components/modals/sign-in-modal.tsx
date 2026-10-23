@@ -12,7 +12,7 @@ import {
   authCallbackUrl,
   persistPendingAction,
 } from "@/lib/auth/pending-action";
-import { isSupabaseConfigured } from "@/lib/env";
+import { isSupabaseConfigured } from "@/lib/env-public";
 import { createBrowserSupabaseClient } from "@/lib/supabase/client";
 
 export function SignInModal({ onClose }: { onClose: () => void }) {

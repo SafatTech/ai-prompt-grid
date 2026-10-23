@@ -29,15 +29,16 @@ import {
 } from "@/lib/catalog/merge-inputs";
 import { track } from "@/lib/analytics";
 import {
-  assemblePrompt,
-  defaultsForStyle,
+  assemblePromptCore,
+  defaultsForStyleCore,
   preserveToggleLabels,
-  previewPrompt,
-  ratioOptions,
+  previewPromptCore,
+  RATIO_OPTIONS,
   type PromptOptions,
-} from "@/lib/catalog/prompts";
+} from "@/lib/catalog/prompt-core";
 import { labeledOptionsForStyle } from "@/lib/catalog/prompt-option-presets";
-import { getStyleProfile, type CatalogStyle } from "@/lib/catalog/styles";
+import { getStyleProfile } from "@/lib/catalog/style-profile";
+import type { CatalogStyle } from "@/lib/catalog/types";
 import { recordRecentView } from "@/lib/recent/views";
 import { cn } from "@/lib/utils";
 
@@ -55,7 +56,7 @@ export function StyleDetailClient({ style, children }: Props) {
   const { signedIn, isSaved, toggleSave, setPendingAction } = useLibrary();
   const { toast } = useToast();
   const { openSignIn, openSaveResult, openExternalInfo } = useUiModals();
-  const [options, setOptions] = useState<PromptOptions>(() => defaultsForStyle(style));
+  const [options, setOptions] = useState<PromptOptions>(() => defaultsForStyleCore(style));
   const [optionsStyleId, setOptionsStyleId] = useState(style.id);
   const [compareDefault, setCompareDefault] = useState<"slider" | "side">("slider");
   const [showStickyCopy, setShowStickyCopy] = useState(false);
@@ -65,12 +66,12 @@ export function StyleDetailClient({ style, children }: Props) {
   );
   if (style.id !== optionsStyleId) {
     setOptionsStyleId(style.id);
-    setOptions(defaultsForStyle(style));
+    setOptions(defaultsForStyleCore(style));
   }
-  const assembled = useMemo(() => assemblePrompt(style, options), [style, options]);
+  const assembled = useMemo(() => assemblePromptCore(style, options), [style, options]);
   const resultSize = mergeResultSize(style);
   const resultFit = resultPresentation(resultSize.width, resultSize.height);
-  const prompt = assembled.ok ? assembled.prompt : previewPrompt(style, options);
+  const prompt = assembled.ok ? assembled.prompt : previewPromptCore(style, options);
   const moodSelectOptions = useMemo(() => labeledOptionsForStyle(style, "mood"), [style]);
   const backgroundSelectOptions = useMemo(
     () => labeledOptionsForStyle(style, "background"),
@@ -125,7 +126,7 @@ export function StyleDetailClient({ style, children }: Props) {
   }
 
   async function onCopy() {
-    const result = assemblePrompt(style, options);
+    const result = assemblePromptCore(style, options);
     if (!result.ok) {
       toast(result.errors[0] ?? "Prompt is incomplete and cannot be copied.", "error");
       return;
@@ -377,7 +378,7 @@ export function StyleDetailClient({ style, children }: Props) {
               label="Output ratio"
               className="sm:col-span-2"
               value={options.ratio}
-              options={ratioOptions.map((item) => ({ value: item, label: item }))}
+              options={RATIO_OPTIONS.map((item) => ({ value: item, label: item }))}
               testId="ratio-select"
               onChange={(value) =>
                 setOptions((o) => ({

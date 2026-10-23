@@ -8,7 +8,7 @@ import {
   ratioSchema,
   styleSubjectSchema,
 } from "@/lib/catalog/schemas";
-import { categories, filterGroups } from "@/lib/catalog/styles";
+import { categories, filterGroups } from "@/lib/catalog/filter-constants";
 
 export const adminStyleStatusSchema = z.object({
   status: z.enum(["draft", "in_review", "published", "archived"]),

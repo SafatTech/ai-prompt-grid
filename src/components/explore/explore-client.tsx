@@ -34,7 +34,7 @@ import {
 } from "@/lib/catalog/filters";
 import type { ExploreQuery } from "@/lib/catalog/schemas";
 import type { StyleCardData } from "@/lib/catalog/style-card-data";
-import { filterGroups, groupLabels } from "@/lib/catalog/styles";
+import { filterGroups, groupLabels } from "@/lib/catalog/filter-constants";
 import { assignBareExploreIfFaceted } from "@/lib/navigation/bare-explore";
 import { cn } from "@/lib/utils";
 

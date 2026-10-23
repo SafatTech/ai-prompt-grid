@@ -91,12 +91,12 @@ export function HeroWallTracks({ images }: Props) {
         const down = colIndex % 2 === 0;
         const dir = down ? "hero-wall-down" : "hero-wall-up";
         // Desktop-only columns: never eager, so mobile/hidden cols stay off the network.
+        // Visible columns: at most one eager image each; never high/priority (h1 paints first).
         const desktopOnly = colIndex >= 3;
         const primary = (
           <div key="primary">
             {colImages.map((image, imgIndex) => {
-              const eager = !desktopOnly && imgIndex < 2;
-              const high = colIndex < 2 && imgIndex === 0;
+              const eager = !desktopOnly && imgIndex === 0;
               return (
                 <Image
                   key={`a-${colIndex}-${imgIndex}-${image.src}`}
@@ -107,7 +107,7 @@ export function HeroWallTracks({ images }: Props) {
                   sizes={WALL_SIZES}
                   className="hero-wall-img"
                   loading={eager ? "eager" : "lazy"}
-                  fetchPriority={high ? "high" : "auto"}
+                  fetchPriority="auto"
                   decoding="async"
                   placeholder={image.blurDataURL ? "blur" : "empty"}
                   blurDataURL={image.blurDataURL}

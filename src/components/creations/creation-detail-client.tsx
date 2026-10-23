@@ -8,7 +8,7 @@ import { EmptyState } from "@/components/empty-state";
 import { useLibrary } from "@/components/providers/library-provider";
 import { useToast } from "@/components/providers/toast-provider";
 import type { Creation } from "@/lib/library/types";
-import { isSupabaseConfigured } from "@/lib/env";
+import { isSupabaseConfigured } from "@/lib/env-public";
 
 type Props = {
   creation?: Creation;

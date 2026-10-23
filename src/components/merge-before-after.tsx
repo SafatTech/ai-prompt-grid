@@ -166,11 +166,11 @@ export function MergeBeforeAfter({
   const resultSizes =
     sizes ??
     (variant === "card"
-      ? "(max-width: 768px) 40vw, 240px"
+      ? "(max-width:699px) 25vw, 120px"
       : "(max-width: 768px) 92vw, 560px");
   const inputSizes =
     variant === "card"
-      ? "(max-width:767px) 18vw, 110px"
+      ? "(max-width:699px) 16vw, 100px"
       : variant === "guide"
         ? "150px"
         : "(max-width: 768px) 55vw, 320px";
@@ -214,7 +214,8 @@ export function MergeBeforeAfter({
           <div className={cn("relative overflow-hidden", resultFrame.contain && "bg-[#f5f3ee]")}>
             <FrameImage
               image={{ ...result, alt: resultAlt(result, title) }}
-              sizes="(max-width:767px) 40vw, 240px"
+              // Half of a 2-col masonry / rail card (~25–31vw on mobile).
+              sizes={sizes ?? "(max-width:699px) 25vw, 120px"}
               {...resultPriorityFlags(priority, eager)}
               className={resultFrame.contain ? "object-contain" : undefined}
             />

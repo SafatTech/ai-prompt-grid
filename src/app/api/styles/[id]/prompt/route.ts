@@ -22,6 +22,7 @@ export async function GET(
   return NextResponse.json(
     {
       prompt: assembled.prompt,
+      title: style.title,
       variantId: style.promptVariant.id,
       tool: assembled.tool,
     },

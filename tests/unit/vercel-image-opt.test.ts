@@ -50,13 +50,15 @@ describe("Vercel image optimization toggle", () => {
 
   it("keeps LCP priority, early home fetch, blur skeletons, and N-24", () => {
     const home = readSrc("src/components/home/explore-load-more.tsx");
-    assert.ok(home.includes('rootMargin: "1400px 0px"'));
+    assert.ok(home.includes('rootMargin: "2400px 0px"'));
     assert.ok(home.includes("measureMasonryContentHeight"));
     assert.ok(home.includes("remainingSlots"));
 
     const feed = readSrc("src/components/home/explore-feed.tsx");
     assert.ok(feed.includes("priority={index === 0}"));
-    assert.ok(feed.includes("eager={index > 0 && index < 2}"));
+    // Full SSR masonry page is eager — CSS columns break native lazy distance.
+    assert.ok(feed.includes("eager={index > 0}"));
+    assert.ok(!feed.includes("eager={index > 0 && index < 2}"));
 
     const explore = readSrc("src/components/explore/explore-client.tsx");
     assert.ok(explore.includes("priority={listing.page === 1 && index === 0}"));
