@@ -18,4 +18,11 @@ export const metadata: Metadata = {
   robots: { index: false, follow: true },
 };
 
-export default ExplorePageView;
+export default async function FacetedExplorePage({
+  searchParams,
+}: {
+  searchParams: Promise<{ offset?: string | string[] }>;
+}) {
+  const sp = await searchParams;
+  return <ExplorePageView offsetParam={sp.offset} />;
+}

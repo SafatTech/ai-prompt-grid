@@ -30,7 +30,7 @@ export function RelatedStylesLazy(props: RelatedProps) {
           if (!cancelled) setComp(() => mod.RelatedStyles);
         });
       },
-      { rootMargin: "600px 0px" },
+      { rootMargin: "2000px 0px" },
     );
     io.observe(node);
     return () => {

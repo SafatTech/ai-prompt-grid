@@ -5,20 +5,39 @@ import {
   exploreListingHeading,
   explorePageSlice,
 } from "@/lib/catalog/explore-pages";
+import { parseExploreOffset } from "@/lib/catalog/explore-paging";
 import { filterStyles, createEmptyFilters } from "@/lib/catalog/filters";
 import { listPublishedStyles } from "@/lib/catalog/repository";
 import { toStyleCardDataList } from "@/lib/catalog/style-card-data";
 
 const getCatalog = cache(listPublishedStyles);
 
+type Props = {
+  /** Optional raw `?offset=` from the URL (home Load more N-27). */
+  offsetParam?: string | string[] | undefined;
+};
+
 /** Shared ISR shell for `/explore` and the faceted rewrite target. */
-export async function ExplorePageView() {
+export async function ExplorePageView({ offsetParam }: Props = {}) {
   const styles = await getCatalog();
   const matches = filterStyles(styles, createEmptyFilters(), "", "Trending");
-  const pageStyles = toStyleCardDataList(explorePageSlice(matches, 1), {
-    blurCount: 3,
-    sharedBlur: true,
-  });
+
+  const params = new URLSearchParams();
+  const raw = Array.isArray(offsetParam) ? offsetParam[0] : offsetParam;
+  if (raw != null && raw !== "") params.set("offset", raw);
+  const offset = parseExploreOffset(params) ?? 0;
+
+  const pageStyles = toStyleCardDataList(
+    offset > 0
+      ? matches.slice(offset, offset + EXPLORE_PAGE_SIZE)
+      : explorePageSlice(matches, 1),
+    {
+      blurCount: 3,
+      sharedBlur: true,
+    },
+  );
+  const initialPage =
+    offset > 0 ? Math.floor(offset / EXPLORE_PAGE_SIZE) + 1 : 1;
 
   return (
     <ExploreClient
@@ -35,8 +54,8 @@ export async function ExplorePageView() {
         requirement: [],
         tool: [],
       }}
-      initialPage={1}
-      initialQueryString=""
+      initialPage={initialPage}
+      initialQueryString={offset > 0 ? `offset=${offset}` : ""}
       heading={exploreListingHeading()}
     />
   );

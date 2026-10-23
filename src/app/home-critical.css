@@ -1,0 +1,77 @@
+/* Inlined on `/` for LCP (h1.hero-wall-title). Keep in sync with home.css hero rules.
+   Mobile overrides follow base rules (same cascade contract as home.css). */
+.home-page {
+  overflow-x: clip;
+  --home-max: 1320px;
+  --home-gutter: 80px;
+  --home-content: min(var(--home-max), calc(100% - var(--home-gutter)));
+}
+
+.hero-wall {
+  position: relative;
+  height: 92vh;
+  min-height: 640px;
+  max-height: 1100px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.hero-wall-content {
+  position: relative;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 72px 24px 48px;
+}
+
+.hero-wall-title {
+  margin: 22px 0 18px;
+  font-size: 76px;
+  line-height: 1;
+  letter-spacing: -0.04em;
+  font-weight: 800;
+}
+
+.hero-wall-title em {
+  font-style: normal;
+  background: linear-gradient(90deg, #b9a8ff, #ff9b82);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.hero-wall-sub {
+  margin: 0 auto;
+  font-size: 19px;
+  line-height: 1.55;
+  color: #d4d1de;
+  max-width: 560px;
+}
+
+@media (max-width: 699px) {
+  .home-page {
+    --home-gutter: 32px;
+    --home-max: 100%;
+  }
+
+  .hero-wall {
+    height: auto;
+    min-height: 100svh;
+    max-height: none;
+  }
+
+  .hero-wall-title {
+    font-size: 44px;
+  }
+
+  .hero-wall-sub {
+    font-size: 16px;
+  }
+
+  .hero-wall-content {
+    padding: 96px 18px 48px;
+  }
+}

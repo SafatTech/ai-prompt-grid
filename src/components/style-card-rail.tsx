@@ -74,7 +74,7 @@ export function StyleCardRail({
               ? `Merge · ${mergePhotos.length} photos`
               : style.category}
           </span>
-          <CopyPromptButton style={style} />
+          <CopyPromptButton style={{ id: style.id, title: style.title }} />
         </div>
       </div>
     </article>

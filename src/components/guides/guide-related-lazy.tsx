@@ -2,16 +2,16 @@
 
 import Link from "next/link";
 import { useEffect, useRef, useState, type ComponentType } from "react";
-import type { Guide } from "@/lib/guides/load";
+import type { RelatedGuideCard } from "@/lib/guides/related-card";
 import { formatGuideDateShort } from "@/lib/guides/prepare";
 
 type RelatedProps = {
-  guides: readonly Guide[];
+  guides: readonly RelatedGuideCard[];
 };
 
 /**
- * Always SSR "Keep exploring" links (N-17). Lazy-loads image-heavy cards when
- * near the viewport; aspect-ratio placeholders hold footer position (R2).
+ * SSR crawlable title links only (slug/heading/description/date).
+ * Lazy-loads image cards near the viewport — never hydrates full Guide bodies.
  */
 export function GuideRelatedLazy(props: RelatedProps) {
   const ref = useRef<HTMLDivElement>(null);
@@ -29,7 +29,7 @@ export function GuideRelatedLazy(props: RelatedProps) {
           if (!cancelled) setComp(() => mod.GuideRelated);
         });
       },
-      { rootMargin: "600px 0px" },
+      { rootMargin: "2000px 0px" },
     );
     io.observe(node);
     return () => {

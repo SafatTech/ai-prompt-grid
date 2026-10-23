@@ -19,7 +19,7 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ["lucide-react"],
     // inlineCss was enabled in #43 but duplicated ~globals into the RSC payload
     // (~300ms style-page main-thread task, home HTML over 1MB). Keep external
-    // CSS; guide LCP uses an early /_next/image preload instead.
+    // CSS; home inlines only hero-critical CSS, style pages preload w=640.
   },
   images: {
     // Pro default: /_next/image from original Supabase URLs. Kill switch:
