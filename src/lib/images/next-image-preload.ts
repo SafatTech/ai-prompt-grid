@@ -33,11 +33,12 @@ export function nextImageSrcSet(
 }
 
 /**
- * Style-page hero sizes — must stay identical on CompareSlider, MergeBeforeAfter,
- * and the react-dom preload so mobile reuses w=640 (320 CSS px @2×).
+ * Style-page hero sizes — must stay identical on CompareSlider / MergeBeforeAfter.
+ * At 390 CSS px the detail container is 100% − 24px ≈ 364 px; pick a 384w
+ * candidate (deviceSizes) so we do not under-fetch at 320 or overshoot with 750.
  */
 export const DETAIL_HERO_SIZES =
-  "(max-width:640px) 320px, (max-width:1024px) 90vw, 560px";
+  "(max-width:640px) 364px, (max-width:1024px) 90vw, 560px";
 
 /** Widths from next.config `images.deviceSizes` that the hero sizes string can select. */
-export const DETAIL_HERO_SRCSET_WIDTHS = [640, 750, 828, 1080, 1200] as const;
+export const DETAIL_HERO_SRCSET_WIDTHS = [384, 640, 750, 828, 1080, 1200] as const;

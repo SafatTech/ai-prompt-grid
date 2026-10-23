@@ -2531,3 +2531,7 @@ textarea:focus-visible,
     transition: none;
   }
 }
+
+/* Inlined by the bundler after globals so `/` ships one app stylesheet.
+   Source of truth for home rules remains home.css (mobile cascade tests). */
+@import "./home.css";

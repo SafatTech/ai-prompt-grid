@@ -17,8 +17,7 @@ type Props = {
 
 /**
  * Homepage rail/masonry card — Server Component shell.
- * Only save + copy (+ masonry media IO) hydrate as client islands.
- * Do not duplicate mobile/desktop markup; `.home-masonry` columns adapt via CSS.
+ * Client islands receive only id/slug (+ tiny media scalars), never the full DTO.
  */
 export function StyleCardRail({
   style,
@@ -35,13 +34,6 @@ export function StyleCardRail({
       : "(max-width:699px) 50vw, (max-width:767px) 55vw, 250px";
   const layoutAware = variant === "masonry" && !priority && !eager;
 
-  const hoverPreview = promptPreview ? (
-    <div className="style-card-hover-preview" aria-hidden="true">
-      <p>{promptPreview}</p>
-      <span>Before → After</span>
-    </div>
-  ) : null;
-
   return (
     <article
       className={cn(
@@ -51,17 +43,32 @@ export function StyleCardRail({
       )}
       data-testid={`style-card-${style.id}`}
     >
-      <StyleCardMasonryMedia
-        style={style}
-        sizes={sizes}
-        priority={priority}
-        eager={eager}
-        layoutAware={layoutAware}
-        naturalAspect={variant === "masonry"}
-        hoverPreview={hoverPreview}
-      />
+      <div className="relative">
+        <StyleCardMasonryMedia
+          styleId={style.id}
+          title={style.title}
+          result={style.result}
+          mediaWidth={style.mediaWidth}
+          mediaHeight={style.mediaHeight}
+          sizes={sizes}
+          priority={priority}
+          eager={eager}
+          layoutAware={layoutAware}
+          naturalAspect={variant === "masonry"}
+          {...(style.resultBlur ? { resultBlur: style.resultBlur } : {})}
+          {...(mergePhotos.length ? { mergePhotos } : {})}
+          {...(style.mergeResult ? { mergeResult: style.mergeResult } : {})}
+        />
+        {/* Hover preview stays on the server tree — not a client prop. */}
+        {promptPreview ? (
+          <div className="style-card-hover-preview pointer-events-none" aria-hidden="true">
+            <p>{promptPreview}</p>
+            <span>Before → After</span>
+          </div>
+        ) : null}
+      </div>
       {/* Heart sits outside overflow:hidden media so the ≥44px hit area is not clipped (N-20). */}
-      <StyleCardSaveButton styleId={style.id} title={style.title} />
+      <StyleCardSaveButton styleId={style.id} />
       <div className="style-card-rail-body px-3.5 pt-3 pb-3.5">
         <h3 className="m-0 text-[15px] font-semibold leading-snug tracking-[-0.01em]">
           <Link href={`/styles/${style.id}`} className="style-card-title-link">
@@ -74,7 +81,7 @@ export function StyleCardRail({
               ? `Merge · ${mergePhotos.length} photos`
               : style.category}
           </span>
-          <CopyPromptButton style={{ id: style.id, title: style.title }} />
+          <CopyPromptButton styleId={style.id} />
         </div>
       </div>
     </article>

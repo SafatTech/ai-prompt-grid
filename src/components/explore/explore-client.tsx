@@ -65,10 +65,9 @@ export function ExploreClient({
   pageSize,
   initialQuery,
   initialPage,
-  initialQueryString: _initialQueryString,
+  initialQueryString,
   heading: ssrHeading,
 }: Props) {
-  void _initialQueryString;
   const router = useRouter();
   const [search, setSearch] = useState(initialQuery.q);
   const [sort, setSort] = useState<SortOption>(initialQuery.sort);
@@ -91,7 +90,9 @@ export function ExploreClient({
   const [pendingCount, setPendingCount] = useState(0);
   const [loadingMore, setLoadingMore] = useState(false);
   const [listingLoading, setListingLoading] = useState(false);
-  const appliedQuery = useRef<string | null>(null);
+  // N-30: seed from the server query string so `/explore?offset=N` keeps SSR
+  // cards and does not flash empty while ExploreUrlSync re-fetches.
+  const appliedQuery = useRef<string | null>(initialQueryString);
   const loadMoreInFlight = useRef(false);
   const fetchSeq = useRef(0);
   const draftCountSeq = useRef(0);
@@ -610,7 +611,7 @@ export function ExploreClient({
             </div>
           </div>
           <h2 className="sr-only">Style results</h2>
-          {listingLoading ? (
+          {listingLoading && visible.length === 0 ? (
             <div
               className="grid grid-cols-1 items-start gap-[18px] sm:grid-cols-2 lg:grid-cols-3"
               data-testid="style-results"

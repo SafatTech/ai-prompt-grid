@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { StyleCardRail } from "@/components/style-card-rail";
+import { StyleCardRailClient } from "@/components/style-card-rail-client";
 import { StyleCardSkeleton } from "@/components/style-card-skeleton";
 import type { StyleCardData } from "@/lib/catalog/style-card-data";
 import {
@@ -276,11 +276,11 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
       >
         <div ref={gridRef} className="home-masonry home-masonry-extra">
           {extraStyles.map((style) => (
-            <StyleCardRail
+            <StyleCardRailClient
               key={style.id}
               style={style}
               variant="masonry"
-              /* Extras never eager/priority — layout-aware IO in StyleCardRail. */
+              /* Extras never eager/priority — layout-aware IO in media island. */
             />
           ))}
         </div>

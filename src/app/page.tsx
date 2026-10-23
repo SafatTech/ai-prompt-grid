@@ -21,9 +21,7 @@ import { HOME_MASONRY_PAGE_SIZE } from "@/lib/home/masonry-page-size";
 import { HOME_RAILS, NEW_STYLES_RAIL, TRENDING_RAIL } from "@/lib/home/rails";
 import { activeSeason } from "@/lib/home/seasons";
 import { listIndexableGuides } from "@/lib/guides/load";
-import { homeCriticalCss } from "@/lib/home/critical-css";
 import { absoluteUrl } from "@/lib/site-url";
-import "./home.css";
 
 const LatestGuides = dynamic(
   () => import("@/components/home/latest-guides").then((mod) => mod.LatestGuides),
@@ -106,10 +104,10 @@ export default async function HomePage() {
 
   const seasonStyleCount = seasonMatched.length;
 
-  // Slim rail/masonry DTOs — drop note/source/height; blur only the LCP card.
-  const railOpts = { sharedBlur: true, surface: "rail" as const };
+  // Slim rail/masonry DTOs — drop note/source/height. Shared blur lives in the
+  // media client chunk (not repeated per-card RSC props). Unique blur = LCP only.
+  const railOpts = { surface: "rail" as const };
   const trendingCards = toStyleCardDataList(trending, railOpts);
-  // New styles: shared blur only, no unique blur / copy prompts (HTML budget).
   const newestCards = toStyleCardDataList(newest, railOpts);
   const couplesCards = toStyleCardDataList(couples, railOpts);
   const familyCards = toStyleCardDataList(family, railOpts);
@@ -117,7 +115,6 @@ export default async function HomePage() {
   const trendsCards = toStyleCardDataList(trends, railOpts);
   const exploreCards = toStyleCardDataList(explorePage1.styles, {
     blurCount: 1,
-    sharedBlur: true,
     surface: "rail",
   });
 
@@ -139,12 +136,7 @@ export default async function HomePage() {
 
   return (
     <div className="home-page">
-      {/* Inline hero/shell CSS so h1 LCP is not blocked on the full home.css sheet. */}
-      <style
-        dangerouslySetInnerHTML={{
-          __html: homeCriticalCss(),
-        }}
-      />
+      {/* home.css is @import'd from globals.css — one app stylesheet for `/`. */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(trendingJsonLd) }}
