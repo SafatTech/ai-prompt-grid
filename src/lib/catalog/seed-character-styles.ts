@@ -182,35 +182,6 @@ const characters: CharacterSeed[] = [
     template: "Edit the uploaded portrait into a high-fashion neon night street editorial. Use the main person in the source image as the {{subject}}. Follow the selected source-preservation settings: preserve their {{preserve}}. Keep the person exactly recognizable as the uploaded person: same face shape, eyes, nose, lips, eyebrows, hairstyle and hairline, hair color, any beard, glasses, or head covering, apparent age, and exact skin tone; do not lighten the skin, change ethnicity, de-age, age up, slim, beautify, or replace the face. Make it a cinematic high-resolution photograph with natural skin texture, detailed costume materials, and believable depth of field. If clothing is not preserved, dress them in layered original streetwear: an oversized cropped jacket over a long tee, wide cargo trousers and chunky plain sneakers, with no logos. If pose is not preserved, show them mid-stride toward the camera, jacket swinging open, one foot splashing a puddle that sprays glittering droplets. Light them with pink neon from one side and cyan from the other, light rain streaks, soft motion blur in the background and a cinematic lens flare. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair and clothing. Show natural hands with five fingers each. Do not add any text, lettering, numbers, or watermarks. Do not add any people or creatures beyond those described. No brand names, logos, emblems, franchise characters, or copied costumes; every outfit, armor, prop, sign, screen, and package is original and unbranded, and any signs or screens show only abstract shapes. Keep it family-friendly: no blood, gore, wounds, or graphic violence, weapons are clearly fantasy props never aimed at the camera, and clothing stays modest. Compose for {{ratio}} without cropping important facial features.",
   },
   {
-    n: "151",
-    id: "streetwear-photoshoot-ai-photo-prompt",
-    title: "Streetwear Commercial Photography",
-    note: "Campaign-style streetwear shoot with hard flash and a jump pose",
-    description: "A free Streetwear Commercial Photography AI photo prompt to copy and paste: campaign-style streetwear shoot with hard flash and a jump pose, with your real face, skin tone and hairstyle kept.",
-    category: "Professional portraits",
-    subject: "Person",
-    intent: "New outfit or theme",
-    requirement: "One photo",
-    mood: "Bold flash pop",
-    background: "Seamless saturated orange studio backdrop with a hard shadow on the wall",
-    ratio: "4:5 Portrait",
-    keepClothing: false,
-    keepPose: false,
-    inputImageCount: 1,
-    changes: ["Oversized hoodie and cargos", "Hard flash", "Colour backdrop", "Mid-jump campaign pose"],
-    stays: ["Face and identity", "Skin tone", "Hairstyle, beard or head covering", "Apparent age"],
-    height: 340,
-    targetSourcePhoto: "One clear chest-up photo, face fully visible",
-    bestSourcePhoto: ["One person, face clearly visible and sharp", "Front or slight three-quarter angle works best", "Even daylight, no beauty filters", "Original image should not be blurry"],
-    altSource: "Young Black man with short twists in a grey t-shirt, standing on a brick-apartment sidewalk.",
-    altResult: "Man with twists frozen mid-jump in an olive oversized hoodie, brown cargo trousers and plain grey sneakers, casting a hard flash shadow on a bright orange studio backdrop.",
-    beforeFile: "streetwear-photoshoot-ai-photo-prompt-before.webp",
-    afterFile: "streetwear-photoshoot-ai-photo-prompt-after.webp",
-    resultWidth: 1200,
-    resultHeight: 1500,
-    template: "Edit the uploaded portrait into a bold streetwear campaign photo. Use the main person in the source image as the {{subject}}. Follow the selected source-preservation settings: preserve their {{preserve}}. Keep the person exactly recognizable as the uploaded person: same face shape, eyes, nose, lips, eyebrows, hairstyle and hairline, hair color, any beard, glasses, or head covering, apparent age, and exact skin tone; do not lighten the skin, change ethnicity, de-age, age up, slim, beautify, or replace the face. Make it a cinematic high-resolution photograph with natural skin texture, detailed costume materials, and believable depth of field. If clothing is not preserved, dress them in an oversized plain hoodie and loose cargo trousers in coordinated earthy tones, with plain minimal low-top canvas sneakers with no recognizable silhouette, all with no logos. If pose is not preserved, freeze them mid-jump with knees tucked and hoodie strings flying, looking straight at the camera. Light them with a hard direct flash, crisp shadows on the backdrop and punchy campaign contrast. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair and clothing. Show natural hands with five fingers each. Do not add any text, lettering, numbers, or watermarks. Do not add any people or creatures beyond those described. No brand names, logos, emblems, franchise characters, or copied costumes; every outfit, armor, prop, sign, screen, and package is original and unbranded, and any signs or screens show only abstract shapes. Keep it family-friendly: no blood, gore, wounds, or graphic violence, weapons are clearly fantasy props never aimed at the camera, and clothing stays modest. Compose for {{ratio}} without cropping important facial features.",
-  },
-  {
     n: "152",
     id: "iceberg-runway-fashion-ai-photo-prompt",
     title: "Floating Iceberg Runway",
@@ -644,37 +615,6 @@ const characters: CharacterSeed[] = [
     resultWidth: 1200,
     resultHeight: 1490,
     template: "Edit the uploaded portrait into a moody cinematic night vigilante scene. Use the main person in the source image as the {{subject}}. Follow the selected source-preservation settings: preserve their {{preserve}}. Keep the person exactly recognizable as the uploaded person: same face shape, eyes, nose, lips, eyebrows, hairstyle and hairline, hair color, any beard, glasses, or head covering, apparent age, and exact skin tone; do not lighten the skin, change ethnicity, de-age, age up, slim, beautify, or replace the face. Make it a cinematic high-resolution photograph with natural skin texture, detailed costume materials, and believable depth of field. If clothing is not preserved, dress them in original dark charcoal armor with a plain chest and a long heavy cape, no mask, no emblem and no pointed ears, so the face is fully visible. If pose is not preserved, show them standing up from a crouch on the gargoyle, cape snapping open in the wind as lightning cracks behind. Add pouring rain, rain spray off the armor, a lightning flash rim light and low rolling fog over the city. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair and clothing. Show natural hands with five fingers each. Do not add any text, lettering, numbers, or watermarks. Do not add any people or creatures beyond those described. No brand names, logos, emblems, franchise characters, or copied costumes; every outfit, armor, prop, sign, screen, and package is original and unbranded, and any signs or screens show only abstract shapes. Keep it family-friendly: no blood, gore, wounds, or graphic violence, weapons are clearly fantasy props never aimed at the camera, and clothing stays modest. Compose for {{ratio}} without cropping important facial features.",
-  },
-  {
-    n: "167",
-    id: "superhero-couple-ai-photo-prompt",
-    title: "Superhero Couple Power Pose",
-    note: "Couple back to back in matching original hero suits with energy auras",
-    description: "A free Superhero Couple Power Pose AI photo prompt to copy and paste: couple back to back in matching original hero suits with energy auras, with your real face, skin tone and hairstyle kept.",
-    category: "Cinematic",
-    subject: "Group",
-    intent: "Full scene transformation",
-    requirement: "Two photos",
-    mood: "Fiery dusk orange and teal",
-    background: "Ruined city skyline at dusk with smoke columns, floating debris and a glowing energy-charged sky",
-    ratio: "4:5 Portrait",
-    keepClothing: true,
-    keepPose: false,
-    inputImageCount: 2,
-    changes: ["Matching original hero suits", "Back-to-back power pose", "Energy auras", "Ruined skyline"],
-    stays: ["Both faces and identities", "Each skin tone and age", "Hairstyles, beards, head coverings", "Realistic relative heights"],
-    height: 340,
-    targetSourcePhoto: "Two clear photos (one per person) or one photo of you both",
-    bestSourcePhoto: ["One clear photo per person, or one photo of you both", "Faces large and sharp", "Similar light in both photos", "Original images should not be blurry"],
-    altSource: "Young man with short dark hair and stubble in a black t-shirt, smiling at an outdoor plaza.",
-    altResult: "Superhero couple in original coordinated costumes striking a power pose amid a smoky ruined city.",
-    altSecond: "Young woman in a mauve hijab and grey long-sleeve top, smiling at an outdoor shopping mall.",
-    beforeFile: "superhero-couple-ai-photo-prompt-before.webp",
-    afterFile: "superhero-couple-ai-photo-prompt-after.webp",
-    beforeBFile: "superhero-couple-ai-photo-prompt-before-b.webp",
-    resultWidth: 1200,
-    resultHeight: 1500,
-    template: "Combine the first uploaded photo and the second uploaded photo into one {{subject}} image: a superhero couple power pose. The first uploaded photo shows person A and the second uploaded photo shows person B; if one photo already shows both people, use it for both. Follow the selected source-preservation settings: preserve the {{preserve}}. Keep person A recognizable from the first uploaded photo and person B from the second uploaded photo: same face shape, features, hairstyle, hair color, any beard, glasses, or head covering, apparent age, and exact skin tone. Treat them as separate people; do not blend, swap, lighten, de-age, or replace any face. Make it a cinematic high-resolution photograph with natural skin texture, detailed costume materials, and believable depth of field. Dress them in matching original hero suits in charcoal with glowing teal panel lines and plain chests with no emblems, no masks so both faces are fully visible; keep any head covering as part of her suit. If group arrangement and pose are not preserved, show them back to back, each with one hand raised and crackling with teal energy, debris lifting off the ground around them. Keep realistic relative heights and natural, modest, family-friendly body language. Add swirling energy auras, sparks, drifting embers, smoke and a hard orange rim light with a lens flare. Apply {{mood}} color grading. Use {{background}} as the backdrop. Show natural hands with five fingers each. Do not add any text, lettering, numbers, or watermarks. Do not add any people or creatures beyond those described. No brand names, logos, emblems, franchise characters, or copied costumes; every outfit, armor, prop, sign, screen, and package is original and unbranded, and any signs or screens show only abstract shapes. Keep it family-friendly: no blood, gore, wounds, or graphic violence, weapons are clearly fantasy props never aimed at the camera, and clothing stays modest. Compose for {{ratio}} without cropping either face.",
   },
   {
     n: "168",
@@ -2310,10 +2250,10 @@ function inputRoles(count: 1 | 2): string[] {
 }
 
 /**
- * Standalone character action styles 147–222 (superhero, anime, game, fantasy,
- * sci-fi, film poster, collectible toy, cinematic fashion). No guide page.
- * Two-photo couple styles store Photo 2 as source-<n>b.webp on a second
- * example pair that shares result-<n>.webp.
+ * Standalone character action styles 147–222 minus #151 and #167 (74 total:
+ * superhero, anime, game, fantasy, sci-fi, film poster, collectible toy,
+ * cinematic fashion). No guide page. Two-photo couple styles store Photo 2 as
+ * source-<n>b.webp on a second example pair that shares result-<n>.webp.
  */
 export const seedCharacterStyles: CatalogStyle[] = characters.map((item, index) => {
   const source = asset(`source-${item.n}.png`);

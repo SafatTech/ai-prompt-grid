@@ -20,7 +20,6 @@ const FRANCHISE =
 
 const TWO_PHOTO_IDS: string[] = [
   "hand-painted-anime-picnic-couple-ai-photo-prompt",
-  "superhero-couple-ai-photo-prompt",
   "chibi-3d-couple-ai-photo-prompt",
   "anime-couple-cherry-blossoms-ai-photo-prompt",
   "sunset-city-game-loading-screen-ai-prompt",
@@ -34,19 +33,30 @@ const TWO_PHOTO_IDS: string[] = [
   "crochet-amigurumi-couple-ai-photo-prompt",
 ];
 
+/** 147–222 minus removed #151 Streetwear and #167 Superhero Couple. */
+const EXPECTED_NUMBERS = Array.from({ length: 76 }, (_, index) => String(147 + index)).filter(
+  (n) => n !== "151" && n !== "167",
+);
+
 describe("character action style pages", () => {
-  it("publishes 76 standalone styles numbered 147 through 222", () => {
-    assert.equal(seedCharacterStyles.length, 76);
+  it("publishes 74 standalone styles numbered 147 through 222 (minus 151 and 167)", () => {
+    assert.equal(EXPECTED_NUMBERS.length, 74);
+    assert.equal(seedCharacterStyles.length, 74);
     assert.ok(seedCharacterStyles.every((style) => style.status === "published"));
     assert.ok(seedCharacterStyles.every((style) => style.tool === "Gemini"));
     const numbers = seedCharacterStyles.map(
       (style) => style.source.match(/source-(\d+)\./)?.[1],
     );
-    assert.deepEqual(
-      numbers,
-      Array.from({ length: 76 }, (_, index) => String(147 + index)),
+    assert.deepEqual(numbers, EXPECTED_NUMBERS);
+    assert.equal(new Set(seedCharacterStyles.map((style) => style.id)).size, 74);
+    assert.equal(
+      seedCharacterStyles.some((style) => style.id === "streetwear-photoshoot-ai-photo-prompt"),
+      false,
     );
-    assert.equal(new Set(seedCharacterStyles.map((style) => style.id)).size, 76);
+    assert.equal(
+      seedCharacterStyles.some((style) => style.id === "superhero-couple-ai-photo-prompt"),
+      false,
+    );
   });
 
   it("keeps titles short, with no app or franchise names in any copy", () => {
@@ -109,7 +119,7 @@ describe("character action style pages", () => {
     }
   });
 
-  it("marks the 13 couple styles as two-photo merges sharing one result", () => {
+  it("marks the 12 couple styles as two-photo merges sharing one result", () => {
     const merges = seedCharacterStyles.filter(
       (style) => style.promptVariant.inputImageCount === 2,
     );
