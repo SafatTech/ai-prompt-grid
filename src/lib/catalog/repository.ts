@@ -79,8 +79,7 @@ export const listPublishedStyles = cache(async (): Promise<CatalogStyle[]> => {
       .select(STYLE_SELECT)
       .eq("status", "published")
       .order("save_count", { ascending: false })
-      .order("published_at", { ascending: false })
-      .order("slug", { ascending: true });
+      .order("published_at", { ascending: false });
 
     if (error) {
       console.warn(
@@ -96,7 +95,7 @@ export const listPublishedStyles = cache(async (): Promise<CatalogStyle[]> => {
       return [...getPublishedStyles()].sort(compareSavedDesc);
     }
 
-    // Client-side tie-break: published_at + id keep offset/exclude paging stable.
+    // Client-side tie-break covers null published_at rows PostgREST may not order stably.
     return mapped.sort(compareSavedDesc);
   } catch (err) {
     console.warn("[catalog] Unexpected catalog error; using seed fallback.", err);

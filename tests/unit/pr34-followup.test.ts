@@ -29,7 +29,7 @@ describe("PR34 follow-up: home feed soft-cap reserves (N-19 / R1)", () => {
     assert.ok(!src.includes("contain-intrinsic-size"));
 
 
-    const css = readSrc("src/app/home.css");
+    const css = readSrc("src/app/globals.css");
     assert.ok(css.includes("overflow-anchor: none"));
     assert.ok(css.includes(".home-load-more"));
     assert.ok(css.includes(".home-trust"));
@@ -87,8 +87,8 @@ describe("PR34 follow-up: mobile menu focus (N-18)", () => {
 
 describe("PR34 follow-up: tap targets not clipped (N-20 / R4)", () => {
   it("truncates title text on an inner span so the link hit area is unclipped", () => {
-    const css = readSrc("src/app/home.css");
-    const card = readSrc("src/components/style-card-rail.tsx");
+    const css = readSrc("src/app/globals.css");
+    const card = readSrc("src/components/style-card.tsx");
     assert.ok(card.includes('className="style-card-title-text"'));
     assert.ok(css.includes(".style-card-title-text"));
     const titleBlock = css.slice(
@@ -100,7 +100,7 @@ describe("PR34 follow-up: tap targets not clipped (N-20 / R4)", () => {
   });
 
   it("gives chips scroller vertical room and Pause an unclipped hit wrapper", () => {
-    const css = readSrc("src/app/home.css");
+    const css = readSrc("src/app/globals.css");
     assert.ok(css.includes("padding-block: 6px"));
     assert.ok(css.includes(".hero-wall-pause-hit"));
     const pause = readSrc("src/components/home/hero-wall-pause.tsx");
@@ -108,15 +108,16 @@ describe("PR34 follow-up: tap targets not clipped (N-20 / R4)", () => {
   });
 
   it("gives the heart a ≥44px hit area without enlarging the visible button", () => {
-    const css = readSrc("src/app/home.css");
-    const heartStart = css.indexOf(".style-card-heart::after");
-    const heartAfter = css.slice(heartStart, heartStart + 220);
+    const css = readSrc("src/app/globals.css");
+    const heartAfter = css.slice(
+      css.indexOf(".style-card-heart::after"),
+      css.indexOf(".site-logo-link::after"),
+    );
     assert.ok(heartAfter.includes("width: 44px"));
     assert.ok(heartAfter.includes("height: 44px"));
-    const save = readSrc("src/components/style-card-save-button.tsx");
-    assert.ok(save.includes("style-card-heart"));
-    assert.ok(save.includes("h-[38px] w-[38px]"));
-    const card = readSrc("src/components/style-card-rail.tsx");
+    const card = readSrc("src/components/style-card.tsx");
+    assert.ok(card.includes("style-card-heart"));
+    assert.ok(card.includes("h-[38px] w-[38px]"));
     // Article must not clip the ::after hit area.
     assert.ok(
       !card.includes(

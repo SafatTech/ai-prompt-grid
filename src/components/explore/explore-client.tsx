@@ -21,7 +21,6 @@ import {
   explorePageHref,
   exploreQueryFromFilters,
   isExplicitFirstExplorePage,
-  parseExploreOffset,
   parseExplorePage,
 } from "@/lib/catalog/explore-pages";
 import {
@@ -109,6 +108,8 @@ export function ExploreClient({
     return merged;
   }, [listing.styles, extraStyles]);
   const hasMore = visible.length < listing.matchCount;
+  const nextFetchPage =
+    listing.page + Math.ceil(extraStyles.length / Math.max(pageSize, 1)) + 1;
   const active = activeFilterEntries(filters);
   const listingQuery = exploreQueryFromFilters(filters, search, sort);
   const matchCount = listing.matchCount;
@@ -124,9 +125,8 @@ export function ExploreClient({
         router.replace(cleaned ? `/explore?${cleaned}` : "/explore", { scroll: false });
         return;
       }
-      const offset = parseExploreOffset(parsed);
       const page = parseExplorePage(parsed);
-      if (page === null && offset === null) {
+      if (page === null) {
         setListing({
           styles: [],
           matchCount: 0,
@@ -139,11 +139,7 @@ export function ExploreClient({
       }
       const query = parseExploreSearchParams(parsed);
       const params = exploreQueryToSearchParams(query);
-      if (offset !== null) {
-        params.set("offset", String(offset));
-      } else {
-        params.set("page", String(page ?? 1));
-      }
+      params.set("page", String(page));
       params.set("pageSize", String(pageSize));
       const seq = ++fetchSeq.current;
       setListingLoading(true);
@@ -155,20 +151,12 @@ export function ExploreClient({
         const data = (await res.json()) as {
           styles?: StyleCardData[];
           total?: number;
-          page?: number;
-          offset?: number;
         };
         const total = typeof data.total === "number" ? data.total : 0;
-        const resolvedPage =
-          typeof data.page === "number"
-            ? data.page
-            : offset !== null
-              ? Math.floor(offset / Math.max(pageSize, 1)) + 1
-              : (page ?? 1);
         setListing({
           styles: Array.isArray(data.styles) ? data.styles : [],
           matchCount: total,
-          page: resolvedPage,
+          page,
           heading: exploreListingHeading(),
         });
         setDraftMatchCount(total);
@@ -215,15 +203,6 @@ export function ExploreClient({
   const onUrlQueryString = useCallback(
     (next: string, focusSearch: boolean) => {
       if (appliedQuery.current !== next) {
-        // Soft-nav to `/explore?q=…` remounts via the faceted rewrite; ignore a
-        // brief empty searchParams flash so we do not snap back to SSR totals.
-        if (
-          !next &&
-          typeof window !== "undefined" &&
-          window.location.search.length > 1
-        ) {
-          return;
-        }
         appliedQuery.current = next;
         const parsed = new URLSearchParams(next);
         const query = parseExploreSearchParams(parsed);
@@ -287,9 +266,7 @@ export function ExploreClient({
     setPendingCount(pageSize);
     try {
       const params = exploreQueryToSearchParams(listingQuery);
-      // N-26: exclude already-shown ids so cached page-1 vs live page-N cannot
-      // duplicate/skip; API tops up to a full pageSize batch.
-      params.set("exclude", visible.map((style) => style.id).join(","));
+      params.set("page", String(nextFetchPage));
       params.set("pageSize", String(pageSize));
       const res = await fetch(`/api/home/explore?${params.toString()}`);
       if (!res.ok) {

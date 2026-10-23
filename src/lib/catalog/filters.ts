@@ -152,23 +152,16 @@ export function publishedAtMs(style: CatalogStyle): number {
   return Number.isFinite(t) ? t : 0;
 }
 
-/** Stable id tie-breaker so page/offset slices never shuffle across cache generations. */
-export function compareStyleIdAsc(a: CatalogStyle, b: CatalogStyle): number {
-  return a.id < b.id ? -1 : a.id > b.id ? 1 : 0;
-}
-
-/** save_count desc, then published_at desc, then id asc (N-26). */
+/** save_count desc, then published_at desc as tie-breaker. */
 export function compareSavedDesc(a: CatalogStyle, b: CatalogStyle): number {
   const bySaved = (b.saved ?? 0) - (a.saved ?? 0);
   if (bySaved !== 0) return bySaved;
-  const byPub = publishedAtMs(b) - publishedAtMs(a);
-  if (byPub !== 0) return byPub;
-  return compareStyleIdAsc(a, b);
+  return publishedAtMs(b) - publishedAtMs(a);
 }
 
 /**
  * Newest first by published_at. When dates are equal/missing, `indexB - indexA`
- * lets callers prefer later catalog order (seed reverse); id is last resort.
+ * lets callers prefer later catalog order (seed reverse).
  */
 export function compareNewestDesc(
   a: CatalogStyle,
@@ -178,8 +171,7 @@ export function compareNewestDesc(
 ): number {
   const byPub = publishedAtMs(b) - publishedAtMs(a);
   if (byPub !== 0) return byPub;
-  if (indexB !== indexA) return indexB - indexA;
-  return compareStyleIdAsc(a, b);
+  return indexB - indexA;
 }
 
 export function filterStyles(
@@ -199,9 +191,10 @@ export function filterStyles(
     return matchesSearch && matchesFilters;
   });
 
-  if (sort === "Most saved" || sort === "Trending") {
+  if (sort === "Most saved") {
     output = [...output].sort(compareSavedDesc);
-  } else if (sort === "Newest") {
+  }
+  if (sort === "Newest") {
     // Preserve input order as seed-order fallback when publishedAt is absent.
     const indexed = output.map((style, index) => ({ style, index }));
     indexed.sort((a, b) => compareNewestDesc(a.style, b.style, a.index, b.index));
