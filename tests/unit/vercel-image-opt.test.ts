@@ -81,7 +81,7 @@ describe("Vercel image optimization toggle", () => {
 
     const feed = readSrc("src/components/home/explore-feed.tsx");
     assert.ok(feed.includes("priority={index === 0}"));
-    assert.ok(feed.includes("eager={index > 0 && index < MASONRY_FIRST_ROW}"));
+    assert.ok(feed.includes("eager={index > 0 && index < HOME_MASONRY_FIRST_ROW}"));
 
     const card = readSrc("src/components/style-card.tsx");
     assert.ok(card.includes("layoutAware"));
@@ -109,7 +109,10 @@ describe("Vercel image optimization toggle", () => {
     assert.ok(!readSrc("package.json").includes("db:generate-image-variants"));
 
     const page = readSrc("src/app/page.tsx");
-    assert.ok(page.includes("pageSize: 12"));
+    assert.ok(page.includes("HOME_MASONRY_PAGE_SIZE"));
     assert.ok(page.includes('surface: "rail"'));
+    const masonrySize = readSrc("src/lib/home/masonry-page-size.ts");
+    assert.ok(masonrySize.includes("HOME_MASONRY_PAGE_SIZE = 50"));
+    assert.ok(masonrySize.includes("HOME_MASONRY_COLUMN_COUNT = 5"));
   });
 });

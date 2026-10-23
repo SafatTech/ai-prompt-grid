@@ -3,15 +3,13 @@ import Link from "next/link";
 import { AdSlot } from "@/components/ad-slot";
 import { StyleCard } from "@/components/style-card";
 import type { StyleCardData } from "@/lib/catalog/style-card-data";
+import { HOME_MASONRY_FIRST_ROW } from "@/lib/home/masonry-page-size";
 
 const ExploreLoadMore = dynamic(
   () =>
     import("@/components/home/explore-load-more").then((mod) => mod.ExploreLoadMore),
   { ssr: true },
 );
-
-/** Desktop masonry first row (5-col); mobile gets the same small eager budget. */
-const MASONRY_FIRST_ROW = 5;
 
 type Props = {
   styles: StyleCardData[];
@@ -37,10 +35,10 @@ export function ExploreFeed({ styles, total, pageSize }: Props) {
             key={style.id}
             style={style}
             variant="masonry"
-            /* Single homepage image preload (LCP). First mobile row eager; the
-               rest use layout-aware IO so CSS columns 4–5 still paint. */
+            /* Single homepage image preload (LCP). First desktop row eager;
+               remaining SSR cards stay lazy + layout-aware IO. */
             priority={index === 0}
-            eager={index > 0 && index < MASONRY_FIRST_ROW}
+            eager={index > 0 && index < HOME_MASONRY_FIRST_ROW}
           />
         ))}
       </div>

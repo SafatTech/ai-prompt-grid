@@ -17,8 +17,9 @@ type Props = {
   pageSize: number;
 };
 
-/** Soft cap for auto-appended home feed cards (SSR page + AUTO_FETCH_PAGES). */
-const AUTO_FETCH_PAGES = 2;
+/** Soft cap for auto-appended home feed cards (SSR page + AUTO_FETCH_PAGES).
+ *  One append page is enough now that HOME_MASONRY_PAGE_SIZE is 50. */
+const AUTO_FETCH_PAGES = 1;
 
 /** Hide stuck placeholders even if a fetch hangs (N-25 intermittent). */
 const PENDING_GUARD_MS = 1500;
