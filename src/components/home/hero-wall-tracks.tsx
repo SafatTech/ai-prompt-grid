@@ -7,8 +7,9 @@ import type { HeroWallImage } from "@/lib/catalog/repository";
 const COLUMN_COUNT = 6;
 const COLUMN_DURATIONS = [70, 90, 62, 84, 76, 96];
 const IMAGES_PER_COLUMN = 6;
-/** Mobile only paints 3 columns; keep sizes small so hidden cols 4–6 stay cheap if fetched. */
-const WALL_SIZES = "(max-width:699px) 34vw, (min-width:1600px) 400px, 300px";
+/** Mobile only paints 3 columns; keep sizes small so hidden cols 4–6 stay cheap if fetched.
+ * 34vw @390×2 ≈ 265 → 256/384 imageSizes (avoid 640 deviceSize). */
+const WALL_SIZES = "(max-width:699px) 32vw, (min-width:1600px) 400px, 280px";
 
 function chunkColumns(images: HeroWallImage[]): HeroWallImage[][] {
   const pool = images.length > 0 ? images : [];

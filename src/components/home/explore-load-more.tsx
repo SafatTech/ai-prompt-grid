@@ -20,6 +20,9 @@ type Props = {
 /** Soft cap for auto-appended home feed cards (SSR page + AUTO_FETCH_PAGES). */
 const AUTO_FETCH_PAGES = 2;
 
+/** First desktop masonry row — matches SSR eager budget; rest use layout IO. */
+const MASONRY_EAGER_COUNT = 5;
+
 function softCapFor(initialCount: number, total: number, pageSize: number) {
   return Math.min(total, initialCount + AUTO_FETCH_PAGES * pageSize);
 }
@@ -54,7 +57,9 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
   const page2Handled = useRef(false);
   const heightLocked = useRef(false);
   const sentinelRef = useRef<HTMLDivElement>(null);
+  const wrapRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
+  const pendingRef = useRef<HTMLDivElement>(null);
   const shown = initialCount + extraStyles.length;
   const hasMore = shown < total;
   const autoDone = autoFetches >= AUTO_FETCH_PAGES || shown >= softCap || !hasMore;
@@ -63,25 +68,30 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
   // Once the soft cap / last batch is done, drop skeletons so min-height cannot
   // keep ratcheting from empty reserved rows (N-19 @ 390).
   const remainingSlots = Math.max(0, softCap - shown);
-  const skeletons = autoDone ? 0 : remainingSlots;
+  // N-25: never park next-batch skeletons inside the CSS multi-column grid with
+  // real cards (columns fill top-down → skeletons land in cols 4–5). Render at
+  // most one in-flight page, outside the column container.
+  const skeletons =
+    autoDone || !loading ? 0 : Math.min(pageSize, remainingSlots);
 
   useLayoutEffect(() => {
-    const node = gridRef.current;
-    if (!node) return;
+    const wrap = wrapRef.current;
+    const grid = gridRef.current;
+    if (!wrap || !grid) return;
 
     if (autoDone) {
       // N-24: measure with min-height cleared so a prior soft-cap floor cannot
       // inflate the lock and leave a blank band above "Load more styles".
       if (heightLocked.current) return;
-      const height = measureMasonryContentHeight(node);
+      const height = measureMasonryContentHeight(grid);
       if (height <= 0) return;
       heightLocked.current = true;
       setGridMinHeight(height);
       return;
     }
 
-    const measured = Math.ceil(node.getBoundingClientRect().height);
-    const reserved = reserveMasonryHeight(node, remainingSlots) ?? 0;
+    const measured = Math.ceil(grid.getBoundingClientRect().height);
+    const reserved = reserveMasonryHeight(grid, remainingSlots) ?? 0;
     const next = Math.max(measured, reserved);
     if (next <= 0) return;
     setGridMinHeight((prev) => Math.max(prev ?? 0, next));
@@ -127,6 +137,7 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
     const run = () => {
       if (cancelled || page2Handled.current || inFlight.current) return;
       inFlight.current = true;
+      setLoading(true);
       void (async () => {
         try {
           const res = await fetch("/api/home/explore?page=2");
@@ -141,6 +152,7 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
           /* network blips — sentinel fetch will retry */
         } finally {
           inFlight.current = false;
+          if (!cancelled) setLoading(false);
         }
       })();
     };
@@ -200,10 +212,10 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
     // eslint-disable-next-line react-hooks/exhaustive-deps -- IO rebinds when next page / auto state changes
   }, [autoDone, nextPage, pageSize]);
 
-  // After each commit, if skeletons remain and the sentinel is near, keep
+  // After each commit, if more auto pages remain and the sentinel is near, keep
   // fetching without requiring a scroll (covers IO edge cases + idle race).
   useEffect(() => {
-    if (autoDone || skeletons === 0 || inFlight.current) return;
+    if (autoDone || remainingSlots === 0 || inFlight.current) return;
     const node = sentinelRef.current;
     if (!node) return;
     const rect = node.getBoundingClientRect();
@@ -212,33 +224,85 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
       void fetchPage(nextPage);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- intentional after batch commits
-  }, [extraStyles.length, autoDone, skeletons, nextPage]);
+  }, [extraStyles.length, autoDone, remainingSlots, nextPage]);
+
+  // N-25 safety net: if any in-flight skeleton enters the viewport, arm the
+  // next fetch (covers columns / mid-scroll cases where the sentinel is still far).
+  useEffect(() => {
+    if (autoDone || skeletons === 0) return;
+    const root = pendingRef.current;
+    if (!root) return;
+
+    let cancelled = false;
+    let retryTimer: ReturnType<typeof setTimeout> | undefined;
+
+    const tryFetch = () => {
+      if (cancelled || inFlight.current) return;
+      void fetchPage(nextPage);
+    };
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        if (!entries.some((entry) => entry.isIntersecting)) return;
+        if (inFlight.current) {
+          if (retryTimer !== undefined) clearTimeout(retryTimer);
+          retryTimer = setTimeout(tryFetch, 200);
+          return;
+        }
+        tryFetch();
+      },
+      { rootMargin: "200px 0px" },
+    );
+
+    const nodes = root.querySelectorAll('[data-testid="style-card-skeleton"]');
+    if (nodes.length === 0) {
+      io.observe(root);
+    } else {
+      nodes.forEach((node) => io.observe(node));
+    }
+
+    return () => {
+      cancelled = true;
+      io.disconnect();
+      if (retryTimer !== undefined) clearTimeout(retryTimer);
+    };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- rebind when pending batch / page changes
+  }, [autoDone, skeletons, nextPage, loading]);
 
   return (
     <>
       <div
-        ref={gridRef}
-        className="home-masonry home-masonry-extra"
-        aria-busy={skeletons > 0 || undefined}
+        ref={wrapRef}
+        className="home-masonry-extra-wrap"
+        aria-busy={loading || undefined}
         style={gridMinHeight ? { minHeight: gridMinHeight } : undefined}
       >
-        {extraStyles.map((style, index) => (
-          <StyleCard
-            key={style.id}
-            style={style}
-            variant="masonry"
-            /* Same CSS-columns lazy caveat as the SSR grid — eager the first
-               appended batch so newly swapped cards in later columns paint. */
-            eager={index < pageSize}
-          />
-        ))}
-        {Array.from({ length: skeletons }, (_, index) => (
-          <StyleCardSkeleton
-            key={`home-pending-${index}`}
-            variant="masonry"
-            index={extraStyles.length + index}
-          />
-        ))}
+        <div ref={gridRef} className="home-masonry home-masonry-extra">
+          {extraStyles.map((style, index) => (
+            <StyleCard
+              key={style.id}
+              style={style}
+              variant="masonry"
+              /* First row eager; remaining cards use layout-aware IO in StyleCard. */
+              eager={index < MASONRY_EAGER_COUNT}
+            />
+          ))}
+        </div>
+        {skeletons > 0 ? (
+          <div
+            ref={pendingRef}
+            className="home-masonry-pending"
+            data-testid="home-masonry-pending"
+          >
+            {Array.from({ length: skeletons }, (_, index) => (
+              <StyleCardSkeleton
+                key={`home-pending-${index}`}
+                variant="masonry"
+                index={extraStyles.length + index}
+              />
+            ))}
+          </div>
+        ) : null}
       </div>
       <div ref={sentinelRef} className="home-load-more" aria-live="polite">
         {hasMore ? (

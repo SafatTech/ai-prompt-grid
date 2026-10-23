@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import type { MouseEvent } from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import { CompareSlider } from "@/components/compare-slider";
 import { CopyPromptButton } from "@/components/home/copy-prompt-button";
 import { MergeBeforeAfter } from "@/components/merge-before-after";
@@ -40,6 +40,27 @@ export function StyleCard({
   const promptPreview = style.promptPreview;
   const mediaWidth = style.mediaWidth;
   const mediaHeight = style.mediaHeight;
+  // CSS columns break native loading="lazy" distance (pre-column flow). For
+  // masonry cards that are not already eager, wait for post-layout IO.
+  const layoutAware = variant === "masonry" && !priority && !eager;
+  const mediaRef = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(!layoutAware);
+
+  useEffect(() => {
+    if (!layoutAware || inView) return;
+    const node = mediaRef.current;
+    if (!node || typeof IntersectionObserver === "undefined") return;
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        setInView(true);
+        io.disconnect();
+      },
+      { rootMargin: "600px 0px" },
+    );
+    io.observe(node);
+    return () => io.disconnect();
+  }, [layoutAware, inView]);
 
   function handleSave(event: MouseEvent) {
     event.preventDefault();
@@ -57,11 +78,17 @@ export function StyleCard({
   }
 
   if (isRail) {
-    // Match CSS: masonry columns 2 @ ≤699 (≈50vw) / 236px; rails 62% @ ≤767 / 250px.
+    // Match CSS: masonry columns 2 @ ≤699 (~50vw) / 236px; rails ~50vw @390 → ≤384w @2×.
     const sizes =
       variant === "masonry"
         ? "(max-width:699px) 48vw, 236px"
-        : "(max-width:767px) 62vw, 250px";
+        : "(max-width:699px) 50vw, (max-width:767px) 55vw, 250px";
+    const mediaReady = !layoutAware || inView;
+    const mediaLoading = priority
+      ? undefined
+      : mediaReady || eager
+        ? "eager"
+        : "lazy";
 
     return (
       <article
@@ -73,60 +100,79 @@ export function StyleCard({
         data-testid={`style-card-${style.id}`}
       >
         <div
+          ref={mediaRef}
           className="style-card-rail-media relative overflow-hidden rounded-t-[var(--radius)] bg-[var(--surface-2)]"
           style={
             variant === "masonry"
-              ? { aspectRatio: `${mediaWidth} / ${mediaHeight}` }
+              ? {
+                  aspectRatio: `${mediaWidth} / ${mediaHeight}`,
+                  ...(style.resultBlur && !mediaReady
+                    ? {
+                        backgroundImage: `url(${style.resultBlur})`,
+                        backgroundSize: "cover",
+                        backgroundPosition: "center",
+                      }
+                    : null),
+                }
               : { aspectRatio: "4 / 5" }
           }
         >
-          {mergePhotos.length >= 2 && style.mergeResult ? (
-            <Link
-              href={`/styles/${style.id}`}
-              className="absolute inset-0 block"
-              aria-label={`Open ${style.title}`}
-            >
-              <MergeBeforeAfter
-                variant="card"
-                title={style.title}
-                inputs={mergePhotos}
-                result={style.mergeResult}
-                sizes={sizes}
-                priority={priority}
-                eager={eager}
-              />
-              {promptPreview ? (
-                <div className="style-card-hover-preview" aria-hidden="true">
-                  <p>{promptPreview}</p>
-                  <span>Before → After</span>
-                </div>
-              ) : null}
-            </Link>
+          {mediaReady ? (
+            mergePhotos.length >= 2 && style.mergeResult ? (
+              <Link
+                href={`/styles/${style.id}`}
+                className="absolute inset-0 block"
+                aria-label={`Open ${style.title}`}
+              >
+                <MergeBeforeAfter
+                  variant="card"
+                  title={style.title}
+                  inputs={mergePhotos}
+                  result={style.mergeResult}
+                  sizes={sizes}
+                  priority={priority}
+                  eager={eager || layoutAware}
+                />
+                {promptPreview ? (
+                  <div className="style-card-hover-preview" aria-hidden="true">
+                    <p>{promptPreview}</p>
+                    <span>Before → After</span>
+                  </div>
+                ) : null}
+              </Link>
+            ) : (
+              <Link
+                href={`/styles/${style.id}`}
+                className="absolute inset-0 block"
+                aria-label={`Open ${style.title}`}
+              >
+                <Image
+                  src={style.result}
+                  alt={`${style.title} AI photo result`}
+                  fill
+                  sizes={sizes}
+                  className="object-cover"
+                  priority={priority}
+                  loading={mediaLoading}
+                  fetchPriority={priority ? "high" : "auto"}
+                  placeholder={style.resultBlur ? "blur" : "empty"}
+                  blurDataURL={style.resultBlur}
+                />
+                {promptPreview ? (
+                  <div className="style-card-hover-preview" aria-hidden="true">
+                    <p>{promptPreview}</p>
+                    <span>Before → After</span>
+                  </div>
+                ) : null}
+              </Link>
+            )
           ) : (
             <Link
               href={`/styles/${style.id}`}
               className="absolute inset-0 block"
               aria-label={`Open ${style.title}`}
-            >
-              <Image
-                src={style.result}
-                alt={`${style.title} AI photo result`}
-                fill
-                sizes={sizes}
-                className="object-cover"
-                priority={priority}
-                loading={priority ? undefined : eager ? "eager" : "lazy"}
-                fetchPriority={priority ? "high" : "auto"}
-                placeholder={style.resultBlur ? "blur" : "empty"}
-                blurDataURL={style.resultBlur}
-              />
-              {promptPreview ? (
-                <div className="style-card-hover-preview" aria-hidden="true">
-                  <p>{promptPreview}</p>
-                  <span>Before → After</span>
-                </div>
-              ) : null}
-            </Link>
+              tabIndex={-1}
+            />
           )}
         </div>
         {/* Heart sits outside overflow:hidden media so the ≥44px hit area is not clipped (N-20). */}
