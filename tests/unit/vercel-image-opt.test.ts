@@ -12,46 +12,60 @@ function readSrc(rel: string) {
 }
 
 describe("Vercel image optimization toggle", () => {
-  it("defaults off and turns on only when NEXT_PUBLIC_VERCEL_IMAGE_OPT=1", () => {
+  it("defaults on; kill switch is NEXT_PUBLIC_VERCEL_IMAGE_OPT=0", () => {
     const prev = process.env.NEXT_PUBLIC_VERCEL_IMAGE_OPT;
     try {
       delete process.env.NEXT_PUBLIC_VERCEL_IMAGE_OPT;
-      assert.equal(isVercelImageOptEnabled(), false);
-      process.env.NEXT_PUBLIC_VERCEL_IMAGE_OPT = "0";
-      assert.equal(isVercelImageOptEnabled(), false);
+      assert.equal(isVercelImageOptEnabled(), true);
       process.env.NEXT_PUBLIC_VERCEL_IMAGE_OPT = "1";
       assert.equal(isVercelImageOptEnabled(), true);
+      process.env.NEXT_PUBLIC_VERCEL_IMAGE_OPT = "0";
+      assert.equal(isVercelImageOptEnabled(), false);
+      process.env.NEXT_PUBLIC_VERCEL_IMAGE_OPT = "false";
+      assert.equal(isVercelImageOptEnabled(), false);
     } finally {
       if (prev === undefined) delete process.env.NEXT_PUBLIC_VERCEL_IMAGE_OPT;
       else process.env.NEXT_PUBLIC_VERCEL_IMAGE_OPT = prev;
     }
   });
 
-  it("wires the custom loader to the env toggle in next.config", () => {
+  it("wires /_next/image as the only path (no custom variant loader)", () => {
     const config = readSrc("next.config.ts");
     assert.ok(config.includes("isVercelImageOptEnabled"));
-    assert.ok(config.includes('loader: "custom"'));
-    assert.ok(config.includes("supabase-image-loader.ts"));
-    assert.ok(config.includes("NEXT_PUBLIC_VERCEL_IMAGE_OPT"));
+    assert.ok(config.includes("unoptimized: !isVercelImageOptEnabled()"));
+    assert.ok(config.includes("minimumCacheTTL: 31_536_000"));
+    assert.ok(config.includes('formats: ["image/avif", "image/webp"]'));
+    assert.ok(config.includes("deviceSizes: [640, 750, 828, 1080, 1200]"));
+    assert.ok(config.includes("catalog-public/**"));
+    assert.ok(!config.includes("loader: \"custom\""));
+    assert.ok(!config.includes("supabase-image-loader"));
+    assert.ok(!config.includes("variant-manifest"));
   });
 
-
-  it("documents the Pro re-enable switch in .env.example", () => {
+  it("documents the kill switch in .env.example", () => {
     const env = readSrc(".env.example");
     assert.ok(env.includes("NEXT_PUBLIC_VERCEL_IMAGE_OPT"));
+    assert.ok(env.includes("Kill switch"));
   });
 
-  it("prefetches home gallery batches early and keeps blur inside skeletons", () => {
+  it("keeps LCP priority, early home fetch, blur skeletons, and N-24", () => {
     const home = readSrc("src/components/home/explore-load-more.tsx");
     assert.ok(home.includes('rootMargin: "1400px 0px"'));
+    assert.ok(home.includes("measureMasonryContentHeight"));
+    assert.ok(home.includes("remainingSlots"));
 
     const feed = readSrc("src/components/home/explore-feed.tsx");
     assert.ok(feed.includes("priority={index === 0}"));
     assert.ok(feed.includes("eager={index > 0 && index < 2}"));
 
+    const explore = readSrc("src/components/explore/explore-client.tsx");
+    assert.ok(explore.includes("priority={listing.page === 1 && index === 0}"));
+    assert.ok(explore.includes("eager={listing.page === 1 && index > 0 && index < 4}"));
+
     const skeleton = readSrc("src/components/style-card-skeleton.tsx");
     assert.ok(skeleton.includes("SHARED_STYLE_BLUR"));
     assert.ok(skeleton.includes("backgroundImage"));
+
+    assert.ok(!readSrc("package.json").includes("db:generate-image-variants"));
   });
 });
-

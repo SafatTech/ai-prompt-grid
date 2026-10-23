@@ -8,8 +8,6 @@ import { isVercelImageOptEnabled } from "./src/lib/images/vercel-image-opt";
 // markdown files and would otherwise drop the Guides link after publishing.
 writePublishedGuideManifest();
 
-const vercelImageOpt = isVercelImageOptEnabled();
-
 const nextConfig: NextConfig = {
   allowedDevOrigins: ["127.0.0.1", "localhost"],
   serverExternalPackages: ["sharp"],
@@ -21,24 +19,21 @@ const nextConfig: NextConfig = {
     optimizePackageImports: ["lucide-react"],
   },
   images: {
-    // Hobby (default): custom loader → pre-generated `.w{n}.webp` on Supabase /
-    // local public (no /_next/image). Pro: set NEXT_PUBLIC_VERCEL_IMAGE_OPT=1.
-    ...(vercelImageOpt
-      ? {}
-      : {
-          loader: "custom" as const,
-          loaderFile: "./src/lib/images/supabase-image-loader.ts",
-        }),
-    // Srcset ladder matches generate-image-variants.ts (360/540/720/1080).
-    // When Vercel opt is on these still cap the optimizer request widths.
-    deviceSizes: [360, 540, 720, 1080],
-    imageSizes: [360, 540],
+    // Pro default: /_next/image from original Supabase URLs. Kill switch:
+    // NEXT_PUBLIC_VERCEL_IMAGE_OPT=0 → unoptimized originals (no transforms).
+    unoptimized: !isVercelImageOptEnabled(),
     formats: ["image/avif", "image/webp"],
+    // Cache optimized variants at the edge for a year (catalog assets are immutable).
+    minimumCacheTTL: 31_536_000,
+    // Trimmed to the widths we actually render (fewer transforms + origin fetches):
+    // cards ~50–92vw @390 → ≤720–828 at 2×; heroes/guides ≤1200; no 1920/3840.
+    deviceSizes: [640, 750, 828, 1080, 1200],
+    imageSizes: [256, 384],
     remotePatterns: [
       {
         protocol: "https",
         hostname: "rbmirzmppbytorbhncxj.supabase.co",
-        pathname: "/storage/v1/object/public/**",
+        pathname: "/storage/v1/object/public/catalog-public/**",
       },
     ],
   },

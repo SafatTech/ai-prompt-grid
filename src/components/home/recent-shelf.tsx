@@ -119,6 +119,7 @@ export function RecentShelf({ catalog }: Props) {
               alt=""
               width={56}
               height={70}
+              sizes="56px"
               className="object-cover"
               loading="lazy"
             />
