@@ -85,6 +85,8 @@ function resultPriorityFlags(priority: boolean, eager = false) {
  * not compete with the result preload (mobile used to prioritize input[0]).
  */
 function inputPriorityFlags(_priority: boolean, _index: number) {
+  void _priority;
+  void _index;
   return {
     priority: false,
     highPriority: false,
