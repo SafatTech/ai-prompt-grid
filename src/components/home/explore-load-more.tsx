@@ -2,9 +2,8 @@
 
 import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { StyleCard } from "@/components/style-card";
+import { StyleCardRail } from "@/components/style-card-rail";
 import { StyleCardSkeleton } from "@/components/style-card-skeleton";
-import { homeExploreFallbackPage } from "@/lib/catalog/explore-paging";
 import type { StyleCardData } from "@/lib/catalog/style-card-data";
 import {
   measureMasonryContentHeight,
@@ -65,7 +64,6 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
   const shown = initialCount + extraStyles.length;
   const hasMore = shown < total;
   const autoDone = autoFetches >= AUTO_FETCH_PAGES || shown >= softCap || !hasMore;
-  const exploreFallbackPage = homeExploreFallbackPage(shown);
   const remainingSlots = Math.max(0, softCap - shown);
   // N-25: pending rail only while a fetch is actually running — never from a
   // queued/idle arm, and never inside the CSS multi-column grid.
@@ -278,11 +276,11 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
       >
         <div ref={gridRef} className="home-masonry home-masonry-extra">
           {extraStyles.map((style) => (
-            <StyleCard
+            <StyleCardRail
               key={style.id}
               style={style}
               variant="masonry"
-              /* Extras never eager/priority — layout-aware IO in StyleCard. */
+              /* Extras never eager/priority — layout-aware IO in StyleCardRail. */
             />
           ))}
         </div>
@@ -304,7 +302,8 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
       </div>
       <div ref={sentinelRef} className="home-load-more" aria-live="polite">
         {hasMore ? (
-          <Link href={`/explore?page=${exploreFallbackPage}`}>Load more styles</Link>
+          /* N-27: page=ceil(shown/18)+1 skipped cards; continue from offset. */
+          <Link href={`/explore?offset=${shown}`}>Load more styles</Link>
         ) : null}
         <span>
           Showing {Math.min(shown, total)} of {total}
