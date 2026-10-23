@@ -215,6 +215,15 @@ export function ExploreClient({
   const onUrlQueryString = useCallback(
     (next: string, focusSearch: boolean) => {
       if (appliedQuery.current !== next) {
+        // Soft-nav to `/explore?q=…` remounts via the faceted rewrite; ignore a
+        // brief empty searchParams flash so we do not snap back to SSR totals.
+        if (
+          !next &&
+          typeof window !== "undefined" &&
+          window.location.search.length > 1
+        ) {
+          return;
+        }
         appliedQuery.current = next;
         const parsed = new URLSearchParams(next);
         const query = parseExploreSearchParams(parsed);

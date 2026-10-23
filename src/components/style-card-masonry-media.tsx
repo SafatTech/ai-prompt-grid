@@ -90,16 +90,18 @@ export function StyleCardMasonryMedia({
             className="absolute inset-0 block"
             aria-label={`Open ${style.title}`}
           >
-            <MergeBeforeAfter
-              variant="card"
-              title={style.title}
-              inputs={mergePhotos}
-              result={style.mergeResult}
-              sizes={sizes}
-              priority={priority}
-              eager={eager}
-            />
-            {hoverPreview}
+            <>
+              <MergeBeforeAfter
+                variant="card"
+                title={style.title}
+                inputs={mergePhotos}
+                result={style.mergeResult}
+                sizes={sizes}
+                priority={priority}
+                eager={eager}
+              />
+              {hoverPreview}
+            </>
           </Link>
         ) : (
           <Link
@@ -107,19 +109,21 @@ export function StyleCardMasonryMedia({
             className="absolute inset-0 block"
             aria-label={`Open ${style.title}`}
           >
-            <Image
-              src={style.result}
-              alt={`${style.title} AI photo result`}
-              fill
-              sizes={sizes}
-              className="object-cover"
-              priority={priority}
-              loading={mediaLoading}
-              fetchPriority={priority ? "high" : "auto"}
-              placeholder={style.resultBlur ? "blur" : "empty"}
-              blurDataURL={style.resultBlur}
-            />
-            {hoverPreview}
+            <>
+              <Image
+                src={style.result}
+                alt={`${style.title} AI photo result`}
+                fill
+                sizes={sizes}
+                className="object-cover"
+                priority={priority}
+                loading={mediaLoading}
+                fetchPriority={priority ? "high" : "auto"}
+                placeholder={style.resultBlur ? "blur" : "empty"}
+                blurDataURL={style.resultBlur}
+              />
+              {hoverPreview}
+            </>
           </Link>
         )
       ) : (

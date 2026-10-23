@@ -84,7 +84,7 @@ function resultPriorityFlags(priority: boolean, eager = false) {
  * Style-page LCP targets the result only — keep merge inputs lazy so they do
  * not compete with the result preload (mobile used to prioritize input[0]).
  */
-function inputPriorityFlags(_priority: boolean, _index: number, _eager = false) {
+function inputPriorityFlags(_priority: boolean, _index: number) {
   return {
     priority: false,
     highPriority: false,
@@ -196,7 +196,7 @@ export function MergeBeforeAfter({
                 <FrameImage
                   image={{ ...input, alt: inputAlt(input, title, index, inputs.length) }}
                   sizes={inputSizes}
-                  {...inputPriorityFlags(priority, index, eager)}
+                  {...inputPriorityFlags(priority, index)}
                   objectPosition="50% 30%"
                 />
                 <span className="mba-split__tag" aria-hidden="true">
@@ -308,7 +308,7 @@ export function MergeBeforeAfter({
                   <FrameImage
                     image={{ ...input, alt: inputAlt(input, title, index, shown.length) }}
                     sizes={inputSizes}
-                    {...inputPriorityFlags(priority, index, eager)}
+                    {...inputPriorityFlags(priority, index)}
                   />
                 </div>
                 <span className="mba-lip" aria-hidden="true">

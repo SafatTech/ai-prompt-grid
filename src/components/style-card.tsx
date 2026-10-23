@@ -1,19 +1,14 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import Link from "next/link";
 import type { MouseEvent } from "react";
+import { CompareSlider } from "@/components/compare-slider";
 import { MergeBeforeAfter } from "@/components/merge-before-after";
 import { useLibrary } from "@/components/providers/library-provider";
 import { useToast } from "@/components/providers/toast-provider";
 import { useUiModals } from "@/components/providers/ui-modal-provider";
 import type { StyleCardData } from "@/lib/catalog/style-card-data";
 import { cn } from "@/lib/utils";
-
-const CompareSlider = dynamic(
-  () => import("@/components/compare-slider").then((mod) => mod.CompareSlider),
-  { ssr: true },
-);
 
 type Props = {
   style: StyleCardData;
