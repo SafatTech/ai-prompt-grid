@@ -10,6 +10,9 @@ const ExploreLoadMore = dynamic(
   { ssr: true },
 );
 
+/** Desktop masonry first row (5-col); mobile gets the same small eager budget. */
+const MASONRY_FIRST_ROW = 5;
+
 type Props = {
   styles: StyleCardData[];
   total: number;
@@ -34,12 +37,10 @@ export function ExploreFeed({ styles, total, pageSize }: Props) {
             key={style.id}
             style={style}
             variant="masonry"
-            /* First card owns LCP. Eager only the first desktop row (~5); the
-               rest use layout-aware IntersectionObserver in StyleCard so CSS
-               columns 4–5 still decode without a bottom round-trip (native
-               loading="lazy" uses pre-column flow distance and stalls). */
+            /* Single homepage image preload (LCP). First mobile row eager; the
+               rest use layout-aware IO so CSS columns 4–5 still paint. */
             priority={index === 0}
-            eager={index > 0 && index < 5}
+            eager={index > 0 && index < MASONRY_FIRST_ROW}
           />
         ))}
       </div>

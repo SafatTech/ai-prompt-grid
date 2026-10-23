@@ -39,12 +39,12 @@ export function StyleRail({ id, title, subtitle, href, styles, ranked = false }:
         tabIndex={0}
         aria-label={`${title} styles, scroll sideways`}
       >
-        {styles.map((style, index) => (
+        {styles.map((style) => (
           <StyleCard
             key={style.id}
             style={style}
             variant="rail"
-            priority={ranked && index === 0}
+            /* No priority/eager on rails — homepage keeps a single feed preload. */
           />
         ))}
       </div>

@@ -6,7 +6,7 @@
 export const EXPLORE_PAGE_SIZE = 18;
 
 /**
- * Homepage masonry uses a larger page size (24) than `/explore` (18).
+ * Homepage masonry SSR/append uses pageSize 12; `/explore` uses 18.
  * After auto-load stops, "Load more styles" must land on the first explore page
  * whose start index is ≥ shown (no repeated cards).
  */

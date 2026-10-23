@@ -4,6 +4,7 @@ import { describe, it } from "node:test";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { isVercelImageOptEnabled } from "../../src/lib/images/vercel-image-opt";
+import { nextImagePreloadUrl } from "../../src/lib/images/next-image-preload";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "../..");
 
@@ -48,25 +49,50 @@ describe("Vercel image optimization toggle", () => {
     assert.ok(env.includes("Kill switch"));
   });
 
-  it("keeps LCP priority, early home fetch, blur skeletons, and N-24", () => {
+  it("builds optimized preload URLs for guide LCP (no raw double-fetch)", () => {
+    const prev = process.env.NEXT_PUBLIC_VERCEL_IMAGE_OPT;
+    try {
+      delete process.env.NEXT_PUBLIC_VERCEL_IMAGE_OPT;
+      const url = nextImagePreloadUrl(
+        "https://rbmirzmppbytorbhncxj.supabase.co/storage/v1/object/public/catalog-public/x.webp",
+        828,
+        75,
+      );
+      assert.ok(url.startsWith("/_next/image?"));
+      assert.ok(url.includes("w=828"));
+      assert.ok(url.includes("q=75"));
+    } finally {
+      if (prev === undefined) delete process.env.NEXT_PUBLIC_VERCEL_IMAGE_OPT;
+      else process.env.NEXT_PUBLIC_VERCEL_IMAGE_OPT = prev;
+    }
+  });
+
+  it("keeps LCP priority, N-25 pending rail, and avoids eager rails", () => {
     const home = readSrc("src/components/home/explore-load-more.tsx");
     assert.ok(home.includes('rootMargin: "2400px 0px"'));
     assert.ok(home.includes("measureMasonryContentHeight"));
     assert.ok(home.includes("remainingSlots"));
-    // N-25: in-flight skeletons only, outside the multi-column grid.
     assert.ok(home.includes("home-masonry-pending"));
-    assert.ok(home.includes("autoDone || !loading ? 0"));
+    assert.ok(home.includes("autoDone || !pending ? 0"));
     assert.ok(home.includes("home-masonry-extra-wrap"));
+    assert.ok(home.includes("PENDING_GUARD_MS"));
+    assert.ok(home.includes("setPending(true)"));
+    assert.ok(home.includes("setPending(false)"));
 
     const feed = readSrc("src/components/home/explore-feed.tsx");
     assert.ok(feed.includes("priority={index === 0}"));
-    // First desktop row eager; rest use layout-aware IO (CSS columns break lazy).
-    assert.ok(feed.includes("eager={index > 0 && index < 5}"));
-    assert.ok(!feed.includes("eager={index > 0 && index < 2}"));
+    assert.ok(feed.includes("eager={index > 0 && index < MASONRY_FIRST_ROW}"));
 
     const card = readSrc("src/components/style-card.tsx");
     assert.ok(card.includes("layoutAware"));
     assert.ok(card.includes("IntersectionObserver"));
+    // #43 regression: mediaReady must not force eager on every rail card.
+    assert.ok(!card.includes("mediaReady || eager"));
+    assert.ok(card.includes('eager ? "eager" : "lazy"'));
+
+    const rail = readSrc("src/components/home/style-rail.tsx");
+    assert.ok(!rail.includes("priority="));
+    assert.ok(!rail.includes("eager="));
 
     const explore = readSrc("src/components/explore/explore-client.tsx");
     assert.ok(explore.includes("priority={listing.page === 1 && index === 0}"));
@@ -76,8 +102,14 @@ describe("Vercel image optimization toggle", () => {
     assert.ok(skeleton.includes("SHARED_STYLE_BLUR"));
     assert.ok(skeleton.includes("backgroundImage"));
 
-    assert.ok(readSrc("next.config.ts").includes("inlineCss: true"));
-    assert.ok(!readSrc("src/components/guides/guide-hero.tsx").includes("preload("));
+    // inlineCss regressed style-page TBT (~300ms) and home HTML size — keep off.
+    assert.ok(!readSrc("next.config.ts").includes("inlineCss: true"));
+    assert.ok(readSrc("src/components/guides/guide-hero.tsx").includes("preload("));
+    assert.ok(readSrc("src/components/guides/guide-hero.tsx").includes("nextImagePreloadUrl"));
     assert.ok(!readSrc("package.json").includes("db:generate-image-variants"));
+
+    const page = readSrc("src/app/page.tsx");
+    assert.ok(page.includes("pageSize: 12"));
+    assert.ok(page.includes('surface: "rail"'));
   });
 });

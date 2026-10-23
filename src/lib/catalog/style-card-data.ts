@@ -60,6 +60,11 @@ export type ToStyleCardDataOptions = {
    * Prefer false below the fold — CopyPromptButton fetches `/api/styles/[id]/prompt`.
    */
   includeCopyPrompt?: boolean;
+  /**
+   * Rail/masonry cards never read note/source/height — omit them from the RSC
+   * payload to keep homepage HTML under budget.
+   */
+  surface?: "full" | "rail";
 };
 
 export function toStyleCardData(
@@ -70,13 +75,18 @@ export function toStyleCardData(
     includeBlur = false,
     sharedBlur = false,
     includeCopyPrompt = false,
+    surface = "full",
   } = options;
+  const rail = surface === "rail";
   const defaults = defaultsForStyle(style);
   const assembled = assemblePrompt(style, defaults);
   const fullPrompt = assembled.ok ? assembled.prompt : previewPrompt(style, defaults);
   // Hover preview is a short clip — do not ship the full prompt twice in HTML.
+  const previewLimit = rail ? 96 : 140;
   const promptPreview =
-    fullPrompt.length > 140 ? `${fullPrompt.slice(0, 137).trimEnd()}…` : fullPrompt;
+    fullPrompt.length > previewLimit
+      ? `${fullPrompt.slice(0, previewLimit - 3).trimEnd()}…`
+      : fullPrompt;
   const pair =
     style.examplePairs.find((p) => p.result === style.result) ?? style.examplePairs[0];
   const mergePhotos = usesMergeStack(style) ? mergeInputPhotos(style) : [];
@@ -106,9 +116,9 @@ export function toStyleCardData(
     category: style.category,
     subject: style.subject,
     tool: style.tool,
-    note: style.note,
-    height: style.height,
-    source: style.source,
+    note: rail ? "" : style.note,
+    height: rail ? 0 : style.height,
+    source: rail ? "" : style.source,
     result: style.result,
     ...(resultBlur ? { resultBlur } : {}),
     promptPreview,

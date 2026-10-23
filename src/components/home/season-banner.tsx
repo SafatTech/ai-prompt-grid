@@ -211,6 +211,7 @@ export function SeasonBanner({
                   sizes="(max-width:699px) 50vw, 300px"
                   className="object-cover"
                   loading="lazy"
+                  fetchPriority="auto"
                   placeholder={style.resultBlur ? "blur" : "empty"}
                   blurDataURL={style.resultBlur}
                 />
@@ -286,6 +287,7 @@ export function SeasonBanner({
                     sizes="40vw"
                     className="object-cover"
                     loading="lazy"
+                    fetchPriority="auto"
                     placeholder={style.resultBlur ? "blur" : "empty"}
                     blurDataURL={style.resultBlur}
                   />
