@@ -20,7 +20,7 @@ describe("PR37 follow-up: home scroll CLS reserve (N-19)", () => {
     assert.ok(reserve.includes("sampleMasonryCardHeights"));
     assert.ok(reserve.includes("estimateMasonryColumns"));
 
-    const css = readSrc("src/app/home.css");
+    const css = readSrc("src/app/globals.css");
     const trust = css.slice(css.indexOf(".home-trust {"), css.indexOf(".home-trust-grid"));
     assert.ok(trust.includes("overflow-anchor: none"));
   });

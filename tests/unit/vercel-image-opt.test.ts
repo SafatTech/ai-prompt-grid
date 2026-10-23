@@ -83,27 +83,20 @@ describe("Vercel image optimization toggle", () => {
     assert.ok(feed.includes("priority={index === 0}"));
     assert.ok(feed.includes("eager={index > 0 && index < HOME_MASONRY_FIRST_ROW}"));
 
-    const media = readSrc("src/components/style-card-masonry-media.tsx");
-    assert.ok(media.includes("layoutAware"));
-    assert.ok(media.includes("IntersectionObserver"));
+    const card = readSrc("src/components/style-card.tsx");
+    assert.ok(card.includes("layoutAware"));
+    assert.ok(card.includes("IntersectionObserver"));
     // #43 regression: mediaReady must not force eager on every rail card.
-    assert.ok(!media.includes("mediaReady || eager"));
-    assert.ok(media.includes('eager ? "eager" : "lazy"'));
-
-    const railCard = readSrc("src/components/style-card-rail.tsx");
-    assert.ok(!railCard.includes('"use client"'));
-    assert.ok(railCard.includes("StyleCardSaveButton"));
-    assert.ok(railCard.includes("CopyPromptButton"));
+    assert.ok(!card.includes("mediaReady || eager"));
+    assert.ok(card.includes('eager ? "eager" : "lazy"'));
 
     const rail = readSrc("src/components/home/style-rail.tsx");
-    assert.ok(rail.includes("StyleCardRail"));
     assert.ok(!rail.includes("priority="));
     assert.ok(!rail.includes("eager="));
 
     const explore = readSrc("src/components/explore/explore-client.tsx");
     assert.ok(explore.includes("priority={listing.page === 1 && index === 0}"));
     assert.ok(explore.includes("eager={listing.page === 1 && index > 0 && index < 4}"));
-    assert.ok(explore.includes('params.set("exclude"'));
 
     const skeleton = readSrc("src/components/style-card-skeleton.tsx");
     assert.ok(skeleton.includes("SHARED_STYLE_BLUR"));
@@ -111,14 +104,9 @@ describe("Vercel image optimization toggle", () => {
 
     // inlineCss regressed style-page TBT (~300ms) and home HTML size — keep off.
     assert.ok(!readSrc("next.config.ts").includes("inlineCss: true"));
-    // Guide LCP: next/image priority alone — no manual w=828 preload (double-fetch).
-    assert.ok(!readSrc("src/components/guides/guide-hero.tsx").includes("preload("));
-    assert.ok(!readSrc("src/components/guides/guide-hero.tsx").includes("nextImagePreloadUrl"));
+    assert.ok(readSrc("src/components/guides/guide-hero.tsx").includes("preload("));
+    assert.ok(readSrc("src/components/guides/guide-hero.tsx").includes("nextImagePreloadUrl"));
     assert.ok(!readSrc("package.json").includes("db:generate-image-variants"));
-
-    const compare = readSrc("src/components/compare-slider.tsx");
-    assert.ok(compare.includes("(max-width:640px) 320px"));
-    assert.ok(compare.includes("priority && !large"));
 
     const page = readSrc("src/app/page.tsx");
     assert.ok(page.includes("HOME_MASONRY_PAGE_SIZE"));

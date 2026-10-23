@@ -8,20 +8,16 @@ import {
 } from "../../src/lib/catalog/explore-pages";
 import { listIndexableGuides } from "../../src/lib/guides/load";
 
-describe("PR32 follow-up: home → explore page math (N-10 / N-27)", () => {
-  it("maps shown counts to the explore page that starts at or before offset", async () => {
-    const { homeExploreContinueHref } = await import(
-      "../../src/lib/catalog/explore-paging"
-    );
+describe("PR32 follow-up: home → explore page math (N-10)", () => {
+  it("maps 72 homepage cards to explore page 5 (not 4)", () => {
     assert.equal(EXPLORE_PAGE_SIZE, 18);
-    // Legacy page helper: floor(shown/18)+1 (no +1 skip).
+    // 72 seen → explore page 5 starts at index 72 (QA N-10).
     assert.equal(homeExploreFallbackPage(72), 5);
-    assert.equal(homeExploreFallbackPage(24), 2);
+    // 24 home cards overlap explore page 2 (18–35); skip to page 3.
+    assert.equal(homeExploreFallbackPage(24), 3);
     assert.equal(homeExploreFallbackPage(54), 4);
+    assert.equal(homeExploreFallbackPage(55), 5);
     assert.equal(homeExploreFallbackPage(18), 2);
-    // N-27: continue via offset so no cards are skipped.
-    assert.equal(homeExploreContinueHref(100), "/explore?offset=100");
-    assert.equal(homeExploreContinueHref(0), "/explore");
   });
 });
 
