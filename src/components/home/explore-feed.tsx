@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { AdSlot } from "@/components/ad-slot";
-import { StyleCard } from "@/components/style-card";
+import { StyleCardRail } from "@/components/style-card-rail";
 import type { StyleCardData } from "@/lib/catalog/style-card-data";
 import { HOME_MASONRY_FIRST_ROW } from "@/lib/home/masonry-page-size";
 
@@ -31,7 +31,7 @@ export function ExploreFeed({ styles, total, pageSize }: Props) {
       </div>
       <div className="home-masonry">
         {styles.map((style, index) => (
-          <StyleCard
+          <StyleCardRail
             key={style.id}
             style={style}
             variant="masonry"

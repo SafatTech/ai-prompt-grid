@@ -1,5 +1,10 @@
 import { NextResponse } from "next/server";
-import { EXPLORE_PAGE_SIZE } from "@/lib/catalog/explore-pages";
+import {
+  EXPLORE_PAGE_SIZE,
+  parseExploreExclude,
+  parseExploreOffset,
+  parseExplorePage,
+} from "@/lib/catalog/explore-pages";
 import {
   filterStyles,
   filtersFromExploreQuery,
@@ -12,15 +17,18 @@ import { HOME_MASONRY_PAGE_SIZE } from "@/lib/home/masonry-page-size";
 /**
  * Paginated explore feed.
  * - Homepage masonry: `?page=2&pageSize=50` (page 1 is SSR'd on `/`).
- * - /explore Load more / filter changes: `?page=1&pageSize=18` plus optional filter query params.
+ * - /explore Load more: prefer `?exclude=id1,id2&pageSize=18` (top-up batch, N-26)
+ *   or `?offset=N&pageSize=18` (stable continue from home, N-27).
+ * - /explore filter changes: `?page=1&pageSize=18` plus optional filter query params.
  */
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
-  const raw = searchParams.get("page") ?? "2";
-  if (!/^[1-9]\d*$/.test(raw)) {
+  const exclude = parseExploreExclude(searchParams);
+  const offsetParam = parseExploreOffset(searchParams);
+  const pageParam = parseExplorePage(searchParams);
+  if (pageParam === null && offsetParam === null && exclude.length === 0) {
     return NextResponse.json({ error: "Invalid page" }, { status: 400 });
   }
-  const page = Number(raw);
 
   const rawPageSize = searchParams.get("pageSize");
   const hasExploreFacets =
@@ -31,6 +39,8 @@ export async function GET(request: Request) {
     searchParams.has("intent") ||
     searchParams.has("requirement") ||
     searchParams.has("tool") ||
+    searchParams.has("exclude") ||
+    searchParams.has("offset") ||
     rawPageSize === String(EXPLORE_PAGE_SIZE);
 
   if (hasExploreFacets) {
@@ -40,21 +50,46 @@ export async function GET(request: Request) {
         : EXPLORE_PAGE_SIZE;
     const query = parseExploreSearchParams(searchParams);
     const styles = await listPublishedStyles();
-    const matches = filterStyles(
+    let matches = filterStyles(
       styles,
       filtersFromExploreQuery(query),
       query.q,
       query.sort,
     );
-    const start = (page - 1) * pageSize;
+    const total = matches.length;
+
+    if (exclude.length > 0) {
+      const excluded = new Set(exclude);
+      matches = matches.filter((style) => !excluded.has(style.id));
+      // Top up to a full batch of unseen styles (N-26).
+      const batch = matches.slice(0, pageSize);
+      return NextResponse.json(
+        {
+          styles: toStyleCardDataList(batch, { sharedBlur: true }),
+          page: 1,
+          pageSize,
+          offset: exclude.length,
+          total,
+        },
+        {
+          headers: {
+            "Cache-Control": "public, s-maxage=60, stale-while-revalidate=300",
+          },
+        },
+      );
+    }
+
+    const offset = offsetParam ?? Math.max(0, ((pageParam ?? 1) - 1) * pageSize);
+    const page = pageParam ?? Math.floor(offset / pageSize) + 1;
     return NextResponse.json(
       {
-        styles: toStyleCardDataList(matches.slice(start, start + pageSize), {
+        styles: toStyleCardDataList(matches.slice(offset, offset + pageSize), {
           sharedBlur: true,
         }),
         page,
         pageSize,
-        total: matches.length,
+        offset,
+        total,
       },
       {
         headers: {
@@ -64,6 +99,7 @@ export async function GET(request: Request) {
     );
   }
 
+  const page = pageParam ?? 2;
   if (page < 2) {
     return NextResponse.json(
       { error: "Use SSR page 1 on the homepage or /explore" },

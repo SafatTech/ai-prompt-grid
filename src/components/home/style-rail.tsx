@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { RailArrows } from "@/components/home/rail-arrows";
-import { StyleCard } from "@/components/style-card";
+import { StyleCardRail } from "@/components/style-card-rail";
 import type { StyleCardData } from "@/lib/catalog/style-card-data";
 
 type Props = {
@@ -40,7 +40,7 @@ export function StyleRail({ id, title, subtitle, href, styles, ranked = false }:
         aria-label={`${title} styles, scroll sideways`}
       >
         {styles.map((style) => (
-          <StyleCard
+          <StyleCardRail
             key={style.id}
             style={style}
             variant="rail"
