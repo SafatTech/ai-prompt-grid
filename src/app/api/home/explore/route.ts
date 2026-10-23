@@ -8,11 +8,12 @@ import {
 import { listExploreFeed, listPublishedStyles } from "@/lib/catalog/repository";
 import { toStyleCardDataList } from "@/lib/catalog/style-card-data";
 
-const HOME_PAGE_SIZE = 24;
+/** Default homepage append size (SSR page 1 uses the same via `?pageSize=`). */
+const HOME_PAGE_SIZE = 12;
 
 /**
  * Paginated explore feed.
- * - Homepage masonry: `?page=2` (pageSize 24). Page 1 is SSR'd on `/`.
+ * - Homepage masonry: `?page=2&pageSize=12` (page 1 is SSR'd on `/`).
  * - /explore Load more / filter changes: `?page=1&pageSize=18` plus optional filter query params.
  */
 export async function GET(request: Request) {
@@ -72,10 +73,17 @@ export async function GET(request: Request) {
     );
   }
 
-  const feed = await listExploreFeed({ page, pageSize: HOME_PAGE_SIZE });
+  const homePageSize =
+    rawPageSize && /^[1-9]\d*$/.test(rawPageSize)
+      ? Math.min(Number(rawPageSize), 48)
+      : HOME_PAGE_SIZE;
+  const feed = await listExploreFeed({ page, pageSize: homePageSize });
   return NextResponse.json(
     {
-      styles: toStyleCardDataList(feed.styles, { sharedBlur: true }),
+      styles: toStyleCardDataList(feed.styles, {
+        sharedBlur: true,
+        surface: "rail",
+      }),
       page: feed.page,
       pageSize: feed.pageSize,
       total: feed.total,

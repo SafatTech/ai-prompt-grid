@@ -26,7 +26,7 @@ export const HOME_RAILS: HomeRailDef[] = [
     subtitle: "Mehndi, baraat, walima and everyday couple shots.",
     href: "/explore?q=couple",
     q: "couple",
-    limit: 10,
+    limit: 8,
   },
   {
     id: "family-eid",
@@ -34,7 +34,7 @@ export const HOME_RAILS: HomeRailDef[] = [
     subtitle: "Merge family photos, Eid frames and birthdays.",
     href: "/explore?q=family",
     q: "family",
-    limit: 10,
+    limit: 8,
   },
   {
     id: "professional",
@@ -42,7 +42,7 @@ export const HOME_RAILS: HomeRailDef[] = [
     subtitle: "LinkedIn, CV and passport photos from a selfie.",
     href: `/explore?category=${encodeURIComponent("Professional portraits")}`,
     category: "Professional portraits",
-    limit: 10,
+    limit: 8,
   },
   {
     id: "trends",
@@ -50,7 +50,7 @@ export const HOME_RAILS: HomeRailDef[] = [
     subtitle: "Anime, retro, and the looks people are trying now.",
     href: "/explore?q=trending",
     q: "anime",
-    limit: 10,
+    limit: 8,
   },
 ];
 
@@ -59,5 +59,5 @@ export const TRENDING_RAIL = {
   title: "Trending this week",
   subtitle: "Editor picks and the styles climbing the catalog.",
   href: "/explore?sort=Trending",
-  limit: 10,
+  limit: 8,
 } as const;

@@ -20,8 +20,8 @@ type Props = {
 /** Soft cap for auto-appended home feed cards (SSR page + AUTO_FETCH_PAGES). */
 const AUTO_FETCH_PAGES = 2;
 
-/** First desktop masonry row — matches SSR eager budget; rest use layout IO. */
-const MASONRY_EAGER_COUNT = 5;
+/** Hide stuck placeholders even if a fetch hangs (N-25 intermittent). */
+const PENDING_GUARD_MS = 1500;
 
 function softCapFor(initialCount: number, total: number, pageSize: number) {
   return Math.min(total, initialCount + AUTO_FETCH_PAGES * pageSize);
@@ -45,7 +45,8 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
   const softCap = softCapFor(initialCount, total, pageSize);
   const [extraStyles, setExtraStyles] = useState<StyleCardData[]>([]);
   const [nextPage, setNextPage] = useState(2);
-  const [loading, setLoading] = useState(false);
+  /** True only while a real network fetch is in flight — never from queued IO. */
+  const [pending, setPending] = useState(false);
   const [autoFetches, setAutoFetches] = useState(0);
   // While slots fill, floor min-height so batch commits cannot collapse trust /
   // load-more / newsletter (R1 / N-19). Reserve remaining slots × measured
@@ -53,9 +54,9 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
   // lands so we do not leave a blank band above "Load more" (N-24).
   const [gridMinHeight, setGridMinHeight] = useState<number | undefined>(undefined);
   const inFlight = useRef(false);
-  const page2Cache = useRef<StyleCardData[] | null>(null);
   const page2Handled = useRef(false);
   const heightLocked = useRef(false);
+  const nextPageRef = useRef(nextPage);
   const sentinelRef = useRef<HTMLDivElement>(null);
   const wrapRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
@@ -64,15 +65,15 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
   const hasMore = shown < total;
   const autoDone = autoFetches >= AUTO_FETCH_PAGES || shown >= softCap || !hasMore;
   const exploreFallbackPage = homeExploreFallbackPage(shown);
-  // Reserve aspect-ratio slots only while auto-fetch can still deliver cards.
-  // Once the soft cap / last batch is done, drop skeletons so min-height cannot
-  // keep ratcheting from empty reserved rows (N-19 @ 390).
   const remainingSlots = Math.max(0, softCap - shown);
-  // N-25: never park next-batch skeletons inside the CSS multi-column grid with
-  // real cards (columns fill top-down → skeletons land in cols 4–5). Render at
-  // most one in-flight page, outside the column container.
+  // N-25: pending rail only while a fetch is actually running — never from a
+  // queued/idle arm, and never inside the CSS multi-column grid.
   const skeletons =
-    autoDone || !loading ? 0 : Math.min(pageSize, remainingSlots);
+    autoDone || !pending ? 0 : Math.min(pageSize, Math.max(remainingSlots, 1));
+
+  useEffect(() => {
+    nextPageRef.current = nextPage;
+  }, [nextPage]);
 
   useLayoutEffect(() => {
     const wrap = wrapRef.current;
@@ -80,8 +81,6 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
     if (!wrap || !grid) return;
 
     if (autoDone) {
-      // N-24: measure with min-height cleared so a prior soft-cap floor cannot
-      // inflate the lock and leave a blank band above "Load more styles".
       if (heightLocked.current) return;
       const height = measureMasonryContentHeight(grid);
       if (height <= 0) return;
@@ -103,58 +102,37 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
     setAutoFetches((n) => n + 1);
   }
 
-  async function fetchPage(page: number) {
-    if (inFlight.current || loading) return;
-
-    if (page === 2 && page2Cache.current) {
-      const cached = page2Cache.current;
-      page2Cache.current = null;
-      page2Handled.current = true;
-      commitPage(2, cached);
-      return;
-    }
+  async function loadNext() {
+    if (inFlight.current || autoDone) return;
+    const page = nextPageRef.current;
+    if (page < 2) return;
 
     inFlight.current = true;
-    setLoading(true);
+    setPending(true);
     try {
-      const res = await fetch(`/api/home/explore?page=${page}`);
+      const res = await fetch(
+        `/api/home/explore?page=${page}&pageSize=${pageSize}`,
+      );
       if (!res.ok) return;
       const data = (await res.json()) as { styles?: StyleCardData[] };
       const styles = Array.isArray(data.styles) ? data.styles : [];
       if (page === 2) page2Handled.current = true;
-      commitPage(page, styles);
+      if (styles.length > 0) commitPage(page, styles);
+    } catch {
+      /* sentinel / visible-skeleton retry */
     } finally {
       inFlight.current = false;
-      setLoading(false);
+      setPending(false);
     }
   }
 
-  // Fetch page 2 while idle and commit as soon as it arrives (layout already
-  // reserved). Waiting for the sentinel left mobile on blur skeletons too long.
+  // Idle page-2 prefetch — pending flips only when the real fetch starts.
   useEffect(() => {
     let cancelled = false;
 
     const run = () => {
       if (cancelled || page2Handled.current || inFlight.current) return;
-      inFlight.current = true;
-      setLoading(true);
-      void (async () => {
-        try {
-          const res = await fetch("/api/home/explore?page=2");
-          if (!res.ok || cancelled) return;
-          const data = (await res.json()) as { styles?: StyleCardData[] };
-          const styles = Array.isArray(data.styles) ? data.styles : [];
-          if (cancelled || styles.length === 0) return;
-          page2Handled.current = true;
-          page2Cache.current = null;
-          commitPage(2, styles);
-        } catch {
-          /* network blips — sentinel fetch will retry */
-        } finally {
-          inFlight.current = false;
-          if (!cancelled) setLoading(false);
-        }
-      })();
+      void loadNext();
     };
 
     if (typeof requestIdleCallback === "function") {
@@ -170,8 +148,8 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
       cancelled = true;
       window.clearTimeout(timer);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- mount-only idle arm
   }, []);
-
 
   useEffect(() => {
     if (autoDone) return;
@@ -183,23 +161,19 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
 
     const tryFetch = () => {
       if (cancelled || inFlight.current) return;
-      void fetchPage(nextPage);
+      void loadNext();
     };
 
     const fetchIo = new IntersectionObserver(
       ([entry]) => {
         if (!entry?.isIntersecting) return;
         if (inFlight.current) {
-          // Idle page-2 fetch may hold inFlight; retry when it clears so we do
-          // not wait for another scroll-driven intersection (desktop cols 4–5).
           if (retryTimer !== undefined) clearTimeout(retryTimer);
           retryTimer = setTimeout(tryFetch, 200);
           return;
         }
         tryFetch();
       },
-      // Tall skeleton reserves can push the sentinel >1 viewport away on 5-col
-      // desktop — keep a generous margin so auto-fetch still arms.
       { rootMargin: "2400px 0px" },
     );
     fetchIo.observe(node);
@@ -213,7 +187,7 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
   }, [autoDone, nextPage, pageSize]);
 
   // After each commit, if more auto pages remain and the sentinel is near, keep
-  // fetching without requiring a scroll (covers IO edge cases + idle race).
+  // fetching without requiring a scroll.
   useEffect(() => {
     if (autoDone || remainingSlots === 0 || inFlight.current) return;
     const node = sentinelRef.current;
@@ -221,13 +195,31 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
     const rect = node.getBoundingClientRect();
     const viewportH = window.innerHeight || 0;
     if (rect.top <= viewportH + 2400) {
-      void fetchPage(nextPage);
+      void loadNext();
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps -- intentional after batch commits
   }, [extraStyles.length, autoDone, remainingSlots, nextPage]);
 
-  // N-25 safety net: if any in-flight skeleton enters the viewport, arm the
-  // next fetch (covers columns / mid-scroll cases where the sentinel is still far).
+  // N-25: if placeholders are visible and nothing is in flight, load immediately.
+  useEffect(() => {
+    if (autoDone || !pending || inFlight.current) return;
+    const root = pendingRef.current;
+    if (!root) return;
+
+    const visible = [...root.querySelectorAll('[data-testid="style-card-skeleton"]')].some(
+      (node) => {
+        const rect = (node as HTMLElement).getBoundingClientRect();
+        const vh = window.innerHeight || 0;
+        return rect.bottom > 0 && rect.top < vh && rect.width > 0;
+      },
+    );
+    if (visible && !inFlight.current) {
+      void loadNext();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- re-check when pending rail mounts
+  }, [autoDone, pending, skeletons, nextPage]);
+
+  // Visible-skeleton safety net while a fetch is marked pending.
   useEffect(() => {
     if (autoDone || skeletons === 0) return;
     const root = pendingRef.current;
@@ -238,7 +230,7 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
 
     const tryFetch = () => {
       if (cancelled || inFlight.current) return;
-      void fetchPage(nextPage);
+      void loadNext();
     };
 
     const io = new IntersectionObserver(
@@ -255,36 +247,41 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
     );
 
     const nodes = root.querySelectorAll('[data-testid="style-card-skeleton"]');
-    if (nodes.length === 0) {
-      io.observe(root);
-    } else {
-      nodes.forEach((node) => io.observe(node));
-    }
+    if (nodes.length === 0) io.observe(root);
+    else nodes.forEach((node) => io.observe(node));
 
     return () => {
       cancelled = true;
       io.disconnect();
       if (retryTimer !== undefined) clearTimeout(retryTimer);
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- rebind when pending batch / page changes
-  }, [autoDone, skeletons, nextPage, loading]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [autoDone, skeletons, nextPage, pending]);
+
+  // Guard: never leave grey placeholders up longer than PENDING_GUARD_MS.
+  useEffect(() => {
+    if (!pending) return;
+    const timer = window.setTimeout(() => {
+      setPending(false);
+    }, PENDING_GUARD_MS);
+    return () => window.clearTimeout(timer);
+  }, [pending]);
 
   return (
     <>
       <div
         ref={wrapRef}
         className="home-masonry-extra-wrap"
-        aria-busy={loading || undefined}
+        aria-busy={pending || undefined}
         style={gridMinHeight ? { minHeight: gridMinHeight } : undefined}
       >
         <div ref={gridRef} className="home-masonry home-masonry-extra">
-          {extraStyles.map((style, index) => (
+          {extraStyles.map((style) => (
             <StyleCard
               key={style.id}
               style={style}
               variant="masonry"
-              /* First row eager; remaining cards use layout-aware IO in StyleCard. */
-              eager={index < MASONRY_EAGER_COUNT}
+              /* Extras never eager/priority — layout-aware IO in StyleCard. */
             />
           ))}
         </div>
@@ -310,7 +307,7 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
         ) : null}
         <span>
           Showing {Math.min(shown, total)} of {total}
-          {loading ? " · loading…" : ""}
+          {pending ? " · loading…" : ""}
         </span>
       </div>
     </>

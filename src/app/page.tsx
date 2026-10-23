@@ -81,14 +81,16 @@ export default async function HomePage() {
     listTrendingStyles(TRENDING_RAIL.limit),
     listHeroWallImages(18, season?.styleSlugs ?? []),
     listStylesBySlugs(season?.styleSlugs ?? []),
+    // Cap season matches — banner only needs a short strip (+ count from this page).
     season
-      ? listStylesMatchingQuery(season.ctaCategoryQuery, 200)
+      ? listStylesMatchingQuery(season.ctaCategoryQuery, 16)
       : Promise.resolve([]),
     listStylesMatchingQuery(HOME_RAILS[0]!.q!, HOME_RAILS[0]!.limit),
     listStylesMatchingQuery(HOME_RAILS[1]!.q!, HOME_RAILS[1]!.limit),
     listStylesByCategory(HOME_RAILS[2]!.category!, HOME_RAILS[2]!.limit),
     listStylesMatchingQuery(HOME_RAILS[3]!.q!, HOME_RAILS[3]!.limit),
-    listExploreFeed({ page: 1, pageSize: 24 }),
+    // SSR first paint only — further pages load client-side (HTML budget ≤1MB).
+    listExploreFeed({ page: 1, pageSize: 12 }),
     Promise.resolve(
       [...listIndexableGuides()]
         .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0))
@@ -98,19 +100,17 @@ export default async function HomePage() {
 
   const seasonStyleCount = seasonMatched.length;
 
-  // Slim DTOs for client rails: unique blur / embedded copy text only above the fold.
-  const trendingCards = toStyleCardDataList(trending, {
-    blurCount: 4,
-    copyPromptCount: 4,
-  });
-  const couplesCards = toStyleCardDataList(couples, { sharedBlur: true });
-  const familyCards = toStyleCardDataList(family, { sharedBlur: true });
-  const professionalCards = toStyleCardDataList(professional, { sharedBlur: true });
-  const trendsCards = toStyleCardDataList(trends, { sharedBlur: true });
+  // Slim rail/masonry DTOs — drop note/source/height; blur only the LCP card.
+  const railOpts = { sharedBlur: true, surface: "rail" as const };
+  const trendingCards = toStyleCardDataList(trending, railOpts);
+  const couplesCards = toStyleCardDataList(couples, railOpts);
+  const familyCards = toStyleCardDataList(family, railOpts);
+  const professionalCards = toStyleCardDataList(professional, railOpts);
+  const trendsCards = toStyleCardDataList(trends, railOpts);
   const exploreCards = toStyleCardDataList(explorePage1.styles, {
-    // Unique blur for the first desktop masonry row only; rest share one tiny URI.
-    blurCount: 5,
+    blurCount: 1,
     sharedBlur: true,
+    surface: "rail",
   });
 
   const recentCatalog = explorePage1.styles

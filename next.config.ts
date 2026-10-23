@@ -17,9 +17,9 @@ const nextConfig: NextConfig = {
   experimental: {
     // Tree-shake lucide icon imports (how-it-works pages) without polyfill bloat.
     optimizePackageImports: ["lucide-react"],
-    // Inline CSS for first-visit FCP/LCP (Tailwind-sized). Duplicates into RSC
-    // payload on initial load; production-only.
-    inlineCss: true,
+    // inlineCss was enabled in #43 but duplicated ~globals into the RSC payload
+    // (~300ms style-page main-thread task, home HTML over 1MB). Keep external
+    // CSS; guide LCP uses an early /_next/image preload instead.
   },
   images: {
     // Pro default: /_next/image from original Supabase URLs. Kill switch:

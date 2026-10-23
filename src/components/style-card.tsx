@@ -19,35 +19,45 @@ type Props = {
   variant?: "default" | "rail" | "masonry";
   /** First above-the-fold card: eager + high fetchPriority (LCP). */
   priority?: boolean;
-  /** Eager load without high fetchPriority (e.g. /explore cards 2–4). */
+  /** Eager load without high fetchPriority (e.g. first masonry row). */
   eager?: boolean;
 };
 
-export function StyleCard({
-  style,
-  compact = false,
-  variant = "default",
-  priority = false,
-  eager = false,
-}: Props) {
+function useSaveHandlers(styleId: string) {
   const { signedIn, isSaved, toggleSave, setPendingAction } = useLibrary();
   const { toast } = useToast();
   const { openSignIn } = useUiModals();
-  const saved = isSaved(style.id);
-  const height = compact ? Math.min(style.height, 320) : style.height;
-  const mergePhotos = style.mergePhotos;
-  const isRail = variant === "rail" || variant === "masonry";
-  const promptPreview = style.promptPreview;
-  const mediaWidth = style.mediaWidth;
-  const mediaHeight = style.mediaHeight;
-  // CSS columns break native loading="lazy" distance (pre-column flow). For
-  // masonry cards that are not already eager, wait for post-layout IO.
-  const layoutAware = variant === "masonry" && !priority && !eager;
+  const saved = isSaved(styleId);
+
+  function handleSave(event: MouseEvent) {
+    event.preventDefault();
+    event.stopPropagation();
+    if (!signedIn) {
+      setPendingAction({ type: "save-style", styleId });
+      openSignIn();
+      return;
+    }
+    const nowSaved = !saved;
+    toggleSave(styleId);
+    toast(
+      nowSaved ? "Style saved to your library." : "Style removed from your library.",
+    );
+  }
+
+  return { saved, handleSave };
+}
+
+/**
+ * CSS columns break native loading="lazy" distance (pre-column flow). Mount
+ * the image only after post-layout IntersectionObserver — never force
+ * loading="eager" on rails (that regressed home to ~40 eager cards in #43).
+ */
+function useMasonryMediaGate(active: boolean) {
   const mediaRef = useRef<HTMLDivElement>(null);
-  const [inView, setInView] = useState(!layoutAware);
+  const [inView, setInView] = useState(!active);
 
   useEffect(() => {
-    if (!layoutAware || inView) return;
+    if (!active || inView) return;
     const node = mediaRef.current;
     if (!node || typeof IntersectionObserver === "undefined") return;
     const io = new IntersectionObserver(
@@ -60,22 +70,27 @@ export function StyleCard({
     );
     io.observe(node);
     return () => io.disconnect();
-  }, [layoutAware, inView]);
+  }, [active, inView]);
 
-  function handleSave(event: MouseEvent) {
-    event.preventDefault();
-    event.stopPropagation();
-    if (!signedIn) {
-      setPendingAction({ type: "save-style", styleId: style.id });
-      openSignIn();
-      return;
-    }
-    const nowSaved = !saved;
-    toggleSave(style.id);
-    toast(
-      nowSaved ? "Style saved to your library." : "Style removed from your library.",
-    );
-  }
+  return { mediaRef, mediaReady: !active || inView };
+}
+
+export function StyleCard({
+  style,
+  compact = false,
+  variant = "default",
+  priority = false,
+  eager = false,
+}: Props) {
+  const { saved, handleSave } = useSaveHandlers(style.id);
+  const height = compact ? Math.min(style.height, 320) : style.height;
+  const mergePhotos = style.mergePhotos;
+  const isRail = variant === "rail" || variant === "masonry";
+  const promptPreview = style.promptPreview;
+  const mediaWidth = style.mediaWidth;
+  const mediaHeight = style.mediaHeight;
+  const layoutAware = variant === "masonry" && !priority && !eager;
+  const { mediaRef, mediaReady } = useMasonryMediaGate(layoutAware);
 
   if (isRail) {
     // Match CSS: masonry columns 2 @ ≤699 (~50vw) / 236px; rails ~50vw @390 → ≤384w @2×.
@@ -83,12 +98,9 @@ export function StyleCard({
       variant === "masonry"
         ? "(max-width:699px) 48vw, 236px"
         : "(max-width:699px) 50vw, (max-width:767px) 55vw, 250px";
-    const mediaReady = !layoutAware || inView;
-    const mediaLoading = priority
-      ? undefined
-      : mediaReady || eager
-        ? "eager"
-        : "lazy";
+    // Only priority / explicit eager flip loading — never "mediaReady ⇒ eager"
+    // (rails always have mediaReady and were incorrectly eager in #43).
+    const mediaLoading = priority ? undefined : eager ? "eager" : "lazy";
 
     return (
       <article
@@ -131,7 +143,7 @@ export function StyleCard({
                   result={style.mergeResult}
                   sizes={sizes}
                   priority={priority}
-                  eager={eager || layoutAware}
+                  eager={eager}
                 />
                 {promptPreview ? (
                   <div className="style-card-hover-preview" aria-hidden="true">
