@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { preload } from "react-dom";
 import { RelatedStylesLazy } from "@/components/styles/related-styles-lazy";
 import { StyleDetailClient } from "@/components/styles/style-detail-client";
 import { relatedStylesFor } from "@/lib/catalog/related-styles";
@@ -10,6 +11,12 @@ import {
   stylePageDescription,
   styleSocialTitle,
 } from "@/lib/catalog/style-meta";
+import {
+  DETAIL_HERO_SIZES,
+  DETAIL_HERO_SRCSET_WIDTHS,
+  nextImagePreloadUrl,
+  nextImageSrcSet,
+} from "@/lib/images/next-image-preload";
 import { absoluteUrl } from "@/lib/site-url";
 
 /** Refresh after catalog asset edits (e.g. blur backfill) without a full redeploy. */
@@ -83,6 +90,15 @@ export default async function StyleDetailPage({
     relatedStylesFor(style.id, style.category, catalog),
     { sharedBlur: true },
   );
+  // Match CompareSlider / MergeBeforeAfter hero sizes so the preload is reused (w=640 on mobile).
+  if (style.result) {
+    preload(nextImagePreloadUrl(style.result, 640), {
+      as: "image",
+      fetchPriority: "high",
+      imageSizes: DETAIL_HERO_SIZES,
+      imageSrcSet: nextImageSrcSet(style.result, DETAIL_HERO_SRCSET_WIDTHS),
+    });
+  }
   const pageUrl = absoluteUrl(`/styles/${style.id}`);
   const jsonLd = {
     "@context": "https://schema.org",

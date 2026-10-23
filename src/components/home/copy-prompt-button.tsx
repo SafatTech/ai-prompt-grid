@@ -7,10 +7,9 @@ import { useToast } from "@/components/providers/toast-provider";
 import { cn } from "@/lib/utils";
 
 type Props = {
-  style: Pick<
-    StyleCardData,
-    "id" | "title" | "copyPrompt" | "promptVariantId" | "promptTool"
-  >;
+  /** Prefer id + title only — fetch the prompt on click to keep card RSC payloads slim. */
+  style: Pick<StyleCardData, "id" | "title"> &
+    Partial<Pick<StyleCardData, "copyPrompt" | "promptVariantId" | "promptTool">>;
   className?: string;
 };
 

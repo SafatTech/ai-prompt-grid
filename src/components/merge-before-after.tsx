@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { DETAIL_HERO_SIZES } from "@/lib/images/next-image-preload";
 import { cn } from "@/lib/utils";
 
 export type MergeImage = {
@@ -167,8 +168,8 @@ export function MergeBeforeAfter({
     sizes ??
     (variant === "card"
       ? "(max-width:699px) 25vw, 120px"
-      : // Style-page hero: 320 CSS px → 2× picks w=640 (not 750/828).
-        "(max-width:640px) 320px, (max-width:768px) 90vw, 560px");
+      : // Must match CompareSlider / style-page preload (DETAIL_HERO_SIZES).
+        DETAIL_HERO_SIZES);
   const inputSizes =
     variant === "card"
       ? "(max-width:699px) 16vw, 100px"

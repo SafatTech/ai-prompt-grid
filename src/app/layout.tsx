@@ -14,11 +14,19 @@ import "./globals.css";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
+  display: "swap",
+  preload: true,
+  // Size-adjusted fallback so the home h1 can paint before the webfont arrives.
+  adjustFontFallback: true,
 });
 
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+  display: "swap",
+  // Mono is not above-the-fold on home/guides — skip competing with LCP font.
+  preload: false,
+  adjustFontFallback: true,
 });
 
 export const metadata: Metadata = {

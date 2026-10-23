@@ -49,17 +49,17 @@ describe("Vercel image optimization toggle", () => {
     assert.ok(env.includes("Kill switch"));
   });
 
-  it("builds optimized preload URLs for guide LCP (no raw double-fetch)", () => {
+  it("builds optimized preload URLs matching next/image widths", () => {
     const prev = process.env.NEXT_PUBLIC_VERCEL_IMAGE_OPT;
     try {
       delete process.env.NEXT_PUBLIC_VERCEL_IMAGE_OPT;
       const url = nextImagePreloadUrl(
         "https://rbmirzmppbytorbhncxj.supabase.co/storage/v1/object/public/catalog-public/x.webp",
-        828,
+        640,
         75,
       );
       assert.ok(url.startsWith("/_next/image?"));
-      assert.ok(url.includes("w=828"));
+      assert.ok(url.includes("w=640"));
       assert.ok(url.includes("q=75"));
     } finally {
       if (prev === undefined) delete process.env.NEXT_PUBLIC_VERCEL_IMAGE_OPT;
@@ -111,14 +111,26 @@ describe("Vercel image optimization toggle", () => {
 
     // inlineCss regressed style-page TBT (~300ms) and home HTML size — keep off.
     assert.ok(!readSrc("next.config.ts").includes("inlineCss: true"));
-    // Guide LCP: next/image priority alone — no manual w=828 preload (double-fetch).
+    // Guide LCP: next/image priority alone — no manual preload (double-fetch).
     assert.ok(!readSrc("src/components/guides/guide-hero.tsx").includes("preload("));
     assert.ok(!readSrc("src/components/guides/guide-hero.tsx").includes("nextImagePreloadUrl"));
     assert.ok(!readSrc("package.json").includes("db:generate-image-variants"));
 
     const compare = readSrc("src/components/compare-slider.tsx");
-    assert.ok(compare.includes("(max-width:640px) 320px"));
+    assert.ok(compare.includes("DETAIL_HERO_SIZES"));
     assert.ok(compare.includes("priority && !large"));
+
+    const stylePage = readSrc("src/app/styles/[slug]/page.tsx");
+    assert.ok(stylePage.includes("preload("));
+    assert.ok(stylePage.includes("DETAIL_HERO_SIZES"));
+    assert.ok(stylePage.includes("imageSrcSet"));
+    assert.ok(stylePage.includes("nextImagePreloadUrl(style.result, 640)"));
+
+    const merge = readSrc("src/components/merge-before-after.tsx");
+    assert.ok(merge.includes("DETAIL_HERO_SIZES"));
+
+    const related = readSrc("src/components/styles/related-styles-lazy.tsx");
+    assert.ok(related.includes('rootMargin: "2000px 0px"'));
 
     const page = readSrc("src/app/page.tsx");
     assert.ok(page.includes("HOME_MASONRY_PAGE_SIZE"));

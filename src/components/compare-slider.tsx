@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { useRef, useState, type PointerEvent } from "react";
 import { track } from "@/lib/analytics";
+import { DETAIL_HERO_SIZES } from "@/lib/images/next-image-preload";
 import { cn } from "@/lib/utils";
 
 type CompareMode = "slider" | "side";
@@ -47,12 +48,12 @@ const HANDLE_HIT_PX = 28;
 /** Explore / card grid — 1-col mobile ≈ 92vw; keep ≤360 CSS px so 2× picks ≤720w. */
 const CARD_SIZES =
   "(max-width:430px) 92vw, (max-width:640px) 92vw, (max-width:1024px) 45vw, (max-width:1280px) 30vw, 302px";
+
 /**
  * Style-page hero: 320 CSS px on mobile → 2× picks deviceSize 640 (not 750/828).
- * Desktop stays ~560 CSS px.
+ * Desktop stays ~560 CSS px. Keep in lockstep with MergeBeforeAfter + page preload.
  */
-export const DETAIL_COMPARE_SIZES =
-  "(max-width:640px) 320px, (max-width:1024px) 90vw, 560px";
+export const DETAIL_COMPARE_SIZES = DETAIL_HERO_SIZES;
 const DETAIL_SIZES = DETAIL_COMPARE_SIZES;
 
 export function CompareSlider({

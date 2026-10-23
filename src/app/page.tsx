@@ -21,6 +21,7 @@ import { HOME_MASONRY_PAGE_SIZE } from "@/lib/home/masonry-page-size";
 import { HOME_RAILS, NEW_STYLES_RAIL, TRENDING_RAIL } from "@/lib/home/rails";
 import { activeSeason } from "@/lib/home/seasons";
 import { listIndexableGuides } from "@/lib/guides/load";
+import { homeCriticalCss } from "@/lib/home/critical-css";
 import { absoluteUrl } from "@/lib/site-url";
 import "./home.css";
 
@@ -138,6 +139,12 @@ export default async function HomePage() {
 
   return (
     <div className="home-page">
+      {/* Inline hero/shell CSS so h1 LCP is not blocked on the full home.css sheet. */}
+      <style
+        dangerouslySetInnerHTML={{
+          __html: homeCriticalCss(),
+        }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(trendingJsonLd) }}

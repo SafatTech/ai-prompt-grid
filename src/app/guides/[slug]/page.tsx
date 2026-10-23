@@ -25,6 +25,7 @@ import {
   resolveGuideSocialImage,
   showsDraftGuides,
 } from "@/lib/guides/prepare";
+import { toRelatedGuideCard } from "@/lib/guides/related-card";
 import { publishedGuideSlugs } from "@/lib/guides/published-slugs.generated";
 import { absoluteUrl } from "@/lib/site-url";
 
@@ -83,9 +84,11 @@ export default async function GuidePage({ params }: GuidePageProps) {
   const hero = resolveGuideDisplayHero(guide);
   const toc = extractGuideToc(guide.body);
   const readingMinutes = estimateReadingMinutes(guide.body);
+  // Slim cards only (slug/heading/…) — never pass Guide.body into the client island.
   const related = listIndexableGuides()
     .filter((item) => item.slug !== guide.slug)
-    .slice(0, 3);
+    .slice(0, 3)
+    .map(toRelatedGuideCard);
 
   const jsonLd = {
     "@context": "https://schema.org",
