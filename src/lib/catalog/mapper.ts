@@ -83,6 +83,8 @@ export type DbStyleRow = {
   target_source_photo: string;
   card_height: number;
   save_count: number;
+  published_at?: string | null;
+  created_at?: string | null;
   status: string;
   categories: DbCategory | DbCategory[] | null;
   prompt_variants: DbPromptVariant[] | null;
@@ -298,6 +300,7 @@ export function mapDbStyleToCatalog(
     note: row.summary,
     height: row.card_height || 330,
     saved: row.save_count || 0,
+    publishedAt: row.published_at ?? row.created_at ?? null,
     source: card.source,
     result: card.result,
     description: row.description,

@@ -10,6 +10,7 @@ import {
   countPublishedStyles,
   listExploreFeed,
   listHeroWallImages,
+  listNewestStyles,
   listStylesByCategory,
   listStylesBySlugs,
   listStylesMatchingQuery,
@@ -17,7 +18,7 @@ import {
 } from "@/lib/catalog/repository";
 import { toStyleCardDataList } from "@/lib/catalog/style-card-data";
 import { HOME_MASONRY_PAGE_SIZE } from "@/lib/home/masonry-page-size";
-import { HOME_RAILS, TRENDING_RAIL } from "@/lib/home/rails";
+import { HOME_RAILS, NEW_STYLES_RAIL, TRENDING_RAIL } from "@/lib/home/rails";
 import { activeSeason } from "@/lib/home/seasons";
 import { listIndexableGuides } from "@/lib/guides/load";
 import { absoluteUrl } from "@/lib/site-url";
@@ -68,6 +69,7 @@ export default async function HomePage() {
   const [
     publishedCount,
     trending,
+    newest,
     heroImages,
     seasonStyles,
     seasonMatched,
@@ -80,6 +82,7 @@ export default async function HomePage() {
   ] = await Promise.all([
     countPublishedStyles(),
     listTrendingStyles(TRENDING_RAIL.limit),
+    listNewestStyles(NEW_STYLES_RAIL.limit),
     listHeroWallImages(18, season?.styleSlugs ?? []),
     listStylesBySlugs(season?.styleSlugs ?? []),
     // Cap season matches — banner only needs a short strip (+ count from this page).
@@ -104,6 +107,8 @@ export default async function HomePage() {
   // Slim rail/masonry DTOs — drop note/source/height; blur only the LCP card.
   const railOpts = { sharedBlur: true, surface: "rail" as const };
   const trendingCards = toStyleCardDataList(trending, railOpts);
+  // New styles: shared blur only, no unique blur / copy prompts (HTML budget).
+  const newestCards = toStyleCardDataList(newest, railOpts);
   const couplesCards = toStyleCardDataList(couples, railOpts);
   const familyCards = toStyleCardDataList(family, railOpts);
   const professionalCards = toStyleCardDataList(professional, railOpts);
@@ -156,6 +161,14 @@ export default async function HomePage() {
           href={TRENDING_RAIL.href}
           styles={trendingCards}
           ranked
+        />
+
+        <StyleRail
+          id={NEW_STYLES_RAIL.id}
+          title={NEW_STYLES_RAIL.title}
+          subtitle={NEW_STYLES_RAIL.subtitle}
+          href={NEW_STYLES_RAIL.href}
+          styles={newestCards}
         />
 
         <CategoryChipsBar season={season} />

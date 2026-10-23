@@ -3,6 +3,8 @@
  * Dates use Asia/Karachi calendar days (ISO YYYY-MM-DD).
  * Movable festival dates must be checked each year.
  * Note: Eid dates below are approximate.
+ *
+ * When windows overlap, `activeSeason` prefers the shortest (most specific) match.
  */
 
 export type SeasonTheme = "amber" | "rose" | "emerald" | "indigo";
@@ -80,10 +82,160 @@ export const SEASONS: Season[] = [
     next: "Wedding season",
   },
   {
-    id: "wedding-2026",
+    id: "halloween-2026",
+    // Short window inside Diwali — activeSeason prefers the shortest match.
+    start: "2026-10-24",
+    end: "2026-10-31",
+    festivalDate: "2026-10-31",
+    theme: "indigo",
+    eyebrow: "SEASONAL · HALLOWEEN 2026",
+    heroEyebrow: "Halloween looks are live",
+    title: "Halloween portraits, ready for the night",
+    body: "Pumpkin-patch warmth, witch glow, and costume looks that still keep your real face.",
+    ctaGuide: "/guides/halloween-ai-prompts-for-selfies",
+    ctaCategoryQuery: "Halloween",
+    styleSlugs: [
+      "cozy-pumpkin-patch-portrait",
+      "recognizable-zombie-portrait",
+      "friendly-glowing-witch-portrait",
+      "elegant-gothic-vampire-portrait",
+      "skeleton-face-paint-portrait",
+    ],
+    styleLabels: {
+      "cozy-pumpkin-patch-portrait": "Pumpkin patch",
+      "recognizable-zombie-portrait": "Zombie portrait",
+      "friendly-glowing-witch-portrait": "Glowing witch",
+      "elegant-gothic-vampire-portrait": "Gothic vampire",
+      "skeleton-face-paint-portrait": "Skeleton face paint",
+    },
+    chips: [
+      { label: "Pumpkin", q: "Halloween pumpkin", icon: "sparkle" },
+      { label: "Costume", q: "Halloween", icon: "sparkle" },
+      { label: "Couple", q: "Couple", icon: "couple" },
+    ],
+    heroChip: "Halloween",
+    popularQueries: [
+      "Halloween",
+      "Couple",
+      "Family",
+      "LinkedIn",
+      "Ghibli",
+      "80s retro",
+    ],
+    next: "Diwali",
+  },
+  {
+    id: "wedding-2026-a",
     start: "2026-11-10",
-    end: "2027-02-28",
-    festivalDate: "2026-12-15",
+    end: "2026-12-14",
+    festivalDate: "2026-12-01",
+    theme: "rose",
+    eyebrow: "WEDDING SEASON · 2026–27",
+    heroEyebrow: "Shaadi season prompts are live",
+    title: "Shaadi season: mehndi, baraat, walima",
+    body: "Couple and family looks for mehndi nights, baraat mornings, and walima portraits — keep every face recognizable.",
+    ctaGuide: "/guides/pakistani-wedding-ai-photo-prompts",
+    ctaCategoryQuery: "wedding",
+    styleSlugs: [
+      "wedding-stage-merge-two-photos-prompt-gemini-couple",
+      "first-diwali-as-a-married-couple",
+      "80s-wedding-album",
+    ],
+    heroChip: "Shaadi",
+    popularQueries: [
+      "Shaadi",
+      "Couple",
+      "Walima",
+      "LinkedIn",
+      "Ghibli",
+      "80s retro",
+    ],
+    next: "Christmas",
+  },
+  {
+    id: "christmas-2026",
+    start: "2026-12-15",
+    end: "2026-12-26",
+    festivalDate: "2026-12-25",
+    theme: "rose",
+    eyebrow: "FESTIVAL COLLECTION · CHRISTMAS 2026",
+    heroEyebrow: "Christmas prompts are live",
+    title: "Christmas looks for couples, kids, and family",
+    body: "Tree nights, gift exchanges, and fireside portraits — tested prompts that keep every face true.",
+    ctaGuide: "/guides/christmas-ai-photo-prompts",
+    ctaCategoryQuery: "Christmas",
+    styleSlugs: [
+      "christmas-couple-photo-ai-prompt-decorating-the-tree",
+      "ai-christmas-photo-prompt-for-couples-gift-exchange",
+      "christmas-family-photoshoot-ai-prompt-tree-and-gifts",
+      "christmas-baby-photoshoot-ai-prompt-gift-boxes",
+      "viral-christmas-ai-photo-trend-prompt-giant-ornament",
+    ],
+    styleLabels: {
+      "christmas-couple-photo-ai-prompt-decorating-the-tree": "Decorating the tree",
+      "ai-christmas-photo-prompt-for-couples-gift-exchange": "Gift exchange",
+      "christmas-family-photoshoot-ai-prompt-tree-and-gifts": "Family by the tree",
+      "christmas-baby-photoshoot-ai-prompt-gift-boxes": "Baby & gift boxes",
+      "viral-christmas-ai-photo-trend-prompt-giant-ornament": "Giant ornament",
+    },
+    chips: [
+      { label: "Couple", q: "Christmas couple", icon: "couple" },
+      { label: "Family", q: "Christmas family", icon: "family" },
+      { label: "Kids", q: "Christmas kids", icon: "sparkle" },
+    ],
+    heroChip: "Christmas",
+    popularQueries: [
+      "Christmas",
+      "Couple",
+      "Family",
+      "LinkedIn",
+      "Ghibli",
+      "80s retro",
+    ],
+    next: "New Year",
+  },
+  {
+    id: "new-year-2027",
+    start: "2026-12-27",
+    end: "2027-01-03",
+    festivalDate: "2027-01-01",
+    theme: "indigo",
+    eyebrow: "SEASONAL · NEW YEAR 2027",
+    heroEyebrow: "New Year looks are live",
+    title: "New Year portraits for the first toast",
+    body: "Festive couple and family frames for the turn of the year — keep every face recognizable.",
+    ctaCategoryQuery: "festive",
+    styleSlugs: [
+      "christmas-couple-photo-ai-prompt-decorating-the-tree",
+      "christmas-family-photoshoot-ai-prompt-tree-and-gifts",
+      "ai-christmas-photo-prompt-for-couples-gift-exchange",
+    ],
+    styleLabels: {
+      "christmas-couple-photo-ai-prompt-decorating-the-tree": "Festive couple",
+      "christmas-family-photoshoot-ai-prompt-tree-and-gifts": "Festive family",
+      "ai-christmas-photo-prompt-for-couples-gift-exchange": "Gift moment",
+    },
+    chips: [
+      { label: "Couple", q: "Couple", icon: "couple" },
+      { label: "Family", q: "Family", icon: "family" },
+      { label: "Festive", q: "festive", icon: "sparkle" },
+    ],
+    heroChip: "Festive",
+    popularQueries: [
+      "Couple",
+      "Family",
+      "Shaadi",
+      "LinkedIn",
+      "Ghibli",
+      "80s retro",
+    ],
+    next: "Wedding season",
+  },
+  {
+    id: "wedding-2026-b",
+    start: "2027-01-04",
+    end: "2027-01-31",
+    festivalDate: "2027-01-15",
     theme: "rose",
     eyebrow: "WEDDING SEASON · 2026–27",
     heroEyebrow: "Shaadi season prompts are live",
@@ -109,8 +261,9 @@ export const SEASONS: Season[] = [
   },
   {
     id: "ramadan-eid-2027",
+    // Ends before Holi so Eid never hides the Holi window.
     start: "2027-02-01",
-    end: "2027-03-12",
+    end: "2027-03-09",
     festivalDate: "2027-03-10",
     theme: "emerald",
     eyebrow: "FESTIVAL COLLECTION · EID UL-FITR 2027",
@@ -204,6 +357,49 @@ export const SEASONS: Season[] = [
     ],
     next: "Diwali",
   },
+  {
+    id: "diwali-2027",
+    // Diwali night ~29 Oct 2027; ~4-week prep window.
+    start: "2027-10-01",
+    end: "2027-11-05",
+    festivalDate: "2027-10-29",
+    theme: "amber",
+    eyebrow: "FESTIVAL COLLECTION · DIWALI 2027",
+    heroEyebrow: "Diwali 2027 prompts are live",
+    title: "Diwali looks, ready before Oct 29",
+    body: "Diya-lit balconies, rangoli with family, and sparkler couple shots. Tested prompts that keep your real face.",
+    ctaGuide: "/guides/diwali-couple-ai-photo-editing-prompts",
+    ctaCategoryQuery: "Diwali",
+    styleSlugs: [
+      "diya-lit-balcony",
+      "finishing-the-rangoli-together",
+      "first-diwali-as-a-married-couple",
+      "golden-hour-sparkler-shot",
+      "babys-first-diwali",
+    ],
+    styleLabels: {
+      "diya-lit-balcony": "Diya-lit balcony",
+      "finishing-the-rangoli-together": "Rangoli together",
+      "first-diwali-as-a-married-couple": "First Diwali, married",
+      "golden-hour-sparkler-shot": "Golden-hour sparkler",
+      "babys-first-diwali": "Baby's first Diwali",
+    },
+    chips: [
+      { label: "Couple", q: "Diwali couple", icon: "couple" },
+      { label: "Family", q: "Diwali family", icon: "family" },
+      { label: "Rangoli", q: "Diwali rangoli", icon: "sparkle" },
+    ],
+    heroChip: "Diwali",
+    popularQueries: [
+      "Diwali couple",
+      "Shaadi",
+      "Eid family",
+      "LinkedIn",
+      "Ghibli",
+      "80s retro",
+    ],
+    next: "Wedding season",
+  },
 ];
 
 /** Fallback Popular chips when no season is active (also used by chip search tests). */
@@ -228,9 +424,29 @@ export function karachiDateString(now = new Date()): string {
   }).format(now);
 }
 
+/** Inclusive calendar-day length of a season window (Asia/Karachi ISO dates). */
+export function seasonWindowDays(season: Season): number {
+  const start = Date.parse(`${season.start}T00:00:00+05:00`);
+  const end = Date.parse(`${season.end}T00:00:00+05:00`);
+  if (!Number.isFinite(start) || !Number.isFinite(end) || end < start) return Number.POSITIVE_INFINITY;
+  return Math.round((end - start) / 86_400_000) + 1;
+}
+
+/**
+ * Active season for a Karachi calendar day.
+ * When several windows match, pick the shortest (most specific) one —
+ * e.g. Halloween inside the wider Diwali window.
+ */
 export function activeSeason(now = new Date()): Season | null {
   const today = karachiDateString(now);
-  return SEASONS.find((season) => season.start <= today && today <= season.end) ?? null;
+  const matching = SEASONS.filter(
+    (season) => season.start <= today && today <= season.end,
+  );
+  if (matching.length === 0) return null;
+  if (matching.length === 1) return matching[0]!;
+  return matching.reduce((best, season) =>
+    seasonWindowDays(season) < seasonWindowDays(best) ? season : best,
+  );
 }
 
 export function popularQueriesForSeason(season: Season | null): string[] {
