@@ -53,12 +53,20 @@ describe("Vercel image optimization toggle", () => {
     assert.ok(home.includes('rootMargin: "2400px 0px"'));
     assert.ok(home.includes("measureMasonryContentHeight"));
     assert.ok(home.includes("remainingSlots"));
+    // N-25: in-flight skeletons only, outside the multi-column grid.
+    assert.ok(home.includes("home-masonry-pending"));
+    assert.ok(home.includes("autoDone || !loading ? 0"));
+    assert.ok(home.includes("home-masonry-extra-wrap"));
 
     const feed = readSrc("src/components/home/explore-feed.tsx");
     assert.ok(feed.includes("priority={index === 0}"));
-    // Full SSR masonry page is eager — CSS columns break native lazy distance.
-    assert.ok(feed.includes("eager={index > 0}"));
+    // First desktop row eager; rest use layout-aware IO (CSS columns break lazy).
+    assert.ok(feed.includes("eager={index > 0 && index < 5}"));
     assert.ok(!feed.includes("eager={index > 0 && index < 2}"));
+
+    const card = readSrc("src/components/style-card.tsx");
+    assert.ok(card.includes("layoutAware"));
+    assert.ok(card.includes("IntersectionObserver"));
 
     const explore = readSrc("src/components/explore/explore-client.tsx");
     assert.ok(explore.includes("priority={listing.page === 1 && index === 0}"));
@@ -68,6 +76,8 @@ describe("Vercel image optimization toggle", () => {
     assert.ok(skeleton.includes("SHARED_STYLE_BLUR"));
     assert.ok(skeleton.includes("backgroundImage"));
 
+    assert.ok(readSrc("next.config.ts").includes("inlineCss: true"));
+    assert.ok(!readSrc("src/components/guides/guide-hero.tsx").includes("preload("));
     assert.ok(!readSrc("package.json").includes("db:generate-image-variants"));
   });
 });

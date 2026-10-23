@@ -1,6 +1,5 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
-import { preload } from "react-dom";
 import type { GuideDisplayHero } from "@/lib/guides/prepare";
 
 /** Full-bleed hero; desktop never needs more than ~1380 CSS px at 2×. */
@@ -25,11 +24,6 @@ export function GuideHero({
   promptsTested: boolean;
   shareActions?: ReactNode;
 }) {
-  if (hero.kind === "image") {
-    // Discover the LCP image as early as the RSC stream — before body images.
-    preload(hero.url, { as: "image", fetchPriority: "high" });
-  }
-
   return (
     <section className="guide-hero relative h-[min(86vh,820px)] min-h-[480px] w-full overflow-hidden sm:min-h-[560px]">
       {hero.kind === "image" ? (

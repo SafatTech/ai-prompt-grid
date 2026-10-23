@@ -108,7 +108,8 @@ export default async function HomePage() {
   const professionalCards = toStyleCardDataList(professional, { sharedBlur: true });
   const trendsCards = toStyleCardDataList(trends, { sharedBlur: true });
   const exploreCards = toStyleCardDataList(explorePage1.styles, {
-    blurCount: 6,
+    // Unique blur for the first desktop masonry row only; rest share one tiny URI.
+    blurCount: 5,
     sharedBlur: true,
   });
 
