@@ -47,8 +47,12 @@ const HANDLE_HIT_PX = 28;
 /** Explore / card grid — 1-col mobile ≈ 92vw; keep ≤360 CSS px so 2× picks ≤720w. */
 const CARD_SIZES =
   "(max-width:430px) 92vw, (max-width:640px) 92vw, (max-width:1024px) 45vw, (max-width:1280px) 30vw, 302px";
-/** Style-page hero and “More examples” share this so the same asset is not fetched twice. */
-export const DETAIL_COMPARE_SIZES = "(max-width:1024px) 100vw, 560px";
+/**
+ * Style-page hero: 320 CSS px on mobile → 2× picks deviceSize 640 (not 750/828).
+ * Desktop stays ~560 CSS px.
+ */
+export const DETAIL_COMPARE_SIZES =
+  "(max-width:640px) 320px, (max-width:1024px) 90vw, 560px";
 const DETAIL_SIZES = DETAIL_COMPARE_SIZES;
 
 export function CompareSlider({
@@ -199,10 +203,11 @@ export function CompareSlider({
         : "cursor-ew-resize";
 
   // Card 1: eager + high. Cards 2–4: eager only so they do not compete for LCP bandwidth.
+  // Style detail (`large`): preload only the result — source stays lazy (N mobile LCP).
   const resultHigh = priority;
-  const sourceHigh = priority;
+  const sourceHigh = priority && !large;
   const resultEager = priority || eager;
-  const sourceEager = priority || eager;
+  const sourceEager = large ? false : priority || eager;
 
   if (mode === "side") {
     return (

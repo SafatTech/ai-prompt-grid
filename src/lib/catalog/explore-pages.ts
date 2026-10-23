@@ -4,8 +4,11 @@ import type { ExploreQuery } from "@/lib/catalog/schemas";
 export {
   EXPLORE_PAGE_SIZE,
   explorePageCount,
+  homeExploreContinueHref,
   homeExploreFallbackPage,
   isExplicitFirstExplorePage,
+  parseExploreExclude,
+  parseExploreOffset,
   parseExplorePage,
 } from "@/lib/catalog/explore-paging";
 
