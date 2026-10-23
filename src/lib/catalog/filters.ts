@@ -37,6 +37,8 @@ export const SEARCH_SYNONYMS: Readonly<Record<string, readonly string[]>> = {
   august: ["family", "couple", "flag", "independence"],
   linkedin: ["headshot", "professional", "corporate", "cv"],
   headshot: ["linkedin", "professional"],
+  halloween: ["pumpkin", "witch", "vampire", "zombie", "costume", "spooky"],
+  christmas: ["festive", "holiday", "tree", "ornament", "winter"],
 };
 
 export function createEmptyFilters(): FilterState {
@@ -143,6 +145,35 @@ function matchesSearchTokens(haystack: string, tokens: string[]): boolean {
   );
 }
 
+/** Milliseconds for publishedAt; 0 when missing/invalid (seed fallback). */
+export function publishedAtMs(style: CatalogStyle): number {
+  if (!style.publishedAt) return 0;
+  const t = Date.parse(style.publishedAt);
+  return Number.isFinite(t) ? t : 0;
+}
+
+/** save_count desc, then published_at desc as tie-breaker. */
+export function compareSavedDesc(a: CatalogStyle, b: CatalogStyle): number {
+  const bySaved = (b.saved ?? 0) - (a.saved ?? 0);
+  if (bySaved !== 0) return bySaved;
+  return publishedAtMs(b) - publishedAtMs(a);
+}
+
+/**
+ * Newest first by published_at. When dates are equal/missing, `indexB - indexA`
+ * lets callers prefer later catalog order (seed reverse).
+ */
+export function compareNewestDesc(
+  a: CatalogStyle,
+  b: CatalogStyle,
+  indexA = 0,
+  indexB = 0,
+): number {
+  const byPub = publishedAtMs(b) - publishedAtMs(a);
+  if (byPub !== 0) return byPub;
+  return indexB - indexA;
+}
+
 export function filterStyles(
   styles: CatalogStyle[],
   filters: FilterState,
@@ -161,10 +192,13 @@ export function filterStyles(
   });
 
   if (sort === "Most saved") {
-    output = [...output].sort((a, b) => b.saved - a.saved);
+    output = [...output].sort(compareSavedDesc);
   }
   if (sort === "Newest") {
-    output = [...output].reverse();
+    // Preserve input order as seed-order fallback when publishedAt is absent.
+    const indexed = output.map((style, index) => ({ style, index }));
+    indexed.sort((a, b) => compareNewestDesc(a.style, b.style, a.index, b.index));
+    output = indexed.map((entry) => entry.style);
   }
   return output;
 }

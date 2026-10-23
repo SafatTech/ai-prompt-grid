@@ -19,6 +19,8 @@ describe("mapDbStyleToCatalog", () => {
       target_source_photo: "Clear selfie",
       card_height: 360,
       save_count: 486,
+      published_at: "2026-09-01T12:00:00.000Z",
+      created_at: "2026-08-01T12:00:00.000Z",
       status: "published",
       categories: { name: "Cinematic", slug: "cinematic" },
       prompt_variants: [
@@ -76,6 +78,59 @@ describe("mapDbStyleToCatalog", () => {
     assert.equal(mapped.examplePairs.length, 1);
     assert.equal(mapped.promptVariant.defaults.mood, "Warm neutral");
     assert.equal(mapped.promptVariant.limitations[0], "May soften freckles");
+    assert.equal(mapped.publishedAt, "2026-09-01T12:00:00.000Z");
+  });
+
+  it("falls back publishedAt to created_at when published_at is null", () => {
+    const mapped = mapDbStyleToCatalog({
+      id: "11111111-1111-5111-8111-111111111111",
+      slug: "fallback-created",
+      title: "Fallback",
+      summary: "Works with one clear photo",
+      description: "Turn a portrait cinematic.",
+      supported_subjects: ["Person"],
+      edit_intent: "Change lighting",
+      input_requirement: "One photo",
+      photo_requirements: { best: ["One visible face"] },
+      preservation_targets: ["Face"],
+      change_targets: ["Lighting"],
+      target_source_photo: "Clear selfie",
+      card_height: 360,
+      save_count: 10,
+      published_at: null,
+      created_at: "2026-07-15T08:00:00.000Z",
+      status: "published",
+      categories: { name: "Cinematic", slug: "cinematic" },
+      prompt_variants: [
+        {
+          id: "22222222-2222-5222-8222-222222222222",
+          tool: "ChatGPT Image",
+          mode: "Image edit",
+          input_image_count: 1,
+          input_image_roles: ["source photo"],
+          version: "1.0.0",
+          template: "Edit with {{mood}} and {{background}} for {{ratio}}.",
+          variables: {
+            defaults: {
+              mood: "Warm neutral",
+              background: "Softly blurred interior",
+              ratio: "4:5 Portrait",
+              keepClothing: true,
+              keepPose: true,
+            },
+          },
+          test_record: {
+            lastVerified: "2026-09-15",
+            limitations: [],
+          },
+          is_primary: true,
+          status: "published",
+        },
+      ],
+      style_assets: [],
+    });
+    assert.ok(mapped);
+    assert.equal(mapped.publishedAt, "2026-07-15T08:00:00.000Z");
   });
 
   it("returns null when no prompt variant exists", () => {

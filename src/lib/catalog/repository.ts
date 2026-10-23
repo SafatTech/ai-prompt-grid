@@ -1,7 +1,12 @@
 import { cache } from "react";
 import { getPublicSupabaseConfig, isSupabaseConfigured } from "@/lib/env";
 import { createPublicSupabaseClient } from "@/lib/supabase/public";
-import { createEmptyFilters, filterStyles } from "./filters";
+import {
+  compareNewestDesc,
+  compareSavedDesc,
+  createEmptyFilters,
+  filterStyles,
+} from "./filters";
 import { mapDbStyleToCatalog, type DbStyleRow } from "./mapper";
 import { getPublishedStyleById, getPublishedStyles } from "./styles";
 import type { CatalogStyle } from "./types";
@@ -33,6 +38,8 @@ const STYLE_SELECT = `
   target_source_photo,
   card_height,
   save_count,
+  published_at,
+  created_at,
   trending_rank,
   status,
   categories ( name, slug ),
@@ -60,39 +67,57 @@ function mapRows(rows: DbStyleRow[]): CatalogStyle[] {
  */
 export const listPublishedStyles = cache(async (): Promise<CatalogStyle[]> => {
   if (!isSupabaseConfigured()) {
-    return getPublishedStyles();
+    return [...getPublishedStyles()].sort(compareSavedDesc);
   }
 
   try {
     const supabase = createPublicSupabaseClient();
-    if (!supabase) return getPublishedStyles();
+    if (!supabase) return [...getPublishedStyles()].sort(compareSavedDesc);
 
     const { data, error } = await supabase
       .from("styles")
       .select(STYLE_SELECT)
       .eq("status", "published")
-      .order("save_count", { ascending: false });
+      .order("save_count", { ascending: false })
+      .order("published_at", { ascending: false });
 
     if (error) {
       console.warn(
         "[catalog] Supabase query failed; using seed fallback.",
         error.message,
       );
-      return getPublishedStyles();
+      return [...getPublishedStyles()].sort(compareSavedDesc);
     }
 
     const mapped = mapRows((data ?? []) as DbStyleRow[]);
     if (mapped.length === 0) {
       console.warn("[catalog] No published styles in database; using seed fallback.");
-      return getPublishedStyles();
+      return [...getPublishedStyles()].sort(compareSavedDesc);
     }
 
-    return mapped;
+    // Client-side tie-break covers null published_at rows PostgREST may not order stably.
+    return mapped.sort(compareSavedDesc);
   } catch (err) {
     console.warn("[catalog] Unexpected catalog error; using seed fallback.", err);
-    return getPublishedStyles();
+    return [...getPublishedStyles()].sort(compareSavedDesc);
   }
 });
+
+/**
+ * Homepage "New styles" rail (~10–12).
+ * Orders by published_at / created_at desc; seed fallback uses reverse catalog order.
+ */
+export async function listNewestStyles(limit = 12): Promise<CatalogStyle[]> {
+  const capped = Math.min(Math.max(limit, 1), 12);
+  const all = await listPublishedStyles();
+  const hasDates = all.some((style) => Boolean(style.publishedAt));
+  if (!hasDates) {
+    return [...getPublishedStyles()].reverse().slice(0, capped);
+  }
+  const indexed = all.map((style, index) => ({ style, index }));
+  indexed.sort((a, b) => compareNewestDesc(a.style, b.style, a.index, b.index));
+  return indexed.slice(0, capped).map((entry) => entry.style);
+}
 
 /**
  * Homepage trending rail (up to 10).
@@ -174,7 +199,7 @@ export async function listHeroWallImages(
     if (picked.length >= Math.min(8, limit)) break;
   }
 
-  const ranked = [...styles].sort((a, b) => (b.saved ?? 0) - (a.saved ?? 0));
+  const ranked = [...styles].sort(compareSavedDesc);
   for (const style of ranked) {
     if (!style.result || seen.has(style.id)) continue;
     picked.push(style);

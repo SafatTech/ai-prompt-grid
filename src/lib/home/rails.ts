@@ -61,3 +61,12 @@ export const TRENDING_RAIL = {
   href: "/explore?sort=Trending",
   limit: 8,
 } as const;
+
+/** Recently published styles — lazy rail, slim DTOs, no priority images. */
+export const NEW_STYLES_RAIL = {
+  id: "new-styles",
+  title: "New styles",
+  subtitle: "Fresh looks just added to the catalog.",
+  href: "/explore?sort=Newest",
+  limit: 12,
+} as const;
