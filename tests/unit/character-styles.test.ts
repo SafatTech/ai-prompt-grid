@@ -154,4 +154,58 @@ describe("character action style pages", () => {
     const data = JSON.parse(match[1]) as { styles: unknown[] };
     assert.deepEqual(data.styles, JSON.parse(JSON.stringify(characterPublishRows)));
   });
+
+  it("keeps #190 battle expression and omits expression from preserve", () => {
+    const knight = seedCharacterStyles.find(
+      (style) => style.id === "dark-fantasy-armored-knight-ai-photo-prompt",
+    );
+    assert.ok(knight);
+    assert.ok(
+      knight.promptVariant.template.includes(
+        "Give the face a strong, clearly visible battle expression",
+      ),
+    );
+    const result = assemblePrompt(knight, defaultsForStyle(knight));
+    assert.equal(result.ok, true);
+    if (!result.ok) return;
+    assert.match(result.prompt, /battle cry/);
+    assert.equal(/\bexpression\b/.test(result.prompt.replace(/battle expression[\s\S]*?neutral\./, "")), false);
+  });
+
+  it("publishes #198 as desert warrior prince with renamed slug and assets", () => {
+    const prince = seedCharacterStyles.find(
+      (style) => style.id === "desert-warrior-prince-ai-photo-prompt",
+    );
+    assert.ok(prince);
+    assert.equal(prince.title, "Desert Kingdom Warrior Prince");
+    assert.equal(
+      styleSocialTitle(prince).startsWith("Desert Kingdom Warrior Prince AI Photo Prompt"),
+      true,
+    );
+    assert.ok(prince.promptVariant.template.includes("warrior prince"));
+    assert.ok(
+      prince.promptVariant.template.includes(
+        "dress him in original desert royal armor with gold details over long flowing robes, a sash and a wrapped head scarf trailing in the wind",
+      ),
+    );
+    assert.ok(prince.promptVariant.template.includes("show him mid-spin on a dune crest"));
+    const publishRow = characterPublishRows.find(
+      (row) => row.id === "desert-warrior-prince-ai-photo-prompt",
+    );
+    assert.ok(publishRow);
+    assert.equal(
+      publishRow.beforeFile,
+      "desert-warrior-prince-ai-photo-prompt-before.webp",
+    );
+    assert.equal(
+      publishRow.afterFile,
+      "desert-warrior-prince-ai-photo-prompt-after.webp",
+    );
+    assert.equal(
+      seedCharacterStyles.some(
+        (style) => style.id === "desert-warrior-princess-ai-photo-prompt",
+      ),
+      false,
+    );
+  });
 });
