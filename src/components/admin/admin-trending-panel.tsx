@@ -3,7 +3,7 @@
 import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import type { AdminStyleRow } from "@/lib/admin/access";
-import { MAX_TRENDING } from "@/lib/admin/trending";
+import { MAX_TRENDING } from "@/lib/admin/trending-constants";
 import { useToast } from "@/components/providers/toast-provider";
 import { cn } from "@/lib/utils";
 

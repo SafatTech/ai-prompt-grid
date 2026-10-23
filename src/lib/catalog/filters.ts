@@ -1,6 +1,8 @@
 import type { CatalogStyle } from "./types";
-import { filterGroups } from "./styles";
-import { exploreQuerySchema, type ExploreQuery } from "./schemas";
+import { filterGroups } from "./filter-constants";
+import type { ExploreQuery } from "./schemas";
+
+const SORT_OPTIONS = ["Trending", "Newest", "Most saved"] as const;
 
 export type FilterState = {
   category: Set<string>;
@@ -57,17 +59,26 @@ export function filtersFromExploreQuery(query: ExploreQuery): FilterState {
   };
 }
 
+/**
+ * Parse explore URL params without zod (client-safe).
+ * Mirrors exploreQuerySchema defaults / sort allow-list.
+ */
 export function parseExploreSearchParams(params: URLSearchParams): ExploreQuery {
   const multi = (key: string) => params.getAll(key).filter(Boolean);
-  return exploreQuerySchema.parse({
-    q: params.get("q") ?? "",
-    sort: params.get("sort") ?? "Trending",
+  const q = (params.get("q") ?? "").slice(0, 120);
+  const sortRaw = params.get("sort") ?? "Trending";
+  const sort = (SORT_OPTIONS as readonly string[]).includes(sortRaw)
+    ? (sortRaw as ExploreQuery["sort"])
+    : "Trending";
+  return {
+    q,
+    sort,
     category: multi("category"),
     subject: multi("subject"),
     intent: multi("intent"),
     requirement: multi("requirement"),
     tool: multi("tool"),
-  });
+  };
 }
 
 export function exploreQueryToSearchParams(

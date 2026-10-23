@@ -1,7 +1,14 @@
 import { z } from "zod";
+import {
+  getPublicSupabaseConfig as getPublicSupabaseConfigLite,
+  isSupabaseConfigured as isSupabaseConfiguredLite,
+  type PublicSupabaseConfig,
+} from "@/lib/env-public";
+
+export type { PublicSupabaseConfig };
 
 /**
- * Shared env schema. Validated when Supabase clients are created.
+ * Shared env schema. Validated when Supabase clients are created on the server.
  * Public keys may be empty so the app can run on static seed fallback.
  */
 export const publicEnvSchema = z.object({
@@ -15,29 +22,14 @@ export const serverEnvSchema = publicEnvSchema.extend({
   SENTRY_DSN: z.string().optional(),
 });
 
-export type PublicSupabaseConfig = {
-  url: string;
-  anonKey: string;
-};
-
+/** Client-safe: no zod. Prefer this from "use client" modules. */
 export function getPublicSupabaseConfig(): PublicSupabaseConfig | null {
-  const parsed = publicEnvSchema.safeParse({
-    NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL ?? "",
-    NEXT_PUBLIC_SUPABASE_URL: process.env.NEXT_PUBLIC_SUPABASE_URL ?? "",
-    NEXT_PUBLIC_SUPABASE_ANON_KEY: process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY ?? "",
-  });
-
-  if (!parsed.success) return null;
-
-  const url = parsed.data.NEXT_PUBLIC_SUPABASE_URL;
-  const anonKey = parsed.data.NEXT_PUBLIC_SUPABASE_ANON_KEY;
-  if (!url || !anonKey) return null;
-
-  return { url, anonKey };
+  return getPublicSupabaseConfigLite();
 }
 
+/** Client-safe: no zod. Prefer this from "use client" modules. */
 export function isSupabaseConfigured(): boolean {
-  return getPublicSupabaseConfig() !== null;
+  return isSupabaseConfiguredLite();
 }
 
 export function getServiceRoleKey(): string | null {

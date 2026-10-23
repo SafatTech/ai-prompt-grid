@@ -4,11 +4,10 @@ import {
   usesMergeStack,
 } from "@/lib/catalog/merge-inputs";
 import { assemblePrompt, defaultsForStyle, previewPrompt } from "@/lib/catalog/prompts";
+import { SHARED_STYLE_BLUR } from "@/lib/catalog/shared-blur";
 import type { CatalogStyle, StyleSubject } from "@/lib/catalog/types";
 
-/** Tiny shared blur so below-fold cards avoid unique ~0.6 KB data URIs each. */
-export const SHARED_STYLE_BLUR =
-  "data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoQAAkAAUAmJQBOgB0A86YAAAD+/+1xAA==";
+export { SHARED_STYLE_BLUR } from "@/lib/catalog/shared-blur";
 
 export type StyleCardMergePhoto = {
   src: string;

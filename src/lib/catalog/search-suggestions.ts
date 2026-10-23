@@ -1,4 +1,4 @@
-import { filterGroups } from "./styles";
+import { filterGroups } from "./filter-constants";
 import type { CatalogStyle } from "./types";
 
 export type StyleSuggestionIndex = {

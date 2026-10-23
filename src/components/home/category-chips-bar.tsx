@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { categories } from "@/lib/catalog/styles";
+import { categories } from "@/lib/catalog/filter-constants";
 import type { Season } from "@/lib/home/seasons";
 
 type Props = {

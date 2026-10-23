@@ -1,19 +1,22 @@
 "use client";
 
-import { useState, type FormEvent } from "react";
+import { useEffect, useState, type FormEvent } from "react";
 import { ModalShell } from "@/components/modals/modal-shell";
 import { Button } from "@/components/ui/button";
 import { useLibrary } from "@/components/providers/library-provider";
 import { useToast } from "@/components/providers/toast-provider";
-import { assemblePrompt, defaultsForStyle } from "@/lib/catalog/prompts";
-import { getPublishedStyleById } from "@/lib/catalog/styles";
-import { isSupabaseConfigured } from "@/lib/env";
+import { isSupabaseConfigured } from "@/lib/env-public";
 import { MAX_UPLOAD_BYTES } from "@/lib/creations/constants";
 import { track } from "@/lib/analytics";
 
 type Props = {
   styleId: string;
   onClose: () => void;
+};
+
+type PromptPayload = {
+  prompt: string;
+  title?: string;
 };
 
 function previewFile(
@@ -38,18 +41,40 @@ function previewFile(
 }
 
 export function SaveResultModal({ styleId, onClose }: Props) {
-  const style = getPublishedStyleById(styleId);
   const { addCreation } = useLibrary();
   const { toast } = useToast();
   const remote = isSupabaseConfigured();
+  const [styleTitle, setStyleTitle] = useState("");
+  const [defaultPrompt, setDefaultPrompt] = useState<string | null>(null);
+  const [loadError, setLoadError] = useState(false);
   const [resultPreview, setResultPreview] = useState("");
   const [sourcePreview, setSourcePreview] = useState("");
   const [resultFile, setResultFile] = useState<File | null>(null);
   const [sourceFile, setSourceFile] = useState<File | null>(null);
   const [busy, setBusy] = useState(false);
 
-  if (!style) return null;
-  const currentStyle = style;
+  useEffect(() => {
+    let cancelled = false;
+    // Parent remounts this modal with key={styleId}, so no sync reset here.
+    void fetch(`/api/styles/${encodeURIComponent(styleId)}/prompt`)
+      .then(async (res) => {
+        if (!res.ok) throw new Error("prompt unavailable");
+        return (await res.json()) as PromptPayload;
+      })
+      .then((data) => {
+        if (cancelled) return;
+        setDefaultPrompt(data.prompt);
+        setStyleTitle(data.title?.trim() || styleId);
+      })
+      .catch(() => {
+        if (!cancelled) setLoadError(true);
+      });
+    return () => {
+      cancelled = true;
+    };
+  }, [styleId]);
+
+  if (loadError) return null;
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -57,9 +82,8 @@ export function SaveResultModal({ styleId, onClose }: Props) {
       toast("Select your transformed result first.", "error");
       return;
     }
-    const assembled = assemblePrompt(currentStyle, defaultsForStyle(currentStyle));
-    if (!assembled.ok) {
-      toast(assembled.errors[0] ?? "Could not snapshot prompt.", "error");
+    if (!defaultPrompt) {
+      toast("Could not snapshot prompt.", "error");
       return;
     }
     const form = new FormData(event.currentTarget);
@@ -68,15 +92,15 @@ export function SaveResultModal({ styleId, onClose }: Props) {
     setBusy(true);
     if (!remote) {
       track("creation_upload_started", {
-        style_id: currentStyle.id,
+        style_id: styleId,
         has_source: Boolean(sourcePreview),
       });
     }
     const result = await addCreation({
-      styleId: currentStyle.id,
-      styleName: currentStyle.title,
+      styleId,
+      styleName: styleTitle || styleId,
       notes,
-      prompt: assembled.prompt,
+      prompt: defaultPrompt,
       resultFile: resultFile ?? undefined,
       sourceFile: sourceFile,
       result: resultPreview,
@@ -113,7 +137,7 @@ export function SaveResultModal({ styleId, onClose }: Props) {
           Selected style
           <input
             readOnly
-            value={style.title}
+            value={styleTitle || "Loading…"}
             className="rounded-[10px] border border-[var(--line)] bg-[var(--surface-2)] px-3 py-2.5 text-[var(--text)]"
           />
         </label>
@@ -164,7 +188,11 @@ export function SaveResultModal({ styleId, onClose }: Props) {
           <Button type="button" variant="ghost" onClick={onClose} disabled={busy}>
             Cancel
           </Button>
-          <Button type="submit" data-testid="save-creation-submit" disabled={busy}>
+          <Button
+            type="submit"
+            data-testid="save-creation-submit"
+            disabled={busy || !defaultPrompt}
+          >
             {busy ? "Saving…" : "Save to my creations"}
           </Button>
         </div>

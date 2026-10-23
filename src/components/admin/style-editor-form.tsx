@@ -13,7 +13,7 @@ import {
   previewPrompt,
   ratioOptions,
 } from "@/lib/catalog/prompts";
-import { categories, filterGroups } from "@/lib/catalog/styles";
+import { categories, filterGroups } from "@/lib/catalog/filter-constants";
 import type { CatalogStyle } from "@/lib/catalog/types";
 import { useToast } from "@/components/providers/toast-provider";
 import { cn } from "@/lib/utils";

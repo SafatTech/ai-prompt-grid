@@ -1,7 +1,8 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { z } from "zod";
+import { MAX_TRENDING } from "@/lib/admin/trending-constants";
 
-export const MAX_TRENDING = 6;
+export { MAX_TRENDING } from "@/lib/admin/trending-constants";
 
 export const adminTrendingSchema = z.object({
   styleIds: z

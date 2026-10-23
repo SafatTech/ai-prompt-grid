@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { StyleCard } from "@/components/style-card";
 import { StyleCardSkeleton } from "@/components/style-card-skeleton";
-import { homeExploreFallbackPage } from "@/lib/catalog/explore-pages";
+import { homeExploreFallbackPage } from "@/lib/catalog/explore-paging";
 import type { StyleCardData } from "@/lib/catalog/style-card-data";
 import {
   measureMasonryContentHeight,
@@ -166,22 +166,53 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
     const node = sentinelRef.current;
     if (!node) return;
 
+    let cancelled = false;
+    let retryTimer: ReturnType<typeof setTimeout> | undefined;
+
+    const tryFetch = () => {
+      if (cancelled || inFlight.current) return;
+      void fetchPage(nextPage);
+    };
+
     const fetchIo = new IntersectionObserver(
       ([entry]) => {
-        if (!entry?.isIntersecting || inFlight.current) return;
-        void fetchPage(nextPage);
+        if (!entry?.isIntersecting) return;
+        if (inFlight.current) {
+          // Idle page-2 fetch may hold inFlight; retry when it clears so we do
+          // not wait for another scroll-driven intersection (desktop cols 4–5).
+          if (retryTimer !== undefined) clearTimeout(retryTimer);
+          retryTimer = setTimeout(tryFetch, 200);
+          return;
+        }
+        tryFetch();
       },
-      // Start the next batch ~1–1.5 viewports early so mobile never hits empty
-      // skeletons while waiting on /api/home/explore.
-      { rootMargin: "1400px 0px" },
+      // Tall skeleton reserves can push the sentinel >1 viewport away on 5-col
+      // desktop — keep a generous margin so auto-fetch still arms.
+      { rootMargin: "2400px 0px" },
     );
     fetchIo.observe(node);
 
     return () => {
+      cancelled = true;
       fetchIo.disconnect();
+      if (retryTimer !== undefined) clearTimeout(retryTimer);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps -- IO rebinds when next page / auto state changes
   }, [autoDone, nextPage, pageSize]);
+
+  // After each commit, if skeletons remain and the sentinel is near, keep
+  // fetching without requiring a scroll (covers IO edge cases + idle race).
+  useEffect(() => {
+    if (autoDone || skeletons === 0 || inFlight.current) return;
+    const node = sentinelRef.current;
+    if (!node) return;
+    const rect = node.getBoundingClientRect();
+    const viewportH = window.innerHeight || 0;
+    if (rect.top <= viewportH + 2400) {
+      void fetchPage(nextPage);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- intentional after batch commits
+  }, [extraStyles.length, autoDone, skeletons, nextPage]);
 
   return (
     <>
@@ -191,8 +222,15 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
         aria-busy={skeletons > 0 || undefined}
         style={gridMinHeight ? { minHeight: gridMinHeight } : undefined}
       >
-        {extraStyles.map((style) => (
-          <StyleCard key={style.id} style={style} variant="masonry" />
+        {extraStyles.map((style, index) => (
+          <StyleCard
+            key={style.id}
+            style={style}
+            variant="masonry"
+            /* Same CSS-columns lazy caveat as the SSR grid — eager the first
+               appended batch so newly swapped cards in later columns paint. */
+            eager={index < pageSize}
+          />
         ))}
         {Array.from({ length: skeletons }, (_, index) => (
           <StyleCardSkeleton

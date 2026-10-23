@@ -34,9 +34,12 @@ export function ExploreFeed({ styles, total, pageSize }: Props) {
             key={style.id}
             style={style}
             variant="masonry"
-            /* First card owns LCP; first mobile row (2 cols @ 390) is eager. */
+            /* First card owns LCP. Eager the full SSR page: native loading="lazy"
+               uses pre-column flow distance, so CSS multi-column paints cards in
+               columns 4–5 while the browser still treats them as far below the
+               fold — they then sit on blur placeholders until a scroll. */
             priority={index === 0}
-            eager={index > 0 && index < 2}
+            eager={index > 0}
           />
         ))}
       </div>

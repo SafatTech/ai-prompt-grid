@@ -1,4 +1,4 @@
-import { SHARED_STYLE_BLUR } from "@/lib/catalog/style-card-data";
+import { SHARED_STYLE_BLUR } from "@/lib/catalog/shared-blur";
 import { cn } from "@/lib/utils";
 
 /**

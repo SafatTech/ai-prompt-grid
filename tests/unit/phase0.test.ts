@@ -11,10 +11,8 @@ import {
   defaultsForStyle,
   previewPrompt,
 } from "../../src/lib/catalog/prompts";
-import {
-  assertPresetValuesInSchema,
-  labeledOptionsForStyle,
-} from "../../src/lib/catalog/prompt-option-presets";
+import { assertPresetValuesInSchema } from "../../src/lib/catalog/prompt-option-presets.assert";
+import { labeledOptionsForStyle } from "../../src/lib/catalog/prompt-option-presets";
 import { promptOptionsSchema } from "../../src/lib/catalog/schemas";
 import { animeStyleIds } from "../../src/lib/catalog/seed-anime-styles";
 import { birthdayStyleIds } from "../../src/lib/catalog/seed-birthday-styles";
@@ -131,14 +129,12 @@ describe("assemblePrompt", () => {
     assert.ok(style);
     const result = assemblePrompt(style, {
       ...defaultsForStyle(style),
-      // @ts-expect-error intentional invalid mood for validation test
       mood: "Not a real mood",
     });
     assert.equal(result.ok, false);
     assert.equal(
       previewPrompt(style, {
         ...defaultsForStyle(style),
-        // @ts-expect-error intentional invalid mood
         mood: "Nope",
       }),
       "",

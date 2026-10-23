@@ -1,119 +1,35 @@
-import {
-  backgroundSchema,
-  moodSchema,
-  promptOptionsSchema,
-  ratioSchema,
-  type PromptOptionsInput,
-} from "./schemas";
+/**
+ * Server/API prompt helpers with zod validation.
+ * Client UI should import from prompt-core.ts instead.
+ */
+import { promptOptionsSchema, moodSchema, backgroundSchema, ratioSchema } from "./schemas";
 import type { CatalogStyle } from "./types";
+import {
+  assemblePromptCore,
+  defaultPromptOptions as defaultPromptOptionsCore,
+  defaultsForStyleCore,
+  previewPromptCore,
+  preserveToggleLabels as preserveToggleLabelsCore,
+  RATIO_OPTIONS,
+  type AssemblePromptResult,
+  type PromptOptions as PromptOptionsCore,
+} from "./prompt-core";
 
-export type PromptOptions = PromptOptionsInput;
+export type PromptOptions = PromptOptionsCore;
+export type { AssemblePromptResult };
 
 export const moodOptions = moodSchema.options;
 export const backgroundOptions = backgroundSchema.options;
 export const ratioOptions = ratioSchema.options;
+/** Prefer RATIO_OPTIONS / prompt-core on the client. */
+export { RATIO_OPTIONS };
 
-export const defaultPromptOptions: PromptOptions = {
-  mood: "Warm neutral",
-  background: "Softly blurred interior",
-  ratio: "4:5 Portrait",
-  keepClothing: true,
-  keepPose: true,
-};
+export const defaultPromptOptions: PromptOptions = defaultPromptOptionsCore;
 
-function naturalList(items: string[]) {
-  if (items.length < 2) return items[0] || "";
-  if (items.length === 2) return `${items[0]} and ${items[1]}`;
-  return `${items.slice(0, -1).join(", ")}, and ${items.at(-1)}`;
-}
-
-function subjectToken(style: CatalogStyle) {
-  if (style.subject === "Person") return "person";
-  if (style.subject === "Product or object") return "product";
-  return style.subject.toLowerCase();
-}
-
-/** Labels for the two preserve toggles (mapped to keepClothing / keepPose). */
-export function preserveToggleLabels(subject: CatalogStyle["subject"]): {
-  clothing: string;
-  pose: string;
-} {
-  if (subject === "Product or object") {
-    return {
-      clothing: "Product details & genuine packaging",
-      pose: "Camera angle & framing",
-    };
-  }
-  if (subject === "Group") {
-    return {
-      clothing: "Identities & facial features",
-      pose: "Group arrangement & pose",
-    };
-  }
-  if (subject === "Place") {
-    return {
-      clothing: "Structural layout",
-      pose: "Camera perspective",
-    };
-  }
-  if (subject === "Pet") {
-    return {
-      clothing: "Pet identity and distinctive markings",
-      pose: "Original pose and composition",
-    };
-  }
-  return {
-    clothing: "Keep clothing from original photo",
-    pose: "Keep original pose",
-  };
-}
-
-function preserveList(style: CatalogStyle, options: PromptOptions) {
-  if (style.subject === "Product or object") {
-    const details: string[] = [];
-    if (options.keepClothing) details.push("product details & genuine packaging");
-    if (options.keepPose) details.push("camera angle & framing");
-    return details.length ? naturalList(details) : "no additional preserve requirements";
-  }
-
-  if (style.subject === "Group") {
-    const details: string[] = [];
-    if (options.keepClothing) details.push("identities and facial features");
-    if (options.keepPose) details.push("group arrangement and pose");
-    return details.length ? naturalList(details) : "no additional preserve requirements";
-  }
-
-  if (style.subject === "Place") {
-    const details: string[] = [];
-    if (options.keepClothing) details.push("structural layout");
-    if (options.keepPose) details.push("camera perspective");
-    return details.length ? naturalList(details) : "no additional preserve requirements";
-  }
-
-  if (style.subject === "Pet") {
-    const details: string[] = [];
-    if (options.keepClothing) details.push("pet identity and distinctive markings");
-    if (options.keepPose) details.push("original pose and composition");
-    return details.length ? naturalList(details) : "no additional preserve requirements";
-  }
-
-  const details = [
-    "recognizable identity",
-    "proportions",
-    "defining features",
-    "expression",
-  ];
-  if (options.keepPose) details.push("pose");
-  if (options.keepClothing) details.push("clothing");
-  return naturalList(details);
-}
-
-export type AssemblePromptResult =
-  | { ok: true; prompt: string; version: string; tool: string; mode: string }
-  | { ok: false; errors: string[] };
+export const preserveToggleLabels = preserveToggleLabelsCore;
 
 /**
- * Validate options and assemble a complete prompt from the style's tested template.
+ * Validate options (zod) and assemble a complete prompt from the style template.
  * Blocks copy when required fields are missing or invalid.
  */
 export function assemblePrompt(
@@ -127,44 +43,18 @@ export function assemblePrompt(
       errors: parsed.error.issues.map((issue) => issue.message),
     };
   }
-
-  const valid = parsed.data;
-  const template = style.promptVariant.template;
-  if (!template?.trim()) {
-    return { ok: false, errors: ["Prompt template is missing for this style."] };
-  }
-
-  const prompt = template
-    .replaceAll("{{subject}}", subjectToken(style))
-    .replaceAll("{{mood}}", valid.mood.toLowerCase())
-    .replaceAll("{{background}}", valid.background.toLowerCase())
-    .replaceAll("{{ratio}}", valid.ratio)
-    .replaceAll("{{preserve}}", preserveList(style, valid));
-
-  if (/\{\{[a-zA-Z]+\}\}/.test(prompt)) {
-    return {
-      ok: false,
-      errors: ["Prompt still contains unresolved placeholders and cannot be copied."],
-    };
-  }
-
-  return {
-    ok: true,
-    prompt,
-    version: style.promptVariant.version,
-    tool: style.promptVariant.tool,
-    mode: style.promptVariant.mode,
-  };
+  return assemblePromptCore(style, parsed.data);
 }
 
 /** Convenience for UI preview — returns empty string if invalid. */
 export function previewPrompt(style: CatalogStyle, options: PromptOptions) {
-  const result = assemblePrompt(style, options);
-  return result.ok ? result.prompt : "";
+  const parsed = promptOptionsSchema.safeParse(options);
+  if (!parsed.success) return "";
+  return previewPromptCore(style, parsed.data);
 }
 
 export function defaultsForStyle(style: CatalogStyle): PromptOptions {
   const d = style.promptVariant.defaults;
   const parsed = promptOptionsSchema.safeParse(d);
-  return parsed.success ? parsed.data : defaultPromptOptions;
+  return parsed.success ? parsed.data : defaultsForStyleCore(style);
 }

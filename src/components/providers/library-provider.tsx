@@ -17,7 +17,7 @@ import {
   readPersistedPendingAction,
   type PendingAction,
 } from "@/lib/auth/pending-action";
-import { isSupabaseConfigured } from "@/lib/env";
+import { isSupabaseConfigured } from "@/lib/env-public";
 import {
   fetchOwnProfile,
   isEditorRole,
