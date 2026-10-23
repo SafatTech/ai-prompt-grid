@@ -3242,6 +3242,8 @@ textarea:focus-visible,
 .home-masonry {
   columns: 5 236px;
   column-gap: 18px;
+  /* Balance so short SSR batches cannot leave the last column empty at the top. */
+  column-fill: balance;
 }
 
 /* N-24 / N-25: height reserve lives on the wrapper; real cards stay in the

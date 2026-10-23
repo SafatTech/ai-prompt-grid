@@ -16,6 +16,7 @@ import {
   listTrendingStyles,
 } from "@/lib/catalog/repository";
 import { toStyleCardDataList } from "@/lib/catalog/style-card-data";
+import { HOME_MASONRY_PAGE_SIZE } from "@/lib/home/masonry-page-size";
 import { HOME_RAILS, TRENDING_RAIL } from "@/lib/home/rails";
 import { activeSeason } from "@/lib/home/seasons";
 import { listIndexableGuides } from "@/lib/guides/load";
@@ -89,8 +90,8 @@ export default async function HomePage() {
     listStylesMatchingQuery(HOME_RAILS[1]!.q!, HOME_RAILS[1]!.limit),
     listStylesByCategory(HOME_RAILS[2]!.category!, HOME_RAILS[2]!.limit),
     listStylesMatchingQuery(HOME_RAILS[3]!.q!, HOME_RAILS[3]!.limit),
-    // SSR first paint only — further pages load client-side (HTML budget ≤1MB).
-    listExploreFeed({ page: 1, pageSize: 12 }),
+    // Multiple of 5-col count so CSS columns fill evenly; +8 rows vs prior 12.
+    listExploreFeed({ page: 1, pageSize: HOME_MASONRY_PAGE_SIZE }),
     Promise.resolve(
       [...listIndexableGuides()]
         .sort((a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : 0))

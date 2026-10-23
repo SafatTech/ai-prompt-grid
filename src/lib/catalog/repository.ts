@@ -243,7 +243,8 @@ export async function listExploreFeed(options?: {
   category?: string;
 }): Promise<ExploreFeedPage> {
   const page = Math.max(1, options?.page ?? 1);
-  const pageSize = Math.min(Math.max(options?.pageSize ?? 24, 1), 48);
+  // Homepage masonry SSR uses 50 (10×5 cols); allow up to 60.
+  const pageSize = Math.min(Math.max(options?.pageSize ?? 24, 1), 60);
   const category = options?.category?.trim() || "";
 
   let all = await listPublishedStyles();

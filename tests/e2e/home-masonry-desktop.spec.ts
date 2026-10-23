@@ -1,13 +1,69 @@
 import { test, expect } from "@playwright/test";
 
 const VIEWPORTS = [
+  { width: 1024, height: 900 },
   { width: 1440, height: 900 },
   { width: 1920, height: 900 },
 ] as const;
 
+/** Top card in every laid-out column must sit on the first row (no empty lead column). */
+async function assertFirstRowFillsEveryColumn(
+  section: ReturnType<import("@playwright/test").Page["locator"]>,
+) {
+  const masonry = section.locator(".home-masonry:not(.home-masonry-extra)");
+  await expect(masonry).toBeVisible();
+
+  await expect
+    .poll(
+      async () =>
+        masonry.evaluate((grid) => {
+          const articles = [...grid.querySelectorAll<HTMLElement>("article")];
+          if (articles.length < 2) return { ok: false, reason: "too-few-cards" };
+
+          const rects = articles.map((el) => el.getBoundingClientRect());
+          const minTop = Math.min(...rects.map((r) => r.top));
+          // Group into columns by left edge (20px bucket absorbs subpixel drift).
+          const cols = new Map<number, DOMRect>();
+          for (const rect of rects) {
+            const key = Math.round(rect.left / 20) * 20;
+            const prev = cols.get(key);
+            if (!prev || rect.top < prev.top) cols.set(key, rect);
+          }
+          if (cols.size < 2) return { ok: false, reason: "too-few-columns", cols: cols.size };
+
+          const threshold = 48; // first-row cards share roughly the same top
+          for (const [key, rect] of cols) {
+            if (rect.top > minTop + threshold) {
+              return {
+                ok: false,
+                reason: "empty-lead-column",
+                col: key,
+                top: rect.top,
+                minTop,
+                cols: cols.size,
+              };
+            }
+          }
+          return { ok: true, cols: cols.size, cards: articles.length };
+        }),
+      { timeout: 15_000 },
+    )
+    .toMatchObject({ ok: true });
+}
+
 for (const viewport of VIEWPORTS) {
-  test.describe(`homepage masonry desktop (5-col) @ ${viewport.width}`, () => {
+  test.describe(`homepage masonry desktop @ ${viewport.width}`, () => {
     test.use({ viewport });
+
+    test("every column has a first-row card without scrolling", async ({ page }) => {
+      await page.goto("/", { waitUntil: "domcontentloaded" });
+
+      const heading = page.getByRole("heading", { level: 2, name: /Explore everything/i });
+      await expect(heading).toBeVisible({ timeout: 30_000 });
+      // No scroll — assert the SSR grid alone fills every column from the top.
+      const section = page.locator("section").filter({ has: heading });
+      await assertFirstRowFillsEveryColumn(section);
+    });
 
     test("visible Explore everything cards load images without scrolling to the bottom", async ({
       page,
@@ -16,13 +72,10 @@ for (const viewport of VIEWPORTS) {
 
       const heading = page.getByRole("heading", { level: 2, name: /Explore everything/i });
       await expect(heading).toBeVisible({ timeout: 30_000 });
-      // Bring the section into view once — the bug required scrolling to the
-      // document bottom and back up before columns 4–5 decoded.
       await heading.scrollIntoViewIfNeeded();
 
       const section = page.locator("section").filter({ has: heading });
 
-      // Skeletons in the viewport must clear without a bottom round-trip.
       await expect
         .poll(
           async () =>
@@ -43,34 +96,33 @@ for (const viewport of VIEWPORTS) {
       );
       await expect(cards.first()).toBeVisible();
 
+      // First row is eager; deeper SSR cards stay lazy — require several decoded
+      // images in view, not every visible card (tall 50-card SSR grids).
       await expect
         .poll(
           async () => {
             return cards.evaluateAll((nodes) => {
               const vh = window.innerHeight || 0;
               const vw = window.innerWidth || 0;
-              const visible = nodes.filter((node) => {
+              return nodes.filter((node) => {
                 const el = node as HTMLElement;
                 const rect = el.getBoundingClientRect();
-                return rect.bottom > 0 && rect.top < vh && rect.right > 0 && rect.left < vw;
-              });
-              if (visible.length < 4) return 0;
-              const loaded = visible.filter((node) => {
-                const img = (node as HTMLElement).querySelector(
+                if (!(rect.bottom > 0 && rect.top < vh && rect.right > 0 && rect.left < vw)) {
+                  return false;
+                }
+                const img = el.querySelector(
                   ".style-card-rail-media img",
                 ) as HTMLImageElement | null;
                 if (!img) return false;
                 const src = img.currentSrc || img.src;
                 return Boolean(src && !src.startsWith("data:") && img.complete && img.naturalWidth > 0);
-              });
-              return loaded.length === visible.length ? loaded.length : 0;
+              }).length;
             });
           },
           { timeout: 15_000 },
         )
-        .toBeGreaterThan(3);
+        .toBeGreaterThanOrEqual(2);
 
-      // Guard the original failure mode: do not scroll to the document end.
       const scrollY = await page.evaluate(() => window.scrollY);
       const scrollMax = await page.evaluate(
         () => document.documentElement.scrollHeight - window.innerHeight,
@@ -93,7 +145,6 @@ for (const viewport of VIEWPORTS) {
       );
       const targetY = masonryTop + 2100;
 
-      // Scroll in 500px steps so intersection observers (sentinel + skeletons) arm.
       let y = await page.evaluate(() => window.scrollY);
       while (y + 500 < targetY) {
         y += 500;

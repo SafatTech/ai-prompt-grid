@@ -7,13 +7,11 @@ import {
 } from "@/lib/catalog/filters";
 import { listExploreFeed, listPublishedStyles } from "@/lib/catalog/repository";
 import { toStyleCardDataList } from "@/lib/catalog/style-card-data";
-
-/** Default homepage append size (SSR page 1 uses the same via `?pageSize=`). */
-const HOME_PAGE_SIZE = 12;
+import { HOME_MASONRY_PAGE_SIZE } from "@/lib/home/masonry-page-size";
 
 /**
  * Paginated explore feed.
- * - Homepage masonry: `?page=2&pageSize=12` (page 1 is SSR'd on `/`).
+ * - Homepage masonry: `?page=2&pageSize=50` (page 1 is SSR'd on `/`).
  * - /explore Load more / filter changes: `?page=1&pageSize=18` plus optional filter query params.
  */
 export async function GET(request: Request) {
@@ -75,8 +73,8 @@ export async function GET(request: Request) {
 
   const homePageSize =
     rawPageSize && /^[1-9]\d*$/.test(rawPageSize)
-      ? Math.min(Number(rawPageSize), 48)
-      : HOME_PAGE_SIZE;
+      ? Math.min(Number(rawPageSize), 60)
+      : HOME_MASONRY_PAGE_SIZE;
   const feed = await listExploreFeed({ page, pageSize: homePageSize });
   return NextResponse.json(
     {

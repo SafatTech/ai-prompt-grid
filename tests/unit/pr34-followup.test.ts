@@ -15,7 +15,7 @@ describe("PR34 follow-up: home feed soft-cap reserves (N-19 / R1)", () => {
     const src = readSrc("src/components/home/explore-load-more.tsx");
     assert.ok(src.includes("softCapFor"));
     assert.ok(src.includes("softCap - shown"));
-    assert.ok(src.includes("AUTO_FETCH_PAGES = 2"));
+    assert.ok(src.includes("AUTO_FETCH_PAGES = 1"));
     assert.ok(src.includes("gridMinHeight"));
     assert.ok(src.includes("autoDone || !pending ? 0"));
     assert.ok(src.includes("heightLocked"));
