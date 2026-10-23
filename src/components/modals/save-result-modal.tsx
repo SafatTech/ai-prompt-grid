@@ -55,9 +55,7 @@ export function SaveResultModal({ styleId, onClose }: Props) {
 
   useEffect(() => {
     let cancelled = false;
-    setLoadError(false);
-    setDefaultPrompt(null);
-    setStyleTitle("");
+    // Parent remounts this modal with key={styleId}, so no sync reset here.
     void fetch(`/api/styles/${encodeURIComponent(styleId)}/prompt`)
       .then(async (res) => {
         if (!res.ok) throw new Error("prompt unavailable");

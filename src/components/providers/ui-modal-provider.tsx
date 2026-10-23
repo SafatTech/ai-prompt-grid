@@ -101,7 +101,7 @@ export function UiModalProvider({ children }: { children: ReactNode }) {
         <ExternalInfoModal onClose={closeModal} />
       ) : null}
       {modal === "save-result" && SaveResultModal && saveStyleId ? (
-        <SaveResultModal styleId={saveStyleId} onClose={closeModal} />
+        <SaveResultModal key={saveStyleId} styleId={saveStyleId} onClose={closeModal} />
       ) : null}
     </UiModalContext.Provider>
   );
