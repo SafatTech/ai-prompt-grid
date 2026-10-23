@@ -22,6 +22,7 @@ import { HOME_RAILS, NEW_STYLES_RAIL, TRENDING_RAIL } from "@/lib/home/rails";
 import { activeSeason } from "@/lib/home/seasons";
 import { listIndexableGuides } from "@/lib/guides/load";
 import { absoluteUrl } from "@/lib/site-url";
+import "./home.css";
 
 const LatestGuides = dynamic(
   () => import("@/components/home/latest-guides").then((mod) => mod.LatestGuides),

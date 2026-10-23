@@ -81,16 +81,16 @@ function resultPriorityFlags(priority: boolean, eager = false) {
 }
 
 /**
- * On mobile the merge hero stacks inputs above the result, so the first print
- * is the LCP element — it must not stay lazy when the hero is prioritized.
+ * Style-page LCP targets the result only — keep merge inputs lazy so they do
+ * not compete with the result preload (mobile used to prioritize input[0]).
  */
-function inputPriorityFlags(priority: boolean, index: number, eager = false) {
-  const high = priority && index === 0;
-  const loadEager = high || (eager && index === 0);
+function inputPriorityFlags(_priority: boolean, _index: number) {
+  void _priority;
+  void _index;
   return {
-    priority: high,
-    highPriority: high,
-    eager: loadEager,
+    priority: false,
+    highPriority: false,
+    eager: false,
   };
 }
 
@@ -167,7 +167,8 @@ export function MergeBeforeAfter({
     sizes ??
     (variant === "card"
       ? "(max-width:699px) 25vw, 120px"
-      : "(max-width: 768px) 92vw, 560px");
+      : // Style-page hero: 320 CSS px → 2× picks w=640 (not 750/828).
+        "(max-width:640px) 320px, (max-width:768px) 90vw, 560px");
   const inputSizes =
     variant === "card"
       ? "(max-width:699px) 16vw, 100px"
@@ -197,7 +198,7 @@ export function MergeBeforeAfter({
                 <FrameImage
                   image={{ ...input, alt: inputAlt(input, title, index, inputs.length) }}
                   sizes={inputSizes}
-                  {...inputPriorityFlags(priority, index, eager)}
+                  {...inputPriorityFlags(priority, index)}
                   objectPosition="50% 30%"
                 />
                 <span className="mba-split__tag" aria-hidden="true">
@@ -309,7 +310,7 @@ export function MergeBeforeAfter({
                   <FrameImage
                     image={{ ...input, alt: inputAlt(input, title, index, shown.length) }}
                     sizes={inputSizes}
-                    {...inputPriorityFlags(priority, index, eager)}
+                    {...inputPriorityFlags(priority, index)}
                   />
                 </div>
                 <span className="mba-lip" aria-hidden="true">

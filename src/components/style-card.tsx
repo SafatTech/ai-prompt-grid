@@ -1,10 +1,8 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState, type MouseEvent } from "react";
+import type { MouseEvent } from "react";
 import { CompareSlider } from "@/components/compare-slider";
-import { CopyPromptButton } from "@/components/home/copy-prompt-button";
 import { MergeBeforeAfter } from "@/components/merge-before-after";
 import { useLibrary } from "@/components/providers/library-provider";
 import { useToast } from "@/components/providers/toast-provider";
@@ -15,11 +13,11 @@ import { cn } from "@/lib/utils";
 type Props = {
   style: StyleCardData;
   compact?: boolean;
-  /** Homepage rails / masonry — 4:5 media, copy button, hover preview. */
-  variant?: "default" | "rail" | "masonry";
+  /** Explore / library cards. Homepage rails use `StyleCardRail` (server). */
+  variant?: "default";
   /** First above-the-fold card: eager + high fetchPriority (LCP). */
   priority?: boolean;
-  /** Eager load without high fetchPriority (e.g. first masonry row). */
+  /** Eager load without high fetchPriority (explore cards 2–4). */
   eager?: boolean;
 };
 
@@ -48,179 +46,19 @@ function useSaveHandlers(styleId: string) {
 }
 
 /**
- * CSS columns break native loading="lazy" distance (pre-column flow). Mount
- * the image only after post-layout IntersectionObserver — never force
- * loading="eager" on rails (that regressed home to ~40 eager cards in #43).
+ * Explore / library card (client — CompareSlider).
+ * Prefer `StyleCardRail` from Server Components on the homepage so only
+ * save/copy/media islands hydrate.
  */
-function useMasonryMediaGate(active: boolean) {
-  const mediaRef = useRef<HTMLDivElement>(null);
-  const [inView, setInView] = useState(!active);
-
-  useEffect(() => {
-    if (!active || inView) return;
-    const node = mediaRef.current;
-    if (!node || typeof IntersectionObserver === "undefined") return;
-    const io = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry?.isIntersecting) return;
-        setInView(true);
-        io.disconnect();
-      },
-      { rootMargin: "600px 0px" },
-    );
-    io.observe(node);
-    return () => io.disconnect();
-  }, [active, inView]);
-
-  return { mediaRef, mediaReady: !active || inView };
-}
-
 export function StyleCard({
   style,
   compact = false,
-  variant = "default",
   priority = false,
   eager = false,
 }: Props) {
   const { saved, handleSave } = useSaveHandlers(style.id);
   const height = compact ? Math.min(style.height, 320) : style.height;
   const mergePhotos = style.mergePhotos;
-  const isRail = variant === "rail" || variant === "masonry";
-  const promptPreview = style.promptPreview;
-  const mediaWidth = style.mediaWidth;
-  const mediaHeight = style.mediaHeight;
-  const layoutAware = variant === "masonry" && !priority && !eager;
-  const { mediaRef, mediaReady } = useMasonryMediaGate(layoutAware);
-
-  if (isRail) {
-    // Match CSS: masonry columns 2 @ ≤699 (~50vw) / 236px; rails ~50vw @390 → ≤384w @2×.
-    const sizes =
-      variant === "masonry"
-        ? "(max-width:699px) 48vw, 236px"
-        : "(max-width:699px) 50vw, (max-width:767px) 55vw, 250px";
-    // Only priority / explicit eager flip loading — never "mediaReady ⇒ eager"
-    // (rails always have mediaReady and were incorrectly eager in #43).
-    const mediaLoading = priority ? undefined : eager ? "eager" : "lazy";
-
-    return (
-      <article
-        className={cn(
-          /* No overflow:hidden on the article — it clips the heart ::after hit area to ~42px (N-20). Media keeps its own clip. */
-          "style-card-rail group relative rounded-[var(--radius)] border border-[var(--line)] bg-[var(--surface)]",
-          variant === "masonry" && "style-card-masonry",
-        )}
-        data-testid={`style-card-${style.id}`}
-      >
-        <div
-          ref={mediaRef}
-          className="style-card-rail-media relative overflow-hidden rounded-t-[var(--radius)] bg-[var(--surface-2)]"
-          style={
-            variant === "masonry"
-              ? {
-                  aspectRatio: `${mediaWidth} / ${mediaHeight}`,
-                  ...(style.resultBlur && !mediaReady
-                    ? {
-                        backgroundImage: `url(${style.resultBlur})`,
-                        backgroundSize: "cover",
-                        backgroundPosition: "center",
-                      }
-                    : null),
-                }
-              : { aspectRatio: "4 / 5" }
-          }
-        >
-          {mediaReady ? (
-            mergePhotos.length >= 2 && style.mergeResult ? (
-              <Link
-                href={`/styles/${style.id}`}
-                className="absolute inset-0 block"
-                aria-label={`Open ${style.title}`}
-              >
-                <MergeBeforeAfter
-                  variant="card"
-                  title={style.title}
-                  inputs={mergePhotos}
-                  result={style.mergeResult}
-                  sizes={sizes}
-                  priority={priority}
-                  eager={eager}
-                />
-                {promptPreview ? (
-                  <div className="style-card-hover-preview" aria-hidden="true">
-                    <p>{promptPreview}</p>
-                    <span>Before → After</span>
-                  </div>
-                ) : null}
-              </Link>
-            ) : (
-              <Link
-                href={`/styles/${style.id}`}
-                className="absolute inset-0 block"
-                aria-label={`Open ${style.title}`}
-              >
-                <Image
-                  src={style.result}
-                  alt={`${style.title} AI photo result`}
-                  fill
-                  sizes={sizes}
-                  className="object-cover"
-                  priority={priority}
-                  loading={mediaLoading}
-                  fetchPriority={priority ? "high" : "auto"}
-                  placeholder={style.resultBlur ? "blur" : "empty"}
-                  blurDataURL={style.resultBlur}
-                />
-                {promptPreview ? (
-                  <div className="style-card-hover-preview" aria-hidden="true">
-                    <p>{promptPreview}</p>
-                    <span>Before → After</span>
-                  </div>
-                ) : null}
-              </Link>
-            )
-          ) : (
-            <Link
-              href={`/styles/${style.id}`}
-              className="absolute inset-0 block"
-              aria-label={`Open ${style.title}`}
-              tabIndex={-1}
-            />
-          )}
-        </div>
-        {/* Heart sits outside overflow:hidden media so the ≥44px hit area is not clipped (N-20). */}
-        <button
-          type="button"
-          className={cn(
-            "style-card-heart absolute top-2.5 right-2.5 z-4 flex h-[38px] w-[38px] cursor-pointer items-center justify-center rounded-[11px] border border-[rgba(255,255,255,0.22)] bg-[rgba(11,11,16,0.72)] text-base text-[var(--text)] backdrop-blur-sm",
-            saved && "bg-[rgba(255,155,130,0.12)] text-[var(--peach)]",
-          )}
-          aria-label={saved ? `Unsave ${style.title}` : `Save ${style.title}`}
-          data-testid={`save-style-${style.id}`}
-          onClick={handleSave}
-        >
-          {saved ? "♥" : "♡"}
-        </button>
-        <div className="style-card-rail-body px-3.5 pt-3 pb-3.5">
-          <h3 className="m-0 text-[15px] font-semibold leading-snug tracking-[-0.01em]">
-            <Link
-              href={`/styles/${style.id}`}
-              className="style-card-title-link"
-            >
-              <span className="style-card-title-text">{style.title}</span>
-            </Link>
-          </h3>
-          <div className="style-card-rail-row mt-2 flex items-center justify-between gap-2">
-            <span className="min-w-0 truncate text-xs text-[var(--muted)]">
-              {mergePhotos.length >= 2
-                ? `Merge · ${mergePhotos.length} photos`
-                : style.category}
-            </span>
-            <CopyPromptButton style={style} />
-          </div>
-        </div>
-      </article>
-    );
-  }
 
   return (
     <article

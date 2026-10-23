@@ -12,7 +12,7 @@ function readSrc(rel: string) {
 
 describe("PR33 regressions: card title truncation (N-14)", () => {
   it("truncates on an inner span so the link hit area stays unclipped", () => {
-    const css = readSrc("src/app/globals.css");
+    const css = readSrc("src/app/home.css");
     assert.ok(css.includes(".style-card-title-link"));
     assert.ok(css.includes(".style-card-title-text"));
     assert.ok(css.includes("text-overflow: ellipsis"));
@@ -68,8 +68,8 @@ describe("PR33 regressions: explore LCP / toolbar", () => {
     assert.ok(src.includes("w-[12ch]"));
 
     const compare = readSrc("src/components/compare-slider.tsx");
-    assert.ok(compare.includes("const sourceHigh = priority"));
-    assert.ok(compare.includes("const sourceEager = priority || eager"));
+    assert.ok(compare.includes("const sourceHigh = priority && !large"));
+    assert.ok(compare.includes("const sourceEager = large ? false : priority || eager"));
     assert.ok(compare.includes("(max-width:430px) 92vw"));
   });
 });

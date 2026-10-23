@@ -1,13 +1,9 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
-import { preload } from "react-dom";
 import type { GuideDisplayHero } from "@/lib/guides/prepare";
-import { nextImagePreloadUrl } from "@/lib/images/next-image-preload";
 
 /** Full-bleed hero; desktop never needs more than ~1380 CSS px at 2×. */
 const HERO_SIZES = "(max-width:1380px) 100vw, 1380px";
-/** Mobile LCP width (390×2 → 828 deviceSize); matches next/image pick for 100vw. */
-const HERO_PRELOAD_WIDTH = 828;
 
 export function GuideHero({
   hero,
@@ -28,15 +24,6 @@ export function GuideHero({
   promptsTested: boolean;
   shareActions?: ReactNode;
 }) {
-  if (hero.kind === "image") {
-    // Early discovery via the optimized URL — not the raw origin (avoids
-    // double-download with next/image priority).
-    preload(nextImagePreloadUrl(hero.url, HERO_PRELOAD_WIDTH, 75), {
-      as: "image",
-      fetchPriority: "high",
-    });
-  }
-
   return (
     <section className="guide-hero relative h-[min(86vh,820px)] min-h-[480px] w-full overflow-hidden sm:min-h-[560px]">
       {hero.kind === "image" ? (
