@@ -836,24 +836,23 @@
   transform: translateY(8px);
   transition: 0.25s;
   pointer-events: none;
-}
-
-.style-card-hover-preview p {
-  margin: 0;
-  font: 12px / 1.5 var(--font-geist-mono), ui-monospace, monospace;
-  color: #e5e2ef;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}
-
-.style-card-hover-preview span {
-  display: inline-block;
-  margin-top: 8px;
   font: 600 10px var(--font-geist-mono), ui-monospace, monospace;
   letter-spacing: 0.1em;
   color: var(--mint);
+}
+
+/* Shared blur once in CSS — never repeat the data URI in per-card inline styles (HTML budget). */
+.style-card-rail-media.is-pending {
+  background-image: url("data:image/webp;base64,UklGRiQAAABXRUJQVlA4IBgAAAAwAQCdASoQAAkAAUAmJQBOgB0A86YAAAD+/+1xAA==");
+  background-size: cover;
+  background-position: center;
+}
+
+/* Defer layout/paint for below-fold home sections (mobile TBT). Skip season —
+   it sits at the top of .home-below and is covered by phone layout tests. */
+.home-below > :not(.home-season) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 520px;
 }
 
 .style-card-masonry {

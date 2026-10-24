@@ -15,6 +15,8 @@ describe("perf LCP/TBT follow-up", () => {
     assert.ok(!page.includes('import "./home.css"'));
     assert.ok(!page.includes("homeCriticalCss"));
     assert.ok(!page.includes("home-critical.css"));
+    // Tiny inline h1 metrics only — not a third stylesheet link.
+    assert.ok(page.includes("hero-wall-title"));
     const globals = read("src/app/globals.css");
     assert.ok(globals.includes('@import "./home.css"'));
     const layout = read("src/app/layout.tsx");
@@ -23,6 +25,8 @@ describe("perf LCP/TBT follow-up", () => {
     assert.ok(layout.includes('display: "swap"'));
     assert.ok(layout.includes("adjustFontFallback: true"));
     assert.ok(layout.includes("preload: false"));
+    // Geist sans must not preload (competes with home h1 LCP).
+    assert.match(layout, /geistSans[\s\S]*?preload:\s*false/);
   });
 
   it("keeps server StyleCardRail out of client ExploreLoadMore", () => {
@@ -87,5 +91,22 @@ describe("perf LCP/TBT follow-up", () => {
     const preload = read("src/lib/images/next-image-preload.ts");
     assert.ok(preload.includes("364px"));
     assert.ok(!preload.includes("(max-width:640px) 320px"));
+  });
+
+  it("keeps home rail/media payload slim (no prompt previews / inline blur URIs)", () => {
+    const rail = read("src/components/style-card-rail.tsx");
+    assert.ok(!rail.includes("promptPreview"));
+    assert.ok(rail.includes("Before → After"));
+    const media = read("src/components/style-card-masonry-media.tsx");
+    assert.ok(media.includes("is-pending"));
+    assert.ok(!media.includes("backgroundImage"));
+    assert.ok(media.includes('variant === "masonry"'));
+    const page = read("src/app/page.tsx");
+    assert.ok(page.includes("listHeroWallImages(12"));
+    assert.ok(page.includes("slice(0, 24)"));
+    const hero = read("src/components/home/hero-wall-tracks.tsx");
+    assert.ok(!hero.includes("blurDataURL"));
+    const dto = read("src/lib/catalog/style-card-data.ts");
+    assert.ok(dto.includes("includePromptPreview"));
   });
 });

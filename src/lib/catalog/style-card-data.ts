@@ -65,6 +65,11 @@ export type ToStyleCardDataOptions = {
    * payload to keep homepage HTML under budget.
    */
   surface?: "full" | "rail";
+  /**
+   * Embed hover prompt clip text. Home rails skip this (label-only hover) to
+   * avoid ~20 KB of duplicated prompt HTML and assemblePrompt work.
+   */
+  includePromptPreview?: boolean;
 };
 
 export function toStyleCardData(
@@ -76,17 +81,9 @@ export function toStyleCardData(
     sharedBlur = false,
     includeCopyPrompt = false,
     surface = "full",
+    includePromptPreview = surface !== "rail",
   } = options;
   const rail = surface === "rail";
-  const defaults = defaultsForStyle(style);
-  const assembled = assemblePrompt(style, defaults);
-  const fullPrompt = assembled.ok ? assembled.prompt : previewPrompt(style, defaults);
-  // Hover preview is a short clip — do not ship the full prompt twice in HTML.
-  const previewLimit = rail ? 96 : 140;
-  const promptPreview =
-    fullPrompt.length > previewLimit
-      ? `${fullPrompt.slice(0, previewLimit - 3).trimEnd()}…`
-      : fullPrompt;
   const pair =
     style.examplePairs.find((p) => p.result === style.result) ?? style.examplePairs[0];
   const mergePhotos = usesMergeStack(style) ? mergeInputPhotos(style) : [];
@@ -110,28 +107,43 @@ export function toStyleCardData(
       }
     : undefined;
 
-  const copyPrompt = includeCopyPrompt && assembled.ok ? assembled.prompt : "";
+  let promptPreview = "";
+  let copyPrompt = "";
+  let promptVariantId = "";
+  let promptTool = "";
+  if (includePromptPreview || includeCopyPrompt || !rail) {
+    const defaults = defaultsForStyle(style);
+    const assembled = assemblePrompt(style, defaults);
+    if (includePromptPreview || !rail) {
+      const fullPrompt = assembled.ok ? assembled.prompt : previewPrompt(style, defaults);
+      const previewLimit = rail ? 96 : 140;
+      promptPreview =
+        fullPrompt.length > previewLimit
+          ? `${fullPrompt.slice(0, previewLimit - 3).trimEnd()}…`
+          : fullPrompt;
+    }
+    copyPrompt = includeCopyPrompt && assembled.ok ? assembled.prompt : "";
+    if (!rail || copyPrompt) {
+      promptVariantId = style.promptVariant.id;
+      promptTool = assembled.ok ? assembled.tool : style.promptVariant.tool;
+    }
+  }
+
   return {
     id: style.id,
     title: style.title,
     category: style.category,
     subject: style.subject,
-    tool: style.tool,
+    tool: rail ? "" : style.tool,
     note: rail ? "" : style.note,
     height: rail ? 0 : style.height,
     source: rail ? "" : style.source,
     result: style.result,
     ...(resultBlur ? { resultBlur } : {}),
     promptPreview,
-    // Home copy button fetches on click — omit empty prompt fields on rails.
     copyPrompt,
-    promptVariantId: rail && !copyPrompt ? "" : style.promptVariant.id,
-    promptTool:
-      rail && !copyPrompt
-        ? ""
-        : assembled.ok
-          ? assembled.tool
-          : style.promptVariant.tool,
+    promptVariantId,
+    promptTool,
     mediaWidth: pair?.resultWidth && pair.resultWidth > 0 ? pair.resultWidth : 800,
     mediaHeight: pair?.resultHeight && pair.resultHeight > 0 ? pair.resultHeight : 1000,
     mergePhotos,

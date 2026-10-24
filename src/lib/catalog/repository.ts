@@ -208,6 +208,8 @@ export async function listHeroWallImages(
     if (picked.length >= limit) break;
   }
 
+  // No per-tile blurDataURL — hero is decorative (aria-hidden) and unique blurs
+  // were repeating ~0.5–1 KB × 18 in home HTML (LCP/TBT parse cost).
   return picked.slice(0, limit).map((style) => {
     const pair = style.examplePairs.find((p) => p.result === style.result) ?? style.examplePairs[0];
     const width = pair?.resultWidth && pair.resultWidth > 0 ? pair.resultWidth : 800;
@@ -216,7 +218,6 @@ export async function listHeroWallImages(
       src: style.result,
       width,
       height,
-      ...(style.resultBlur ? { blurDataURL: style.resultBlur } : {}),
     };
   });
 }

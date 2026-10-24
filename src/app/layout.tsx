@@ -15,8 +15,9 @@ const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
   display: "swap",
-  preload: true,
-  // Size-adjusted fallback so the home h1 can paint before the webfont arrives.
+  // Skip preload so the home h1 is not contested by the webfont (LCP).
+  preload: false,
+  // Size-adjusted fallback so the h1 can paint before the webfont arrives.
   adjustFontFallback: true,
 });
 

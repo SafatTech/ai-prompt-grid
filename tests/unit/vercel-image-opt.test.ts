@@ -132,7 +132,7 @@ describe("Vercel image optimization toggle", () => {
     assert.ok(merge.includes("DETAIL_HERO_SIZES"));
 
     const related = readSrc("src/components/styles/related-styles-lazy.tsx");
-    assert.ok(related.includes('"2000px 0px"'));
+    assert.ok(related.includes('"2800px 0px"'));
     assert.ok(related.includes('"600px 0px"'));
     assert.ok(related.includes("max-width: 767px"));
 
