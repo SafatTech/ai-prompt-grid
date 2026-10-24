@@ -65,7 +65,20 @@ export type HomepageAdminStyle = {
 export type HomepageAdminData = {
   settings: HomepageSettings;
   styles: HomepageAdminStyle[];
+  loadError: string | null;
+  stylesLoadError: string | null;
 };
+
+export function filterHomepageAdminStyles(
+  styles: HomepageAdminStyle[],
+  query: string,
+): HomepageAdminStyle[] {
+  const normalizedQuery = query.trim().toLocaleLowerCase();
+  if (!normalizedQuery) return styles;
+  return styles.filter((style) =>
+    `${style.title} ${style.slug}`.toLocaleLowerCase().includes(normalizedQuery),
+  );
+}
 
 function assetUrl(key: string): string {
   if (!key || /^https?:\/\//i.test(key) || key.startsWith("/")) return key;
@@ -78,29 +91,46 @@ function assetUrl(key: string): string {
 export async function getHomepageAdminData(
   client: SupabaseClient,
 ): Promise<HomepageAdminData> {
-  const [{ data: settings }, { data: styles, error }] = await Promise.all([
-    client
-      .from("homepage_settings")
-      .select(
-        "hero_slugs, hero_auto_fill, season_mode, season_id, season_eyebrow, season_headline, season_body, season_chips, season_style_slugs, season_image_slugs",
-      )
-      .eq("id", "default")
-      .maybeSingle(),
-    client
-      .from("styles")
-      .select(
-        "id, slug, title, published_at, save_count, trending_rank, pin_new_rank, show_on_home, hide_from_new, explore_weight, exclude_from_explore, allow_in_hero, hero_priority, style_assets ( kind, result_storage_key, sort_order )",
-      )
-      .eq("status", "published")
-      .order("save_count", { ascending: false }),
-  ]);
+  const [{ data: settings, error: settingsError }, { data: styles, error: stylesError }] =
+    await Promise.all([
+      client
+        .from("homepage_settings")
+        .select(
+          "hero_slugs, hero_auto_fill, season_mode, season_id, season_eyebrow, season_headline, season_body, season_chips, season_style_slugs, season_image_slugs",
+        )
+        .eq("id", "default")
+        .maybeSingle(),
+      client
+        .from("styles")
+        .select(
+          "id, slug, title, published_at, save_count, trending_rank, pin_new_rank, show_on_home, hide_from_new, explore_weight, exclude_from_explore, allow_in_hero, hero_priority, style_assets ( kind, result_storage_key, sort_order )",
+        )
+        .eq("status", "published")
+        .order("save_count", { ascending: false }),
+    ]);
 
-  if (error) console.warn("[admin] homepage styles fetch failed", error.message);
+  if (settingsError) {
+    console.warn("[admin] homepage settings fetch failed", settingsError.message);
+  }
+  if (stylesError) {
+    console.warn("[admin] homepage styles fetch failed", stylesError.message);
+  }
+
+  const stylesLoadError = stylesError
+    ? "Published styles could not be loaded. Apply the latest Supabase migrations, then refresh this page."
+    : null;
+  const loadError = stylesLoadError
+    ? stylesLoadError
+    : settingsError
+      ? "Homepage settings could not be loaded. Apply the latest Supabase migrations, then refresh this page."
+      : null;
 
   return {
     settings: settings
       ? mapHomepageSettings(settings as Parameters<typeof mapHomepageSettings>[0])
       : DEFAULT_HOMEPAGE_SETTINGS,
+    loadError,
+    stylesLoadError,
     styles: ((styles ?? []) as Array<Record<string, unknown>>).map((row) => {
       const assets = (row.style_assets ?? []) as Array<{
         kind: string;

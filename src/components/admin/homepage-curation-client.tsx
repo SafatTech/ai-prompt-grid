@@ -6,6 +6,7 @@ import { useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/providers/toast-provider";
 import {
+  filterHomepageAdminStyles,
   MAX_NEW_PINS,
   MAX_TRENDING,
   type HomepageAdminData,
@@ -198,12 +199,22 @@ export function HomepageCurationClient({
         </div>
         <Button
           onClick={() => void save()}
-          disabled={busy}
+          disabled={busy || Boolean(initialData.loadError)}
           data-testid="save-homepage-curation"
         >
           {busy ? "Saving…" : "Save homepage"}
         </Button>
       </div>
+
+      {initialData.loadError ? (
+        <div
+          role="alert"
+          className="mb-6 rounded-xl border border-red-500/40 bg-red-500/10 p-4 text-sm text-red-200"
+        >
+          <b>Homepage curation data failed to load.</b> {initialData.loadError} Saving is
+          disabled to protect the existing curation.
+        </div>
+      ) : null}
 
       <div className="grid gap-6">
         <Panel
@@ -528,6 +539,7 @@ export function HomepageCurationClient({
               : idsFor(picker.key)
           }
           max={picker.max}
+          loadError={initialData.stylesLoadError}
           onClose={() => setPicker(null)}
           onChange={(ids) => {
             if (
@@ -680,6 +692,7 @@ function ImagePicker({
   styles,
   selected,
   max,
+  loadError,
   onChange,
   onClose,
 }: {
@@ -687,14 +700,13 @@ function ImagePicker({
   styles: HomepageAdminStyle[];
   selected: string[];
   max: number;
+  loadError: string | null;
   onChange: (ids: string[]) => void;
   onClose: () => void;
 }) {
   const [query, setQuery] = useState("");
   const selectedSet = new Set(selected);
-  const visible = styles.filter((style) =>
-    `${style.title} ${style.slug}`.toLowerCase().includes(query.toLowerCase()),
-  );
+  const visible = filterHomepageAdminStyles(styles, query);
   return (
     <div
       className="fixed inset-0 z-[100] grid place-items-center bg-black/70 p-3"
@@ -742,6 +754,15 @@ function ImagePicker({
               </button>
             );
           })}
+          {visible.length === 0 ? (
+            <p className="col-span-full m-0 rounded-xl border border-dashed border-[var(--line)] p-6 text-center text-sm text-[var(--muted)]">
+              {loadError
+                ? "Styles could not be loaded. Apply the latest Supabase migrations and refresh this page."
+                : styles.length === 0
+                  ? "No published styles are available."
+                  : `No styles match “${query.trim()}”. Try another search.`}
+            </p>
+          ) : null}
         </div>
       </div>
     </div>

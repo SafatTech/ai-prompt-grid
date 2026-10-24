@@ -1,10 +1,14 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
+  filterHomepageAdminStyles,
+  getHomepageAdminData,
   homepageCurationSaveSchema,
   MAX_NEW_PINS,
   MAX_TRENDING,
+  type HomepageAdminStyle,
 } from "../../src/lib/admin/homepage";
+import type { SupabaseClient } from "@supabase/supabase-js";
 import {
   DEFAULT_HOMEPAGE_SETTINGS,
   homepageSettingsSchema,
@@ -69,5 +73,66 @@ describe("homepage curation", () => {
       }).success,
       false,
     );
+  });
+
+  it("finds picker styles by title or slug without case sensitivity", () => {
+    const baseStyle: HomepageAdminStyle = {
+      id: ids[0]!,
+      slug: "golden-hour-portrait",
+      title: "Golden Hour Portrait",
+      resultUrl: "/golden.webp",
+      publishedAt: null,
+      saveCount: 0,
+      trendingRank: null,
+      pinNewRank: null,
+      showOnHome: true,
+      hideFromNew: false,
+      exploreWeight: 0,
+      excludeFromExplore: false,
+      allowInHero: true,
+      heroPriority: 0,
+    };
+    const otherStyle = {
+      ...baseStyle,
+      id: ids[1]!,
+      slug: "editorial",
+      title: "Editorial Portrait",
+    };
+
+    assert.deepEqual(filterHomepageAdminStyles([baseStyle, otherStyle], " GOLDEN "), [
+      baseStyle,
+    ]);
+    assert.deepEqual(filterHomepageAdminStyles([baseStyle, otherStyle], "editorial"), [
+      otherStyle,
+    ]);
+  });
+
+  it("returns an actionable error instead of silently treating a failed query as empty", async () => {
+    function query(result: { data: unknown; error: { message: string } | null }) {
+      const chain = {
+        select: () => chain,
+        eq: () => chain,
+        order: async () => result,
+        maybeSingle: async () => result,
+      };
+      return chain;
+    }
+
+    const client = {
+      from: (table: string) =>
+        table === "styles"
+          ? query({ data: null, error: { message: "column does not exist" } })
+          : query({ data: null, error: null }),
+    } as unknown as SupabaseClient;
+    const originalWarn = console.warn;
+    console.warn = () => undefined;
+    try {
+      const data = await getHomepageAdminData(client);
+      assert.deepEqual(data.styles, []);
+      assert.match(data.stylesLoadError ?? "", /latest Supabase migrations/);
+      assert.equal(data.loadError, data.stylesLoadError);
+    } finally {
+      console.warn = originalWarn;
+    }
   });
 });
