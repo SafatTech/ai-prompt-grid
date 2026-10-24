@@ -1,7 +1,12 @@
 import { cache } from "react";
+import { unstable_cache } from "next/cache";
 import { z } from "zod";
 import { createPublicSupabaseClient } from "@/lib/supabase/public";
 import { isSupabaseConfigured } from "@/lib/env";
+import {
+  HOMEPAGE_SETTINGS_CACHE_TAG,
+  PUBLIC_DATA_REVALIDATE_SECONDS,
+} from "@/lib/catalog/public-cache";
 import { activeSeason, SEASONS, type Season, type SeasonChip } from "./seasons";
 
 export const seasonChipSchema = z.object({
@@ -68,7 +73,7 @@ export function mapHomepageSettings(row: SettingsRow | null): HomepageSettings {
   return parsed.success ? parsed.data : DEFAULT_HOMEPAGE_SETTINGS;
 }
 
-export const getHomepageSettings = cache(async (): Promise<HomepageSettings> => {
+async function fetchHomepageSettings(): Promise<HomepageSettings> {
   if (!isSupabaseConfigured()) return DEFAULT_HOMEPAGE_SETTINGS;
   try {
     const client = createPublicSupabaseClient();
@@ -92,6 +97,20 @@ export const getHomepageSettings = cache(async (): Promise<HomepageSettings> => 
     console.warn("[home] curation settings failed; using defaults.", error);
     return DEFAULT_HOMEPAGE_SETTINGS;
   }
+}
+
+const getCachedHomepageSettings = unstable_cache(
+  fetchHomepageSettings,
+  ["homepage-settings-v1"],
+  {
+    tags: [HOMEPAGE_SETTINGS_CACHE_TAG],
+    revalidate: PUBLIC_DATA_REVALIDATE_SECONDS,
+  },
+);
+
+export const getHomepageSettings = cache(async (): Promise<HomepageSettings> => {
+  if (!isSupabaseConfigured()) return fetchHomepageSettings();
+  return getCachedHomepageSettings();
 });
 
 export function resolveHomepageSeason(

@@ -12,8 +12,8 @@ import {
 } from "@/lib/catalog/style-meta";
 import { absoluteUrl } from "@/lib/site-url";
 
-/** Refresh after catalog asset edits (e.g. blur backfill) without a full redeploy. */
-export const revalidate = 60;
+/** Hourly safety net; admin catalog writes invalidate cached data and paths. */
+export const revalidate = 3600;
 
 export async function generateStaticParams() {
   const styles = await listPublishedStyles();

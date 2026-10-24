@@ -1,6 +1,8 @@
 import { cache } from "react";
+import { unstable_cache } from "next/cache";
 import { getPublicSupabaseConfig, isSupabaseConfigured } from "@/lib/env";
 import { createPublicSupabaseClient } from "@/lib/supabase/public";
+import { PUBLIC_CATALOG_CACHE_TAG, PUBLIC_DATA_REVALIDATE_SECONDS } from "./public-cache";
 import {
   compareNewestDesc,
   compareSavedDesc,
@@ -50,7 +52,19 @@ const STYLE_SELECT = `
   trending_rank,
   status,
   categories ( name, slug ),
-  prompt_variants ( * ),
+  prompt_variants (
+    id,
+    tool,
+    mode,
+    input_image_count,
+    input_image_roles,
+    version,
+    template,
+    variables,
+    test_record,
+    is_primary,
+    status
+  ),
   style_assets ( ${STYLE_ASSET_SELECT} )
 `;
 
@@ -70,9 +84,9 @@ function mapRows(rows: DbStyleRow[]): CatalogStyle[] {
  * Published catalog for guest UI.
  * Prefers Supabase when configured; falls back to static seed otherwise.
  * Uses a cookie-free anon client so catalog pages can prerender.
- * Cached per request so homepage rails share one fetch.
+ * Cached across requests so all public routes and ISR renders share one read.
  */
-export const listPublishedStyles = cache(async (): Promise<CatalogStyle[]> => {
+async function fetchPublishedStyles(): Promise<CatalogStyle[]> {
   if (!isSupabaseConfigured()) {
     return [...getPublishedStyles()].sort(compareSavedDesc);
   }
@@ -109,6 +123,22 @@ export const listPublishedStyles = cache(async (): Promise<CatalogStyle[]> => {
     console.warn("[catalog] Unexpected catalog error; using seed fallback.", err);
     return [...getPublishedStyles()].sort(compareSavedDesc);
   }
+}
+
+const getCachedPublishedStyles = unstable_cache(
+  fetchPublishedStyles,
+  ["published-catalog-v2"],
+  {
+    tags: [PUBLIC_CATALOG_CACHE_TAG],
+    revalidate: PUBLIC_DATA_REVALIDATE_SECONDS,
+  },
+);
+
+/** React cache also deduplicates concurrent callers in a single render. */
+export const listPublishedStyles = cache(async (): Promise<CatalogStyle[]> => {
+  // Keep seed-only local/test use independent of Next's runtime cache context.
+  if (!isSupabaseConfigured()) return fetchPublishedStyles();
+  return getCachedPublishedStyles();
 });
 
 /**
@@ -148,51 +178,19 @@ export async function listNewestStyles(limit = 12): Promise<CatalogStyle[]> {
 export async function listTrendingStyles(limit = 6): Promise<CatalogStyle[]> {
   const capped = Math.min(Math.max(limit, 1), 12);
   const all = (await listPublishedStyles()).filter((style) => style.showOnHome !== false);
-
-  if (!isSupabaseConfigured()) {
-    return all.slice(0, capped);
+  const ranked = all
+    .filter((style) => style.trendingRank != null)
+    .sort((a, b) => (a.trendingRank ?? 0) - (b.trendingRank ?? 0))
+    .slice(0, capped);
+  if (ranked.length < capped) {
+    const seen = new Set(ranked.map((style) => style.id));
+    for (const style of all) {
+      if (seen.has(style.id)) continue;
+      ranked.push(style);
+      if (ranked.length >= capped) break;
+    }
   }
-
-  try {
-    const supabase = createPublicSupabaseClient();
-    if (!supabase) return all.slice(0, capped);
-
-    const { data, error } = await supabase
-      .from("styles")
-      .select(STYLE_SELECT)
-      .eq("status", "published")
-      .not("trending_rank", "is", null)
-      .order("trending_rank", { ascending: true })
-      .limit(capped);
-
-    if (error) {
-      console.warn(
-        "[catalog] Trending query failed; using catalog fallback.",
-        error.message,
-      );
-      return all.slice(0, capped);
-    }
-
-    const mapped = mapRows((data ?? []) as DbStyleRow[]).filter(
-      (style) => style.showOnHome !== false,
-    );
-    if (mapped.length === 0) {
-      return all.slice(0, capped);
-    }
-
-    if (mapped.length < capped) {
-      const seen = new Set(mapped.map((style) => style.id));
-      for (const style of all) {
-        if (seen.has(style.id)) continue;
-        mapped.push(style);
-        if (mapped.length >= capped) break;
-      }
-    }
-    return mapped;
-  } catch (err) {
-    console.warn("[catalog] Unexpected trending error; using catalog fallback.", err);
-    return all.slice(0, capped);
-  }
+  return ranked;
 }
 
 export type HeroWallImage = {
@@ -326,33 +324,7 @@ export async function listExploreFeed(options?: {
 
 /** Exact published style count for trust / CTA copy (no made-up padding). */
 export async function countPublishedStyles(): Promise<number> {
-  if (!isSupabaseConfigured()) {
-    return (await listPublishedStyles()).length;
-  }
-
-  try {
-    const supabase = createPublicSupabaseClient();
-    if (!supabase) return (await listPublishedStyles()).length;
-
-    const { count, error } = await supabase
-      .from("styles")
-      .select("id", { count: "exact", head: true })
-      .eq("status", "published");
-
-    if (error || count == null) {
-      if (error) {
-        console.warn(
-          "[catalog] Published count failed; using list length.",
-          error.message,
-        );
-      }
-      return (await listPublishedStyles()).length;
-    }
-    return count;
-  } catch (err) {
-    console.warn("[catalog] Unexpected published count error; using list length.", err);
-    return (await listPublishedStyles()).length;
-  }
+  return (await listPublishedStyles()).length;
 }
 
 /** Lightweight published-style rows for sitemap generation. */
@@ -517,35 +489,13 @@ function parseSitemapDate(value: string): Date {
   return Number.isNaN(parsed.getTime()) ? new Date() : parsed;
 }
 
-export async function getPublishedStyleBySlug(
-  slug: string,
-): Promise<CatalogStyle | undefined> {
-  if (!isSupabaseConfigured()) {
-    return getPublishedStyleById(slug);
-  }
-
-  try {
-    const supabase = createPublicSupabaseClient();
-    if (!supabase) return getPublishedStyleById(slug);
-
-    const { data, error } = await supabase
-      .from("styles")
-      .select(STYLE_SELECT)
-      .eq("slug", slug)
-      .eq("status", "published")
-      .maybeSingle();
-
-    if (error) {
-      console.warn("[catalog] Style lookup failed; using seed fallback.", error.message);
-      return getPublishedStyleById(slug);
-    }
-
-    if (!data) return getPublishedStyleById(slug);
-
-    const mapped = mapDbStyleToCatalog(data as DbStyleRow, publicBaseUrl());
-    return mapped?.status === "published" ? mapped : undefined;
-  } catch (err) {
-    console.warn("[catalog] Unexpected style lookup error; using seed fallback.", err);
-    return getPublishedStyleById(slug);
-  }
-}
+/**
+ * Resolve from the shared catalog instead of issuing one PostgREST request per
+ * style during generateStaticParams/build. The detail page needs this catalog
+ * for related styles anyway.
+ */
+export const getPublishedStyleBySlug = cache(
+  async (slug: string): Promise<CatalogStyle | undefined> =>
+    (await listPublishedStyles()).find((style) => style.id === slug) ??
+    getPublishedStyleById(slug),
+);

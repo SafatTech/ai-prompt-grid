@@ -6,6 +6,7 @@ import {
   listTrendingAdminStyles,
   setTrendingStyles,
 } from "@/lib/admin/trending";
+import { expirePublicCatalogCache } from "@/lib/catalog/public-cache-invalidation";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
 export const runtime = "nodejs";
@@ -59,6 +60,7 @@ export async function PUT(request: Request) {
   }
 
   // Homepage prerenders trending from the public catalog; bust that cache on save.
+  expirePublicCatalogCache();
   revalidatePath("/");
 
   const styles = await listTrendingAdminStyles(supabase);

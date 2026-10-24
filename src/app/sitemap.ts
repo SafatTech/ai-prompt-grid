@@ -6,8 +6,8 @@ import { guideSitemapEntries } from "@/lib/seo/guide-sitemap";
 import { dedupedStylePaths, explorePaginationPaths } from "@/lib/seo/public-paths";
 import { absoluteUrl } from "@/lib/site-url";
 
-/** Refresh often so newly published styles (and seed unions) reach crawlers quickly. */
-export const revalidate = 300;
+/** Hourly safety net; publishing also revalidates the sitemap on demand. */
+export const revalidate = 3600;
 
 const STATIC_PAGES: Array<{
   path: string;

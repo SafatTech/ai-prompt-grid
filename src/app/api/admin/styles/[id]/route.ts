@@ -1,16 +1,10 @@
 import { NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
-import {
-  canTransition,
-  listAdminStyles,
-  requireEditor,
-} from "@/lib/admin/access";
-import {
-  adminStyleContentSchema,
-  adminStyleStatusSchema,
-} from "@/lib/admin/schemas";
+import { canTransition, listAdminStyles, requireEditor } from "@/lib/admin/access";
+import { adminStyleContentSchema, adminStyleStatusSchema } from "@/lib/admin/schemas";
 import { fetchAdminStyleById } from "@/lib/admin/styles-read";
 import { updateAdminStyle } from "@/lib/admin/styles-write";
+import { expirePublicCatalogCache } from "@/lib/catalog/public-cache-invalidation";
 import type { PublishStatus } from "@/lib/catalog/types";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
@@ -70,6 +64,13 @@ export async function PUT(request: Request, context: RouteContext) {
   const result = await updateAdminStyle(supabase, access.userId, id, parsed.data);
   if (!result.ok) {
     return NextResponse.json({ error: result.error }, { status: result.status });
+  }
+  if (result.style.status === "published") {
+    expirePublicCatalogCache();
+    revalidatePath("/");
+    revalidatePath("/explore");
+    revalidatePath(`/styles/${result.style.slug}`);
+    revalidatePath("/sitemap.xml");
   }
   return NextResponse.json({ style: result.style });
 }
@@ -137,7 +138,8 @@ export async function PATCH(request: Request, context: RouteContext) {
     trending_rank?: null;
   } = {
     status: nextStatus,
-    published_at: nextStatus === "published" ? publishedAt : (current.published_at as string | null),
+    published_at:
+      nextStatus === "published" ? publishedAt : (current.published_at as string | null),
     updated_at: now,
   };
   // Only published styles can stay on the homepage trending grid.
@@ -145,10 +147,7 @@ export async function PATCH(request: Request, context: RouteContext) {
     patch.trending_rank = null;
   }
 
-  const { error: updateError } = await supabase
-    .from("styles")
-    .update(patch)
-    .eq("id", id);
+  const { error: updateError } = await supabase.from("styles").update(patch).eq("id", id);
 
   if (updateError) {
     console.warn("[admin] style update failed", updateError.message);
@@ -193,8 +192,10 @@ export async function PATCH(request: Request, context: RouteContext) {
   }
 
   // Unpublish clears trending_rank; publish/archive can change home + catalog surfaces.
+  expirePublicCatalogCache();
   revalidatePath("/");
   revalidatePath("/explore");
+  revalidatePath("/sitemap.xml");
   if (typeof current.slug === "string" && current.slug.length > 0) {
     revalidatePath(`/styles/${current.slug}`);
   }

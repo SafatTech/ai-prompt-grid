@@ -105,7 +105,7 @@ describe("sitemap handler", () => {
       path.join(process.cwd(), "src/app/sitemap.ts"),
       "utf8",
     );
-    assert.match(source, /revalidate\s*=\s*300/);
+    assert.match(source, /revalidate\s*=\s*3600/);
 
     const entries = await sitemap();
     const styleUrls = entries

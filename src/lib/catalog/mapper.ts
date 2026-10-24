@@ -85,6 +85,7 @@ export type DbStyleRow = {
   exclude_from_explore?: boolean;
   allow_in_hero?: boolean;
   hero_priority?: number;
+  trending_rank?: number | null;
   published_at?: string | null;
   created_at?: string | null;
   status: string;
@@ -308,6 +309,7 @@ export function mapDbStyleToCatalog(
     excludeFromExplore: row.exclude_from_explore === true,
     allowInHero: row.allow_in_hero !== false,
     heroPriority: row.hero_priority ?? 0,
+    trendingRank: row.trending_rank ?? null,
     publishedAt: row.published_at ?? row.created_at ?? null,
     source: card.source,
     result: card.result,

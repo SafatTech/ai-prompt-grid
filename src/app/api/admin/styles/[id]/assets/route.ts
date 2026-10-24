@@ -1,7 +1,9 @@
 import { randomUUID } from "node:crypto";
+import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { requireEditor } from "@/lib/admin/access";
 import { adminAssetUploadMetaSchema } from "@/lib/admin/schemas";
+import { expirePublicCatalogCache } from "@/lib/catalog/public-cache-invalidation";
 import { buildResultBlurDataUrl } from "@/lib/catalog/result-blur";
 import { processUploadImage } from "@/lib/creations/image";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
@@ -40,7 +42,7 @@ export async function POST(request: Request, context: RouteContext) {
 
   const { data: style, error: styleError } = await supabase
     .from("styles")
-    .select("id, slug")
+    .select("id, slug, status")
     .eq("id", styleId)
     .maybeSingle();
   if (styleError || !style) {
@@ -61,7 +63,10 @@ export async function POST(request: Request, context: RouteContext) {
 
   const role = String(form.get("role") || "");
   if (role !== "source" && role !== "result") {
-    return NextResponse.json({ error: "role must be source or result." }, { status: 400 });
+    return NextResponse.json(
+      { error: "role must be source or result." },
+      { status: 400 },
+    );
   }
 
   let metaRaw: unknown = {};
@@ -94,12 +99,13 @@ export async function POST(request: Request, context: RouteContext) {
     });
   if (uploadError) {
     console.warn("[admin] catalog upload failed", uploadError.message);
-    return NextResponse.json({ error: "Could not store catalog image." }, { status: 500 });
+    return NextResponse.json(
+      { error: "Could not store catalog image." },
+      { status: 500 },
+    );
   }
 
-  const { data: publicUrlData } = supabase.storage
-    .from(CATALOG_BUCKET)
-    .getPublicUrl(key);
+  const { data: publicUrlData } = supabase.storage.from(CATALOG_BUCKET).getPublicUrl(key);
   const publicUrl = publicUrlData.publicUrl;
 
   const existingId = String(form.get("assetId") || "");
@@ -117,9 +123,7 @@ export async function POST(request: Request, context: RouteContext) {
           ? { source_storage_key: publicUrl }
           : {
               result_storage_key: publicUrl,
-              result_blur_data_url: await buildResultBlurDataUrl(
-                processed.image.buffer,
-              ),
+              result_blur_data_url: await buildResultBlurDataUrl(processed.image.buffer),
             };
       await supabase
         .from("style_assets")
@@ -151,6 +155,13 @@ export async function POST(request: Request, context: RouteContext) {
     entity_id: styleId,
     payload: { assetId, role, key, kind: metaParsed.data.kind },
   });
+
+  if (style.status === "published") {
+    expirePublicCatalogCache();
+    revalidatePath("/");
+    revalidatePath("/explore");
+    revalidatePath(`/styles/${style.slug}`);
+  }
 
   return NextResponse.json({
     assetId,
