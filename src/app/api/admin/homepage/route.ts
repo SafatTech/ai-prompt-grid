@@ -19,7 +19,8 @@ export async function GET() {
   if (!access.ok) {
     return NextResponse.json({ error: access.error }, { status: access.status });
   }
-  return NextResponse.json(await getHomepageAdminData(supabase));
+  const data = await getHomepageAdminData(supabase);
+  return NextResponse.json(data, { status: data.loadError ? 500 : 200 });
 }
 
 export async function PUT(request: Request) {
