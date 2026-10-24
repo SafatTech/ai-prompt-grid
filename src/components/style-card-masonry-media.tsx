@@ -2,12 +2,25 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useRef, useState, type ReactNode } from "react";
+import { useEffect, useRef, useState } from "react";
 import { MergeBeforeAfter } from "@/components/merge-before-after";
-import type { StyleCardData } from "@/lib/catalog/style-card-data";
+import { SHARED_STYLE_BLUR } from "@/lib/catalog/shared-blur";
+import type {
+  StyleCardMergePhoto,
+  StyleCardMergeResult,
+} from "@/lib/catalog/style-card-data";
 
-type Props = {
-  style: StyleCardData;
+export type StyleCardMediaProps = {
+  /** Style slug / id — only scalar identity crosses this client boundary. */
+  styleId: string;
+  title: string;
+  result: string;
+  /** Unique blur only — shared placeholder is imported here (not RSC props). */
+  resultBlur?: string;
+  mediaWidth: number;
+  mediaHeight: number;
+  mergePhotos?: StyleCardMergePhoto[];
+  mergeResult?: StyleCardMergeResult;
   sizes: string;
   priority?: boolean;
   eager?: boolean;
@@ -15,7 +28,6 @@ type Props = {
   layoutAware?: boolean;
   /** Masonry uses natural result aspect; rails stay 4:5. */
   naturalAspect?: boolean;
-  hoverPreview?: ReactNode;
 };
 
 /**
@@ -48,21 +60,29 @@ function useMasonryMediaGate(active: boolean) {
 
 /**
  * Tiny client island for rail/masonry media (IO gate + next/image).
- * Keeps the card chrome as a Server Component.
+ * Receives only media fields — never the full StyleCardData RSC blob.
  */
 export function StyleCardMasonryMedia({
-  style,
+  styleId,
+  title,
+  result,
+  resultBlur,
+  mediaWidth,
+  mediaHeight,
+  mergePhotos = [],
+  mergeResult,
   sizes,
   priority = false,
   eager = false,
   layoutAware = false,
   naturalAspect = false,
-  hoverPreview,
-}: Props) {
-  const mergePhotos = style.mergePhotos;
+}: StyleCardMediaProps) {
   const { mediaRef, mediaReady } = useMasonryMediaGate(layoutAware);
   // Only priority / explicit eager flip loading — never "mediaReady ⇒ eager".
   const mediaLoading = priority ? undefined : eager ? "eager" : "lazy";
+  // Prefer a unique blur when provided; otherwise the tiny shared placeholder
+  // stays in the client chunk instead of repeating in every RSC card prop.
+  const blur = resultBlur || SHARED_STYLE_BLUR;
 
   return (
     <div
@@ -71,10 +91,10 @@ export function StyleCardMasonryMedia({
       style={
         naturalAspect
           ? {
-              aspectRatio: `${style.mediaWidth} / ${style.mediaHeight}`,
-              ...(style.resultBlur && !mediaReady
+              aspectRatio: `${mediaWidth} / ${mediaHeight}`,
+              ...(!mediaReady
                 ? {
-                    backgroundImage: `url(${style.resultBlur})`,
+                    backgroundImage: `url(${blur})`,
                     backgroundSize: "cover",
                     backgroundPosition: "center",
                   }
@@ -84,53 +104,47 @@ export function StyleCardMasonryMedia({
       }
     >
       {mediaReady ? (
-        mergePhotos.length >= 2 && style.mergeResult ? (
+        mergePhotos.length >= 2 && mergeResult ? (
           <Link
-            href={`/styles/${style.id}`}
+            href={`/styles/${styleId}`}
             className="absolute inset-0 block"
-            aria-label={`Open ${style.title}`}
+            aria-label={`Open ${title}`}
           >
-            <>
-              <MergeBeforeAfter
-                variant="card"
-                title={style.title}
-                inputs={mergePhotos}
-                result={style.mergeResult}
-                sizes={sizes}
-                priority={priority}
-                eager={eager}
-              />
-              {hoverPreview}
-            </>
+            <MergeBeforeAfter
+              variant="card"
+              title={title}
+              inputs={mergePhotos}
+              result={mergeResult}
+              sizes={sizes}
+              priority={priority}
+              eager={eager}
+            />
           </Link>
         ) : (
           <Link
-            href={`/styles/${style.id}`}
+            href={`/styles/${styleId}`}
             className="absolute inset-0 block"
-            aria-label={`Open ${style.title}`}
+            aria-label={`Open ${title}`}
           >
-            <>
-              <Image
-                src={style.result}
-                alt={`${style.title} AI photo result`}
-                fill
-                sizes={sizes}
-                className="object-cover"
-                priority={priority}
-                loading={mediaLoading}
-                fetchPriority={priority ? "high" : "auto"}
-                placeholder={style.resultBlur ? "blur" : "empty"}
-                blurDataURL={style.resultBlur}
-              />
-              {hoverPreview}
-            </>
+            <Image
+              src={result}
+              alt={`${title} AI photo result`}
+              fill
+              sizes={sizes}
+              className="object-cover"
+              priority={priority}
+              loading={mediaLoading}
+              fetchPriority={priority ? "high" : "auto"}
+              placeholder="blur"
+              blurDataURL={blur}
+            />
           </Link>
         )
       ) : (
         <Link
-          href={`/styles/${style.id}`}
+          href={`/styles/${styleId}`}
           className="absolute inset-0 block"
-          aria-label={`Open ${style.title}`}
+          aria-label={`Open ${title}`}
           tabIndex={-1}
         />
       )}

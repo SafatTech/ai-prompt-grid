@@ -7,15 +7,15 @@ import { useUiModals } from "@/components/providers/ui-modal-provider";
 import { cn } from "@/lib/utils";
 
 type Props = {
+  /** Style slug / id only — keeps the StyleCard shell a Server Component. */
   styleId: string;
-  title: string;
   className?: string;
 };
 
 /**
- * Hydrated save heart — keeps the StyleCard shell a Server Component on home.
+ * Hydrated save heart — receives only the style id/slug.
  */
-export function StyleCardSaveButton({ styleId, title, className }: Props) {
+export function StyleCardSaveButton({ styleId, className }: Props) {
   const { signedIn, isSaved, toggleSave, setPendingAction } = useLibrary();
   const { toast } = useToast();
   const { openSignIn } = useUiModals();
@@ -44,7 +44,7 @@ export function StyleCardSaveButton({ styleId, title, className }: Props) {
         saved && "bg-[rgba(255,155,130,0.12)] text-[var(--peach)]",
         className,
       )}
-      aria-label={saved ? `Unsave ${title}` : `Save ${title}`}
+      aria-label={saved ? "Unsave style" : "Save style"}
       data-testid={`save-style-${styleId}`}
       onClick={handleSave}
     >

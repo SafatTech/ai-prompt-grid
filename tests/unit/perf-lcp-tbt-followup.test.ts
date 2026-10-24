@@ -10,20 +10,41 @@ function read(rel: string) {
 }
 
 describe("perf LCP/TBT follow-up", () => {
-  it("inlines home critical CSS and tunes Geist for LCP text", () => {
+  it("bundles home.css through globals (no page/critical double sheet)", () => {
     const page = read("src/app/page.tsx");
-    assert.ok(page.includes("homeCriticalCss"));
-    assert.ok(fs.existsSync(path.join(root, "src/app/home-critical.css")));
-    const critical = read("src/app/home-critical.css");
-    assert.ok(critical.includes(".hero-wall-title"));
-    // Mobile overrides after base rules (same contract as home.css).
-    assert.ok(critical.indexOf(".hero-wall-title") < critical.indexOf("@media (max-width: 699px)"));
-    assert.ok(critical.includes("font-size: 44px"));
-
+    assert.ok(!page.includes('import "./home.css"'));
+    assert.ok(!page.includes("homeCriticalCss"));
+    assert.ok(!page.includes("home-critical.css"));
+    const globals = read("src/app/globals.css");
+    assert.ok(globals.includes('@import "./home.css"'));
     const layout = read("src/app/layout.tsx");
+    assert.ok(layout.includes('import "./globals.css"'));
+    assert.ok(!layout.includes('import "./home.css"'));
     assert.ok(layout.includes('display: "swap"'));
     assert.ok(layout.includes("adjustFontFallback: true"));
     assert.ok(layout.includes("preload: false"));
+  });
+
+  it("keeps server StyleCardRail out of client ExploreLoadMore", () => {
+    const loadMore = read("src/components/home/explore-load-more.tsx");
+    assert.ok(loadMore.includes("StyleCardRailClient"));
+    assert.ok(!loadMore.includes('from "@/components/style-card-rail"'));
+    assert.ok(!loadMore.includes("StyleCardRail "));
+
+    const rail = read("src/components/style-card-rail.tsx");
+    assert.ok(!rail.includes('"use client"'));
+    assert.ok(rail.includes("StyleCardSaveButton"));
+    assert.ok(rail.includes("CopyPromptButton"));
+    assert.ok(rail.includes("styleId={style.id}"));
+    assert.ok(!rail.includes("style={{ id:"));
+
+    const media = read("src/components/style-card-masonry-media.tsx");
+    assert.ok(media.includes("styleId: string"));
+    assert.ok(!media.includes("style: StyleCardData"));
+
+    const copy = read("src/components/home/copy-prompt-button.tsx");
+    assert.ok(copy.includes("styleId: string"));
+    assert.ok(!copy.includes("Pick<StyleCardData"));
   });
 
   it("passes slim related-guide cards (no Guide.body) into the client island", () => {
@@ -32,8 +53,6 @@ describe("perf LCP/TBT follow-up", () => {
     const lazy = read("src/components/guides/guide-related-lazy.tsx");
     assert.ok(lazy.includes("RelatedGuideCard"));
     assert.ok(!lazy.includes('from "@/lib/guides/load"'));
-    const rail = read("src/components/style-card-rail.tsx");
-    assert.ok(rail.includes("style={{ id: style.id, title: style.title }}"));
   });
 
   it("reads explore ?offset= on the faceted (rewritten) server path", () => {
@@ -45,5 +64,28 @@ describe("perf LCP/TBT follow-up", () => {
     const view = read("src/components/explore/explore-page-view.tsx");
     assert.ok(view.includes("parseExploreOffset"));
     assert.ok(view.includes("offset > 0"));
+  });
+
+  it("N-29: ClipboardItem sync copy with prefetch + Copying state", () => {
+    const copy = read("src/components/home/copy-prompt-button.tsx");
+    assert.ok(copy.includes("ClipboardItem"));
+    assert.ok(copy.includes("navigator.clipboard.write"));
+    assert.ok(copy.includes("writeText"));
+    assert.ok(copy.includes("onPointerEnter"));
+    assert.ok(copy.includes("onTouchStart"));
+    assert.ok(copy.includes("Copying…"));
+    assert.ok(copy.includes("styleId: string"));
+  });
+
+  it("N-30: seeds explore appliedQuery from server offset cards", () => {
+    const client = read("src/components/explore/explore-client.tsx");
+    assert.ok(client.includes("useRef<string | null>(initialQueryString)"));
+    assert.ok(client.includes("listingLoading && visible.length === 0"));
+  });
+
+  it("style hero sizes target ~364px at 390 viewport", () => {
+    const preload = read("src/lib/images/next-image-preload.ts");
+    assert.ok(preload.includes("364px"));
+    assert.ok(!preload.includes("(max-width:640px) 320px"));
   });
 });

@@ -22,6 +22,11 @@ export function RelatedStylesLazy(props: RelatedProps) {
     const node = ref.current;
     if (!node) return;
     let cancelled = false;
+    // Large prefetch margin on mobile only — desktop was loading ~15 images early.
+    const rootMargin =
+      typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches
+        ? "2000px 0px"
+        : "600px 0px";
     const io = new IntersectionObserver(
       ([entry]) => {
         if (!entry?.isIntersecting) return;
@@ -30,7 +35,7 @@ export function RelatedStylesLazy(props: RelatedProps) {
           if (!cancelled) setComp(() => mod.RelatedStyles);
         });
       },
-      { rootMargin: "2000px 0px" },
+      { rootMargin },
     );
     io.observe(node);
     return () => {

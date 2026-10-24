@@ -110,6 +110,7 @@ export function toStyleCardData(
       }
     : undefined;
 
+  const copyPrompt = includeCopyPrompt && assembled.ok ? assembled.prompt : "";
   return {
     id: style.id,
     title: style.title,
@@ -122,9 +123,15 @@ export function toStyleCardData(
     result: style.result,
     ...(resultBlur ? { resultBlur } : {}),
     promptPreview,
-    copyPrompt: includeCopyPrompt && assembled.ok ? assembled.prompt : "",
-    promptVariantId: style.promptVariant.id,
-    promptTool: assembled.ok ? assembled.tool : style.promptVariant.tool,
+    // Home copy button fetches on click — omit empty prompt fields on rails.
+    copyPrompt,
+    promptVariantId: rail && !copyPrompt ? "" : style.promptVariant.id,
+    promptTool:
+      rail && !copyPrompt
+        ? ""
+        : assembled.ok
+          ? assembled.tool
+          : style.promptVariant.tool,
     mediaWidth: pair?.resultWidth && pair.resultWidth > 0 ? pair.resultWidth : 800,
     mediaHeight: pair?.resultHeight && pair.resultHeight > 0 ? pair.resultHeight : 1000,
     mergePhotos,

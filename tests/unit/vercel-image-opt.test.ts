@@ -121,16 +121,23 @@ describe("Vercel image optimization toggle", () => {
     assert.ok(compare.includes("priority && !large"));
 
     const stylePage = readSrc("src/app/styles/[slug]/page.tsx");
-    assert.ok(stylePage.includes("preload("));
-    assert.ok(stylePage.includes("DETAIL_HERO_SIZES"));
-    assert.ok(stylePage.includes("imageSrcSet"));
-    assert.ok(stylePage.includes("nextImagePreloadUrl(style.result, 640)"));
+    // Prefer Image priority + fetchPriority over react-dom preload (CSS race).
+    assert.ok(!stylePage.includes("preload("));
+    assert.ok(!stylePage.includes("nextImagePreloadUrl"));
+
+    const detail = readSrc("src/components/styles/style-detail-client.tsx");
+    assert.ok(detail.includes("priority"));
 
     const merge = readSrc("src/components/merge-before-after.tsx");
     assert.ok(merge.includes("DETAIL_HERO_SIZES"));
 
     const related = readSrc("src/components/styles/related-styles-lazy.tsx");
-    assert.ok(related.includes('rootMargin: "2000px 0px"'));
+    assert.ok(related.includes('"2000px 0px"'));
+    assert.ok(related.includes('"600px 0px"'));
+    assert.ok(related.includes("max-width: 767px"));
+
+    const heroSizes = readSrc("src/lib/images/next-image-preload.ts");
+    assert.ok(heroSizes.includes("364px"));
 
     const page = readSrc("src/app/page.tsx");
     assert.ok(page.includes("HOME_MASONRY_PAGE_SIZE"));
