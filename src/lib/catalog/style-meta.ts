@@ -1,6 +1,7 @@
 import { animeStyleIds } from "./seed-anime-styles";
 import { birthdayStyleIds } from "./seed-birthday-styles";
 import { boysStyleIds } from "./seed-boys-styles";
+import { characterStyleIds } from "./seed-character-styles";
 import { christmasStyleIds } from "./seed-christmas-styles";
 import { eightiesStyleIds } from "./seed-80s-styles";
 import { linkedinStyleIds } from "./seed-linkedin-styles";
@@ -53,7 +54,7 @@ function fitDocumentTitle(look: string): string | { absolute: string } {
  * Style document titles. When the catalog title is already a full SEO prompt
  * title (contains "Prompt"), use it as-is via fitDocumentTitle so the root
  * ` · AI Prompt Grid` template does not double-append past 60 characters.
- * Legacy short 1980s looks still get " AI Photo Prompt"; other short looks get
+ * Legacy short 1980s looks and the character action styles get " AI Photo Prompt"; other short looks get
  * " Prompt". LinkedIn, merge, winter, anime, birthday, boys, and Christmas titles stay unchanged.
  */
 export function styleMetadataTitle(style: {
@@ -63,7 +64,7 @@ export function styleMetadataTitle(style: {
   if (/\bPrompt\b/i.test(style.title)) {
     return fitDocumentTitle(style.title);
   }
-  if (eightiesStyleIds.has(style.id)) {
+  if (eightiesStyleIds.has(style.id) || characterStyleIds.has(style.id)) {
     return fitDocumentTitle(`${style.title} AI Photo Prompt`);
   }
   if (

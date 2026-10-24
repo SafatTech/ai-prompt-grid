@@ -150,6 +150,81 @@ export const moodLabels: Record<string, string> = {
   "Faded 70s film": "Faded 70s",
   "Cozy festive warm": "Cozy festive",
   "Festive red and green evening": "Red green evening",
+  "Electric teal and violet": "Electric teal violet",
+  "Warm sunny storybook": "Sunny storybook",
+  "Clean studio daylight": "Studio daylight",
+  "Pink and cyan neon": "Pink cyan neon",
+  "Bold flash pop": "Bold flash pop",
+  "Icy silver and blue": "Icy silver blue",
+  "Teal and magenta neon": "Teal magenta neon",
+  "Green and cyan code glow": "Code glow",
+  "Deep violet high contrast": "Deep violet",
+  "Clean neutral studio": "Neutral studio",
+  "Rainy neon action": "Rainy neon action",
+  "Cold steel and gold rays": "Steel and gold rays",
+  "Twilight emerald glow": "Twilight emerald",
+  "Soft misty dawn": "Misty dawn",
+  "Twilight indigo and lamp gold": "Indigo lamp gold",
+  "Golden hour adventure": "Golden adventure",
+  "Graphite and electric blue": "Graphite electric blue",
+  "Night city blue and gold": "Night city gold",
+  "Neon night teal": "Neon night teal",
+  "Rainy steel blue": "Rainy steel blue",
+  "Fiery dusk orange and teal": "Fiery dusk teal",
+  "Bright playful primary colors": "Playful primaries",
+  "Stormy blue lightning": "Stormy lightning",
+  "Explosive orange and blue": "Explosive orange blue",
+  "Galaxy violet and gold": "Galaxy violet gold",
+  "Blazing gold power": "Blazing gold",
+  "Pastel 90s sunset": "Pastel 90s sunset",
+  "Glowing sunset painterly": "Painterly sunset",
+  "Moonlit silver blue": "Moonlit silver blue",
+  "Sunset orange and leaf green": "Sunset leaf green",
+  "Crimson autumn": "Crimson autumn",
+  "Soft pastel candy": "Pastel candy",
+  "Warm golden glow on dark": "Golden glow dark",
+  "Steel blue and warning orange": "Steel and warning orange",
+  "Soft blossom pink": "Blossom pink",
+  "Hot sunset orange and pink": "Hot sunset pink",
+  "Grey-blue misty dark fantasy": "Misty dark fantasy",
+  "Glowing gamer blue": "Gamer blue",
+  "Bright tropical pop": "Tropical pop",
+  "Saturated splash-art": "Splash-art color",
+  "Retro bright pixel": "Retro pixel",
+  "Sunny candy pastel": "Candy pastel",
+  "Crimson versus electric blue": "Crimson versus blue",
+  "Cold misty steel": "Cold misty steel",
+  "Misty jade mountains": "Misty jade",
+  "Sun-dappled forest gold": "Forest gold",
+  "Royal jewel tones": "Royal jewel tones",
+  "Fiery ember sky": "Fiery ember sky",
+  "Faded 80s film": "Faded 80s film",
+  "Candlelit magic gold": "Candlelit gold",
+  "Violet arcane glow": "Violet arcane",
+  "Desert sunset gold": "Desert sunset gold",
+  "Dusty desert sci-fi": "Dusty desert sci-fi",
+  "Cosmic blue wonder": "Cosmic blue",
+  "Chrome and cyan rim": "Chrome cyan rim",
+  "Neon crimson and cyan": "Neon crimson cyan",
+  "Burnt orange desert": "Burnt orange desert",
+  "Moody blockbuster teal and orange": "Blockbuster teal orange",
+  "Warm 70s painted": "Warm 70s painted",
+  "Grainy flash shadows": "Grainy flash",
+  "Early-2000s digital flash": "Early-2000s flash",
+  "Black and white noir": "Black and white noir",
+  "Glamorous night gold": "Glamorous night gold",
+  "Dusty sunset sepia": "Dusty sepia",
+  "Desaturated survival": "Desaturated survival",
+  "Cold steel 1920s": "Cold steel 1920s",
+  "Moody candle and fog": "Candle and fog",
+  "Pastel candlelit romance": "Pastel candlelit",
+  "Moonlit crimson": "Moonlit crimson",
+  "Soft magical rose gold": "Magical rose gold",
+  "Moody brown dark academia": "Dark academia brown",
+  "Saturated 90s toy colors": "90s toy colors",
+  "Bright toy primaries": "Bright toy primaries",
+  "Cozy warm craft": "Cozy craft",
+  "Warm handmade clay": "Handmade clay",
 };
 
 /** Short 2–3 word UI labels for full background prompt strings. */
@@ -444,6 +519,149 @@ export const backgroundLabels: Record<string, string> = {
     "Under the tree",
   "Festive outdoor lane at dusk lined with giant candy canes, oversized wrapped gift-box displays and decorated pine trees":
     "Candy cane lane",
+  "Sleek futuristic training arena with glowing floor lines, floating hexagon barriers and a hazy skyline beyond":
+    "Training arena",
+  "Rolling green meadow full of wildflowers under huge soft cumulus clouds, a lone tree and distant hills":
+    "Wildflower meadow",
+  "Tidy creator's desk with a computer monitor showing an untextured 3D model of the same figure, soft daylight from a window":
+    "Creator's desk",
+  "Rain-soaked city side street at night with pink and cyan neon glow, reflections on wet pavement and drifting steam":
+    "Neon side street",
+  "Seamless saturated orange studio backdrop with a hard shadow on the wall":
+    "Orange studio",
+  "Glossy white iceberg runway on still arctic water under a vast overcast sky, distant ice cliffs and drifting mist":
+    "Iceberg runway",
+  "Crowded-looking neon night market alley with glowing holographic stall canopies, steam vents and heavy rain, all signs showing abstract shapes":
+    "Neon night market",
+  "Dark room lit only by a curved wall of monitors showing abstract glowing code patterns, tangled cables and server lights":
+    "Monitor wall room",
+  "Pure black studio background filled with swirling violet smoke":
+    "Violet smoke studio",
+  "Seamless mid-grey studio backdrop with soft vignette": "Grey studio",
+  "Rain-soaked neon city street at night with glowing signs showing only abstract shapes, puddles and steam":
+    "Rainy neon street",
+  "Ruined flooded gothic cathedral with tall stained-glass windows, broken pillars and god rays cutting through mist":
+    "Flooded cathedral",
+  "Giant ancient forest canopy at dusk with huge mossy roots, hanging vines and swarms of fireflies":
+    "Firefly forest",
+  "Cliff ledge above a misty mountain valley at sunrise with layered peaks and soft gold light":
+    "Misty cliff ledge",
+  "Old observatory dome with the slit open to a deep twilight sky with a meteor shower, star charts and warm brass lamps":
+    "Old observatory",
+  "Deck of a wooden flying galleon sailing above a sea of clouds at golden hour, billowing sails and rigging":
+    "Flying galleon deck",
+  "City rooftop at dusk with glowing skyscrapers, wind-blown haze and a dramatic sky":
+    "Dusk city rooftop",
+  "Skyscraper ledge high above a glowing city at night with searchlights and drifting clouds":
+    "Night skyscraper ledge",
+  "Glass-and-steel tower wall between neon skyscrapers at night, high above traffic light trails":
+    "Glass tower wall",
+  "Stone gargoyle ledge on a gothic tower in heavy rain above a moody city skyline with lightning":
+    "Gargoyle tower ledge",
+  "Ruined city skyline at dusk with smoke columns, floating debris and a glowing energy-charged sky":
+    "Ruined city skyline",
+  "Colorful toy-town rooftops under a bright blue sky with puffy clouds and paper-kite birds":
+    "Toy-town rooftops",
+  "Stormy sea cliff with towering black clouds, crashing waves and forked lightning":
+    "Stormy sea cliff",
+  "Poster backdrop of a city skyline with a huge fiery explosion glow and smoke behind":
+    "Explosion skyline",
+  "Deep space with a swirling purple and gold nebula, distant planets and star dust":
+    "Purple gold nebula",
+  "Shattered rocky battlefield with floating boulders, cracked ground and a stormy sky":
+    "Floating boulder field",
+  "City rooftop at sunset with pastel pink and lavender sky, power lines and a soft sunset glow":
+    "Pastel sunset rooftop",
+  "Grassy hilltop under a huge towering cloud-filled sunset sky with distant hills and wind-swept grass":
+    "Sunset hilltop",
+  "Moonlit bamboo grove with mist and drifting leaves": "Moonlit bamboo grove",
+  "Tiled rooftops of a hillside village at sunset with swirling leaves and distant mountains":
+    "Sunset village rooftops",
+  "Mountain path with blazing red maple trees and swirling falling leaves":
+    "Red maple path",
+  "Soft pastel studio backdrop with floating hearts, stars and confetti":
+    "Pastel hearts studio",
+  "Dark moody room with soft shadows": "Dark moody room",
+  "Hangar launch bay at dusk with a towering original giant robot behind, steam, sparks and warning lights":
+    "Robot hangar bay",
+  "Petal-covered path under arching cherry blossom trees with sparkles in the air":
+    "Cherry blossom path",
+  "Palm-lined coastal city boulevard at sunset with a sleek original sports car with no badges or plates":
+    "Palm sunset boulevard",
+  "Misty grey-blue waterfall gorge with damp black rocks and pale mist":
+    "Waterfall gorge",
+  "Character-select menu screen with a glowing circular platform, abstract icon stat bars without numbers and soft holographic panels":
+    "Character-select screen",
+  "Colorful stylized tropical island with bright trees, floating supply crates and a blue sky":
+    "Tropical island",
+  "Abstract dynamic splash-art backdrop of bright energy shapes and paint-like streaks":
+    "Splash-art backdrop",
+  "16-bit pixel-art fantasy overworld with a castle, forest and river, with plain icon-only health bars":
+    "Pixel overworld",
+  "Candy-colored floating voxel islands with rounded pastel trees, a little waterfall and a bright sky with soft round clouds":
+    "Floating voxel islands",
+  "Split arena versus screen with a crimson side and an electric-blue side and plain health bars at the top":
+    "Versus screen",
+  "Misty ruined castle courtyard with broken arches, cold fog and falling ash":
+    "Ruined castle courtyard",
+  "Misty mountain path among bamboo and pine with towering cloud-wrapped peaks":
+    "Misty mountain path",
+  "Sun-dappled ancient forest with huge trees, ferns and light shafts":
+    "Sun-dappled forest",
+  "Marble palace courtyard with carved arches, hanging lanterns, fountains and rose petals":
+    "Marble palace courtyard",
+  "Jagged mountain peaks above the clouds at sunset with smoke and ember-filled air":
+    "Ember mountain peaks",
+  "Foggy sword-and-sorcery set with crumbling stone pillars, smoke machines and colored gels":
+    "Foggy fantasy set",
+  "Candle-lit castle library with towering shelves, floating books and warm hanging lanterns":
+    "Castle library",
+  "Gothic tower chamber with a tall arched window, stormy night and floating candles":
+    "Gothic tower chamber",
+  "Rolling sand dunes at sunset with a golden palace far away and swirling sand":
+    "Sunset sand dunes",
+  "Sunbaked desert spaceport with rounded cargo containers and dome hangars, heat haze and dust storms":
+    "Desert spaceport",
+  "Alien planet surface with glowing crystals, craters and Earth rising in a starry sky":
+    "Crystal alien planet",
+  "Dark studio with cyan and orange rim lights and faint floating particles":
+    "Rim-lit dark studio",
+  "Rainy neon megacity rooftop with glowing signs showing only abstract shapes and holograms":
+    "Neon megacity rooftop",
+  "Vast orange dunes under a single huge pale sun with sand storms on the horizon":
+    "Single-sun dunes",
+  "Blockbuster poster backdrop of a city skyline at night with explosions and searchlights":
+    "Blockbuster skyline",
+  "Hand-painted 1970s cinema poster backdrop with dramatic sky, burst lines and grainy texture":
+    "70s painted poster",
+  "Dim late-90s bedroom hallway at night": "Dim 90s hallway",
+  "Dark home hallway at night with a half-open doorway": "Dark home hallway",
+  "1940s detective office at night with venetian blinds, rain on the window and smoke haze":
+    "1940s detective office",
+  "Casino-style marble balcony at night over a glittering harbor with fireworks":
+    "Harbor night balcony",
+  "Dusty frontier town street at sunset with wooden storefronts showing no signs and tumbleweeds":
+    "Frontier town street",
+  "Abandoned overgrown city street with rusted cars, vines and smoke on the horizon":
+    "Overgrown city street",
+  "Smoky industrial 1920s street with brick factories, cobblestones and gas lamps":
+    "1920s industrial street",
+  "Foggy moor with a dark gothic manor and storm clouds": "Foggy gothic moor",
+  "Candle-lit Regency ballroom with chandeliers and pastel flowers":
+    "Regency ballroom",
+  "Misty pine forest at night under a huge full moon": "Full-moon pine forest",
+  "Storybook castle garden with a fountain, glowing fireflies and pastel flowers":
+    "Storybook castle garden",
+  "Towering old library with spiral stairs, stacked books and warm lamps":
+    "Old spiral library",
+  "Plain table surface with soft daylight, like an online listing photo":
+    "Listing photo table",
+  "Tidy desk with soft daylight and blurred shelves": "Tidy desk shelves",
+  "Bright building-brick baseplate diorama with tiny trees and a little house":
+    "Brick baseplate diorama",
+  "Cozy wooden craft table with yarn balls, crochet hooks and soft window light":
+    "Crochet craft table",
+  "Miniature handmade clay set of a town square": "Clay town square",
 };
 
 const genericMoodPresets = [

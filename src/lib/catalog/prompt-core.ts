@@ -102,8 +102,11 @@ function preserveList(style: CatalogStyle, options: PromptOptions) {
     "recognizable identity",
     "proportions",
     "defining features",
-    "expression",
   ];
+  // #190 battle knight: omit expression so the template's battle-face instruction wins.
+  if (style.id !== "dark-fantasy-armored-knight-ai-photo-prompt") {
+    details.push("expression");
+  }
   if (options.keepPose) details.push("pose");
   if (options.keepClothing) details.push("clothing");
   return naturalList(details);

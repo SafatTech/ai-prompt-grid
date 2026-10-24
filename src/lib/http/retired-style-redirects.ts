@@ -6,6 +6,9 @@ const RETIRED_STYLE_PATHS: Record<string, string> = {
   "/styles/saree-office-linkedin-profile-picture-prompt-gemini-women":
     "/guides/gemini-headshot-cv-photo-prompts",
   "/styles/80s-aerobics-studio": "/guides/80s-ai-photo-prompts-solo-couple",
+  // #198 renamed princess → prince before launch; keep the old slug out of the sitemap.
+  "/styles/desert-warrior-princess-ai-photo-prompt":
+    "/styles/desert-warrior-prince-ai-photo-prompt",
 };
 
 /** Slugs that 301 away from `/styles/:slug` and must stay out of the sitemap. */

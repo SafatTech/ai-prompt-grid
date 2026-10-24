@@ -256,6 +256,11 @@ export function StyleDetailClient({ style, children }: Props) {
             />
           </div>
         )}
+        {style.promptVariant.limitations.some((item) => /AI-generated/i.test(item)) ? (
+          <p className="mt-2.5 text-xs text-[var(--muted)]" data-testid="ai-image-disclosure">
+            Example images are AI-generated. The people shown are not real.
+          </p>
+        ) : null}
       </section>
 
       <section className="container grid items-start gap-10 pt-12 pb-[95px] lg:grid-cols-[minmax(0,1fr)_440px] lg:gap-16 lg:pt-[70px]">
