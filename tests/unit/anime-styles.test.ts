@@ -22,33 +22,10 @@ const TRADEMARK =
   /\b(ghibli|studio\s+ghibli|naruto|one\s+piece|demon\s+slayer|dragon\s+ball|pokemon|pokémon)\b/i;
 
 /**
- * Remaining catalog titles that still name an app. Tracked so the catalog-wide
- * check stays green while Anime (and future) retitles land. Do not add the
- * anime-companion / anime-squad slugs here — those titles are cleaned.
+ * LinkedIn guide styles keep app names in titles by product choice.
+ * Slugs with "linkedin", plus the passport and matching-team headshot styles.
  */
 const ALLOWED_APP_NAME_TITLE_IDS = new Set([
-  "south-asian-fashion-editorial",
-  "joyful-outdoor-lifestyle",
-  "vintage-pulp-comic-hero",
-  "crimson-bloom-shadows",
-  "sunlit-bouquet-triptych",
-  "shadowed-saree-noir",
-  "sunlit-daisy-drift",
-  "amber-shadow-triptych",
-  "golden-boho-storyboard",
-  "cozy-pumpkin-patch-portrait",
-  "friendly-glowing-witch-portrait",
-  "elegant-gothic-vampire-portrait",
-  "diya-lit-balcony",
-  "first-diwali-as-a-married-couple",
-  "separate-photos-couple",
-  "fairy-light-portrait",
-  "family-lakshmi-puja-photo",
-  "family-diwali-in-karachi-or-sindh",
-  "diaspora-diwali-in-a-cold-city",
-  "1985-studio-portrait",
-  "1985-studio-couple",
-  "80s-wedding-album",
   "navy-blazer-linkedin-profile-picture-prompt-gemini",
   "charcoal-suit-corporate-linkedin-profile-picture-prompt-gemini-men",
   "black-blazer-linkedin-profile-picture-prompt-gemini-women",
@@ -61,30 +38,6 @@ const ALLOWED_APP_NAME_TITLE_IDS = new Set([
   "passport-size-photo-ai-prompt-gemini-white-background",
   "executive-corporate-linkedin-profile-picture-prompt-gemini",
   "home-office-linkedin-profile-picture-prompt-gemini",
-  "riverside-merge-two-photos-prompt-gemini-couple",
-  "cafe-window-merge-two-photos-prompt-gemini-couple",
-  "side-by-side-keepsake-frame-merge-two-photos-prompt-gemini-couple",
-  "long-distance-sunset-beach-merge-two-photos-prompt-gemini-couple",
-  "add-missing-person-to-group-photo-merge-two-photos-prompt-gemini-family",
-  "eid-family-frame-merge-two-photos-prompt-gemini-family",
-  "rooftop-friends-reunion-merge-two-photos-prompt-gemini-group",
-  "grandparent-and-grandchild-courtyard-merge-two-photos-prompt-gemini-family",
-  "sofa-cuddle-with-your-pet-merge-two-photos-prompt-gemini-person-and-pet",
-  "wedding-stage-merge-two-photos-prompt-gemini-couple",
-  "graduation-day-merge-two-photos-prompt-gemini-family",
-  "mountain-viewpoint-trip-merge-two-photos-prompt-gemini-couple",
-  "soft-daylight-lifestyle",
-  "after-hours-polaroid",
-  "clay-crew",
-  "modern-virtual-staging",
-  "refined-luxury-living",
-  "outdoor-living-oasis",
-  "bathroom-spa-upgrade",
-  "cute-3d-toon-pet",
-  "hand-painted-watercolor-pet",
-  "cozy-plushie-pet",
-  "cartoon-animation-pet",
-  "funny-everyday-pet",
 ]);
 
 describe("anime AI photo style pages", () => {

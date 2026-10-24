@@ -84,7 +84,7 @@ Compose for {{ratio}}. Do not add text, logos, watermarks, hands, extra products
   {
     n: "03",
     id: "soft-daylight-lifestyle",
-    title: "Window Light Lifestyle Product AI Prompt (Gemini)",
+    title: "Window Light Lifestyle Product AI Prompt",
     note: "Natural window-lit lifestyle product scene",
     description:
       "Product shoot AI prompt with daylight: a natural window-lit lifestyle scene for your item, from one plain photo. Copy-paste free for Gemini.",

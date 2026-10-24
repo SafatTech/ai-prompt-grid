@@ -51,7 +51,7 @@ const merge: MergeSeed[] = [
   {
     n: "75",
     id: "riverside-merge-two-photos-prompt-gemini-couple",
-    title: "Riverside Merge Two Photos Prompt for Gemini (Couple)",
+    title: "Riverside Merge Two Photos Prompt (Couple)",
     note: "Two selfies, one riverside walk photo",
     description:
       "Merge two separate photos into one natural couple photo standing side by side on a riverside promenade in late-afternoon light, one arm around the other's shoulder, both faces kept exactly as in their own photos.",
@@ -96,7 +96,7 @@ const merge: MergeSeed[] = [
   {
     n: "76",
     id: "cafe-window-merge-two-photos-prompt-gemini-couple",
-    title: "Cafe Window Merge Two Photos Prompt for Gemini (Couple)",
+    title: "Cafe Window Merge Two Photos Prompt (Couple)",
     note: "Seated together at a cafe window table",
     description:
       "Combine two separate portraits into one waist-up couple photo seated at a cafe table by a window, with soft window light matched on both faces.",
@@ -138,7 +138,7 @@ const merge: MergeSeed[] = [
   {
     n: "77",
     id: "side-by-side-keepsake-frame-merge-two-photos-prompt-gemini-couple",
-    title: "Keepsake Frame Merge Two Photos Prompt for Gemini (Couple)",
+    title: "Keepsake Frame Merge Two Photos Prompt (Couple)",
     note: "Both photos kept as-is in one framed keepsake",
     description:
       "Combine two photos in one frame: both original photos placed side by side, unchanged, in an elegant cream keepsake layout with a thin gold divider.",
@@ -170,7 +170,7 @@ const merge: MergeSeed[] = [
   {
     n: "78",
     id: "long-distance-sunset-beach-merge-two-photos-prompt-gemini-couple",
-    title: "Long Distance Couple: Merge 2 Photos AI Prompt (Gemini)",
+    title: "Long Distance Couple: Merge 2 Photos AI Prompt (Beach)",
     note: "Walking hand in hand on a beach at sunset",
     description:
       "For long-distance couples: merge two photos into one photo walking hand in hand on a sunset beach in casual summer clothes, with matching warm backlight on both.",
@@ -211,7 +211,7 @@ const merge: MergeSeed[] = [
   {
     n: "79",
     id: "add-missing-person-to-group-photo-merge-two-photos-prompt-gemini-family",
-    title: "Add Missing Person to Group Photo AI Prompt (Gemini)",
+    title: "Add Missing Person to Group Photo AI Prompt",
     note: "Add one person to an existing group photo",
     description:
       "Add a missing person to a family group photo: the person from the second photo joins the group at the right end, matched in size, light, and shadow, with everyone else unchanged.",
@@ -248,7 +248,7 @@ const merge: MergeSeed[] = [
   {
     n: "80",
     id: "eid-family-frame-merge-two-photos-prompt-gemini-family",
-    title: "Eid Family Frame Merge Two Photos Prompt for Gemini (Family)",
+    title: "Eid Family Frame Merge Two Photos Prompt (Family)",
     note: "Parents' photo and kids' photo combined for Eid",
     description:
       "Combine two photos, one of the parents and one of the children, into one Eid family portrait in a festively decorated living room, every face kept as in its own photo.",
@@ -293,7 +293,7 @@ const merge: MergeSeed[] = [
   {
     n: "81",
     id: "rooftop-friends-reunion-merge-two-photos-prompt-gemini-group",
-    title: "Rooftop Reunion Merge Two Photos Prompt for Gemini (Group)",
+    title: "Rooftop Reunion Merge Two Photos Prompt (Group)",
     note: "Two friends reunited at a rooftop dinner",
     description:
       "Merge two separate selfies into one candid photo of two friends reunited at a rooftop dinner under warm fairy lights, both faces kept exactly as in their own photos.",
@@ -330,7 +330,7 @@ const merge: MergeSeed[] = [
   {
     n: "82",
     id: "grandparent-and-grandchild-courtyard-merge-two-photos-prompt-gemini-family",
-    title: "Grandparent Merge Two Photos Prompt for Gemini (Family)",
+    title: "Grandparent Merge Two Photos Prompt (Family)",
     note: "Grandparent reading to a grandchild on a charpai",
     description:
       "Merge a grandparent's photo and a grandchild's photo into one warm family photo sitting together on a charpai in a sunny courtyard, the grandparent sharing a book with their older grandchild or teen.",
@@ -370,7 +370,7 @@ const merge: MergeSeed[] = [
   {
     n: "83",
     id: "sofa-cuddle-with-your-pet-merge-two-photos-prompt-gemini-person-and-pet",
-    title: "Sofa Pet Merge Two Photos Prompt for Gemini (Person & Pet)",
+    title: "Sofa Pet Merge Two Photos Prompt (Person & Pet)",
     note: "You and your dog together on the sofa",
     description:
       "Merge your photo and your dog's photo into one cozy picture on a living room sofa, the dog leaning on your shoulder, with breed, coat, and markings kept exact.",
@@ -407,7 +407,7 @@ const merge: MergeSeed[] = [
   {
     n: "84",
     id: "wedding-stage-merge-two-photos-prompt-gemini-couple",
-    title: "Wedding Stage Merge Two Photos Prompt for Gemini (Couple)",
+    title: "Wedding Stage Merge Two Photos Prompt (Couple)",
     note: "Bride and groom seated together on a decorated stage",
     description:
       "Merge two separate photos into one wedding stage photo of a couple in wedding outfits seated together on a floral stage, each face kept exactly as in their own photo.",
@@ -451,7 +451,7 @@ const merge: MergeSeed[] = [
   {
     n: "85",
     id: "graduation-day-merge-two-photos-prompt-gemini-family",
-    title: "Graduation Day Merge Two Photos Prompt for Gemini (Family)",
+    title: "Graduation Day Merge Two Photos Prompt (Family)",
     note: "Graduate with a parent who could not attend",
     description:
       "Merge a graduate's photo with a parent's photo into one proud graduation day picture on a sunny campus lawn, both faces kept exactly as in their own photos.",
@@ -483,7 +483,7 @@ const merge: MergeSeed[] = [
   {
     n: "86",
     id: "mountain-viewpoint-trip-merge-two-photos-prompt-gemini-couple",
-    title: "Mountain Trip Merge Two Photos Prompt for Gemini (Couple)",
+    title: "Mountain Trip Merge Two Photos Prompt (Couple)",
     note: "Together at a mountain viewpoint in warm jackets",
     description:
       "Merge two separate photos into one travel photo of a couple at a mountain viewpoint, dressed in warm winter puffer jackets, with crisp daylight matched on both faces.",

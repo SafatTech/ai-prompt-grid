@@ -45,7 +45,7 @@ const pets: PetSeed[] = [
   {
     n: "01",
     id: "cute-3d-toon-pet",
-    title: "3D Pet AI Photo Prompt for Gemini (Cute Toon Character)",
+    title: "3D Pet AI Photo Prompt (Cute Toon Character)",
     category: "3D avatars",
     note: "Polished expressive 3D animated pet character",
     description:
@@ -70,7 +70,7 @@ Compose the final image for {{ratio}}, keeping the pet comfortably framed and en
   {
     n: "02",
     id: "hand-painted-watercolor-pet",
-    title: "Watercolor Pet Portrait AI Prompt for Gemini",
+    title: "Watercolor Pet Portrait AI Prompt",
     category: "Painting",
     note: "Soft watercolor pet portrait on paper",
     description:
@@ -96,7 +96,7 @@ Compose the final artwork for {{ratio}}, keeping the pet’s face, ears, body, p
   {
     n: "03",
     id: "cozy-plushie-pet",
-    title: "Plush Toy Pet AI Photo Prompt (Gemini & ChatGPT)",
+    title: "Plush Toy Pet AI Photo Prompt",
     category: "3D avatars",
     note: "Handcrafted plush-toy pet makeover",
     description:
@@ -122,7 +122,7 @@ Compose the final image for {{ratio}}, keeping the plush pet comfortably framed 
   {
     n: "04",
     id: "cartoon-animation-pet",
-    title: "Cartoon Pet AI Photo Prompt for Gemini (Animated Film)",
+    title: "Cartoon Pet AI Photo Prompt (Animated Film)",
     category: "Anime",
     note: "Polished animated-film pet character",
     description:
@@ -226,7 +226,7 @@ Compose the final image for {{ratio}}, keeping the pet’s face, body, and any k
   {
     n: "08",
     id: "funny-everyday-pet",
-    title: "Funny Dog AI Photo Prompt for Gemini (Everyday Life)",
+    title: "Funny Dog AI Photo Prompt (Everyday Life)",
     category: "Pets",
     note: "Humorous everyday lifestyle pet portrait",
     description:
