@@ -99,4 +99,29 @@ describe("sitemap handler", () => {
       assert.equal(urls.has(absoluteUrl(`/styles/${slug}`)), false, slug);
     }
   });
+
+  it("lists ~257 style URLs including character styles from seed (N-31)", async () => {
+    const source = fs.readFileSync(
+      path.join(process.cwd(), "src/app/sitemap.ts"),
+      "utf8",
+    );
+    assert.match(source, /revalidate\s*=\s*300/);
+
+    const entries = await sitemap();
+    const styleUrls = entries
+      .map((entry) => entry.url)
+      .filter((url) => url.includes("/styles/"));
+    assert.ok(
+      styleUrls.length >= 250,
+      `expected ≥250 style sitemap URLs, got ${styleUrls.length}`,
+    );
+    assert.ok(
+      styleUrls.includes(absoluteUrl("/styles/desert-warrior-prince-ai-photo-prompt")),
+    );
+    assert.ok(
+      styleUrls.includes(
+        absoluteUrl("/styles/dark-fantasy-armored-knight-ai-photo-prompt"),
+      ),
+    );
+  });
 });
