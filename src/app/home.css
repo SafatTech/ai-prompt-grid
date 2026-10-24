@@ -848,11 +848,12 @@
   background-position: center;
 }
 
-/* Defer layout/paint for below-fold home sections (mobile TBT). Skip season —
-   it sits at the top of .home-below and is covered by phone layout tests. */
-.home-below > :not(.home-season) {
+/* Defer paint only on static far-below bands. Do not apply to rails / masonry /
+   explore — fake intrinsic heights race footer soft-nav (launch.spec) and IO. */
+.home-below > .home-section.home-trust,
+.home-below > .home-section.home-newsletter {
   content-visibility: auto;
-  contain-intrinsic-size: auto 520px;
+  contain-intrinsic-size: auto 280px;
 }
 
 .style-card-masonry {
