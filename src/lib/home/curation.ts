@@ -113,3 +113,13 @@ export function resolveHomepageSeason(
       settings.seasonStyleSlugs.length > 0 ? settings.seasonStyleSlugs : base.styleSlugs,
   };
 }
+
+export function resolveHomepageSeasonImages(
+  settings: HomepageSettings,
+  season: Season | null,
+): { slugs: string[]; isCurated: boolean } {
+  if (settings.seasonImageSlugs.length > 0) {
+    return { slugs: settings.seasonImageSlugs, isCurated: true };
+  }
+  return { slugs: season?.styleSlugs ?? [], isCurated: false };
+}

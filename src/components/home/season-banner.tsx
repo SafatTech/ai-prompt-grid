@@ -19,25 +19,8 @@ type Props = {
   seasonStyleCount: number;
 };
 
-const DESKTOP_BG_ORDER = [
-  "diya-lit-balcony",
-  "first-diwali-as-a-married-couple",
-  "golden-hour-sparkler-shot",
-] as const;
-
 function pickBackgroundStyles(styles: CatalogStyle[], count: number): CatalogStyle[] {
-  const byId = new Map(styles.map((style) => [style.id, style]));
-  const picked: CatalogStyle[] = [];
-  for (const id of DESKTOP_BG_ORDER) {
-    const style = byId.get(id);
-    if (style) picked.push(style);
-    if (picked.length >= count) return picked;
-  }
-  for (const style of styles) {
-    if (!picked.some((item) => item.id === style.id)) picked.push(style);
-    if (picked.length >= count) break;
-  }
-  return picked;
+  return styles.slice(0, count);
 }
 
 function pickStripStyles(
