@@ -212,8 +212,6 @@ export function SeasonBanner({
                   className="object-cover"
                   loading="lazy"
                   fetchPriority="auto"
-                  placeholder={style.resultBlur ? "blur" : "empty"}
-                  blurDataURL={style.resultBlur}
                 />
               </Link>
             );
@@ -288,8 +286,6 @@ export function SeasonBanner({
                     className="object-cover"
                     loading="lazy"
                     fetchPriority="auto"
-                    placeholder={style.resultBlur ? "blur" : "empty"}
-                    blurDataURL={style.resultBlur}
                   />
                 </span>
                 <b>{label}</b>

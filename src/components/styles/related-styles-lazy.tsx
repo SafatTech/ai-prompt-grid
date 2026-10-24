@@ -22,10 +22,11 @@ export function RelatedStylesLazy(props: RelatedProps) {
     const node = ref.current;
     if (!node) return;
     let cancelled = false;
-    // Large prefetch margin on mobile only — desktop was loading ~15 images early.
+    // Slightly larger mobile prefetch so mid-scroll placeholders clear faster;
+    // keep desktop tight so related cards stay lazy.
     const rootMargin =
       typeof window !== "undefined" && window.matchMedia("(max-width: 767px)").matches
-        ? "2000px 0px"
+        ? "2800px 0px"
         : "600px 0px";
     const io = new IntersectionObserver(
       ([entry]) => {

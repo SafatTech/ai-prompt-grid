@@ -110,8 +110,6 @@ export function HeroWallTracks({ images }: Props) {
                   loading={eager ? "eager" : "lazy"}
                   fetchPriority="auto"
                   decoding="async"
-                  placeholder={image.blurDataURL ? "blur" : "empty"}
-                  blurDataURL={image.blurDataURL}
                 />
               );
             })}

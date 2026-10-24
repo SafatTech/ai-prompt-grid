@@ -26,13 +26,8 @@ export function StyleCardRail({
   eager = false,
 }: Props) {
   const mergePhotos = style.mergePhotos;
-  const promptPreview = style.promptPreview;
-  // Match CSS: masonry columns 2 @ ≤699 (~50vw) / 236px; rails ~50vw @390 → ≤384w @2×.
-  const sizes =
-    variant === "masonry"
-      ? "(max-width:699px) 48vw, 236px"
-      : "(max-width:699px) 50vw, (max-width:767px) 55vw, 250px";
   const layoutAware = variant === "masonry" && !priority && !eager;
+  const naturalAspect = variant === "masonry";
 
   return (
     <article
@@ -46,26 +41,23 @@ export function StyleCardRail({
       <div className="relative">
         <StyleCardMasonryMedia
           styleId={style.id}
-          title={style.title}
           result={style.result}
-          mediaWidth={style.mediaWidth}
-          mediaHeight={style.mediaHeight}
-          sizes={sizes}
+          variant={variant}
           priority={priority}
           eager={eager}
           layoutAware={layoutAware}
-          naturalAspect={variant === "masonry"}
+          naturalAspect={naturalAspect}
           {...(style.resultBlur ? { resultBlur: style.resultBlur } : {})}
+          {...(naturalAspect
+            ? { mediaWidth: style.mediaWidth, mediaHeight: style.mediaHeight }
+            : {})}
           {...(mergePhotos.length ? { mergePhotos } : {})}
           {...(style.mergeResult ? { mergeResult: style.mergeResult } : {})}
         />
-        {/* Hover preview stays on the server tree — not a client prop. */}
-        {promptPreview ? (
-          <div className="style-card-hover-preview pointer-events-none" aria-hidden="true">
-            <p>{promptPreview}</p>
-            <span>Before → After</span>
-          </div>
-        ) : null}
+        {/* Label-only hover chrome — no per-card prompt text in HTML (payload). */}
+        <div className="style-card-hover-preview" aria-hidden="true">
+          Before → After
+        </div>
       </div>
       {/* Heart sits outside overflow:hidden media so the ≥44px hit area is not clipped (N-20). */}
       <StyleCardSaveButton styleId={style.id} />

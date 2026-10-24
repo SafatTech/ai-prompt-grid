@@ -208,6 +208,8 @@ export async function listHeroWallImages(
     if (picked.length >= limit) break;
   }
 
+  // No per-tile blurDataURL — hero is decorative (aria-hidden) and unique blurs
+  // were repeating ~0.5–1 KB × 18 in home HTML (LCP/TBT parse cost).
   return picked.slice(0, limit).map((style) => {
     const pair = style.examplePairs.find((p) => p.result === style.result) ?? style.examplePairs[0];
     const width = pair?.resultWidth && pair.resultWidth > 0 ? pair.resultWidth : 800;
@@ -216,7 +218,6 @@ export async function listHeroWallImages(
       src: style.result,
       width,
       height,
-      ...(style.resultBlur ? { blurDataURL: style.resultBlur } : {}),
     };
   });
 }
@@ -326,9 +327,15 @@ export type SitemapStyleEntry = {
  * Abort a stalled sitemap catalog read so the seed fallback can still run.
  * withTimeout fires slightly later, so an abort can reject, get logged, and
  * fall back. It only wins when the aborted request never settles.
+ *
+ * Keep this generous: a 4s timeout previously raced cold Supabase and silently
+ * served a partial DB page (183 styles) while seed already had 257 including
+ * character styles 147–222.
  */
-const SITEMAP_STYLE_QUERY_MS = 4_000;
-const SITEMAP_STYLE_QUERY_BACKSTOP_MS = SITEMAP_STYLE_QUERY_MS + 1_000;
+export const SITEMAP_STYLE_QUERY_MS = 15_000;
+const SITEMAP_STYLE_QUERY_BACKSTOP_MS = SITEMAP_STYLE_QUERY_MS + 2_000;
+/** PostgREST default max-rows is often 1000; page explicitly so we never undercount. */
+const SITEMAP_STYLE_PAGE_SIZE = 1_000;
 
 function withTimeout<T>(promise: PromiseLike<T>, ms: number): Promise<T> {
   const settled = Promise.resolve(promise);
@@ -349,62 +356,124 @@ function withTimeout<T>(promise: PromiseLike<T>, ms: number): Promise<T> {
   });
 }
 
-/**
- * Published style URLs for `/sitemap.xml`.
- * Prefers Supabase `updated_at` / `published_at`; falls back to seed catalog.
- * A stalled query is aborted and logged, then the seed catalog is used.
- */
-export async function listPublishedStyleSitemapEntries(): Promise<SitemapStyleEntry[]> {
-  if (isSupabaseConfigured()) {
-    try {
-      const supabase = createPublicSupabaseClient();
-      if (supabase) {
-        const { data, error } = await withTimeout(
-          supabase
-            .from("styles")
-            .select("slug, updated_at, published_at")
-            .eq("status", "published")
-            .order("updated_at", { ascending: false })
-            .abortSignal(AbortSignal.timeout(SITEMAP_STYLE_QUERY_MS)),
-          SITEMAP_STYLE_QUERY_BACKSTOP_MS,
-        );
-
-        if (!error && data && data.length > 0) {
-          return data
-            .filter(
-              (
-                row,
-              ): row is {
-                slug: string;
-                updated_at: string | null;
-                published_at: string | null;
-              } => typeof row.slug === "string" && row.slug.trim().length > 0,
-            )
-            .map((row) => ({
-              slug: row.slug.trim(),
-              lastModified: parseSitemapDate(row.updated_at || row.published_at || ""),
-            }));
-        }
-
-        if (error) {
-          console.warn(
-            "[catalog] Sitemap style query failed; using seed fallback.",
-            error.message,
-          );
-        }
-      }
-    } catch (err) {
-      console.warn(
-        "[catalog] Unexpected sitemap catalog error; using seed fallback.",
-        err,
-      );
-    }
-  }
-
+function seedSitemapEntries(): SitemapStyleEntry[] {
   return getPublishedStyles().map((style) => ({
     slug: style.id,
     lastModified: parseSitemapDate(style.promptVariant.lastVerified),
   }));
+}
+
+/**
+ * Union DB rows with seed so a partial Supabase response (or pre-character
+ * cache) cannot drop published seed slugs from `/sitemap.xml`.
+ */
+export function mergeSitemapStyleEntries(
+  primary: SitemapStyleEntry[],
+  seed: SitemapStyleEntry[] = seedSitemapEntries(),
+): SitemapStyleEntry[] {
+  const bySlug = new Map<string, SitemapStyleEntry>();
+  for (const entry of seed) {
+    const slug = entry.slug.trim();
+    if (!slug) continue;
+    bySlug.set(slug, { slug, lastModified: entry.lastModified });
+  }
+  for (const entry of primary) {
+    const slug = entry.slug.trim();
+    if (!slug) continue;
+    // Prefer DB lastModified when present.
+    bySlug.set(slug, { slug, lastModified: entry.lastModified });
+  }
+  return [...bySlug.values()];
+}
+
+type SitemapStyleRow = {
+  slug: string;
+  updated_at: string | null;
+  published_at: string | null;
+};
+
+function mapSitemapRows(data: unknown[]): SitemapStyleEntry[] {
+  return data
+    .filter(
+      (row): row is SitemapStyleRow =>
+        !!row &&
+        typeof row === "object" &&
+        typeof (row as SitemapStyleRow).slug === "string" &&
+        (row as SitemapStyleRow).slug.trim().length > 0,
+    )
+    .map((row) => ({
+      slug: row.slug.trim(),
+      lastModified: parseSitemapDate(row.updated_at || row.published_at || ""),
+    }));
+}
+
+/**
+ * Published style URLs for `/sitemap.xml`.
+ * Prefers Supabase `updated_at` / `published_at`, paginated to completion, then
+ * always unioned with the seed catalog so character styles (and any other seed
+ * rows missing from a partial DB read) still appear. A stalled query falls back
+ * to seed alone.
+ */
+export async function listPublishedStyleSitemapEntries(): Promise<SitemapStyleEntry[]> {
+  const seed = seedSitemapEntries();
+
+  if (!isSupabaseConfigured()) {
+    return seed;
+  }
+
+  try {
+    const supabase = createPublicSupabaseClient();
+    if (!supabase) return seed;
+
+    const rows: unknown[] = [];
+    let from = 0;
+    for (;;) {
+      const to = from + SITEMAP_STYLE_PAGE_SIZE - 1;
+      const { data, error } = await withTimeout(
+        supabase
+          .from("styles")
+          .select("slug, updated_at, published_at")
+          .eq("status", "published")
+          .order("slug", { ascending: true })
+          .range(from, to)
+          .abortSignal(AbortSignal.timeout(SITEMAP_STYLE_QUERY_MS)),
+        SITEMAP_STYLE_QUERY_BACKSTOP_MS,
+      );
+
+      if (error) {
+        console.warn(
+          "[catalog] Sitemap style query failed; using seed fallback.",
+          error.message,
+        );
+        return seed;
+      }
+
+      const page = data ?? [];
+      rows.push(...page);
+      if (page.length < SITEMAP_STYLE_PAGE_SIZE) break;
+      from += SITEMAP_STYLE_PAGE_SIZE;
+    }
+
+    if (rows.length === 0) {
+      console.warn("[catalog] Sitemap style query returned 0 rows; using seed fallback.");
+      return seed;
+    }
+
+    const fromDb = mapSitemapRows(rows);
+    const merged = mergeSitemapStyleEntries(fromDb, seed);
+    if (fromDb.length < seed.length) {
+      console.warn(
+        `[catalog] Sitemap Supabase undercount (${fromDb.length} < seed ${seed.length}); unioned seed slugs.`,
+      );
+    }
+    return merged;
+  } catch (err) {
+    console.warn(
+      "[catalog] Unexpected sitemap catalog error; using seed fallback.",
+      err,
+    );
+    return seed;
+  }
 }
 
 function parseSitemapDate(value: string): Date {

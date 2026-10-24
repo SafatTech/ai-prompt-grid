@@ -26,12 +26,8 @@ export function StyleCardRailClient({
   eager = false,
 }: Props) {
   const mergePhotos = style.mergePhotos;
-  const promptPreview = style.promptPreview;
-  const sizes =
-    variant === "masonry"
-      ? "(max-width:699px) 48vw, 236px"
-      : "(max-width:699px) 50vw, (max-width:767px) 55vw, 250px";
   const layoutAware = variant === "masonry" && !priority && !eager;
+  const naturalAspect = variant === "masonry";
 
   return (
     <article
@@ -44,25 +40,22 @@ export function StyleCardRailClient({
       <div className="relative">
         <StyleCardMasonryMedia
           styleId={style.id}
-          title={style.title}
           result={style.result}
-          mediaWidth={style.mediaWidth}
-          mediaHeight={style.mediaHeight}
-          sizes={sizes}
+          variant={variant}
           priority={priority}
           eager={eager}
           layoutAware={layoutAware}
-          naturalAspect={variant === "masonry"}
+          naturalAspect={naturalAspect}
           {...(style.resultBlur ? { resultBlur: style.resultBlur } : {})}
+          {...(naturalAspect
+            ? { mediaWidth: style.mediaWidth, mediaHeight: style.mediaHeight }
+            : {})}
           {...(mergePhotos.length ? { mergePhotos } : {})}
           {...(style.mergeResult ? { mergeResult: style.mergeResult } : {})}
         />
-        {promptPreview ? (
-          <div className="style-card-hover-preview pointer-events-none" aria-hidden="true">
-            <p>{promptPreview}</p>
-            <span>Before → After</span>
-          </div>
-        ) : null}
+        <div className="style-card-hover-preview" aria-hidden="true">
+          Before → After
+        </div>
       </div>
       <StyleCardSaveButton styleId={style.id} />
       <div className="style-card-rail-body px-3.5 pt-3 pb-3.5">

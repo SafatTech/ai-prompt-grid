@@ -83,7 +83,8 @@ export default async function HomePage() {
     countPublishedStyles(),
     listTrendingStyles(TRENDING_RAIL.limit),
     listNewestStyles(NEW_STYLES_RAIL.limit),
-    listHeroWallImages(18, season?.styleSlugs ?? []),
+    // 12 tiles fill the wall; 18 repeated blur/markup cost without visual gain.
+    listHeroWallImages(12, season?.styleSlugs ?? []),
     listStylesBySlugs(season?.styleSlugs ?? []),
     // Cap season matches — banner only needs a short strip (+ count from this page).
     season
@@ -114,12 +115,14 @@ export default async function HomePage() {
   const professionalCards = toStyleCardDataList(professional, railOpts);
   const trendsCards = toStyleCardDataList(trends, railOpts);
   const exploreCards = toStyleCardDataList(explorePage1.styles, {
-    blurCount: 1,
+    // Shared pending blur is CSS (.is-pending); no unique blur in HTML/RSC.
     surface: "rail",
   });
 
+  // Cap client RecentShelf lookup — full explore+trending catalog was ~60 URLs.
   const recentCatalog = explorePage1.styles
     .concat(trending)
+    .slice(0, 24)
     .map((style) => ({ id: style.id, title: style.title, result: style.result }));
 
   const trendingJsonLd = {
@@ -136,7 +139,13 @@ export default async function HomePage() {
 
   return (
     <div className="home-page">
-      {/* home.css is @import'd from globals.css — one app stylesheet for `/`. */}
+      {/* Tiny h1 metrics inline so text LCP is not gated only on the full CSS parse. */}
+      <style
+        dangerouslySetInnerHTML={{
+          __html:
+            ".hero-wall-title{margin:22px 0 18px;font-size:76px;line-height:1;letter-spacing:-.04em;font-weight:800}.hero-wall-title em{font-style:normal;background:linear-gradient(90deg,#b9a8ff,#ff9b82);-webkit-background-clip:text;background-clip:text;color:transparent}@media (max-width:699px){.hero-wall-title{font-size:44px}}",
+        }}
+      />
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(trendingJsonLd) }}
