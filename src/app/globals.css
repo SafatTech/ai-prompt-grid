@@ -25,6 +25,17 @@
   --mba-dim: 0.55;
 }
 
+.admin-curation-input {
+  min-height: 44px;
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  background: var(--surface-2);
+  padding: 10px 12px;
+  color: var(--text);
+  font: inherit;
+}
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);

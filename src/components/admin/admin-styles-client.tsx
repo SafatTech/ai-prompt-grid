@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
-import { AdminTrendingPanel } from "@/components/admin/admin-trending-panel";
 import { Button } from "@/components/ui/button";
 import {
   STYLE_STATUS_TRANSITIONS,
@@ -61,9 +60,7 @@ export function AdminStylesClient({ initialStyles, role, displayName }: Props) {
       toast(payload.error ?? "Could not update status.", "error");
       return;
     }
-    setStyles((prev) =>
-      prev.map((row) => (row.id === style.id ? payload.style! : row)),
-    );
+    setStyles((prev) => prev.map((row) => (row.id === style.id ? payload.style! : row)));
     toast(`${style.title} → ${status.replace("_", " ")}.`);
   }
 
@@ -81,16 +78,23 @@ export function AdminStylesClient({ initialStyles, role, displayName }: Props) {
           Create and edit recipes, then draft, review, publish, or archive. Publish and
           archive write an audit log. Archiving never deletes private user creations.
         </p>
-        <Link
-          href="/admin/styles/new"
-          data-testid="admin-new-style"
-          className="inline-flex min-h-11 items-center justify-center rounded-xl bg-[var(--violet)] px-[18px] text-sm font-bold text-[#100d1a]"
-        >
-          New style
-        </Link>
+        <div className="flex flex-wrap gap-2">
+          <Link
+            href="/admin/styles/new"
+            data-testid="admin-new-style"
+            className="inline-flex min-h-11 items-center justify-center rounded-xl bg-[var(--violet)] px-[18px] text-sm font-bold text-[#100d1a]"
+          >
+            New style
+          </Link>
+          <Link
+            href="/admin/homepage"
+            data-testid="admin-homepage-curation"
+            className="inline-flex min-h-11 items-center justify-center rounded-xl border border-[var(--line)] bg-[var(--surface-2)] px-[18px] text-sm font-bold"
+          >
+            Curate homepage
+          </Link>
+        </div>
       </section>
-
-      <AdminTrendingPanel styles={styles} onStylesChange={setStyles} />
 
       <div className="container flex flex-wrap gap-2 border-b border-[var(--line)] pb-4">
         {STATUS_FILTERS.map((value) => (
@@ -132,7 +136,9 @@ export function AdminStylesClient({ initialStyles, role, displayName }: Props) {
                         </h2>
                         <p className="m-0 mt-1 text-[12px] text-[var(--muted)]">
                           {style.category} · {style.tool}
-                          {style.trendingRank != null ? ` · Home #${style.trendingRank}` : ""}
+                          {style.trendingRank != null
+                            ? ` · Home #${style.trendingRank}`
+                            : ""}
                         </p>
                       </div>
                       <StatusPill status={style.status} />
@@ -190,7 +196,9 @@ export function AdminStylesClient({ initialStyles, role, displayName }: Props) {
                         className="border-t border-[var(--line)] bg-[var(--surface)]"
                       >
                         <td className="px-4 py-4 align-top">
-                          <div className="font-bold text-[var(--text)]">{style.title}</div>
+                          <div className="font-bold text-[var(--text)]">
+                            {style.title}
+                          </div>
                           <div className="mt-1 text-[12px] text-[var(--muted)]">
                             {style.category} ·{" "}
                             <Link

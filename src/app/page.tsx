@@ -18,8 +18,8 @@ import {
 } from "@/lib/catalog/repository";
 import { toStyleCardDataList } from "@/lib/catalog/style-card-data";
 import { HOME_MASONRY_PAGE_SIZE } from "@/lib/home/masonry-page-size";
+import { getHomepageSettings, resolveHomepageSeason } from "@/lib/home/curation";
 import { HOME_RAILS, NEW_STYLES_RAIL, TRENDING_RAIL } from "@/lib/home/rails";
-import { activeSeason } from "@/lib/home/seasons";
 import { listIndexableGuides } from "@/lib/guides/load";
 import { absoluteUrl } from "@/lib/site-url";
 
@@ -43,7 +43,8 @@ const NewsletterBand = dynamic(
 /** ISR safety net so homepage trending catches up even without an admin save. */
 export const revalidate = 60;
 
-const HOME_TITLE = "AI Photo Editing Prompts for Festivals & Everyday Looks | AI Prompt Grid";
+const HOME_TITLE =
+  "AI Photo Editing Prompts for Festivals & Everyday Looks | AI Prompt Grid";
 const HOME_DESCRIPTION =
   "Tested AI photo editing prompts for Diwali, Eid, weddings, LinkedIn, and more. Pick a style, see the result first, keep your real face.";
 
@@ -65,13 +66,24 @@ export const metadata: Metadata = {
 };
 
 export default async function HomePage() {
-  const season = activeSeason();
+  const homepageSettings = await getHomepageSettings();
+  const season = resolveHomepageSeason(homepageSettings);
+  const heroSlugs =
+    homepageSettings.heroSlugs.length > 0
+      ? homepageSettings.heroSlugs
+      : (season?.styleSlugs ?? []);
+  const seasonImageSlugs =
+    homepageSettings.seasonMode === "override" &&
+    homepageSettings.seasonImageSlugs.length > 0
+      ? homepageSettings.seasonImageSlugs
+      : (season?.styleSlugs ?? []);
   const [
     publishedCount,
     trending,
     newest,
     heroImages,
     seasonStyles,
+    seasonImageStyles,
     seasonMatched,
     couples,
     family,
@@ -83,13 +95,12 @@ export default async function HomePage() {
     countPublishedStyles(),
     listTrendingStyles(TRENDING_RAIL.limit),
     listNewestStyles(NEW_STYLES_RAIL.limit),
-    // 12 tiles fill the wall; 18 repeated blur/markup cost without visual gain.
-    listHeroWallImages(12, season?.styleSlugs ?? []),
+    // Six columns × six tiles; curated lists can provide a unique image per slot.
+    listHeroWallImages(36, heroSlugs, homepageSettings.heroAutoFill),
     listStylesBySlugs(season?.styleSlugs ?? []),
+    listStylesBySlugs(seasonImageSlugs),
     // Cap season matches — banner only needs a short strip (+ count from this page).
-    season
-      ? listStylesMatchingQuery(season.ctaCategoryQuery, 16)
-      : Promise.resolve([]),
+    season ? listStylesMatchingQuery(season.ctaCategoryQuery, 16) : Promise.resolve([]),
     listStylesMatchingQuery(HOME_RAILS[0]!.q!, HOME_RAILS[0]!.limit),
     listStylesMatchingQuery(HOME_RAILS[1]!.q!, HOME_RAILS[1]!.limit),
     listStylesByCategory(HOME_RAILS[2]!.category!, HOME_RAILS[2]!.limit),
@@ -158,6 +169,7 @@ export default async function HomePage() {
           <SeasonBanner
             season={season}
             styles={seasonStyles}
+            imageStyles={seasonImageStyles}
             matchedStyles={seasonMatched}
             seasonStyleCount={seasonStyleCount}
           />
