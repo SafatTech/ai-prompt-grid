@@ -18,7 +18,11 @@ import {
 } from "@/lib/catalog/repository";
 import { toStyleCardDataList } from "@/lib/catalog/style-card-data";
 import { HOME_MASONRY_PAGE_SIZE } from "@/lib/home/masonry-page-size";
-import { getHomepageSettings, resolveHomepageSeason } from "@/lib/home/curation";
+import {
+  getHomepageSettings,
+  resolveHomepageSeason,
+  resolveHomepageSeasonImages,
+} from "@/lib/home/curation";
 import { HOME_RAILS, NEW_STYLES_RAIL, TRENDING_RAIL } from "@/lib/home/rails";
 import { listIndexableGuides } from "@/lib/guides/load";
 import { absoluteUrl } from "@/lib/site-url";
@@ -72,11 +76,7 @@ export default async function HomePage() {
     homepageSettings.heroSlugs.length > 0
       ? homepageSettings.heroSlugs
       : (season?.styleSlugs ?? []);
-  const seasonImageSlugs =
-    homepageSettings.seasonMode === "override" &&
-    homepageSettings.seasonImageSlugs.length > 0
-      ? homepageSettings.seasonImageSlugs
-      : (season?.styleSlugs ?? []);
+  const seasonImages = resolveHomepageSeasonImages(homepageSettings, season);
   const [
     publishedCount,
     trending,
@@ -98,7 +98,7 @@ export default async function HomePage() {
     // Six columns × six tiles; curated lists can provide a unique image per slot.
     listHeroWallImages(36, heroSlugs, homepageSettings.heroAutoFill),
     listStylesBySlugs(season?.styleSlugs ?? []),
-    listStylesBySlugs(seasonImageSlugs),
+    listStylesBySlugs(seasonImages.slugs),
     // Cap season matches — banner only needs a short strip (+ count from this page).
     season ? listStylesMatchingQuery(season.ctaCategoryQuery, 16) : Promise.resolve([]),
     listStylesMatchingQuery(HOME_RAILS[0]!.q!, HOME_RAILS[0]!.limit),
@@ -170,7 +170,7 @@ export default async function HomePage() {
             season={season}
             styles={seasonStyles}
             imageStyles={seasonImageStyles}
-            matchedStyles={seasonMatched}
+            matchedStyles={seasonImages.isCurated ? [] : seasonMatched}
             seasonStyleCount={seasonStyleCount}
           />
         ) : null}

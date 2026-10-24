@@ -13,6 +13,7 @@ import {
   DEFAULT_HOMEPAGE_SETTINGS,
   homepageSettingsSchema,
   resolveHomepageSeason,
+  resolveHomepageSeasonImages,
 } from "../../src/lib/home/curation";
 
 const ids = Array.from(
@@ -42,6 +43,32 @@ describe("homepage curation", () => {
     assert.equal(season?.title, "Custom event headline");
     assert.deepEqual(season?.styleSlugs, ["linked-style"]);
     assert.deepEqual(settings.seasonImageSlugs, ["image-style"]);
+  });
+
+  it("uses curated banner images in calendar mode and preserves their order", () => {
+    const settings = homepageSettingsSchema.parse({
+      ...DEFAULT_HOMEPAGE_SETTINGS,
+      seasonMode: "calendar",
+      seasonImageSlugs: ["fourth-style", "first-style", "third-style"],
+    });
+    const season = resolveHomepageSeason(settings, new Date("2026-10-25T12:00:00Z"));
+
+    assert.deepEqual(resolveHomepageSeasonImages(settings, season), {
+      slugs: ["fourth-style", "first-style", "third-style"],
+      isCurated: true,
+    });
+  });
+
+  it("falls back to the active event styles when no banner images are curated", () => {
+    const season = resolveHomepageSeason(
+      DEFAULT_HOMEPAGE_SETTINGS,
+      new Date("2026-10-25T12:00:00Z"),
+    );
+
+    assert.deepEqual(resolveHomepageSeasonImages(DEFAULT_HOMEPAGE_SETTINGS, season), {
+      slugs: season?.styleSlugs,
+      isCurated: false,
+    });
   });
 
   it("enforces twelve Trending slots and five New pins", () => {
