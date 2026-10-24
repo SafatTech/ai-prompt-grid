@@ -61,6 +61,7 @@ export type CatalogStyle = {
   excludeFromExplore?: boolean;
   allowInHero?: boolean;
   heroPriority?: number;
+  trendingRank?: number | null;
   /**
    * ISO timestamp when the style was published (or created, as fallback from DB).
    * Seed rows omit this; newest sorting then falls back to reverse catalog order.

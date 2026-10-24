@@ -44,8 +44,8 @@ const NewsletterBand = dynamic(
   { ssr: true },
 );
 
-/** ISR safety net so homepage trending catches up even without an admin save. */
-export const revalidate = 60;
+/** Hourly safety net; admin saves invalidate catalog/settings immediately. */
+export const revalidate = 3600;
 
 const HOME_TITLE =
   "AI Photo Editing Prompts for Festivals & Everyday Looks | AI Prompt Grid";

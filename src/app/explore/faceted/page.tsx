@@ -9,7 +9,7 @@ import {
  * Internal rewrite target for `/explore?*` so meta robots is noindex,follow
  * (matches the x-robots-tag header) without making the bare listing dynamic.
  */
-export const revalidate = 60;
+export const revalidate = 3600;
 
 export const metadata: Metadata = {
   title: exploreListingTitle(1),
