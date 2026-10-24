@@ -1,9 +1,4 @@
-export type StyleSubject =
-  | "Person"
-  | "Group"
-  | "Pet"
-  | "Place"
-  | "Product or object";
+export type StyleSubject = "Person" | "Group" | "Pet" | "Place" | "Product or object";
 
 export type EditIntent =
   | "Change lighting"
@@ -58,6 +53,14 @@ export type CatalogStyle = {
   note: string;
   height: number;
   saved: number;
+  /** Homepage editorial controls. Seed styles use these defaults when absent. */
+  showOnHome?: boolean;
+  pinNewRank?: number | null;
+  hideFromNew?: boolean;
+  exploreWeight?: number;
+  excludeFromExplore?: boolean;
+  allowInHero?: boolean;
+  heroPriority?: number;
   /**
    * ISO timestamp when the style was published (or created, as fallback from DB).
    * Seed rows omit this; newest sorting then falls back to reverse catalog order.

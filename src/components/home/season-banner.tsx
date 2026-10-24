@@ -11,6 +11,8 @@ import {
 
 type Props = {
   season: Season;
+  /** Styles whose primary after-images are displayed in the banner artwork. */
+  imageStyles?: CatalogStyle[];
   styles: CatalogStyle[];
   /** Extra season-matched styles used to fill the mobile strip without repeating band photos. */
   matchedStyles?: CatalogStyle[];
@@ -58,7 +60,13 @@ function pickStripStyles(
 function ChipIcon({ icon }: { icon: SeasonChip["icon"] }) {
   if (icon === "couple") {
     return (
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
+      <svg
+        viewBox="0 0 16 16"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        aria-hidden
+      >
         <circle cx="5.5" cy="5" r="2.2" />
         <circle cx="10.8" cy="5" r="2.2" />
         <path d="M1.8 13.5c.4-2.4 1.9-3.7 3.7-3.7s3.3 1.3 3.7 3.7M8.3 11c.6-.8 1.5-1.2 2.5-1.2 1.8 0 3.1 1.3 3.5 3.7" />
@@ -67,14 +75,26 @@ function ChipIcon({ icon }: { icon: SeasonChip["icon"] }) {
   }
   if (icon === "family") {
     return (
-      <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5" aria-hidden>
+      <svg
+        viewBox="0 0 16 16"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1.5"
+        aria-hidden
+      >
         <path d="M2.5 7.5 8 3l5.5 4.5V13a.5.5 0 0 1-.5.5H3a.5.5 0 0 1-.5-.5z" />
         <path d="M6.5 13.5v-3h3v3" />
       </svg>
     );
   }
   return (
-    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.4" aria-hidden>
+    <svg
+      viewBox="0 0 16 16"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.4"
+      aria-hidden
+    >
       <circle cx="8" cy="8" r="1.6" />
       <path d="M8 1.8c1.4 1.6 1.4 3.2 0 4.6-1.4-1.4-1.4-3 0-4.6zM8 14.2c1.4-1.6 1.4-3.2 0-4.6-1.4 1.4-1.4 3 0 4.6zM1.8 8c1.6-1.4 3.2-1.4 4.6 0-1.4 1.4-3 1.4-4.6 0zM14.2 8c-1.6-1.4-3.2-1.4-4.6 0 1.4 1.4 3 1.4 4.6 0z" />
     </svg>
@@ -83,7 +103,12 @@ function ChipIcon({ icon }: { icon: SeasonChip["icon"] }) {
 
 function RangoliMark() {
   return (
-    <svg className="home-season-rangoli" viewBox="0 0 320 320" aria-hidden focusable="false">
+    <svg
+      className="home-season-rangoli"
+      viewBox="0 0 320 320"
+      aria-hidden
+      focusable="false"
+    >
       <circle cx="160" cy="160" r="7" fill="currentColor" />
       {[
         [180.3, 168.4],
@@ -176,15 +201,16 @@ function RangoliMark() {
 export function SeasonBanner({
   season,
   styles,
+  imageStyles = styles,
   matchedStyles = [],
   seasonStyleCount,
 }: Props) {
   const days = daysUntilFestival(season);
   const festivalDay = formatFestivalDay(season.festivalDate);
-  const bgStyles = pickBackgroundStyles(styles, 3);
+  const bgStyles = pickBackgroundStyles(imageStyles, 3);
   /** Mobile band shows the first two background panes; strip must not repeat them. */
   const bandIds = new Set(bgStyles.slice(0, 2).map((style) => style.id));
-  const stripStyles = pickStripStyles(styles, matchedStyles, bandIds, 5);
+  const stripStyles = pickStripStyles(imageStyles, matchedStyles, bandIds, 5);
   const chips = season.chips ?? [];
   const exploreHref = `/explore?q=${encodeURIComponent(season.ctaCategoryQuery)}`;
   const ctaLabel =
@@ -245,7 +271,10 @@ export function SeasonBanner({
           </Link>
         </div>
         {chips.length > 0 ? (
-          <div className="home-season-chips" aria-label={`Popular ${season.heroChip} themes`}>
+          <div
+            className="home-season-chips"
+            aria-label={`Popular ${season.heroChip} themes`}
+          >
             {chips.map((chip) => (
               <Link
                 key={chip.label}
@@ -260,9 +289,12 @@ export function SeasonBanner({
         ) : null}
       </div>
 
-      {bgStyles.length > 0 ? (
-        <nav className="home-season-links" aria-label={`Featured ${season.heroChip} styles`}>
-          {bgStyles.map((style) => (
+      {styles.length > 0 ? (
+        <nav
+          className="home-season-links"
+          aria-label={`Featured ${season.heroChip} styles`}
+        >
+          {styles.slice(0, 5).map((style) => (
             <Link key={style.id} href={`/styles/${style.id}`}>
               {styleLabelForSeason(season, style.id, style.title)} →
             </Link>

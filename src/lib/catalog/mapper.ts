@@ -30,12 +30,7 @@ const REQUIREMENTS = new Set<InputRequirement>([
   "Photo plus style reference",
 ]);
 
-const STATUSES = new Set<PublishStatus>([
-  "draft",
-  "in_review",
-  "published",
-  "archived",
-]);
+const STATUSES = new Set<PublishStatus>(["draft", "in_review", "published", "archived"]);
 
 export type DbCategory = {
   name: string;
@@ -83,6 +78,13 @@ export type DbStyleRow = {
   target_source_photo: string;
   card_height: number;
   save_count: number;
+  show_on_home?: boolean;
+  pin_new_rank?: number | null;
+  hide_from_new?: boolean;
+  explore_weight?: number;
+  exclude_from_explore?: boolean;
+  allow_in_hero?: boolean;
+  hero_priority?: number;
   published_at?: string | null;
   created_at?: string | null;
   status: string;
@@ -167,8 +169,7 @@ function mapPromptVariant(row: DbPromptVariant): PromptVariant {
       keepClothing: defaults.keepClothing !== false,
       keepPose: defaults.keepPose !== false,
     },
-    lastVerified:
-      typeof test.lastVerified === "string" ? test.lastVerified : "",
+    lastVerified: typeof test.lastVerified === "string" ? test.lastVerified : "",
     limitations: asStringArray(test.limitations),
   };
 }
@@ -215,13 +216,13 @@ function stringField(record: Record<string, unknown>, key: string): string | nul
 
 function numberField(record: Record<string, unknown>, key: string): number | undefined {
   const value = record[key];
-  return typeof value === "number" && Number.isFinite(value) && value > 0 ? value : undefined;
+  return typeof value === "number" && Number.isFinite(value) && value > 0
+    ? value
+    : undefined;
 }
 
 function parseResultBlur(value: unknown): string | undefined {
-  return typeof value === "string" && value.startsWith("data:image/")
-    ? value
-    : undefined;
+  return typeof value === "string" && value.startsWith("data:image/") ? value : undefined;
 }
 
 function mapCardMedia(
@@ -300,6 +301,13 @@ export function mapDbStyleToCatalog(
     note: row.summary,
     height: row.card_height || 330,
     saved: row.save_count || 0,
+    showOnHome: row.show_on_home !== false,
+    pinNewRank: row.pin_new_rank ?? null,
+    hideFromNew: row.hide_from_new === true,
+    exploreWeight: row.explore_weight ?? 0,
+    excludeFromExplore: row.exclude_from_explore === true,
+    allowInHero: row.allow_in_hero !== false,
+    heroPriority: row.hero_priority ?? 0,
     publishedAt: row.published_at ?? row.created_at ?? null,
     source: card.source,
     result: card.result,

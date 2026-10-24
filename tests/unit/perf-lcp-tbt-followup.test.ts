@@ -102,7 +102,7 @@ describe("perf LCP/TBT follow-up", () => {
     assert.ok(!media.includes("backgroundImage"));
     assert.ok(media.includes('variant === "masonry"'));
     const page = read("src/app/page.tsx");
-    assert.ok(page.includes("listHeroWallImages(12"));
+    assert.ok(page.includes("listHeroWallImages(36"));
     assert.ok(page.includes("slice(0, 24)"));
     const hero = read("src/components/home/hero-wall-tracks.tsx");
     assert.ok(!hero.includes("blurDataURL"));
