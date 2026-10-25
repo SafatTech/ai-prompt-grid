@@ -109,11 +109,13 @@ export const moodLabels: Record<string, string> = {
     "Poster sunset",
   "Warm sunset backlight with soft golden haze": "Sunset backlight",
   "Match the original photo's colors": "Match original colors",
-  "Crisp icy blue with warm natural skin tones and bright snow highlights": "Crisp icy blue",
+  "Crisp icy blue with warm natural skin tones and bright snow highlights":
+    "Crisp icy blue",
   "Warm amber tea-stall glow against cool blue snowy dusk": "Amber tea glow",
   "Soft winter pastel with rose-pink accents, creamy whites, and natural warm skin tones":
     "Soft winter pastel",
-  "Warm cozy winter glow with soft amber highlights and cool snowy shadows": "Cozy winter glow",
+  "Warm cozy winter glow with soft amber highlights and cool snowy shadows":
+    "Cozy winter glow",
   "Warm festive cel-shaded glow with saffron, magenta, and gold accents and soft evening highlights":
     "Festive cel glow",
   "Luxe black and gold": "Luxe black gold",
@@ -127,6 +129,7 @@ export const moodLabels: Record<string, string> = {
   "Bold vibrant": "Bold vibrant",
   "Warm nostalgic film": "Nostalgic film",
   "Cool cinematic night": "Cool night",
+  "Cool muted editorial": "Cool editorial",
   "Warm romantic daylight": "Romantic daylight",
   "Warm golden dusk": "Golden dusk",
   "Moody blue and amber": "Blue amber",
@@ -238,7 +241,8 @@ export const backgroundLabels: Record<string, string> = {
   "Bright outdoor park with mature trees and colorful floating confetti": "Park confetti",
   "Retro roadside diner at sunset with a classic red car": "Retro diner",
   "Dim artist studio or reading room beside a textured window": "Artist studio",
-  "Historic European-style cobblestone city street with soft café details": "Cobblestone street",
+  "Historic European-style cobblestone city street with soft café details":
+    "Cobblestone street",
   "Dense dark city crowd at blue hour with heavy motion blur": "Night crowd",
   "Dark indoor room with strong late-afternoon window shadows": "Window shadows",
   "Tree-lined city street with parked cars and subtle street motion blur": "City street",
@@ -282,19 +286,23 @@ export const backgroundLabels: Record<string, string> = {
     "Riverside sunset",
   "Warm traditional indoor setting beside a wooden window or doorway with muted beige-brown walls, soft sunlight, and shallow cinematic blur":
     "Traditional indoor",
-  "Grassy hillside meadow with tall wild grass, a bare tree, and a cloudy sky": "Hillside meadow",
+  "Grassy hillside meadow with tall wild grass, a bare tree, and a cloudy sky":
+    "Hillside meadow",
   "Pure white seamless infinity studio background": "White infinity",
-  "Monochrome coral seamless studio backdrop with a circular coral pedestal": "Coral pedestal",
+  "Monochrome coral seamless studio backdrop with a circular coral pedestal":
+    "Coral pedestal",
   "Sunlit pale-oak desk with a softly blurred open notebook, ceramic cup, and minimal greenery near a window":
     "Oak desk",
   "Warm light-beige textured paper surface with a closed cream notebook and graphite pencil at the edges":
     "Paper surface",
   "Warm limestone pedestal with soft green leaves, natural stone, folded unbleached linen, and a pale beige backdrop":
     "Limestone pedestal",
-  "Deep charcoal-black seamless studio with a low black reflective plinth": "Charcoal studio",
+  "Deep charcoal-black seamless studio with a low black reflective plinth":
+    "Charcoal studio",
   "Pale sage-to-cream gradient studio background with subtle curved light trails":
     "Sage gradient",
-  "Warm ivory microsuede surface with a subtle fine matte-stone texture": "Ivory microsuede",
+  "Warm ivory microsuede surface with a subtle fine matte-stone texture":
+    "Ivory microsuede",
   "A softly blurred neutral bathroom vanity beside a sunlit window": "Bathroom vanity",
   "Sunlit pale-oak table with soft cream linen curtains and a small blurred dried-flower arrangement":
     "Oak table",
@@ -308,7 +316,8 @@ export const backgroundLabels: Record<string, string> = {
   "Luxury garden picnic with soft golden-hour light": "Garden picnic",
   "Cozy retro living-room set with warm ambient lights": "Retro living room",
   "Miniature snowy village scene with handcrafted depth": "Snowy village",
-  "Cozy indoor celebration setting with subtle booth-style atmosphere": "Indoor celebration",
+  "Cozy indoor celebration setting with subtle booth-style atmosphere":
+    "Indoor celebration",
   "Cozy contemporary bedroom interior with warm wood accents, layered neutral textiles, soft curtains and subtle greenery":
     "Cozy bedroom",
   "Modern staged living room with cream upholstery, warm natural wood, textured neutral rug, soft curtains, indoor greenery and refined minimal decor":
@@ -495,6 +504,54 @@ export const backgroundLabels: Record<string, string> = {
     "Monsoon street",
   "Open wheat field at golden hour with tall grass and a soft warm sky":
     "Golden wheat field",
+  "Bright city sidewalk in soft daylight with cream shopfronts, trees and gentle background blur":
+    "Daylight sidewalk",
+  "City rooftop terrace at golden hour with soft skyline bokeh, warm sky and a low concrete ledge":
+    "Golden rooftop",
+  "Quiet apartment balcony with a soft sheer curtain, muted beige walls and gentle window light":
+    "Quiet balcony",
+  "Lit city street at night with shop-window glow, wet pavement reflections and soft bokeh lights":
+    "Night suit street",
+  "Soft out-of-focus warm cream studio backdrop": "Warm cream studio",
+  "Tall textured concrete wall in soft afternoon light with subtle shadow falloff":
+    "Textured concrete",
+  "Modern cafe interior with an arched mirror, warm wood, plants and soft daylight through a window":
+    "Cafe mirror",
+  "Outdoor concrete stairs beside a colourful abstract mural wall with soft late-afternoon light":
+    "Mural stairs",
+  "Soft charcoal fashion studio backdrop with a gentle gradient and subtle rim light":
+    "Charcoal fashion studio",
+  "Bright city plaza sidewalk in soft daylight with cream shopfronts and gentle blur":
+    "Daylight plaza",
+  "Soft outdoor concrete wall with muted daylight and gentle shadow":
+    "Muted concrete wall",
+  "Modern cafe balcony with soft daylight, railing and gentle city blur": "Cafe balcony",
+  "Soft out-of-focus warm cream window-lit backdrop": "Cream window light",
+  "Evening balcony overlooking soft city bokeh lights with a dark blue dusk sky":
+    "Evening city balcony",
+  "Warm lit hotel lobby with marble floors, soft chandelier glow and deep hallway perspective":
+    "Hotel lobby",
+  "High balcony overlooking a modern glass skyline city at dusk with soft amber and blue city lights (no named landmarks)":
+    "Glass skyline balcony",
+  "Modern glass lounge with soft leather seating, warm lamps and a softly blurred city view through floor-to-ceiling windows":
+    "Glass lounge",
+  "Night city terrace with string lights, dark railing and glowing skyline bokeh":
+    "Night city terrace",
+  "Soft estate garden with stone steps, trimmed hedges and muted greenery in gentle daylight":
+    "Estate garden",
+  "Warm soft-brown fashion studio backdrop with gentle gradient and clean negative space":
+    "Brown fashion studio",
+  "Modern house terrace with light stone flooring, slim railing, soft greenery and bright daylight sky":
+    "Modern house terrace",
+  "Clean pale stone editorial backdrop with soft shadow falloff": "Pale stone editorial",
+  "Quiet waterfront promenade at dusk with soft city lights across the water and a warm sky":
+    "Waterfront dusk",
+  "Evening terrace overlooking soft city bokeh with dark blue dusk sky":
+    "Evening city terrace",
+  "Elevated balcony overlooking a soft generic Middle-Eastern city skyline at dusk with warm lights (no landmark names)":
+    "Dusk skyline balcony",
+  "Quiet estate garden with stone steps, soft trees and cream daylight":
+    "Quiet estate garden",
   "Cozy living room with a tall green Christmas tree, red and gold ornaments, and a wooden floor":
     "Tree living room",
   "Bright cream studio set with a small decorated Christmas tree, stacked wrapped gift boxes with satin ribbons, and a soft white rug":
@@ -535,8 +592,7 @@ export const backgroundLabels: Record<string, string> = {
     "Neon night market",
   "Dark room lit only by a curved wall of monitors showing abstract glowing code patterns, tangled cables and server lights":
     "Monitor wall room",
-  "Pure black studio background filled with swirling violet smoke":
-    "Violet smoke studio",
+  "Pure black studio background filled with swirling violet smoke": "Violet smoke studio",
   "Seamless mid-grey studio backdrop with soft vignette": "Grey studio",
   "Rain-soaked neon city street at night with glowing signs showing only abstract shapes, puddles and steam":
     "Rainy neon street",
@@ -647,8 +703,7 @@ export const backgroundLabels: Record<string, string> = {
   "Smoky industrial 1920s street with brick factories, cobblestones and gas lamps":
     "1920s industrial street",
   "Foggy moor with a dark gothic manor and storm clouds": "Foggy gothic moor",
-  "Candle-lit Regency ballroom with chandeliers and pastel flowers":
-    "Regency ballroom",
+  "Candle-lit Regency ballroom with chandeliers and pastel flowers": "Regency ballroom",
   "Misty pine forest at night under a huge full moon": "Full-moon pine forest",
   "Storybook castle garden with a fountain, glowing fireflies and pastel flowers":
     "Storybook castle garden",
@@ -921,11 +976,7 @@ function isCategoryName(value: string): value is CategoryName {
 }
 
 function shortLabelFallback(value: string): string {
-  const words = value
-    .replace(/[,—]/g, " ")
-    .split(/\s+/)
-    .filter(Boolean)
-    .slice(0, 3);
+  const words = value.replace(/[,—]/g, " ").split(/\s+/).filter(Boolean).slice(0, 3);
   return words.join(" ") || value;
 }
 
@@ -934,10 +985,7 @@ function labelFor(kind: "mood" | "background", value: string): string {
   return map[value] ?? shortLabelFallback(value);
 }
 
-function presetsFor(
-  category: string,
-  kind: "mood" | "background",
-): readonly string[] {
+function presetsFor(category: string, kind: "mood" | "background"): readonly string[] {
   if (isCategoryName(category)) {
     const presets =
       kind === "mood"
@@ -972,4 +1020,3 @@ export function labeledOptionsForStyle(
     label: labelFor(kind, value),
   }));
 }
-

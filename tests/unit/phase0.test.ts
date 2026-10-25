@@ -21,6 +21,8 @@ import { characterStyleIds } from "../../src/lib/catalog/seed-character-styles";
 import { christmasStyleIds } from "../../src/lib/catalog/seed-christmas-styles";
 import { eightiesStyleIds } from "../../src/lib/catalog/seed-80s-styles";
 import { linkedinStyleIds } from "../../src/lib/catalog/seed-linkedin-styles";
+import { luxuryLifestyleStyleIds } from "../../src/lib/catalog/seed-luxury-lifestyle-styles";
+import { stylishStyleIds } from "../../src/lib/catalog/seed-stylish-styles";
 import { winterStyleIds } from "../../src/lib/catalog/seed-winter-styles";
 import { getPublishedStyles, getStyleById } from "../../src/lib/catalog/styles";
 import { cn } from "../../src/lib/utils";
@@ -32,9 +34,9 @@ describe("cn", () => {
 });
 
 describe("published catalog seed", () => {
-  it("exposes 257 published styles with recipe fields", () => {
+  it("exposes 284 published styles with recipe fields", () => {
     const published = getPublishedStyles();
-    assert.equal(published.length, 257);
+    assert.equal(published.length, 284);
     for (const style of published) {
       assert.equal(style.status, "published");
       assert.ok(style.promptVariant.template.includes("{{mood}}"));
@@ -42,17 +44,14 @@ describe("published catalog seed", () => {
       const singlePair =
         eightiesStyleIds.has(style.id) ||
         linkedinStyleIds.has(style.id) ||
-        (winterStyleIds.has(style.id) &&
-          style.promptVariant.inputImageCount === 1) ||
-        (animeStyleIds.has(style.id) &&
-          style.promptVariant.inputImageCount === 1) ||
-        (birthdayStyleIds.has(style.id) &&
-          style.promptVariant.inputImageCount === 1) ||
-        (boysStyleIds.has(style.id) &&
-          style.promptVariant.inputImageCount === 1) ||
-        (christmasStyleIds.has(style.id) &&
-          style.promptVariant.inputImageCount === 1) ||
-        (characterStyleIds.has(style.id) &&
+        (winterStyleIds.has(style.id) && style.promptVariant.inputImageCount === 1) ||
+        (animeStyleIds.has(style.id) && style.promptVariant.inputImageCount === 1) ||
+        (birthdayStyleIds.has(style.id) && style.promptVariant.inputImageCount === 1) ||
+        (boysStyleIds.has(style.id) && style.promptVariant.inputImageCount === 1) ||
+        (christmasStyleIds.has(style.id) && style.promptVariant.inputImageCount === 1) ||
+        (characterStyleIds.has(style.id) && style.promptVariant.inputImageCount === 1) ||
+        (stylishStyleIds.has(style.id) && style.promptVariant.inputImageCount === 1) ||
+        (luxuryLifestyleStyleIds.has(style.id) &&
           style.promptVariant.inputImageCount === 1);
       assert.ok(style.examplePairs.length >= (singlePair ? 1 : 2));
       assert.ok(style.promptVariant.limitations.length >= 1);

@@ -339,8 +339,8 @@ export type SitemapStyleEntry = {
  * fall back. It only wins when the aborted request never settles.
  *
  * Keep this generous: a 4s timeout previously raced cold Supabase and silently
- * served a partial DB page (183 styles) while seed already had 257 including
- * character styles 147–222.
+ * served a partial DB page while the seed already had the character and newer
+ * editorial batches.
  */
 export const SITEMAP_STYLE_QUERY_MS = 15_000;
 const SITEMAP_STYLE_QUERY_BACKSTOP_MS = SITEMAP_STYLE_QUERY_MS + 2_000;

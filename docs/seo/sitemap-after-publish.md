@@ -13,7 +13,7 @@
 
 1. Confirm styles are `status = published` in Supabase (or present in seed for fallback).
 2. Wait up to **5 minutes** for ISR, or trigger an on-demand revalidation of `/sitemap.xml` (e.g. `revalidatePath("/sitemap.xml")` from an admin publish hook, or redeploy).
-3. Spot-check: `curl -s https://aipromptgrid.com/sitemap.xml | grep -c '/styles/'` should match published count (~257+), and character slugs such as `desert-warrior-prince-ai-photo-prompt` / `dark-fantasy-armored-knight-ai-photo-prompt` must appear.
+3. Spot-check: `curl -s https://aipromptgrid.com/sitemap.xml | grep -c '/styles/'` should match the published count (~284+), and character slugs such as `desert-warrior-prince-ai-photo-prompt` / `dark-fantasy-armored-knight-ai-photo-prompt` must appear.
 4. Resubmit the sitemap in Google Search Console if the URL set grew substantially.
 
 ## Ops notes

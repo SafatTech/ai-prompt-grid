@@ -100,7 +100,7 @@ describe("sitemap handler", () => {
     }
   });
 
-  it("lists ~257 style URLs including character styles from seed (N-31)", async () => {
+  it("lists the full style seed including character styles (N-31)", async () => {
     const source = fs.readFileSync(
       path.join(process.cwd(), "src/app/sitemap.ts"),
       "utf8",
