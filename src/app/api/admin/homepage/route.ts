@@ -6,10 +6,7 @@ import {
   homepageCurationSaveSchema,
   saveHomepageCuration,
 } from "@/lib/admin/homepage";
-import {
-  expireHomepageSettingsCache,
-  expirePublicCatalogCache,
-} from "@/lib/catalog/public-cache-invalidation";
+import { expireHomepageSettingsCache } from "@/lib/catalog/public-cache-invalidation";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
 export const runtime = "nodejs";
@@ -50,7 +47,6 @@ export async function PUT(request: Request) {
     return NextResponse.json({ error: result.error }, { status: 500 });
   }
   expireHomepageSettingsCache();
-  expirePublicCatalogCache();
   revalidatePath("/");
   revalidatePath("/explore");
   return NextResponse.json({ ok: true });

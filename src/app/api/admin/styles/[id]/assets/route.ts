@@ -1,9 +1,7 @@
 import { randomUUID } from "node:crypto";
-import { revalidatePath } from "next/cache";
 import { NextResponse } from "next/server";
 import { requireEditor } from "@/lib/admin/access";
 import { adminAssetUploadMetaSchema } from "@/lib/admin/schemas";
-import { expirePublicCatalogCache } from "@/lib/catalog/public-cache-invalidation";
 import { buildResultBlurDataUrl } from "@/lib/catalog/result-blur";
 import { processUploadImage } from "@/lib/creations/image";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
@@ -42,7 +40,7 @@ export async function POST(request: Request, context: RouteContext) {
 
   const { data: style, error: styleError } = await supabase
     .from("styles")
-    .select("id, slug, status")
+    .select("id, slug")
     .eq("id", styleId)
     .maybeSingle();
   if (styleError || !style) {
@@ -156,12 +154,9 @@ export async function POST(request: Request, context: RouteContext) {
     payload: { assetId, role, key, kind: metaParsed.data.kind },
   });
 
-  if (style.status === "published") {
-    expirePublicCatalogCache();
-    revalidatePath("/");
-    revalidatePath("/explore");
-    revalidatePath(`/styles/${style.slug}`);
-  }
+  // Do not invalidate the public catalog for each source/result upload. The
+  // editor explicitly requires a final style save, which batches all uploaded
+  // URLs into one catalog invalidation in the style PUT route.
 
   return NextResponse.json({
     assetId,
