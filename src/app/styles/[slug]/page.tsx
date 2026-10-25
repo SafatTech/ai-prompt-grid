@@ -15,9 +15,12 @@ import { absoluteUrl } from "@/lib/site-url";
 /** Hourly safety net; admin catalog writes invalidate cached data and paths. */
 export const revalidate = 3600;
 
-export async function generateStaticParams() {
-  const styles = await listPublishedStyles();
-  return styles.map((style) => ({ slug: style.id }));
+/**
+ * Generate style pages on first request, then keep them in ISR. Pre-rendering
+ * the full catalog fans one large database read out across every build worker.
+ */
+export function generateStaticParams(): Array<{ slug: string }> {
+  return [];
 }
 
 export async function generateMetadata({

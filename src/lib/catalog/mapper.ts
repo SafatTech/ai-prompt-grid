@@ -48,23 +48,26 @@ export type DbPromptVariant = {
   variables: unknown;
   test_record: unknown;
   is_primary: boolean;
-  status: string;
+  /** Admin/test callers may include it; the shared public select does not. */
+  status?: string;
 };
 
 export type DbStyleAsset = {
-  id: string;
+  /** Admin/test callers may include it; the shared public select does not. */
+  id?: string;
   kind: string;
   source_storage_key: string;
   result_storage_key: string;
   alt_text: string;
   sort_order: number;
   provenance?: unknown;
-  /** Inline 32×40 WebP data URI for ambient hero blur. */
+  /** Optional for admin/seed callers; omitted from the shared public catalog. */
   result_blur_data_url?: string | null;
 };
 
 export type DbStyleRow = {
-  id: string;
+  /** Admin/test callers may include it; the shared public select does not. */
+  id?: string;
   slug: string;
   title: string;
   summary: string;

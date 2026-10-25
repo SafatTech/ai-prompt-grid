@@ -2,7 +2,11 @@ import { cache } from "react";
 import { unstable_cache } from "next/cache";
 import { getPublicSupabaseConfig, isSupabaseConfigured } from "@/lib/env";
 import { createPublicSupabaseClient } from "@/lib/supabase/public";
-import { PUBLIC_CATALOG_CACHE_TAG, PUBLIC_DATA_REVALIDATE_SECONDS } from "./public-cache";
+import {
+  PUBLIC_CATALOG_CACHE_TAG,
+  PUBLIC_CATALOG_PAGE_SIZE,
+  PUBLIC_DATA_REVALIDATE_SECONDS,
+} from "./public-cache";
 import {
   compareNewestDesc,
   compareSavedDesc,
@@ -13,20 +17,21 @@ import { mapDbStyleToCatalog, type DbStyleRow } from "./mapper";
 import { getPublishedStyleById, getPublishedStyles } from "./styles";
 import type { CatalogStyle } from "./types";
 
-/** Nested asset columns must stay explicit so new fields (blur) are never dropped by a stale schema cache. */
+/**
+ * Keep the shared public payload lean. List cards use SHARED_STYLE_BLUR and
+ * detail media already renders correctly without an ambient data URI, so
+ * result_blur_data_url must not be copied hundreds of times into Data Cache.
+ */
 const STYLE_ASSET_SELECT = `
-  id,
   kind,
   source_storage_key,
   result_storage_key,
   alt_text,
   sort_order,
-  provenance,
-  result_blur_data_url
+  provenance
 `;
 
 const STYLE_SELECT = `
-  id,
   slug,
   title,
   summary,
@@ -62,8 +67,7 @@ const STYLE_SELECT = `
     template,
     variables,
     test_record,
-    is_primary,
-    status
+    is_primary
   ),
   style_assets ( ${STYLE_ASSET_SELECT} )
 `;
@@ -86,48 +90,75 @@ function mapRows(rows: DbStyleRow[]): CatalogStyle[] {
  * Uses a cookie-free anon client so catalog pages can prerender.
  * Cached across requests so all public routes and ISR renders share one read.
  */
-async function fetchPublishedStyles(): Promise<CatalogStyle[]> {
+type PublishedStylesPage = {
+  styles: CatalogStyle[];
+  /** Raw row count controls pagination even if a malformed row cannot be mapped. */
+  sourceRowCount: number;
+};
+
+function seedPublishedStylesPage(pageIndex: number): PublishedStylesPage {
+  const start = pageIndex * PUBLIC_CATALOG_PAGE_SIZE;
+  const styles = [...getPublishedStyles()]
+    .sort(compareSavedDesc)
+    .slice(start, start + PUBLIC_CATALOG_PAGE_SIZE);
+  return { styles, sourceRowCount: styles.length };
+}
+
+async function fetchPublishedStylesPage(pageIndex: number): Promise<PublishedStylesPage> {
   if (!isSupabaseConfigured()) {
-    return [...getPublishedStyles()].sort(compareSavedDesc);
+    return seedPublishedStylesPage(pageIndex);
   }
 
   try {
     const supabase = createPublicSupabaseClient();
-    if (!supabase) return [...getPublishedStyles()].sort(compareSavedDesc);
+    if (!supabase) return seedPublishedStylesPage(pageIndex);
 
+    const from = pageIndex * PUBLIC_CATALOG_PAGE_SIZE;
+    const to = from + PUBLIC_CATALOG_PAGE_SIZE - 1;
     const { data, error } = await supabase
       .from("styles")
       .select(STYLE_SELECT)
       .eq("status", "published")
       .order("save_count", { ascending: false })
       .order("published_at", { ascending: false })
-      .order("slug", { ascending: true });
+      .order("slug", { ascending: true })
+      .range(from, to);
 
     if (error) {
       console.warn(
-        "[catalog] Supabase query failed; using seed fallback.",
+        `[catalog] Supabase page ${pageIndex} failed; using seed fallback.`,
         error.message,
       );
-      return [...getPublishedStyles()].sort(compareSavedDesc);
+      return seedPublishedStylesPage(pageIndex);
     }
 
-    const mapped = mapRows((data ?? []) as DbStyleRow[]);
-    if (mapped.length === 0) {
-      console.warn("[catalog] No published styles in database; using seed fallback.");
-      return [...getPublishedStyles()].sort(compareSavedDesc);
+    const rows = (data ?? []) as DbStyleRow[];
+    const mapped = mapRows(rows);
+    if (rows.length > 0 && mapped.length === 0) {
+      console.warn(
+        `[catalog] Supabase page ${pageIndex} could not be mapped; using seed fallback.`,
+      );
+      return seedPublishedStylesPage(pageIndex);
     }
 
-    // Client-side tie-break: published_at + id keep offset/exclude paging stable.
-    return mapped.sort(compareSavedDesc);
+    return { styles: mapped, sourceRowCount: rows.length };
   } catch (err) {
-    console.warn("[catalog] Unexpected catalog error; using seed fallback.", err);
-    return [...getPublishedStyles()].sort(compareSavedDesc);
+    console.warn(
+      `[catalog] Unexpected page ${pageIndex} error; using seed fallback.`,
+      err,
+    );
+    return seedPublishedStylesPage(pageIndex);
   }
 }
 
-const getCachedPublishedStyles = unstable_cache(
-  fetchPublishedStyles,
-  ["published-catalog-v2"],
+/**
+ * A single joined catalog was ~1.9 MB, close enough to Vercel's 2 MB Data
+ * Cache item limit that serialization could make every call a miss. Cache
+ * bounded pages independently; callers still receive one shared catalog.
+ */
+const getCachedPublishedStylesPage = unstable_cache(
+  fetchPublishedStylesPage,
+  ["published-catalog-page-v3"],
   {
     tags: [PUBLIC_CATALOG_CACHE_TAG],
     revalidate: PUBLIC_DATA_REVALIDATE_SECONDS,
@@ -137,8 +168,19 @@ const getCachedPublishedStyles = unstable_cache(
 /** React cache also deduplicates concurrent callers in a single render. */
 export const listPublishedStyles = cache(async (): Promise<CatalogStyle[]> => {
   // Keep seed-only local/test use independent of Next's runtime cache context.
-  if (!isSupabaseConfigured()) return fetchPublishedStyles();
-  return getCachedPublishedStyles();
+  if (!isSupabaseConfigured()) {
+    return [...getPublishedStyles()].sort(compareSavedDesc);
+  }
+
+  const bySlug = new Map<string, CatalogStyle>();
+  for (let pageIndex = 0; ; pageIndex += 1) {
+    const page = await getCachedPublishedStylesPage(pageIndex);
+    for (const style of page.styles) bySlug.set(style.id, style);
+    if (page.sourceRowCount < PUBLIC_CATALOG_PAGE_SIZE) break;
+  }
+
+  // Client-side tie-break keeps paging stable if one page used the seed fallback.
+  return [...bySlug.values()].sort(compareSavedDesc);
 });
 
 /**
