@@ -118,12 +118,12 @@ async function assertStalledQueryFallsBack(
       warnings.some((args) => {
         const detail = args[1];
         return (
-          String(args[0]).includes("Sitemap style query failed") ||
-          String(args[0]).includes("Unexpected sitemap catalog error")
-        ) &&
+          (String(args[0]).includes("Sitemap style query failed") ||
+            String(args[0]).includes("Unexpected sitemap catalog error")) &&
           (typeof detail === "string"
             ? detail.includes(errorName) || detail.includes("Timed out")
-            : String(detail).includes(errorName) || String(detail).includes("Timed out"));
+            : String(detail).includes(errorName) || String(detail).includes("Timed out"))
+        );
       }),
       `${errorName} / timeout is logged before the seed fallback`,
     );
@@ -150,7 +150,10 @@ describe("sitemap style query", () => {
 describe("sitemap seed completeness (N-31)", () => {
   it("includes every character style in the published seed fallback", () => {
     const published = new Set(getPublishedStyles().map((style) => style.id));
-    assert.ok(published.size >= 250, `expected ≥250 published seed styles, got ${published.size}`);
+    assert.ok(
+      published.size >= 250,
+      `expected ≥250 published seed styles, got ${published.size}`,
+    );
     assert.equal(characterStyleIds.size, 74);
     for (const id of characterStyleIds) {
       assert.ok(published.has(id), `missing character style in seed: ${id}`);
@@ -159,7 +162,7 @@ describe("sitemap seed completeness (N-31)", () => {
     assert.ok(published.has("dark-fantasy-armored-knight-ai-photo-prompt"));
   });
 
-  it("unions seed slugs when Supabase undercounts (pre-character 183)", () => {
+  it("unions seed slugs when Supabase undercounts before the latest batches", () => {
     const seed = getPublishedStyles().map((style) => ({
       slug: style.id,
       lastModified: new Date("2026-01-01T00:00:00.000Z"),
@@ -170,7 +173,7 @@ describe("sitemap seed completeness (N-31)", () => {
         slug: entry.slug,
         lastModified: new Date("2026-10-01T00:00:00.000Z"),
       }));
-    assert.equal(partial.length, 183);
+    assert.equal(partial.length, 210);
     const merged = mergeSitemapStyleEntries(partial, seed);
     assert.equal(merged.length, seed.length);
     const slugs = new Set(merged.map((entry) => entry.slug));

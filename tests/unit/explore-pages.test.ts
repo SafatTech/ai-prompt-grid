@@ -54,10 +54,7 @@ describe("explore pagination", () => {
     // Paginated listings keep the same visible H1 (Page N stays in title/description).
     assert.equal(exploreListingHeading(), "Find a style for your photo");
     assert.equal(exploreQueryHasFacets(emptyQuery), false);
-    assert.equal(
-      exploreQueryHasFacets({ ...emptyQuery, category: ["Cinematic"] }),
-      true,
-    );
+    assert.equal(exploreQueryHasFacets({ ...emptyQuery, category: ["Cinematic"] }), true);
     assert.equal(exploreCanonicalHref(emptyQuery, 2), "/explore?page=2");
     assert.equal(
       exploreCanonicalHref({ ...emptyQuery, category: ["Cinematic"] }, 1),
@@ -71,22 +68,22 @@ describe("explore pagination", () => {
 
   it("covers every published style across server pages and the sitemap", () => {
     const styles = getPublishedStyles();
-    assert.equal(styles.length, 257);
+    assert.equal(styles.length, 284);
     assert.equal(EXPLORE_PAGE_SIZE, 18);
 
     const seen = new Set<string>();
     const pages = explorePageCount(styles.length);
-    assert.equal(pages, 15);
+    assert.equal(pages, 16);
     for (let page = 1; page <= pages; page += 1) {
       const slice = explorePageSlice(styles, page);
       assert.ok(slice.length > 0);
       assert.ok(slice.length <= EXPLORE_PAGE_SIZE);
       for (const style of slice) seen.add(style.id);
     }
-    assert.equal(seen.size, 257);
+    assert.equal(seen.size, 284);
 
     const stylePaths = dedupedStylePaths(styles.map((style) => style.id));
-    assert.equal(stylePaths.length, 257);
+    assert.equal(stylePaths.length, 284);
     assert.ok(stylePaths.includes("/styles/meadow-reverie"));
     for (const style of styles) {
       assert.equal(isRetiredStyleSlug(style.id), false, style.id);
@@ -106,6 +103,7 @@ describe("explore pagination", () => {
       "/explore?page=13",
       "/explore?page=14",
       "/explore?page=15",
+      "/explore?page=16",
     ]);
   });
 
