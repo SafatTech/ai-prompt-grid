@@ -77,7 +77,6 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
 
     if (!expansionRequested) {
       heightLocked.current = false;
-      setGridMinHeight(undefined);
       return;
     }
 
@@ -134,7 +133,11 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
     } finally {
       inFlight.current = false;
       setPending(false);
-      if (!committed) setExpansionRequested(false);
+      if (!committed) {
+        heightLocked.current = false;
+        setGridMinHeight(undefined);
+        setExpansionRequested(false);
+      }
     }
   }
 
