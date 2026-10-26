@@ -17,7 +17,7 @@ type Props = {
 };
 
 /** Soft cap for auto-appended home feed cards (SSR page + AUTO_FETCH_PAGES).
- *  One append page is enough now that HOME_MASONRY_PAGE_SIZE is 50. */
+ *  One append page adds another five desktop masonry rows. */
 const AUTO_FETCH_PAGES = 1;
 
 /** Hide stuck placeholders even if a fetch hangs (N-25 intermittent). */

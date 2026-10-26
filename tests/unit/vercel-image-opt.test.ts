@@ -143,7 +143,7 @@ describe("Vercel image optimization toggle", () => {
     assert.ok(page.includes("HOME_MASONRY_PAGE_SIZE"));
     assert.ok(page.includes('surface: "rail"'));
     const masonrySize = readSrc("src/lib/home/masonry-page-size.ts");
-    assert.ok(masonrySize.includes("HOME_MASONRY_PAGE_SIZE = 50"));
+    assert.ok(masonrySize.includes("HOME_MASONRY_PAGE_SIZE = 25"));
     assert.ok(masonrySize.includes("HOME_MASONRY_COLUMN_COUNT = 5"));
   });
 });
