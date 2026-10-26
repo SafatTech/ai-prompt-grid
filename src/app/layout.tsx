@@ -14,10 +14,10 @@ import "./globals.css";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
-  display: "swap",
-  // Skip preload so the home h1 is not contested by the webfont (LCP).
+  // Keep the fallback font when Geist misses its brief load window so the
+  // homepage h1 does not repaint after first render (mobile LCP).
+  display: "optional",
   preload: false,
-  // Size-adjusted fallback so the h1 can paint before the webfont arrives.
   adjustFontFallback: true,
 });
 

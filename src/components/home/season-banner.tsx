@@ -1,6 +1,5 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { CatalogStyle } from "@/lib/catalog/types";
 import {
   daysUntilFestival,
   formatFestivalDay,
@@ -9,28 +8,37 @@ import {
   type SeasonChip,
 } from "@/lib/home/seasons";
 
+export type SeasonBannerStyle = {
+  id: string;
+  title: string;
+  result: string;
+};
+
 type Props = {
   season: Season;
   /** Styles whose primary after-images are displayed in the banner artwork. */
-  imageStyles?: CatalogStyle[];
-  styles: CatalogStyle[];
+  imageStyles?: SeasonBannerStyle[];
+  styles: SeasonBannerStyle[];
   /** Extra season-matched styles used to fill the mobile strip without repeating band photos. */
-  matchedStyles?: CatalogStyle[];
+  matchedStyles?: SeasonBannerStyle[];
   seasonStyleCount: number;
 };
 
-function pickBackgroundStyles(styles: CatalogStyle[], count: number): CatalogStyle[] {
+function pickBackgroundStyles(
+  styles: SeasonBannerStyle[],
+  count: number,
+): SeasonBannerStyle[] {
   return styles.slice(0, count);
 }
 
 function pickStripStyles(
-  featured: CatalogStyle[],
-  matched: CatalogStyle[],
+  featured: SeasonBannerStyle[],
+  matched: SeasonBannerStyle[],
   excludeIds: Set<string>,
   count: number,
-): CatalogStyle[] {
+): SeasonBannerStyle[] {
   const seen = new Set(excludeIds);
-  const out: CatalogStyle[] = [];
+  const out: SeasonBannerStyle[] = [];
   for (const style of [...featured, ...matched]) {
     if (seen.has(style.id)) continue;
     seen.add(style.id);

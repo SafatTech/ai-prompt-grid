@@ -22,11 +22,13 @@ describe("perf LCP/TBT follow-up", () => {
     const layout = read("src/app/layout.tsx");
     assert.ok(layout.includes('import "./globals.css"'));
     assert.ok(!layout.includes('import "./home.css"'));
-    assert.ok(layout.includes('display: "swap"'));
     assert.ok(layout.includes("adjustFontFallback: true"));
     assert.ok(layout.includes("preload: false"));
-    // Geist sans must not preload (competes with home h1 LCP).
-    assert.match(layout, /geistSans[\s\S]*?preload:\s*false/);
+    // Geist sans must neither preload nor force a late swap of the home h1.
+    assert.match(
+      layout,
+      /geistSans[\s\S]*?display:\s*"optional"[\s\S]*?preload:\s*false/,
+    );
   });
 
   it("keeps server StyleCardRail out of client ExploreLoadMore", () => {
@@ -108,5 +110,20 @@ describe("perf LCP/TBT follow-up", () => {
     assert.ok(!hero.includes("blurDataURL"));
     const dto = read("src/lib/catalog/style-card-data.ts");
     assert.ok(dto.includes("includePromptPreview"));
+  });
+
+  it("passes only the slim image/label DTO into SeasonBanner", () => {
+    const page = read("src/app/page.tsx");
+    assert.ok(page.includes("toSeasonBannerStyles"));
+    assert.match(
+      page,
+      /styles=\{seasonBannerStyles\}[\s\S]*imageStyles=\{seasonBannerImageStyles\}/,
+    );
+    assert.ok(!page.includes("styles={seasonStyles}"));
+    assert.ok(!page.includes("imageStyles={seasonImageStyles}"));
+
+    const banner = read("src/components/home/season-banner.tsx");
+    assert.ok(banner.includes("type SeasonBannerStyle"));
+    assert.ok(!banner.includes("CatalogStyle"));
   });
 });
