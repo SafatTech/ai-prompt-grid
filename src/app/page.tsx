@@ -4,10 +4,7 @@ import { AdSlot } from "@/components/ad-slot";
 import { CategoryChipsBar } from "@/components/home/category-chips-bar";
 import { ExploreFeed } from "@/components/home/explore-feed";
 import { HeroWall } from "@/components/home/hero-wall";
-import {
-  SeasonBanner,
-  type SeasonBannerStyle,
-} from "@/components/home/season-banner";
+import { SeasonBanner, type SeasonBannerStyle } from "@/components/home/season-banner";
 import { StyleRail } from "@/components/home/style-rail";
 import {
   countPublishedStyles,
