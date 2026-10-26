@@ -10,14 +10,22 @@ function readSrc(rel: string) {
   return readFileSync(join(root, rel), "utf8");
 }
 
-describe("PR34 follow-up: home feed soft-cap reserves (N-19 / R1)", () => {
-  it("reserves skeleton slots under the soft cap and freezes height after the last batch", () => {
+describe("home feed click expansion and soft-cap reserves", () => {
+  it("expands to 100 only after a click, then hands off to Explore", () => {
     const src = readSrc("src/components/home/explore-load-more.tsx");
     assert.ok(src.includes("softCapFor"));
     assert.ok(src.includes("softCap - shown"));
-    assert.ok(src.includes("AUTO_FETCH_PAGES = 1"));
+    assert.ok(src.includes("HOME_MASONRY_SOFT_CAP = 100"));
+    assert.ok(src.includes("Math.min(total, HOME_MASONRY_SOFT_CAP)"));
+    assert.ok(src.includes("expansionRequested"));
+    assert.ok(src.includes("onClick={() => setExpansionRequested(true)}"));
+    assert.ok(src.includes("Explore styles"));
+    assert.ok(!src.includes("requestIdleCallback"));
+    assert.ok(!src.includes("IntersectionObserver"));
     assert.ok(src.includes("gridMinHeight"));
-    assert.ok(src.includes("autoDone || !pending ? 0"));
+    assert.ok(
+      src.includes("!expansionRequested || expansionDone || !pending"),
+    );
     assert.ok(src.includes("heightLocked"));
     assert.ok(src.includes("reserveMasonryHeight"));
     assert.ok(src.includes("remainingSlots"));

@@ -67,13 +67,16 @@ describe("Vercel image optimization toggle", () => {
     }
   });
 
-  it("keeps LCP priority, N-25 pending rail, and avoids eager rails", () => {
+  it("keeps click-driven pending rail, LCP priority, and avoids eager rails", () => {
     const home = readSrc("src/components/home/explore-load-more.tsx");
-    assert.ok(home.includes('rootMargin: "2400px 0px"'));
+    assert.ok(!home.includes('rootMargin: "2400px 0px"'));
     assert.ok(home.includes("measureMasonryContentHeight"));
     assert.ok(home.includes("remainingSlots"));
     assert.ok(home.includes("home-masonry-pending"));
-    assert.ok(home.includes("autoDone || !pending ? 0"));
+    assert.ok(
+      home.includes("!expansionRequested || expansionDone || !pending"),
+    );
+    assert.ok(home.includes("HOME_MASONRY_SOFT_CAP = 100"));
     assert.ok(home.includes("home-masonry-extra-wrap"));
     assert.ok(home.includes("PENDING_GUARD_MS"));
     assert.ok(home.includes("setPending(true)"));
