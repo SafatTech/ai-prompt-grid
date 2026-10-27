@@ -4,7 +4,7 @@ import { AdSlot } from "@/components/ad-slot";
 import { CategoryChipsBar } from "@/components/home/category-chips-bar";
 import { ExploreFeed } from "@/components/home/explore-feed";
 import { HeroWall } from "@/components/home/hero-wall";
-import { SeasonBanner } from "@/components/home/season-banner";
+import { SeasonBanner, type SeasonBannerStyle } from "@/components/home/season-banner";
 import { StyleRail } from "@/components/home/style-rail";
 import {
   countPublishedStyles,
@@ -69,6 +69,10 @@ export const metadata: Metadata = {
   },
 };
 
+function toSeasonBannerStyles(styles: SeasonBannerStyle[]): SeasonBannerStyle[] {
+  return styles.map(({ id, title, result }) => ({ id, title, result }));
+}
+
 export default async function HomePage() {
   const homepageSettings = await getHomepageSettings();
   const season = resolveHomepageSeason(homepageSettings);
@@ -115,6 +119,9 @@ export default async function HomePage() {
   ]);
 
   const seasonStyleCount = seasonMatched.length;
+  const seasonBannerStyles = toSeasonBannerStyles(seasonStyles);
+  const seasonBannerImageStyles = toSeasonBannerStyles(seasonImageStyles);
+  const seasonBannerMatchedStyles = toSeasonBannerStyles(seasonMatched);
 
   // Slim rail/masonry DTOs — drop note/source/height. Shared blur lives in the
   // media client chunk (not repeated per-card RSC props). Unique blur = LCP only.
@@ -168,9 +175,9 @@ export default async function HomePage() {
         {season ? (
           <SeasonBanner
             season={season}
-            styles={seasonStyles}
-            imageStyles={seasonImageStyles}
-            matchedStyles={seasonImages.isCurated ? [] : seasonMatched}
+            styles={seasonBannerStyles}
+            imageStyles={seasonBannerImageStyles}
+            matchedStyles={seasonImages.isCurated ? [] : seasonBannerMatchedStyles}
             seasonStyleCount={seasonStyleCount}
           />
         ) : null}
