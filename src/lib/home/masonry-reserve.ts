@@ -1,5 +1,5 @@
 /**
- * Estimate reserved height for homepage masonry auto-load slots (N-19 / N-24).
+ * Estimate reserved height for homepage masonry click-expansion slots (N-19 / N-24).
  * Skeletons under-measure real card height at 390, so we size from live cards.
  * Use remaining slot count × measured average — no extra % buffer (N-24 blank band).
  */

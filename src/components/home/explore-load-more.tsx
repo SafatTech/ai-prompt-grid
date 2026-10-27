@@ -16,15 +16,14 @@ type Props = {
   pageSize: number;
 };
 
-/** Soft cap for auto-appended home feed cards (SSR page + AUTO_FETCH_PAGES).
- *  One append page is enough now that HOME_MASONRY_PAGE_SIZE is 50. */
-const AUTO_FETCH_PAGES = 1;
+/** Maximum number of styles expanded in-place after the first user click. */
+const HOME_MASONRY_SOFT_CAP = 100;
 
 /** Hide stuck placeholders even if a fetch hangs (N-25 intermittent). */
 const PENDING_GUARD_MS = 1500;
 
-function softCapFor(initialCount: number, total: number, pageSize: number) {
-  return Math.min(total, initialCount + AUTO_FETCH_PAGES * pageSize);
+function softCapFor(total: number) {
+  return Math.min(total, HOME_MASONRY_SOFT_CAP);
 }
 
 function mergeUnique(
@@ -42,44 +41,46 @@ function mergeUnique(
 }
 
 export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
-  const softCap = softCapFor(initialCount, total, pageSize);
+  const softCap = softCapFor(total);
   const [extraStyles, setExtraStyles] = useState<StyleCardData[]>([]);
   const [nextPage, setNextPage] = useState(2);
-  /** True only while a real network fetch is in flight — never from queued IO. */
+  const [expansionRequested, setExpansionRequested] = useState(false);
+  /** True only while a real network fetch is in flight. */
   const [pending, setPending] = useState(false);
-  const [autoFetches, setAutoFetches] = useState(0);
   // While slots fill, floor min-height so batch commits cannot collapse trust /
   // load-more / newsletter (R1 / N-19). Reserve remaining slots × measured
   // card height only — then release to natural content once the last batch
   // lands so we do not leave a blank band above "Load more" (N-24).
   const [gridMinHeight, setGridMinHeight] = useState<number | undefined>(undefined);
   const inFlight = useRef(false);
-  const page2Handled = useRef(false);
   const heightLocked = useRef(false);
   const nextPageRef = useRef(nextPage);
-  const sentinelRef = useRef<HTMLDivElement>(null);
-  const wrapRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
-  const pendingRef = useRef<HTMLDivElement>(null);
   const shown = initialCount + extraStyles.length;
   const hasMore = shown < total;
-  const autoDone = autoFetches >= AUTO_FETCH_PAGES || shown >= softCap || !hasMore;
+  const expansionDone = shown >= softCap || !hasMore;
   const remainingSlots = Math.max(0, softCap - shown);
-  // N-25: pending rail only while a fetch is actually running — never from a
-  // queued/idle arm, and never inside the CSS multi-column grid.
+  // Pending rail is outside the CSS multi-column grid and only appears after
+  // the user requests the on-home expansion.
   const skeletons =
-    autoDone || !pending ? 0 : Math.min(pageSize, Math.max(remainingSlots, 1));
+    !expansionRequested || expansionDone || !pending
+      ? 0
+      : Math.min(pageSize, Math.max(remainingSlots, 1));
 
   useEffect(() => {
     nextPageRef.current = nextPage;
   }, [nextPage]);
 
   useLayoutEffect(() => {
-    const wrap = wrapRef.current;
     const grid = gridRef.current;
-    if (!wrap || !grid) return;
+    if (!grid) return;
 
-    if (autoDone) {
+    if (!expansionRequested) {
+      heightLocked.current = false;
+      return;
+    }
+
+    if (expansionDone) {
       if (heightLocked.current) return;
       const height = measureMasonryContentHeight(grid);
       if (height <= 0) return;
@@ -93,169 +94,73 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
     const next = Math.max(measured, reserved);
     if (next <= 0) return;
     setGridMinHeight((prev) => Math.max(prev ?? 0, next));
-  }, [extraStyles.length, skeletons, autoDone, remainingSlots]);
+  }, [
+    expansionDone,
+    expansionRequested,
+    extraStyles.length,
+    remainingSlots,
+    skeletons,
+  ]);
 
   function commitPage(page: number, styles: StyleCardData[]) {
     setExtraStyles((prev) => mergeUnique(prev, styles));
     setNextPage(page + 1);
-    setAutoFetches((n) => n + 1);
   }
 
   async function loadNext() {
-    if (inFlight.current || autoDone) return;
+    if (inFlight.current || !expansionRequested || expansionDone) return;
     const page = nextPageRef.current;
     if (page < 2) return;
 
     inFlight.current = true;
     setPending(true);
+    let committed = false;
     try {
       const res = await fetch(
         `/api/home/explore?page=${page}&pageSize=${pageSize}`,
       );
       if (!res.ok) return;
       const data = (await res.json()) as { styles?: StyleCardData[] };
-      const styles = Array.isArray(data.styles) ? data.styles : [];
-      if (page === 2) page2Handled.current = true;
-      if (styles.length > 0) commitPage(page, styles);
+      const styles = Array.isArray(data.styles)
+        ? data.styles.slice(0, remainingSlots)
+        : [];
+      if (styles.length > 0) {
+        committed = true;
+        commitPage(page, styles);
+      }
     } catch {
-      /* sentinel / visible-skeleton retry */
+      /* Restore the expansion button so the user can retry. */
     } finally {
       inFlight.current = false;
       setPending(false);
+      if (!committed) {
+        heightLocked.current = false;
+        setGridMinHeight(undefined);
+        setExpansionRequested(false);
+      }
     }
   }
 
-  // Idle page-2 prefetch — pending flips only when the real fetch starts.
+  // A single user action drives sequential pages until the on-home cap. There
+  // is intentionally no idle or intersection-observer auto-fetch.
   useEffect(() => {
-    let cancelled = false;
-
-    const run = () => {
-      if (cancelled || page2Handled.current || inFlight.current) return;
-      void loadNext();
-    };
-
-    if (typeof requestIdleCallback === "function") {
-      const id = requestIdleCallback(run, { timeout: 1200 });
-      return () => {
-        cancelled = true;
-        cancelIdleCallback(id);
-      };
+    if (
+      !expansionRequested ||
+      expansionDone ||
+      remainingSlots === 0 ||
+      inFlight.current
+    ) {
+      return;
     }
-
-    const timer = window.setTimeout(run, 400);
-    return () => {
-      cancelled = true;
-      window.clearTimeout(timer);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- mount-only idle arm
-  }, []);
-
-  useEffect(() => {
-    if (autoDone) return;
-    const node = sentinelRef.current;
-    if (!node) return;
-
-    let cancelled = false;
-    let retryTimer: ReturnType<typeof setTimeout> | undefined;
-
-    const tryFetch = () => {
-      if (cancelled || inFlight.current) return;
-      void loadNext();
-    };
-
-    const fetchIo = new IntersectionObserver(
-      ([entry]) => {
-        if (!entry?.isIntersecting) return;
-        if (inFlight.current) {
-          if (retryTimer !== undefined) clearTimeout(retryTimer);
-          retryTimer = setTimeout(tryFetch, 200);
-          return;
-        }
-        tryFetch();
-      },
-      { rootMargin: "2400px 0px" },
-    );
-    fetchIo.observe(node);
-
-    return () => {
-      cancelled = true;
-      fetchIo.disconnect();
-      if (retryTimer !== undefined) clearTimeout(retryTimer);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- IO rebinds when next page / auto state changes
-  }, [autoDone, nextPage, pageSize]);
-
-  // After each commit, if more auto pages remain and the sentinel is near, keep
-  // fetching without requiring a scroll.
-  useEffect(() => {
-    if (autoDone || remainingSlots === 0 || inFlight.current) return;
-    const node = sentinelRef.current;
-    if (!node) return;
-    const rect = node.getBoundingClientRect();
-    const viewportH = window.innerHeight || 0;
-    if (rect.top <= viewportH + 2400) {
-      void loadNext();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- intentional after batch commits
-  }, [extraStyles.length, autoDone, remainingSlots, nextPage]);
-
-  // N-25: if placeholders are visible and nothing is in flight, load immediately.
-  useEffect(() => {
-    if (autoDone || !pending || inFlight.current) return;
-    const root = pendingRef.current;
-    if (!root) return;
-
-    const visible = [...root.querySelectorAll('[data-testid="style-card-skeleton"]')].some(
-      (node) => {
-        const rect = (node as HTMLElement).getBoundingClientRect();
-        const vh = window.innerHeight || 0;
-        return rect.bottom > 0 && rect.top < vh && rect.width > 0;
-      },
-    );
-    if (visible && !inFlight.current) {
-      void loadNext();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps -- re-check when pending rail mounts
-  }, [autoDone, pending, skeletons, nextPage]);
-
-  // Visible-skeleton safety net while a fetch is marked pending.
-  useEffect(() => {
-    if (autoDone || skeletons === 0) return;
-    const root = pendingRef.current;
-    if (!root) return;
-
-    let cancelled = false;
-    let retryTimer: ReturnType<typeof setTimeout> | undefined;
-
-    const tryFetch = () => {
-      if (cancelled || inFlight.current) return;
-      void loadNext();
-    };
-
-    const io = new IntersectionObserver(
-      (entries) => {
-        if (!entries.some((entry) => entry.isIntersecting)) return;
-        if (inFlight.current) {
-          if (retryTimer !== undefined) clearTimeout(retryTimer);
-          retryTimer = setTimeout(tryFetch, 200);
-          return;
-        }
-        tryFetch();
-      },
-      { rootMargin: "200px 0px" },
-    );
-
-    const nodes = root.querySelectorAll('[data-testid="style-card-skeleton"]');
-    if (nodes.length === 0) io.observe(root);
-    else nodes.forEach((node) => io.observe(node));
-
-    return () => {
-      cancelled = true;
-      io.disconnect();
-      if (retryTimer !== undefined) clearTimeout(retryTimer);
-    };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [autoDone, skeletons, nextPage, pending]);
+    void loadNext();
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- continue only after click/page commit
+  }, [
+    expansionDone,
+    expansionRequested,
+    extraStyles.length,
+    nextPage,
+    remainingSlots,
+  ]);
 
   // Guard: never leave grey placeholders up longer than PENDING_GUARD_MS.
   useEffect(() => {
@@ -269,7 +174,7 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
   return (
     <>
       <div
-        ref={wrapRef}
+        id="home-masonry-expansion"
         className="home-masonry-extra-wrap"
         aria-busy={pending || undefined}
         style={gridMinHeight ? { minHeight: gridMinHeight } : undefined}
@@ -286,7 +191,6 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
         </div>
         {skeletons > 0 ? (
           <div
-            ref={pendingRef}
             className="home-masonry-pending"
             data-testid="home-masonry-pending"
           >
@@ -300,10 +204,21 @@ export function ExploreLoadMore({ initialCount, total, pageSize }: Props) {
           </div>
         ) : null}
       </div>
-      <div ref={sentinelRef} className="home-load-more" aria-live="polite">
-        {hasMore ? (
-          /* N-27: page=ceil(shown/18)+1 skipped cards; continue from offset. */
-          <Link href={`/explore?offset=${shown}`}>Load more styles</Link>
+      <div className="home-load-more" aria-live="polite">
+        {hasMore && !expansionDone ? (
+          <button
+            type="button"
+            className="home-load-more-btn"
+            aria-controls="home-masonry-expansion"
+            disabled={expansionRequested}
+            onClick={() => setExpansionRequested(true)}
+          >
+            {expansionRequested ? "Loading styles…" : "Load more styles"}
+          </button>
+        ) : total > 0 ? (
+          <Link href={hasMore ? `/explore?offset=${shown}` : "/explore"}>
+            Explore styles
+          </Link>
         ) : null}
         <span>
           Showing {Math.min(shown, total)} of {total}

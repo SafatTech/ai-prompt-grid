@@ -1087,6 +1087,11 @@
   cursor: pointer;
 }
 
+.home-load-more-btn:disabled {
+  cursor: wait;
+  opacity: 0.72;
+}
+
 /* Trust strip v3-B — type-only */
 .home-below > .home-section.home-trust {
   position: relative;
