@@ -2,8 +2,14 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { RelatedStylesLazy } from "@/components/styles/related-styles-lazy";
 import { StyleDetailClient } from "@/components/styles/style-detail-client";
+import { usesMergeHero } from "@/lib/catalog/merge-inputs";
 import { relatedStylesFor } from "@/lib/catalog/related-styles";
-import { getPublishedStyleBySlug, listPublishedStyles } from "@/lib/catalog/repository";
+import {
+  getPublishedStyleAmbientBlur,
+  getPublishedStyleBySlug,
+  listPublishedStyles,
+  withStyleAmbientBlur,
+} from "@/lib/catalog/repository";
 import { toStyleCardDataList } from "@/lib/catalog/style-card-data";
 import {
   styleMetadataTitle,
@@ -82,23 +88,30 @@ export default async function StyleDetailPage({
   ]);
   if (!style) notFound();
 
+  // Shared catalog omits result_blur_data_url (cache budget). Merge print-stack
+  // heroes still need the tiny blur for .mba-ambient — fetch one style only.
+  const detailStyle = withStyleAmbientBlur(
+    style,
+    usesMergeHero(style) ? await getPublishedStyleAmbientBlur(style.id) : undefined,
+  );
+
   const relatedStyles = toStyleCardDataList(
-    relatedStylesFor(style.id, style.category, catalog),
+    relatedStylesFor(detailStyle.id, detailStyle.category, catalog),
     { sharedBlur: true },
   );
   // LCP: CompareSlider / MergeBeforeAfter use priority + fetchPriority="high"
   // (no react-dom preload — avoids a second request behind CSS).
-  const pageUrl = absoluteUrl(`/styles/${style.id}`);
+  const pageUrl = absoluteUrl(`/styles/${detailStyle.id}`);
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
     "@id": pageUrl,
-    name: style.title,
-    description: style.note || style.description,
+    name: detailStyle.title,
+    description: detailStyle.note || detailStyle.description,
     url: pageUrl,
-    image: style.result || style.source || undefined,
-    about: style.category,
-    dateModified: style.promptVariant.lastVerified || undefined,
+    image: detailStyle.result || detailStyle.source || undefined,
+    about: detailStyle.category,
+    dateModified: detailStyle.promptVariant.lastVerified || undefined,
     provider: {
       "@type": "Organization",
       "@id": absoluteUrl("/#organization"),
@@ -113,8 +126,8 @@ export default async function StyleDetailPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      <StyleDetailClient style={style}>
-        <RelatedStylesLazy styles={relatedStyles} category={style.category} />
+      <StyleDetailClient style={detailStyle}>
+        <RelatedStylesLazy styles={relatedStyles} category={detailStyle.category} />
       </StyleDetailClient>
     </>
   );

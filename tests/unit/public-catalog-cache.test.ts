@@ -32,6 +32,15 @@ describe("public catalog cache", () => {
     assert.doesNotMatch(selectConstants, /prompt_variants\s*\(\s*\*\s*\)/);
     assert.doesNotMatch(selectConstants, /result_blur_data_url/);
     assert.match(source, /listPublishedStyles\(\)\)\.find/);
+    // Merge detail heroes load blur one-style-at-a-time, not via the shared select.
+    assert.match(source, /getPublishedStyleAmbientBlur/);
+  });
+
+  it("wires merge style detail pages to the one-style ambient blur fetch", () => {
+    const source = readSrc("src/app/styles/[slug]/page.tsx");
+    assert.match(source, /usesMergeHero/);
+    assert.match(source, /getPublishedStyleAmbientBlur/);
+    assert.match(source, /withStyleAmbientBlur/);
   });
 
   it("keeps representative serialized cache pages below the safety budget", () => {
