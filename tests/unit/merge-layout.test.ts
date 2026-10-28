@@ -10,6 +10,10 @@ import {
   usesMergeHero,
   usesMergeStack,
 } from "../../src/lib/catalog/merge-inputs";
+import {
+  pickAmbientBlurDataUrl,
+  withStyleAmbientBlur,
+} from "../../src/lib/catalog/repository";
 import { getStyleById } from "../../src/lib/catalog/styles";
 import { createElement } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
@@ -189,6 +193,65 @@ describe("merge result blur resolution", () => {
       resultBlur: "data:image/webp;base64,CARD",
     };
     assert.equal(mergeResultBlurSrc(cardOnly), "data:image/webp;base64,CARD");
+  });
+
+  it("detail-only ambient blur attaches to mergeResultImage for the print stack", () => {
+    const style = getStyleById("riverside-merge-two-photos-prompt-gemini-couple");
+    assert.ok(style);
+    assert.equal(usesMergeHero(style), true);
+    assert.equal(mergeResultImage(style).blurSrc, undefined);
+
+    const enriched = withStyleAmbientBlur(style, "data:image/webp;base64,DETAIL");
+    assert.equal(enriched.resultBlur, "data:image/webp;base64,DETAIL");
+    assert.equal(mergeResultImage(enriched).blurSrc, "data:image/webp;base64,DETAIL");
+
+    // Local paths avoid next/image remote-host checks in unit tests.
+    const html = renderToStaticMarkup(
+      createElement(MergeBeforeAfter, {
+        variant: "hero",
+        title: style.title,
+        inputs: [
+          { src: "/catalog/editorial/source-75.png", alt: "Photo 1" },
+          { src: "/catalog/editorial/source-75b.png", alt: "Photo 2" },
+        ],
+        result: {
+          ...mergeResultImage(enriched),
+          src: "/catalog/editorial/result-75.png",
+        },
+      }),
+    );
+    assert.match(html, /mba-ambient/);
+    assert.match(html, /data:image\/webp;base64,DETAIL/);
+    assert.match(html, /mba-stack/);
+    assert.doesNotMatch(html, /mba-dock/);
+  });
+
+  it("picks card_pair blur before example_pair for the detail ambient fetch", () => {
+    assert.equal(
+      pickAmbientBlurDataUrl([
+        {
+          kind: "example_pair",
+          sort_order: 1,
+          result_blur_data_url: "data:image/webp;base64,EXAMPLE",
+        },
+        {
+          kind: "card_pair",
+          sort_order: 0,
+          result_blur_data_url: "data:image/webp;base64,CARD",
+        },
+      ]),
+      "data:image/webp;base64,CARD",
+    );
+    assert.equal(
+      pickAmbientBlurDataUrl([
+        {
+          kind: "example_pair",
+          sort_order: 1,
+          result_blur_data_url: "not-a-data-uri",
+        },
+      ]),
+      undefined,
+    );
   });
 });
 

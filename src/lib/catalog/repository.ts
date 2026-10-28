@@ -18,9 +18,10 @@ import { getPublishedStyleById, getPublishedStyles } from "./styles";
 import type { CatalogStyle } from "./types";
 
 /**
- * Keep the shared public payload lean. List cards use SHARED_STYLE_BLUR and
- * detail media already renders correctly without an ambient data URI, so
- * result_blur_data_url must not be copied hundreds of times into Data Cache.
+ * Keep the shared public payload lean. List cards use SHARED_STYLE_BLUR.
+ * Merge style detail heroes load result_blur_data_url via
+ * getPublishedStyleAmbientBlur (one style) so blur is not copied hundreds of
+ * times into Data Cache pages.
  */
 const STYLE_ASSET_SELECT = `
   kind,
@@ -541,3 +542,88 @@ export const getPublishedStyleBySlug = cache(
     (await listPublishedStyles()).find((style) => style.id === slug) ??
     getPublishedStyleById(slug),
 );
+
+type StyleAmbientBlurAsset = {
+  kind: string;
+  sort_order: number;
+  result_blur_data_url: string | null;
+};
+
+const AMBIENT_BLUR_KIND_ORDER = ["card_pair", "example_pair", "hero"] as const;
+
+/** Prefer card_pair blur, then example_pair / hero — same order as mapCardMedia. */
+export function pickAmbientBlurDataUrl(
+  assets: readonly StyleAmbientBlurAsset[],
+): string | undefined {
+  const ranked = [...assets].sort((a, b) => {
+    const aKind = AMBIENT_BLUR_KIND_ORDER.indexOf(
+      a.kind as (typeof AMBIENT_BLUR_KIND_ORDER)[number],
+    );
+    const bKind = AMBIENT_BLUR_KIND_ORDER.indexOf(
+      b.kind as (typeof AMBIENT_BLUR_KIND_ORDER)[number],
+    );
+    const aRank = aKind === -1 ? 99 : aKind;
+    const bRank = bKind === -1 ? 99 : bKind;
+    return aRank - bRank || a.sort_order - b.sort_order;
+  });
+  for (const asset of ranked) {
+    const blur = asset.result_blur_data_url;
+    if (typeof blur === "string" && blur.startsWith("data:image/")) return blur;
+  }
+  return undefined;
+}
+
+/**
+ * Tiny result blur for merge style detail heroes (mba-ambient).
+ * Kept off the shared catalog pages — unique data URIs × catalog size exceed
+ * the Data Cache budget. One style, one lean select.
+ */
+export const getPublishedStyleAmbientBlur = cache(
+  async (slug: string): Promise<string | undefined> => {
+    const id = slug.trim();
+    if (!id || !isSupabaseConfigured()) return undefined;
+
+    try {
+      const supabase = createPublicSupabaseClient();
+      if (!supabase) return undefined;
+
+      const { data, error } = await supabase
+        .from("styles")
+        .select(
+          `
+          style_assets (
+            kind,
+            sort_order,
+            result_blur_data_url
+          )
+        `,
+        )
+        .eq("slug", id)
+        .eq("status", "published")
+        .maybeSingle();
+
+      if (error) {
+        console.warn(
+          `[catalog] Ambient blur query failed for ${id}.`,
+          error.message,
+        );
+        return undefined;
+      }
+
+      const assets = (data?.style_assets ?? []) as StyleAmbientBlurAsset[];
+      return pickAmbientBlurDataUrl(assets);
+    } catch (err) {
+      console.warn(`[catalog] Ambient blur unexpected error for ${id}.`, err);
+      return undefined;
+    }
+  },
+);
+
+/** Attach a detail-only ambient blur without mutating the shared catalog entry. */
+export function withStyleAmbientBlur(
+  style: CatalogStyle,
+  blur: string | undefined,
+): CatalogStyle {
+  if (!blur) return style;
+  return { ...style, resultBlur: blur };
+}
