@@ -61,7 +61,10 @@ export default function PrivacyPolicyPage() {
       </LegalSection>
 
       <LegalSection title="Advertising and Google AdSense">
-        <p>We use Google AdSense to show ads on the Site.</p>
+        <p>
+          We use Google AdSense to show ads on the Site. AdSense and its partners may set
+          cookies or use similar technologies to serve, personalize, and measure ads.
+        </p>
         <ul>
           <li>
             Third-party vendors, including Google, use cookies to serve ads based on your
@@ -74,6 +77,11 @@ export default function PrivacyPolicyPage() {
           <li>
             Other third-party ad vendors or ad networks may also use cookies or web
             beacons to serve and measure ads on the Site.
+          </li>
+          <li>
+            Advertising and analytics cookies stay off by default until you Accept them in
+            our cookie banner (or remain off if you Reject). You can clear site data in
+            your browser to see the banner again and change your choice.
           </li>
           <li>
             You can turn off personalized advertising in{" "}
@@ -95,11 +103,9 @@ export default function PrivacyPolicyPage() {
       <LegalSection title="Analytics">
         <p>
           We use Google Analytics 4 (GA4) to understand how visitors use the Site, such as
-          which pages are viewed. GA4 uses cookies. Advertising and analytics cookies stay
-          off for visitors in the EEA, the UK, and Switzerland. Analytics cookies stay off
-          until you accept them. When we show ads, a Google-certified consent message will
-          let you accept or reject them and change your choice later. You can opt out of
-          Google Analytics with the{" "}
+          which pages are viewed. GA4 uses cookies. Analytics cookies stay off by default
+          until you Accept them in our cookie banner (or remain off if you Reject). You
+          can opt out of Google Analytics with the{" "}
           <a href="https://tools.google.com/dlpage/gaoptout">
             Google Analytics opt-out add-on
           </a>
@@ -129,13 +135,12 @@ export default function PrivacyPolicyPage() {
         <p>
           Depending on where you live, you may have the right to access, correct, delete,
           or move your personal data, to object to or limit how we process it, and to
-          withdraw consent. If you&apos;re in the EEA, the UK, or Switzerland, we rely on
-          your consent for advertising and analytics cookies. Advertising and analytics
-          cookies stay off for visitors in the EEA, the UK, and Switzerland. When we show
-          ads, a Google-certified consent message will let you accept or reject them and
-          change your choice later. If you&apos;re a California resident, you can ask what
-          we&apos;ve collected and opt out of the &quot;sale&quot; or &quot;sharing&quot;
-          of your personal information for targeted ads. To make a request, email{" "}
+          withdraw consent. We rely on your consent for advertising and analytics cookies:
+          they stay off until you Accept them in our cookie banner (Reject keeps them
+          off). Clear this site&apos;s data in your browser to see the banner again. If
+          you&apos;re a California resident, you can ask what we&apos;ve collected and opt
+          out of the &quot;sale&quot; or &quot;sharing&quot; of your personal information
+          for targeted ads. To make a request, email{" "}
           <a href={CONTACT_MAILTO}>{CONTACT_EMAIL}</a>.
         </p>
       </LegalSection>

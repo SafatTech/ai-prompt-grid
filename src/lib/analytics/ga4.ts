@@ -1,8 +1,21 @@
 /**
- * ISO 3166-1 alpha-2 regions where Consent Mode defaults to denied:
- * the EEA (EU 27 plus Iceland, Liechtenstein, and Norway), the UK, and Switzerland.
- * Everyone else, including Pakistan, India, and the rest of South Asia, uses the
- * granted default. Google's region list uses GB for the United Kingdom.
+ * GA4 loader. Consent Mode v2 defaults are set by `buildConsentBootstrap`
+ * (inline, early in the root layout) before this script runs — do not
+ * re-declare defaults here.
+ */
+
+const MEASUREMENT_ID = /^G-[A-Z0-9]+$/;
+
+/**
+ * Local opt-out for internal/test browsers (no UI).
+ * `?apg_internal=1` sets localStorage `apg:internal=1`; `?apg_internal=0` clears it.
+ * When set, this bootstrap returns before gtag so GA never loads.
+ */
+export const GA_INTERNAL_STORAGE_KEY = "apg:internal";
+
+/**
+ * Regions historically used for Consent Mode denied defaults (EEA + UK + CH).
+ * Kept for documentation/tests; runtime defaults are global denied + banner.
  */
 export const CONSENT_DENIED_REGIONS = [
   "AT",
@@ -39,16 +52,7 @@ export const CONSENT_DENIED_REGIONS = [
   "CH",
 ] as const;
 
-const MEASUREMENT_ID = /^G-[A-Z0-9]+$/;
-
-/**
- * Local opt-out for internal/test browsers (no UI).
- * `?apg_internal=1` sets localStorage `apg:internal=1`; `?apg_internal=0` clears it.
- * When set, this bootstrap returns before consent/gtag so GA never loads.
- */
-export const GA_INTERNAL_STORAGE_KEY = "apg:internal";
-
-/** Consent defaults, then gtag config. Safe to interpolate only a validated G- id. */
+/** gtag config + loader. Assumes consent defaults were already queued. */
 export function buildGaBootstrap(measurementId: string): string {
   return `
 (function(){
@@ -60,20 +64,7 @@ export function buildGaBootstrap(measurementId: string): string {
   } catch (e) {}
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
-  gtag('consent', 'default', {
-    ad_storage: 'denied',
-    ad_user_data: 'denied',
-    ad_personalization: 'denied',
-    analytics_storage: 'denied',
-    region: ${JSON.stringify(CONSENT_DENIED_REGIONS)},
-    wait_for_update: 500
-  });
-  gtag('consent', 'default', {
-    ad_storage: 'granted',
-    ad_user_data: 'granted',
-    ad_personalization: 'granted',
-    analytics_storage: 'granted'
-  });
+  window.gtag = window.gtag || gtag;
   gtag('js', new Date());
   gtag('config', ${JSON.stringify(measurementId)});
   var s = document.createElement('script');
