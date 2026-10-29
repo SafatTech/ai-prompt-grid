@@ -2,6 +2,8 @@ import { randomUUID } from "node:crypto";
 import { NextResponse } from "next/server";
 import { requireEditor } from "@/lib/admin/access";
 import { adminAssetUploadMetaSchema } from "@/lib/admin/schemas";
+import { detectFaceFocusFromBuffer } from "@/lib/catalog/detect-face-focus-node";
+import { normalizeFocus } from "@/lib/catalog/image-focus";
 import { buildResultBlurDataUrl } from "@/lib/catalog/result-blur";
 import { processUploadImage } from "@/lib/creations/image";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
@@ -86,6 +88,14 @@ export async function POST(request: Request, context: RouteContext) {
     return NextResponse.json({ error: processed.error }, { status: 400 });
   }
 
+  const metaFocus = normalizeFocus(metaParsed.data.focusX, metaParsed.data.focusY);
+  const detectedFocus =
+    metaFocus ?? (await detectFaceFocusFromBuffer(processed.image.buffer));
+  const focusPatch =
+    role === "source"
+      ? { source_focus_x: detectedFocus.x, source_focus_y: detectedFocus.y }
+      : { result_focus_x: detectedFocus.x, result_focus_y: detectedFocus.y };
+
   const assetId = String(form.get("assetId") || "") || randomUUID();
   const key = `${style.slug}/${assetId}/${role}.${processed.image.ext}`;
 
@@ -118,10 +128,11 @@ export async function POST(request: Request, context: RouteContext) {
     if (existing) {
       const patch =
         role === "source"
-          ? { source_storage_key: publicUrl }
+          ? { source_storage_key: publicUrl, ...focusPatch }
           : {
               result_storage_key: publicUrl,
               result_blur_data_url: await buildResultBlurDataUrl(processed.image.buffer),
+              ...focusPatch,
             };
       await supabase
         .from("style_assets")
@@ -143,6 +154,7 @@ export async function POST(request: Request, context: RouteContext) {
       alt_text: metaParsed.data.altText,
       provenance: metaParsed.data.provenance,
       sort_order: metaParsed.data.sortOrder,
+      ...focusPatch,
     });
   }
 
@@ -163,5 +175,7 @@ export async function POST(request: Request, context: RouteContext) {
     role,
     key,
     url: publicUrl,
+    focusX: detectedFocus.x,
+    focusY: detectedFocus.y,
   });
 }

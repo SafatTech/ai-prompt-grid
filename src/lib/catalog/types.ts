@@ -11,6 +11,12 @@ export type InputRequirement = "One photo" | "Two photos" | "Photo plus style re
 
 export type PublishStatus = "draft" | "in_review" | "published" | "archived";
 
+/** Crop focus as 0–100 percent for object-position. */
+export type ImageFocusPoint = {
+  x: number;
+  y: number;
+};
+
 export type ExamplePair = {
   source: string;
   result: string;
@@ -21,6 +27,10 @@ export type ExamplePair = {
   resultHeight?: number;
   /** Tiny WebP data URI for the merge hero ambient blur. Null/absent = surface fallback. */
   resultBlur?: string;
+  /** Cover-crop focus for the source image (face-aware). */
+  sourceFocus?: ImageFocusPoint;
+  /** Cover-crop focus for the result image (face-aware). */
+  resultFocus?: ImageFocusPoint;
 };
 
 export type PromptVariant = {
@@ -69,6 +79,10 @@ export type CatalogStyle = {
   publishedAt?: string | null;
   source: string;
   result: string;
+  /** Cover-crop focus for the card source image. */
+  sourceFocus?: ImageFocusPoint;
+  /** Cover-crop focus for the card result image. */
+  resultFocus?: ImageFocusPoint;
   description: string;
   status: PublishStatus;
   bestSourcePhoto: string[];

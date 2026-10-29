@@ -29,7 +29,11 @@ const STYLE_ASSET_SELECT = `
   result_storage_key,
   alt_text,
   sort_order,
-  provenance
+  provenance,
+  source_focus_x,
+  source_focus_y,
+  result_focus_x,
+  result_focus_y
 `;
 
 const STYLE_SELECT = `

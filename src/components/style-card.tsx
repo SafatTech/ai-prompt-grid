@@ -84,6 +84,16 @@ export function StyleCard({
             result={style.result}
             title={style.title}
             styleId={style.id}
+            sourceFocus={
+              style.sourceFocusX != null && style.sourceFocusY != null
+                ? { x: style.sourceFocusX, y: style.sourceFocusY }
+                : null
+            }
+            resultFocus={
+              style.resultFocusX != null && style.resultFocusY != null
+                ? { x: style.resultFocusX, y: style.resultFocusY }
+                : null
+            }
             priority={priority}
             eager={eager}
           />

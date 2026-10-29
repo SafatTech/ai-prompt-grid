@@ -3,6 +3,11 @@
 import Image from "next/image";
 import { useRef, useState, type PointerEvent } from "react";
 import { track } from "@/lib/analytics";
+import {
+  DEFAULT_IMAGE_FOCUS,
+  focusObjectPosition,
+  type ImageFocus,
+} from "@/lib/catalog/image-focus";
 import { DETAIL_HERO_SIZES } from "@/lib/images/next-image-preload";
 import { cn } from "@/lib/utils";
 
@@ -20,6 +25,10 @@ type Props = {
   defaultMode?: CompareMode;
   altSource?: string;
   altResult?: string;
+  /** Cover-crop focus for the source image (0–100). */
+  sourceFocus?: ImageFocus | null;
+  /** Cover-crop focus for the result image (0–100). */
+  resultFocus?: ImageFocus | null;
   /** First above-the-fold card / hero: eager + high fetch priority. */
   priority?: boolean;
   /** Eager load without high fetchPriority (explore cards 2–4). */
@@ -67,15 +76,18 @@ export function CompareSlider({
   defaultMode = "slider",
   altSource,
   altResult,
+  sourceFocus = null,
+  resultFocus = null,
   priority = false,
   eager = false,
   sizes,
 }: Props) {
   const sourceAlt = altSource || `Source photo for ${title}`;
   const resultAlt = altResult || `AI result showing ${title}`;
+  const seedFocus = resultFocus ?? sourceFocus ?? DEFAULT_IMAGE_FOCUS;
   const [value, setValue] = useState(50);
   const [mode, setMode] = useState<CompareMode>(defaultMode);
-  const [pan, setPan] = useState({ x: 50, y: 50 });
+  const [pan, setPan] = useState({ x: seedFocus.x, y: seedFocus.y });
   const [panning, setPanning] = useState(false);
   const [sliding, setSliding] = useState(false);
   const [overHandle, setOverHandle] = useState(false);
@@ -84,7 +96,12 @@ export function CompareSlider({
 
   /** Image pan is only for the detail-page slider (where cover crop is noticeable). */
   const allowPan = showModeToggle;
-  const objectPosition = allowPan ? `${pan.x}% ${pan.y}%` : undefined;
+  const sourceObjectPosition = allowPan
+    ? `${pan.x}% ${pan.y}%`
+    : focusObjectPosition(sourceFocus);
+  const resultObjectPosition = allowPan
+    ? `${pan.x}% ${pan.y}%`
+    : focusObjectPosition(resultFocus);
   const imageSizes = sizes ?? (large ? DETAIL_SIZES : CARD_SIZES);
 
   function onInteract() {
@@ -224,6 +241,7 @@ export function CompareSlider({
               fill
               sizes={imageSizes}
               className="object-cover"
+              style={{ objectPosition: focusObjectPosition(sourceFocus) }}
               priority={sourceHigh}
               loading={sourceHigh ? undefined : sourceEager ? "eager" : "lazy"}
               fetchPriority={sourceHigh ? "high" : "auto"}
@@ -240,6 +258,7 @@ export function CompareSlider({
               fill
               sizes={imageSizes}
               className="object-cover"
+              style={{ objectPosition: focusObjectPosition(resultFocus) }}
               priority={resultHigh}
               loading={resultHigh ? undefined : resultEager ? "eager" : "lazy"}
               fetchPriority={resultHigh ? "high" : "auto"}
@@ -280,7 +299,7 @@ export function CompareSlider({
           fill
           sizes={imageSizes}
           className="pointer-events-none object-cover"
-          style={objectPosition ? { objectPosition } : undefined}
+          style={{ objectPosition: sourceObjectPosition }}
           priority={sourceHigh}
           loading={sourceHigh ? undefined : sourceEager ? "eager" : "lazy"}
           fetchPriority={sourceHigh ? "high" : "auto"}
@@ -297,7 +316,7 @@ export function CompareSlider({
           fill
           sizes={imageSizes}
           className="pointer-events-none object-cover"
-          style={objectPosition ? { objectPosition } : undefined}
+          style={{ objectPosition: resultObjectPosition }}
           priority={resultHigh}
           loading={resultHigh ? undefined : resultEager ? "eager" : "lazy"}
           fetchPriority={resultHigh ? "high" : "auto"}

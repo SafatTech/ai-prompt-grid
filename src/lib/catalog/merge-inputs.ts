@@ -3,6 +3,8 @@ import type { CatalogStyle } from "./types";
 export type MergeInputPhoto = {
   src: string;
   alt: string;
+  focusX?: number;
+  focusY?: number;
 };
 
 const PORTRAIT_RESULT = { width: 1122, height: 1402 };
@@ -36,13 +38,17 @@ export function mergeResultImage(style: CatalogStyle): {
   width: number;
   height: number;
   blurSrc?: string;
+  focusX?: number;
+  focusY?: number;
 } {
   const blurSrc = mergeResultBlurSrc(style);
+  const focus = style.resultFocus ?? style.examplePairs[0]?.resultFocus;
   return {
     src: style.result,
     alt: style.examplePairs[0]?.altResult ?? "",
     ...mergeResultSize(style),
     ...(blurSrc ? { blurSrc } : {}),
+    ...(focus ? { focusX: focus.x, focusY: focus.y } : {}),
   };
 }
 
@@ -66,7 +72,13 @@ export function mergeInputPhotos(style: CatalogStyle): MergeInputPhoto[] {
     if (pair.result !== primary.result) continue;
     if (seen.has(pair.source)) continue;
     seen.add(pair.source);
-    photos.push({ src: pair.source, alt: pair.altSource });
+    photos.push({
+      src: pair.source,
+      alt: pair.altSource,
+      ...(pair.sourceFocus
+        ? { focusX: pair.sourceFocus.x, focusY: pair.sourceFocus.y }
+        : {}),
+    });
   }
 
   const declared = style.promptVariant.inputImageCount;

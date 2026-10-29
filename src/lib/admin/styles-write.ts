@@ -99,6 +99,10 @@ async function replaceAssets(
       provenance,
       sort_order: 0,
       result_blur_data_url: cardBlur,
+      source_focus_x: input.cardSourceFocusX ?? null,
+      source_focus_y: input.cardSourceFocusY ?? null,
+      result_focus_x: input.cardResultFocusX ?? null,
+      result_focus_y: input.cardResultFocusY ?? null,
     },
     ...input.examplePairs.map((pair, index) => ({
       id: randomUUID(),
@@ -110,6 +114,10 @@ async function replaceAssets(
       provenance,
       sort_order: index + 1,
       result_blur_data_url: exampleBlurs[index] ?? null,
+      source_focus_x: pair.sourceFocusX ?? null,
+      source_focus_y: pair.sourceFocusY ?? null,
+      result_focus_x: pair.resultFocusX ?? null,
+      result_focus_y: pair.resultFocusY ?? null,
     })),
   ];
 

@@ -1,3 +1,4 @@
+import { normalizeFocus, type ImageFocus } from "./image-focus";
 import type {
   CatalogStyle,
   EditIntent,
@@ -63,6 +64,11 @@ export type DbStyleAsset = {
   provenance?: unknown;
   /** Optional for admin/seed callers; omitted from the shared public catalog. */
   result_blur_data_url?: string | null;
+  /** 0–100 percent; small numbers only — safe on the shared public select. */
+  source_focus_x?: number | null;
+  source_focus_y?: number | null;
+  result_focus_x?: number | null;
+  result_focus_y?: number | null;
 };
 
 export type DbStyleRow = {
@@ -202,6 +208,8 @@ function mapExamplePairs(
     const resultWidth = numberField(provenance, "resultWidth");
     const resultHeight = numberField(provenance, "resultHeight");
     const resultBlur = parseResultBlur(asset.result_blur_data_url);
+    const sourceFocus = assetFocus(asset, "source");
+    const resultFocus = assetFocus(asset, "result");
     return {
       source: resolveAssetUrl(asset.source_storage_key, publicBaseUrl),
       result: resolveAssetUrl(asset.result_storage_key, publicBaseUrl),
@@ -209,8 +217,21 @@ function mapExamplePairs(
       altResult,
       ...(resultWidth && resultHeight ? { resultWidth, resultHeight } : {}),
       ...(resultBlur ? { resultBlur } : {}),
+      ...(sourceFocus ? { sourceFocus } : {}),
+      ...(resultFocus ? { resultFocus } : {}),
     };
   });
+}
+
+function assetFocus(
+  asset: DbStyleAsset,
+  side: "source" | "result",
+): ImageFocus | undefined {
+  const focus =
+    side === "source"
+      ? normalizeFocus(asset.source_focus_x, asset.source_focus_y)
+      : normalizeFocus(asset.result_focus_x, asset.result_focus_y);
+  return focus ?? undefined;
 }
 
 function stringField(record: Record<string, unknown>, key: string): string | null {
@@ -232,7 +253,13 @@ function parseResultBlur(value: unknown): string | undefined {
 function mapCardMedia(
   assets: DbStyleAsset[] | null,
   publicBaseUrl: string | null,
-): { source: string; result: string; resultBlur?: string } {
+): {
+  source: string;
+  result: string;
+  resultBlur?: string;
+  sourceFocus?: ImageFocus;
+  resultFocus?: ImageFocus;
+} {
   const list = assets ?? [];
   const card =
     list.find((a) => a.kind === "card_pair") ??
@@ -242,10 +269,14 @@ function mapCardMedia(
 
   if (!card) return { source: "", result: "" };
   const resultBlur = parseResultBlur(card.result_blur_data_url);
+  const sourceFocus = assetFocus(card, "source");
+  const resultFocus = assetFocus(card, "result");
   return {
     source: resolveAssetUrl(card.source_storage_key, publicBaseUrl),
     result: resolveAssetUrl(card.result_storage_key, publicBaseUrl),
     ...(resultBlur ? { resultBlur } : {}),
+    ...(sourceFocus ? { sourceFocus } : {}),
+    ...(resultFocus ? { resultFocus } : {}),
   };
 }
 
@@ -290,6 +321,8 @@ export function mapDbStyleToCatalog(
             altSource: `${row.title} source`,
             altResult: `${row.title} result`,
             ...(card.resultBlur ? { resultBlur: card.resultBlur } : {}),
+            ...(card.sourceFocus ? { sourceFocus: card.sourceFocus } : {}),
+            ...(card.resultFocus ? { resultFocus: card.resultFocus } : {}),
           },
         ];
   const resultBlur = resolveStyleResultBlur(pairs, card.result, card.resultBlur);
@@ -316,6 +349,8 @@ export function mapDbStyleToCatalog(
     publishedAt: row.published_at ?? row.created_at ?? null,
     source: card.source,
     result: card.result,
+    ...(card.sourceFocus ? { sourceFocus: card.sourceFocus } : {}),
+    ...(card.resultFocus ? { resultFocus: card.resultFocus } : {}),
     description: row.description,
     status: mapStatus(row.status),
     bestSourcePhoto: best,

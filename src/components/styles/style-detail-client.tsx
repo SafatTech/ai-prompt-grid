@@ -27,6 +27,7 @@ import {
   usesMergeHero,
   usesMergeStack,
 } from "@/lib/catalog/merge-inputs";
+import { focusObjectPosition } from "@/lib/catalog/image-focus";
 import { track } from "@/lib/analytics";
 import {
   assemblePromptCore,
@@ -249,6 +250,12 @@ export function StyleDetailClient({ style, children }: Props) {
               styleId={style.id}
               altSource={style.examplePairs[0]?.altSource}
               altResult={style.examplePairs[0]?.altResult}
+              sourceFocus={
+                style.sourceFocus ?? style.examplePairs[0]?.sourceFocus ?? null
+              }
+              resultFocus={
+                style.resultFocus ?? style.examplePairs[0]?.resultFocus ?? null
+              }
               large
               priority
               showModeToggle
@@ -494,6 +501,9 @@ export function StyleDetailClient({ style, children }: Props) {
                       fill
                       sizes="(max-width:640px) 50vw, (max-width:1024px) 33vw, 220px"
                       className="object-cover"
+                      style={{
+                        objectPosition: focusObjectPosition(example.sourceFocus),
+                      }}
                       loading="lazy"
                     />
                     <span className="absolute bottom-3 left-3 rounded-lg bg-[rgba(11,11,16,0.72)] px-2 py-1 text-[10px] font-extrabold">
@@ -507,6 +517,15 @@ export function StyleDetailClient({ style, children }: Props) {
                       fill
                       sizes="(max-width:640px) 50vw, (max-width:1024px) 33vw, 220px"
                       className={resultFit.contain ? "object-contain" : "object-cover"}
+                      style={
+                        resultFit.contain
+                          ? undefined
+                          : {
+                              objectPosition: focusObjectPosition(
+                                example.resultFocus,
+                              ),
+                            }
+                      }
                       loading="lazy"
                     />
                     <span className="absolute right-3 bottom-3 rounded-lg bg-[rgba(11,11,16,0.72)] px-2 py-1 text-[10px] font-extrabold">

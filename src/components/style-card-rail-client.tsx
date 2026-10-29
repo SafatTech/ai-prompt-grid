@@ -47,6 +47,12 @@ export function StyleCardRailClient({
           layoutAware={layoutAware}
           naturalAspect={naturalAspect}
           {...(style.resultBlur ? { resultBlur: style.resultBlur } : {})}
+          {...(style.resultFocusX != null && style.resultFocusY != null
+            ? {
+                resultFocusX: style.resultFocusX,
+                resultFocusY: style.resultFocusY,
+              }
+            : {})}
           {...(naturalAspect
             ? { mediaWidth: style.mediaWidth, mediaHeight: style.mediaHeight }
             : {})}
