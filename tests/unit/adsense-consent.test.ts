@@ -74,15 +74,16 @@ describe("Consent Mode v2 bootstrap", () => {
 });
 
 describe("AdSense site wiring", () => {
-  it("loads the site tag afterInteractive and consent beforeInteractive", () => {
+  it("loads the async site tag and early consent defaults in the root layout", () => {
     const layout = readSrc("src/app/layout.tsx");
     assert.match(layout, /ConsentDefaults/);
     assert.match(layout, /AdSenseScript/);
     assert.match(layout, /CookieConsentBanner/);
 
     const adsense = readSrc("src/components/analytics/adsense-script.tsx");
-    assert.match(adsense, /afterInteractive/);
+    assert.match(adsense, /\basync\b/);
     assert.match(adsense, /adsbygoogle\.js\?client=/);
+    assert.doesNotMatch(adsense, /from ["']next\/script["']/);
 
     const consent = readSrc("src/components/analytics/consent-defaults.tsx");
     assert.match(consent, /dangerouslySetInnerHTML/);
