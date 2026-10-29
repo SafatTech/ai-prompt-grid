@@ -41,11 +41,17 @@ export function findUnknownPlaceholders(template: string): string[] {
   return [...found];
 }
 
+const focusCoordSchema = z.number().min(0).max(100).finite().optional().nullable();
+
 export const adminExamplePairSchema = z.object({
   sourceUrl: z.string().url().max(2000),
   resultUrl: z.string().url().max(2000),
   altSource: z.string().min(1).max(200),
   altResult: z.string().min(1).max(200),
+  sourceFocusX: focusCoordSchema,
+  sourceFocusY: focusCoordSchema,
+  resultFocusX: focusCoordSchema,
+  resultFocusY: focusCoordSchema,
 });
 
 export const adminStyleContentSchema = z
@@ -66,6 +72,10 @@ export const adminStyleContentSchema = z
     cardHeight: z.number().int().min(240).max(520).optional().default(330),
     cardSourceUrl: z.string().url().max(2000),
     cardResultUrl: z.string().url().max(2000),
+    cardSourceFocusX: focusCoordSchema,
+    cardSourceFocusY: focusCoordSchema,
+    cardResultFocusX: focusCoordSchema,
+    cardResultFocusY: focusCoordSchema,
     examplePairs: z.array(adminExamplePairSchema).min(2).max(8),
     variant: z.object({
       tool: z.enum(filterGroups.tool),
@@ -105,6 +115,9 @@ export const adminAssetUploadMetaSchema = z.object({
   kind: z.enum(["card_pair", "example_pair"]),
   altText: z.string().min(1).max(200),
   sortOrder: z.number().int().min(0).max(20).optional().default(0),
+  /** Optional cover-crop focus from client-side face detection / picker. */
+  focusX: focusCoordSchema,
+  focusY: focusCoordSchema,
   provenance: z
     .object({
       owner: z.string().max(200).optional().default(""),

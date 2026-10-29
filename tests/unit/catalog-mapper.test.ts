@@ -57,6 +57,10 @@ describe("mapDbStyleToCatalog", () => {
           result_storage_key: "https://example.com/result.jpg",
           alt_text: "Card",
           sort_order: 0,
+          source_focus_x: 48,
+          source_focus_y: 22,
+          result_focus_x: 52,
+          result_focus_y: 28,
         },
         {
           id: "a2",
@@ -65,6 +69,10 @@ describe("mapDbStyleToCatalog", () => {
           result_storage_key: "https://example.com/ex-result.jpg",
           alt_text: "Example source",
           sort_order: 1,
+          source_focus_x: 40,
+          source_focus_y: 18,
+          result_focus_x: 44,
+          result_focus_y: 24,
         },
       ],
     };
@@ -75,7 +83,11 @@ describe("mapDbStyleToCatalog", () => {
     assert.equal(mapped.category, "Cinematic");
     assert.equal(mapped.tool, "ChatGPT Image");
     assert.equal(mapped.source, "https://example.com/source.jpg");
+    assert.deepEqual(mapped.sourceFocus, { x: 48, y: 22 });
+    assert.deepEqual(mapped.resultFocus, { x: 52, y: 28 });
     assert.equal(mapped.examplePairs.length, 1);
+    assert.deepEqual(mapped.examplePairs[0]?.sourceFocus, { x: 40, y: 18 });
+    assert.deepEqual(mapped.examplePairs[0]?.resultFocus, { x: 44, y: 24 });
     assert.equal(mapped.promptVariant.defaults.mood, "Warm neutral");
     assert.equal(mapped.promptVariant.limitations[0], "May soften freckles");
     assert.equal(mapped.publishedAt, "2026-09-01T12:00:00.000Z");

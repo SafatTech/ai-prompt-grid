@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { MergeBeforeAfter } from "@/components/merge-before-after";
+import { focusObjectPositionFromCoords } from "@/lib/catalog/image-focus";
 import type {
   StyleCardMergePhoto,
   StyleCardMergeResult,
@@ -19,6 +20,9 @@ export type StyleCardMediaProps = {
   result: string;
   /** Unique blur only — shared placeholder is CSS / client-chunk, not RSC props. */
   resultBlur?: string;
+  /** Result cover focus (0–100). Small scalars only. */
+  resultFocusX?: number;
+  resultFocusY?: number;
   mediaWidth?: number;
   mediaHeight?: number;
   mergePhotos?: StyleCardMergePhoto[];
@@ -69,6 +73,8 @@ export function StyleCardMasonryMedia({
   styleId,
   result,
   resultBlur,
+  resultFocusX,
+  resultFocusY,
   mediaWidth = 800,
   mediaHeight = 1000,
   mergePhotos = [],
@@ -84,6 +90,10 @@ export function StyleCardMasonryMedia({
   const sizes = variant === "masonry" ? MASONRY_SIZES : RAIL_SIZES;
   // Unique blur only when provided; otherwise empty placeholder (shared CSS covers pending).
   const uniqueBlur = resultBlur || undefined;
+  const resultObjectPosition = focusObjectPositionFromCoords(
+    resultFocusX,
+    resultFocusY,
+  );
 
   return (
     <div
@@ -127,6 +137,7 @@ export function StyleCardMasonryMedia({
               fill
               sizes={sizes}
               className="object-cover"
+              style={{ objectPosition: resultObjectPosition }}
               priority={priority}
               loading={mediaLoading}
               fetchPriority={priority ? "high" : "auto"}

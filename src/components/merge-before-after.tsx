@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { focusObjectPositionFromCoords } from "@/lib/catalog/image-focus";
 import { DETAIL_HERO_SIZES } from "@/lib/images/next-image-preload";
 import { cn } from "@/lib/utils";
 
@@ -9,6 +10,9 @@ export type MergeImage = {
   height?: number;
   /** Tiny data-URI (or URL) for the ambient hero blur. Optional. */
   blurSrc?: string;
+  /** Cover-crop focus (0–100). */
+  focusX?: number;
+  focusY?: number;
 };
 
 type Props = {
@@ -56,6 +60,9 @@ function FrameImage({
   objectPosition?: string;
 }) {
   const shared = cn("object-cover", className);
+  const resolvedPosition =
+    objectPosition ??
+    focusObjectPositionFromCoords(image.focusX, image.focusY);
   return (
     <Image
       src={image.src}
@@ -67,7 +74,7 @@ function FrameImage({
       fetchPriority={highPriority ? "high" : "auto"}
       decoding="async"
       className={shared}
-      style={objectPosition ? { objectPosition } : undefined}
+      style={{ objectPosition: resolvedPosition }}
     />
   );
 }
@@ -200,7 +207,6 @@ export function MergeBeforeAfter({
                   image={{ ...input, alt: inputAlt(input, title, index, inputs.length) }}
                   sizes={inputSizes}
                   {...inputPriorityFlags(priority, index)}
-                  objectPosition="50% 30%"
                 />
                 <span className="mba-split__tag" aria-hidden="true">
                   {index + 1}

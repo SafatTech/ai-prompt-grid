@@ -22,6 +22,7 @@
     "db:upload-catalog": "tsx --env-file=.env.local scripts/upload-catalog-assets.ts",
     "db:upload-stylish-luxury": "tsx --env-file=.env.local scripts/upload-stylish-luxury-assets.ts",
     "db:generate-blur-thumbs": "tsx --env-file=.env.local scripts/generate-blur-thumbs.ts",
+    "db:backfill-image-focus": "tsx --env-file=.env.local scripts/backfill-image-focus.ts",
     "emails:build": "tsx scripts/build-email-templates.ts"
   },
   "dependencies": {
@@ -29,6 +30,8 @@
     "@splinetool/runtime": "^2.0.58",
     "@supabase/ssr": "^0.12.7",
     "@supabase/supabase-js": "^2.116.0",
+    "@tensorflow-models/blazeface": "^0.1.0",
+    "@tensorflow/tfjs": "^4.22.0",
     "clsx": "^2.1.1",
     "gray-matter": "^4.0.3",
     "lucide-react": "^1.48.0",

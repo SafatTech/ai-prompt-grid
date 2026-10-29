@@ -3,7 +3,9 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useMemo, useState, type FormEvent, type ReactNode } from "react";
+import { ImageFocusPicker } from "@/components/admin/image-focus-picker";
 import { Button } from "@/components/ui/button";
+import { detectFaceFocusFromUrl } from "@/lib/admin/detect-face-focus-browser";
 import type { AdminStyleContentInput } from "@/lib/admin/schemas";
 import type { AdminStyleEditorPayload } from "@/lib/admin/styles-read";
 import {
@@ -14,6 +16,11 @@ import {
   ratioOptions,
 } from "@/lib/catalog/prompts";
 import { categories, filterGroups } from "@/lib/catalog/filter-constants";
+import {
+  DEFAULT_IMAGE_FOCUS,
+  normalizeFocus,
+  type ImageFocus,
+} from "@/lib/catalog/image-focus";
 import type { CatalogStyle } from "@/lib/catalog/types";
 import { useToast } from "@/components/providers/toast-provider";
 import { cn } from "@/lib/utils";
@@ -38,18 +45,30 @@ export function emptyStyleForm(): AdminStyleContentInput {
     cardHeight: 330,
     cardSourceUrl: "https://picsum.photos/seed/admin-card-source/900/1100",
     cardResultUrl: "https://picsum.photos/seed/admin-card-result/900/1100",
+    cardSourceFocusX: null,
+    cardSourceFocusY: null,
+    cardResultFocusX: null,
+    cardResultFocusY: null,
     examplePairs: [
       {
         sourceUrl: "https://picsum.photos/seed/admin-ex-source-1/650/800",
         resultUrl: "https://picsum.photos/seed/admin-ex-result-1/650/800",
         altSource: "Source example 1",
         altResult: "Result example 1",
+        sourceFocusX: null,
+        sourceFocusY: null,
+        resultFocusX: null,
+        resultFocusY: null,
       },
       {
         sourceUrl: "https://picsum.photos/seed/admin-ex-source-2/650/800",
         resultUrl: "https://picsum.photos/seed/admin-ex-result-2/650/800",
         altSource: "Source example 2",
         altResult: "Result example 2",
+        sourceFocusX: null,
+        sourceFocusY: null,
+        resultFocusX: null,
+        resultFocusY: null,
       },
     ],
     variant: {
@@ -144,6 +163,7 @@ export function StyleEditorForm({
   const [busy, setBusy] = useState(false);
   const [slugTouched, setSlugTouched] = useState(mode === "edit");
   const [uploading, setUploading] = useState<string | null>(null);
+  const [detecting, setDetecting] = useState<string | null>(null);
 
   const preview = useMemo(() => {
     const style = toPreviewStyle(form);
@@ -155,6 +175,58 @@ export function StyleEditorForm({
     value: AdminStyleContentInput[K],
   ) {
     setForm((prev) => ({ ...prev, [key]: value }));
+  }
+
+  function setCardFocus(role: "source" | "result", focus: ImageFocus) {
+    if (role === "source") {
+      setForm((prev) => ({
+        ...prev,
+        cardSourceFocusX: focus.x,
+        cardSourceFocusY: focus.y,
+      }));
+      return;
+    }
+    setForm((prev) => ({
+      ...prev,
+      cardResultFocusX: focus.x,
+      cardResultFocusY: focus.y,
+    }));
+  }
+
+  function setExampleFocus(
+    index: number,
+    role: "source" | "result",
+    focus: ImageFocus,
+  ) {
+    setForm((prev) => ({
+      ...prev,
+      examplePairs: prev.examplePairs.map((pair, i) => {
+        if (i !== index) return pair;
+        return role === "source"
+          ? { ...pair, sourceFocusX: focus.x, sourceFocusY: focus.y }
+          : { ...pair, resultFocusX: focus.x, resultFocusY: focus.y };
+      }),
+    }));
+  }
+
+  async function detectFocusFor(
+    key: string,
+    url: string,
+    apply: (focus: ImageFocus) => void,
+  ) {
+    if (!url) {
+      toast("Add an image URL first.", "error");
+      return;
+    }
+    setDetecting(key);
+    const focus = await detectFaceFocusFromUrl(url);
+    apply(focus);
+    setDetecting(null);
+    toast(
+      focus.x === DEFAULT_IMAGE_FOCUS.x && focus.y === DEFAULT_IMAGE_FOCUS.y
+        ? "No face found — using default focus (center 30%)."
+        : "Focus detected from faces.",
+    );
   }
 
   function patchList(
@@ -245,6 +317,8 @@ export function StyleEditorForm({
     });
     const payload = (await response.json().catch(() => ({}))) as {
       url?: string;
+      focusX?: number;
+      focusY?: number;
       error?: string;
     };
     setUploading(null);
@@ -252,19 +326,46 @@ export function StyleEditorForm({
       toast(payload.error ?? "Upload failed.", "error");
       return;
     }
+    const focus =
+      normalizeFocus(payload.focusX, payload.focusY) ?? DEFAULT_IMAGE_FOCUS;
     if (target.kind === "card") {
-      if (target.role === "source") patch("cardSourceUrl", payload.url);
-      else patch("cardResultUrl", payload.url);
+      if (target.role === "source") {
+        setForm((prev) => ({
+          ...prev,
+          cardSourceUrl: payload.url!,
+          cardSourceFocusX: focus.x,
+          cardSourceFocusY: focus.y,
+        }));
+      } else {
+        setForm((prev) => ({
+          ...prev,
+          cardResultUrl: payload.url!,
+          cardResultFocusX: focus.x,
+          cardResultFocusY: focus.y,
+        }));
+      }
     } else {
-      const next = form.examplePairs.map((pair, i) => {
-        if (i !== target.index) return pair;
-        return target.role === "source"
-          ? { ...pair, sourceUrl: payload.url! }
-          : { ...pair, resultUrl: payload.url! };
-      });
-      patch("examplePairs", next);
+      setForm((prev) => ({
+        ...prev,
+        examplePairs: prev.examplePairs.map((pair, i) => {
+          if (i !== target.index) return pair;
+          return target.role === "source"
+            ? {
+                ...pair,
+                sourceUrl: payload.url!,
+                sourceFocusX: focus.x,
+                sourceFocusY: focus.y,
+              }
+            : {
+                ...pair,
+                resultUrl: payload.url!,
+                resultFocusX: focus.x,
+                resultFocusY: focus.y,
+              };
+        }),
+      }));
     }
-    toast("Image uploaded. Save the form to persist URLs on the style.");
+    toast("Image uploaded. Save the form to persist URLs and focus.");
   }
 
   return (
@@ -620,6 +721,7 @@ export function StyleEditorForm({
         <p className="m-0 mb-3 text-[13px] text-[var(--muted)]">
           MVP accepts HTTPS URLs. After the style exists, you can also upload into
           catalog-public (saves the public URL into the form — click Save afterward).
+          Uploads auto-detect face focus; click the preview to override.
         </p>
         <div className="grid gap-3 sm:grid-cols-2">
           <Field label="Card source URL">
@@ -635,6 +737,21 @@ export function StyleEditorForm({
                 onFile={(f) => void uploadImage(f, { kind: "card", role: "source" })}
               />
             ) : null}
+            <ImageFocusPicker
+              src={form.cardSourceUrl}
+              label="Card source"
+              focus={normalizeFocus(form.cardSourceFocusX, form.cardSourceFocusY)}
+              onChange={(focus) => setCardFocus("source", focus)}
+              className="mt-2"
+            />
+            <DetectFocusButton
+              busy={detecting === "card-source"}
+              onClick={() =>
+                void detectFocusFor("card-source", form.cardSourceUrl, (focus) =>
+                  setCardFocus("source", focus),
+                )
+              }
+            />
           </Field>
           <Field label="Card result URL">
             <input
@@ -649,6 +766,21 @@ export function StyleEditorForm({
                 onFile={(f) => void uploadImage(f, { kind: "card", role: "result" })}
               />
             ) : null}
+            <ImageFocusPicker
+              src={form.cardResultUrl}
+              label="Card result"
+              focus={normalizeFocus(form.cardResultFocusX, form.cardResultFocusY)}
+              onChange={(focus) => setCardFocus("result", focus)}
+              className="mt-2"
+            />
+            <DetectFocusButton
+              busy={detecting === "card-result"}
+              onClick={() =>
+                void detectFocusFor("card-result", form.cardResultUrl, (focus) =>
+                  setCardFocus("result", focus),
+                )
+              }
+            />
           </Field>
         </div>
         {form.examplePairs.map((pair, index) => (
@@ -679,6 +811,23 @@ export function StyleEditorForm({
                   }
                 />
               ) : null}
+              <ImageFocusPicker
+                src={pair.sourceUrl}
+                label={`Example ${index + 1} source`}
+                focus={normalizeFocus(pair.sourceFocusX, pair.sourceFocusY)}
+                onChange={(focus) => setExampleFocus(index, "source", focus)}
+                className="mt-2"
+              />
+              <DetectFocusButton
+                busy={detecting === `ex-${index}-source`}
+                onClick={() =>
+                  void detectFocusFor(
+                    `ex-${index}-source`,
+                    pair.sourceUrl,
+                    (focus) => setExampleFocus(index, "source", focus),
+                  )
+                }
+              />
             </Field>
             <Field label={`Example ${index + 1} result URL`}>
               <input
@@ -703,6 +852,23 @@ export function StyleEditorForm({
                   }
                 />
               ) : null}
+              <ImageFocusPicker
+                src={pair.resultUrl}
+                label={`Example ${index + 1} result`}
+                focus={normalizeFocus(pair.resultFocusX, pair.resultFocusY)}
+                onChange={(focus) => setExampleFocus(index, "result", focus)}
+                className="mt-2"
+              />
+              <DetectFocusButton
+                busy={detecting === `ex-${index}-result`}
+                onClick={() =>
+                  void detectFocusFor(
+                    `ex-${index}-result`,
+                    pair.resultUrl,
+                    (focus) => setExampleFocus(index, "result", focus),
+                  )
+                }
+              />
             </Field>
             <Field label="Alt source">
               <input
@@ -760,11 +926,12 @@ function Field({
   label: string;
   children: ReactNode;
 }) {
+  // div (not label): file inputs, focus pickers, and detect buttons nest here.
   return (
-    <label className="grid gap-1.5 text-[11px] font-bold text-[#cbc9d2]">
-      {label}
+    <div className="grid gap-1.5 text-[11px] font-bold text-[#cbc9d2]">
+      <span>{label}</span>
       {children}
-    </label>
+    </div>
   );
 }
 
@@ -811,5 +978,24 @@ function FileUpload({
       className="mt-2 block w-full text-[12px] text-[var(--muted)]"
       onChange={(e) => onFile(e.target.files?.[0])}
     />
+  );
+}
+
+function DetectFocusButton({
+  onClick,
+  busy,
+}: {
+  onClick: () => void;
+  busy: boolean;
+}) {
+  return (
+    <button
+      type="button"
+      disabled={busy}
+      onClick={onClick}
+      className="mt-2 cursor-pointer border-0 bg-transparent p-0 text-[12px] font-bold text-[#bbaeff] disabled:opacity-60"
+    >
+      {busy ? "Detecting focus…" : "Auto-detect face focus"}
+    </button>
   );
 }

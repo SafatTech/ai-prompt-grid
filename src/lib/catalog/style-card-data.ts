@@ -12,6 +12,9 @@ export { SHARED_STYLE_BLUR } from "@/lib/catalog/shared-blur";
 export type StyleCardMergePhoto = {
   src: string;
   alt: string;
+  /** Cover-crop focus; omit to use default center 30%. */
+  focusX?: number;
+  focusY?: number;
 };
 
 export type StyleCardMergeResult = {
@@ -20,6 +23,8 @@ export type StyleCardMergeResult = {
   width: number;
   height: number;
   blurSrc?: string;
+  focusX?: number;
+  focusY?: number;
 };
 
 /**
@@ -37,6 +42,12 @@ export type StyleCardData = {
   height: number;
   source: string;
   result: string;
+  /** Card source cover focus (0–100). Small numbers only. */
+  sourceFocusX?: number;
+  sourceFocusY?: number;
+  /** Card result cover focus (0–100). Small numbers only. */
+  resultFocusX?: number;
+  resultFocusY?: number;
   /** Blur for next/image; omitted or shared for below-fold cards. */
   resultBlur?: string;
   promptPreview: string;
@@ -104,6 +115,9 @@ export function toStyleCardData(
         height: mergeResult.height,
         // Ambient blur on merge cards is a tiny asset; only keep when unique blur allowed.
         ...(includeBlur && mergeResult.blurSrc ? { blurSrc: mergeResult.blurSrc } : {}),
+        ...(mergeResult.focusX != null && mergeResult.focusY != null
+          ? { focusX: mergeResult.focusX, focusY: mergeResult.focusY }
+          : {}),
       }
     : undefined;
 
@@ -139,6 +153,12 @@ export function toStyleCardData(
     height: rail ? 0 : style.height,
     source: rail ? "" : style.source,
     result: style.result,
+    ...(style.sourceFocus
+      ? { sourceFocusX: style.sourceFocus.x, sourceFocusY: style.sourceFocus.y }
+      : {}),
+    ...(style.resultFocus
+      ? { resultFocusX: style.resultFocus.x, resultFocusY: style.resultFocus.y }
+      : {}),
     ...(resultBlur ? { resultBlur } : {}),
     promptPreview,
     copyPrompt,

@@ -23,12 +23,20 @@ export type AdminStyleEditorPayload = {
   cardHeight: number;
   cardSourceUrl: string;
   cardResultUrl: string;
+  cardSourceFocusX?: number | null;
+  cardSourceFocusY?: number | null;
+  cardResultFocusX?: number | null;
+  cardResultFocusY?: number | null;
   examplePairs: Array<{
     id: string;
     sourceUrl: string;
     resultUrl: string;
     altSource: string;
     altResult: string;
+    sourceFocusX?: number | null;
+    sourceFocusY?: number | null;
+    resultFocusX?: number | null;
+    resultFocusY?: number | null;
   }>;
   variant: {
     id: string;
@@ -82,7 +90,7 @@ export async function fetchAdminStyleBySlug(
   const { data, error } = await client
     .from("styles")
     .select(
-      "id, slug, title, status, published_at, summary, description, supported_subjects, edit_intent, input_requirement, photo_requirements, preservation_targets, change_targets, target_source_photo, card_height, categories ( name ), prompt_variants ( id, tool, mode, version, template, variables, test_record, input_image_count, input_image_roles, is_primary, status ), style_assets ( id, kind, source_storage_key, result_storage_key, alt_text, sort_order )",
+      "id, slug, title, status, published_at, summary, description, supported_subjects, edit_intent, input_requirement, photo_requirements, preservation_targets, change_targets, target_source_photo, card_height, categories ( name ), prompt_variants ( id, tool, mode, version, template, variables, test_record, input_image_count, input_image_roles, is_primary, status ), style_assets ( id, kind, source_storage_key, result_storage_key, alt_text, sort_order, source_focus_x, source_focus_y, result_focus_x, result_focus_y )",
     )
     .eq("slug", slug)
     .maybeSingle();
@@ -102,7 +110,7 @@ export async function fetchAdminStyleById(
   const { data, error } = await client
     .from("styles")
     .select(
-      "id, slug, title, status, published_at, summary, description, supported_subjects, edit_intent, input_requirement, photo_requirements, preservation_targets, change_targets, target_source_photo, card_height, categories ( name ), prompt_variants ( id, tool, mode, version, template, variables, test_record, input_image_count, input_image_roles, is_primary, status ), style_assets ( id, kind, source_storage_key, result_storage_key, alt_text, sort_order )",
+      "id, slug, title, status, published_at, summary, description, supported_subjects, edit_intent, input_requirement, photo_requirements, preservation_targets, change_targets, target_source_photo, card_height, categories ( name ), prompt_variants ( id, tool, mode, version, template, variables, test_record, input_image_count, input_image_roles, is_primary, status ), style_assets ( id, kind, source_storage_key, result_storage_key, alt_text, sort_order, source_focus_x, source_focus_y, result_focus_x, result_focus_y )",
     )
     .eq("id", id)
     .maybeSingle();
@@ -156,6 +164,10 @@ function mapRowToEditor(data: Record<string, unknown>): AdminStyleEditorPayload 
       result_storage_key: string;
       alt_text: string;
       sort_order: number;
+      source_focus_x?: number | null;
+      source_focus_y?: number | null;
+      result_focus_x?: number | null;
+      result_focus_y?: number | null;
     }>
   ).slice().sort((a, b) => a.sort_order - b.sort_order);
 
@@ -187,12 +199,20 @@ function mapRowToEditor(data: Record<string, unknown>): AdminStyleEditorPayload 
     cardHeight: (data.card_height as number) || 330,
     cardSourceUrl: card?.source_storage_key ?? "",
     cardResultUrl: card?.result_storage_key ?? "",
+    cardSourceFocusX: card?.source_focus_x ?? null,
+    cardSourceFocusY: card?.source_focus_y ?? null,
+    cardResultFocusX: card?.result_focus_x ?? null,
+    cardResultFocusY: card?.result_focus_y ?? null,
     examplePairs: examples.map((ex) => ({
       id: ex.id,
       sourceUrl: ex.source_storage_key,
       resultUrl: ex.result_storage_key,
       altSource: ex.alt_text || "Source",
       altResult: ex.alt_text || "Result",
+      sourceFocusX: ex.source_focus_x ?? null,
+      sourceFocusY: ex.source_focus_y ?? null,
+      resultFocusX: ex.result_focus_x ?? null,
+      resultFocusY: ex.result_focus_y ?? null,
     })),
     variant: {
       id: (primary?.id as string) ?? "",
@@ -233,11 +253,19 @@ export function editorPayloadToFormInput(
     cardHeight: payload.cardHeight,
     cardSourceUrl: payload.cardSourceUrl,
     cardResultUrl: payload.cardResultUrl,
+    cardSourceFocusX: payload.cardSourceFocusX ?? null,
+    cardSourceFocusY: payload.cardSourceFocusY ?? null,
+    cardResultFocusX: payload.cardResultFocusX ?? null,
+    cardResultFocusY: payload.cardResultFocusY ?? null,
     examplePairs: payload.examplePairs.map((p) => ({
       sourceUrl: p.sourceUrl,
       resultUrl: p.resultUrl,
       altSource: p.altSource,
       altResult: p.altResult,
+      sourceFocusX: p.sourceFocusX ?? null,
+      sourceFocusY: p.sourceFocusY ?? null,
+      resultFocusX: p.resultFocusX ?? null,
+      resultFocusY: p.resultFocusY ?? null,
     })),
     variant: {
       tool: payload.variant.tool as AdminStyleContentInput["variant"]["tool"],
