@@ -30,29 +30,32 @@ export default function CookiePolicyPage() {
       <LegalSection title="Analytics cookies">
         <p>
           Analytics cookies help us understand how visitors use the Site. We use Google
-          Analytics 4 (GA4) for that. In the EEA, the UK, and Switzerland, these cookies
-          stay off until you accept them.
+          Analytics 4 (GA4) for that. These cookies stay off by default until you Accept
+          them in our cookie banner (or remain off if you Reject).
         </p>
       </LegalSection>
 
       <LegalSection title="Advertising cookies">
         <p>
           Advertising cookies are set by Google AdSense and its partners to show and
-          measure ads, including personalized ads based on your browsing. In the EEA, the
-          UK, and Switzerland, these cookies stay off until you accept them.
+          measure ads, including personalized ads based on your browsing. These cookies
+          stay off by default until you Accept them in our cookie banner (or remain off if
+          you Reject). You can also opt out of personalized Google ads in{" "}
+          <a href="https://myadcenter.google.com/">My Ad Center</a>, or of some third-party
+          ad cookies at{" "}
+          <a href="https://www.aboutads.info/choices/">aboutads.info</a> /{" "}
+          <a href="https://www.youronlinechoices.eu/">Your Online Choices</a>.
         </p>
       </LegalSection>
 
       <LegalSection title="Your choices">
         <p>
-          Advertising and analytics cookies stay off for visitors in the EEA, the UK, and
-          Switzerland. Analytics cookies stay off until you accept them. When we show ads,
-          a Google-certified consent message will let you accept or reject them and change
-          your choice later. You can also block or delete cookies in your browser
-          settings, or turn off personalized Google ads in{" "}
-          <a href="https://myadcenter.google.com/">My Ad Center</a>. If you block cookies,
-          some parts of the Site may not work properly, including staying signed in.
-          Questions? Email <a href={CONTACT_MAILTO}>{CONTACT_EMAIL}</a>.
+          Our cookie banner lets you Accept or Reject advertising and analytics cookies.
+          Your choice is stored in your browser (localStorage) and sent to Google via
+          Consent Mode. Clear this site&apos;s data to see the banner again. You can also
+          block or delete cookies in your browser settings. If you block cookies, some
+          parts of the Site may not work properly, including staying signed in. Questions?
+          Email <a href={CONTACT_MAILTO}>{CONTACT_EMAIL}</a>.
         </p>
       </LegalSection>
     </LegalPage>

@@ -1,4 +1,4 @@
-import Script from "next/script";
+import { getAdSenseClient } from "@/lib/adsense/client";
 
 type Props = {
   slot: string;
@@ -8,17 +8,19 @@ type Props = {
 };
 
 /**
- * AdSense slot. Renders nothing visible until client + slot env vars are set
- * (no empty placeholder boxes while AdSense is unapproved).
+ * AdSense slot. Renders nothing until a slot env var is set (no empty boxes
+ * while AdSense is unapproved). The site-wide adsbygoogle.js tag lives in the
+ * root layout — this component only renders the unit markup.
  */
 export function AdSlot({ slot, envSlot, className }: Props) {
-  const client = process.env.NEXT_PUBLIC_ADSENSE_CLIENT?.trim();
   const adSlot =
     envSlot?.trim() || process.env.NEXT_PUBLIC_ADSENSE_SLOT_GUIDES?.trim();
 
-  if (!client || !adSlot) {
+  if (!adSlot) {
     return null;
   }
+
+  const client = getAdSenseClient();
 
   return (
     <aside
@@ -29,12 +31,6 @@ export function AdSlot({ slot, envSlot, className }: Props) {
       <h2 className="sr-only">Advertisement</h2>
       <span className="guides-ad-label">Advertisement</span>
       <div className="guides-ad-box">
-        <Script
-          id={`adsense-loader-${slot}`}
-          src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${encodeURIComponent(client)}`}
-          strategy="lazyOnload"
-          crossOrigin="anonymous"
-        />
         <ins
           className="adsbygoogle"
           style={{ display: "block", width: "100%", minHeight: 250 }}

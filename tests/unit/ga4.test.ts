@@ -22,19 +22,11 @@ describe("GA4 measurement id", () => {
 });
 
 describe("GA4 bootstrap", () => {
-  it("sets denied defaults for the region list before the granted default and config", () => {
+  it("configs GA without re-declaring Consent Mode defaults", () => {
     const script = buildGaBootstrap("G-TEST1234");
-    const denied = script.indexOf("ad_storage: 'denied'");
-    const granted = script.indexOf("ad_storage: 'granted'");
+    assert.doesNotMatch(script, /gtag\('consent'/);
+    assert.match(script, /gtag\('config', "G-TEST1234"\)/);
     const config = script.indexOf("gtag('config', \"G-TEST1234\")");
-    assert.ok(denied !== -1 && granted !== -1 && config !== -1);
-    assert.ok(denied < granted && granted < config);
-    assert.match(script, /ad_user_data: 'denied'/);
-    assert.match(script, /ad_personalization: 'denied'/);
-    assert.match(script, /analytics_storage: 'denied'/);
-    assert.match(script, /"GB"/);
-    assert.match(script, /"CH"/);
-    assert.doesNotMatch(script, /"PK"/);
     const loader = script.indexOf(
       "https://www.googletagmanager.com/gtag/js?id=G-TEST1234",
     );

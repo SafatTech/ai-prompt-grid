@@ -49,12 +49,16 @@ describe("PR32 follow-up: guides pagination skips featured (N-11)", () => {
 });
 
 describe("PR32 follow-up: ads.txt (AdSense prep)", () => {
-  it("returns 404 when NEXT_PUBLIC_ADSENSE_CLIENT is unset", async () => {
+  it("falls back to the known publisher when NEXT_PUBLIC_ADSENSE_CLIENT is unset", async () => {
     const prev = process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
     delete process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
     try {
       const res = adsTxtGet();
-      assert.equal(res.status, 404);
+      assert.equal(res.status, 200);
+      assert.equal(
+        await res.text(),
+        "google.com, pub-4446032458804047, DIRECT, f08c47fec0942fa0\n",
+      );
     } finally {
       if (prev === undefined) delete process.env.NEXT_PUBLIC_ADSENSE_CLIENT;
       else process.env.NEXT_PUBLIC_ADSENSE_CLIENT = prev;
