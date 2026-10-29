@@ -1,6 +1,9 @@
 import Link from "next/link";
 import { LegalPage, LegalSection, legalMetadata } from "@/components/legal/legal-page";
-import { CONTACT_EMAIL, CONTACT_MAILTO } from "@/lib/site-contact";
+
+/** Public support address for this page only (shared CONTACT_EMAIL stays hello@ elsewhere). */
+const SUPPORT_EMAIL = "support@aipromptgrid.com";
+const SUPPORT_MAILTO = `mailto:${SUPPORT_EMAIL}`;
 
 export const metadata = legalMetadata(
   "Privacy policy",
@@ -141,7 +144,7 @@ export default function PrivacyPolicyPage() {
           you&apos;re a California resident, you can ask what we&apos;ve collected and opt
           out of the &quot;sale&quot; or &quot;sharing&quot; of your personal information
           for targeted ads. To make a request, email{" "}
-          <a href={CONTACT_MAILTO}>{CONTACT_EMAIL}</a>.
+          <a href={SUPPORT_MAILTO}>{SUPPORT_EMAIL}</a>.
         </p>
       </LegalSection>
 
@@ -150,7 +153,7 @@ export default function PrivacyPolicyPage() {
           We keep personal information only as long as we need it for the purposes above
           or as the law requires. You can delete creations from your library. To ask us to
           delete your account or export your data, email{" "}
-          <a href={CONTACT_MAILTO}>{CONTACT_EMAIL}</a>.
+          <a href={SUPPORT_MAILTO}>{SUPPORT_EMAIL}</a>.
         </p>
       </LegalSection>
 
@@ -178,7 +181,7 @@ export default function PrivacyPolicyPage() {
 
       <LegalSection id="contact" title="Contact">
         <p>
-          Safat Tech, <a href={CONTACT_MAILTO}>{CONTACT_EMAIL}</a>
+          Safat Tech, <a href={SUPPORT_MAILTO}>{SUPPORT_EMAIL}</a>
         </p>
       </LegalSection>
     </LegalPage>
