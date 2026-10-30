@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { CONTACT_EMAIL, CONTACT_MAILTO } from "@/lib/site-contact";
+
+/** Public support address for this page only (shared CONTACT_EMAIL stays hello@ elsewhere). */
+const SUPPORT_EMAIL = "support@aipromptgrid.com";
+const SUPPORT_MAILTO = `mailto:${SUPPORT_EMAIL}`;
 
 export const metadata: Metadata = {
   title: "Contact",
@@ -31,10 +34,10 @@ export default function ContactPage() {
           Reach the AI Prompt Grid team at:
         </p>
         <a
-          href={CONTACT_MAILTO}
+          href={SUPPORT_MAILTO}
           className="inline-flex min-h-11 items-center justify-center rounded-xl bg-[var(--violet)] px-5 text-sm font-bold text-[#100d1a] hover:bg-[#9b82ff]"
         >
-          {CONTACT_EMAIL}
+          {SUPPORT_EMAIL}
         </a>
         <p className="m-0 mt-4 text-[13px] text-[var(--muted)]">
           Typical topics: catalog feedback, style requests, privacy or account deletion,
