@@ -552,6 +552,24 @@ export const backgroundLabels: Record<string, string> = {
     "Dusk skyline balcony",
   "Quiet estate garden with stone steps, soft trees and cream daylight":
     "Quiet estate garden",
+  "A carved wooden doorway framed by hanging marigold garlands, with a neat row of glowing clay diyas along the threshold at the couple's feet and soft warm light from inside":
+    "Diya doorway",
+  "An open city rooftop at Diwali night with a soft out-of-focus fireworks sky in gold and pink, warm string lights along the parapet and distant lit homes":
+    "Fireworks rooftop",
+  "A softly lit window nook at Diwali dusk with sheer curtains, a few diyas on the sill and blurred warm lights outside":
+    "Window diya nook",
+  "A studio backdrop of hanging marigold flower strings in orange and yellow, softly out of focus, with a warm cream wall behind":
+    "Marigold studio",
+  "A traditional home interior at Diwali evening with a carved wooden jhoola, tall glowing brass oil lamps behind and soft marigold accents":
+    "Jhoola interior",
+  "A curtain of warm fairy lights hanging behind, melting into large golden bokeh, with a dark festive night backdrop":
+    "Fairy-light curtain",
+  "A lit home courtyard at Diwali night with diyas along the walls, string lights overhead and a ground chakri spinning safely far in the background":
+    "Courtyard sparkler",
+  "Wide stone steps of an old haveli courtyard at Diwali evening, diyas on every step edge, a simple rangoli border at the base and carved arches behind":
+    "Haveli steps",
+  "A family dining room at Diwali night with a long table of brass thalis, mithai and diyas, warm string lights overhead and marigold garlands on the wall":
+    "Dinner table",
   "Cozy living room with a tall green Christmas tree, red and gold ornaments, and a wooden floor":
     "Tree living room",
   "Bright cream studio set with a small decorated Christmas tree, stacked wrapped gift boxes with satin ribbons, and a soft white rug":

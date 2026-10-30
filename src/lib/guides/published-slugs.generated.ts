@@ -18,7 +18,7 @@ export const publishedGuides: readonly { slug: string; updated: string; category
   { slug: "anime-ai-photo-prompts", updated: "2026-10-18", category: "styles" },
   { slug: "birthday-ai-photo-prompts", updated: "2026-10-14", category: "occasions" },
   { slug: "christmas-ai-photo-prompts", updated: "2026-10-18", category: "festivals" },
-  { slug: "diwali-couple-ai-photo-editing-prompts", updated: "2026-10-05", category: "festivals" },
+  { slug: "diwali-couple-ai-photo-editing-prompts", updated: "2026-10-30", category: "festivals" },
   { slug: "gemini-headshot-cv-photo-prompts", updated: "2026-10-11", category: "professional" },
   { slug: "halloween-ai-prompts-for-selfies", updated: "2026-10-03", category: "festivals" },
   { slug: "how-to-merge-two-photos-in-gemini", updated: "2026-10-11", category: "couples-family" },

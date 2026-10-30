@@ -19,6 +19,7 @@ import { birthdayStyleIds } from "../../src/lib/catalog/seed-birthday-styles";
 import { boysStyleIds } from "../../src/lib/catalog/seed-boys-styles";
 import { characterStyleIds } from "../../src/lib/catalog/seed-character-styles";
 import { christmasStyleIds } from "../../src/lib/catalog/seed-christmas-styles";
+import { diwaliAddonStyleIds } from "../../src/lib/catalog/seed-diwali-styles";
 import { eightiesStyleIds } from "../../src/lib/catalog/seed-80s-styles";
 import { linkedinStyleIds } from "../../src/lib/catalog/seed-linkedin-styles";
 import { luxuryLifestyleStyleIds } from "../../src/lib/catalog/seed-luxury-lifestyle-styles";
@@ -34,9 +35,9 @@ describe("cn", () => {
 });
 
 describe("published catalog seed", () => {
-  it("exposes 284 published styles with recipe fields", () => {
+  it("exposes 293 published styles with recipe fields", () => {
     const published = getPublishedStyles();
-    assert.equal(published.length, 284);
+    assert.equal(published.length, 293);
     for (const style of published) {
       assert.equal(style.status, "published");
       assert.ok(style.promptVariant.template.includes("{{mood}}"));
@@ -52,7 +53,8 @@ describe("published catalog seed", () => {
         (characterStyleIds.has(style.id) && style.promptVariant.inputImageCount === 1) ||
         (stylishStyleIds.has(style.id) && style.promptVariant.inputImageCount === 1) ||
         (luxuryLifestyleStyleIds.has(style.id) &&
-          style.promptVariant.inputImageCount === 1);
+          style.promptVariant.inputImageCount === 1) ||
+        (diwaliAddonStyleIds.has(style.id) && style.promptVariant.inputImageCount === 1);
       assert.ok(style.examplePairs.length >= (singlePair ? 1 : 2));
       assert.ok(style.promptVariant.limitations.length >= 1);
     }
