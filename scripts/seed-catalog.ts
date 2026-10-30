@@ -3,9 +3,17 @@
  *
  * Usage:
  *   npx tsx --env-file=.env.local scripts/seed-catalog.ts
+ *   npx tsx --env-file=.env.local scripts/seed-catalog.ts --only-missing
+ *   npx tsx --env-file=.env.local scripts/seed-catalog.ts --only-missing --dry-run
+ *   npx tsx --env-file=.env.local scripts/seed-catalog.ts --slugs=a,b,c --dry-run
  *
- * Local `/catalog/...` asset paths are uploaded to catalog-public (WebP),
- * same pipeline as admin upload, then stored as public URLs on style_assets.
+ * Default (full) run upserts every seed style, re-uploads local /catalog assets,
+ * and deletes DB styles not present in code (orphans).
+ *
+ * Additive mode (--only-missing and/or --slugs):
+ *   inserts only styles missing from the DB (plus tags, prompts, style_assets),
+ *   never deletes or rewrites existing rows, and never re-uploads images
+ *   (assumes catalog WebPs already exist at seed/catalog/…).
  */
 
 import { createHash } from "node:crypto";
@@ -19,6 +27,13 @@ import {
 } from "../src/lib/catalog/seed-80s-styles";
 import { seedStyles } from "../src/lib/catalog/seed-styles";
 import type { CatalogStyle } from "../src/lib/catalog/types";
+import {
+  filterMissingStyles,
+  isAdditiveMode,
+  parseSeedCliArgs,
+  selectCandidateStyles,
+  type SeedCliOptions,
+} from "./seed-catalog-cli";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type SeedClient = SupabaseClient<any>;
@@ -54,6 +69,16 @@ function isRemoteCatalogUrl(url: string): boolean {
     /^https?:\/\//i.test(url) &&
     url.includes("/storage/v1/object/public/catalog-public/")
   );
+}
+
+/** Map a local /catalog/... path to the expected public storage URL (no upload). */
+function publicUrlForLocalCatalogAsset(
+  assetUrl: string,
+  supabaseUrl: string,
+): string {
+  const cleaned = assetUrl.replace(/^\//, "").replace(/\.[^.]+$/, "");
+  const key = `seed/${cleaned}.webp`;
+  return `${supabaseUrl.replace(/\/$/, "")}/storage/v1/object/public/${CATALOG_BUCKET}/${key}`;
 }
 
 async function ensureCatalogBucket(client: SeedClient) {
@@ -110,6 +135,24 @@ async function resolveAssetUrl(
   return data.publicUrl;
 }
 
+/** Additive mode: never upload; reuse existing storage public URLs. */
+function resolveAssetUrlNoUpload(
+  assetUrl: string,
+  supabaseUrl: string,
+  cache: Map<string, string>,
+): string {
+  if (!assetUrl) return assetUrl;
+  if (isRemoteCatalogUrl(assetUrl) || /^https?:\/\//i.test(assetUrl)) {
+    return assetUrl;
+  }
+  if (cache.has(assetUrl)) return cache.get(assetUrl)!;
+  if (!assetUrl.startsWith("/catalog/")) return assetUrl;
+
+  const publicUrl = publicUrlForLocalCatalogAsset(assetUrl, supabaseUrl);
+  cache.set(assetUrl, publicUrl);
+  return publicUrl;
+}
+
 async function upsertCategory(
   client: SeedClient,
   name: string,
@@ -121,6 +164,32 @@ async function upsertCategory(
     { id, name, slug, sort_order: sortOrder },
     { onConflict: "slug" },
   );
+  if (error) throw error;
+  return { id, name, slug };
+}
+
+/** Look up a category by name; insert only if missing (no rewrite). */
+async function ensureCategory(
+  client: SeedClient,
+  name: string,
+  sortOrder: number,
+) {
+  const slug = slugify(name);
+  const { data: existing, error: findError } = await client
+    .from("categories")
+    .select("id, name, slug")
+    .eq("slug", slug)
+    .maybeSingle();
+  if (findError) throw findError;
+  if (existing?.id) return { id: existing.id, name: existing.name, slug: existing.slug };
+
+  const id = uuidFromKey(`category:${slug}`);
+  const { error } = await client.from("categories").insert({
+    id,
+    name,
+    slug,
+    sort_order: sortOrder,
+  });
   if (error) throw error;
   return { id, name, slug };
 }
@@ -221,6 +290,108 @@ async function seedStyle(
   const { error: assetsError } = await client.from("style_assets").insert(assets);
   if (assetsError) throw assetsError;
 
+  await linkStyleTags(client, style, styleId);
+}
+
+/** Insert-only seed for a style that is confirmed missing from the DB. */
+async function insertMissingStyle(
+  client: SeedClient,
+  style: CatalogStyle,
+  categoryId: string,
+  supabaseUrl: string,
+  assetCache: Map<string, string>,
+) {
+  const styleId = uuidFromKey(`style:${style.id}`);
+
+  const { error: styleError } = await client.from("styles").insert({
+    id: styleId,
+    slug: style.id,
+    title: style.title,
+    category_id: categoryId,
+    summary: style.note,
+    description: style.description,
+    supported_subjects: [style.subject],
+    edit_intent: style.intent,
+    input_requirement: style.requirement,
+    photo_requirements: { best: style.bestSourcePhoto },
+    preservation_targets: style.stays,
+    change_targets: style.changes,
+    target_source_photo: style.targetSourcePhoto,
+    card_height: style.height,
+    save_count: style.saved,
+    status: style.status,
+    published_at: style.status === "published" ? new Date().toISOString() : null,
+  });
+  if (styleError) throw styleError;
+
+  const variantId = uuidFromKey(`variant:${style.promptVariant.id}`);
+  const { error: variantError } = await client.from("prompt_variants").insert({
+    id: variantId,
+    style_id: styleId,
+    tool: style.promptVariant.tool,
+    mode: style.promptVariant.mode,
+    input_image_count: style.promptVariant.inputImageCount,
+    input_image_roles: style.promptVariant.inputImageRoles,
+    version: style.promptVariant.version,
+    template: style.promptVariant.template,
+    variables: { defaults: style.promptVariant.defaults },
+    settings: {},
+    test_record: {
+      ...(style.promptVariant.lastVerified
+        ? { lastVerified: style.promptVariant.lastVerified }
+        : {}),
+      limitations: style.promptVariant.limitations,
+    },
+    is_primary: true,
+    status: "published",
+  });
+  if (variantError) throw variantError;
+
+  const cardSource = resolveAssetUrlNoUpload(style.source, supabaseUrl, assetCache);
+  const cardResult = resolveAssetUrlNoUpload(style.result, supabaseUrl, assetCache);
+  const cardSourceAlt = style.examplePairs[0]?.altSource ?? `${style.title} source`;
+  const cardResultAlt = style.examplePairs[0]?.altResult ?? `${style.title} result`;
+
+  const assets = [
+    {
+      id: uuidFromKey(`asset:${style.id}:card`),
+      style_id: styleId,
+      kind: "card_pair",
+      source_storage_key: cardSource,
+      result_storage_key: cardResult,
+      alt_text: eightiesStyleIds.has(style.id)
+        ? cardSourceAlt
+        : `${style.title} card pair`,
+      provenance: provenanceFor(style, cardSourceAlt, cardResultAlt),
+      sort_order: 0,
+    },
+  ];
+
+  for (let index = 0; index < style.examplePairs.length; index++) {
+    const pair = style.examplePairs[index]!;
+    assets.push({
+      id: uuidFromKey(`asset:${style.id}:ex:${index + 1}`),
+      style_id: styleId,
+      kind: "example_pair",
+      source_storage_key: resolveAssetUrlNoUpload(pair.source, supabaseUrl, assetCache),
+      result_storage_key: resolveAssetUrlNoUpload(pair.result, supabaseUrl, assetCache),
+      alt_text: pair.altSource,
+      provenance: provenanceFor(style, pair.altSource, pair.altResult),
+      sort_order: index + 1,
+    });
+  }
+
+  const { error: assetsError } = await client.from("style_assets").insert(assets);
+  if (assetsError) throw assetsError;
+
+  await linkStyleTags(client, style, styleId);
+}
+
+async function linkStyleTags(
+  client: SeedClient,
+  style: CatalogStyle,
+  styleId: string,
+) {
   const tagSpecs = [
     { name: style.subject, kind: "subject" },
     { name: style.intent, kind: "intent" },
@@ -273,28 +444,86 @@ function provenanceFor(style: CatalogStyle, altSource: string, altResult: string
   };
 }
 
-async function main() {
-  const url = requireEnv("NEXT_PUBLIC_SUPABASE_URL");
-  const serviceRoleKey = requireEnv("SUPABASE_SERVICE_ROLE_KEY");
+async function loadExistingSlugs(client: SeedClient): Promise<Set<string>> {
+  const { data, error } = await client.from("styles").select("slug");
+  if (error) throw error;
+  return new Set((data ?? []).map((row: { slug: string }) => row.slug));
+}
 
-  const client: SeedClient = createClient(url, serviceRoleKey, {
-    auth: { autoRefreshToken: false, persistSession: false },
-  });
+async function runAdditiveSeed(
+  client: SeedClient,
+  supabaseUrl: string,
+  options: SeedCliOptions,
+) {
+  const candidates = selectCandidateStyles(seedStyles, options);
+  const existingSlugs = await loadExistingSlugs(client);
+  const missing = filterMissingStyles(candidates, existingSlugs);
+  const alreadyPresent = candidates.length - missing.length;
+
+  if (options.dryRun) {
+    console.log(
+      `Dry run (additive): ${missing.length} style(s) would be inserted` +
+        (alreadyPresent > 0 ? `; ${alreadyPresent} already present (skipped)` : "") +
+        ".",
+    );
+    for (const style of missing) {
+      console.log(
+        `  would insert ${style.id} (${style.title})` +
+          ` [assets: no upload; tags + prompt_variants + style_assets]`,
+      );
+    }
+    if (missing.length === 0) {
+      console.log("Nothing to insert.");
+    }
+    return;
+  }
+
+  if (missing.length === 0) {
+    console.log(
+      `Done. No missing styles` +
+        (options.slugs ? ` among --slugs=${options.slugs.join(",")}` : "") +
+        ` (${candidates.length} candidate(s) already present).`,
+    );
+    return;
+  }
+
+  const categoryIds = new Map<string, string>();
+  const categoryNames = [...new Set(missing.map((s) => s.category))];
+  for (let i = 0; i < categoryNames.length; i++) {
+    const cat = await ensureCategory(client, categoryNames[i]!, i);
+    categoryIds.set(cat.name, cat.id);
+  }
+
+  const assetCache = new Map<string, string>();
+  for (const style of missing) {
+    const categoryId = categoryIds.get(style.category);
+    if (!categoryId) throw new Error(`Missing category for ${style.id}`);
+    await insertMissingStyle(client, style, categoryId, supabaseUrl, assetCache);
+    console.log(`Inserted missing ${style.id}`);
+  }
+
+  console.log(
+    `Done. Inserted ${missing.length} missing style(s)` +
+      (alreadyPresent > 0 ? `; skipped ${alreadyPresent} already present` : "") +
+      `; no deletes, no rewrites, no image uploads.`,
+  );
+}
+
+async function runFullSeed(client: SeedClient, options: SeedCliOptions) {
+  if (options.dryRun) {
+    throw new Error(
+      "--dry-run is only supported with --only-missing and/or --slugs (additive mode).",
+    );
+  }
 
   await ensureCatalogBucket(client);
 
   const categoryIds = new Map<string, string>();
   const assetCache = new Map<string, string>();
 
-  const only = process.argv
-    .find((arg) => arg.startsWith("--only="))
-    ?.slice("--only=".length);
-  const stylesToSeed =
-    only === "80s"
-      ? seedStyles.filter((style) => eightiesStyleIds.has(style.id))
-      : seedStyles;
+  const stylesToSeed = selectCandidateStyles(seedStyles, options);
 
-  if (only === "80s") {
+  if (options.only === "80s") {
     const { data: cat, error: catError } = await client
       .from("categories")
       .select("id")
@@ -318,8 +547,8 @@ async function main() {
     console.log(`Seeded ${style.id}`);
   }
 
-  if (only) {
-    console.log(`Done. Seeded ${stylesToSeed.length} styles (--only=${only}).`);
+  if (options.only) {
+    console.log(`Done. Seeded ${stylesToSeed.length} styles (--only=${options.only}).`);
     return;
   }
 
@@ -350,6 +579,23 @@ async function main() {
   console.log(
     `Done. Seeded ${seedStyles.length} styles; removed ${orphans.length} orphans; catalog uploads ${assetCache.size}.`,
   );
+}
+
+async function main() {
+  const options = parseSeedCliArgs(process.argv.slice(2));
+  const url = requireEnv("NEXT_PUBLIC_SUPABASE_URL");
+  const serviceRoleKey = requireEnv("SUPABASE_SERVICE_ROLE_KEY");
+
+  const client: SeedClient = createClient(url, serviceRoleKey, {
+    auth: { autoRefreshToken: false, persistSession: false },
+  });
+
+  if (isAdditiveMode(options)) {
+    await runAdditiveSeed(client, url, options);
+    return;
+  }
+
+  await runFullSeed(client, options);
 }
 
 main().catch((err) => {
