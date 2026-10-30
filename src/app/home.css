@@ -273,16 +273,20 @@
   background: none;
   border: 0;
   outline: 0;
+  box-shadow: none;
   color: var(--text);
   font: inherit;
   font-size: 16px;
   padding: 10px 4px;
 }
 
+/* Keep focus on the outer pill only — no inner input border/outline/ring. */
+.hero-wall-search input:focus,
 .hero-wall-search input:focus-visible {
-  outline: 3px solid rgba(139, 108, 255, 0.55);
-  outline-offset: 2px;
-  border-radius: 8px;
+  outline: none;
+  outline-offset: 0;
+  border: 0;
+  box-shadow: none;
 }
 
 .hero-wall-search:focus-within {
