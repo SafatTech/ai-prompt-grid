@@ -449,7 +449,11 @@ describe("guide files", () => {
     );
     assert.ok(guide);
     assert.equal(guide.draft, false);
-    assert.equal(guide.updated, "2026-10-05");
+    assert.equal(guide.updated, "2026-10-30");
+    assert.match(
+      guide.description,
+      /Copy-paste Diwali couple AI photo editing prompts for Instagram/,
+    );
     assert.deepEqual(guide.ogImage, {
       url: "/guides/diwali-couple-ai-photo-editing-prompts/diya-lit-balcony-og.webp",
       width: 1200,
@@ -464,6 +468,8 @@ describe("guide files", () => {
     assert.match(guide.body, /Prompts 3 and 6/);
     assert.match(guide.body, /Prompt 4/);
     assert.match(guide.body, /Prompt 12/);
+    assert.match(guide.body, /## Diwali couple poses prompts/);
+    assert.match(guide.body, /## Diwali photo prompts for men and women/);
     assert.doesNotMatch(guide.body, /Lakshmi|Bhai Dooj|\[IMAGE:/i);
     assert.match(
       guide.body,
@@ -481,6 +487,15 @@ describe("guide files", () => {
       "babys-first-diwali",
       "family-diwali-in-karachi-or-sindh",
       "diaspora-diwali-in-a-cold-city",
+      "diwali-couple-poses-diya-doorway",
+      "diwali-couple-instagram-fireworks",
+      "diwali-girl-aesthetic-diya",
+      "diwali-women-marigold-portrait",
+      "diwali-men-kurta-portrait",
+      "diwali-boy-instagram-portrait",
+      "diwali-men-crackers-celebration",
+      "diwali-family-courtyard-group",
+      "diwali-family-dinner-table",
     ]) {
       assert.equal(guide.body.includes(`](/styles/${slug})`), true, slug);
     }
