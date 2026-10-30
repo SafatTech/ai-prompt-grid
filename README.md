@@ -29,6 +29,7 @@ Open [http://localhost:3000](http://localhost:3000).
 | `npm run test:unit` | Node unit tests |
 | `npm run test:e2e` | Playwright e2e |
 | `npm run db:seed` | Upsert catalog seed into Supabase (needs service role) |
+| `npm run db:seed:missing` | Insert only missing seed styles (no deletes / rewrites / uploads) |
 
 ## Repository layout
 

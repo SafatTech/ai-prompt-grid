@@ -19,6 +19,7 @@
     "test:unit": "tsx --test tests/unit/*.test.ts",
     "test:e2e": "playwright test",
     "db:seed": "tsx --env-file=.env.local scripts/seed-catalog.ts",
+    "db:seed:missing": "tsx --env-file=.env.local scripts/seed-catalog.ts --only-missing",
     "db:upload-catalog": "tsx --env-file=.env.local scripts/upload-catalog-assets.ts",
     "db:upload-stylish-luxury": "tsx --env-file=.env.local scripts/upload-stylish-luxury-assets.ts",
     "db:generate-blur-thumbs": "tsx --env-file=.env.local scripts/generate-blur-thumbs.ts",
