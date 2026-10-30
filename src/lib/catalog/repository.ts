@@ -323,6 +323,18 @@ export async function listStylesMatchingQuery(
   return filterStyles(all, createEmptyFilters(), q, "Trending").slice(0, capped);
 }
 
+/**
+ * Uncapped match count for season/CTA copy — same filter as listStylesMatchingQuery
+ * (shown-on-home styles, empty filters, Trending sort) without the list limit.
+ */
+export async function countStylesMatchingQuery(query: string): Promise<number> {
+  const q = query.trim().toLowerCase();
+  if (!q) return 0;
+
+  const all = (await listPublishedStyles()).filter((style) => style.showOnHome !== false);
+  return filterStyles(all, createEmptyFilters(), q, "Trending").length;
+}
+
 export async function listStylesBySlugs(slugs: string[]): Promise<CatalogStyle[]> {
   if (slugs.length === 0) return [];
   const all = (await listPublishedStyles()).filter((style) => style.showOnHome !== false);

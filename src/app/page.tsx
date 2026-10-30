@@ -8,6 +8,7 @@ import { SeasonBanner, type SeasonBannerStyle } from "@/components/home/season-b
 import { StyleRail } from "@/components/home/style-rail";
 import {
   countPublishedStyles,
+  countStylesMatchingQuery,
   listExploreFeed,
   listHeroWallImages,
   listNewestStyles,
@@ -89,6 +90,7 @@ export default async function HomePage() {
     seasonStyles,
     seasonImageStyles,
     seasonMatched,
+    seasonStyleCount,
     couples,
     family,
     professional,
@@ -103,8 +105,9 @@ export default async function HomePage() {
     listHeroWallImages(36, heroSlugs, homepageSettings.heroAutoFill),
     listStylesBySlugs(season?.styleSlugs ?? []),
     listStylesBySlugs(seasonImages.slugs),
-    // Cap season matches — banner only needs a short strip (+ count from this page).
+    // Cap season matches — banner strip only needs a short list.
     season ? listStylesMatchingQuery(season.ctaCategoryQuery, 16) : Promise.resolve([]),
+    season ? countStylesMatchingQuery(season.ctaCategoryQuery) : Promise.resolve(0),
     listStylesMatchingQuery(HOME_RAILS[0]!.q!, HOME_RAILS[0]!.limit),
     listStylesMatchingQuery(HOME_RAILS[1]!.q!, HOME_RAILS[1]!.limit),
     listStylesByCategory(HOME_RAILS[2]!.category!, HOME_RAILS[2]!.limit),
@@ -117,8 +120,6 @@ export default async function HomePage() {
         .slice(0, 4),
     ),
   ]);
-
-  const seasonStyleCount = seasonMatched.length;
   const seasonBannerStyles = toSeasonBannerStyles(seasonStyles);
   const seasonBannerImageStyles = toSeasonBannerStyles(seasonImageStyles);
   const seasonBannerMatchedStyles = toSeasonBannerStyles(seasonMatched);
