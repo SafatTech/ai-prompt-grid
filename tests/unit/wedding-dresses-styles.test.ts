@@ -109,8 +109,10 @@ describe("Wedding Dress guide content", () => {
     assert.match(guide, /title: "Wedding Dress AI Prompts: Bridal Lehenga, Sherwani & Dulhan Looks"/);
     assert.match(
       guide,
-      /description: "Copy-paste wedding dress AI prompts and Gemini bridal look prompts for lehenga, dulhan, dulha and sherwani\. Get a shaadi-ready edit from your photo\."/,
+      /description: "Copy-paste wedding dress AI prompts and gemini bridal look prompts for lehenga, dulhan, dulha and sherwani\. Get a shaadi-ready edit from your photo\."/,
     );
+    assert.equal(guide.match(/\bGemini\b/g)?.length, 1);
+    assert.equal(guide.match(/\bChatGPT\b/g)?.length, 1);
     assert.match(guide, /h1: "Wedding Dress AI Photo Prompts"/);
     assert.match(guide, /## Bridal Lehenga AI Prompts \(Dulhan Looks\)/);
     assert.match(guide, /## Groom Sherwani AI Prompts \(Dulha Looks\)/);

@@ -457,7 +457,7 @@ describe("guide files", () => {
       guide.title,
       "Wedding Dress AI Prompts: Bridal Lehenga, Sherwani & Dulhan Looks",
     );
-    assert.match(guide.description, /Gemini bridal look prompts/);
+    assert.match(guide.description, /gemini bridal look prompts/);
     assert.match(guide.body, /## Bridal Lehenga AI Prompts \(Dulhan Looks\)/);
     assert.match(guide.body, /## Bride and Groom & Couple Wedding Poses Prompts/);
     assert.match(guide.body, /## Haldi, Mehndi, Nikah & Walima Outfit Prompts/);
