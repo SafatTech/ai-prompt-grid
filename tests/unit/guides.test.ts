@@ -36,6 +36,7 @@ import {
   linkStyleMentions,
   prepareGuideMarkdown,
   estimateReadingMinutes,
+  extractGuideFaqs,
   extractGuideToc,
   resolveGuideArticleImage,
   resolveGuideDisplayHero,
@@ -43,6 +44,7 @@ import {
   showsDraftGuides,
   stripLeadingH1,
 } from "../../src/lib/guides/prepare";
+import { publishedGuideSlugs } from "../../src/lib/guides/published-slugs.generated";
 import { absoluteUrl } from "../../src/lib/site-url";
 
 describe("guide publishing rules", () => {
@@ -441,6 +443,55 @@ describe("guide files", () => {
       "/guides/halloween-ai-prompts-for-selfies/pumpkin-patch-after.webp",
     ]);
     assert.equal(guide.body.match(/"1122x1402"/g)?.length, 14);
+  });
+
+  it("publishes the Wedding Dress guide with SEO meta, H2s, and all 14 style links", () => {
+    const guide = loadAllGuides().find(
+      (item) => item.slug === "wedding-dress-ai-photo-prompts",
+    );
+    assert.ok(guide);
+    assert.equal(guide.draft, false);
+    assert.equal(guide.updated, "2026-10-31");
+    assert.equal(guide.heading, "Wedding Dress AI Photo Prompts");
+    assert.equal(
+      guide.title,
+      "Wedding Dress AI Prompts: Bridal Lehenga, Sherwani & Dulhan Looks",
+    );
+    assert.match(guide.description, /Gemini bridal look prompts/);
+    assert.match(guide.body, /## Bridal Lehenga AI Prompts \(Dulhan Looks\)/);
+    assert.match(guide.body, /## Bride and Groom & Couple Wedding Poses Prompts/);
+    assert.match(guide.body, /## Haldi, Mehndi, Nikah & Walima Outfit Prompts/);
+    assert.match(guide.body, /## 2026 Bridal Dress Trends \(Pakistani & Indian Looks\)/);
+    assert.match(guide.body, /### Are these prompts free\?/);
+    assert.match(guide.body, /### Can AI change my dress to a lehenga\?/);
+    assert.match(guide.body, /gemini wedding prompt copy paste/);
+    assert.match(
+      guide.body,
+      /The people in the "before" photos are AI-generated, not real people\. Every "after" image on this page is an AI edit made with the prompts below, tested in October 2026\./,
+    );
+    for (const slug of [
+      "red-bridal-lehenga",
+      "pastel-bridal-lehenga",
+      "bridal-sharara",
+      "nikkah-dress",
+      "walima-maxi",
+      "mehndi-outfit",
+      "white-wedding-gown",
+      "ivory-sherwani",
+      "black-sherwani",
+      "groom-prince-coat",
+      "couple-wedding-outfits",
+      "dulha-dulhan-outfits",
+      "mehndi-groom-kurta",
+      "walima-groom-suit",
+    ]) {
+      assert.equal(guide.body.includes(`](/styles/${slug})`), true, slug);
+    }
+    assert.ok(extractGuideFaqs(guide.body).length >= 5);
+    assert.match(
+      publishedGuideSlugs.join("\n"),
+      /^wedding-dress-ai-photo-prompts$/m,
+    );
   });
 
   it("publishes the Diwali guide with ten sized pairs and no withheld prompts", () => {

@@ -228,6 +228,19 @@ export const moodLabels: Record<string, string> = {
   "Bright toy primaries": "Bright toy primaries",
   "Cozy warm craft": "Cozy craft",
   "Warm handmade clay": "Handmade clay",
+  "Rich royal crimson": "Royal crimson",
+  "Soft dreamy pastel": "Dreamy pastel",
+  "Deep jewel-tone dramatic": "Jewel dramatic",
+  "Soft ivory luminous": "Ivory luminous",
+  "Glamorous champagne silver": "Champagne silver",
+  "Vibrant warm festive": "Warm festive",
+  "Soft cinematic ivory": "Cinematic ivory",
+  "Rich regal gold": "Regal gold",
+  "Moody cinematic noir gold": "Noir gold",
+  "Warm evening elegant": "Evening elegant",
+  "Rich royal maroon gold": "Maroon gold",
+  "Dramatic festive crimson": "Festive crimson",
+  "Glamorous midnight cinematic": "Midnight glam",
 };
 
 /** Short 2–3 word UI labels for full background prompt strings. */
@@ -735,6 +748,30 @@ export const backgroundLabels: Record<string, string> = {
   "Cozy wooden craft table with yarn balls, crochet hooks and soft window light":
     "Crochet craft table",
   "Miniature handmade clay set of a town square": "Clay town square",
+  "A grand Mughal-style palace hall with carved marble arches, warm hanging lanterns and deep red rose petals scattered on the floor":
+    "Mughal palace hall",
+  "A lush garden pavilion in soft daylight with white marble pillars, cascading white and pink flowers and a blurred fountain behind":
+    "Garden pavilion",
+  "A traditional haveli courtyard at night with carved jharokha windows, brass lamps, deep red drapes and scattered marigold and rose petals":
+    "Haveli courtyard",
+  "An elegant nikah setting with ivory floral arches of white roses and jasmine, soft sheer drapes and warm fairy-light bokeh":
+    "Nikah floral arch",
+  "A luxurious walima reception stage with crystal chandeliers, white and silver floral walls, mirrored floor and soft glowing bokeh":
+    "Walima stage",
+  "A colourful mehndi night setting with marigold garlands, hanging string lights, brass lanterns, colourful floor cushions and a floral swing":
+    "Mehndi night set",
+  "A neutral grand hall with tall arched windows, white floral arrangements, soft sheer drapes and a polished marble floor, no religious symbols":
+    "Neutral grand hall",
+  "A royal palace corridor with carved sandstone arches, warm lanterns and soft drapes in deep red and gold":
+    "Palace corridor",
+  "A dark luxurious reception hall with warm gold uplighting, deep velvet drapes, scattered candles and soft gold bokeh":
+    "Reception hall",
+  "A softly lit garden lawn at a wedding evening with fairy-light canopies, white floral pillars and warm bokeh":
+    "Fairy-lit lawn",
+  "A grand palace hall with carved marble arches, deep maroon drapes, warm hanging lanterns and rose petals on the floor":
+    "Maroon palace hall",
+  "A lavish wedding stage with a carved gold sofa, walls of red roses and marigolds, hanging floral strings and warm golden bokeh":
+    "Floral wedding stage",
 };
 
 const genericMoodPresets = [

@@ -387,6 +387,68 @@ export function formatGuideDate(isoDate: string): string {
   }).format(date);
 }
 
+export type GuideFaqItem = {
+  question: string;
+  answer: string;
+};
+
+/**
+ * FAQ pairs from a ## FAQ section: each ### question followed by answer prose
+ * until the next heading. Used for FAQPage JSON-LD.
+ */
+export function extractGuideFaqs(markdown: string): GuideFaqItem[] {
+  const outsideFences = markdown
+    .split(/(```[\s\S]*?```)/g)
+    .filter((_, index) => index % 2 === 0)
+    .join("\n");
+  const lines = outsideFences.split("\n");
+  let inFaq = false;
+  const items: GuideFaqItem[] = [];
+  let question: string | null = null;
+  let answerLines: string[] = [];
+
+  const flush = () => {
+    if (!question) return;
+    const answer = answerLines
+      .join(" ")
+      .replace(/!\[[^\]]*\]\([^)]+\)/g, " ")
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+      .replace(/[`*_~>#]/g, " ")
+      .replace(/\s+/g, " ")
+      .trim();
+    if (answer) items.push({ question, answer });
+    question = null;
+    answerLines = [];
+  };
+
+  for (const line of lines) {
+    const h2 = /^##\s+(.+?)\s*$/.exec(line);
+    if (h2) {
+      const title = h2[1]!.replace(/#+\s*$/, "").trim().toLowerCase();
+      if (title === "faq") {
+        flush();
+        inFaq = true;
+        continue;
+      }
+      if (inFaq) {
+        flush();
+        inFaq = false;
+      }
+      continue;
+    }
+    if (!inFaq) continue;
+    const h3 = /^###\s+(.+?)\s*$/.exec(line);
+    if (h3) {
+      flush();
+      question = h3[1]!.replace(/#+\s*$/, "").trim();
+      continue;
+    }
+    if (question) answerLines.push(line.trim());
+  }
+  flush();
+  return items;
+}
+
 function mapOutsideFences(
   markdown: string,
   mapSegment: (segment: string) => string,

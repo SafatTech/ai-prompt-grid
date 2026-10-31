@@ -16,6 +16,7 @@ import {
   canonicalGuideUrl,
   documentTitle,
   estimateReadingMinutes,
+  extractGuideFaqs,
   extractGuideToc,
   formatGuideDateShort,
   guideMetadataTitle,
@@ -83,12 +84,17 @@ export default async function GuidePage({ params }: GuidePageProps) {
   const articleImage = resolveGuideArticleImage(guide);
   const hero = resolveGuideDisplayHero(guide);
   const toc = extractGuideToc(guide.body);
+  const faqs = extractGuideFaqs(guide.body);
   const readingMinutes = estimateReadingMinutes(guide.body);
   // Slim cards only (slug/heading/…) — never pass Guide.body into the client island.
   const related = listIndexableGuides()
     .filter((item) => item.slug !== guide.slug)
     .slice(0, 3)
     .map(toRelatedGuideCard);
+  const styleMentions = [...guide.body.matchAll(/\]\(\/styles\/([^)/?#]+)\)/g)].map(
+    (match) => match[1]!,
+  );
+  const uniqueStyleMentions = [...new Set(styleMentions)];
 
   const jsonLd = {
     "@context": "https://schema.org",
@@ -141,6 +147,35 @@ export default async function GuidePage({ params }: GuidePageProps) {
           },
         ],
       },
+      ...(faqs.length > 0
+        ? [
+            {
+              "@type": "FAQPage",
+              mainEntity: faqs.map((item) => ({
+                "@type": "Question",
+                name: item.question,
+                acceptedAnswer: {
+                  "@type": "Answer",
+                  text: item.answer,
+                },
+              })),
+            },
+          ]
+        : []),
+      ...(uniqueStyleMentions.length > 0
+        ? [
+            {
+              "@type": "ItemList",
+              name: `${guide.heading} styles`,
+              itemListElement: uniqueStyleMentions.map((slug, index) => ({
+                "@type": "ListItem",
+                position: index + 1,
+                url: absoluteUrl(`/styles/${slug}`),
+                name: slug,
+              })),
+            },
+          ]
+        : []),
     ],
   };
 
