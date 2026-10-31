@@ -6,7 +6,10 @@ import {
   homepageCurationSaveSchema,
   saveHomepageCuration,
 } from "@/lib/admin/homepage";
-import { expireHomepageSettingsCache } from "@/lib/catalog/public-cache-invalidation";
+import {
+  expireHomepageSettingsCache,
+  expirePublicCatalogCache,
+} from "@/lib/catalog/public-cache-invalidation";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
 export const runtime = "nodejs";
@@ -46,6 +49,8 @@ export async function PUT(request: Request) {
   if (!result.ok) {
     return NextResponse.json({ error: result.error }, { status: 500 });
   }
+  // Pins / hide_from_new / trending ranks live on styles; bust catalog + settings.
+  expirePublicCatalogCache();
   expireHomepageSettingsCache();
   revalidatePath("/");
   revalidatePath("/explore");

@@ -189,23 +189,28 @@ export const listPublishedStyles = cache(async (): Promise<CatalogStyle[]> => {
 });
 
 /**
- * Homepage "New styles" rail (~10–12).
- * Orders by published_at / created_at desc; seed fallback uses reverse catalog order.
+ * Pure New-styles rail selection. Admin pins (pinNewRank 1–5) always win their
+ * slot even when hideFromNew is set; hideFromNew only filters the organic tail.
+ * Exported for unit tests.
  */
-export async function listNewestStyles(limit = 12): Promise<CatalogStyle[]> {
+export function selectNewestStyles(
+  published: CatalogStyle[],
+  limit = 12,
+  seedFallback: CatalogStyle[] = published,
+): CatalogStyle[] {
   const capped = Math.min(Math.max(limit, 1), 12);
-  const all = (await listPublishedStyles()).filter(
-    (style) => style.showOnHome !== false && !style.hideFromNew,
-  );
-  const pinned = all
-    .filter((style) => style.pinNewRank != null)
+  const pinned = published
+    .filter((style) => style.pinNewRank != null && style.showOnHome !== false)
     .sort((a, b) => (a.pinNewRank ?? 99) - (b.pinNewRank ?? 99))
     .slice(0, 5);
   const pinnedIds = new Set(pinned.map((style) => style.id));
-  const unpinned = all.filter((style) => !pinnedIds.has(style.id));
-  const hasDates = all.some((style) => Boolean(style.publishedAt));
+  const unpinned = published.filter(
+    (style) =>
+      style.showOnHome !== false && !style.hideFromNew && !pinnedIds.has(style.id),
+  );
+  const hasDates = published.some((style) => Boolean(style.publishedAt));
   if (!hasDates) {
-    const seedNewest = [...getPublishedStyles()]
+    const seedNewest = [...seedFallback]
       .filter(
         (style) =>
           style.showOnHome !== false && !style.hideFromNew && !pinnedIds.has(style.id),
@@ -216,6 +221,15 @@ export async function listNewestStyles(limit = 12): Promise<CatalogStyle[]> {
   const indexed = unpinned.map((style, index) => ({ style, index }));
   indexed.sort((a, b) => compareNewestDesc(a.style, b.style, a.index, b.index));
   return [...pinned, ...indexed.map((entry) => entry.style)].slice(0, capped);
+}
+
+/**
+ * Homepage "New styles" rail (~10–12).
+ * Orders by published_at / created_at desc; seed fallback uses reverse catalog order.
+ */
+export async function listNewestStyles(limit = 12): Promise<CatalogStyle[]> {
+  const published = await listPublishedStyles();
+  return selectNewestStyles(published, limit, getPublishedStyles());
 }
 
 /**
