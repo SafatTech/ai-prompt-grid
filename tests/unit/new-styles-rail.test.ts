@@ -9,7 +9,10 @@ import {
   createEmptyFilters,
   filterStyles,
 } from "../../src/lib/catalog/filters";
-import { listNewestStyles } from "../../src/lib/catalog/repository";
+import {
+  listNewestStyles,
+  selectNewestStyles,
+} from "../../src/lib/catalog/repository";
 import { getPublishedStyles } from "../../src/lib/catalog/styles";
 import type { CatalogStyle } from "../../src/lib/catalog/types";
 import { NEW_STYLES_RAIL } from "../../src/lib/home/rails";
@@ -22,6 +25,23 @@ function readSrc(rel: string) {
 
 function withSaved(style: CatalogStyle, saved: number, publishedAt?: string): CatalogStyle {
   return { ...style, saved, publishedAt: publishedAt ?? style.publishedAt ?? null };
+}
+
+function fixtureStyle(
+  id: string,
+  overrides: Partial<CatalogStyle> = {},
+): CatalogStyle {
+  const base = getPublishedStyles()[0]!;
+  return {
+    ...base,
+    id,
+    title: id,
+    publishedAt: "2026-01-01T00:00:00.000Z",
+    pinNewRank: null,
+    hideFromNew: false,
+    showOnHome: true,
+    ...overrides,
+  };
 }
 
 describe("New styles rail", () => {
@@ -43,6 +63,30 @@ describe("New styles rail", () => {
       newest.map((s) => s.id),
       seedNewest.map((s) => s.id),
     );
+  });
+
+  it("keeps a hideFromNew pin in its pinNewRank slot", () => {
+    const organic = Array.from({ length: 8 }, (_, index) =>
+      fixtureStyle(`organic-${index}`, {
+        publishedAt: `2026-06-${String(index + 1).padStart(2, "0")}T00:00:00.000Z`,
+      }),
+    );
+    const pins = [1, 2, 3, 4, 5].map((rank) =>
+      fixtureStyle(`pin-${rank}`, {
+        pinNewRank: rank,
+        hideFromNew: rank === 4,
+        publishedAt: "2025-01-01T00:00:00.000Z",
+      }),
+    );
+    const newest = selectNewestStyles([...organic, ...pins], 12);
+    assert.deepEqual(
+      newest.slice(0, 5).map((style) => style.id),
+      ["pin-1", "pin-2", "pin-3", "pin-4", "pin-5"],
+    );
+    assert.equal(newest[3]?.id, "pin-4");
+    assert.equal(newest[3]?.hideFromNew, true);
+    assert.equal(newest[3]?.pinNewRank, 4);
+    assert.ok(!newest.slice(5).some((style) => style.hideFromNew));
   });
 
   it("keeps StyleRail free of priority/eager loading", () => {

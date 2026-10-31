@@ -78,6 +78,8 @@ describe("public catalog cache", () => {
     for (const path of [
       "src/app/api/admin/styles/[id]/route.ts",
       "src/app/api/admin/trending/route.ts",
+      // Homepage curation writes pin_new_rank / hide_from_new / trending_rank on styles.
+      "src/app/api/admin/homepage/route.ts",
     ]) {
       assert.match(
         readSrc(path),
@@ -86,16 +88,11 @@ describe("public catalog cache", () => {
       );
     }
 
-    for (const path of [
-      "src/app/api/admin/homepage/route.ts",
-      "src/app/api/admin/styles/[id]/assets/route.ts",
-    ]) {
-      assert.doesNotMatch(
-        readSrc(path),
-        /expirePublicCatalogCache\(\)/,
-        `${path} must not thrash the public catalog cache`,
-      );
-    }
+    assert.doesNotMatch(
+      readSrc("src/app/api/admin/styles/[id]/assets/route.ts"),
+      /expirePublicCatalogCache\(\)/,
+      "asset uploads must not thrash the public catalog cache",
+    );
   });
 
   it("generates style pages on demand instead of fanning out catalog reads at build", () => {
