@@ -223,6 +223,19 @@ export const moodSchema = z.enum([
   "Bright toy primaries",
   "Cozy warm craft",
   "Warm handmade clay",
+  "Rich royal crimson",
+  "Soft dreamy pastel",
+  "Deep jewel-tone dramatic",
+  "Soft ivory luminous",
+  "Glamorous champagne silver",
+  "Vibrant warm festive",
+  "Soft cinematic ivory",
+  "Rich regal gold",
+  "Moody cinematic noir gold",
+  "Warm evening elegant",
+  "Rich royal maroon gold",
+  "Dramatic festive crimson",
+  "Glamorous midnight cinematic",
 ]);
 
 export const backgroundSchema = z.enum([
@@ -510,6 +523,18 @@ export const backgroundSchema = z.enum([
   "Bright building-brick baseplate diorama with tiny trees and a little house",
   "Cozy wooden craft table with yarn balls, crochet hooks and soft window light",
   "Miniature handmade clay set of a town square",
+  "A grand Mughal-style palace hall with carved marble arches, warm hanging lanterns and deep red rose petals scattered on the floor",
+  "A lush garden pavilion in soft daylight with white marble pillars, cascading white and pink flowers and a blurred fountain behind",
+  "A traditional haveli courtyard at night with carved jharokha windows, brass lamps, deep red drapes and scattered marigold and rose petals",
+  "An elegant nikah setting with ivory floral arches of white roses and jasmine, soft sheer drapes and warm fairy-light bokeh",
+  "A luxurious walima reception stage with crystal chandeliers, white and silver floral walls, mirrored floor and soft glowing bokeh",
+  "A colourful mehndi night setting with marigold garlands, hanging string lights, brass lanterns, colourful floor cushions and a floral swing",
+  "A neutral grand hall with tall arched windows, white floral arrangements, soft sheer drapes and a polished marble floor, no religious symbols",
+  "A royal palace corridor with carved sandstone arches, warm lanterns and soft drapes in deep red and gold",
+  "A dark luxurious reception hall with warm gold uplighting, deep velvet drapes, scattered candles and soft gold bokeh",
+  "A softly lit garden lawn at a wedding evening with fairy-light canopies, white floral pillars and warm bokeh",
+  "A grand palace hall with carved marble arches, deep maroon drapes, warm hanging lanterns and rose petals on the floor",
+  "A lavish wedding stage with a carved gold sofa, walls of red roses and marigolds, hanging floral strings and warm golden bokeh",
 ]);
 
 export const ratioSchema = z.enum(["4:5 Portrait", "1:1 Square", "9:16 Story"]);

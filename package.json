@@ -22,6 +22,7 @@
     "db:seed:missing": "tsx --env-file=.env.local scripts/seed-catalog.ts --only-missing",
     "db:upload-catalog": "tsx --env-file=.env.local scripts/upload-catalog-assets.ts",
     "db:upload-stylish-luxury": "tsx --env-file=.env.local scripts/upload-stylish-luxury-assets.ts",
+    "db:upload-wedding-dresses": "tsx --env-file=.env.local scripts/upload-wedding-dresses-assets.ts",
     "db:generate-blur-thumbs": "tsx --env-file=.env.local scripts/generate-blur-thumbs.ts",
     "db:backfill-image-focus": "tsx --env-file=.env.local scripts/backfill-image-focus.ts",
     "emails:build": "tsx scripts/build-email-templates.ts"

@@ -134,12 +134,12 @@ export const SEASONS: Season[] = [
     heroEyebrow: "Shaadi season prompts are live",
     title: "Shaadi season: mehndi, baraat, walima",
     body: "Couple and family looks for mehndi nights, baraat mornings, and walima portraits — keep every face recognizable.",
-    ctaGuide: "/guides/pakistani-wedding-ai-photo-prompts",
+    ctaGuide: "/guides/wedding-dress-ai-photo-prompts",
     ctaCategoryQuery: "wedding",
     styleSlugs: [
-      "wedding-stage-merge-two-photos-prompt-gemini-couple",
-      "first-diwali-as-a-married-couple",
-      "80s-wedding-album",
+      "red-bridal-lehenga",
+      "couple-wedding-outfits",
+      "ivory-sherwani",
     ],
     heroChip: "Shaadi",
     popularQueries: [
@@ -241,12 +241,12 @@ export const SEASONS: Season[] = [
     heroEyebrow: "Shaadi season prompts are live",
     title: "Shaadi season: mehndi, baraat, walima",
     body: "Couple and family looks for mehndi nights, baraat mornings, and walima portraits — keep every face recognizable.",
-    ctaGuide: "/guides/pakistani-wedding-ai-photo-prompts",
+    ctaGuide: "/guides/wedding-dress-ai-photo-prompts",
     ctaCategoryQuery: "wedding",
     styleSlugs: [
-      "wedding-stage-merge-two-photos-prompt-gemini-couple",
-      "first-diwali-as-a-married-couple",
-      "80s-wedding-album",
+      "red-bridal-lehenga",
+      "couple-wedding-outfits",
+      "ivory-sherwani",
     ],
     heroChip: "Shaadi",
     popularQueries: [

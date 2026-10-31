@@ -173,7 +173,7 @@ describe("sitemap seed completeness (N-31)", () => {
         slug: entry.slug,
         lastModified: new Date("2026-10-01T00:00:00.000Z"),
       }));
-    assert.equal(partial.length, 219);
+    assert.equal(partial.length, 233);
     const merged = mergeSitemapStyleEntries(partial, seed);
     assert.equal(merged.length, seed.length);
     const slugs = new Set(merged.map((entry) => entry.slug));
