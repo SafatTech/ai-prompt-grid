@@ -241,6 +241,18 @@ export const moodLabels: Record<string, string> = {
   "Rich royal maroon gold": "Maroon gold",
   "Dramatic festive crimson": "Festive crimson",
   "Glamorous midnight cinematic": "Midnight glam",
+  "Warm amber glow": "Warm amber glow",
+  "Rich forest green and gold": "Forest green gold",
+  "Dreamy golden bokeh": "Golden bokeh",
+  "Luxe crimson and gold": "Luxe crimson gold",
+  "Warm cozy emerald": "Cozy emerald",
+  "Warm lights, cool dusk": "Warm lights dusk",
+  "Cinematic warm night": "Warm night",
+  "Moody black and gold": "Black and gold",
+  "Glossy retro film": "Glossy retro",
+  "Rich red and gold": "Rich red gold",
+  "Cool blue with warm lights": "Cool blue warm",
+  "Warm cabin glow": "Cabin glow",
 };
 
 /** Short 2–3 word UI labels for full background prompt strings. */
@@ -772,6 +784,30 @@ export const backgroundLabels: Record<string, string> = {
     "Maroon palace hall",
   "A lavish wedding stage with a carved gold sofa, walls of red roses and marigolds, hanging floral strings and warm golden bokeh":
     "Floral wedding stage",
+  "A minimalist modern living room with a sleek stone fireplace, a slim decorated Christmas tree with warm white lights and soft candles on the mantel":
+    "Modern fireplace room",
+  "A modern Scandinavian-style living room with a tall pine Christmas tree in warm white lights, wrapped gifts in kraft paper and soft candlelight":
+    "Scandi Christmas room",
+  "A softly blurred Christmas tree covered in warm white fairy lights and glass baubles, turned into large round golden bokeh":
+    "Tree lights bokeh",
+  "An elegant modern holiday lounge with a gold-ornament Christmas tree, warm brass candle holders and soft gold sparkle bokeh":
+    "Holiday lounge",
+  "A modern living room with a tall decorated Christmas tree in warm white lights, neatly wrapped gifts and a knit throw blanket":
+    "Tree and throw room",
+  "A modern front doorway with a lush evergreen garland, warm white string lights, a simple wreath with no text and a lantern on the step":
+    "String-lit doorway",
+  "A generic festive outdoor Christmas market at night with wooden stalls, warm string lights and a softly blurred lit tree, with no signs, text, brands or landmarks":
+    "Christmas market night",
+  "A dark studio set with a tall Christmas tree in warm gold lights, stacked black and gold gift boxes and soft haze":
+    "Dark gift studio",
+  "A shimmering silver and red tinsel curtain studio backdrop with a small retro-style Christmas tree and soft colored lights":
+    "Tinsel curtain studio",
+  "A seamless deep-red studio backdrop with golden bokeh lights, gold ornaments and a few elegant wrapped gifts":
+    "Red gold studio",
+  "A quiet snowy evening street with softly blurred trees wrapped in warm white lights and gently falling snow, with no signs, text or landmarks":
+    "Snowy lit street",
+  "A modern wooden cabin window seat with snow falling outside on pine trees, warm string lights along the window frame and a small lit tree":
+    "Snowy cabin window",
 };
 
 const genericMoodPresets = [

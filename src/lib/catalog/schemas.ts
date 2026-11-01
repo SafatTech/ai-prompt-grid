@@ -236,6 +236,18 @@ export const moodSchema = z.enum([
   "Rich royal maroon gold",
   "Dramatic festive crimson",
   "Glamorous midnight cinematic",
+  "Warm amber glow",
+  "Rich forest green and gold",
+  "Dreamy golden bokeh",
+  "Luxe crimson and gold",
+  "Warm cozy emerald",
+  "Warm lights, cool dusk",
+  "Cinematic warm night",
+  "Moody black and gold",
+  "Glossy retro film",
+  "Rich red and gold",
+  "Cool blue with warm lights",
+  "Warm cabin glow",
 ]);
 
 export const backgroundSchema = z.enum([
@@ -535,6 +547,18 @@ export const backgroundSchema = z.enum([
   "A softly lit garden lawn at a wedding evening with fairy-light canopies, white floral pillars and warm bokeh",
   "A grand palace hall with carved marble arches, deep maroon drapes, warm hanging lanterns and rose petals on the floor",
   "A lavish wedding stage with a carved gold sofa, walls of red roses and marigolds, hanging floral strings and warm golden bokeh",
+  "A minimalist modern living room with a sleek stone fireplace, a slim decorated Christmas tree with warm white lights and soft candles on the mantel",
+  "A modern Scandinavian-style living room with a tall pine Christmas tree in warm white lights, wrapped gifts in kraft paper and soft candlelight",
+  "A softly blurred Christmas tree covered in warm white fairy lights and glass baubles, turned into large round golden bokeh",
+  "An elegant modern holiday lounge with a gold-ornament Christmas tree, warm brass candle holders and soft gold sparkle bokeh",
+  "A modern living room with a tall decorated Christmas tree in warm white lights, neatly wrapped gifts and a knit throw blanket",
+  "A modern front doorway with a lush evergreen garland, warm white string lights, a simple wreath with no text and a lantern on the step",
+  "A generic festive outdoor Christmas market at night with wooden stalls, warm string lights and a softly blurred lit tree, with no signs, text, brands or landmarks",
+  "A dark studio set with a tall Christmas tree in warm gold lights, stacked black and gold gift boxes and soft haze",
+  "A shimmering silver and red tinsel curtain studio backdrop with a small retro-style Christmas tree and soft colored lights",
+  "A seamless deep-red studio backdrop with golden bokeh lights, gold ornaments and a few elegant wrapped gifts",
+  "A quiet snowy evening street with softly blurred trees wrapped in warm white lights and gently falling snow, with no signs, text or landmarks",
+  "A modern wooden cabin window seat with snow falling outside on pine trees, warm string lights along the window frame and a small lit tree",
 ]);
 
 export const ratioSchema = z.enum(["4:5 Portrait", "1:1 Square", "9:16 Story"]);
