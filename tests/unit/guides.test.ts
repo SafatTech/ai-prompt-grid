@@ -445,6 +445,59 @@ describe("guide files", () => {
     assert.equal(guide.body.match(/"1122x1402"/g)?.length, 14);
   });
 
+  it("publishes the Trending Christmas 2026 guide with SEO meta, H2s, and all 12 style links", () => {
+    const guide = loadAllGuides().find(
+      (item) => item.slug === "trending-christmas-ai-photo-editing-prompts-gemini",
+    );
+    assert.ok(guide);
+    assert.equal(guide.draft, false);
+    assert.equal(guide.updated, "2026-11-01");
+    assert.equal(
+      guide.heading,
+      "Trending Christmas AI Photo Editing Prompts for Gemini (2026)",
+    );
+    assert.equal(
+      guide.title,
+      "Trending Christmas AI Photo Editing Prompts for Gemini (2026) – Women, Men & Couples",
+    );
+    assert.match(guide.description, /Christmas AI photo editing prompts for Gemini/);
+    assert.match(guide.body, /## Christmas Photo Editing Prompts for Women/);
+    assert.match(guide.body, /## Christmas Photo Prompts for Men/);
+    assert.match(guide.body, /### Retro 80s Christmas Portrait/);
+    assert.match(guide.body, /## Christmas Couple Photo Prompts/);
+    assert.match(guide.body, /## Snow & Winter Christmas Prompts/);
+    assert.match(guide.body, /### Are these Christmas AI photo editing prompts free\?/);
+    assert.match(
+      guide.body,
+      /### Do these prompts work in ChatGPT as well as Gemini\?/,
+    );
+    assert.match(
+      guide.body,
+      /The people in the "before" photos are AI-generated, not real people\. Every "after" image on this page is an AI edit made with the prompts below, tested in November 2026\./,
+    );
+    for (const slug of [
+      "cozy-fireplace-sweater-christmas-portrait-women",
+      "mens-christmas-knit-sweater-portrait",
+      "christmas-tree-lights-bokeh-selfie",
+      "red-velvet-holiday-glam-portrait",
+      "couple-matching-christmas-pajamas-by-tree",
+      "couple-string-lights-doorway-christmas",
+      "couple-christmas-market-night-stroll",
+      "mens-christmas-photoshoot-dark-suit-gift-boxes",
+      "80s-retro-christmas-portrait",
+      "womens-studio-christmas-photoshoot-red-backdrop",
+      "christmas-snowfall-winter-coat-portrait",
+      "couple-snowy-cabin-window-christmas",
+    ]) {
+      assert.equal(guide.body.includes(`](/styles/${slug})`), true, slug);
+    }
+    assert.ok(extractGuideFaqs(guide.body).length >= 5);
+    assert.match(
+      publishedGuideSlugs.join("\n"),
+      /^trending-christmas-ai-photo-editing-prompts-gemini$/m,
+    );
+  });
+
   it("publishes the Wedding Dress guide with SEO meta, H2s, and all 14 style links", () => {
     const guide = loadAllGuides().find(
       (item) => item.slug === "wedding-dress-ai-photo-prompts",
