@@ -1,6 +1,12 @@
 import assert from "node:assert/strict";
 import { describe, it } from "node:test";
-import { styleMetadataTitle, stylePageDescription } from "../../src/lib/catalog/style-meta";
+import {
+  STYLE_SEO_OVERRIDES,
+  styleMetadataTitle,
+  stylePageDescription,
+  styleSeoDescription,
+  styleSocialTitle,
+} from "../../src/lib/catalog/style-meta";
 
 const SECOND = "Copy-ready prompt for ChatGPT, Gemini, and other AI image editors.";
 
@@ -37,6 +43,61 @@ describe("style page meta description", () => {
     assert.equal(
       stylePageDescription("  ", "Midnight Glove Noir"),
       "Copy-ready Midnight Glove Noir prompt for ChatGPT, Gemini, and other AI image editors.",
+    );
+  });
+});
+
+describe("style SEO overrides", () => {
+  const passportId = "passport-size-photo-ai-prompt-gemini-white-background";
+  const cvId = "cv-photo-ai-prompt-plain-background-resume-headshot";
+
+  it("replaces title and meta for passport and CV style slugs without boilerplate", () => {
+    const passport = STYLE_SEO_OVERRIDES[passportId];
+    const cv = STYLE_SEO_OVERRIDES[cvId];
+    assert.ok(passport);
+    assert.ok(cv);
+    assert.equal(passport.title, "Passport Size Photo Prompt: Gemini & ChatGPT, White BG");
+    assert.equal(cv.title, "CV Photo AI Prompt for Resume Pictures (Gemini/ChatGPT)");
+
+    for (const id of [passportId, cvId]) {
+      const override = STYLE_SEO_OVERRIDES[id];
+      assert.ok(override);
+      assert.ok(override.title.length <= 60, `${id} title is ${override.title.length}`);
+
+      const metadata = styleMetadataTitle({
+        id,
+        title: "Catalog title that should be ignored for SEO",
+      });
+      assert.equal(typeof metadata, "object");
+      if (typeof metadata === "string") return;
+      assert.equal(metadata.absolute, override.title);
+      assert.equal(metadata.absolute.includes(" · AI Prompt Grid"), false);
+
+      const social = styleSocialTitle({
+        id,
+        title: "Catalog title that should be ignored for SEO",
+      });
+      assert.equal(social, override.title);
+      assert.equal(social.endsWith(" · AI Prompt Grid"), false);
+
+      const description = styleSeoDescription({
+        id,
+        title: "Catalog title",
+        description: "Catalog summary that would normally get a boilerplate sentence",
+      });
+      assert.equal(description, override.description);
+      assert.equal(description.includes(SECOND), false);
+    }
+  });
+
+  it("keeps the boilerplate path for styles without an override", () => {
+    assert.equal(
+      styleSeoDescription({
+        id: "navy-blazer-linkedin-profile-picture-prompt-gemini",
+        title: "Navy Blazer LinkedIn Profile Picture Prompt (Gemini Free)",
+        description: "Navy blazer, white shirt, light-grey studio",
+      }),
+      `Navy blazer, white shirt, light-grey studio. ${SECOND}`,
     );
   });
 });
