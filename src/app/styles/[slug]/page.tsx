@@ -13,7 +13,7 @@ import {
 import { toStyleCardDataList } from "@/lib/catalog/style-card-data";
 import {
   styleMetadataTitle,
-  stylePageDescription,
+  styleSeoDescription,
   styleSocialTitle,
 } from "@/lib/catalog/style-meta";
 import { absoluteUrl } from "@/lib/site-url";
@@ -43,11 +43,7 @@ export async function generateMetadata({
     };
   }
 
-  const description = stylePageDescription(
-    style.description || style.note || "",
-    style.title,
-  );
-
+  const description = styleSeoDescription(style);
   const title = styleMetadataTitle(style);
   const socialTitle = styleSocialTitle(style);
   const url = `/styles/${style.id}`;

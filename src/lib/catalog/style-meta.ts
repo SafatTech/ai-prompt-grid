@@ -14,6 +14,26 @@ const COPY_READY_SENTENCE =
 const BRAND_SUFFIX = " · AI Prompt Grid";
 const TITLE_LIMIT = 60;
 
+/**
+ * Code-level SEO overrides for published styles whose title/description live
+ * in Supabase. Values replace catalog fields for <title> and meta description
+ * only (display H1 stays on the DB/seed title).
+ */
+export const STYLE_SEO_OVERRIDES: Readonly<
+  Record<string, { readonly title: string; readonly description: string }>
+> = {
+  "passport-size-photo-ai-prompt-gemini-white-background": {
+    title: "Passport Size Photo Prompt: Gemini & ChatGPT, White BG",
+    description:
+      "Copy-paste passport size photo prompt for Gemini and ChatGPT. Turn one selfie into a white or blue background ID, 2x2 or visa photo with your real face kept.",
+  },
+  "cv-photo-ai-prompt-plain-background-resume-headshot": {
+    title: "CV Photo AI Prompt for Resume Pictures (Gemini/ChatGPT)",
+    description:
+      "Free AI prompt for a CV or resume photo: turn a selfie into a clean, professional headshot on a plain background in Gemini or ChatGPT. Copy and paste.",
+  },
+};
+
 /** Sentence-ending punctuation, including a closing quote or parenthesis. */
 const ENDS_WITH_PUNCTUATION = /[.!?…]["')\]]*$/;
 
@@ -29,6 +49,21 @@ export function stylePageDescription(summary: string, title: string): string {
 
   const lead = ENDS_WITH_PUNCTUATION.test(trimmed) ? trimmed : `${trimmed}.`;
   return `${lead} ${COPY_READY_SENTENCE}`;
+}
+
+/**
+ * Meta description for a style page. SEO overrides replace the catalog summary
+ * and skip the boilerplate second sentence.
+ */
+export function styleSeoDescription(style: {
+  id: string;
+  title: string;
+  description?: string | null;
+  note?: string | null;
+}): string {
+  const override = STYLE_SEO_OVERRIDES[style.id];
+  if (override) return override.description;
+  return stylePageDescription(style.description || style.note || "", style.title);
 }
 
 /**
@@ -61,6 +96,10 @@ export function styleMetadataTitle(style: {
   id: string;
   title: string;
 }): string | { absolute: string } {
+  const override = STYLE_SEO_OVERRIDES[style.id];
+  if (override) {
+    return fitDocumentTitle(override.title);
+  }
   if (/\bPrompt\b/i.test(style.title)) {
     return fitDocumentTitle(style.title);
   }
