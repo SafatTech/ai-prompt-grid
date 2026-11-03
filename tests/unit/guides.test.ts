@@ -369,6 +369,33 @@ describe("guide publishing rules", () => {
     ]);
     assert.ok(estimateReadingMinutes(markdown) >= 3);
   });
+
+  it("strips inline markdown from TOC labels so links and emphasis stay plain text", () => {
+    const markdown = [
+      "## 1. [Modern Saree Drape Outfit Change AI Prompt](/styles/modern-saree-drape-outfit-change)",
+      "",
+      "### Tips: **Keep** your `face` the same",
+      "",
+      "## Women Western & Modest Outfit Change Prompts",
+    ].join("\n");
+    assert.deepEqual(extractGuideToc(markdown), [
+      {
+        id: "1-modern-saree-drape-outfit-change-ai-prompt",
+        text: "1. Modern Saree Drape Outfit Change AI Prompt",
+        level: 2,
+      },
+      {
+        id: "tips-keep-your-face-the-same",
+        text: "Tips: Keep your face the same",
+        level: 3,
+      },
+      {
+        id: "women-western-modest-outfit-change-prompts",
+        text: "Women Western & Modest Outfit Change Prompts",
+        level: 2,
+      },
+    ]);
+  });
 });
 
 describe("guide files", () => {
