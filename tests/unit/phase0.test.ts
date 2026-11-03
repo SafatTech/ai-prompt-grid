@@ -20,6 +20,7 @@ import { boysStyleIds } from "../../src/lib/catalog/seed-boys-styles";
 import { characterStyleIds } from "../../src/lib/catalog/seed-character-styles";
 import { christmasStyleIds } from "../../src/lib/catalog/seed-christmas-styles";
 import { christmas2026StyleIds } from "../../src/lib/catalog/seed-christmas-2026-styles";
+import { outfitChangeStyleIds } from "../../src/lib/catalog/seed-outfit-change-styles";
 import { diwaliAddonStyleIds } from "../../src/lib/catalog/seed-diwali-styles";
 import { eightiesStyleIds } from "../../src/lib/catalog/seed-80s-styles";
 import { linkedinStyleIds } from "../../src/lib/catalog/seed-linkedin-styles";
@@ -37,9 +38,9 @@ describe("cn", () => {
 });
 
 describe("published catalog seed", () => {
-  it("exposes 319 published styles with recipe fields", () => {
+  it("exposes 331 published styles with recipe fields", () => {
     const published = getPublishedStyles();
-    assert.equal(published.length, 319);
+    assert.equal(published.length, 331);
     for (const style of published) {
       assert.equal(style.status, "published");
       assert.ok(style.promptVariant.template.includes("{{mood}}"));
@@ -58,7 +59,8 @@ describe("published catalog seed", () => {
           style.promptVariant.inputImageCount === 1) ||
         (diwaliAddonStyleIds.has(style.id) && style.promptVariant.inputImageCount === 1) ||
         (weddingDressStyleIds.has(style.id) && style.promptVariant.inputImageCount === 1) ||
-        (christmas2026StyleIds.has(style.id) && style.promptVariant.inputImageCount === 1);
+        (christmas2026StyleIds.has(style.id) && style.promptVariant.inputImageCount === 1) ||
+        (outfitChangeStyleIds.has(style.id) && style.promptVariant.inputImageCount === 1);
       assert.ok(style.examplePairs.length >= (singlePair ? 1 : 2));
       assert.ok(style.promptVariant.limitations.length >= 1);
     }

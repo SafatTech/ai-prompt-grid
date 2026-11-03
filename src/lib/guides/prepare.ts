@@ -174,6 +174,25 @@ export type GuideTocItem = {
   level: 2 | 3;
 };
 
+/**
+ * Plain text for TOC labels and heading ids. Strips common inline markdown
+ * (links, images, emphasis, code, strikethrough) so "On this page" never
+ * shows raw `[label](/path)` syntax.
+ */
+export function plainGuideHeadingText(text: string): string {
+  return text
+    .replace(/!\[([^\]]*)\]\([^)]+\)/g, "$1")
+    .replace(/\[([^\]]+)\]\([^)]+\)/g, "$1")
+    .replace(/`([^`]+)`/g, "$1")
+    .replace(/\*\*([^*]+)\*\*/g, "$1")
+    .replace(/__([^_]+)__/g, "$1")
+    .replace(/(?<![a-zA-Z0-9])\*([^*]+)\*(?![a-zA-Z0-9])/g, "$1")
+    .replace(/(?<![a-zA-Z0-9])_([^_]+)_(?![a-zA-Z0-9])/g, "$1")
+    .replace(/~~([^~]+)~~/g, "$1")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
 /** H2/H3 headings outside fenced code, with stable unique ids. */
 export function extractGuideToc(markdown: string): GuideTocItem[] {
   const items: GuideTocItem[] = [];
@@ -187,7 +206,7 @@ export function extractGuideToc(markdown: string): GuideTocItem[] {
     const match = /^(#{2,3})\s+(.+?)\s*$/.exec(line);
     if (!match) continue;
     const level = match[1]!.length === 2 ? 2 : 3;
-    const text = match[2]!.replace(/#+\s*$/, "").trim();
+    const text = plainGuideHeadingText(match[2]!.replace(/#+\s*$/, "").trim());
     if (!text) continue;
     const id = uniqueHeadingId(text, used);
     items.push({ id, text, level });

@@ -40,7 +40,7 @@ Personal photo transformation leads the list. Product imagery may appear (≤ ~1
 
 ## Live register (all subject packs)
 
-- Person editorial templates **1–47** plus Diwali add-on **250–258**, Wedding Dresses **259–272**, and Christmas 2026 add-on **273–284** (Halloween **31–35**, Diwali **36–47** and add-on in `seed-halloween-styles.ts` / `seed-diwali-styles.ts`; wedding dresses in `seed-wedding-dresses-styles.ts`; Christmas 2026 in `seed-christmas-2026-styles.ts`)
+- Person editorial templates **1–47** plus Diwali add-on **250–258**, Wedding Dresses **259–272**, Christmas 2026 add-on **273–284**, and Outfit Change **285–296** (Halloween **31–35**, Diwali **36–47** and add-on in `seed-halloween-styles.ts` / `seed-diwali-styles.ts`; wedding dresses in `seed-wedding-dresses-styles.ts`; Christmas 2026 in `seed-christmas-2026-styles.ts`; Outfit Change in `seed-outfit-change-styles.ts`)
 - Product templates **1–10** (`seed-product-styles.ts`)
 - Group templates **1–10** (`seed-group-styles.ts`)
 - Place templates **1–10** (`seed-place-styles.ts`)
