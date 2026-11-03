@@ -498,6 +498,54 @@ describe("guide files", () => {
     );
   });
 
+  it("publishes the Outfit Change guide with SEO meta, H2s, and all 12 style links", () => {
+    const guide = loadAllGuides().find(
+      (item) => item.slug === "outfit-change-ai-prompts",
+    );
+    assert.ok(guide);
+    assert.equal(guide.draft, false);
+    assert.equal(guide.updated, "2026-11-02");
+    assert.equal(
+      guide.heading,
+      "Outfit Change AI Prompts: Change Your Dress in Any Photo",
+    );
+    assert.equal(
+      guide.title,
+      "Outfit Change AI Prompts: Change Your Dress in Any Photo",
+    );
+    assert.match(guide.description, /Outfit change AI prompts/);
+    assert.match(guide.body, /## Women Eastern Outfit Change Prompts/);
+    assert.match(guide.body, /## Women Western & Modest Outfit Change Prompts/);
+    assert.match(guide.body, /## Men Eastern Outfit Change Prompts/);
+    assert.match(guide.body, /## Men Western Outfit Change Prompts/);
+    assert.match(guide.body, /## Streetwear Outfit Swap Prompt/);
+    assert.match(guide.body, /## Couple Clothes Change AI Prompts/);
+    assert.match(guide.body, /## Optional: Keep Your Hairstyle the Same/);
+    assert.match(guide.body, /### Are these outfit change AI prompts free\?/);
+    assert.match(
+      guide.body,
+      /The people in the "before" photos are AI-generated, not real people\. Every "after" image on this page is an AI edit made with the prompts below, tested in November 2026\./,
+    );
+    for (const slug of [
+      "modern-saree-drape-outfit-change",
+      "black-shalwar-kameez-outfit-change-men",
+      "pastel-shalwar-kameez-outfit-change-women",
+      "party-lehenga-outfit-change",
+      "black-suit-outfit-change-men",
+      "blazer-power-suit-outfit-change-women",
+      "oversized-hoodie-cargo-streetwear-outfit-change",
+      "kurta-waistcoat-eid-outfit-change-men",
+      "modest-maxi-abaya-chic-outfit-change",
+      "couple-matching-black-outfits-change",
+      "couple-eastern-twinning-outfit-change",
+      "leather-jacket-street-outfit-change-men",
+    ]) {
+      assert.equal(guide.body.includes(`](/styles/${slug})`), true, slug);
+    }
+    assert.ok(extractGuideFaqs(guide.body).length >= 5);
+    assert.match(publishedGuideSlugs.join("\n"), /^outfit-change-ai-prompts$/m);
+  });
+
   it("publishes the Wedding Dress guide with SEO meta, H2s, and all 14 style links", () => {
     const guide = loadAllGuides().find(
       (item) => item.slug === "wedding-dress-ai-photo-prompts",

@@ -253,6 +253,18 @@ export const moodLabels: Record<string, string> = {
   "Rich red and gold": "Rich red gold",
   "Cool blue with warm lights": "Cool blue warm",
   "Warm cabin glow": "Cabin glow",
+  "Soft modern pastel": "Soft modern pastel",
+  "Warm cinematic contrast": "Warm cinematic",
+  "Soft pastel spring": "Pastel spring",
+  "Warm evening glow": "Evening glow",
+  "Clean neutral contrast": "Clean neutral",
+  "Clean corporate neutral": "Corporate neutral",
+  "Muted urban tones": "Muted urban",
+  "Warm festive gold": "Festive gold",
+  "Warm neutral beige": "Neutral beige",
+  "Moody modern noir-lite": "Noir-lite",
+  "Soft warm rose": "Warm rose",
+  "Cool cinematic teal": "Cinematic teal",
 };
 
 /** Short 2–3 word UI labels for full background prompt strings. */
@@ -808,6 +820,30 @@ export const backgroundLabels: Record<string, string> = {
     "Snowy lit street",
   "A modern wooden cabin window seat with snow falling outside on pine trees, warm string lights along the window frame and a small lit tree":
     "Snowy cabin window",
+  "A bright minimalist modern apartment with a large window, sheer curtains and a few green plants":
+    "Bright apartment",
+  "A modern courtyard with a clean cream stone wall, wooden door and soft greenery":
+    "Cream courtyard",
+  "A modern landscaped garden with trimmed hedges, white flowers and a pale stone path":
+    "Landscaped garden",
+  "A chic modern evening event lawn with warm string lights, soft florals and softly blurred empty tables":
+    "Evening event lawn",
+  "A modern industrial studio loft with large windows, concrete walls and soft daylight":
+    "Industrial loft",
+  "A bright modern office with glass walls, light oak desks and soft city-view bokeh, no readable signage":
+    "Glass office loft",
+  "A clean modern city side street with a plain concrete wall, steel railings and soft background bokeh, no signage or graffiti text":
+    "City side street",
+  "A modern home entrance with cream walls, brass lanterns, fresh white flowers and soft fairy lights":
+    "Festive home entrance",
+  "A modern minimalist terrace with cream stone walls, clean lines and potted olive trees":
+    "Olive terrace",
+  "A modern rooftop terrace at blue hour with soft city-light bokeh and glass railings, no readable signs":
+    "Blue-hour rooftop",
+  "A modern home lounge with cream walls, a low sofa, brass accents and soft indoor plants":
+    "Modern lounge",
+  "A clean modern city street with glass storefronts blurred into soft bokeh, no readable signs or logos":
+    "Glass storefront street",
 };
 
 const genericMoodPresets = [

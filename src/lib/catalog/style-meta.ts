@@ -32,6 +32,11 @@ export const STYLE_SEO_OVERRIDES: Readonly<
     description:
       "Free AI prompt for a CV or resume photo: turn a selfie into a clean, professional headshot on a plain background in Gemini or ChatGPT. Copy and paste.",
   },
+  "black-suit-outfit-change-men": {
+    title: "Black Suit Outfit Change AI Prompt for Men",
+    description:
+      "Outfit-swap black suit AI prompt for men: slim black two-piece in a bright industrial loft. Change your clothes in any photo and keep your real face — distinct from night-city or lobby suit shoots.",
+  },
 };
 
 /** Sentence-ending punctuation, including a closing quote or parenthesis. */

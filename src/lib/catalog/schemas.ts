@@ -248,6 +248,18 @@ export const moodSchema = z.enum([
   "Rich red and gold",
   "Cool blue with warm lights",
   "Warm cabin glow",
+  "Soft modern pastel",
+  "Warm cinematic contrast",
+  "Soft pastel spring",
+  "Warm evening glow",
+  "Clean neutral contrast",
+  "Clean corporate neutral",
+  "Muted urban tones",
+  "Warm festive gold",
+  "Warm neutral beige",
+  "Moody modern noir-lite",
+  "Soft warm rose",
+  "Cool cinematic teal",
 ]);
 
 export const backgroundSchema = z.enum([
@@ -559,6 +571,18 @@ export const backgroundSchema = z.enum([
   "A seamless deep-red studio backdrop with golden bokeh lights, gold ornaments and a few elegant wrapped gifts",
   "A quiet snowy evening street with softly blurred trees wrapped in warm white lights and gently falling snow, with no signs, text or landmarks",
   "A modern wooden cabin window seat with snow falling outside on pine trees, warm string lights along the window frame and a small lit tree",
+  "A bright minimalist modern apartment with a large window, sheer curtains and a few green plants",
+  "A modern courtyard with a clean cream stone wall, wooden door and soft greenery",
+  "A modern landscaped garden with trimmed hedges, white flowers and a pale stone path",
+  "A chic modern evening event lawn with warm string lights, soft florals and softly blurred empty tables",
+  "A modern industrial studio loft with large windows, concrete walls and soft daylight",
+  "A bright modern office with glass walls, light oak desks and soft city-view bokeh, no readable signage",
+  "A clean modern city side street with a plain concrete wall, steel railings and soft background bokeh, no signage or graffiti text",
+  "A modern home entrance with cream walls, brass lanterns, fresh white flowers and soft fairy lights",
+  "A modern minimalist terrace with cream stone walls, clean lines and potted olive trees",
+  "A modern rooftop terrace at blue hour with soft city-light bokeh and glass railings, no readable signs",
+  "A modern home lounge with cream walls, a low sofa, brass accents and soft indoor plants",
+  "A clean modern city street with glass storefronts blurred into soft bokeh, no readable signs or logos",
 ]);
 
 export const ratioSchema = z.enum(["4:5 Portrait", "1:1 Square", "9:16 Story"]);
