@@ -39,6 +39,7 @@ import {
 } from "@/lib/catalog/prompt-core";
 import { labeledOptionsForStyle } from "@/lib/catalog/prompt-option-presets";
 import { getStyleProfile } from "@/lib/catalog/style-profile";
+import { styleDisplayTitle, styleSeoOverride } from "@/lib/catalog/style-meta";
 import type { CatalogStyle } from "@/lib/catalog/types";
 import { recordRecentView } from "@/lib/recent/views";
 import { cn } from "@/lib/utils";
@@ -54,6 +55,14 @@ type Props = { style: CatalogStyle; children?: ReactNode };
 
 export function StyleDetailClient({ style, children }: Props) {
   const profile = getStyleProfile(style);
+  const seo = styleSeoOverride(style.id);
+  const displayTitle = styleDisplayTitle(style);
+  const introParagraphs = seo?.intro
+    ? seo.intro
+        .split(/\n\s*\n/)
+        .map((part) => part.trim())
+        .filter(Boolean)
+    : [];
   const { signedIn, isSaved, toggleSave, setPendingAction } = useLibrary();
   const { toast } = useToast();
   const { openSignIn, openSaveResult, openExternalInfo } = useUiModals();
@@ -289,11 +298,48 @@ export function StyleDetailClient({ style, children }: Props) {
             ))}
           </div>
           <h1 className="m-0 mb-4 text-[clamp(32px,6vw,67px)] leading-none tracking-[-0.05em]">
-            {style.title}
+            {displayTitle}
           </h1>
-          <p className="m-0 max-w-[690px] text-[16px] text-[#c2c0ca] sm:text-[19px]">
-            {profile.description}
-          </p>
+          {introParagraphs.length > 0 ? (
+            <div
+              className="max-w-[690px] space-y-4 text-[16px] leading-relaxed text-[#c2c0ca] sm:text-[19px]"
+              data-testid="style-seo-intro"
+            >
+              {introParagraphs.map((paragraph) => (
+                <p key={paragraph.slice(0, 48)} className="m-0">
+                  {paragraph}
+                </p>
+              ))}
+            </div>
+          ) : (
+            <p className="m-0 max-w-[690px] text-[16px] text-[#c2c0ca] sm:text-[19px]">
+              {profile.description}
+            </p>
+          )}
+          {seo?.tips && seo.tips.length > 0 ? (
+            <section className="mt-6 max-w-[690px]" data-testid="style-seo-tips">
+              <h2 className="mb-3 text-[22px]">Tips for this look</h2>
+              <ul className="m-0 list-disc space-y-2 pl-5 text-sm text-[#d2cfd7] sm:text-[15px]">
+                {seo.tips.map((tip) => (
+                  <li key={tip}>{tip}</li>
+                ))}
+              </ul>
+            </section>
+          ) : null}
+          {seo?.guideLinks && seo.guideLinks.length > 0 ? (
+            <p className="mt-4 max-w-[690px] text-sm text-[var(--muted)]">
+              Related guides:{" "}
+              {seo.guideLinks.map((link, index) => (
+                <span key={link.href}>
+                  {index > 0 ? " · " : null}
+                  <Link href={link.href} className="font-bold text-[#bbaeff]">
+                    {link.label}
+                  </Link>
+                </span>
+              ))}
+              .
+            </p>
+          ) : null}
           {style.id === "combine-two-photos-80s-couple" ||
           style.id === "separate-photos-couple" ? (
             <p className="mt-3 max-w-[690px] text-sm text-[var(--muted)]">

@@ -12,8 +12,10 @@ import {
 } from "@/lib/catalog/repository";
 import { toStyleCardDataList } from "@/lib/catalog/style-card-data";
 import {
+  styleDisplayTitle,
   styleMetadataTitle,
   styleSeoDescription,
+  styleSeoOverride,
   styleSocialTitle,
 } from "@/lib/catalog/style-meta";
 import { absoluteUrl } from "@/lib/site-url";
@@ -91,19 +93,27 @@ export default async function StyleDetailPage({
     usesMergeHero(style) ? await getPublishedStyleAmbientBlur(style.id) : undefined,
   );
 
+  const seoOverride = styleSeoOverride(detailStyle.id);
   const relatedStyles = toStyleCardDataList(
-    relatedStylesFor(detailStyle.id, detailStyle.category, catalog),
+    relatedStylesFor(
+      detailStyle.id,
+      detailStyle.category,
+      catalog,
+      seoOverride?.relatedStyleIds,
+    ),
     { sharedBlur: true },
   );
   // LCP: CompareSlider / MergeBeforeAfter use priority + fetchPriority="high"
   // (no react-dom preload — avoids a second request behind CSS).
   const pageUrl = absoluteUrl(`/styles/${detailStyle.id}`);
+  const displayTitle = styleDisplayTitle(detailStyle);
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "CreativeWork",
     "@id": pageUrl,
-    name: detailStyle.title,
-    description: detailStyle.note || detailStyle.description,
+    name: displayTitle,
+    description:
+      seoOverride?.description || detailStyle.note || detailStyle.description,
     url: pageUrl,
     image: detailStyle.result || detailStyle.source || undefined,
     about: detailStyle.category,

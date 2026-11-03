@@ -6,7 +6,11 @@ import { christmasStyleIds } from "./seed-christmas-styles";
 import { eightiesStyleIds } from "./seed-80s-styles";
 import { linkedinStyleIds } from "./seed-linkedin-styles";
 import { mergeStyleIds } from "./seed-merge-styles";
+import { STYLE_SEO_OVERRIDE_ENTRIES } from "./style-seo-overrides-data";
+import type { StyleSeoOverride } from "./style-seo-override-types";
 import { winterStyleIds } from "./seed-winter-styles";
+
+export type { StyleGuideLink, StyleSeoOverride } from "./style-seo-override-types";
 
 const COPY_READY_SENTENCE =
   "Copy-ready prompt for ChatGPT, Gemini, and other AI image editors.";
@@ -16,28 +20,11 @@ const TITLE_LIMIT = 60;
 
 /**
  * Code-level SEO overrides for published styles whose title/description live
- * in Supabase. Values replace catalog fields for <title> and meta description
- * only (display H1 stays on the DB/seed title).
+ * in Supabase. Values replace catalog fields for <title>, meta description,
+ * optional H1, and on-page intro/tips when present.
  */
-export const STYLE_SEO_OVERRIDES: Readonly<
-  Record<string, { readonly title: string; readonly description: string }>
-> = {
-  "passport-size-photo-ai-prompt-gemini-white-background": {
-    title: "Passport Size Photo Prompt: Gemini & ChatGPT, White BG",
-    description:
-      "Copy-paste passport size photo prompt for Gemini and ChatGPT. Turn one selfie into a white or blue background ID, 2x2 or visa photo with your real face kept.",
-  },
-  "cv-photo-ai-prompt-plain-background-resume-headshot": {
-    title: "CV Photo AI Prompt for Resume Pictures (Gemini/ChatGPT)",
-    description:
-      "Free AI prompt for a CV or resume photo: turn a selfie into a clean, professional headshot on a plain background in Gemini or ChatGPT. Copy and paste.",
-  },
-  "black-suit-outfit-change-men": {
-    title: "Black Suit Outfit Change AI Prompt for Men",
-    description:
-      "Outfit-swap black suit AI prompt for men: slim black two-piece in a bright industrial loft. Change your clothes in any photo and keep your real face — distinct from night-city or lobby suit shoots.",
-  },
-};
+export const STYLE_SEO_OVERRIDES: Readonly<Record<string, StyleSeoOverride>> =
+  STYLE_SEO_OVERRIDE_ENTRIES;
 
 /** Sentence-ending punctuation, including a closing quote or parenthesis. */
 const ENDS_WITH_PUNCTUATION = /[.!?…]["')\]]*$/;
@@ -69,6 +56,18 @@ export function styleSeoDescription(style: {
   const override = STYLE_SEO_OVERRIDES[style.id];
   if (override) return override.description;
   return stylePageDescription(style.description || style.note || "", style.title);
+}
+
+/** Visible H1 for a style page (override title/h1 when present). */
+export function styleDisplayTitle(style: { id: string; title: string }): string {
+  const override = STYLE_SEO_OVERRIDES[style.id];
+  if (!override) return style.title;
+  return override.h1 || override.title;
+}
+
+/** Full SEO override record when the style has one. */
+export function styleSeoOverride(styleId: string): StyleSeoOverride | undefined {
+  return STYLE_SEO_OVERRIDES[styleId];
 }
 
 /**

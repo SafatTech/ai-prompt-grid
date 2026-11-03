@@ -76,9 +76,15 @@ describe("legacy WordPress requests", () => {
     }
   });
 
-  it("returns 410 for retired SEO tool URLs with or without a trailing slash", () => {
-    assert.deepEqual(classify("/best-ai-seo-tools-2025"), { kind: "gone" });
-    assert.deepEqual(classify("/best-ai-seo-tools-2025/"), { kind: "gone" });
+  it("301s the leftover SEO tools WordPress URL to the homepage", () => {
+    assert.deepEqual(classify("/best-ai-seo-tools-2025"), {
+      kind: "redirect",
+      pathname: "/",
+    });
+    assert.deepEqual(classify("/best-ai-seo-tools-2025/"), {
+      kind: "redirect",
+      pathname: "/",
+    });
   });
 
   it("retires WordPress ?p= permalinks only on the old homepage paths", () => {

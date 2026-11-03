@@ -9,10 +9,12 @@ export type LegacyAction =
 const CONTENT_REDIRECTS: Record<string, string> = {
   "/about-us": "/about",
   "/contact-us": "/contact",
+  // Leftover WordPress SEO-tools post → permanent home redirect.
+  "/best-ai-seo-tools-2025": "/",
 };
 
 /** Retired public paths that should answer 410 Gone (with or without a trailing slash). */
-const GONE_PATHS = new Set(["/best-ai-seo-tools-2025"]);
+const GONE_PATHS = new Set<string>();
 
 /**
  * Real pages this change must leave to their own routes, including trailing
