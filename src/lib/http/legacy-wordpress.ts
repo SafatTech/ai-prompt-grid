@@ -11,6 +11,9 @@ const CONTENT_REDIRECTS: Record<string, string> = {
   "/contact-us": "/contact",
   // Leftover WordPress SEO-tools post → permanent home redirect.
   "/best-ai-seo-tools-2025": "/",
+  // Google-indexed typo slug (…-ai-photo-prompt) → real style page (…-ai-prompt).
+  "/styles/photographer-red-t-shirt-studio-portrait-ai-photo-prompt":
+    "/styles/photographer-red-t-shirt-studio-portrait-ai-prompt",
 };
 
 /** Retired public paths that should answer 410 Gone (with or without a trailing slash). */

@@ -87,6 +87,23 @@ describe("legacy WordPress requests", () => {
     });
   });
 
+  it("301s the Google-indexed photographer typo slug to the real style page", () => {
+    assert.deepEqual(
+      classify("/styles/photographer-red-t-shirt-studio-portrait-ai-photo-prompt"),
+      {
+        kind: "redirect",
+        pathname: "/styles/photographer-red-t-shirt-studio-portrait-ai-prompt",
+      },
+    );
+    assert.deepEqual(
+      classify("/styles/photographer-red-t-shirt-studio-portrait-ai-photo-prompt/"),
+      {
+        kind: "redirect",
+        pathname: "/styles/photographer-red-t-shirt-studio-portrait-ai-prompt",
+      },
+    );
+  });
+
   it("retires WordPress ?p= permalinks only on the old homepage paths", () => {
     assert.deepEqual(classify("/", "p=123"), { kind: "gone" });
     assert.deepEqual(classify("/", "p=1"), { kind: "gone" });
