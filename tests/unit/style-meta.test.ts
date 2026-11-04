@@ -2,13 +2,41 @@ import assert from "node:assert/strict";
 import { describe, it } from "node:test";
 import {
   STYLE_SEO_OVERRIDES,
+  styleDisplayTitle,
   styleMetadataTitle,
   stylePageDescription,
   styleSeoDescription,
+  styleSeoOverride,
   styleSocialTitle,
 } from "../../src/lib/catalog/style-meta";
 
 const SECOND = "Copy-ready prompt for ChatGPT, Gemini, and other AI image editors.";
+
+const GSC_THIN_STYLE_IDS = [
+  "soft-daylight-lifestyle",
+  "golden-twirl-storyboard",
+  "cute-3d-toon-pet",
+  "dark-crowd-editorial",
+  "pure-white-packshot",
+  "editorial-flat-lay",
+  "crimson-bloom-shadows",
+  "joyful-outdoor-lifestyle",
+  "travel-fashion-bouquet",
+  "urban-street-fashion-editorial",
+  "neon-street-fashion-ai-photo-prompt",
+  "iceberg-runway-fashion-ai-photo-prompt",
+  "purple-smoke-portrait-ai-photo-prompt",
+  "photographer-red-t-shirt-studio-portrait-ai-prompt",
+  "cyberpunk-hacker-ai-photo-prompt",
+  "cyberpunk-street-market-ai-photo-prompt",
+  "action-heroine-neon-street-fight-ai-photo-prompt",
+  "cybernetic-warrior-gothic-cathedral-ai-photo-prompt",
+  "couple-action-figure-two-pack-ai-prompt",
+  "ai-action-figure-prompt-premium-collectible",
+  "clay-stop-motion-group-ai-photo-prompt",
+  "main-character-game-menu-ai-photo-prompt",
+  "hand-painted-anime-picnic-couple-ai-photo-prompt",
+] as const;
 
 describe("style page meta description", () => {
   it("adds a sentence break when the summary has no ending punctuation", () => {
@@ -99,6 +127,52 @@ describe("style SEO overrides", () => {
       }),
       `Navy blazer, white shirt, light-grey studio. ${SECOND}`,
     );
+  });
+});
+
+describe("GSC thin-style SEO overrides", () => {
+  it("gives every listed slug a keyword title, H1, 150+ word intro, tips, and guide links", () => {
+    for (const id of GSC_THIN_STYLE_IDS) {
+      const override = styleSeoOverride(id);
+      assert.ok(override, id);
+      assert.ok(override.title.trim().length > 0, `${id} title`);
+      assert.ok(override.description.trim().length > 40, `${id} meta`);
+      const h1 = styleDisplayTitle({ id, title: "Catalog title" });
+      assert.equal(h1, override.h1 || override.title);
+      assert.notEqual(h1, "Catalog title");
+      assert.ok(override.intro, `${id} intro`);
+      const words = override.intro.trim().split(/\s+/).filter(Boolean).length;
+      assert.ok(words >= 150, `${id} intro has ${words} words`);
+      assert.ok(override.tips && override.tips.length >= 2, `${id} tips`);
+      assert.ok(override.guideLinks && override.guideLinks.length >= 1, `${id} guides`);
+    }
+  });
+
+  it("keeps cyberpunk hacker and street market on distinct indoor vs outdoor angles", () => {
+    const hacker = STYLE_SEO_OVERRIDES["cyberpunk-hacker-ai-photo-prompt"];
+    const market = STYLE_SEO_OVERRIDES["cyberpunk-street-market-ai-photo-prompt"];
+    assert.ok(hacker?.intro && market?.intro);
+    assert.match(hacker.intro, /indoor terminal|wall of monitors|desk/i);
+    assert.match(market.intro, /outdoor|rainy night|vendor alley/i);
+    assert.match(hacker.intro, /not the indoor hacker|separate from cyberpunk street market|never merged/i);
+    assert.ok(hacker.title !== market.title);
+    assert.ok(
+      hacker.relatedStyleIds?.includes("cyberpunk-street-market-ai-photo-prompt"),
+    );
+    assert.ok(
+      market.relatedStyleIds?.includes("cyberpunk-hacker-ai-photo-prompt"),
+    );
+  });
+
+  it("keeps action-figure and 3D siblings on distinct toy vs UI vs clay angles", () => {
+    const solo = STYLE_SEO_OVERRIDES["ai-action-figure-prompt-premium-collectible"];
+    const couple = STYLE_SEO_OVERRIDES["couple-action-figure-two-pack-ai-prompt"];
+    const clay = STYLE_SEO_OVERRIDES["clay-stop-motion-group-ai-photo-prompt"];
+    const menu = STYLE_SEO_OVERRIDES["main-character-game-menu-ai-photo-prompt"];
+    assert.match(solo?.intro ?? "", /solo|1\/7|desk/i);
+    assert.match(couple?.intro ?? "", /two-pack|two people|person A/i);
+    assert.match(clay?.intro ?? "", /clay|stop-motion/i);
+    assert.match(menu?.intro ?? "", /character-select|menu|UI/i);
   });
 });
 
