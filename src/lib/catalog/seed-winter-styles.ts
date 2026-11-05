@@ -578,13 +578,323 @@ const winter: WinterSeed[] = [
     template:
       "Merge the first uploaded photo and the second uploaded photo into one natural {{subject}} photo of two friends or siblings on a winter trip in a snowy mountain valley. The first uploaded photo shows person A and the second uploaded photo shows person B. Follow the selected source-preservation settings: {{preserve}}. Always keep person A's face shape, eyes, nose, lips, hairline, hair, any beard, glasses, or head covering, apparent age, and exact skin tone as in the first uploaded photo, and person B's exactly as in the second uploaded photo. Treat them as two separate people; do not blend, swap, beautify, slim, de-age, or lighten either face, and keep natural skin texture. Dress both in plain, unbranded puffer jackets and knitted wool caps over their own clothes, modest and family-friendly, keeping any head covering or dupatta. If group arrangement and pose are not preserved, stand them side by side on a snowy slope overlooking the valley, one arm over the other's shoulder, smiling at the camera, at realistic relative heights. Light both with the same bright, crisp mountain sunlight from one direction and matching shadows so they look photographed together. Add soft, realistic falling snow and visible cold-air breath only where natural, with frost and snow lit consistently with the scene. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair, wool, and fabric. Do not add extra people, text, lettering, brand names, or logos; all clothing and props are plain and unbranded. Compose for {{ratio}} without cropping either face.",
   },
+  {
+    n: "297",
+    id: "foggy-road-hoodie-muffler-winter-ai-photo-prompt-boys",
+    title: "Foggy Road Hoodie Muffler Winter AI Photo Prompt for Boys",
+    note: "Hoodie, olive jacket and knit muffler on a foggy winter road",
+    description:
+      "A viral foggy-road winter AI photo prompt for boys: light-grey hoodie, olive jacket and dark knit muffler walking a misty asphalt road with bare trees.",
+    category: "Cinematic",
+    subject: "Person",
+    intent: "New outfit or theme",
+    requirement: "One photo",
+    mood: "Moody cinematic",
+    background:
+      "Foggy winter road lined with bare trees, soft mist, distant car headlights, and light frost along the verges",
+    ratio: "4:5 Portrait",
+    keepClothing: false,
+    keepPose: false,
+    inputImageCount: 1,
+    changes: [
+      "Grey hoodie under olive jacket",
+      "Dark knit muffler",
+      "Foggy winter road",
+      "Walking-toward-camera pose",
+    ],
+    stays: ["Face and identity", "Skin tone", "Hairstyle and beard", "Body proportions"],
+    height: 340,
+    targetSourcePhoto: "One clear chest-up or waist-up photo of a boy or man",
+    bestSourcePhoto: [
+      "One person, face clearly visible and sharp",
+      "Chest-up or waist-up framing works best",
+      "Even daylight, no strong filters",
+      "Original image should not be blurry",
+    ],
+    altSource:
+      "Young man with short dark hair and light stubble in a white tee against a plain grey wall.",
+    altResult:
+      "Young man in a light-grey hoodie, olive jacket and dark knit muffler walking a foggy winter road with bare trees.",
+    beforeFile: "foggy-road-hoodie-muffler-winter-ai-photo-prompt-boys-before.webp",
+    afterFile: "foggy-road-hoodie-muffler-winter-ai-photo-prompt-boys-after.webp",
+    template:
+      "Edit the uploaded portrait into a moody, cinematic foggy-road winter portrait. Use the main person in the source image as the {{subject}}. Follow the selected source-preservation settings: preserve their {{preserve}}. Always keep the person's face shape, eyes, nose, lips, hairline, hair, any beard, glasses, or head covering, apparent age, and exact skin tone exactly as in the uploaded photo; do not beautify, slim, de-age, or lighten the face, and keep natural skin texture. If clothing is not preserved, dress them in a plain light-grey hoodie under an olive utility jacket with a thick dark-grey ribbed knit muffler wrapped once around the neck, and dark trousers. If pose is not preserved, show him walking toward the camera down the centre of the road with hands in jacket pockets and a calm, neutral expression. Light him with soft diffused overcast daylight through the fog, with distant warm headlights softly blurred behind. Add soft, realistic winter mist and visible cold-air breath only where natural. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair, wool, and fabric. Do not add extra people, text, lettering, brand names, or logos; all clothing and props are plain and unbranded. Compose for {{ratio}} without cropping important facial features.",
+  },
+  {
+    n: "298",
+    id: "chai-dhaba-fog-leather-jacket-winter-ai-photo-prompt-men",
+    title: "Chai Dhaba Fog Leather Jacket Winter AI Photo Prompt for Men",
+    note: "Black leather jacket and steaming chai at a foggy roadside dhaba",
+    description:
+      "A cozy winter AI photo prompt for men: black leather jacket over a cream turtleneck with steaming chai at a foggy roadside dhaba under warm hanging bulbs.",
+    category: "Cinematic",
+    subject: "Person",
+    intent: "New outfit or theme",
+    requirement: "One photo",
+    mood: "Warm amber tea-stall glow against cool blue snowy dusk",
+    background:
+      "Foggy roadside chai dhaba with warm hanging bulbs, a steaming kettle, wooden benches, and cool winter mist",
+    ratio: "4:5 Portrait",
+    keepClothing: false,
+    keepPose: false,
+    inputImageCount: 1,
+    changes: [
+      "Black leather jacket over turtleneck",
+      "Steaming glass of chai",
+      "Foggy roadside dhaba",
+      "Warm hanging-bulb glow",
+    ],
+    stays: ["Face and identity", "Skin tone", "Hairstyle and beard", "Body proportions"],
+    height: 350,
+    targetSourcePhoto: "One clear chest-up photo of a boy or man",
+    bestSourcePhoto: [
+      "One person, face clearly visible and sharp",
+      "Chest-up or waist-up framing works best",
+      "Even daylight, no strong filters",
+      "Original image should not be blurry",
+    ],
+    altSource:
+      "Young man with short dark hair and a neat beard in a white tee against a plain grey wall.",
+    altResult:
+      "Young man in a black leather jacket over a cream turtleneck, holding steaming chai at a foggy roadside dhaba.",
+    beforeFile: "chai-dhaba-fog-leather-jacket-winter-ai-photo-prompt-men-before.webp",
+    afterFile: "chai-dhaba-fog-leather-jacket-winter-ai-photo-prompt-men-after.webp",
+    template:
+      "Edit the uploaded portrait into a cozy, cinematic foggy chai-dhaba winter portrait. Use the main person in the source image as the {{subject}}. Follow the selected source-preservation settings: preserve their {{preserve}}. Always keep the person's face shape, eyes, nose, lips, hairline, hair, any beard, glasses, or head covering, apparent age, and exact skin tone exactly as in the uploaded photo; do not beautify, slim, de-age, or lighten the face, and keep natural skin texture. If clothing is not preserved, dress them in a plain black leather biker jacket over a cream ribbed turtleneck sweater. If pose is not preserved, show him standing at the stall holding a small steaming glass of milky chai in one hand, looking at the camera with a gentle smile, waist-up framing. Light his face with warm hanging-bulb amber glow against cool blue fog behind, with visible steam from the chai and kettle. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair, leather, and fabric. Do not add extra people, text, lettering, brand names, or logos; all clothing and props are plain and unbranded. Compose for {{ratio}} without cropping important facial features.",
+  },
+  {
+    n: "299",
+    id: "kurta-pashmina-shawl-snowy-pine-forest-winter-ai-photo-prompt-men",
+    title: "Kurta Pashmina Pine Forest Winter AI Photo Prompt for Men",
+    note: "Charcoal kurta and tan pashmina shawl in a snowy pine forest",
+    description:
+      "A winter AI photo prompt for men: charcoal kurta pajama with a tan pashmina shawl standing in a snowy pine forest under soft falling snow.",
+    category: "Travel",
+    subject: "Person",
+    intent: "New outfit or theme",
+    requirement: "One photo",
+    mood: "Crisp icy blue with warm natural skin tones and bright snow highlights",
+    background:
+      "Quiet snowy pine forest path with fresh snow, frosted branches, and soft winter mist",
+    ratio: "4:5 Portrait",
+    keepClothing: false,
+    keepPose: false,
+    inputImageCount: 1,
+    changes: [
+      "Charcoal kurta pajama",
+      "Tan pashmina shawl",
+      "Snowy pine forest",
+      "Soft falling snow",
+    ],
+    stays: ["Face and identity", "Skin tone", "Hairstyle and beard", "Body proportions"],
+    height: 340,
+    targetSourcePhoto: "One clear waist-up or full-body photo of a boy or man",
+    bestSourcePhoto: [
+      "One person, face clearly visible and sharp",
+      "Chest-up or waist-up framing works best",
+      "Even daylight, no strong filters",
+      "Original image should not be blurry",
+    ],
+    altSource:
+      "Young man with a neat dark beard in a white tee against a plain grey wall.",
+    altResult:
+      "Man in a charcoal kurta pajama and tan pashmina shawl standing in a snowy pine forest with soft falling snow.",
+    beforeFile:
+      "kurta-pashmina-shawl-snowy-pine-forest-winter-ai-photo-prompt-men-before.webp",
+    afterFile:
+      "kurta-pashmina-shawl-snowy-pine-forest-winter-ai-photo-prompt-men-after.webp",
+    template:
+      "Edit the uploaded portrait into a graceful, realistic snowy pine-forest winter portrait. Use the main person in the source image as the {{subject}}. Follow the selected source-preservation settings: preserve their {{preserve}}. Always keep the person's face shape, eyes, nose, lips, hairline, hair, any beard, glasses, or head covering, apparent age, and exact skin tone exactly as in the uploaded photo; do not beautify, slim, de-age, or lighten the face, and keep natural skin texture. If clothing is not preserved, dress them in a plain charcoal-grey kurta pajama with a large soft tan pashmina shawl draped over the shoulders, one hand lightly holding the shawl at chest level, and plain brown leather sandals. If pose is not preserved, stand him centred among the pines facing the camera with a calm expression, full upper body or full body visible. Light him with soft diffused winter daylight reflecting off the snow. Add soft, realistic falling snow and visible cold-air breath only where natural, with frost and snow lit consistently with the scene. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair, wool, and fabric. Do not add extra people, text, lettering, brand names, or logos; all clothing and props are plain and unbranded. Compose for {{ratio}} without cropping important facial features.",
+  },
+  {
+    n: "300",
+    id: "pastel-coat-beanie-snowfall-winter-ai-photo-prompt-girls",
+    title: "Pastel Coat Beanie Snowfall Winter AI Photo Prompt for Girls",
+    note: "Pastel pink coat, cream beanie and mittens catching snowfall",
+    description:
+      "A cozy aesthetic winter AI photo prompt for girls: pastel pink wool coat, cream beanie and mittens catching soft snowfall on a snowy tree path.",
+    category: "Cinematic",
+    subject: "Person",
+    intent: "New outfit or theme",
+    requirement: "One photo",
+    mood: "Soft winter pastel with rose-pink accents, creamy whites, and natural warm skin tones",
+    background:
+      "Snowy tree-lined avenue with frosted bare branches, old lamp posts, and soft distant bokeh",
+    ratio: "4:5 Portrait",
+    keepClothing: false,
+    keepPose: false,
+    inputImageCount: 1,
+    changes: [
+      "Pastel pink wool coat",
+      "Cream beanie and mittens",
+      "Snowy tree path",
+      "Catching snowfall pose",
+    ],
+    stays: ["Face and identity", "Skin tone", "Hair or head covering", "Body proportions"],
+    height: 350,
+    targetSourcePhoto: "One clear chest-up or waist-up photo of a girl or woman",
+    bestSourcePhoto: [
+      "One person, face clearly visible and sharp",
+      "Chest-up or waist-up framing works best",
+      "Even daylight, no strong filters",
+      "Original image should not be blurry",
+    ],
+    altSource:
+      "Young woman with long dark hair in a casual top against a plain indoor wall.",
+    altResult:
+      "Young woman in a pastel pink wool coat, cream beanie and mittens catching snowfall on a snowy tree path.",
+    beforeFile: "pastel-coat-beanie-snowfall-winter-ai-photo-prompt-girls-before.webp",
+    afterFile: "pastel-coat-beanie-snowfall-winter-ai-photo-prompt-girls-after.webp",
+    template:
+      "Edit the uploaded portrait into a cozy, pastel snowfall winter portrait. Use the main person in the source image as the {{subject}}. Follow the selected source-preservation settings: preserve their {{preserve}}. Always keep the person's face shape, eyes, nose, lips, hairline, hair, any beard, glasses, or head covering, apparent age, and exact skin tone exactly as in the uploaded photo; do not beautify, slim, de-age, or lighten the face, and keep natural skin texture. If clothing is not preserved, dress them in a long pastel-pink wool coat over a cream turtleneck, a cream ribbed knit beanie, and thick cream knit mittens; keep any existing head covering. If pose is not preserved, show her standing on a snowy path looking slightly upward with a joyful smile, one mittened hand raised as if catching snowflakes. Light her with soft overcast winter daylight. Add soft, realistic falling snow lit consistently with the scene. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair, wool, and fabric. Do not add extra people, text, lettering, brand names, or logos; all clothing and props are plain and unbranded. Compose for {{ratio}} without cropping important facial features.",
+  },
+  {
+    n: "301",
+    id: "cinematic-foggy-street-portrait-winter-ai-photo-prompt-women",
+    title: "Cinematic Foggy Street Winter AI Photo Prompt for Women",
+    note: "Wool wrap coat on a foggy city street at dusk with warm streetlights",
+    description:
+      "A cinematic winter AI photo prompt for women: dark grey wool wrap coat and soft scarf on a foggy city street at dusk with warm streetlight bokeh.",
+    category: "Cinematic",
+    subject: "Person",
+    intent: "New outfit or theme",
+    requirement: "One photo",
+    mood: "Cool cinematic night",
+    background:
+      "Foggy city street at dusk with wet pavement, warm streetlights, and soft red taillight bokeh",
+    ratio: "4:5 Portrait",
+    keepClothing: false,
+    keepPose: false,
+    inputImageCount: 1,
+    changes: [
+      "Dark grey wool wrap coat",
+      "Light scarf",
+      "Foggy dusk street",
+      "Three-quarter street portrait",
+    ],
+    stays: ["Face and identity", "Skin tone", "Hair or head covering", "Body proportions"],
+    height: 340,
+    targetSourcePhoto: "One clear waist-up photo of a girl or woman",
+    bestSourcePhoto: [
+      "One person, face clearly visible and sharp",
+      "Chest-up or waist-up framing works best",
+      "Even daylight, no strong filters",
+      "Original image should not be blurry",
+    ],
+    altSource:
+      "Young woman with long dark wavy hair in a casual top against a plain indoor wall.",
+    altResult:
+      "Young woman in a dark grey wool wrap coat and light scarf on a foggy city street at dusk with warm streetlights.",
+    beforeFile: "cinematic-foggy-street-portrait-winter-ai-photo-prompt-women-before.webp",
+    afterFile: "cinematic-foggy-street-portrait-winter-ai-photo-prompt-women-after.webp",
+    template:
+      "Edit the uploaded portrait into a cinematic foggy-street winter portrait. Use the main person in the source image as the {{subject}}. Follow the selected source-preservation settings: preserve their {{preserve}}. Always keep the person's face shape, eyes, nose, lips, hairline, hair, any beard, glasses, or head covering, apparent age, and exact skin tone exactly as in the uploaded photo; do not beautify, slim, de-age, or lighten the face, and keep natural skin texture. If clothing is not preserved, dress them in a dark grey textured wool wrap coat with a matching belt at the waist and a light grey scarf tucked into the collar; keep any existing head covering. If pose is not preserved, show her in a three-quarter stance facing slightly aside while looking toward the camera with a soft, neutral expression, waist-up framing. Light her with warm streetlamp glow through cool fog and soft bokeh behind. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair, wool, and fabric. Do not add extra people, text, lettering, brand names, or logos; all clothing and props are plain and unbranded. Compose for {{ratio}} without cropping important facial features.",
+  },
+  {
+    n: "302",
+    id: "couple-foggy-road-walk-one-shawl-winter-ai-photo-prompt",
+    title: "Couple Foggy Road Walk One Shawl Winter AI Photo Prompt",
+    note: "Two photos merged: couple sharing one shawl on a foggy winter road",
+    description:
+      "Merge two photos into one cozy couple winter look: sharing one large shawl while walking a foggy road lined with bare trees, both faces kept exact.",
+    category: "Cinematic",
+    subject: "Group",
+    intent: "Full scene transformation",
+    requirement: "Two photos",
+    mood: "Warm cozy winter glow with soft amber highlights and cool snowy shadows",
+    background:
+      "Foggy winter road lined with bare trees, soft mist, distant car headlights, and light frost along the verges",
+    ratio: "4:5 Portrait",
+    keepClothing: false,
+    keepPose: false,
+    inputImageCount: 2,
+    changes: [
+      "Both people in one photo",
+      "One shared wool shawl",
+      "Coordinated winter coats",
+      "Foggy road walk",
+    ],
+    stays: [
+      "Person A's face from photo 1",
+      "Person B's face from photo 2",
+      "Each skin tone",
+      "Any head covering",
+    ],
+    height: 350,
+    targetSourcePhoto:
+      "Two separate photos uploaded together in one message: person A first, person B second",
+    bestSourcePhoto: [
+      "One person per photo, face large and sharp",
+      "Similar light in both photos (both daylight or both indoors)",
+      "Similar head angle and framing, ideally chest-up",
+      "Original images should not be blurry",
+    ],
+    altSource:
+      "Woman with long dark hair in an olive-green tee against a plain beige wall.",
+    altSecond:
+      "Man with curly dark hair and a short beard in a black tee against a plain off-white wall.",
+    altResult:
+      "Couple sharing one large beige shawl over winter coats on a foggy road lined with bare trees.",
+    beforeFile: "couple-foggy-road-walk-one-shawl-winter-ai-photo-prompt-before.webp",
+    beforeBFile: "couple-foggy-road-walk-one-shawl-winter-ai-photo-prompt-before-b.webp",
+    afterFile: "couple-foggy-road-walk-one-shawl-winter-ai-photo-prompt-after.webp",
+    template:
+      "Merge the first uploaded photo and the second uploaded photo into one natural {{subject}} photo of a couple sharing one shawl on a foggy winter road. The first uploaded photo shows person A and the second uploaded photo shows person B. Follow the selected source-preservation settings: {{preserve}}. Always keep person A's face shape, eyes, nose, lips, hairline, hair, any beard, glasses, or head covering, apparent age, and exact skin tone as in the first uploaded photo, and person B's exactly as in the second uploaded photo. Treat them as two separate people; do not blend, swap, beautify, slim, de-age, or lighten either face, and keep natural skin texture. If clothing is not preserved, dress person A in a camel wool coat over a cream knit sweater and person B in a navy coat over a dark grey sweater, then wrap one large soft beige wool shawl across both of their shoulders, modest and family-friendly, keeping any head covering or dupatta. If group arrangement and pose are not preserved, stand them side by side on the foggy road facing the camera with soft smiles, waist-up framing, at realistic relative heights. Light both with the same soft overcast daylight through the fog so they look photographed together. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair, wool, and fabric. Do not add extra people, text, lettering, brand names, or logos; all clothing and props are plain and unbranded. Compose for {{ratio}} without cropping either face.",
+  },
+  {
+    n: "303",
+    id: "viral-snowflake-close-up-portrait-winter-ai-photo-prompt",
+    title: "Viral Snowflake Close-Up Portrait Winter AI Photo Prompt",
+    note: "Close-up cozy turtleneck portrait with sharp snowflakes and bokeh",
+    description:
+      "A viral winter AI photo prompt: close-up portrait in a cream turtleneck with sharp snowflakes in the hair and large foreground snowflake bokeh.",
+    category: "Cinematic",
+    subject: "Person",
+    intent: "New outfit or theme",
+    requirement: "One photo",
+    mood: "Soft winter pastel with rose-pink accents, creamy whites, and natural warm skin tones",
+    background:
+      "Soft out-of-focus snowy backdrop with large foreground snowflake bokeh and overcast daylight",
+    ratio: "4:5 Portrait",
+    keepClothing: false,
+    keepPose: false,
+    inputImageCount: 1,
+    changes: [
+      "Cream ribbed turtleneck",
+      "Close-up portrait crop",
+      "Sharp snowflakes in hair",
+      "Foreground snowflake bokeh",
+    ],
+    stays: ["Face and identity", "Skin tone", "Hair or head covering", "Body proportions"],
+    height: 360,
+    targetSourcePhoto: "One clear chest-up selfie or portrait",
+    bestSourcePhoto: [
+      "One person, face clearly visible and sharp",
+      "Chest-up or close framing works best",
+      "Even daylight, no strong filters",
+      "Original image should not be blurry",
+    ],
+    altSource:
+      "Young woman with long dark hair in a casual top against a plain indoor wall.",
+    altResult:
+      "Close-up winter portrait in a cream turtleneck with sharp snowflakes in the hair and soft foreground bokeh.",
+    beforeFile: "viral-snowflake-close-up-portrait-winter-ai-photo-prompt-before.webp",
+    afterFile: "viral-snowflake-close-up-portrait-winter-ai-photo-prompt-after.webp",
+    template:
+      "Edit the uploaded portrait into a viral, cozy snowflake close-up winter portrait. Use the main person in the source image as the {{subject}}. Follow the selected source-preservation settings: preserve their {{preserve}}. Always keep the person's face shape, eyes, nose, lips, hairline, hair, any beard, glasses, or head covering, apparent age, and exact skin tone exactly as in the uploaded photo; do not beautify, slim, de-age, or lighten the face, and keep natural skin texture. If clothing is not preserved, dress them in a thick cream or off-white ribbed turtleneck sweater; keep any existing head covering. If pose is not preserved, frame a close head-and-shoulders portrait looking straight at the camera with a soft smile. Light the face with soft even overcast daylight. Add sharp, realistic snowflakes resting in the hair and a few on the skin, plus large soft out-of-focus snowflake bokeh in the extreme foreground. Apply {{mood}} color grading. Replace the background with {{background}}, keeping clean edges around hair and fabric. Do not add extra people, text, lettering, brand names, or logos; all clothing and props are plain and unbranded. Compose for {{ratio}} without cropping important facial features.",
+  },
 ];
 
-function resultSize(ratio: WinterSeed["ratio"]): {
+function resultSize(
+  ratio: WinterSeed["ratio"],
+  n: string,
+): {
   resultWidth: number;
   resultHeight: number;
 } {
   if (ratio === "9:16 Story") return { resultWidth: 941, resultHeight: 1672 };
+  // Add-on styles 297–303 use the 1200×1489 catalog crop.
+  if (Number(n) >= 297) return { resultWidth: 1200, resultHeight: 1489 };
   return { resultWidth: 1122, resultHeight: 1402 };
 }
 
@@ -594,14 +904,14 @@ const categorySlug: Record<string, string> = {
 };
 
 /**
- * Winter AI photo prompts 87–98 (solo, couple, and two-photo merges).
- * Merge styles store Photo 2 as source-<n>b.webp on a second example pair
- * that shares result-<n>.webp.
+ * Winter AI photo prompts 87–98 plus add-on 297–303 (solo, couple, and
+ * two-photo merges). Merge styles store Photo 2 as source-<n>b.webp on a
+ * second example pair that shares result-<n>.webp. IDs 99–105 stay anime.
  */
 export const seedWinterStyles: CatalogStyle[] = winter.map((item, index) => {
   const source = asset(`source-${item.n}.png`);
   const result = asset(`result-${item.n}.png`);
-  const pixels = resultSize(item.ratio);
+  const pixels = resultSize(item.ratio, item.n);
   const examplePairs: CatalogStyle["examplePairs"] = [
     {
       source,
@@ -630,7 +940,7 @@ export const seedWinterStyles: CatalogStyle[] = winter.map((item, index) => {
     tool: "ChatGPT Image",
     note: item.note,
     height: item.height,
-    saved: 14 - index,
+    saved: 26 - index,
     source,
     result,
     status: "published",
@@ -679,7 +989,7 @@ export const winterPublishRows = winter.map((item, index) => ({
   requirement: item.requirement,
   tool: "ChatGPT Image",
   height: item.height,
-  saved: 14 - index,
+  saved: 26 - index,
   status: "published" as const,
   targetSourcePhoto: item.targetSourcePhoto,
   bestSourcePhoto: item.bestSourcePhoto,

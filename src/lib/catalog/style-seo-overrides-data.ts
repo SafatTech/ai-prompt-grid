@@ -748,4 +748,237 @@ Who it is for: couples who want a soft hand-painted anime meadow picnic rather t
       "turn-photo-into-anime-countryside-family-ai-prompt",
     ],
   },
+
+  // ── Winter add-on 297–303 (fog / cozy aesthetic siblings) ────────────────
+  "foggy-road-hoodie-muffler-winter-ai-photo-prompt-boys": {
+    title: "Foggy Road Hoodie Muffler Winter Prompt for Boys",
+    h1: "Foggy Road Hoodie Muffler Winter AI Photo Prompt for Boys",
+    description:
+      "Foggy-road winter AI photo prompt for boys: grey hoodie, olive jacket and knit muffler on a misty asphalt road. Keeps your real face.",
+    intro: `This foggy-road hoodie and muffler prompt is for boys and young men who want a moody winter walk edit—not a bright snowy valley travel shot and not a night city street with heavy bokeh. Upload one clear chest-up photo, paste the prompt, and keep the face-lock lines so skin tone, hair, and beard stay yours while the outfit and road scene change.
+
+The look centres on a light-grey hoodie under an olive utility jacket with a dark ribbed muffler, walking the middle of a foggy two-lane road lined with bare trees. Soft overcast light and distant headlight glow do the atmosphere work; there is no steaming chai cup and no pine-valley blue sky. That separation keeps this page distinct from the snowfall-chai and snowy-valley winter siblings.
+
+Use a sharp source with even light and no heavy beauty filters. If the muffler hides too much of the jaw, ask for a looser wrap. Pair it with the Winter guide’s foggy street and couple road looks when you want a set, but keep this page focused on the solo boy foggy-road hero.
+
+Who it is for: boys and men who want a viral foggy-road winter edit with hoodie and muffler rather than a puffer-valley travel frame. Tip: ask for soft mist and distant headlights only—heavy fog overlays can wash out the face.`,
+    tips: [
+      "Prefer a waist-up source so the jacket and muffler read clearly.",
+      "Ask to thin the fog if the face starts to fade.",
+      "See the Winter guide for chai dhaba and couple foggy-road siblings.",
+    ],
+    guideLinks: [
+      {
+        href: "/guides/winter-ai-photo-prompts",
+        label: "Winter AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: [
+      "snowfall-chai-winter-ai-photo-prompt-boys",
+      "night-snow-street-winter-ai-photo-prompt-men",
+      "chai-dhaba-fog-leather-jacket-winter-ai-photo-prompt-men",
+    ],
+  },
+  "chai-dhaba-fog-leather-jacket-winter-ai-photo-prompt-men": {
+    title: "Chai Dhaba Fog Leather Jacket Winter Prompt for Men",
+    h1: "Chai Dhaba Fog Leather Jacket Winter AI Photo Prompt for Men",
+    description:
+      "Foggy chai-dhaba winter AI prompt for men: black leather jacket, cream turtleneck and steaming chai under warm bulbs. Real face kept.",
+    intro: `The chai-dhaba fog leather-jacket prompt is built for men who want a warm roadside tea-stall edit with cool winter mist—not the snowy hill-station chai-and-shawl boy look and not a leather street outfit-change with no fog. Attach one clear portrait, keep the identity lines, and let the prompt swap in the black leather jacket, cream turtleneck, and steaming glass of chai.
+
+Warm hanging bulbs and a steaming kettle sit against blue-grey fog so the amber glow stays local to the stall. That contrast is the point: cozy tea light, not crisp mountain daylight. The jacket stays plain and unbranded so the edit stays family-safe and logo-free.
+
+Use this when you already like the Winter guide’s snowfall-chai mood but want leather and fog instead of a wool shawl in a pine valley. If steam covers the face, ask for a thinner steam trail. Related pages cover foggy roads and kurta-pashmina forest looks when you need a different winter wardrobe.
+
+Who it is for: men who want a foggy roadside chai dhaba portrait in a leather jacket rather than a snowy valley puffer shot. Tip: keep “exact skin tone” in every follow-up so warm bulbs do not lighten the face.`,
+    tips: [
+      "Chest-up sources keep the chai glass and jacket collar sharp.",
+      "Ask for cooler fog behind if the whole frame goes amber.",
+      "Open the Winter guide for more chai and fog siblings.",
+    ],
+    guideLinks: [
+      {
+        href: "/guides/winter-ai-photo-prompts",
+        label: "Winter AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: [
+      "snowfall-chai-winter-ai-photo-prompt-boys",
+      "foggy-road-hoodie-muffler-winter-ai-photo-prompt-boys",
+      "leather-jacket-street-outfit-change-men",
+    ],
+  },
+  "kurta-pashmina-shawl-snowy-pine-forest-winter-ai-photo-prompt-men": {
+    title: "Kurta Pashmina Pine Forest Winter Prompt for Men",
+    h1: "Kurta Pashmina Pine Forest Winter AI Photo Prompt for Men",
+    description:
+      "Snowy pine-forest winter AI prompt for men: charcoal kurta and tan pashmina shawl under soft falling snow. Keeps your real face.",
+    intro: `This kurta and pashmina pine-forest prompt is for men who want a traditional winter travel frame—charcoal kurta pajama, tan shawl, snow-laden pines—without turning the edit into a Western puffer-jacket valley shot or a pheran garden look for girls. Upload one clear photo and keep the face-preservation lines so beard, hairline, and skin tone stay locked.
+
+The scene is a quiet snowy pine path with soft mist and falling snow, not a tea stall and not a foggy city street. Holding the shawl at the chest gives a calm, posed travel portrait rather than a walking muffler shot. Footwear stays simple and unbranded.
+
+Use it when you want South Asian winter clothing in a photoreal snow forest. If the shawl hides the jaw, ask for a lower drape. Pair with the Winter guide’s Hunza-style merge when you need two people in a northern valley, but keep this page as the solo kurta hero.
+
+Who it is for: men who want a kurta-and-pashmina snowy pine portrait rather than a hoodie foggy-road or leather chai-dhaba edit. Tip: say “keep exact skin tone against bright snow” if the model lightens the face.`,
+    tips: [
+      "Waist-up or full-body sources show the shawl drape best.",
+      "Ask for softer snowfall if flakes streak across the eyes.",
+      "See the Winter guide for couple and merge valley options.",
+    ],
+    guideLinks: [
+      {
+        href: "/guides/winter-ai-photo-prompts",
+        label: "Winter AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: [
+      "snowy-valley-winter-ai-photo-prompt-boys",
+      "hunza-style-valley-merge-two-photos-winter-prompt",
+      "foggy-road-hoodie-muffler-winter-ai-photo-prompt-boys",
+    ],
+  },
+  "pastel-coat-beanie-snowfall-winter-ai-photo-prompt-girls": {
+    title: "Pastel Coat Beanie Snowfall Winter Prompt for Girls",
+    h1: "Pastel Coat Beanie Snowfall Winter AI Photo Prompt for Girls",
+    description:
+      "Cozy aesthetic winter AI prompt for girls: pastel pink coat, cream beanie and mittens catching soft snowfall. Real face kept.",
+    intro: `The pastel coat and beanie snowfall prompt is a cozy aesthetic winter look for girls—soft pink wool coat, cream knit beanie, mittens catching flakes—distinct from the camel long-coat avenue walk and from the fairy-lights sweater indoor crop. Paste it with one clear photo and keep the identity lines so hair, skin tone, and any head covering stay yours.
+
+The pose looks slightly upward with one mitten raised, which sells the snowfall moment without needing a chai cup or balcony railing. Soft overcast light and a snowy tree path keep the palette creamy and rose-tinted rather than moody fog grey.
+
+Use this when you want a bright, playful winter feed frame. If the beanie changes hair length, restate the original hairstyle. Related Winter guide pages cover pheran gardens and shawl-and-chai balconies when you want warmer South Asian styling instead of pastel outerwear.
+
+Who it is for: girls who want a pastel snowfall aesthetic edit rather than a dark foggy street or fairy-lights night selfie. Tip: ask for soft flakes only—heavy overlays can look fake on mittens and hair.`,
+    tips: [
+      "Chest-up sources keep the beanie and smile sharp.",
+      "Ask to restore hair length if the beanie crops it oddly.",
+      "Browse the Winter guide for more girls’ snowfall looks.",
+    ],
+    guideLinks: [
+      {
+        href: "/guides/winter-ai-photo-prompts",
+        label: "Winter AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: [
+      "long-coat-snowfall-winter-ai-photo-prompt-girls",
+      "shawl-chai-winter-ai-photo-prompt-girls",
+      "viral-snowflake-close-up-portrait-winter-ai-photo-prompt",
+    ],
+  },
+  "cinematic-foggy-street-portrait-winter-ai-photo-prompt-women": {
+    title: "Cinematic Foggy Street Winter Prompt for Women",
+    h1: "Cinematic Foggy Street Winter AI Photo Prompt for Women",
+    description:
+      "Cinematic foggy-street winter AI prompt for women: grey wool wrap coat and scarf at dusk with warm streetlight bokeh. Face kept.",
+    intro: `This cinematic foggy-street portrait is for women who want a dusk city edit—dark grey wrap coat, soft scarf, wet pavement, warm streetlights in fog—not a pastel snowfall park walk and not the night-snow street look written for men. Upload one waist-up photo, keep the face-lock lines, and let the prompt rebuild the foggy urban depth behind you.
+
+The three-quarter stance with the head turned to camera is the differentiator: editorial street portrait energy, not a mid-stride walk down a snowy avenue. Cool fog against amber lamps keeps the grade cinematic without tipping into pure monochrome.
+
+Use it for moody winter feed covers when you already have a clear face and want atmosphere more than props. If streetlights blow out the skin, ask for softer lamp glow. Pair with the Winter guide’s foggy-road boy look or couple shared-shawl road merge when building a fog set.
+
+Who it is for: women who want a foggy dusk street coat portrait rather than a pastel beanie snowfall or fairy-lights indoor crop. Tip: say “keep exact skin tone under streetlights” if warmth pushes the face lighter.`,
+    tips: [
+      "Waist-up sources show the wrap coat belt and scarf cleanly.",
+      "Ask to reduce bokeh if the face softens too much.",
+      "See the Winter guide for more fog and coat siblings.",
+    ],
+    guideLinks: [
+      {
+        href: "/guides/winter-ai-photo-prompts",
+        label: "Winter AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: [
+      "long-coat-snowfall-winter-ai-photo-prompt-girls",
+      "night-snow-street-winter-ai-photo-prompt-men",
+      "foggy-road-hoodie-muffler-winter-ai-photo-prompt-boys",
+    ],
+  },
+  "couple-foggy-road-walk-one-shawl-winter-ai-photo-prompt": {
+    title: "Couple Foggy Road Walk One Shawl Winter Prompt",
+    h1: "Couple Foggy Road Walk One Shawl Winter AI Photo Prompt",
+    description:
+      "Two-photo couple winter AI prompt: share one shawl on a foggy road walk. Keeps both real faces from separate uploads.",
+    intro: `The couple foggy-road one-shawl prompt merges two separate photos into one cozy walk: camel and navy coats under a single beige shawl on a misty road lined with bare trees. It is not the snowy mountain viewpoint couple, not the shared-shawl chai porch, and not the snowfall pine-path merge—those siblings keep different wardrobes and backdrops. Attach person A first and person B second, then keep the dual identity lines.
+
+Both faces stay locked to their source photos while the shared shawl ties the frame together. Soft overcast fog replaces bright snow peaks so the mood stays intimate and cool rather than crisp travel blue. Relative heights stay realistic; do not let the model blend features.
+
+Use this when you only have separate selfies and want a foggy-road couple story. If faces swap, restate person A and person B. Related Winter guide merges cover pine paths and Hunza-style valleys when you want snow instead of fog.
+
+Who it is for: couples who want a two-photo foggy-road shared-shawl edit rather than a snowy mountain railing pose. Tip: match lighting in both sources (both daylight) before you merge.`,
+    tips: [
+      "Upload person A then person B in the same message.",
+      "Ask to restore each face separately if either drifts.",
+      "Read the merge guide for more two-photo setups.",
+    ],
+    guideLinks: [
+      {
+        href: "/guides/winter-ai-photo-prompts",
+        label: "Winter AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-merge-two-photos-in-gemini",
+        label: "How to Merge Two Photos in Gemini",
+      },
+    ],
+    relatedStyleIds: [
+      "shared-shawl-couple-winter-ai-photo-prompt-chai",
+      "snowfall-merge-two-photos-winter-ai-prompt-couple",
+      "foggy-road-hoodie-muffler-winter-ai-photo-prompt-boys",
+    ],
+  },
+  "viral-snowflake-close-up-portrait-winter-ai-photo-prompt": {
+    title: "Viral Snowflake Close-Up Winter Portrait Prompt",
+    h1: "Viral Snowflake Close-Up Portrait Winter AI Photo Prompt",
+    description:
+      "Viral snowflake close-up winter AI prompt: cream turtleneck, sharp flakes in hair, foreground bokeh. Keeps your real face.",
+    intro: `This viral snowflake close-up is a tight cozy portrait—cream turtleneck, sharp flakes in the hair, large foreground snowflake bokeh—not a full-body pastel coat walk and not an indoor fairy-lights sweater story crop. Upload a clear chest-up selfie, keep the face-lock lines, and let the prompt add winter atmosphere without changing who you are.
+
+Shallow depth of field and soft overcast light sell the “viral” feed look while skin texture stays natural. The backdrop is a soft snowy blur; there is no road, stall, or forest path competing with the face. That makes this page a portrait-first sibling inside the Winter guide.
+
+Use it for profile pictures and close winter posts. If flakes smear across the eyes, ask for fewer foreground flakes. Pair with the pastel coat snowfall look when you want a matching wider shot after the close-up.
+
+Who it is for: anyone who wants a viral snowflake close-up winter portrait rather than a full scene with coats and roads. Tip: keep “exact skin tone” and “natural skin texture” so bright snow bokeh does not flatten the face.`,
+    tips: [
+      "Use a sharp close source; heavy filters fight the snowflake detail.",
+      "Ask to clear flakes from the eyes if they smear.",
+      "See the Winter guide for matching pastel snowfall looks.",
+    ],
+    guideLinks: [
+      {
+        href: "/guides/winter-ai-photo-prompts",
+        label: "Winter AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: [
+      "pastel-coat-beanie-snowfall-winter-ai-photo-prompt-girls",
+      "fairy-lights-sweater-winter-ai-photo-prompt-girls",
+      "shawl-chai-winter-ai-photo-prompt-girls",
+    ],
+  },
 };

@@ -24,7 +24,7 @@ import type { CatalogStyle } from "./types";
 
 /**
  * Published catalog seed =
- * person/group/pet editorial 1–296 (Halloween 31–35 + Diwali 36–47 + 1980s 48–59 + LinkedIn 60–74 + merge 75–86 + winter 87–98 + anime 99–110 + birthday 111–122 + boys 123–134 + Christmas 135–146 + character styles 147–222 + Stylish 223–236 + Luxury Lifestyle 237–249 + Diwali add-on 250–258 + Wedding Dresses 259–272 + Christmas 2026 add-on 273–284 + Outfit Change 285–296)
+ * person/group/pet editorial 1–303 (Halloween 31–35 + Diwali 36–47 + 1980s 48–59 + LinkedIn 60–74 + merge 75–86 + winter 87–98 + anime 99–110 + birthday 111–122 + boys 123–134 + Christmas 135–146 + character styles 147–222 + Stylish 223–236 + Luxury Lifestyle 237–249 + Diwali add-on 250–258 + Wedding Dresses 259–272 + Christmas 2026 add-on 273–284 + Outfit Change 285–296 + Winter add-on 297–303)
  * + product 1–10 + group 1–10 + place 1–10 + pet 1–9.
  */
 export const seedStyles: CatalogStyle[] = [

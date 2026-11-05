@@ -478,6 +478,14 @@ export const backgroundLabels: Record<string, string> = {
     "Snowy pine path",
   "Snowy northern mountain valley with a frozen river, small stone houses, bare poplar trees, and towering white peaks":
     "Frozen river valley",
+  "Foggy winter road lined with bare trees, soft mist, distant car headlights, and light frost along the verges":
+    "Foggy winter road",
+  "Foggy roadside chai dhaba with warm hanging bulbs, a steaming kettle, wooden benches, and cool winter mist":
+    "Foggy chai dhaba",
+  "Foggy city street at dusk with wet pavement, warm streetlights, and soft red taillight bokeh":
+    "Foggy dusk street",
+  "Soft out-of-focus snowy backdrop with large foreground snowflake bokeh and overcast daylight":
+    "Snowflake bokeh close-up",
   "Plain soft pastel backdrop with tiny sparkles and hearts around a white die-cut sticker border":
     "Pastel sticker sheet",
   "Sunlit anime college campus with brick buildings, blossom trees, a wide path, and pink petals drifting in the air":

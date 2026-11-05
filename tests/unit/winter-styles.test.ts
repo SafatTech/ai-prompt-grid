@@ -18,11 +18,22 @@ const TOKEN = /\{\{[a-zA-Z]+\}\}/;
 const mergeIds = new Set([
   "snowfall-merge-two-photos-winter-ai-prompt-couple",
   "hunza-style-valley-merge-two-photos-winter-prompt",
+  "couple-foggy-road-walk-one-shawl-winter-ai-photo-prompt",
 ]);
 
+const addonIds = [
+  "foggy-road-hoodie-muffler-winter-ai-photo-prompt-boys",
+  "chai-dhaba-fog-leather-jacket-winter-ai-photo-prompt-men",
+  "kurta-pashmina-shawl-snowy-pine-forest-winter-ai-photo-prompt-men",
+  "pastel-coat-beanie-snowfall-winter-ai-photo-prompt-girls",
+  "cinematic-foggy-street-portrait-winter-ai-photo-prompt-women",
+  "couple-foggy-road-walk-one-shawl-winter-ai-photo-prompt",
+  "viral-snowflake-close-up-portrait-winter-ai-photo-prompt",
+] as const;
+
 describe("winter AI photo style pages", () => {
-  it("publishes 12 styles numbered 87 through 98", () => {
-    assert.equal(seedWinterStyles.length, 12);
+  it("publishes 19 styles: 87–98 plus add-on 297–303", () => {
+    assert.equal(seedWinterStyles.length, 19);
     assert.ok(
       seedWinterStyles.every((style) =>
         ["Travel", "Cinematic"].includes(style.category),
@@ -45,7 +56,16 @@ describe("winter AI photo style pages", () => {
       "96",
       "97",
       "98",
+      "297",
+      "298",
+      "299",
+      "300",
+      "301",
+      "302",
+      "303",
     ]);
+    // Anime owns 99–105; winter add-on must not collide.
+    assert.ok(numbers.every((n) => n && (Number(n) < 99 || Number(n) >= 297)));
   });
 
   it("keeps style titles and document titles within 60 characters", () => {
@@ -91,7 +111,7 @@ describe("winter AI photo style pages", () => {
     }
   });
 
-  it("marks the two merge styles as two-photo inputs with shared results", () => {
+  it("marks merge styles as two-photo inputs with shared results", () => {
     for (const id of mergeIds) {
       const style = seedWinterStyles.find((item) => item.id === id);
       assert.ok(style);
@@ -116,6 +136,27 @@ describe("winter AI photo style pages", () => {
     assert.equal(style.promptVariant.defaults.ratio, "9:16 Story");
     assert.equal(style.examplePairs[0]?.resultWidth, 941);
     assert.equal(style.examplePairs[0]?.resultHeight, 1672);
+  });
+
+  it("uses 1200×1489 for add-on styles 297–303", () => {
+    for (const id of addonIds) {
+      const style = seedWinterStyles.find((item) => item.id === id);
+      assert.ok(style, id);
+      assert.equal(style.examplePairs[0]?.resultWidth, 1200, id);
+      assert.equal(style.examplePairs[0]?.resultHeight, 1489, id);
+      assert.match(style.source, /source-30[0-3]\.webp|source-297\.webp|source-298\.webp|source-299\.webp/);
+    }
+  });
+
+  it("includes AI-generated disclosure on every winter style", () => {
+    for (const style of seedWinterStyles) {
+      assert.ok(
+        style.promptVariant.limitations.some((line) =>
+          /AI-generated/i.test(line),
+        ),
+        style.id,
+      );
+    }
   });
 
   it("keeps Hunza Valley in the friends/siblings merge title", () => {
