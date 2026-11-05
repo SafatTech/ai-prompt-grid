@@ -27,7 +27,8 @@
     "db:upload-outfit-change": "tsx --env-file=.env.local scripts/upload-outfit-change-assets.ts",
     "db:generate-blur-thumbs": "tsx --env-file=.env.local scripts/generate-blur-thumbs.ts",
     "db:backfill-image-focus": "tsx --env-file=.env.local scripts/backfill-image-focus.ts",
-    "emails:build": "tsx scripts/build-email-templates.ts"
+    "emails:build": "tsx scripts/build-email-templates.ts",
+    "indexnow": "tsx scripts/indexnow-submit.ts"
   },
   "dependencies": {
     "@splinetool/react-spline": "^4.1.0",
@@ -36,6 +37,7 @@
     "@supabase/supabase-js": "^2.116.0",
     "@tensorflow-models/blazeface": "^0.1.0",
     "@tensorflow/tfjs": "^4.22.0",
+    "@vercel/analytics": "^2.0.1",
     "clsx": "^2.1.1",
     "gray-matter": "^4.0.3",
     "lucide-react": "^1.48.0",
