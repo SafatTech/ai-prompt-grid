@@ -31,5 +31,5 @@ export const publishedGuides: readonly { slug: string; updated: string; category
   { slug: "trending-ai-photo-prompts-for-boys", updated: "2026-10-15", category: "trends" },
   { slug: "trending-christmas-ai-photo-editing-prompts-gemini", updated: "2026-11-01", category: "festivals" },
   { slug: "wedding-dress-ai-photo-prompts", updated: "2026-10-31", category: "occasions" },
-  { slug: "winter-ai-photo-prompts", updated: "2026-10-18", category: "seasonal" },
+  { slug: "winter-ai-photo-prompts", updated: "2026-11-05", category: "seasonal" },
 ];
