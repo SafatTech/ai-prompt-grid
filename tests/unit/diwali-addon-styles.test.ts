@@ -95,6 +95,7 @@ describe("Diwali guide add-on content", () => {
       assert.match(guide, new RegExp(`/styles/${style.id}(?:\\)|\\b)`), style.id);
     }
     assert.match(guide, /## Diwali couple poses prompts/);
+    assert.match(guide, /## Diwali Prompt for Girl/);
     assert.match(guide, /## Diwali photo prompts for men and women/);
     assert.match(
       guide,

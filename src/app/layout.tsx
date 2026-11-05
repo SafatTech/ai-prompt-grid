@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import { AdSenseScript } from "@/components/analytics/adsense-script";
 import { ConsentDefaults } from "@/components/analytics/consent-defaults";
 import { CookieConsentBanner } from "@/components/analytics/cookie-consent-banner";
@@ -146,6 +147,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
             </UiModalProvider>
           </LibraryProvider>
         </ToastProvider>
+        {/* Cookieless Vercel Web Analytics — client useEffect, after interactive. */}
+        <Analytics />
       </body>
     </html>
   );
