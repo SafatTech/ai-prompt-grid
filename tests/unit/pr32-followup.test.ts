@@ -1,4 +1,6 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
+import path from "node:path";
 import { describe, it } from "node:test";
 import { GET as adsTxtGet } from "../../src/app/ads.txt/route";
 import { GUIDES_PAGE_SIZE } from "../../src/components/guides/guides-index";
@@ -45,6 +47,15 @@ describe("PR32 follow-up: guides pagination skips featured (N-11)", () => {
       page2.some((g) => g.slug === guides[0]!.slug),
       false,
     );
+  });
+
+  it("View more soft-navs to /guides/p/N so App Router hits the paged route", () => {
+    const source = fs.readFileSync(
+      path.join(process.cwd(), "src/components/guides/guides-index.tsx"),
+      "utf8",
+    );
+    assert.match(source, /href=\{`\/guides\/p\/\$\{page \+ 1\}`\}/);
+    assert.doesNotMatch(source, /href=\{`\/guides\?page=\$\{page \+ 1\}`\}/);
   });
 });
 

@@ -125,7 +125,9 @@ export function GuidesIndex({ page }: { page: number }) {
               </div>
               {hasMore ? (
                 <div className="guides-more">
-                  <Link href={`/guides?page=${page + 1}`}>View more guides</Link>
+                  {/* Soft-nav must hit /guides/p/N (App Router segment). Public/SEO
+                      canonical stays /guides?page=N via middleware rewrite + p/[page] metadata. */}
+                  <Link href={`/guides/p/${page + 1}`}>View more guides</Link>
                 </div>
               ) : null}
             </>
