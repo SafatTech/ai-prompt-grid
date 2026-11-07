@@ -981,4 +981,121 @@ Who it is for: anyone who wants a viral snowflake close-up winter portrait rathe
       "shawl-chai-winter-ai-photo-prompt-girls",
     ],
   },
+
+  // ── AdSense uniqueness pilot (intro / tips / FAQs / addon; meta unchanged) ─
+  "crimson-bangle-reverie": {
+    intro:
+      "Built for women who want a jewellery-led traditional look without a studio booking: one selfie becomes a three-panel story of ivory embroidery, stacks of deep red glass bangles, and warm window light. The middle frame is a calm waist-up portrait by a wooden window; the top and bottom panels linger on hands, rings, and bangle texture. Best source: a sharp daytime face photo with bare or lightly dressed wrists so the crimson stacks read clearly.",
+    tips: [
+      "Upload a clear daytime portrait with wrists visible and free of thick watch straps or bulky bracelets, so the red glass stacks and oxidized kadas can sit cleanly on both hands.",
+      "If a panel softens your face or changes your hairline, rerun once with a sharper source and ask to keep the same face shape, eyes, and natural skin tone across all three panels.",
+      "When bangles look melted or rings multiply, ask for fewer, sharper glass bangles with realistic metal reflections and five natural fingers on each hand.",
+    ],
+    faqs: [
+      {
+        question: "Why is this a three-panel image instead of one portrait?",
+        answer:
+          "The style is a vertical triptych by design: hand-and-bangle close-ups frame a soft window portrait so jewellery and embroidery stay the story, not a single full-length pose.",
+      },
+      {
+        question: "What should I wear in the source photo?",
+        answer:
+          "Everyday clothes are fine. The prompt replaces the outfit with an ivory embroidered traditional dress when clothing is not preserved; a clear face and natural wrists matter more than festive wear in the upload.",
+      },
+    ],
+    addonLine:
+      "Want a softer evening mood in the same triptych? Add: keep the ivory embroidery and crimson glass bangles, but shift the window light slightly warmer and lower, with gentler shadows on the hands and a quieter, more intimate expression.",
+  },
+  "diwali-couple-poses-diya-doorway": {
+    intro:
+      "Made for couples who want a quiet Diwali doorway portrait rather than a rooftop fireworks frame: you stand back-to-back in a marigold-framed wooden entrance, clay diyas glowing along the threshold, both faces turned toward the camera. Outfits stay modest—festive lehenga or silk saree with a full blouse for one partner, ivory or deep-blue kurta for the other. Upload two clear face photos, or one shot of you both, with similar lighting so heights and skin tones stay honest.",
+    tips: [
+      "Prefer two separate portraits taken from a similar camera height; mismatched angles are the usual reason one partner looks taller or farther away in the doorway.",
+      "If faces blend or swap, name which upload is person A and person B, and ask to keep each exact skin tone, hairstyle, and age with no beautify pass.",
+      "When diyas smear into a yellow smear underfoot, ask for a neat row of distinct clay diyas on the threshold and warm light from inside the doorway only.",
+    ],
+    faqs: [
+      {
+        question: "Do we need a photo that already shows us back-to-back?",
+        answer:
+          "No. Separate clear portraits work. The prompt builds the back-to-back doorway pose when pose is not preserved; you only need readable faces.",
+      },
+      {
+        question: "How is this different from a sparkler or fireworks couple look?",
+        answer:
+          "This page is a still doorway scene with marigolds and floor-level diyas. Sparklers in hand and rooftop fireworks belong to other couple styles, so keep those cues out of this run.",
+      },
+    ],
+    addonLine:
+      "Want a slightly richer doorway glow? Add: keep the back-to-back pose and modest festive outfits, but add one more neat row of clay diyas along the threshold and a soft marigold shadow on the wooden frame—no sparklers.",
+  },
+  "birthday-ai-photo-prompt-boy-black-gold": {
+    intro:
+      "For young men celebrating a birthday who want a luxe black-and-gold cake-cutting frame: a fitted black suit or subtle gold-detail kurta, a black cake with gold drip and lit candles, and a metallic balloon arch behind. The look is polished party photography—not pastel cake walls and not baby number-balloon setups. Use a sharp waist-up daytime portrait with a clear face and natural skin tone so the suit edit keeps your real features.",
+    tips: [
+      "Shoot a waist-up or chest-up photo in even daylight with no beauty filter; busy corridors and heavy shadows make the black suit edges fray against the balloon arch.",
+      "If the cake knife or candles warp, ask for one clean cake-cutting pose with a simple gold-drip black cake, lit candles, and five natural fingers on the knife hand.",
+      "To keep the face the same, say keep exact face shape, beard or clean shave, hairline, and skin tone—do not lighten, slim, or replace the face when the balloons update.",
+    ],
+    faqs: [
+      {
+        question: "Suit or kurta—which one will I get?",
+        answer:
+          "Either is allowed when clothing is not preserved: a fitted black suit with a plain white shirt (no tie) or a black sherwani-style kurta with subtle gold detail. Ask for one if you prefer it.",
+      },
+      {
+        question: "Can I use this for a child’s birthday?",
+        answer:
+          "This page is aimed at older boys and young men in a suit or kurta cake-cutting look. For little kids, use a baby or kids birthday style instead so proportions stay age-honest.",
+      },
+    ],
+    addonLine:
+      "Want a sharper party finish in the same black-and-gold set? Add: keep the black cake with gold drip and the balloon arch, but add a thin gold wristwatch and a confident mid-cut smile—no pastel balloons or extra guests.",
+  },
+  "anime-squad": {
+    intro:
+      "For friend groups who want a premium contemporary anime portrait of the same squad—not chibi stickers and not a single-hero close-up. Everyone stays recognizable: hairstyles, expressions, and the exact headcount carry into clean linework and vibrant outdoor adventure lighting. Best source: one evenly lit group photo where every face is sharp and people are not heavily overlapping, so the restyle can polish each person instead of inventing strangers.",
+    tips: [
+      "Crop tight enough that every face is large and readable before you upload; tiny distant faces are the fastest way to lose identity in an anime pass.",
+      "If two friends merge into one character, rerun and insist on the exact same number of people, distinct faces, and no added or removed members.",
+      "Keep clothing and arrangement toggles on when you want your real outfits and poses; only turn them off if you deliberately want a restyled adventure wardrobe.",
+    ],
+    faqs: [
+      {
+        question: "Will this turn us into cute chibi characters?",
+        answer:
+          "No. The default is a polished contemporary anime look with clean linework and expressive but adult proportions—not a chibi scrapbook or sticker sheet.",
+      },
+      {
+        question: "How many friends can I include?",
+        answer:
+          "Match a real group photo where every face is clear. Very crowded frames often merge people; three to six evenly lit faces usually holds identity better than a distant party crowd.",
+      },
+    ],
+    addonLine:
+      "Want a stronger adventure backdrop for the same squad? Add: keep every real face and the contemporary anime finish, but set them on a windy cliff path at golden hour with deep scenic depth behind the group—no text, speech bubbles, or extra characters.",
+  },
+  "separate-photos-couple": {
+    intro:
+      "When two people cannot stand in the same room for Diwali, this merge places both of you on a lamp-lit rooftop holding sparklers, with soft distant fireworks and coordinated festive outfits. Each face stays locked to its own upload—no blended features. Prefer two clear individual portraits shot from a similar height and distance so body scale, light direction, and eye line match in the final terrace frame.",
+    tips: [
+      "Upload two similarly framed portraits (same approximate distance and eye level); large selfie-versus-full-body mismatches are the usual cause of floating shoulders or uneven sparkler hands.",
+      "If lighting disagrees—one face cold, one warm—ask to match warm rooftop lamp light and sparkler glow across both people so it reads as one photograph.",
+      "To keep faces distinct, remind the model that person A and person B are separate identity references: never average, swap, or beautify either face.",
+    ],
+    faqs: [
+      {
+        question: "Do both photos need to be taken on Diwali night?",
+        answer:
+          "No. Ordinary clear portraits work. The rooftop lamps, diya glow, distant fireworks, and sparklers come from the prompt once both faces are readable.",
+      },
+      {
+        question: "What if we already have one photo together?",
+        answer:
+          "You can still use this merge when you want a sparkler rooftop restyle, but separate portraits are ideal when you were never photographed side by side.",
+      },
+    ],
+    addonLine:
+      "Want a softer rooftop romance in the same sparkler merge? Add: keep both exact faces and the hand-held sparklers, but add gentle string lights along the terrace railing and a calm shared glance—no extra people and no oversized props.",
+  },
 };

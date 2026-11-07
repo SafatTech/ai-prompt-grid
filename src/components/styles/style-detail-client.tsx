@@ -39,7 +39,11 @@ import {
 } from "@/lib/catalog/prompt-core";
 import { labeledOptionsForStyle } from "@/lib/catalog/prompt-option-presets";
 import { getStyleProfile } from "@/lib/catalog/style-profile";
-import { styleDisplayTitle, styleSeoOverride } from "@/lib/catalog/style-meta";
+import {
+  styleDisplayTitle,
+  styleHasUniqueContentSections,
+  styleSeoOverride,
+} from "@/lib/catalog/style-meta";
 import type { CatalogStyle } from "@/lib/catalog/types";
 import { recordRecentView } from "@/lib/recent/views";
 import { cn } from "@/lib/utils";
@@ -57,6 +61,7 @@ export function StyleDetailClient({ style, children }: Props) {
   const profile = getStyleProfile(style);
   const seo = styleSeoOverride(style.id);
   const displayTitle = styleDisplayTitle(style);
+  const uniqueSections = styleHasUniqueContentSections(seo);
   const introParagraphs = seo?.intro
     ? seo.intro
         .split(/\n\s*\n/)
@@ -135,32 +140,58 @@ export function StyleDetailClient({ style, children }: Props) {
     toast(saved ? "Style removed from your library." : "Style saved to your library.");
   }
 
+  async function copyText(value: string): Promise<boolean> {
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(value);
+      } else {
+        const area = document.createElement("textarea");
+        area.value = value;
+        document.body.appendChild(area);
+        area.select();
+        document.execCommand("copy");
+        area.remove();
+      }
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
   async function onCopy() {
     const result = assemblePromptCore(style, options);
     if (!result.ok) {
       toast(result.errors[0] ?? "Prompt is incomplete and cannot be copied.", "error");
       return;
     }
-    try {
-      if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(result.prompt);
-      } else {
-        const area = document.createElement("textarea");
-        area.value = result.prompt;
-        document.body.appendChild(area);
-        area.select();
-        document.execCommand("copy");
-        area.remove();
-      }
-      track("prompt_copy", {
-        style_id: style.id,
-        variant_id: style.promptVariant.id,
-        tool: result.tool,
-      });
-      toast("Prompt copied. Open your AI image editor and upload your photo there.");
-    } catch {
+    const ok = await copyText(result.prompt);
+    if (!ok) {
       toast("Could not copy automatically. Select the prompt text manually.", "error");
+      return;
     }
+    track("prompt_copy", {
+      style_id: style.id,
+      variant_id: style.promptVariant.id,
+      tool: result.tool,
+    });
+    toast("Prompt copied. Open your AI image editor and upload your photo there.");
+  }
+
+  async function onCopyAddon() {
+    const line = seo?.addonLine?.trim();
+    if (!line) return;
+    const ok = await copyText(line);
+    if (!ok) {
+      toast("Could not copy automatically. Select the add-on text manually.", "error");
+      return;
+    }
+    track("prompt_copy", {
+      style_id: style.id,
+      variant_id: style.promptVariant.id,
+      tool: style.promptVariant.tool,
+      addon: true,
+    });
+    toast("Optional add-on copied. Paste it after your main prompt.");
   }
 
   function onSaveResult() {
@@ -300,7 +331,25 @@ export function StyleDetailClient({ style, children }: Props) {
           <h1 className="m-0 mb-4 text-[clamp(32px,6vw,67px)] leading-none tracking-[-0.05em]">
             {displayTitle}
           </h1>
-          {introParagraphs.length > 0 ? (
+          {uniqueSections ? (
+            <>
+              <p className="m-0 max-w-[690px] text-[16px] text-[#c2c0ca] sm:text-[19px]">
+                {profile.description}
+              </p>
+              {introParagraphs.length > 0 ? (
+                <div
+                  className="mt-4 max-w-[690px] space-y-4 text-[16px] leading-relaxed text-[#c2c0ca] sm:text-[19px]"
+                  data-testid="style-seo-intro"
+                >
+                  {introParagraphs.map((paragraph) => (
+                    <p key={paragraph.slice(0, 48)} className="m-0">
+                      {paragraph}
+                    </p>
+                  ))}
+                </div>
+              ) : null}
+            </>
+          ) : introParagraphs.length > 0 ? (
             <div
               className="max-w-[690px] space-y-4 text-[16px] leading-relaxed text-[#c2c0ca] sm:text-[19px]"
               data-testid="style-seo-intro"
@@ -316,7 +365,7 @@ export function StyleDetailClient({ style, children }: Props) {
               {profile.description}
             </p>
           )}
-          {seo?.tips && seo.tips.length > 0 ? (
+          {!uniqueSections && seo?.tips && seo.tips.length > 0 ? (
             <section className="mt-6 max-w-[690px]" data-testid="style-seo-tips">
               <h2 className="mb-3 text-[22px]">Tips for this look</h2>
               <ul className="m-0 list-disc space-y-2 pl-5 text-sm text-[#d2cfd7] sm:text-[15px]">
@@ -398,6 +447,52 @@ export function StyleDetailClient({ style, children }: Props) {
               ))}
             </ul>
           </section>
+
+          {uniqueSections && seo?.tips && seo.tips.length > 0 ? (
+            <section
+              className="border-t border-[var(--line)] py-7"
+              data-testid="style-seo-tips"
+            >
+              <h2 className="mb-4 text-[22px]">Tips for this look</h2>
+              <ol className="m-0 list-decimal space-y-3 pl-5 text-sm leading-relaxed text-[#d2cfd7] sm:text-[15px]">
+                {seo.tips.map((tip) => (
+                  <li key={tip}>{tip}</li>
+                ))}
+              </ol>
+            </section>
+          ) : null}
+
+          {seo?.faqs && seo.faqs.length > 0 ? (
+            <section
+              className="border-t border-[var(--line)] py-7"
+              data-testid="style-seo-faqs"
+            >
+              <h2 className="mb-4 text-[22px]">FAQs</h2>
+              <div className="grid max-w-[690px] gap-2.5">
+                {seo.faqs.map((faq) => (
+                  <details
+                    key={faq.question}
+                    className="group rounded-[14px] border border-[var(--line)] bg-[rgba(255,255,255,0.02)] open:border-[rgba(139,108,255,0.28)] open:bg-[rgba(139,108,255,0.06)]"
+                  >
+                    <summary className="cursor-pointer list-none px-4 py-3.5 text-sm font-semibold text-[#e8e6ef] marker:content-none [&::-webkit-details-marker]:hidden">
+                      <span className="flex items-start justify-between gap-3">
+                        <span>{faq.question}</span>
+                        <span
+                          className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-md border border-[var(--line)] text-[11px] text-[var(--muted)] transition group-open:rotate-45 group-open:border-[rgba(139,108,255,0.35)] group-open:text-[var(--violet)]"
+                          aria-hidden
+                        >
+                          +
+                        </span>
+                      </span>
+                    </summary>
+                    <p className="m-0 border-t border-[var(--line)] px-4 py-3.5 text-sm leading-relaxed text-[#d2cfd7]">
+                      {faq.answer}
+                    </p>
+                  </details>
+                ))}
+              </div>
+            </section>
+          ) : null}
         </article>
 
         <aside
@@ -468,6 +563,31 @@ export function StyleDetailClient({ style, children }: Props) {
               <span className="text-[var(--danger)]">{assembled.errors.join(" ")}</span>
             )}
           </div>
+
+          {seo?.addonLine ? (
+            <div
+              className="mb-[18px] rounded-[14px] border border-[rgba(103,216,178,0.22)] bg-[rgba(103,216,178,0.06)] p-3.5"
+              data-testid="style-addon-card"
+            >
+              <div className="mb-2 flex items-center justify-between gap-3">
+                <h3 className="m-0 text-[13px] font-bold tracking-[-0.01em] text-[#c9efe0]">
+                  Optional add-on
+                </h3>
+                <Button
+                  variant="secondary"
+                  className="min-h-9 gap-2 px-3 text-xs"
+                  data-testid="copy-addon-line"
+                  onClick={onCopyAddon}
+                >
+                  <CopyIcon />
+                  Copy
+                </Button>
+              </div>
+              <p className="m-0 text-[12px] leading-relaxed text-[#d7efe6]">
+                {seo.addonLine}
+              </p>
+            </div>
+          ) : null}
 
           <div className="grid grid-cols-1 gap-2 sm:grid-cols-2">
             <Button

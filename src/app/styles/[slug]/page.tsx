@@ -125,6 +125,22 @@ export default async function StyleDetailPage({
       url: absoluteUrl("/"),
     },
   };
+  const faqJsonLd =
+    seoOverride?.faqs && seoOverride.faqs.length > 0
+      ? {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "@id": `${pageUrl}#faq`,
+          mainEntity: seoOverride.faqs.map((faq) => ({
+            "@type": "Question",
+            name: faq.question,
+            acceptedAnswer: {
+              "@type": "Answer",
+              text: faq.answer,
+            },
+          })),
+        }
+      : null;
 
   return (
     <>
@@ -132,6 +148,12 @@ export default async function StyleDetailPage({
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
+      {faqJsonLd ? (
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
+        />
+      ) : null}
       <StyleDetailClient style={detailStyle}>
         <RelatedStylesLazy styles={relatedStyles} category={detailStyle.category} />
       </StyleDetailClient>
