@@ -10,7 +10,11 @@ import { STYLE_SEO_OVERRIDE_ENTRIES } from "./style-seo-overrides-data";
 import type { StyleSeoOverride } from "./style-seo-override-types";
 import { winterStyleIds } from "./seed-winter-styles";
 
-export type { StyleGuideLink, StyleSeoOverride } from "./style-seo-override-types";
+export type {
+  StyleFaq,
+  StyleGuideLink,
+  StyleSeoOverride,
+} from "./style-seo-override-types";
 
 const COPY_READY_SENTENCE =
   "Copy-ready prompt for ChatGPT, Gemini, and other AI image editors.";
@@ -54,20 +58,31 @@ export function styleSeoDescription(style: {
   note?: string | null;
 }): string {
   const override = STYLE_SEO_OVERRIDES[style.id];
-  if (override) return override.description;
+  if (override?.description) return override.description;
   return stylePageDescription(style.description || style.note || "", style.title);
 }
 
 /** Visible H1 for a style page (override title/h1 when present). */
 export function styleDisplayTitle(style: { id: string; title: string }): string {
   const override = STYLE_SEO_OVERRIDES[style.id];
-  if (!override) return style.title;
-  return override.h1 || override.title;
+  if (!override?.h1 && !override?.title) return style.title;
+  return override.h1 || override.title || style.title;
 }
 
 /** Full SEO override record when the style has one. */
 export function styleSeoOverride(styleId: string): StyleSeoOverride | undefined {
   return STYLE_SEO_OVERRIDES[styleId];
+}
+
+/**
+ * True when the style uses the AdSense uniqueness layout: catalog description
+ * stays visible, intro follows it, tips/FAQs sit below how-to content, and an
+ * optional add-on card can appear under the main prompt.
+ */
+export function styleHasUniqueContentSections(
+  override: StyleSeoOverride | undefined,
+): boolean {
+  return Boolean(override?.faqs?.length || override?.addonLine);
 }
 
 /**
@@ -101,7 +116,7 @@ export function styleMetadataTitle(style: {
   title: string;
 }): string | { absolute: string } {
   const override = STYLE_SEO_OVERRIDES[style.id];
-  if (override) {
+  if (override?.title) {
     return fitDocumentTitle(override.title);
   }
   if (/\bPrompt\b/i.test(style.title)) {

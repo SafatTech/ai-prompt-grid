@@ -100,9 +100,9 @@ describe("Outfit Change guide catalog batch", () => {
   it("keeps the black suit outfit-change SEO override distinct from fashion suit pages", () => {
     const override = STYLE_SEO_OVERRIDES["black-suit-outfit-change-men"];
     assert.ok(override);
-    assert.match(override.title, /Outfit Change/i);
-    assert.match(override.description, /outfit.?swap|industrial loft/i);
-    assert.doesNotMatch(override.description, /night-city lobby|lobby luxury shoot/i);
+    assert.match(override.title ?? "", /Outfit Change/i);
+    assert.match(override.description ?? "", /outfit.?swap|industrial loft/i);
+    assert.doesNotMatch(override.description ?? "", /night-city lobby|lobby luxury shoot/i);
     const style = addon.find((item) => item.id === "black-suit-outfit-change-men");
     assert.ok(style);
     assert.match(style.description || "", /outfit swap/i);

@@ -3,6 +3,7 @@ import { describe, it } from "node:test";
 import {
   STYLE_SEO_OVERRIDES,
   styleDisplayTitle,
+  styleHasUniqueContentSections,
   styleMetadataTitle,
   stylePageDescription,
   styleSeoDescription,
@@ -90,7 +91,9 @@ describe("style SEO overrides", () => {
     for (const id of [passportId, cvId]) {
       const override = STYLE_SEO_OVERRIDES[id];
       assert.ok(override);
+      assert.ok(override.title);
       assert.ok(override.title.length <= 60, `${id} title is ${override.title.length}`);
+      const overrideTitle = override.title;
 
       const metadata = styleMetadataTitle({
         id,
@@ -98,14 +101,14 @@ describe("style SEO overrides", () => {
       });
       assert.equal(typeof metadata, "object");
       if (typeof metadata === "string") return;
-      assert.equal(metadata.absolute, override.title);
+      assert.equal(metadata.absolute, overrideTitle);
       assert.equal(metadata.absolute.includes(" · AI Prompt Grid"), false);
 
       const social = styleSocialTitle({
         id,
         title: "Catalog title that should be ignored for SEO",
       });
-      assert.equal(social, override.title);
+      assert.equal(social, overrideTitle);
       assert.equal(social.endsWith(" · AI Prompt Grid"), false);
 
       const description = styleSeoDescription({
@@ -135,8 +138,8 @@ describe("GSC thin-style SEO overrides", () => {
     for (const id of GSC_THIN_STYLE_IDS) {
       const override = styleSeoOverride(id);
       assert.ok(override, id);
-      assert.ok(override.title.trim().length > 0, `${id} title`);
-      assert.ok(override.description.trim().length > 40, `${id} meta`);
+      assert.ok(override.title?.trim().length, `${id} title`);
+      assert.ok((override.description?.trim().length ?? 0) > 40, `${id} meta`);
       const h1 = styleDisplayTitle({ id, title: "Catalog title" });
       assert.equal(h1, override.h1 || override.title);
       assert.notEqual(h1, "Catalog title");
@@ -173,6 +176,64 @@ describe("GSC thin-style SEO overrides", () => {
     assert.match(couple?.intro ?? "", /two-pack|two people|person A/i);
     assert.match(clay?.intro ?? "", /clay|stop-motion/i);
     assert.match(menu?.intro ?? "", /character-select|menu|UI/i);
+  });
+});
+
+const ADSENSE_UNIQUENESS_PILOT_IDS = [
+  "crimson-bangle-reverie",
+  "diwali-couple-poses-diya-doorway",
+  "birthday-ai-photo-prompt-boy-black-gold",
+  "anime-squad",
+  "separate-photos-couple",
+] as const;
+
+describe("AdSense uniqueness pilot style sections", () => {
+  it("stores intro, tips, FAQs, and addon copy without replacing title/meta", () => {
+    for (const id of ADSENSE_UNIQUENESS_PILOT_IDS) {
+      const override = styleSeoOverride(id);
+      assert.ok(override, id);
+      assert.equal(override.title, undefined, `${id} should keep catalog title`);
+      assert.equal(
+        override.description,
+        undefined,
+        `${id} should keep catalog meta description`,
+      );
+      assert.ok(override.intro?.trim(), `${id} intro`);
+      assert.ok(override.tips && override.tips.length === 3, `${id} tips`);
+      assert.ok(override.faqs && override.faqs.length === 2, `${id} faqs`);
+      assert.ok(override.addonLine?.trim(), `${id} addonLine`);
+      assert.equal(styleHasUniqueContentSections(override), true);
+
+      for (const faq of override.faqs) {
+        assert.ok(faq.question.trim(), `${id} faq question`);
+        assert.ok(faq.answer.trim(), `${id} faq answer`);
+      }
+    }
+  });
+
+  it("keeps catalog document titles for pilot styles", () => {
+    const metadata = styleMetadataTitle({
+      id: "anime-squad",
+      title: "Anime Group AI Photo Prompt (Friends Squad)",
+    });
+    assert.equal(typeof metadata, "string");
+    if (typeof metadata !== "string") return;
+    assert.equal(metadata, "Anime Group AI Photo Prompt (Friends Squad)");
+
+    const description = styleSeoDescription({
+      id: "anime-squad",
+      title: "Anime Group AI Photo Prompt (Friends Squad)",
+      description:
+        "Anime group photo prompt for friends: turn a squad picture into a polished anime friends portrait where everyone stays recognisable. Copy-paste free for Gemini.",
+    });
+    assert.match(description, /Anime group photo prompt for friends/);
+    assert.match(description, new RegExp(SECOND));
+  });
+
+  it("does not mark legacy GSC thin overrides as uniqueness-section pages", () => {
+    const override = styleSeoOverride("soft-daylight-lifestyle");
+    assert.ok(override?.intro);
+    assert.equal(styleHasUniqueContentSections(override), false);
   });
 });
 
