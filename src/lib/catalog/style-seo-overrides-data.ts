@@ -982,10 +982,10 @@ Who it is for: anyone who wants a viral snowflake close-up winter portrait rathe
     ],
   },
 
-  // ── AdSense uniqueness pilot (intro / tips / FAQs / addon; meta unchanged) ─
+  // ── AdSense uniqueness (active: crimson only; meta unchanged) ────────────
   "crimson-bangle-reverie": {
     intro:
-      "Built for women who want a jewellery-led traditional look without a studio booking: one selfie becomes a three-panel story of ivory embroidery, stacks of deep red glass bangles, and warm window light. The middle frame is a calm waist-up portrait by a wooden window; the top and bottom panels linger on hands, rings, and bangle texture. Best source: a sharp daytime face photo with bare or lightly dressed wrists so the crimson stacks read clearly.",
+      "Jewellery-led traditional triptych from one selfie: ivory embroidery, crimson glass bangles, and warm window light—best with a sharp daytime face photo and clear wrists.",
     tips: [
       "Upload a clear daytime portrait with wrists visible and free of thick watch straps or bulky bracelets, so the red glass stacks and oxidized kadas can sit cleanly on both hands.",
       "If a panel softens your face or changes your hairline, rerun once with a sharper source and ask to keep the same face shape, eyes, and natural skin tone across all three panels.",
@@ -1006,6 +1006,15 @@ Who it is for: anyone who wants a viral snowflake close-up winter portrait rathe
     addonLine:
       "Want a softer evening mood in the same triptych? Add: keep the ivory embroidery and crimson glass bangles, but shift the window light slightly warmer and lower, with gentler shadows on the hands and a quieter, more intimate expression.",
   },
+};
+
+/**
+ * Draft uniqueness copy kept in-repo but not wired into STYLE_SEO_OVERRIDE_ENTRIES,
+ * so these style pages render exactly like master until re-enabled.
+ */
+export const STYLE_UNIQUENESS_DRAFT_ENTRIES: Readonly<
+  Record<string, StyleSeoOverride>
+> = {
   "diwali-couple-poses-diya-doorway": {
     intro:
       "Made for couples who want a quiet Diwali doorway portrait rather than a rooftop fireworks frame: you stand back-to-back in a marigold-framed wooden entrance, clay diyas glowing along the threshold, both faces turned toward the camera. Outfits stay modest—festive lehenga or silk saree with a full blouse for one partner, ivory or deep-blue kurta for the other. Upload two clear face photos, or one shot of you both, with similar lighting so heights and skin tones stay honest.",

@@ -18,8 +18,9 @@ export type StyleSeoOverride = {
   readonly h1?: string;
   /**
    * Unique on-page intro (plain text; paragraphs separated by blank lines).
-   * Shown after the catalog description when FAQs/addon enrichment is present;
-   * otherwise replaces the catalog description (legacy GSC thin-page pattern).
+   * Legacy GSC thin pages: replaces the catalog description near the H1.
+   * Uniqueness enrichment pages: short line below the how-to block (not above
+   * the main prompt).
    */
   readonly intro?: string;
   /** Short practical tips rendered on the style detail page. */
@@ -27,8 +28,9 @@ export type StyleSeoOverride = {
   /** FAQ pairs for an on-page accordion + FAQPage JSON-LD. */
   readonly faqs?: readonly StyleFaq[];
   /**
-   * Optional extra prompt line shown in an “Optional add-on” card with its own
-   * copy control. Does not change the main prompt or its defaults.
+   * Optional extra prompt line shown as a compact “Optional add-on” row with
+   * its own copy control under the main Copy prompt action. Does not change
+   * the main prompt or its defaults.
    */
   readonly addonLine?: string;
   /** In-page links to related guides. */

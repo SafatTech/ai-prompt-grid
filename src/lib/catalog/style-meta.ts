@@ -75,9 +75,9 @@ export function styleSeoOverride(styleId: string): StyleSeoOverride | undefined 
 }
 
 /**
- * True when the style uses the AdSense uniqueness layout: catalog description
- * stays visible, intro follows it, tips/FAQs sit below how-to content, and an
- * optional add-on card can appear under the main prompt.
+ * True when the style uses the compact AdSense uniqueness layout: top of page
+ * matches catalog (description + main prompt/copy unchanged), optional add-on
+ * sits under Copy prompt, and a short intro + collapsed tips/FAQs follow how-to.
  */
 export function styleHasUniqueContentSections(
   override: StyleSeoOverride | undefined,

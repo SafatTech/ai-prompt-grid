@@ -10,6 +10,7 @@ import {
   styleSeoOverride,
   styleSocialTitle,
 } from "../../src/lib/catalog/style-meta";
+import { STYLE_UNIQUENESS_DRAFT_ENTRIES } from "../../src/lib/catalog/style-seo-overrides-data";
 
 const SECOND = "Copy-ready prompt for ChatGPT, Gemini, and other AI image editors.";
 
@@ -179,55 +180,35 @@ describe("GSC thin-style SEO overrides", () => {
   });
 });
 
-const ADSENSE_UNIQUENESS_PILOT_IDS = [
-  "crimson-bangle-reverie",
+const DISABLED_UNIQUENESS_DRAFT_IDS = [
   "diwali-couple-poses-diya-doorway",
   "birthday-ai-photo-prompt-boy-black-gold",
   "anime-squad",
   "separate-photos-couple",
 ] as const;
 
-describe("AdSense uniqueness pilot style sections", () => {
-  it("stores intro, tips, FAQs, and addon copy without replacing title/meta", () => {
-    for (const id of ADSENSE_UNIQUENESS_PILOT_IDS) {
-      const override = styleSeoOverride(id);
-      assert.ok(override, id);
-      assert.equal(override.title, undefined, `${id} should keep catalog title`);
-      assert.equal(
-        override.description,
-        undefined,
-        `${id} should keep catalog meta description`,
-      );
-      assert.ok(override.intro?.trim(), `${id} intro`);
-      assert.ok(override.tips && override.tips.length === 3, `${id} tips`);
-      assert.ok(override.faqs && override.faqs.length === 2, `${id} faqs`);
-      assert.ok(override.addonLine?.trim(), `${id} addonLine`);
-      assert.equal(styleHasUniqueContentSections(override), true);
-
-      for (const faq of override.faqs) {
-        assert.ok(faq.question.trim(), `${id} faq question`);
-        assert.ok(faq.answer.trim(), `${id} faq answer`);
-      }
-    }
+describe("AdSense uniqueness style sections", () => {
+  it("activates only crimson-bangle-reverie with short intro, tips, FAQs, and addon", () => {
+    const id = "crimson-bangle-reverie";
+    const override = styleSeoOverride(id);
+    assert.ok(override, id);
+    assert.equal(override.title, undefined);
+    assert.equal(override.description, undefined);
+    assert.ok(override.intro?.trim());
+    const introWords = (override.intro ?? "").trim().split(/\s+/).filter(Boolean).length;
+    assert.ok(introWords <= 40, `crimson intro should stay short (${introWords} words)`);
+    assert.ok(override.tips && override.tips.length === 3);
+    assert.ok(override.faqs && override.faqs.length === 2);
+    assert.ok(override.addonLine?.trim());
+    assert.equal(styleHasUniqueContentSections(override), true);
   });
 
-  it("keeps catalog document titles for pilot styles", () => {
-    const metadata = styleMetadataTitle({
-      id: "anime-squad",
-      title: "Anime Group AI Photo Prompt (Friends Squad)",
-    });
-    assert.equal(typeof metadata, "string");
-    if (typeof metadata !== "string") return;
-    assert.equal(metadata, "Anime Group AI Photo Prompt (Friends Squad)");
-
-    const description = styleSeoDescription({
-      id: "anime-squad",
-      title: "Anime Group AI Photo Prompt (Friends Squad)",
-      description:
-        "Anime group photo prompt for friends: turn a squad picture into a polished anime friends portrait where everyone stays recognisable. Copy-paste free for Gemini.",
-    });
-    assert.match(description, /Anime group photo prompt for friends/);
-    assert.match(description, new RegExp(SECOND));
+  it("keeps the other four pilot drafts out of live SEO overrides", () => {
+    for (const id of DISABLED_UNIQUENESS_DRAFT_IDS) {
+      assert.equal(styleSeoOverride(id), undefined, `${id} must render like master`);
+      assert.ok(STYLE_UNIQUENESS_DRAFT_ENTRIES[id], `${id} draft retained in code`);
+      assert.equal(styleHasUniqueContentSections(undefined), false);
+    }
   });
 
   it("does not mark legacy GSC thin overrides as uniqueness-section pages", () => {
