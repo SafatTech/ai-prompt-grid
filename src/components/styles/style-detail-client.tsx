@@ -177,23 +177,6 @@ export function StyleDetailClient({ style, children }: Props) {
     toast("Prompt copied. Open your AI image editor and upload your photo there.");
   }
 
-  async function onCopyAddon() {
-    const line = seo?.addonLine?.trim();
-    if (!line) return;
-    const ok = await copyText(line);
-    if (!ok) {
-      toast("Could not copy automatically. Select the add-on text manually.", "error");
-      return;
-    }
-    track("prompt_copy", {
-      style_id: style.id,
-      variant_id: style.promptVariant.id,
-      tool: style.promptVariant.tool,
-      addon: true,
-    });
-    toast("Optional add-on copied. Paste it after your main prompt.");
-  }
-
   function onSaveResult() {
     if (!signedIn) {
       setPendingAction({ type: "save-result", styleId: style.id });
@@ -431,6 +414,77 @@ export function StyleDetailClient({ style, children }: Props) {
               ))}
             </ul>
           </section>
+
+          {uniqueSections ? (
+            <section
+              className="border-t border-[var(--line)] py-7"
+              data-testid="style-unique-sections"
+            >
+              {introParagraphs.length > 0 ? (
+                <p
+                  className="m-0 mb-5 max-w-[690px] text-[16px] leading-relaxed text-[#c2c0ca] sm:text-[19px]"
+                  data-testid="style-seo-intro"
+                >
+                  {introParagraphs.join(" ")}
+                </p>
+              ) : null}
+
+              {seo?.tips && seo.tips.length > 0 ? (
+                <details
+                  className="group mb-4 max-w-[690px] rounded-[14px] border border-[var(--line)] bg-[rgba(255,255,255,0.02)] open:border-[rgba(139,108,255,0.28)] open:bg-[rgba(139,108,255,0.06)]"
+                  data-testid="style-seo-tips"
+                >
+                  <summary className="cursor-pointer list-none px-4 py-3.5 marker:content-none [&::-webkit-details-marker]:hidden">
+                    <span className="flex items-center justify-between gap-3">
+                      <span className="text-[22px] font-semibold tracking-[-0.02em] text-[var(--text)]">
+                        Tips for this look
+                      </span>
+                      <span
+                        className="grid h-7 w-7 shrink-0 place-items-center rounded-md border border-[var(--line)] text-xs text-[var(--muted)] transition group-open:rotate-45 group-open:border-[rgba(139,108,255,0.35)] group-open:text-[var(--violet)]"
+                        aria-hidden
+                      >
+                        +
+                      </span>
+                    </span>
+                  </summary>
+                  <ol className="m-0 list-decimal space-y-2.5 border-t border-[var(--line)] px-4 py-4 pl-9 text-sm leading-relaxed text-[#d2cfd7]">
+                    {seo.tips.map((tip) => (
+                      <li key={tip}>{tip}</li>
+                    ))}
+                  </ol>
+                </details>
+              ) : null}
+
+              {seo?.faqs && seo.faqs.length > 0 ? (
+                <div className="max-w-[690px]" data-testid="style-seo-faqs">
+                  <h2 className="mb-4 text-[22px]">FAQs</h2>
+                  <div className="grid gap-2.5">
+                    {seo.faqs.map((faq) => (
+                      <details
+                        key={faq.question}
+                        className="group rounded-[14px] border border-[var(--line)] bg-[rgba(255,255,255,0.02)] open:border-[rgba(139,108,255,0.28)] open:bg-[rgba(139,108,255,0.06)]"
+                      >
+                        <summary className="cursor-pointer list-none px-4 py-3.5 text-sm font-semibold text-[#e8e6ef] marker:content-none [&::-webkit-details-marker]:hidden">
+                          <span className="flex items-start justify-between gap-3">
+                            <span>{faq.question}</span>
+                            <span
+                              className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-md border border-[var(--line)] text-[11px] text-[var(--muted)] transition group-open:rotate-45 group-open:border-[rgba(139,108,255,0.35)] group-open:text-[var(--violet)]"
+                              aria-hidden
+                            >
+                              +
+                            </span>
+                          </span>
+                        </summary>
+                        <p className="m-0 border-t border-[var(--line)] px-4 py-3.5 text-sm leading-relaxed text-[#d2cfd7]">
+                          {faq.answer}
+                        </p>
+                      </details>
+                    ))}
+                  </div>
+                </div>
+              ) : null}
+            </section>
+          ) : null}
         </article>
 
         <aside
@@ -512,30 +566,6 @@ export function StyleDetailClient({ style, children }: Props) {
               <CopyIcon />
               Copy prompt
             </Button>
-            {seo?.addonLine ? (
-              <div
-                className="sm:col-span-2 flex items-start gap-3 rounded-[12px] border border-[rgba(103,216,178,0.2)] bg-[rgba(103,216,178,0.05)] px-3 py-2.5"
-                data-testid="style-addon-card"
-              >
-                <div className="min-w-0 flex-1">
-                  <p className="m-0 mb-1 text-[10px] font-bold tracking-[0.06em] text-[#9fd9c4] uppercase">
-                    Optional add-on
-                  </p>
-                  <p className="m-0 text-[12px] leading-relaxed text-[#d7efe6]">
-                    {seo.addonLine}
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  className="inline-flex shrink-0 cursor-pointer items-center gap-1.5 rounded-lg border border-[var(--line)] bg-[rgba(255,255,255,0.04)] px-2.5 py-1.5 text-[11px] font-bold text-[#c9efe0] hover:border-[var(--line-strong)]"
-                  data-testid="copy-addon-line"
-                  onClick={onCopyAddon}
-                >
-                  <CopyIcon />
-                  Copy
-                </button>
-              </div>
-            ) : null}
             <Button variant="secondary" onClick={onSave}>
               Save to collection
             </Button>
@@ -577,72 +607,6 @@ export function StyleDetailClient({ style, children }: Props) {
               Why does this use an external tool?
             </button>
           </div>
-
-          {uniqueSections ? (
-            <section
-              className="mt-5 border-t border-[var(--line)] pt-[18px]"
-              data-testid="style-unique-sections"
-            >
-              {introParagraphs.length > 0 ? (
-                <p
-                  className="m-0 mb-3 text-[13px] leading-relaxed text-[#c2c0ca]"
-                  data-testid="style-seo-intro"
-                >
-                  {introParagraphs.join(" ")}
-                </p>
-              ) : null}
-
-              {seo?.tips && seo.tips.length > 0 ? (
-                <details
-                  className="group mb-2.5 rounded-[12px] border border-[var(--line)] bg-[rgba(255,255,255,0.02)] open:border-[rgba(139,108,255,0.28)] open:bg-[rgba(139,108,255,0.06)]"
-                  data-testid="style-seo-tips"
-                >
-                  <summary className="cursor-pointer list-none px-3.5 py-3 text-[13px] font-semibold text-[#e8e6ef] marker:content-none [&::-webkit-details-marker]:hidden">
-                    <span className="flex items-center justify-between gap-3">
-                      <span>Tips for this look</span>
-                      <span
-                        className="grid h-6 w-6 shrink-0 place-items-center rounded-md border border-[var(--line)] text-[11px] text-[var(--muted)] transition group-open:rotate-45 group-open:border-[rgba(139,108,255,0.35)] group-open:text-[var(--violet)]"
-                        aria-hidden
-                      >
-                        +
-                      </span>
-                    </span>
-                  </summary>
-                  <ol className="m-0 list-decimal space-y-2 border-t border-[var(--line)] px-3.5 py-3 pl-8 text-[12px] leading-relaxed text-[#d2cfd7]">
-                    {seo.tips.map((tip) => (
-                      <li key={tip}>{tip}</li>
-                    ))}
-                  </ol>
-                </details>
-              ) : null}
-
-              {seo?.faqs && seo.faqs.length > 0 ? (
-                <div className="grid gap-2.5" data-testid="style-seo-faqs">
-                  {seo.faqs.map((faq) => (
-                    <details
-                      key={faq.question}
-                      className="group rounded-[12px] border border-[var(--line)] bg-[rgba(255,255,255,0.02)] open:border-[rgba(139,108,255,0.28)] open:bg-[rgba(139,108,255,0.06)]"
-                    >
-                      <summary className="cursor-pointer list-none px-3.5 py-3 text-[13px] font-semibold text-[#e8e6ef] marker:content-none [&::-webkit-details-marker]:hidden">
-                        <span className="flex items-start justify-between gap-3">
-                          <span>{faq.question}</span>
-                          <span
-                            className="mt-0.5 grid h-6 w-6 shrink-0 place-items-center rounded-md border border-[var(--line)] text-[11px] text-[var(--muted)] transition group-open:rotate-45 group-open:border-[rgba(139,108,255,0.35)] group-open:text-[var(--violet)]"
-                            aria-hidden
-                          >
-                            +
-                          </span>
-                        </span>
-                      </summary>
-                      <p className="m-0 border-t border-[var(--line)] px-3.5 py-3 text-[12px] leading-relaxed text-[#d2cfd7]">
-                        {faq.answer}
-                      </p>
-                    </details>
-                  ))}
-                </div>
-              ) : null}
-            </section>
-          ) : null}
         </aside>
       </section>
 

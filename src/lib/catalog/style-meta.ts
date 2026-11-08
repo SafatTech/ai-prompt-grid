@@ -76,13 +76,15 @@ export function styleSeoOverride(styleId: string): StyleSeoOverride | undefined 
 
 /**
  * True when the style uses the compact AdSense uniqueness layout: top of page
- * matches catalog (description + main prompt/copy unchanged), optional add-on
- * sits under Copy prompt, and a short intro + collapsed tips/FAQs follow how-to.
+ * matches catalog (description + main prompt/copy unchanged); a short intro and
+ * collapsed tips/FAQs render in the left column below Limitations.
+ * Gated on `faqs` so legacy GSC thin overrides (intro + tips only) keep their
+ * existing layout. `addonLine` may still be stored for a later redesign.
  */
 export function styleHasUniqueContentSections(
   override: StyleSeoOverride | undefined,
 ): boolean {
-  return Boolean(override?.faqs?.length || override?.addonLine);
+  return Boolean(override?.faqs?.length);
 }
 
 /**
