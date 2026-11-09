@@ -4683,5 +4683,2805 @@ export const STYLE_UNIQUENESS_ENTRIES: Readonly<
     ],
     addonLine: `Want a quieter glass-skyline dusk? Add: keep the high balcony, modern glass skyline ambience, and elevated evening outfit, but soften amber city lights and calm the pose—no named landmarks, logos, or champagne props.`,
   },
+  "snowy-valley-winter-ai-photo-prompt-boys": {
+    intro: `Boy’s winter travel portrait in a plain puffer and wool beanie amid snow-covered pines and distant white peaks. Light falling snow, crisp blue sky, and a confident hands-in-pockets stance from one clear chest-up photo.`,
+    tips: [
+      `Use a sharp chest-up or waist-up photo in even daylight—group shots and heavy filters make the puffer edges smear.`,
+      `If the jacket looks shiny or logo-heavy, ask for a plain matte puffer with a simple wool beanie and no brand marks.`,
+      `When snow looks pasted on, ask for light natural snowfall and bright snow highlights that do not stick to eyelashes in clumps.`,
+      `Keep clothing and pose off so the look can place you in the pine valley with hands in pockets while locking your face.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a photo already taken in the mountains?`,
+        answer: `No. A clear indoor or outdoor portrait works; the prompt builds the snowy pine valley when pose is not preserved.`,
+      },
+      {
+        question: `Will my own jacket stay?`,
+        answer: `Only if you turn clothing preservation on. By default you get a plain puffer and beanie while your face stays exact.`,
+      },
+      {
+        question: `Why does the snow look fake?`,
+        answer: `Ask for light falling snow with soft depth, bright snow on the ground, and no glitter stuck to the face or jacket.`,
+      },
+      {
+        question: `Can I use a full-body selfie?`,
+        answer: `Chest-up or waist-up is safer. Very distant full-body shots make the face shrink against the peaks.`,
+      },
+    ],
+    addonLine: `Want a slightly softer travel stare? Add: keep the plain puffer, beanie, and snowy pine valley, but ease the smile and keep hands lightly in the pockets—no ski gear, no crowded trek group.`,
+  },
+  "snowfall-chai-winter-ai-photo-prompt-boys": {
+    intro: `Cozy hill-station roadside look: cable-knit sweater, wool shawl, and a steaming chai cup under warm stall bulbs at snowy dusk. Upload one clear chest-up photo of a boy or man.`,
+    tips: [
+      `Prefer a chest-up portrait with a readable face; sunglasses hide the warm chai-stall glow on the eyes.`,
+      `If the chai cup melts into a blur, ask for a clear glass or kulhad with visible steam rising naturally.`,
+      `Ask for cable-knit sweater texture and a draped wool shawl—avoid random parkas if the knit looks wrong.`,
+      `Keep pose off so the stall-side hold can appear; turn clothing on only if you must keep your own layers.`,
+    ],
+    faqs: [
+      {
+        question: `Must I already be holding chai in the photo?`,
+        answer: `No. A plain portrait is enough; the prompt adds the steaming cup and shawl when clothing and pose are not preserved.`,
+      },
+      {
+        question: `Will the tea stall look like a café indoor?`,
+        answer: `Ask for a small wooden hill-station roadside stall with warm hanging bulbs, pine trees, and cool snowy dusk behind.`,
+      },
+      {
+        question: `Why is my face orange from the lights?`,
+        answer: `Ask for warm amber stall glow balanced with cool blue snow so skin tone stays natural, not neon.`,
+      },
+      {
+        question: `Can girls use this boy’s chai look?`,
+        answer: `It is written for boys’ styling. For a balcony shawl-and-chai frame, use the girls’ shawl chai winter style instead.`,
+      },
+    ],
+    addonLine: `Want a quieter dusk sip? Add: keep the sweater, shawl, steaming chai, and snowy roadside stall, but soften the bulb glow a little—no second cup, no crowded queue of strangers.`,
+  },
+  "night-snow-street-winter-ai-photo-prompt-men": {
+    intro: `Moody night snowfall on a city street: dark jacket over turtleneck and scarf, soft streetlight bokeh, walking toward camera. Best from one clear waist-up photo of a man.`,
+    tips: [
+      `Upload a waist-up portrait with a sharp face; night selfies with neon filters fight the cinematic street grade.`,
+      `If bokeh turns into coloured blobs on clothing, ask for soft warm streetlight circles only in the background.`,
+      `Ask for a dark jacket over a turtleneck with a simple scarf—avoid bright sports logos.`,
+      `Keep pose off for the walking-toward-camera stance; rerun if the face morphs under snowfall.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a night photo as the source?`,
+        answer: `No. A clear daylight portrait works; the look builds the snowy night street and streetlight bokeh for you.`,
+      },
+      {
+        question: `Will parked cars appear behind me?`,
+        answer: `Often yes as soft snow-covered shapes. Ask to keep them softly blurred if they look sharp or branded.`,
+      },
+      {
+        question: `Why does snowfall hide my eyes?`,
+        answer: `Ask for gentle snowfall that stays mostly in the mid-ground, with sharp focus on the eyes and face.`,
+      },
+      {
+        question: `Can I keep my own coat?`,
+        answer: `Turn clothing preservation on. Otherwise the default restsyles into the dark jacket and turtleneck set.`,
+      },
+    ],
+    addonLine: `Want a quieter night walk? Add: keep the dark jacket, turtleneck, scarf, and snowy night street, but reduce snow density near the face—no umbrellas, no busy crowd closing in.`,
+  },
+  "wooden-cabin-window-winter-ai-photo-prompt-boys": {
+    intro: `Indoor winter calm: knit cardigan over a hoodie beside a frosted cabin window with snow falling outside and warm fairy lights. One clear chest-up photo is enough.`,
+    tips: [
+      `Use a chest-up selfie with even light; harsh bathroom flash fights the cozy pastel cabin mood.`,
+      `If the window frost looks plastic, ask for a realistic frosted pane with soft snowfall visible outside.`,
+      `Ask for a knit cardigan layered over a hoodie—avoid puffer jackets that break the indoor look.`,
+      `Keep pose off so you can be seated by the window; preserve clothing only if you need your own layers.`,
+    ],
+    faqs: [
+      {
+        question: `Must my photo already show a cabin?`,
+        answer: `No. Any clear portrait works; the prompt builds the wooden cabin interior and snowy window.`,
+      },
+      {
+        question: `Will I look like I’m outside in the snow?`,
+        answer: `This is an indoor look. You stay by the window with snow falling outside, not standing in a valley.`,
+      },
+      {
+        question: `Why do fairy lights stick to my hair?`,
+        answer: `Ask for warm fairy lights in the cabin background only, not wrapped around the head or face.`,
+      },
+      {
+        question: `Is a blurry bedroom selfie okay?`,
+        answer: `Avoid blur. Soft indoor light is fine, but the face must stay sharp for identity lock.`,
+      },
+    ],
+    addonLine: `Want a quieter cabin corner? Add: keep the cardigan-over-hoodie, frosted window, and wooden cabin interior, but dim the fairy lights slightly—no outdoor trek gear, no second person in frame.`,
+  },
+  "pheran-snow-garden-winter-ai-photo-prompt-girls": {
+    intro: `Graceful winter valley frame for girls: embroidered woolen pheran and soft scarf in a snowy Kashmir-style garden with bare chinar trees and misty peaks. Use one clear chest-up or waist-up photo.`,
+    tips: [
+      `Upload a sharp chest-up or waist-up photo; beauty filters flatten embroidery and skin texture.`,
+      `If the pheran looks like a plain coat, ask for an embroidered woolen pheran with visible Kashmiri-style stitch detail.`,
+      `Keep any head covering from your source—ask to preserve scarf or dupatta draping if it drifts.`,
+      `When snow turns glittery, ask for gentle natural snowfall and soft misty mountains behind the wooden fence.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a photo from Kashmir already?`,
+        answer: `No. A clear everyday portrait works; the look builds the snowy garden, chinar-style trees, and misty peaks.`,
+      },
+      {
+        question: `Will my hijab or scarf stay?`,
+        answer: `Head covering is meant to stay. If it changes, ask to keep your exact scarf or covering from the source.`,
+      },
+      {
+        question: `Can I wear my own pheran?`,
+        answer: `Turn clothing preservation on. By default the prompt dresses you in an embroidered woolen pheran while locking your face.`,
+      },
+      {
+        question: `Why does embroidery look painted on?`,
+        answer: `Ask for realistic wool fabric with fine embroidered motifs and soft winter pastel light—no flat stickers.`,
+      },
+    ],
+    addonLine: `Want a softer garden glance? Add: keep the embroidered pheran, soft scarf, and snowy valley garden, but quiet the smile and ease snowfall near the lashes—no heavy jewellery sets, no tourist crowd.`,
+  },
+  "shawl-chai-winter-ai-photo-prompt-girls": {
+    intro: `Wrapped in a soft wool shawl over a sweater, holding steaming chai on a wooden balcony above snowy pine hills. Gentle snowfall and warm cozy glow from one clear chest-up photo.`,
+    tips: [
+      `Use a chest-up portrait with a clear face; side profiles hide how the shawl frames the cheeks.`,
+      `If steam vanishes, ask for a visible steaming cup of chai held naturally near the chest.`,
+      `Ask for a soft woolen shawl draped over a sweater—avoid long camel coats that belong to the avenue look.`,
+      `Keep pose off for the balcony hold; preserve clothing only when you must keep your own wrap.`,
+    ],
+    faqs: [
+      {
+        question: `Must I already be on a balcony?`,
+        answer: `No. Indoor or outdoor portraits work; the prompt builds the wooden hill-station balcony and snowy pine view.`,
+      },
+      {
+        question: `Will my hair colour change in the cold light?`,
+        answer: `Ask to keep exact hair colour and skin tone with warm cozy glow balanced against cool snowy shadows.`,
+      },
+      {
+        question: `Why does the chai cup look empty?`,
+        answer: `Ask for a filled cup with gentle steam rising, held naturally—no oversized prop mugs covering the face.`,
+      },
+      {
+        question: `Is this the same as the boys’ snowfall chai stall?`,
+        answer: `No. This is a balcony shawl-and-chai frame for girls; the boys’ version uses a roadside tea stall and cable-knit sweater.`,
+      },
+    ],
+    addonLine: `Want a calmer balcony sip? Add: keep the wool shawl, sweater, steaming chai, and snowy pine balcony, but soften amber highlights on the cheeks—no second mug, no crowded café tables.`,
+  },
+  "long-coat-snowfall-winter-ai-photo-prompt-girls": {
+    intro: `Elegant long camel wool coat with knit muffler and gloves on a snowy tree-lined avenue—soft falling snow, silver-gray cinematic grade. Best from a waist-up or full-body photo of a girl or woman.`,
+    tips: [
+      `Prefer waist-up or full-body framing so the long coat length reads; tight selfies crop the hem awkwardly.`,
+      `If the coat turns black or navy, ask for a camel wool long coat with a knit muffler and simple gloves.`,
+      `When film grain gets muddy, ask for gentle grain with luminous highlights and deep romantic shadows—not heavy noise.`,
+      `Keep pose off for the walking snowfall stance; turn clothing on only to keep your own coat.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a full-body photo?`,
+        answer: `Waist-up works; full-body shows the coat length better. Very cropped headshots hide the muffler and gloves.`,
+      },
+      {
+        question: `Will the look stay black-and-white?`,
+        answer: `It leans soft cinematic monochrome with silver-gray midtones. Ask to keep natural warm skin if the face goes fully grey.`,
+      },
+      {
+        question: `Why do gloves fuse with the coat sleeves?`,
+        answer: `Ask for distinct knit gloves and clean coat cuffs with soft snowfall around the hands—not melted into fabric.`,
+      },
+      {
+        question: `Can I keep trainers visible?`,
+        answer: `Defaults focus on coat and muffler. If shoes appear oddly, ask for simple winter boots that match the avenue mood.`,
+      },
+    ],
+    addonLine: `Want a quieter avenue walk? Add: keep the camel long coat, muffler, gloves, and snowy tree-lined avenue, but ease the walking pace and soften distant lamp bokeh—no umbrellas, no shopping bags.`,
+  },
+  "fairy-lights-sweater-winter-ai-photo-prompt-girls": {
+    intro: `Dreamy night indoor winter close-up: oversized knit sweater, warm fairy lights, and a frosted window with snow outside. One clear chest-up selfie or portrait of a girl or woman works best.`,
+    tips: [
+      `Use a sharp chest-up selfie; heavy beauty filters fight natural skin texture under fairy-light glow.`,
+      `If lights wrap around the neck, ask for warm fairy lights in the bedroom background only, not as a body garland.`,
+      `Ask for an oversized knit sweater with visible ribbing—avoid formal coats that break the cozy night mood.`,
+      `Keep pose off for the dreamy close framing; preserve clothing only if you want your own sweater.`,
+    ],
+    faqs: [
+      {
+        question: `Must my room already have fairy lights?`,
+        answer: `No. A plain selfie works; the prompt builds the cozy bedroom corner, frosted window, and warm lights.`,
+      },
+      {
+        question: `Will snow appear inside the room?`,
+        answer: `Snow stays outside the frosted window. Ask to keep flakes outdoors if they start drifting indoors.`,
+      },
+      {
+        question: `Why does my face look over-smoothed?`,
+        answer: `Ask to keep natural skin texture with soft amber highlights and cool snowy window light—no beauty-filter skin.`,
+      },
+      {
+        question: `Is a group selfie okay?`,
+        answer: `Use one person only. Extra faces confuse the close dreamy crop.`,
+      },
+    ],
+    addonLine: `Want a softer night glow? Add: keep the oversized knit sweater, frosted window, and fairy lights, but dim the amber highlights slightly—no string lights on the face, no outdoor street props.`,
+  },
+  "snowy-mountain-couple-winter-ai-photo-prompt": {
+    intro: `Couple winter viewpoint: matching plain jackets and scarves side by side at a snowy hill-station railing with pine slopes and white peaks. Upload one photo where both faces are clear.`,
+    tips: [
+      `Use one couple photo with both faces sharp and similarly lit—uneven shade makes one partner drift.`,
+      `If jackets mismatch wildly, ask for matching plain winter jackets and simple scarves with no loud logos.`,
+      `Say who stands on the left and right if positions swap; keep relative heights honest.`,
+      `Clothing preservation defaults on for this look—turn it off only if you want the matching jackets applied.`,
+    ],
+    faqs: [
+      {
+        question: `Can we upload two separate photos?`,
+        answer: `This page expects one couple frame. For two selfies, use a merge winter couple style such as the snowfall pine-path look.`,
+      },
+      {
+        question: `Will our own clothes stay?`,
+        answer: `Clothing is preserved by default here. Turn preservation off if you want matching plain jackets and scarves.`,
+      },
+      {
+        question: `Why does one face look younger?`,
+        answer: `Ask to keep each exact age and skin tone, treat you as two separate people, and avoid beautify or de-age.`,
+      },
+      {
+        question: `Do we need a railing already in the photo?`,
+        answer: `No. The prompt builds the wooden viewpoint railing, pine slopes, and distant peaks when pose is not preserved.`,
+      },
+    ],
+    addonLine: `Want a softer shared glance? Add: keep both exact faces, matching jackets, and the snowy mountain viewpoint, but quiet the smiles and lighten falling snow near the eyes—no ski poles, no third person in frame.`,
+  },
+  "shared-shawl-couple-winter-ai-photo-prompt-chai": {
+    intro: `Cozy couple porch frame: one large wool shawl over sweaters, two steaming chai cups, lantern glow on a snow-covered cottage porch at dusk. Needs one couple photo with both faces clear.`,
+    tips: [
+      `Upload a couple photo standing or sitting close; large gaps make the shared shawl look stretched.`,
+      `If cups multiply or vanish, ask for exactly two steaming chai cups held naturally.`,
+      `Ask for one continuous large wool shawl wrapping both of you—not two separate throws.`,
+      `Clothing stays on by default; turn it off only when you want the shared-shawl restyle.`,
+    ],
+    faqs: [
+      {
+        question: `Must we already share a shawl in the source?`,
+        answer: `No. A normal couple portrait works; the prompt drapes one large shawl when clothing is not forced to stay.`,
+      },
+      {
+        question: `Will chai splash on our clothes?`,
+        answer: `Ask for steady cups with gentle steam only—no spilled tea or oversized props covering faces.`,
+      },
+      {
+        question: `Why does the porch look like a city street?`,
+        answer: `Ask for a snow-covered wooden cottage porch with pine trees, soft snowfall, and warm lantern light at dusk.`,
+      },
+      {
+        question: `Can friends use this instead of a couple?`,
+        answer: `It is styled as a couple chai porch. For friends or siblings on a trip, try the Hunza-style valley merge instead.`,
+      },
+    ],
+    addonLine: `Want a quieter porch dusk? Add: keep both exact faces, the shared wool shawl, two chai cups, and snowy cottage porch, but soften the lantern glow—no third cup, no crowded dhaba benches.`,
+  },
+  "snowfall-merge-two-photos-winter-ai-prompt-couple": {
+    intro: `Merge two separate photos into one couple walking hand in hand on a quiet snowy pine path in plain winter jackets. Upload person A first and person B second in one message.`,
+    tips: [
+      `Use two sharp single-person photos with similar daylight or similar indoor light—mixed neon vs daylight merges poorly.`,
+      `Match chest-up framing and head angle when you can; extreme profile plus front face is harder to blend.`,
+      `Name who is person A and person B if positions swap; ask to keep each exact skin tone and any head covering.`,
+      `If hands look wrong while walking, ask for a natural hand-in-hand hold with five fingers each.`,
+    ],
+    faqs: [
+      {
+        question: `What order should I upload the photos?`,
+        answer: `Put person A first and person B second in the same message so each face maps correctly.`,
+      },
+      {
+        question: `Can I use one couple photo instead?`,
+        answer: `This style is built for two separate uploads. For one couple frame, use the snowy mountain viewpoint couple look.`,
+      },
+      {
+        question: `Why do our faces blend into one person?`,
+        answer: `Ask to treat A and B as two separate people, keep each face exact, and avoid beauty morphing.`,
+      },
+      {
+        question: `Will our original clothes stay?`,
+        answer: `Clothing preservation is on by default. Turn it off if you want matching plain jackets and scarves on the pine path.`,
+      },
+    ],
+    addonLine: `Want a calmer pine-path walk? Add: keep both exact faces from their source photos, plain jackets, and the snowy pine path, but ease snowfall near the eyes—no third walker, no busy ski resort signs.`,
+  },
+  "hunza-style-valley-merge-two-photos-winter-prompt": {
+    intro: `Two friends or siblings merged into one winter trip photo in a snowy northern valley—frozen river, stone houses, bare poplars, towering peaks. Upload two separate photos: person A first, person B second.`,
+    tips: [
+      `Choose two clear single-person shots with similar light and similar head size in frame.`,
+      `Ask for plain puffer jackets and wool caps if the travel layers look mismatched or logo-heavy.`,
+      `If the river looks like a road, ask for a frozen river with stone houses and bare poplar trees under white peaks.`,
+      `Keep each head covering and skin tone exact—say so if either drifts toward the other person.`,
+    ],
+    faqs: [
+      {
+        question: `Is this only for couples?`,
+        answer: `No. It is written for friends or siblings on a winter trip, though any two people can merge.`,
+      },
+      {
+        question: `Do we need real Hunza photos already?`,
+        answer: `No. Everyday portraits work; the prompt builds the snowy valley, frozen river, and stone houses.`,
+      },
+      {
+        question: `Why does one person look taller than in real life?`,
+        answer: `Ask to keep relative heights honest and place both side by side at a natural travel distance.`,
+      },
+      {
+        question: `Can we keep our own trip jackets?`,
+        answer: `Clothing is preserved by default. Turn it off only if you want plain puffers and wool caps applied.`,
+      },
+    ],
+    addonLine: `Want a softer valley travel pose? Add: keep both exact faces from their photos, puffers, wool caps, and the snowy northern valley, but quiet the smiles and soften peak haze—no crowded tourist group, no ski lift gear.`,
+  },
+  "foggy-road-hoodie-muffler-winter-ai-photo-prompt-boys": {
+    intro: `Moody foggy-road winter walk for boys: light-grey hoodie under an olive jacket, dark knit muffler, misty asphalt lined with bare trees. One clear chest-up or waist-up photo is ideal.`,
+    tips: [
+      `Use a sharp waist-up portrait; heavy contrast filters clash with soft mist and distant headlights.`,
+      `If the muffler covers the mouth oddly, ask for a dark knit muffler that leaves the face clear and natural.`,
+      `Ask for a grey hoodie under an olive jacket—avoid black leather that belongs to the dhaba look.`,
+      `Keep pose off for the walking-toward-camera stance; rerun if fog flattens facial detail.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a photo already on a foggy road?`,
+        answer: `No. A clear everyday portrait works; the look builds the misty road, bare trees, and frost along the verges.`,
+      },
+      {
+        question: `Will cars appear behind me?`,
+        answer: `Distant headlights may show softly. Ask to keep them as soft bokeh if number plates or sharp vehicles appear.`,
+      },
+      {
+        question: `Why does fog wash out my beard?`,
+        answer: `Ask for soft mist in the background with sharp focus on the face, beard, and eyes.`,
+      },
+      {
+        question: `Can I keep my own hoodie?`,
+        answer: `Turn clothing preservation on. Otherwise the default restsyles into the grey hoodie, olive jacket, and muffler.`,
+      },
+    ],
+    addonLine: `Want a quieter mist walk? Add: keep the grey hoodie, olive jacket, dark muffler, and foggy winter road, but reduce headlight glare behind—no umbrella, no busy traffic beside you.`,
+  },
+  "chai-dhaba-fog-leather-jacket-winter-ai-photo-prompt-men": {
+    intro: `Foggy roadside dhaba mood for men: black leather jacket over a cream turtleneck, steaming glass of chai under warm hanging bulbs and cool winter mist. Upload one clear chest-up photo.`,
+    tips: [
+      `Prefer a chest-up shot with a readable face; sunglasses hide the warm bulb glow in the eyes.`,
+      `If leather looks plastic, ask for realistic black leather texture over a cream turtleneck with natural folds.`,
+      `Ask for a steaming glass of chai and a kettle or wooden bench cues—avoid snowy pine valleys that break the dhaba story.`,
+      `Keep pose off so the stall-side hold can appear; preserve clothing only to keep your own jacket.`,
+    ],
+    faqs: [
+      {
+        question: `Must I already be at a dhaba?`,
+        answer: `No. Any clear portrait works; the prompt builds the foggy roadside stall, hanging bulbs, and mist.`,
+      },
+      {
+        question: `Will the jacket stay black?`,
+        answer: `Ask for a black leather jacket over a cream turtleneck if the model drifts to brown or navy.`,
+      },
+      {
+        question: `Why does chai look like coffee?`,
+        answer: `Ask for a classic steaming glass of milky chai with visible steam—not a latte art cup.`,
+      },
+      {
+        question: `Is this the same as snowfall chai for boys?`,
+        answer: `No. That look uses a sweater, wool shawl, and snowy hill-station stall; this one is leather jacket and foggy dhaba.`,
+      },
+    ],
+    addonLine: `Want a calmer dhaba sip? Add: keep the black leather jacket, cream turtleneck, steaming chai, and foggy roadside dhaba, but soften hanging-bulb intensity—no second glass, no crowded truck-stop queue.`,
+  },
+  "kurta-pashmina-shawl-snowy-pine-forest-winter-ai-photo-prompt-men": {
+    intro: `Graceful snowy pine-forest portrait for men: charcoal kurta pajama with a tan pashmina shawl under soft falling snow. Best from a waist-up or full-body photo of a boy or man.`,
+    tips: [
+      `Use waist-up or full-body framing so the kurta length and shawl drape read clearly.`,
+      `If the shawl turns into a Western scarf, ask for a tan pashmina draped over a charcoal kurta pajama.`,
+      `When snow clumps on embroidery or fabric, ask for soft falling snow with sharp fabric texture still visible.`,
+      `Keep clothing off for the kurta-pashmina restyle; turn it on only to keep your own outfit.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a forest photo already?`,
+        answer: `No. A clear portrait works; the look builds the quiet snowy pine path with frosted branches and soft mist.`,
+      },
+      {
+        question: `Will my beard style stay?`,
+        answer: `Yes—face, beard, and skin tone are meant to stay. Ask again if the beard thins or reshapes.`,
+      },
+      {
+        question: `Why does the kurta look like a shirt?`,
+        answer: `Ask for a full charcoal kurta pajama with natural folds and a tan pashmina shawl draped across the shoulders.`,
+      },
+      {
+        question: `Can I wear a coloured kurta instead?`,
+        answer: `Defaults are charcoal with tan pashmina. A colour swap would change the outfit default, so keep charcoal unless you intentionally override.`,
+      },
+    ],
+    addonLine: `Want a quieter forest pause? Add: keep the charcoal kurta, tan pashmina, and snowy pine path, but ease snowfall near the face and soften mist—no trek backpacks, no bright puffer jackets.`,
+  },
+  "pastel-coat-beanie-snowfall-winter-ai-photo-prompt-girls": {
+    intro: `Cozy pastel snowfall look for girls: pastel pink wool coat, cream beanie and mittens catching soft flakes on a snowy tree path. Upload one clear chest-up or waist-up photo.`,
+    tips: [
+      `Use a sharp chest-up or waist-up portrait; heavy pink filters can oversaturate the coat colour.`,
+      `If mittens vanish, ask for cream mittens catching snowfall with fingers natural and visible.`,
+      `Ask for a pastel pink wool coat and cream beanie—avoid camel long coats that belong to the avenue elegance look.`,
+      `Keep pose off for the catching-snowfall gesture; preserve clothing only to keep your own coat.`,
+    ],
+    faqs: [
+      {
+        question: `Must I already wear a pink coat?`,
+        answer: `No. A plain portrait works; the prompt adds the pastel pink coat, cream beanie, and mittens.`,
+      },
+      {
+        question: `Will my hijab stay under the beanie?`,
+        answer: `Ask to keep your exact head covering. If a beanie appears over a hijab oddly, say to preserve the covering and skip the beanie.`,
+      },
+      {
+        question: `Why does pink look neon?`,
+        answer: `Ask for soft pastel pink wool with creamy whites and natural warm skin—no candy neon saturation.`,
+      },
+      {
+        question: `Is this the same as the long camel coat avenue?`,
+        answer: `No. That look is an elegant camel long coat with muffler; this one is pastel pink coat, beanie, and mittens.`,
+      },
+    ],
+    addonLine: `Want a softer flake catch? Add: keep the pastel pink coat, cream beanie, mittens, and snowy tree path, but quiet the smile and lighten flake density near the eyes—no umbrellas, no busy shopping street props.`,
+  },
+  "cinematic-foggy-street-portrait-winter-ai-photo-prompt-women": {
+    intro: `Cinematic foggy dusk street for women: dark grey wool wrap coat and light scarf, wet pavement, warm streetlights and soft red taillight bokeh. One clear waist-up photo works best.`,
+    tips: [
+      `Prefer a waist-up portrait with a sharp face; night club filters clash with cool cinematic dusk grade.`,
+      `If taillights smear onto the coat, ask for soft red bokeh only in the distant background.`,
+      `Ask for a dark grey wool wrap coat with a light scarf—avoid pastel pink coats from the snowfall path look.`,
+      `Keep pose off for the three-quarter street portrait; preserve clothing only to keep your own wrap.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a night-time source photo?`,
+        answer: `No. Daylight portraits work; the prompt builds foggy dusk, wet pavement, and warm streetlights.`,
+      },
+      {
+        question: `Will the coat stay wrap-style?`,
+        answer: `Ask for a dark grey wool wrap coat with a clean belt or fold if it turns into a plain blazer.`,
+      },
+      {
+        question: `Why does fog hide my jawline?`,
+        answer: `Ask for soft street fog behind you with sharp focus on the face and scarf edges.`,
+      },
+      {
+        question: `Can men use this women’s street look?`,
+        answer: `It is styled for women. For a men’s night snowfall street, use the night snow street winter prompt instead.`,
+      },
+    ],
+    addonLine: `Want a quieter dusk stare? Add: keep the dark grey wrap coat, light scarf, and foggy city street at dusk, but soften taillight bokeh and ease wet-road reflections—no umbrella props, no crowded sidewalk extras.`,
+  },
+  "couple-foggy-road-walk-one-shawl-winter-ai-photo-prompt": {
+    intro: `Merge two photos into one cozy couple walk: sharing one large shawl with coordinated winter coats on a foggy road lined with bare trees. Upload person A first, person B second.`,
+    tips: [
+      `Use two sharp single-person photos with similar light and similar chest-up framing.`,
+      `Ask for one shared wool shawl wrapping both of you plus coordinated winter coats—not two unrelated jackets only.`,
+      `If positions swap, name left and right; keep each exact face, skin tone, and head covering.`,
+      `When hands look fused under the shawl, ask for a natural walking hold with clear shoulders.`,
+    ],
+    faqs: [
+      {
+        question: `What upload order should we use?`,
+        answer: `Person A first, person B second in one message so each face maps to the correct partner.`,
+      },
+      {
+        question: `Can we start from one couple photo?`,
+        answer: `This style expects two separate uploads. For one couple frame with a shared shawl and chai, use the cottage-porch couple look.`,
+      },
+      {
+        question: `Will our faces blend?`,
+        answer: `Ask to keep person A’s face from photo 1 and person B’s from photo 2 as two separate people—no morphing.`,
+      },
+      {
+        question: `Why does the road look snowy instead of foggy?`,
+        answer: `Ask for foggy winter mist, bare trees, light frost on the verges, and soft distant headlights—not a full snow valley.`,
+      },
+    ],
+    addonLine: `Want a softer foggy walk? Add: keep both exact faces from their photos, the shared shawl, coordinated coats, and foggy bare-tree road, but reduce distant headlight glare—no third walker, no beach or summer props.`,
+  },
+  "viral-snowflake-close-up-portrait-winter-ai-photo-prompt": {
+    intro: `Viral winter close-up: cream ribbed turtleneck, sharp snowflakes in the hair, and large foreground snowflake bokeh on a soft snowy backdrop. One clear chest-up selfie or portrait is enough.`,
+    tips: [
+      `Use a sharp close chest-up selfie; wide full-body shots waste the snowflake bokeh crop.`,
+      `If flakes look like white noise, ask for a few sharp snowflakes in the hair plus large soft foreground bokeh flakes.`,
+      `Ask for a cream ribbed turtleneck—avoid heavy coats that hide the close neckline.`,
+      `Keep pose off for the tight portrait crop; preserve clothing only to keep your own top.`,
+    ],
+    faqs: [
+      {
+        question: `Must snow already be in my photo?`,
+        answer: `No. A clear indoor selfie works; the prompt adds snowflakes in the hair and soft snowy bokeh.`,
+      },
+      {
+        question: `Will my skin tone stay natural?`,
+        answer: `Ask for natural warm skin with soft winter pastel light—no bleaching or heavy pink filters on the face.`,
+      },
+      {
+        question: `Why do snowflakes stick to my eyes?`,
+        answer: `Ask for sharp flakes in the hair and large bokeh flakes in the foreground, not resting on eyelids.`,
+      },
+      {
+        question: `Does this work for men and women?`,
+        answer: `Yes. The cream turtleneck close-up is unisex; your face, hair or beard, and skin tone stay from the source.`,
+      },
+    ],
+    addonLine: `Want a softer snowflake close-up? Add: keep the cream turtleneck, sharp hair snowflakes, and foreground bokeh, but ease flake density near the eyes—no full snowstorm wall, no outdoor trek backdrop.`,
+  },
+  "modern-saree-drape-outfit-change": {
+    intro: `Outfit swap into a sleek sage-green georgette saree with a modern drape in a bright apartment and soft daylight. Upload one clear waist-up photo of an adult woman; face stays yours.`,
+    tips: [
+      `Use a sharp waist-up portrait facing front or slight three-quarter—blurry selfies smear the georgette pleats.`,
+      `If the drape looks bridal-heavy, ask for a sleek modern sage georgette saree with a clean contemporary fall.`,
+      `Keep jewellery light; ask to remove heavy bridal sets if they appear uninvited.`,
+      `Leave clothing preservation off so the outfit change can apply; turn it on only to keep what you wore.`,
+    ],
+    faqs: [
+      {
+        question: `Will my face change with the saree?`,
+        answer: `No. This is an outfit change—your face, skin tone, hair or head covering stay while only clothing updates.`,
+      },
+      {
+        question: `Do I need to already wear a saree?`,
+        answer: `No. Everyday wear is fine; the prompt swaps you into the sage modern drape.`,
+      },
+      {
+        question: `Why does the saree look stiff?`,
+        answer: `Ask for soft georgette fabric with natural pleats and a sleek modern drape—not rigid costume folds.`,
+      },
+      {
+        question: `Can I keep my glasses?`,
+        answer: `Yes. Glasses are meant to stay if you wear them in the source photo.`,
+      },
+    ],
+    addonLine: `Want a quieter modern drape? Add: keep the sage georgette saree, modern drape, and bright apartment daylight, but soften sheer-curtain glow and ease the smile—no heavy bridal jewellery, no stage backdrop.`,
+  },
+  "pastel-shalwar-kameez-outfit-change-women": {
+    intro: `Outfit change into a powder-pink lawn shalwar kameez with chiffon dupatta in a modern garden under morning light. One clear waist-up photo of an adult woman keeps your real face.`,
+    tips: [
+      `Upload a sharp waist-up photo in even light; beauty filters flatten lawn embroidery and thread work.`,
+      `If the dupatta vanishes, ask for a light chiffon dupatta draped naturally over the powder-pink kameez.`,
+      `Ask for soft pastel pink lawn—not neon magenta or heavy bridal zari.`,
+      `Keep clothing off for the outfit swap; preserve pose only if you must keep your exact stance.`,
+    ],
+    faqs: [
+      {
+        question: `Must I already wear shalwar kameez?`,
+        answer: `No. Any clear waist-up photo works; the prompt changes only the outfit into the pastel suit.`,
+      },
+      {
+        question: `Will my hijab stay?`,
+        answer: `Hair and head covering are meant to stay. If the dupatta replaces a hijab wrongly, ask to keep your exact covering.`,
+      },
+      {
+        question: `Why does pink look too bright?`,
+        answer: `Ask for powder-pink lawn with soft pastel spring colour and natural skin—no candy saturation.`,
+      },
+      {
+        question: `Is this a bridal look?`,
+        answer: `No. It is a fresh everyday pastel shalwar kameez outfit change, not bridal wear.`,
+      },
+    ],
+    addonLine: `Want a fresher garden finish? Add: keep the powder-pink lawn suit, chiffon dupatta, and modern garden path, but soften morning highlights on the fabric—no heavy bridal jewellery, no indoor studio sweep.`,
+  },
+  "party-lehenga-outfit-change": {
+    intro: `Non-bridal party outfit swap: mint-and-silver sequin lehenga under warm string lights on an evening event lawn. Upload one clear waist-up photo of an adult woman; keep your real face.`,
+    tips: [
+      `Use a sharp waist-up or three-quarter photo so lehenga detail can read without cropping oddly at the chest.`,
+      `If it turns into a red bridal lehenga, ask for mint-and-silver sequin and mirror work—explicitly non-bridal.`,
+      `Ask to keep jewellery elegant but light; remove heavy matha patti if a wedding set appears.`,
+      `Leave clothing preservation off so the party lehenga can replace your current dress.`,
+    ],
+    faqs: [
+      {
+        question: `Is this a bridal lehenga prompt?`,
+        answer: `No. It is a non-bridal party lehenga in mint and silver for evening events.`,
+      },
+      {
+        question: `Will my face stay the same?`,
+        answer: `Yes. Only the outfit changes; face, skin tone, and hair or head covering stay from your photo.`,
+      },
+      {
+        question: `Do I need an event photo already?`,
+        answer: `No. A plain indoor portrait works; the look builds the evening lawn and warm string lights.`,
+      },
+      {
+        question: `Why do sequins look like white noise?`,
+        answer: `Ask for realistic sequin and mirror work with soft string-light glow—not glitter sprayed on skin.`,
+      },
+    ],
+    addonLine: `Want a softer evening glam? Add: keep the mint-and-silver party lehenga, sequin work, and string-lit event lawn, but ease sparkle intensity near the face—no bridal red, no stage smoke.`,
+  },
+  "blazer-power-suit-outfit-change-women": {
+    intro: `Professional outfit change into an ivory double-breasted power suit with wide-leg trousers in a bright glass office. One clear waist-up photo of an adult woman locks your real face.`,
+    tips: [
+      `Use a sharp front or three-quarter waist-up photo; slumped casual crops make the blazer shoulders sag.`,
+      `If the suit turns black or navy, ask for an ivory double-breasted power suit with clean wide-leg trousers.`,
+      `Ask for a modern glass office with soft city-view bokeh and no readable signage.`,
+      `Keep clothing preservation off for the outfit swap; turn it on only to keep your own clothes.`,
+    ],
+    faqs: [
+      {
+        question: `Will this change my face for LinkedIn?`,
+        answer: `Your face stays exact. Only the outfit becomes the ivory power suit while identity is locked.`,
+      },
+      {
+        question: `Must I already wear formal clothes?`,
+        answer: `No. Casual source photos work; the prompt handles the outfit change into the suit.`,
+      },
+      {
+        question: `Why does ivory look yellow?`,
+        answer: `Ask for clean ivory fabric under soft daylight with natural skin highlights—not warm orange cast on the suit.`,
+      },
+      {
+        question: `Can I keep my glasses?`,
+        answer: `Yes. Glasses stay if they are in your source photo.`,
+      },
+    ],
+    addonLine: `Want a calmer office polish? Add: keep the ivory power suit, wide-leg trousers, and bright glass office, but soften daylight on the lapels and ease the smile—no loud logos, no party sequins.`,
+  },
+  "modest-maxi-abaya-chic-outfit-change": {
+    intro: `Modest outfit swap into a flowing taupe abaya-chic crepe maxi on a sunlit modern terrace with cream stone and olive pots. Upload one clear waist-up photo of an adult woman.`,
+    tips: [
+      `Use a sharp waist-up portrait; extreme crops hide how the maxi falls from the shoulders.`,
+      `If the dress looks tight or bodycon, ask for a flowing taupe crepe abaya-style maxi with modest coverage.`,
+      `Keep your exact head covering—ask to preserve hijab or scarf if the model restyles hair.`,
+      `Leave clothing off so the modest maxi can apply; avoid adding flashy party embellishment.`,
+    ],
+    faqs: [
+      {
+        question: `Is this only for abaya wearers?`,
+        answer: `It is a modest abaya-chic maxi outfit change. Anyone wanting that flowing taupe look can use it.`,
+      },
+      {
+        question: `Will my hijab stay?`,
+        answer: `Head covering is meant to stay. If it changes, ask to keep your exact covering from the source.`,
+      },
+      {
+        question: `Do I need a terrace photo already?`,
+        answer: `No. A clear indoor portrait works; the prompt builds the modern terrace and soft golden-hour light.`,
+      },
+      {
+        question: `Why does taupe look grey or brown wrong?`,
+        answer: `Ask for warm taupe crepe with natural fabric folds under gentle sun—not cold grey or muddy brown.`,
+      },
+    ],
+    addonLine: `Want a softer terrace breeze? Add: keep the taupe abaya-chic maxi, flowing crepe, and modern terrace light, but ease golden-hour intensity on the fabric—no heavy embroidery panels, no crowded café tables.`,
+  },
+  "black-shalwar-kameez-outfit-change-men": {
+    intro: `Men’s outfit change into a tailored jet-black shalwar kameez with band collar in a modern courtyard under golden-hour light. One clear waist-up photo of an adult man keeps your real face.`,
+    tips: [
+      `Upload a sharp waist-up photo; side selfies with deep shadow make black fabric lose shape.`,
+      `If it turns into a Western suit, ask for a jet-black shalwar kameez with a clean band collar.`,
+      `Ask for warm cinematic contrast on cream stone and soft greenery—no beach or snow backdrops.`,
+      `Keep clothing preservation off for the outfit swap; preserve beard and hairstyle explicitly if either drifts.`,
+    ],
+    faqs: [
+      {
+        question: `Must I already wear shalwar kameez?`,
+        answer: `No. Casual clothes are fine; the prompt changes only the outfit into tailored black.`,
+      },
+      {
+        question: `Will my beard stay the same?`,
+        answer: `Yes—hairstyle and beard are meant to stay. Ask again if length or shape changes.`,
+      },
+      {
+        question: `Why does black look grey or shiny?`,
+        answer: `Ask for deep matte jet-black fabric with natural folds and warm golden-hour light—not plastic gloss.`,
+      },
+      {
+        question: `Is this an Eid waistcoat look?`,
+        answer: `No. This is a clean black shalwar kameez. For kurta plus emerald waistcoat, use the Eid outfit-change style.`,
+      },
+    ],
+    addonLine: `Want a quieter courtyard finish? Add: keep the jet-black shalwar kameez, band collar, and modern courtyard, but soften golden-hour rim light—no bright waistcoat colours, no heavy bridal garlands.`,
+  },
+  "kurta-waistcoat-eid-outfit-change-men": {
+    intro: `Eid outfit swap for men: off-white kurta pajama with an emerald waistcoat at a warm modern home entrance with brass lanterns and soft fairy lights. One clear waist-up photo locks your face.`,
+    tips: [
+      `Use a sharp waist-up portrait in even light; heavy filters wash out off-white kurta texture.`,
+      `If the waistcoat turns black or gold-heavy, ask for an emerald waistcoat over an off-white kurta pajama.`,
+      `Ask for a modern festive entrance with brass lanterns and fresh white flowers—not a wedding stage.`,
+      `Leave clothing off so the Eid outfit can apply; keep glasses if you wear them.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need an Eid photo already?`,
+        answer: `No. Any clear portrait works; the prompt handles the kurta-waistcoat outfit change and warm entrance.`,
+      },
+      {
+        question: `Will my face look fairer for the festive edit?`,
+        answer: `It should not. Ask to keep exact skin tone and natural texture—no lightening.`,
+      },
+      {
+        question: `Why does emerald look neon green?`,
+        answer: `Ask for rich emerald fabric with soft festive gold light—not fluorescent green.`,
+      },
+      {
+        question: `Can I keep a black kurta instead?`,
+        answer: `Defaults are off-white kurta with emerald waistcoat. Keeping black would change the outfit default; use the black shalwar kameez style for that.`,
+      },
+    ],
+    addonLine: `Want a calmer Eid doorway? Add: keep the off-white kurta, emerald waistcoat, and modern festive entrance, but soften fairy lights and ease the smile—no heavy sherwani embroidery, no crowded baithak extras.`,
+  },
+  "black-suit-outfit-change-men": {
+    intro: `Outfit swap into a slim jet-black two-piece suit with white shirt and tie in a bright industrial loft—change clothes, not a fashion campaign. One clear waist-up photo of an adult man.`,
+    tips: [
+      `Use a sharp waist-up photo; crumpled casual crops make the suit jacket look oversized.`,
+      `If the look becomes a night-city fashion shoot, ask for a clean industrial loft with large windows and soft daylight only.`,
+      `Ask for a slim black two-piece with white shirt and simple tie—no velvet tuxedo details.`,
+      `Keep clothing preservation off so the suit outfit change applies while face and beard stay locked.`,
+    ],
+    faqs: [
+      {
+        question: `Is this a studio fashion shoot prompt?`,
+        answer: `No. It is framed as an outfit swap into a slim black suit in a bright loft while your face stays exact.`,
+      },
+      {
+        question: `Will my own shirt stay?`,
+        answer: `Only if you preserve clothing. By default you get the black suit, white shirt, and tie.`,
+      },
+      {
+        question: `Why does the suit look baggy?`,
+        answer: `Ask for a slim-fit black two-piece with clean shoulders and natural sleeve length.`,
+      },
+      {
+        question: `Can I skip the tie?`,
+        answer: `Defaults include a tie. Skipping it changes the outfit default, so keep the tie unless you intentionally override.`,
+      },
+    ],
+    addonLine: `Want a cleaner loft suit swap? Add: keep the slim black suit, white shirt and tie, and industrial loft daylight, but ease contrast on the lapels—no night skyline, no runway posing props.`,
+  },
+  "leather-jacket-street-outfit-change-men": {
+    intro: `Street outfit change for men: black leather biker jacket over a white tee with jeans on a clean modern city street in late-afternoon light. Upload one clear waist-up photo.`,
+    tips: [
+      `Use a sharp waist-up portrait; neon night filters fight the cool cinematic teal street grade.`,
+      `If leather looks plastic, ask for realistic black biker leather over a plain white tee with natural creases.`,
+      `Ask for a modern street with soft storefront bokeh and no readable signs or logos.`,
+      `Leave clothing off for the outfit swap; preserve hairstyle and beard if either softens.`,
+    ],
+    faqs: [
+      {
+        question: `Must I already own a leather jacket photo?`,
+        answer: `No. Everyday clothes are fine; the prompt changes the outfit into the biker jacket look.`,
+      },
+      {
+        question: `Will shop signs appear behind me?`,
+        answer: `Ask for blurred glass storefronts with no readable text or logos.`,
+      },
+      {
+        question: `Why does the jacket look brown?`,
+        answer: `Ask for a black leather biker jacket with a plain white tee underneath.`,
+      },
+      {
+        question: `Is this the foggy chai dhaba leather look?`,
+        answer: `No. That winter style adds fog and chai at a dhaba; this is a daylight street outfit change with tee and jeans.`,
+      },
+    ],
+    addonLine: `Want a quieter street edge? Add: keep the black biker jacket, white tee, jeans, and modern city street, but soften late-afternoon contrast—no motorcycle propped beside you, no heavy logo patches.`,
+  },
+  "oversized-hoodie-cargo-streetwear-outfit-change": {
+    intro: `Streetwear outfit swap: oversized grey hoodie and olive cargo trousers on a clean city side street with concrete wall and soft bokeh. One clear waist-up photo keeps your real face.`,
+    tips: [
+      `Upload a sharp waist-up photo; tight crops hide the oversized hoodie volume.`,
+      `If cargos look like formal trousers, ask for olive cargo trousers with visible pockets and an oversized grey hoodie.`,
+      `Ask for muted urban tones and a plain concrete wall—no graffiti text or brand signs.`,
+      `Keep clothing preservation off so the streetwear outfit change can apply.`,
+    ],
+    faqs: [
+      {
+        question: `Does this work only for men?`,
+        answer: `The page targets a men’s waist-up source, but the streetwear swap can still lock any adult face from a clear photo.`,
+      },
+      {
+        question: `Must I already wear a hoodie?`,
+        answer: `No. Any clear portrait works; the prompt changes only the outfit.`,
+      },
+      {
+        question: `Why does grey look purple?`,
+        answer: `Ask for muted grey hoodie fabric under overcast daylight—no colour cast on the fleece.`,
+      },
+      {
+        question: `Will graffiti text appear on the wall?`,
+        answer: `Ask for a plain concrete wall with soft bokeh and no signage or graffiti text.`,
+      },
+    ],
+    addonLine: `Want a calmer streetwear finish? Add: keep the oversized grey hoodie, olive cargos, and clean city side street, but soften overcast daylight slightly—no loud brand prints, no skate-park props.`,
+  },
+  "couple-matching-black-outfits-change": {
+    intro: `Couple clothes change into matching all-black looks—blazer and suit energy—on a modern rooftop at blue hour with soft city bokeh. Upload two clear photos or one of you both; both faces stay real.`,
+    tips: [
+      `Prefer two sharp photos with similar light, or one couple frame where both faces are clear.`,
+      `If outfits mismatch, ask for coordinated all-black looks with clean blazer or suit lines—no random colours.`,
+      `Name who is on the left and right if positions swap; keep each skin tone and head covering exact.`,
+      `Leave clothing off so the matching black outfit change applies to both people.`,
+    ],
+    faqs: [
+      {
+        question: `Can we upload two separate photos?`,
+        answer: `Yes. One photo per person works, or one photo of you both. Faces stay locked while outfits match in black.`,
+      },
+      {
+        question: `Will our faces blend together?`,
+        answer: `Ask to keep both identities separate with each exact face, skin tone, and any beard or head covering.`,
+      },
+      {
+        question: `Do we need a rooftop photo already?`,
+        answer: `No. Everyday portraits work; the prompt builds the modern rooftop terrace at blue hour.`,
+      },
+      {
+        question: `Is this Eastern twinning?`,
+        answer: `No. This is matching all-black modern wear. For dusty-rose kurta and embroidered suit twinning, use the Eastern twinning outfit change.`,
+      },
+    ],
+    addonLine: `Want a quieter blue-hour twinning? Add: keep both exact faces, matching all-black outfits, and the rooftop city bokeh, but soften blue-hour contrast—no party neon signs, no third person in frame.`,
+  },
+  "couple-eastern-twinning-outfit-change": {
+    intro: `Couple Eastern twinning outfit change: coordinated dusty-rose embroidered suit and kurta in a modern lounge with cream walls and brass accents. Upload two clear photos or one of you both.`,
+    tips: [
+      `Use two sharp photos with similar lighting, or one couple frame with both faces readable.`,
+      `If colours drift apart, ask for matching dusty-rose tones across the embroidered suit and kurta.`,
+      `Keep jewellery and buttons modest; ask to remove heavy bridal sets if they appear.`,
+      `Leave clothing off so both outfits update together while faces stay exact.`,
+    ],
+    faqs: [
+      {
+        question: `Must we already wear matching clothes?`,
+        answer: `No. Everyday photos work; the prompt changes both outfits into coordinated dusty-rose Eastern wear.`,
+      },
+      {
+        question: `Can we start from two selfies?`,
+        answer: `Yes. Upload one clear photo per person, or one photo of you both, and keep both faces locked.`,
+      },
+      {
+        question: `Why does dusty-rose look hot pink?`,
+        answer: `Ask for soft dusty-rose fabric with warm lounge daylight—not neon pink.`,
+      },
+      {
+        question: `Is this the matching black rooftop look?`,
+        answer: `No. That style uses all-black modern outfits on a blue-hour rooftop; this one is Eastern dusty-rose twinning indoors.`,
+      },
+    ],
+    addonLine: `Want a softer lounge twinning? Add: keep both exact faces, dusty-rose coordinated outfits, and the modern lounge, but ease embroidery shine and quiet the smiles—no bridal red leap, no crowded hall extras.`,
+  },
+  "christmas-couple-photo-ai-prompt-decorating-the-tree": {
+    intro: `Warm festive couple tree-decorating shot: red and gold ornaments on a tall living-room tree. Upload two clear photos (or one of you both); both faces, skin tones and heights stay true.`,
+    tips: [
+      `Use one sharp photo per person with similar light, or one clear shot of you both with both faces large and unobscured.`,
+      `Clothing stays by default—wear what you want in the source, or turn clothing off only if you want coordinated festive outfits applied.`,
+      `Leave pose unlocked so the candid hanging-ornaments moment can form; lock pose only to keep your exact stance.`,
+      `If ornaments look sparse, ask for fuller red and gold baubles on a tall green tree without covering either face.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need two separate photos?`,
+        answer: `One clear photo per person works best, but a single photo of you both is fine if both faces are sharp and visible.`,
+      },
+      {
+        question: `Will our clothes change?`,
+        answer: `No by default—clothing is preserved. Turn clothing preservation off only if you want matching festive outfits instead.`,
+      },
+      {
+        question: `Can heights look wrong between us?`,
+        answer: `The look keeps realistic relative heights. Use full or three-quarter sources so neither person is cropped oddly.`,
+      },
+      {
+        question: `Why do the ornaments look painted on?`,
+        answer: `Ask for real glass red and gold baubles catching room light, with hands naturally reaching toward the tree—not flat stickers.`,
+      },
+    ],
+    addonLine: `Want a cosier living-room glow? Add: keep both faces, the tall tree and red-gold ornaments, but add soft warm fairy lights in the branches—no snow indoors, no Santa costume swap.`,
+  },
+  "ai-christmas-photo-prompt-for-couples-gift-exchange": {
+    intro: `Soft romantic gift-exchange couple portrait by a decorated tree with wrapped presents and candle lanterns. Two photos become one seated moment; both faces and identities stay locked.`,
+    tips: [
+      `Upload two clear face-forward photos with similar lighting, or one sharp photo of you both already together.`,
+      `Clothing is preserved by default so your real outfits stay; unlock clothing only for cosy festive wardrobe swaps.`,
+      `Leave pose off for the seated gift-pass moment; preserve pose only if you must keep your exact body stance.`,
+      `If gifts look empty under the tree, ask for a few neatly wrapped presents and warm lantern glow without crowding faces.`,
+    ],
+    faqs: [
+      {
+        question: `Must we already be sitting in the source photo?`,
+        answer: `No. With pose unlocked, the prompt seats you together for the gift exchange while keeping both faces recognisable.`,
+      },
+      {
+        question: `Will our skin tones stay accurate?`,
+        answer: `Yes—each person's skin tone, age and identity stay. Avoid heavy beauty filters on the uploads.`,
+      },
+      {
+        question: `Do clothes stay the same?`,
+        answer: `Yes by default. Turn clothing preservation off only if you want cosy festive outfits instead of your real clothes.`,
+      },
+      {
+        question: `Why do the gifts look blurry?`,
+        answer: `Ask for sharp wrapped presents under the tree and soft candle-lantern light that does not wash out either face.`,
+      },
+    ],
+    addonLine: `Want a sweeter exchange moment? Add: keep both faces, the tree and wrapped gifts, but tuck one small ribbon bow on the gift being passed—no giant props, no costume hats.`,
+  },
+  "christmas-couple-photoshoot-ai-prompt-candy-cane-lane": {
+    intro: `Festive evening couple walk down a candy cane lane: giant candy canes, oversized gift-box displays and decorated pines at dusk. Both faces stay yours; coats and scarves can apply when clothing is unlocked.`,
+    tips: [
+      `Start with two sharp portraits (or one of you both) with faces large; matching light between uploads helps blend cleanly.`,
+      `Clothing stays by default—unlock it only if you want coats and scarves for the outdoor evening stroll.`,
+      `Leave pose unlocked so the walking-together frame can form along the festive lane.`,
+      `If the lane looks empty, ask for giant candy canes and gift-box displays lining both sides without covering your faces.`,
+    ],
+    faqs: [
+      {
+        question: `Do we need an outdoor photo already?`,
+        answer: `No. Clear indoor selfies work; the dusk candy cane lane is built when pose is not preserved.`,
+      },
+      {
+        question: `Will our coats change?`,
+        answer: `Only if you turn clothing preservation off. By default your real clothes stay while the festive lane appears behind you.`,
+      },
+      {
+        question: `Is this daytime or evening?`,
+        answer: `Evening dusk with festive red and green light—ask for soft dusk glow if the scene comes out too bright.`,
+      },
+      {
+        question: `Why do the candy canes look fake?`,
+        answer: `Ask for large real-looking red-and-white candy canes with depth along the lane, not flat stickers stuck beside you.`,
+      },
+    ],
+    addonLine: `Want a richer dusk lane? Add: keep both faces, giant candy canes and gift displays, but add soft warm string lights on the pines—no snowstorm whiteout, no cartoon mascots.`,
+  },
+  "christmas-baby-photoshoot-ai-prompt-gift-boxes": {
+    intro: `Sweet Christmas baby studio look: little one among red, green and gold ribboned gift boxes beside a small decorated tree on a soft cream set, with the same face and age kept.`,
+    tips: [
+      `Use one clear eye-level photo of the baby or toddler with the face sharp, no filters or stickers on the skin.`,
+      `Leave clothing and pose unlocked so a festive baby outfit and cosy seated gift-box framing can apply.`,
+      `If boxes look sparse, ask for stacked wrapped gifts with satin ribbons around a small tree without hiding the face.`,
+      `When skin tone shifts, restate exact skin tone and apparent age—no beautify, lighten or age-up.`,
+    ],
+    faqs: [
+      {
+        question: `What photo works best for a baby?`,
+        answer: `One sharp eye-level shot with the face fully visible in soft daylight. Blurry or filtered photos struggle to keep identity.`,
+      },
+      {
+        question: `Will the baby's age change?`,
+        answer: `No—apparent age, face and hair stay. Avoid add-ons that ask to make the child look older or younger.`,
+      },
+      {
+        question: `Do clothes stay the same?`,
+        answer: `Not by default. Clothing is unlocked so a festive baby outfit can apply; turn clothing on only to keep the real outfit.`,
+      },
+      {
+        question: `Why do the gift boxes look empty?`,
+        answer: `Ask for stacked red, green and gold wrapped boxes with satin ribbons beside the small tree, still clear of the face.`,
+      },
+    ],
+    addonLine: `Want a softer studio Christmas feel? Add: keep the baby's face, gift boxes and small tree, but add a tiny plush toy peeking beside one box—no oversized props, no adult costumes.`,
+  },
+  "fun-ai-christmas-photo-prompt-for-kids-santa-hat-cookies": {
+    intro: `Cheerful kids' Christmas baking scene: plain Santa hat, gingerbread cookies and candy canes in a warm festive kitchen. Your child's real face, hair and age stay locked.`,
+    tips: [
+      `Upload one clear eye-level photo of the child with a sharp, unobscured face and soft daylight.`,
+      `Leave clothing and pose off so the Santa hat, festive kitchen and playful cookie-decorating pose can apply.`,
+      `If cookies look plastic, ask for real gingerbread trays and red-and-white candy canes in a jar without covering the face.`,
+      `When the hat swallows the head, ask for a plain snug Santa hat that sits above the hairline without changing the hairstyle.`,
+    ],
+    faqs: [
+      {
+        question: `Must my child already be wearing a Santa hat?`,
+        answer: `No. A normal clear photo works; the prompt adds a plain Santa hat when clothing is not preserved.`,
+      },
+      {
+        question: `Will my child's face stay the same?`,
+        answer: `Yes—face, skin tone, hair and apparent age stay. Skip filters or stickers on the source photo.`,
+      },
+      {
+        question: `Is this for toddlers only?`,
+        answer: `It works for young children with a clear face in frame. Use an eye-level photo so the kitchen scene frames naturally.`,
+      },
+      {
+        question: `Why does the kitchen look empty?`,
+        answer: `Ask for a small counter tree, gingerbread trays and candy canes in a jar with warm kitchen light behind the child.`,
+      },
+    ],
+    addonLine: `Want a messier baking moment? Add: keep the Santa hat, kitchen and gingerbread trays, but add a light dusting of flour on the counter—no full chef costume, no face paint.`,
+  },
+  "christmas-ai-photo-prompt-for-girls-ornament-tree": {
+    intro: `Elegant Christmas portrait for girls: red velvet look beside a huge ornament-covered tree, holding one shiny glass bauble. Face, skin tone and hairstyle stay yours.`,
+    tips: [
+      `Use a clear waist-up photo with even daylight and a front or slight three-quarter angle.`,
+      `Leave clothing and pose unlocked for the red velvet outfit, standing pose and bauble-in-hand detail.`,
+      `If ornaments look sparse, ask for dense red, gold and silver glass baubles with ribbon bows on a grand hallway tree.`,
+      `When the bauble hides the face, ask for the ornament held at chest height with soft reflection, not covering eyes.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a red dress in my photo?`,
+        answer: `No. A normal waist-up selfie works; red velvet styling applies when clothing is not preserved.`,
+      },
+      {
+        question: `Will my hairstyle stay?`,
+        answer: `Yes—face, hairstyle, glasses and skin tone stay. The look changes outfit and backdrop, not your identity.`,
+      },
+      {
+        question: `Is this only for kids?`,
+        answer: `No. It suits a girl or woman with a clear waist-up photo; keep the elegant standing tree pose, not a toddler set.`,
+      },
+      {
+        question: `Why do the ornaments look flat?`,
+        answer: `Ask for real glass baubles catching hallway light with depth on the tree, and one shiny ornament held naturally in hand.`,
+      },
+    ],
+    addonLine: `Want richer jewel-tone sparkle? Add: keep the red velvet, ornament tree and glass bauble, but add soft warm tree-light glow in the branches—no heavy crown, no costume mask.`,
+  },
+  "christmas-ai-photo-prompts-for-men-fireside-gifts": {
+    intro: `Warm fireside Christmas portrait for men: stone fireplace, plain red stockings, garland mantel and wrapped gifts, with a relaxed seated burgundy-blazer look while your face stays locked.`,
+    tips: [
+      `Upload a sharp waist-up photo of an adult man with even face light and no beauty filters.`,
+      `Leave clothing and pose unlocked so the burgundy blazer outfit and relaxed fireside seat can apply.`,
+      `If the fire looks fake, ask for a crackling stone fireplace with soft amber light on the face—not neon orange glow.`,
+      `When gifts crowd the frame, ask for a few wrapped presents on the floor and plain red stockings on the mantel only.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a fireplace photo already?`,
+        answer: `No. Any clear waist-up selfie works; the stone fireplace and gifts are built when pose is not preserved.`,
+      },
+      {
+        question: `Will my beard stay?`,
+        answer: `Yes—face, beard, hairstyle, glasses and skin tone stay. Only wardrobe and backdrop shift by default.`,
+      },
+      {
+        question: `Can I keep my own clothes?`,
+        answer: `Yes—turn clothing preservation on. Otherwise a smart burgundy blazer look applies for the fireside scene.`,
+      },
+      {
+        question: `Why do the stockings look busy?`,
+        answer: `Ask for plain red stockings on a garland mantel with no text or logos, plus soft firelight on your face.`,
+      },
+    ],
+    addonLine: `Want a cosier mantel moment? Add: keep the fireplace, stockings and burgundy look, but add soft candle light on the mantel—no Santa hat, no cartoon props.`,
+  },
+  "ai-christmas-photo-prompt-for-boys-with-candy-cane": {
+    intro: `Bright peppermint Christmas portrait for boys: giant red-and-white candy canes, striped studio backdrop and a playful lean, while your real face and skin tone stay.`,
+    tips: [
+      `Use one clear waist-up photo of a boy or young man with a sharp front or three-quarter face.`,
+      `Leave clothing and pose unlocked for the red-and-white outfit and playful candy-cane lean.`,
+      `If stripes look muddy, ask for clean peppermint red-and-white backdrop stripes with giant candy canes as props.`,
+      `When the cane hides the face, ask for the giant candy cane as a lean support at the side, not across the eyes.`,
+    ],
+    faqs: [
+      {
+        question: `Is this only for little kids?`,
+        answer: `It works for a boy or young man with a clear waist-up photo. Keep the playful candy-cane lean and bright studio mood.`,
+      },
+      {
+        question: `Will my face change?`,
+        answer: `No—face, hair, glasses and skin tone stay. The peppermint set and outfit build around your identity.`,
+      },
+      {
+        question: `Do I need candy cane props already?`,
+        answer: `No. A normal selfie is enough; giant candy canes and the striped backdrop are added in the edit.`,
+      },
+      {
+        question: `Why does the outfit look wrong?`,
+        answer: `Ask for a simple red-and-white festive outfit that matches the peppermint set, without logos or busy prints on the chest.`,
+      },
+    ],
+    addonLine: `Want a sweeter peppermint studio vibe? Add: keep the giant candy canes, striped backdrop and playful pose, but scatter a few wrapped candies near the feet—no face stickers, no full clown makeup.`,
+  },
+  "vintage-christmas-photo-ai-prompt-for-men-retro-film": {
+    intro: `Faded 1970s Christmas film snapshot for men: wood-panelled room, tinsel tree with big coloured bulbs and patterned gift wrap, with soft grain while your face stays recognisable.`,
+    tips: [
+      `Upload a clear waist-up photo with even light; avoid heavy modern filters so the retro film grade can sit cleanly.`,
+      `Leave clothing and pose unlocked for the retro outfit and vintage living-room framing.`,
+      `If it looks too sharp and digital, ask for soft 1970s film grain and slightly faded warm colour without blurring the face.`,
+      `When the tree looks modern, ask for a tinsel tree with big coloured bulbs and patterned-paper gifts, not today's minimal lights.`,
+    ],
+    faqs: [
+      {
+        question: `Will I look older or younger?`,
+        answer: `No. Apparent age and face stay the same; only the 1970s room, outfit and film grade change.`,
+      },
+      {
+        question: `Do I need a vintage photo already?`,
+        answer: `No. A normal clear portrait works; the retro film Christmas scene is built when clothing and pose are unlocked.`,
+      },
+      {
+        question: `Can I keep my own clothes?`,
+        answer: `Yes—preserve clothing. Otherwise a retro festive outfit matches the wood-panelled tinsel-tree set.`,
+      },
+      {
+        question: `Why does the film look too noisy?`,
+        answer: `Ask for gentle 1970s grain and faded warmth, not heavy noise that softens eyes or skin detail.`,
+      },
+    ],
+    addonLine: `Want a stronger retro snapshot feel? Add: keep the tinsel tree, wood panelling and film grain, but add a slight soft vignette at the corners—no neon cyber look, no modern LED walls.`,
+  },
+  "christmas-family-photoshoot-ai-prompt-tree-and-gifts": {
+    intro: `Warm classic Christmas family portrait: everyone gathered by a large decorated tree with wrapped gifts and a plaid throw. Every face, skin tone and relative height stays true from your group photo.`,
+    tips: [
+      `Upload one family photo of 2–6 people with every face visible, facing the camera, and even light on all faces.`,
+      `Clothing stays by default so real outfits remain; unlock clothing only if you want coordinated festive looks.`,
+      `Leave pose unlocked so the group can gather naturally around the tree and gift pile.`,
+      `If someone blends into another person, restate separate identities and realistic heights—no face swaps or merges.`,
+    ],
+    faqs: [
+      {
+        question: `How many people can be in the photo?`,
+        answer: `Best with 2–6 people in one shot where every face is clear. Hidden or side-turned faces are harder to keep accurate.`,
+      },
+      {
+        question: `Will our clothes change?`,
+        answer: `No by default—clothing is preserved. Turn it off only if you want matching festive outfits for everyone.`,
+      },
+      {
+        question: `Can kids and adults stay the right age?`,
+        answer: `Yes. Each person's age, skin tone and identity stay. Avoid blurry crops where a child's face is tiny.`,
+      },
+      {
+        question: `Why does one face look swapped?`,
+        answer: `Use a source where nobody is blocked, then ask to keep every person separate with matching features from the upload.`,
+      },
+    ],
+    addonLine: `Want a warmer classic living-room Christmas? Add: keep every face, the decorated tree and gift pile, but add soft warm tree lights in the branches—no snow indoors, no costume mascots.`,
+  },
+  "viral-christmas-ai-photo-trend-prompt-giant-ornament": {
+    intro: `Viral miniature Christmas trend: you sitting inside a giant clear glass ornament on a huge pine branch with red and gold baubles, while your real face stays locked.`,
+    tips: [
+      `Use one clear photo of a girl or woman with the face fully visible and sharp in even light.`,
+      `Leave clothing and pose unlocked so the festive outfit and inside-the-ornament seated pose can apply.`,
+      `If scale looks wrong, ask for a miniature figure clearly inside a huge glass bauble hanging from an oversized pine branch.`,
+      `When glass reflections hide the face, ask for clear glass with soft gold-emerald glow and the face readable through the orb.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a tiny prop photo already?`,
+        answer: `No. A normal clear portrait works; the giant ornament miniature scene is created in the edit.`,
+      },
+      {
+        question: `Will my face stay recognisable inside the glass?`,
+        answer: `Yes—that is the point. Face, skin tone and hair stay yours while the fantasy scale and ornament are built around you.`,
+      },
+      {
+        question: `Is clothing preserved?`,
+        answer: `Not by default. Unlock clothing stays off so a festive outfit can match the ornament scene; turn clothing on to keep your real clothes.`,
+      },
+      {
+        question: `Why do I look pasted onto the bauble?`,
+        answer: `Ask to sit fully inside the clear glass ornament with natural contact shadows and soft reflection on the glass.`,
+      },
+    ],
+    addonLine: `Want a more magical ornament glow? Add: keep the giant clear glass bauble, pine branch and your face, but add soft gold sparkle outside the glass—no cracked glass shards, no face distortion.`,
+  },
+  "ai-christmas-pet-photo-prompt-gift-box-surprise": {
+    intro: `Cute Christmas pet surprise: your dog or cat peeking from a wrapped gift box under the tree with a tiny plain red bow, while breed, fur, eyes and face stay true.`,
+    tips: [
+      `Upload one clear pet photo at eye level with face and eyes sharp—no filters that change fur colour.`,
+      `Clothing/accessory preservation stays on by default for the pet look; the tiny red bow is the festive accent.`,
+      `Leave pose unlocked so the peeking-from-the-box moment can form under the decorated tree.`,
+      `If the pet turns into a different breed, restate exact fur colour, markings, eye colour and face shape.`,
+    ],
+    faqs: [
+      {
+        question: `Does this work for dogs and cats?`,
+        answer: `Yes. Use any clear photo of your dog or cat with the face visible; breed and markings stay the same.`,
+      },
+      {
+        question: `Will my pet become a cartoon?`,
+        answer: `No. The look stays a realistic photo—same animal, just peeking from a gift box under the tree.`,
+      },
+      {
+        question: `Do I need a Christmas photo of my pet already?`,
+        answer: `No. A normal daylight pet photo is enough; the tree, wrapped box and tiny red bow are added.`,
+      },
+      {
+        question: `Why does the fur colour change?`,
+        answer: `Restate exact fur colour and markings, and avoid filtered source photos that already shift the coat.`,
+      },
+    ],
+    addonLine: `Want a cosier under-tree surprise? Add: keep the same pet, gift box and tiny red bow, but add a soft plaid blanket under the box—no human clothes on the pet, no cartoon eyes.`,
+  },
+  "cozy-fireplace-sweater-christmas-portrait-women": {
+    intro: `Modern cosy Christmas portrait for women: oversized cream cable-knit turtleneck by a sleek stone fireplace with warm fairy lights and a slim tree, while your face stays yours.`,
+    tips: [
+      `Use a clear waist-up photo of an adult woman with even light and a front or three-quarter angle.`,
+      `Leave clothing and pose unlocked for the cream cable-knit turtleneck and armchair fireside framing.`,
+      `If the knit looks flat, ask for visible cable texture on the oversized turtleneck with soft amber fireplace glow.`,
+      `When the room feels empty, ask for a slim decorated tree with warm white lights and soft mantel candles behind you.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a fireplace in my photo?`,
+        answer: `No. A normal waist-up selfie works; the modern stone fireplace and slim tree are built around you.`,
+      },
+      {
+        question: `Will my skin tone stay the same?`,
+        answer: `Yes—face, skin tone, hair and glasses stay. Warm amber light should not bleach or darken your skin.`,
+      },
+      {
+        question: `Can I keep my own sweater?`,
+        answer: `Yes—turn clothing preservation on. Otherwise the cream cable-knit turtleneck applies for this cosy look.`,
+      },
+      {
+        question: `Why does the sweater look plastic?`,
+        answer: `Ask for real cable-knit fabric texture and soft shadows in the knit, not a smooth painted surface.`,
+      },
+    ],
+    addonLine: `Want a softer modern fireside mood? Add: keep the cream cable-knit, stone fireplace and warm amber glow, but add one soft throw on the armchair—no heavy fur coats, no costume jewellery overload.`,
+  },
+  "christmas-tree-lights-bokeh-selfie": {
+    intro: `Dreamy Christmas tree-lights selfie: blush-pink fuzzy cardigan and large golden fairy-light bokeh behind your face. Close-up identity stays locked while the glow builds around you.`,
+    tips: [
+      `Upload a clear close-up of an adult woman with a sharp face; arm's-length selfie framing works especially well.`,
+      `Leave clothing and pose unlocked so the fuzzy cardigan and selfie angle with big golden bokeh can apply.`,
+      `If lights look like hard dots, ask for large round creamy golden bokeh from warm white fairy lights behind the face.`,
+      `When the face softens too much, ask to keep eyes and skin sharp while only the tree lights blur into bokeh.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a Christmas tree behind me already?`,
+        answer: `No. A clear close-up selfie works; large golden tree-light bokeh is created as the backdrop.`,
+      },
+      {
+        question: `Will my face stay sharp?`,
+        answer: `Yes—identity stays locked. Ask for creamy bokeh only in the background so eyes and skin stay clear.`,
+      },
+      {
+        question: `Is clothing changed?`,
+        answer: `By default yes—the blush-pink fuzzy cardigan applies. Preserve clothing if you want your real top to stay.`,
+      },
+      {
+        question: `Why do the lights look harsh?`,
+        answer: `Ask for large soft golden circular bokeh from warm fairy lights, not tiny bright speckles or colourful disco bulbs.`,
+      },
+    ],
+    addonLine: `Want dreamier golden bokeh? Add: keep the blush-pink cardigan, close selfie angle and golden lights, but deepen the soft warm grade slightly—no neon pink cast, no heavy beauty blur on the face.`,
+  },
+  "red-velvet-holiday-glam-portrait": {
+    intro: `Luxe modest holiday glam: deep-red velvet gown, gold drop earrings and sparkling gold bokeh in an elegant lounge with a gold-ornament tree, while your real face stays.`,
+    tips: [
+      `Use a sharp waist-up photo with even light so velvet texture and gold earrings can read cleanly.`,
+      `Leave clothing and pose unlocked for the modest deep-red velvet gown and glam lounge framing.`,
+      `If velvet looks shiny like plastic, ask for soft deep-red velvet fabric with natural folds under warm lounge light.`,
+      `When earrings overpower the face, ask for simple gold drop earrings that catch light without covering hair or cheeks.`,
+    ],
+    faqs: [
+      {
+        question: `Is the gown modest by default?`,
+        answer: `Yes—this look uses a modest deep-red velvet gown. Avoid add-ons that ask for revealing cuts.`,
+      },
+      {
+        question: `Will my jewellery from the photo stay?`,
+        answer: `Only if you preserve clothing/accessories. Otherwise gold drop earrings match the holiday lounge glam.`,
+      },
+      {
+        question: `Do I need a party venue photo?`,
+        answer: `No. A clear waist-up selfie is enough; the elegant holiday lounge and gold bokeh are added.`,
+      },
+      {
+        question: `Why does the red look orange?`,
+        answer: `Ask for deep crimson velvet under warm gold light, not a bright orange cast on the dress or skin.`,
+      },
+    ],
+    addonLine: `Want richer crimson-and-gold glam? Add: keep the deep-red velvet gown, gold earrings and lounge tree, but soften the gold sparkle bokeh behind—no heavy crown, no plunging neckline changes.`,
+  },
+  "womens-studio-christmas-photoshoot-red-backdrop": {
+    intro: `Polished women's studio Christmas shoot: modest red satin dress, gold-wrapped gift and deep-red seamless backdrop with gold bokeh. Face, hair and skin tone stay yours.`,
+    tips: [
+      `Upload one clear waist-up photo with a front or slight three-quarter angle and even light.`,
+      `Leave clothing and pose unlocked so the red satin dress and gold-gift studio pose can apply.`,
+      `If the backdrop looks wrinkled, ask for a seamless deep-red studio sweep with soft golden bokeh lights.`,
+      `When the gift hides the torso oddly, ask for one elegant gold-wrapped gift held naturally at the side.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a studio photo already?`,
+        answer: `No. A normal clear portrait works; the deep-red seamless backdrop and gold bokeh are created for you.`,
+      },
+      {
+        question: `Will my face stay the same?`,
+        answer: `Yes—face, skin tone, hair and glasses stay. Only outfit and studio Christmas set change by default.`,
+      },
+      {
+        question: `Can I keep my own dress?`,
+        answer: `Yes—preserve clothing. Otherwise a modest red satin dress with a gold-wrapped gift applies.`,
+      },
+      {
+        question: `Why does the satin look flat?`,
+        answer: `Ask for soft satin highlights and natural folds on the red dress under studio light, not a matte painted shape.`,
+      },
+    ],
+    addonLine: `Want richer red-and-gold studio polish? Add: keep the red satin dress, gold gift and deep-red backdrop, but add a few soft gold ornaments in the distance—no busy props in front of the face.`,
+  },
+  "mens-christmas-knit-sweater-portrait": {
+    intro: `Sharp men's Christmas knit portrait: forest-green merino sweater with a subtle snowflake pattern beside a tall Scandinavian pine in warm white lights, while your face and beard stay locked.`,
+    tips: [
+      `Use a clear waist-up photo of an adult man with even light and no heavy filters.`,
+      `Leave clothing and pose unlocked for the forest-green merino knit and confident waist-up tree framing.`,
+      `If the knit pattern looks loud, ask for a subtle snowflake pattern on fitted forest-green merino—not a busy cartoon print.`,
+      `When the room feels empty, ask for kraft-paper gifts and soft candlelight near a tall pine with warm white lights.`,
+    ],
+    faqs: [
+      {
+        question: `Will my beard stay?`,
+        answer: `Yes—face, hair, beard, glasses and skin tone stay. The green knit and living-room tree are what change.`,
+      },
+      {
+        question: `Do I need a Christmas sweater already?`,
+        answer: `No. A normal photo works; the forest-green merino knit applies when clothing is not preserved.`,
+      },
+      {
+        question: `Is this a funny novelty sweater look?`,
+        answer: `No—it is a sharp modern knit with a subtle pattern beside a tall pine, not a joke slogan sweater.`,
+      },
+      {
+        question: `Why does the green look neon?`,
+        answer: `Ask for rich forest-green merino under warm white tree light, not bright neon green on the fabric or skin.`,
+      },
+    ],
+    addonLine: `Want a richer forest-green Christmas mood? Add: keep the merino knit, Scandinavian tree and warm lights, but soften tree-light bokeh behind the shoulder—no Santa hat, no novelty sweater slogans.`,
+  },
+  "mens-christmas-photoshoot-dark-suit-gift-boxes": {
+    intro: `Moody men's Christmas studio look: tailored midnight-black suit seated on stacked black and gold gift boxes beside a tall tree in warm gold lights, with your real face kept.`,
+    tips: [
+      `Upload a sharp waist-up photo of an adult man; clean even light helps the dark suit read without crushing shadows.`,
+      `Leave clothing and pose unlocked for the midnight-black suit and gift-box seating pose.`,
+      `If the set looks flat, ask for stacked black and gold gift boxes, soft haze and a tall tree in warm gold lights.`,
+      `When the suit loses shape, ask for tailored black fabric with natural lapel structure under moody studio light.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need to wear a suit in my photo?`,
+        answer: `No. A clear everyday portrait works; the tailored midnight-black suit applies when clothing is unlocked.`,
+      },
+      {
+        question: `Will my skin tone stay accurate in dark light?`,
+        answer: `Yes. Ask for moody studio light that still shows true skin tone—not crushed black shadows on the face.`,
+      },
+      {
+        question: `Is this a bright cheerful Christmas look?`,
+        answer: `No—it is moody black and gold with warm tree lights, more dramatic than bright living-room cheer.`,
+      },
+      {
+        question: `Why do the gift boxes look cheap?`,
+        answer: `Ask for elegant stacked black and gold wrapped boxes with clean edges and soft studio depth.`,
+      },
+    ],
+    addonLine: `Want a deeper black-and-gold studio mood? Add: keep the midnight suit, gift-box seat and gold tree lights, but soften a light haze behind—no colourful neon, no flashy logos on the boxes.`,
+  },
+  "80s-retro-christmas-portrait": {
+    intro: `Glossy 80s fashion-editorial Christmas portrait: metallic puff-shoulder blouse, berry lip and shimmering silver-red tinsel curtain with soft film grain, while your face stays recognisable.`,
+    tips: [
+      `Use a clear chest-up photo with even light so the puff-shoulder blouse and tinsel backdrop can frame cleanly.`,
+      `Leave clothing and pose unlocked for the metallic blouse and retro studio pose.`,
+      `If it looks too modern and sharp, ask for soft film grain and glossy retro colour without blurring eyes.`,
+      `When tinsel turns into noise, ask for a shimmering silver-and-red tinsel curtain with a small retro tree and soft coloured lights.`,
+    ],
+    faqs: [
+      {
+        question: `Will my hairstyle become an 80s wig?`,
+        answer: `No. Your real hair and face stay; the look adds outfit, makeup mood and tinsel-studio backdrop around you.`,
+      },
+      {
+        question: `Do I need vintage clothes already?`,
+        answer: `No. A normal chest-up photo works; the metallic puff-shoulder blouse applies when clothing is not preserved.`,
+      },
+      {
+        question: `Is this for men and women?`,
+        answer: `It suits any adult with a clear chest-up photo. Keep the fashion-editorial tinsel studio mood rather than a kids' costume set.`,
+      },
+      {
+        question: `Why does the makeup look heavy?`,
+        answer: `Ask for soft glossy berry lip and light retro glam only—editorial, not costume face paint.`,
+      },
+    ],
+    addonLine: `Want a stronger 80s editorial Christmas vibe? Add: keep the puff-shoulder blouse, tinsel curtain and soft film grain, but add a slight glossy catchlight—no modern streetwear, no neon cyber grid.`,
+  },
+  "couple-matching-christmas-pajamas-by-tree": {
+    intro: `Cosy couple Christmas pajama portrait: matching emerald satin pajamas on a rug in front of a tall tree with warm white lights. Upload two photos; both faces and heights stay true.`,
+    tips: [
+      `Use one clear photo per person (or one of you both) with sharp faces and similar lighting between uploads.`,
+      `Leave clothing unlocked so matching emerald satin pajamas can apply to both of you.`,
+      `Leave pose unlocked for the relaxed rug pose in front of the decorated tree and wrapped gifts.`,
+      `If pajamas mismatch, ask for the same emerald satin set on both people with soft tree-light glow.`,
+    ],
+    faqs: [
+      {
+        question: `Do we need matching pajamas in the source photos?`,
+        answer: `No. Everyday photos work; matching emerald satin pajamas are applied when clothing is not preserved.`,
+      },
+      {
+        question: `Will both faces stay accurate?`,
+        answer: `Yes—both identities, skin tones and relative heights stay. Similar light in both uploads helps a lot.`,
+      },
+      {
+        question: `Can we keep our own clothes?`,
+        answer: `Yes—turn clothing preservation on. Otherwise the matching emerald pajama look is the default for this style.`,
+      },
+      {
+        question: `Why do we look different heights wrongly?`,
+        answer: `Ask to keep realistic relative heights and seat both of you naturally on the rug in front of the tree.`,
+      },
+    ],
+    addonLine: `Want a cosier matching-pajama night? Add: keep both faces, emerald satin pajamas and the tree rug pose, but add a knit throw beside you—no Santa hats, no busy slogan prints on the pajamas.`,
+  },
+  "couple-string-lights-doorway-christmas": {
+    intro: `Stylish doorway Christmas couple portrait: camel and charcoal coats framed by evergreen garland, warm string lights, a simple wreath and a lantern at dusk. Both faces stay yours.`,
+    tips: [
+      `Upload two clear photos or one of you both with front or three-quarter faces and similar light.`,
+      `Leave clothing unlocked for camel and charcoal coats with scarves in the doorway frame.`,
+      `Leave pose unlocked so you stand together in the string-lit doorway at evening ambient light.`,
+      `If lights look sparse, ask for warm white string lights in a lush evergreen garland with a simple text-free wreath.`,
+    ],
+    faqs: [
+      {
+        question: `Do we need a doorway photo already?`,
+        answer: `No. Clear portraits work; the modern doorway with garland and string lights is built when pose is unlocked.`,
+      },
+      {
+        question: `Will our coats match automatically?`,
+        answer: `The look aims for camel and charcoal coats together. Preserve clothing if you want your real outfits instead.`,
+      },
+      {
+        question: `Is this daytime?`,
+        answer: `It is evening dusk with warm string lights and cooler ambient light—ask for dusk if the scene comes out too bright.`,
+      },
+      {
+        question: `Why does the wreath show random text?`,
+        answer: `Ask for a simple wreath with no text or brands, plus clean warm string lights on the evergreen garland.`,
+      },
+    ],
+    addonLine: `Want a warmer dusk doorway glow? Add: keep both faces, coats and string-lit garland, but soften the lantern glow on the step—no snow blizzard, no logo wreath text.`,
+  },
+  "couple-christmas-market-night-stroll": {
+    intro: `Cinematic Christmas market night stroll for couples: ivory wool coat and navy peacoat arm-in-arm past wooden stalls and warm string lights, with both faces kept true.`,
+    tips: [
+      `Use two sharp photos (or one of you both) with similar lighting so both faces blend cleanly at night.`,
+      `Leave clothing unlocked for the ivory coat and navy peacoat pairing on the night stroll.`,
+      `Leave pose unlocked so the arm-in-arm market walk can form under warm stall glow.`,
+      `If signs or brands appear, ask for a generic market with no text, logos or landmarks in the background.`,
+    ],
+    faqs: [
+      {
+        question: `Do we need photos from a real Christmas market?`,
+        answer: `No. Everyday clear portraits work; a generic night market with wooden stalls is created for you.`,
+      },
+      {
+        question: `Will both faces stay recognisable at night?`,
+        answer: `Yes. Ask for cinematic warm night light that still shows true skin tone on both faces.`,
+      },
+      {
+        question: `Can we keep our own coats?`,
+        answer: `Yes—preserve clothing. Otherwise ivory wool and navy peacoat styling applies for the stroll.`,
+      },
+      {
+        question: `Why do random shop signs appear?`,
+        answer: `Ask for a generic festive market with no signs, text, brands or landmarks—only stalls, lights and soft tree blur.`,
+      },
+    ],
+    addonLine: `Want a richer night-market stroll? Add: keep both faces, ivory and navy coats and warm stall lights, but soften a lit tree blur behind—no brand signs, no crowded face-blocking props.`,
+  },
+  "christmas-snowfall-winter-coat-portrait": {
+    intro: `Cinematic Christmas snowfall portrait: tailored charcoal wool overcoat and knit scarf on a quiet lit street with gently falling snow, while your face and beard stay locked.`,
+    tips: [
+      `Upload a clear waist-up photo of an adult man with even light and a sharp front or three-quarter face.`,
+      `Leave clothing and pose unlocked for the charcoal overcoat, knit scarf and snowy evening street framing.`,
+      `If snow looks like noise, ask for gentle falling snowflakes with depth—not white speckles stuck on the face.`,
+      `When street signs appear, ask for a quiet snowy evening street with no text, signs or landmarks.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a photo taken in snow?`,
+        answer: `No. A clear indoor or outdoor portrait works; gentle snowfall and the quiet lit street are added.`,
+      },
+      {
+        question: `Will my face stay clear with snow?`,
+        answer: `Yes—ask for snow falling around you without covering eyes or sticking as white dots on skin.`,
+      },
+      {
+        question: `Can I keep my own coat?`,
+        answer: `Yes—preserve clothing. Otherwise a tailored charcoal wool overcoat and knit scarf apply.`,
+      },
+      {
+        question: `Why does the scene look blue and cold on my skin?`,
+        answer: `Ask for cool blue evening air with warm street lights that still keep your true skin tone.`,
+      },
+    ],
+    addonLine: `Want a softer snowfall evening mood? Add: keep the charcoal overcoat, knit scarf and falling snow, but soften warm lights on distant trees—no heavy blizzard whiteout, no logo scarves.`,
+  },
+  "couple-snowy-cabin-window-christmas": {
+    intro: `Warm cabin Christmas couple portrait: chunky knit sweaters on a window seat while snow falls on pines outside, with string lights on the frame. Upload two photos; both faces stay true.`,
+    tips: [
+      `Use one clear photo per person or one of you both, with sharp faces and similar lighting.`,
+      `Leave clothing unlocked so chunky knit sweaters can apply for the cosy cabin seat.`,
+      `Leave pose unlocked for the shared window-seat blanket moment with snow visible outside.`,
+      `If the window looks fake, ask for real falling snow on pine trees outside and warm string lights along the frame.`,
+    ],
+    faqs: [
+      {
+        question: `Do we need a cabin photo already?`,
+        answer: `No. Clear everyday portraits work; the wooden cabin window seat and snowy pines are built for you.`,
+      },
+      {
+        question: `Will both of us stay recognisable?`,
+        answer: `Yes—both faces, skin tones, ages and relative heights stay when you upload clear photos of each person.`,
+      },
+      {
+        question: `Can we keep our own sweaters?`,
+        answer: `Yes—turn clothing preservation on. Otherwise chunky knit sweaters match the warm cabin Christmas look.`,
+      },
+      {
+        question: `Why does the snow outside look painted?`,
+        answer: `Ask for soft real snowfall on pine trees outside the glass, with warm interior light on both faces.`,
+      },
+    ],
+    addonLine: `Want a cosier snowy cabin window mood? Add: keep both faces, chunky knits and the window seat, but add a soft shared blanket across your laps—no heavy costumes, no text on the glass.`,
+  },
+  "trending-ai-photo-prompt-for-boys-with-car-night": {
+    intro: `Cool cinematic night for boys: lean on a sleek unbadged black sports car on a rain-wet city road, neon and streetlight reflections on asphalt. Upload one clear chest-up or waist-up photo.`,
+    tips: [
+      `Chest-up or waist-up sharpness lets the dark jacket and car lines read once pose is rebuilt.`,
+      `Ask for a generic unbadged black sports car and wet-road neon reflections—no brand logos on the bodywork.`,
+      `Keep exact skin tone under night neon; blue-pink grades often lighten faces.`,
+      `Turn clothing on only to keep your real outfit; otherwise accept the dark jacket restyle.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a photo already taken with a car?`,
+        answer: `No. A clear indoor or outdoor portrait works; the wet night road and sports car build when pose is not preserved.`,
+      },
+      {
+        question: `Will a branded supercar appear?`,
+        answer: `No—the look uses a generic unbadged black sports car. Ask again if logos creep in.`,
+      },
+      {
+        question: `Is this a daylight street pose?`,
+        answer: `No—this is cool cinematic night with wet asphalt reflections. Use daylight street styles for soft sun sidewalks.`,
+      },
+      {
+        question: `Will my face stay the same?`,
+        answer: `Yes. Face, skin tone, hairstyle, and beard stay locked; only scene, outfit, and lean change unless you alter preservation.`,
+      },
+    ],
+    addonLine: `Want a quieter night lean? Add: keep the black sports car, wet city road, and dark jacket, but soften neon intensity and use a calmer lean—no brand badges, smoke machines, or extra friends.`,
+  },
+  "bike-ai-photo-prompt-for-boys-mountain-highway": {
+    intro: `Golden sunset bike portrait for boys: sit on a generic cafe-racer motorcycle on a winding mountain highway with layered peaks and an orange sky. Use one clear chest-up or waist-up photo.`,
+    tips: [
+      `Chest-up or waist-up frames keep the riding jacket and bike readable against the peaks.`,
+      `Ask for a generic cafe-racer only—no brand badges or racing numbers on the tank.`,
+      `Keep exact skin tone under sunset glow; orange skies often warm faces too far.`,
+      `If the road looks flat or fake, request winding highway curves with layered mountain peaks.`,
+    ],
+    faqs: [
+      {
+        question: `Must my photo already show a motorcycle?`,
+        answer: `No. A clear portrait is enough; the cafe-racer and mountain highway build when pose is not locked.`,
+      },
+      {
+        question: `Will a famous bike brand appear?`,
+        answer: `No. The prompt uses a generic cafe-racer without badges. Re-ask if logos show up.`,
+      },
+      {
+        question: `Is this a night city car look?`,
+        answer: `No—this is golden sunset on a mountain highway. Night sports-car leans are a different style.`,
+      },
+      {
+        question: `Helmet on or off?`,
+        answer: `Face stays fully visible by default. Ask only if you specifically want a helmet in hand, not covering your face.`,
+      },
+    ],
+    addonLine: `Want a softer mountain ride? Add: keep the cafe-racer, winding highway, and riding jacket, but ease the sunset rim and use a calmer seated pose—no helmet covering the face or brand logos on the bike.`,
+  },
+  "retro-ai-photo-prompt-for-boys-90s-vintage-jeep": {
+    intro: `Faded 90s film look for boys: denim jacket beside a vintage open-top jeep on a dusty countryside road with dry grass and warm grain. Upload one clear chest-up or waist-up photo.`,
+    tips: [
+      `Sharp chest-up or waist-up sources hold film grain better than tiny distant faces.`,
+      `Ask for a vintage open-top jeep and dusty country road—not a modern SUV showroom.`,
+      `Request warm faded colour and light grain; heavy vintage filters can muddy the face.`,
+      `Keep exact skin tone and beard—90s grades sometimes bleach complexions.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a jeep in my original photo?`,
+        answer: `No. A clear portrait works; the vintage jeep and dusty road build when pose is not preserved.`,
+      },
+      {
+        question: `Is this black-and-white?`,
+        answer: `No—it is faded colour with warm 90s film grain, not full monochrome.`,
+      },
+      {
+        question: `Will clothing stay mine?`,
+        answer: `Only if clothing preservation is on. Otherwise it restyles into a denim jacket look.`,
+      },
+      {
+        question: `Why does the jeep look like a new SUV?`,
+        answer: `Ask again for a vintage open-top jeep with dusty bodywork and no modern badges.`,
+      },
+    ],
+    addonLine: `Want a quieter 90s roadside frame? Add: keep the denim jacket, open-top jeep, and dusty country road, but soften grain slightly and use a calmer lean—no modern alloy wheels or neon city props.`,
+  },
+  "trending-ai-photo-prompt-for-boys-with-rose-red-shirt": {
+    intro: `Warm romantic daylight for boys: red shirt, bouquet of red roses, sunny old-town street with cream walls and soft blur. Use one clear chest-up or waist-up photo.`,
+    tips: [
+      `Chest-up sharpness lets the rose bouquet and red shirt read without cutting petals at the edge.`,
+      `Ask for a sunny old-town street with cream walls and green plants—not a dark studio.`,
+      `Keep exact skin tone under bright daylight; romantic grades often lighten faces.`,
+      `If the smile looks stiff, request a relaxed natural smile with roses held casually.`,
+    ],
+    faqs: [
+      {
+        question: `Must I already hold roses in my photo?`,
+        answer: `No. A clear portrait is enough; the bouquet and red shirt build when clothing and pose are not locked.`,
+      },
+      {
+        question: `Is this a sad rainy-window look?`,
+        answer: `No—this is warm romantic daylight with roses. Rainy-window sadness is a different mood.`,
+      },
+      {
+        question: `Will my hairstyle change?`,
+        answer: `Hairstyle and beard stay; only outfit, roses, and street backdrop shift unless you change settings.`,
+      },
+      {
+        question: `Can I use white roses instead?`,
+        answer: `Default is red roses with a red shirt. Use an add-on line only if you want a small colour tweak without rewriting the whole look.`,
+      },
+    ],
+    addonLine: `Want a softer rose-street mood? Add: keep the red shirt, red rose bouquet, and sunny cream-wall street, but ease saturation slightly and use a quieter smile—no heart stickers or night neon.`,
+  },
+  "kurta-pajama-ai-photo-prompt-for-boys-old-city-haveli": {
+    intro: `Classic desi everyday look for boys: white kurta pajama and waistcoat on old-city haveli steps with carved wooden doors and sandstone arches. Upload one clear chest-up or waist-up photo.`,
+    tips: [
+      `Chest-up or waist-up frames show the waistcoat and kurta cleanly against the carved doors.`,
+      `Ask for haveli courtyard steps with arched sandstone walls—not a wedding mandap or stage lights.`,
+      `Keep exact skin tone under warm heritage daylight; heritage grades can orange the face.`,
+      `This is everyday classic, not festive—avoid requesting heavy sherwani embroidery unless you want a different style.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a photo already taken in a haveli?`,
+        answer: `No. A clear portrait works; the old-city courtyard and steps build when pose is not preserved.`,
+      },
+      {
+        question: `Is this a festive wedding look?`,
+        answer: `No—it is a classic everyday kurta pajama and waistcoat look, not heavy wedding attire.`,
+      },
+      {
+        question: `Will my kurta stay if I already wore one?`,
+        answer: `Only if clothing preservation is on. Otherwise it restyles into white kurta pajama with a waistcoat.`,
+      },
+      {
+        question: `Why do festival props appear?`,
+        answer: `Ask for plain heritage daylight on haveli steps with no diyas, garlands, or stage décor.`,
+      },
+    ],
+    addonLine: `Want a quieter haveli step pose? Add: keep the white kurta pajama, waistcoat, and carved courtyard steps, but soften hard sunlight and use a calmer seated stance—no wedding florals or stage lights.`,
+  },
+  "realistic-ai-photo-prompt-for-boys-golden-hour-field": {
+    intro: `Natural golden-hour field portrait for boys: open wheat field, tall grass, soft warm sky, simple linen shirt, true skin texture. Use one clear chest-up or waist-up photo.`,
+    tips: [
+      `Sharp face and natural daylight sources keep true skin texture under golden hour.`,
+      `Ask for an open wheat field with tall grass—not a studio backdrop or city street.`,
+      `Keep exact skin tone and hairstyle; golden grades often lighten complexions and smooth pores.`,
+      `Turn clothing on only to keep your real shirt; otherwise accept the simple linen restyle.`,
+    ],
+    faqs: [
+      {
+        question: `Must my photo already be in a field?`,
+        answer: `No. A clear chest-up or waist-up portrait works; the golden-hour field builds when pose is not locked.`,
+      },
+      {
+        question: `Will my face look heavily edited?`,
+        answer: `This style aims for realistic skin texture. Ask for true pores and exact skin tone if smoothing creeps in.`,
+      },
+      {
+        question: `Is this a sad rainy indoor mood?`,
+        answer: `No—this is natural outdoor golden hour. Rainy-window sadness is a different page.`,
+      },
+      {
+        question: `Outfit too fancy?`,
+        answer: `Ask for a simple linen shirt while locking face, hair, and skin tone.`,
+      },
+    ],
+    addonLine: `Want a quieter field glow? Add: keep the wheat field, tall grass, and simple linen shirt, but soften the sun rim and use a calmer stance—no flower crowns or heavy beauty filters.`,
+  },
+  "sad-ai-photo-prompt-for-boys-rainy-window": {
+    intro: `Moody blue-and-amber sadness for boys: sit by a rain-streaked night window with warm lamp glow and blurred city lights outside, hoodie on. Upload one clear chest-up or waist-up photo.`,
+    tips: [
+      `Chest-up sharpness keeps eyes readable under mixed blue window light and amber lamp.`,
+      `Ask for rain streaks on the glass and a small warm table lamp—not a bright studio fill.`,
+      `Keep exact skin tone; moody grades can drain warmth or over-blue the face.`,
+      `Request a thoughtful quiet expression, not exaggerated crying unless you specifically want that.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a rainy night photo already?`,
+        answer: `No. A clear portrait is enough; the rain window and lamp glow build when pose is not preserved.`,
+      },
+      {
+        question: `Is this black-and-white?`,
+        answer: `No—it stays in colour with moody blue window light and warm amber lamp.`,
+      },
+      {
+        question: `Will clothing stay mine?`,
+        answer: `Only if clothing preservation is on. Otherwise it restyles into a simple hoodie look.`,
+      },
+      {
+        question: `Why does it look cheerful?`,
+        answer: `Ask for a thoughtful sad expression with rain streaks and soft lamp light, not a bright smile.`,
+      },
+    ],
+    addonLine: `Want a quieter rainy-window mood? Add: keep the rain-streaked glass, warm lamp, and hoodie, but soften blue contrast and use a calmer glance outside—no text overlays or heavy tears.`,
+  },
+  "attitude-ai-photo-prompt-for-boys-black-outfit": {
+    intro: `High-contrast urban attitude for boys: all-black outfit, sunglasses in hand, low-angle shot against a raw grey concrete city wall with hard afternoon shadows. Use one clear chest-up or waist-up photo.`,
+    tips: [
+      `Waist-up or chest-up sharpness helps the low-angle concrete wall read without cutting the jaw.`,
+      `Ask for a raw grey concrete wall and hard afternoon shadows—not soft golden fields.`,
+      `Keep exact skin tone under high contrast; attitude grades often crush midtones.`,
+      `Sunglasses stay in hand by default for a clear face—say so if the model puts them on.`,
+    ],
+    faqs: [
+      {
+        question: `Must my photo already be against a wall?`,
+        answer: `No. A clear portrait works; the concrete wall and low angle build when pose is not locked.`,
+      },
+      {
+        question: `Will sunglasses cover my eyes?`,
+        answer: `Default keeps sunglasses in hand so the face stays visible. Ask only if you want them worn.`,
+      },
+      {
+        question: `Is this a night neon DP?`,
+        answer: `No—this is hard afternoon light on a concrete wall. Neon rim-light DP is a different style.`,
+      },
+      {
+        question: `Outfit colour change?`,
+        answer: `Default restyles to all black unless clothing preservation is on.`,
+      },
+    ],
+    addonLine: `Want a quieter concrete attitude frame? Add: keep the all-black outfit, low-angle wall, and sunglasses in hand, but ease hard shadows slightly and calm the stance—no gang props or neon graffiti tags.`,
+  },
+  "ai-photo-prompt-for-boy-and-girl-standing-together-rooftop": {
+    intro: `Boy and girl on a city rooftop at dusk under warm string lights, matching outfits, standing side by side. Upload two clear photos (boy, then girl) or one photo of you both.`,
+    tips: [
+      `Use one clear photo per person—or one shot of you both—with faces large and sharp, no sunglasses.`,
+      `Keep similar light in both sources so dusk string lights do not mismatch skin tones.`,
+      `Ask for rooftop terrace string lights and soft skyline bokeh—not an indoor studio.`,
+      `Clothing stays by default on this style; turn it off only if you want matching outfits rebuilt.`,
+    ],
+    faqs: [
+      {
+        question: `Do we need a rooftop photo already?`,
+        answer: `No. Two clear portraits (or one together) work; the dusk rooftop and string lights build when pose is not preserved.`,
+      },
+      {
+        question: `Will both faces stay accurate?`,
+        answer: `Yes. Each face, skin tone, age, and hairstyle stay locked, with realistic relative heights.`,
+      },
+      {
+        question: `Is this a monsoon umbrella look?`,
+        answer: `No—this is a dry dusk rooftop with string lights. Monsoon umbrella is a rainy street couple style.`,
+      },
+      {
+        question: `Matching outfits required?`,
+        answer: `The look aims for matching outfits when clothing is restyled. Keep clothing on to preserve what you wore.`,
+      },
+    ],
+    addonLine: `Want a quieter rooftop dusk? Add: keep both exact faces, string lights, and side-by-side stance, but soften skyline bokeh and use calmer smiles—no extra friends or sparklers.`,
+  },
+  "aesthetic-ai-photo-editing-prompt-for-boy-and-girl-beach": {
+    intro: `Dreamy sunset beach walk for boy and girl: soft waves, low glowing sun, golden haze, light linen outfits. Made from two photos, both faces kept. Upload two clear photos or one of you both.`,
+    tips: [
+      `Faces must stay large and sharp in each source—golden haze can hide soft or tiny faces.`,
+      `Ask for calm sandy beach, soft waves, and golden backlight—not a city rooftop.`,
+      `Match lighting across both uploads so one person does not look cooler than the other.`,
+      `Clothing preserves by default; turn it off only if you want light linen restyles.`,
+    ],
+    faqs: [
+      {
+        question: `Must we already have a beach photo?`,
+        answer: `No. Two clear portraits (or one together) work; the sunset beach builds when pose is not locked.`,
+      },
+      {
+        question: `Will faces stay visible in the haze?`,
+        answer: `Yes—the style keeps both faces readable. Ask to reduce haze near the eyes if it gets too strong.`,
+      },
+      {
+        question: `Is this a monsoon street couple look?`,
+        answer: `No—this is a golden sunset beach walk. Monsoon umbrella uses rain and one shared umbrella.`,
+      },
+      {
+        question: `Heights look wrong?`,
+        answer: `Ask for realistic relative heights based on the source photos.`,
+      },
+    ],
+    addonLine: `Want a softer beach haze? Add: keep both exact faces, sunset walk, and light linen mood, but ease backlight intensity and keep a gentle pace—no crowded tourists or neon props.`,
+  },
+  "ai-photo-prompt-for-boy-and-girl-together-monsoon-umbrella": {
+    intro: `Fresh monsoon couple look: boy and girl share one umbrella on a rainy street with wet-road reflections, green trees, and small shops. Upload two clear photos or one of you both.`,
+    tips: [
+      `Sharp faces without sunglasses work best—rain reflections can hide soft features.`,
+      `Ask for one shared umbrella, wet road reflections, and plain shop signboards—no logo spam.`,
+      `Keep similar light in both sources so monsoon greys do not mismatch skin tones.`,
+      `Request a candid laughing moment, not a stiff studio pose.`,
+    ],
+    faqs: [
+      {
+        question: `Do we need a rainy-day photo already?`,
+        answer: `No. Two clear portraits (or one together) work; the monsoon street and umbrella build when pose is not preserved.`,
+      },
+      {
+        question: `Two umbrellas or one?`,
+        answer: `Default is one shared umbrella for a candid couple frame.`,
+      },
+      {
+        question: `Is this a sunset beach walk?`,
+        answer: `No—this is a rainy monsoon street. Beach sunset is a different couple style.`,
+      },
+      {
+        question: `Will outfits stay dry-looking?`,
+        answer: `The look uses rain-ready outfits when clothing is restyled. Keep clothing on to preserve what you wore.`,
+      },
+    ],
+    addonLine: `Want a quieter monsoon share? Add: keep both exact faces, one umbrella, and wet street reflections, but soften rain density and keep a natural laugh—no flooded streets or extra strangers crowding in.`,
+  },
+  "dp-ai-photo-prompt-for-boys-neon-rim-light": {
+    intro: `Instagram DP close-up for boys: sharp square crop, dual-colour shirt, pink and blue neon rim light on a plain dark studio backdrop. Upload one clear chest-up or waist-up photo.`,
+    tips: [
+      `Front or slight three-quarter face sharpness matters more than background for DP crops.`,
+      `Ask for pink-and-blue neon rim light and a plain dark studio gradient—not a busy street.`,
+      `Keep exact skin tone under neon; pink-blue rims often tint cheeks unnaturally.`,
+      `Request a square profile-ready crop so eyes stay centred after Instagram masking.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a studio photo already?`,
+        answer: `No. A clear chest-up portrait works; the dark backdrop and neon rim build when pose is not locked.`,
+      },
+      {
+        question: `Is this a full-body street attitude shot?`,
+        answer: `No—this is a square close-up DP with neon rim light, not a low-angle concrete wall look.`,
+      },
+      {
+        question: `Will my shirt colour stay?`,
+        answer: `Only if clothing preservation is on. Otherwise it restyles into a dual-colour shirt.`,
+      },
+      {
+        question: `Why does neon turn my skin purple?`,
+        answer: `Ask for rim light that keeps exact skin tone on the face, with colour mostly on the outline.`,
+      },
+    ],
+    addonLine: `Want a cleaner neon DP? Add: keep the dual-colour shirt, pink-blue rim light, and dark studio backdrop, but lower rim intensity slightly and keep a calm expression—no text stickers or extra props.`,
+  },
+  "luxury-life-cinematic-night-ai-photo-prompt": {
+    intro: `Moody cinematic night luxury: city terrace with string lights, dark railing, glowing skyline bokeh, and premium fabric textures. Upload one clear waist-up photo of one person.`,
+    tips: [
+      `Waist-up sharpness keeps premium fabric texture readable against skyline bokeh.`,
+      `Ask for a night city terrace with string lights and dark railing—not a bright hotel lobby.`,
+      `Keep exact skin tone under cinematic night grade; teal-orange looks often shift complexions.`,
+      `Solo only—say one person if extras appear in the terrace bokeh.`,
+    ],
+    faqs: [
+      {
+        question: `Must I already be on a terrace at night?`,
+        answer: `No. A clear waist-up portrait works; the night terrace and skyline bokeh build when pose is not preserved.`,
+      },
+      {
+        question: `Is this a daytime house terrace?`,
+        answer: `No—this is cinematic night colour on a city terrace. Daylight house terrace is a different style.`,
+      },
+      {
+        question: `Will famous towers be named?`,
+        answer: `No. Use soft glowing skyline bokeh only—avoid naming hotels or landmarks.`,
+      },
+      {
+        question: `Outfit too flashy?`,
+        answer: `Ask for premium fabric textures with a quieter cut while locking face and skin tone.`,
+      },
+    ],
+    addonLine: `Want a quieter cinematic terrace night? Add: keep the string lights, dark railing, and premium fabrics, but soften skyline bokeh and ease the colour grade—no champagne trays or named landmarks.`,
+  },
+  "quiet-luxury-terrace-women": {
+    intro: `Quiet-luxury evening terrace for women: muted knit or silk, soft city bokeh, dark blue dusk sky, modest composed pose. Upload one clear waist-up photo of an adult woman.`,
+    tips: [
+      `Waist-up sharpness lets muted knit or silk texture read without competing with city lights.`,
+      `Ask for an evening terrace with soft city bokeh—not a loud party balcony.`,
+      `Keep exact skin tone and hairstyle or head covering under warm golden evening light.`,
+      `Request a quiet composed pose; avoid asking for heavy jewellery stacks that break the quiet-luxury mood.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a terrace photo already?`,
+        answer: `No. A clear waist-up portrait works; the evening terrace and city bokeh build when pose is not locked.`,
+      },
+      {
+        question: `Is this a Dubai skyline balcony?`,
+        answer: `No—this is a general quiet-luxury dusk terrace. Dubai balcony emphasises a generic Middle-Eastern skyline.`,
+      },
+      {
+        question: `Will my head covering stay?`,
+        answer: `Yes. Hairstyle or head covering stays, along with face, skin tone, and glasses if worn.`,
+      },
+      {
+        question: `Outfit too bright?`,
+        answer: `Ask for muted knit or silk in a quiet palette while keeping your exact face.`,
+      },
+    ],
+    addonLine: `Want an even quieter dusk terrace? Add: keep the muted knit or silk, evening terrace, and soft city bokeh, but lower light intensity and use a calmer lean on the railing—no logos, champagne, or loud statement jewellery.`,
+  },
+  "dubai-balcony-women-lifestyle": {
+    intro: `Women’s luxury balcony at dusk: elevated view over a soft generic Middle-Eastern city skyline, modest casual-luxury outfit, warm city-light ambience. Upload one clear waist-up photo of an adult woman.`,
+    tips: [
+      `Waist-up framing keeps the skyline as soft ambience behind a sharp face.`,
+      `Ask for a generic Middle-Eastern skyline only—no named towers, hotels, or brands.`,
+      `Keep exact skin tone under warm golden dusk; city lights often orange the face.`,
+      `If the skyline dominates, request softer distant lights and stronger subject focus.`,
+    ],
+    faqs: [
+      {
+        question: `Will famous landmarks appear?`,
+        answer: `No. The prompt uses a generic skyline only—do not name or depict specific towers or hotels.`,
+      },
+      {
+        question: `Is this the quiet-luxury terrace page?`,
+        answer: `Quiet-luxury terrace is a general dusk city bokeh look. This one emphasises a Middle-Eastern skyline balcony for women.`,
+      },
+      {
+        question: `Do I need a balcony photo already?`,
+        answer: `No. A clear waist-up portrait works; the dusk balcony skyline builds when pose is not preserved.`,
+      },
+      {
+        question: `Outfit too formal?`,
+        answer: `Ask for modest casual-luxury styling while locking face, skin tone, and head covering if worn.`,
+      },
+    ],
+    addonLine: `Want a quieter Dubai-dusk balcony? Add: keep the elevated balcony, generic Middle-Eastern skyline ambience, and modest casual-luxury outfit, but soften warm city lights and calm the pose—no named landmarks, logos, or champagne props.`,
+  },
+  "businessman-lifestyle-lounge-ai-photo-prompt": {
+    intro: `Businessman lifestyle in a glass lounge: open-collar shirt and blazer, soft leather seating, warm lamps, city view through floor-to-ceiling windows—success vibe, not a CV headshot. Use one clear waist-up photo of an adult man.`,
+    tips: [
+      `Waist-up sharpness shows the open-collar blazer without a passport-crop feel.`,
+      `Ask for a modern glass lounge with warm lamps and soft leather—not a white studio backdrop.`,
+      `Keep exact skin tone under warm lamp light; lounge grades can orange the face.`,
+      `Say relaxed lifestyle pose, not stiff LinkedIn or passport stance.`,
+    ],
+    faqs: [
+      {
+        question: `Is this a LinkedIn headshot?`,
+        answer: `No—it is a lifestyle success portrait in a lounge, not a CV or passport crop.`,
+      },
+      {
+        question: `Must I already be in an office lounge?`,
+        answer: `No. A clear waist-up portrait works; the glass lounge builds when pose is not locked.`,
+      },
+      {
+        question: `Tie required?`,
+        answer: `Default is open-collar shirt with blazer—no tie. Ask only if you want one.`,
+      },
+      {
+        question: `Will my beard stay?`,
+        answer: `Yes. Face, skin tone, hair, and beard stay locked unless you change preservation settings.`,
+      },
+    ],
+    addonLine: `Want a quieter lounge success frame? Add: keep the open-collar blazer, glass lounge, and warm lamps, but soften window city blur and ease the pose—no laptop props, name badges, or CV headshot framing.`,
+  },
+  "old-money-aesthetic-portrait-ai-photo-prompt": {
+    intro: `Quiet old-money portrait: neutral knit or wool on soft estate garden stone steps, trimmed hedges, muted greenery, gentle daylight, no logos. Upload one clear waist-up photo of one person.`,
+    tips: [
+      `Waist-up sharpness lets knit or wool texture read against soft garden hedges.`,
+      `Ask for estate garden stone steps and muted greenery—not a neon city street.`,
+      `Keep exact skin tone under soft heritage daylight; warm grades can lighten faces.`,
+      `Avoid logo or badge requests on clothing—old-money stays quiet, unbranded, and logo-free.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a garden photo already?`,
+        answer: `No. A clear waist-up portrait works; the estate garden steps build when pose is not preserved.`,
+      },
+      {
+        question: `Is this the women’s old-money garden page?`,
+        answer: `That page is tuned for women in cream or neutral wool or linen. This one is a general old-money aesthetic for one person.`,
+      },
+      {
+        question: `Will brand logos appear?`,
+        answer: `No. Ask again if any logo or badge creeps onto clothing.`,
+      },
+      {
+        question: `Outfit too loud?`,
+        answer: `Ask for quiet neutral knit or wool while locking your exact face and skin tone.`,
+      },
+    ],
+    addonLine: `Want an even quieter estate-step frame? Add: keep the neutral knit or wool, stone steps, and trimmed hedges, but soften daylight contrast and use a calmer seated pose—no logos, flashy watches, or party décor.`,
+  },
+  "old-money-garden-women": {
+    intro: `Old-money garden editorial for women: cream or neutral wool or linen on estate stone steps, soft trees, cream daylight, quiet heritage palette—no saree or logos. Upload one clear waist-up photo of an adult woman.`,
+    tips: [
+      `Waist-up framing shows cream wool or linen cleanly against soft garden trees.`,
+      `Ask for quiet estate garden stone steps and cream daylight—not a festive courtyard.`,
+      `Keep exact skin tone and hairstyle or head covering; soft grades can bleach complexions.`,
+      `Skip saree or logo requests—this page stays cream or neutral wool or linen only.`,
+    ],
+    faqs: [
+      {
+        question: `Must my photo already show a garden?`,
+        answer: `No. A clear waist-up portrait works; the estate garden steps build when pose is not locked.`,
+      },
+      {
+        question: `Is a saree included?`,
+        answer: `No—this look uses cream or neutral wool or linen only, not a saree.`,
+      },
+      {
+        question: `General old-money portrait instead?`,
+        answer: `The general old-money aesthetic page is for one person in neutral knit or wool. This page is women-specific garden editorial.`,
+      },
+      {
+        question: `Will my head covering stay?`,
+        answer: `Yes. Face, skin tone, hairstyle or head covering, and glasses if worn all stay locked.`,
+      },
+    ],
+    addonLine: `Want a softer heritage garden frame? Add: keep the cream or neutral wool or linen, stone steps, and quiet trees, but ease daylight contrast and use a calmer seated pose—no logos, saree drape, or party florals.`,
+  },
+  "luxury-house-terrace-solo-ai-photo-prompt": {
+    intro: `Person-forward luxury house terrace: modern light stone flooring, slim railing, soft greenery, bright daylight, elevated casual outfit. Not an interior redesign. Upload one clear waist-up or full-length photo.`,
+    tips: [
+      `Standing waist-up or full-length sources fit the terrace railing pose better than tiny distant faces.`,
+      `Ask for a modern house terrace with light stone and slim railing—not a redesigned living room.`,
+      `Keep exact skin tone under bright daylight; outdoor grades often lighten faces.`,
+      `Remind that you are the subject—if furniture dominates, ask for person-forward framing.`,
+    ],
+    faqs: [
+      {
+        question: `Will my house interior be redesigned?`,
+        answer: `No. This is a person-forward terrace portrait, not a room makeover look.`,
+      },
+      {
+        question: `Do I need a terrace photo already?`,
+        answer: `No. A clear standing portrait works; the modern terrace builds when pose is not preserved.`,
+      },
+      {
+        question: `Is this cinematic night city terrace?`,
+        answer: `No—this is bright daylight on a modern house terrace. Cinematic night luxury is a different mood.`,
+      },
+      {
+        question: `Outfit too formal?`,
+        answer: `Ask for elevated casual styling while locking face, hair, and skin tone.`,
+      },
+    ],
+    addonLine: `Want a quieter daylight terrace? Add: keep the modern house terrace, slim railing, and elevated casual outfit, but soften bright sky contrast and use a calmer standing pose—no interior redesign or cluttered furniture stacks.`,
+  },
+  "luxury-editorial-magazine-ai-photo-prompt": {
+    intro: `Magazine-style solo editorial: clean pale stone backdrop, premium wardrobe, soft fashion light, elegant warm grade. Upload one clear chest-up or waist-up photo of one person.`,
+    tips: [
+      `Chest-up or waist-up sharpness matters—editorial crops amplify soft faces.`,
+      `Ask for a clean pale stone backdrop with soft shadow falloff—not a busy location set.`,
+      `Keep exact skin tone and natural texture; fashion light can over-smooth faces.`,
+      `Turn clothing on only to keep your real outfit; otherwise accept the premium wardrobe restyle.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a studio photo already?`,
+        answer: `No. A clear chest-up or waist-up portrait works; the pale editorial backdrop builds when pose is not locked.`,
+      },
+      {
+        question: `Is this a lifestyle terrace look?`,
+        answer: `No—this is a clean magazine editorial with a pale backdrop, not a balcony or terrace scene.`,
+      },
+      {
+        question: `Will my face stay the same?`,
+        answer: `Yes. Face, skin tone, hair, and beard stay locked; only wardrobe, light, and backdrop shift.`,
+      },
+      {
+        question: `Why does skin look plastic?`,
+        answer: `Ask for natural skin texture with soft fashion light—no heavy beauty smoothing.`,
+      },
+    ],
+    addonLine: `Want a quieter magazine finish? Add: keep the pale stone backdrop, premium wardrobe, and soft fashion light, but lower contrast slightly and keep natural skin texture—no glitter overlays or extreme beauty smoothing.`,
+  },
+  "golden-motion-glamour": {
+    intro: `Champagne-gold sequined saree with motion-blur event lights: festive glam from one clear portrait, face kept sharp while golden streaks rush past.`,
+    tips: [
+      `Use a sharp face-forward portrait; motion blur is for the festive background only, not your eyes or jewellery.`,
+      `Ask for a champagne-gold sequined saree with fitted long-sleeve blouse and oversized gold hoops if embroidery smears.`,
+      `If anonymous crowd shapes turn into clear strangers, request soft distant figures only with no readable faces.`,
+      `Keep clothing off for the saree restyle; turn it on only if you must keep what you already wore.`,
+    ],
+    faqs: [
+      {
+        question: `Will my face also go blurry?`,
+        answer: `No. Motion blur belongs on the festive background and light streaks; your face, eyes, and jewellery should stay crisp.`,
+      },
+      {
+        question: `Do I need a saree photo already?`,
+        answer: `No. A clear everyday portrait works; the champagne-gold saree builds when clothing is not preserved.`,
+      },
+      {
+        question: `Is this an outdoor street look?`,
+        answer: `No—it is an indoor festive event with glowing golden lights and reflective surfaces.`,
+      },
+      {
+        question: `Can I keep my own jewellery?`,
+        answer: `Turn clothing/jewellery preservation on, or ask to keep specific pieces while locking face and skin tone.`,
+      },
+    ],
+    addonLine: `Want a quieter golden event glow? Add: keep the champagne-gold saree, sharp face, and horizontal light streaks, but soften the crowd shapes and ease rim light on the hair—no extra jewellery stacks or readable guest faces.`,
+  },
+  "blue-note-scrapbook": {
+    intro: `Pastel scrapbook collage on graph paper: layered photo cutouts, pale-blue tape, torn notes and soft doodles from one clear portrait.`,
+    tips: [
+      `Upload one sharp portrait; the look builds several crops of the same face across one scrapbook page.`,
+      `Ask for off-white graph paper, pale-blue tape, and short handwritten notes if decorations turn into neon stickers.`,
+      `If faces drift between cutouts, request the same person, hairstyle, and skin tone in every photo.`,
+      `Keep clothing off for the blush-pink striped shirt restyle unless you want your real outfit in every panel.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need many photos already?`,
+        answer: `No. One clear portrait is enough; the prompt creates several cutouts of the same person on one page.`,
+      },
+      {
+        question: `Will every face look like me?`,
+        answer: `It should. If any crop drifts, ask to keep exact identity, hairstyle, and skin tone in all panels.`,
+      },
+      {
+        question: `Can the notes stay blank?`,
+        answer: `Yes—ask for torn paper cards with minimal or no writing so portraits stay the focus.`,
+      },
+      {
+        question: `Is this a three-panel fashion triptych?`,
+        answer: `No—this is a pastel scrapbook collage with tape, doodles, and paper notes.`,
+      },
+    ],
+    addonLine: `Want a calmer diary page? Add: keep the graph-paper scrapbook, pale-blue tape, and layered cutouts of the same face, but thin out doodles and dried flowers slightly—no social-media UI icons or mismatched versions of you.`,
+  },
+  "dreamy-floral-warp": {
+    intro: `Wide-angle floral selfie with soft pink-white blooms and liquid-wave warp around a sharp face—spring pastel mood from one clear portrait.`,
+    tips: [
+      `Face must stay sharp; ask for warp only in the flowers and liquid edges, never across eyes or mouth.`,
+      `Request soft yellow shirt over white inner top with light-wash jeans if the casual look goes formal.`,
+      `If flowers smear into plastic blobs, ask for soft pink and white blooms with fresh botanical greens.`,
+      `Keep pose off for the immersive selfie angle; turn clothing on only to keep your real outfit.`,
+    ],
+    faqs: [
+      {
+        question: `Will the warp melt my face?`,
+        answer: `It should not. Ask for a sharp face with liquid warp only in the surrounding flowers and colour waves.`,
+      },
+      {
+        question: `Do I need a garden photo?`,
+        answer: `No. A clear indoor selfie works; the immersive floral garden builds when pose is not preserved.`,
+      },
+      {
+        question: `Is this the daisy field outdoor look?`,
+        answer: `No—daisy drift is open blue sky with white daisies. This is a dreamy floral frame with liquid warp.`,
+      },
+      {
+        question: `Outfit too dressy?`,
+        answer: `Ask for the relaxed soft-yellow shirt and light-wash jeans while locking face and skin tone.`,
+      },
+    ],
+    addonLine: `Want a gentler spring warp? Add: keep the pink-white floral garden and sharp face, but soften the liquid-wave distortions and keep blooms slightly farther from the cheeks—no heavy glitter overlays or extra people.`,
+  },
+  "sunlit-bouquet-triptych": {
+    intro: `Warm three-panel bouquet story: one wide top frame and two bottom candid panels with roses, afternoon window light, and soft film grain.`,
+    tips: [
+      `One sharp portrait is enough; the look builds three matching candid moments with the same bouquet.`,
+      `Ask for blush and deep-red roses with baby's-breath if the flowers turn into random mixed props.`,
+      `If panels show different people, request identical face, hair, and charcoal hoodie across all three.`,
+      `Keep pose off so the looking-down, hair-touch, and bouquet-hug moments can form.`,
+    ],
+    faqs: [
+      {
+        question: `Must I already hold flowers?`,
+        answer: `No. A clear portrait works; the wrapped rose bouquet is added when props and pose are not locked.`,
+      },
+      {
+        question: `Why do the three faces look different?`,
+        answer: `Ask for the same identity, hairstyle, and skin tone in every panel with matching warm sunlight.`,
+      },
+      {
+        question: `Is this the amber wall-shadow triptych?`,
+        answer: `No—amber shadow is close-up fashion with cast wall shadows. This is a romantic bouquet story in three panels.`,
+      },
+      {
+        question: `Can I keep my own hoodie?`,
+        answer: `Yes—preserve clothing, or ask to keep your real top while the bouquet and window light build.`,
+      },
+    ],
+    addonLine: `Want a quieter bouquet afternoon? Add: keep the three-panel layout, rose bouquet, and warm window shadows, but soften film grain and use calmer smiles—no text stickers or extra guests in any panel.`,
+  },
+  "monochrome-echo-trio": {
+    intro: `Black-and-white beauty echo: one sharp foreground portrait with two larger faded exposures of the same face on a soft off-white studio backdrop.`,
+    tips: [
+      `Use a clear chest-up portrait so the main face stays sharp against the two ghosted echoes.`,
+      `Ask for high-contrast monochrome with silver-gray midtones if colour or heavy tint creeps back in.`,
+      `If the rear faces become strangers, request two translucent enlargements of the exact same person.`,
+      `Keep styling minimal; turn clothing on only if you must keep your real outfit under the monochrome grade.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need three separate photos?`,
+        answer: `No. One clear portrait is enough; the prompt builds the main face plus two faded echoes.`,
+      },
+      {
+        question: `Will skin stay realistic in black and white?`,
+        answer: `Ask for natural skin texture with soft silver midtones—no plastic smoothing under the monochrome grade.`,
+      },
+      {
+        question: `Is this the golden saree motion look?`,
+        answer: `No—this is a timeless monochrome multi-exposure beauty set, not festive colour glam.`,
+      },
+      {
+        question: `Why does one echo look blurred?`,
+        answer: `Rear exposures should be soft and translucent; only the foreground portrait needs razor-sharp eyes.`,
+      },
+    ],
+    addonLine: `Want a softer noir echo? Add: keep the sharp main portrait and two faded rear exposures of the same face, but lighten charcoal blacks slightly and keep grain subtle—no colour props or text overlays.`,
+  },
+  "sunlit-daisy-drift": {
+    intro: `Bright outdoor daisy portrait against vivid blue sky: dense white blooms, navy zip hoodie, warm sun on skin from one clear selfie.`,
+    tips: [
+      `Prefer a sharp face with good daylight skin; ask for warm golden highlights that keep exact skin tone.`,
+      `Request dense white daisies with yellow centres and large near-lens blur if flowers look sparse or fake.`,
+      `If the sky goes grey or neon, ask for open vivid blue with soft white clouds only.`,
+      `Keep clothing off for the midnight-blue zip hoodie; turn it on only to keep your real top.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a photo already taken in a field?`,
+        answer: `No. A clear portrait works; the daisy field and blue sky build when background is not preserved.`,
+      },
+      {
+        question: `Will my face stay the same under bright sun?`,
+        answer: `Ask to keep exact skin tone and facial features—bright outdoor grades sometimes lighten complexions.`,
+      },
+      {
+        question: `Is this the dreamy floral warp selfie?`,
+        answer: `No—floral warp uses liquid distortions indoors around pink blooms. This is open sky with daisies.`,
+      },
+      {
+        question: `Hoodie colour wrong?`,
+        answer: `Ask for a deep navy or midnight-blue zip-front hoodie with a soft structured hood.`,
+      },
+    ],
+    addonLine: `Want a quieter daisy field frame? Add: keep the navy zip hoodie, blue sky, and white daisy surround, but pull large blooms slightly farther from the face and ease sun intensity—no festival props or text banners.`,
+  },
+  "amber-shadow-triptych": {
+    intro: `Three stacked amber fashion panels on a warm beige wall: hard side sun, sharp head-and-shoulder cast shadows, and close editorial poses from one photo.`,
+    tips: [
+      `Chest-up sharpness matters; each panel needs clear eyes under strong directional light.`,
+      `Ask for a matte warm beige wall with bold cast shadows of head and shoulders if the backdrop goes busy.`,
+      `If identity drifts between panels, request the same face, wet-textured hair, and dark collared shirt in all three.`,
+      `Keep pose off so the frontal, over-shoulder, and tight close-up stack can form.`,
+    ],
+    faqs: [
+      {
+        question: `Must my photo already show hard shadows?`,
+        answer: `No. A clear portrait is enough; the directional sun and cast wall shadows build with the triptych.`,
+      },
+      {
+        question: `Why do the three faces look different?`,
+        answer: `Ask for identical identity, hairstyle, and skin tone across all panels with the same light direction.`,
+      },
+      {
+        question: `Is this the bouquet triptych?`,
+        answer: `No—bouquet triptych is romantic flower storytelling. This is amber wall-light fashion with cast shadows.`,
+      },
+      {
+        question: `Can I keep my beard?`,
+        answer: `Yes. Hairstyle and facial hair stay; only wardrobe, light, and panel layout change unless you lock clothing.`,
+      },
+    ],
+    addonLine: `Want a quieter amber contact sheet? Add: keep the three horizontal panels, beige wall, and sharp cast shadows, but soften chocolate contrast slightly and calm the gaze—no scrapbook tape or colourful props.`,
+  },
+  "golden-boho-storyboard": {
+    intro: `Golden-hour boho street storyboard in a two-by-two grid: floral camisole, jeans, woven bag, and sun-dappled tree-lined pavement from one portrait.`,
+    tips: [
+      `One clear portrait feeds all four panels—ask for the same face and long loose waves in every square.`,
+      `Request a rust or brown floral camisole, light jeans, stacked bangles, and woven bag if styling drifts formal.`,
+      `If the street looks empty or fake, ask for tree-lined residential pavement with leafy dappled light.`,
+      `Keep pose off for the walk, reading, hand-detail, and back-view moments.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need four photos already?`,
+        answer: `No. One clear portrait is enough; the prompt builds four candid lifestyle panels of the same person.`,
+      },
+      {
+        question: `Will every panel look like me?`,
+        answer: `It should. If one square drifts, ask for identical face, hair, and skin tone across the grid.`,
+      },
+      {
+        question: `Is this the tall-grass meadow portrait?`,
+        answer: `No—meadow reverie is a single moody hillside frame. This is a four-panel golden-hour street storyboard.`,
+      },
+      {
+        question: `Can I remove the little heart icons?`,
+        answer: `Yes—ask for a clean collage with no emoji accents while keeping the book and street moments.`,
+      },
+    ],
+    addonLine: `Want a calmer golden afternoon collage? Add: keep the two-by-two grid, tree-lined street, and boho floral top, but thin out playful emoji accents and soften sun glare—no busy markets or night neon.`,
+  },
+  "meadow-reverie": {
+    intro: `Moody hillside meadow portrait in tall wild grass under a cloudy sky: white rolled-sleeve shirt, dark denim, beige cap, calm outdoor editorial from one selfie.`,
+    tips: [
+      `Use a sharp face with natural skin; muted earthy grades sometimes flatten features—ask to keep likeness.`,
+      `Request seated pose in tall wild grass with a bare tree and cloudy sky if the field looks manicured.`,
+      `If the outfit goes shiny or formal, ask for a relaxed white button-up, loose dark denim, and light beige cap.`,
+      `Keep pose off for the meadow sit; turn clothing on only to keep your real clothes.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a photo already taken in a meadow?`,
+        answer: `No. A clear portrait works; the grassy hillside and cloudy sky build when background is not preserved.`,
+      },
+      {
+        question: `Will the cap change my hair?`,
+        answer: `Hair under the cap should still match your real style and colour; ask to preserve hairline and length.`,
+      },
+      {
+        question: `Is this the golden-hour boho street collage?`,
+        answer: `No—that is a four-panel street storyboard. This is one moody meadow portrait in tall grass.`,
+      },
+      {
+        question: `Skin looking too pale or grey?`,
+        answer: `Ask for muted earthy grading that keeps your exact skin tone and natural texture.`,
+      },
+    ],
+    addonLine: `Want a quieter windy meadow frame? Add: keep the tall wild grass, cloudy hillside, and white button-up with beige cap, but soften contrast and ease wind on the hair—no bright flower overlays or sunny blue-sky filters.`,
+  },
+  "tactical-hero-agent-ai-photo-prompt": {
+    intro: `Semi-real cel-shaded tactical game hero mid-ability blast: tech jacket, glowing energy, futuristic arena—your face, skin tone and hairstyle locked.`,
+    tips: [
+      `Upload a clear chest-up photo with face fully visible; action blur should not wipe eyes or jaw.`,
+      `Ask for an original teal-violet tech jacket and crackling energy blast with no franchise logos or emblems.`,
+      `If the arena looks empty, request glowing floor lines, floating hexagon barriers, and a hazy skyline.`,
+      `Keep clothing and pose off so the sprinting ability-burst pose can build.`,
+    ],
+    faqs: [
+      {
+        question: `Will I still look like myself in game art?`,
+        answer: `Yes—ask to keep face shape, skin tone, hairstyle, and any beard or glasses even under cel shading.`,
+      },
+      {
+        question: `Do I need an action photo already?`,
+        answer: `No. A calm chest-up portrait works; the sprinting ability pose builds when pose is not preserved.`,
+      },
+      {
+        question: `Is this the armored rooftop superhero look?`,
+        answer: `No—that is live-action tech armor on a dusk rooftop. This is cel-shaded arena game-hero energy.`,
+      },
+      {
+        question: `Why did a logo appear on the jacket?`,
+        answer: `Ask for an original unbranded tech jacket with abstract panels only—no emblems or franchise marks.`,
+      },
+    ],
+    addonLine: `Want a tighter arena blast? Add: keep the cel-shaded tech jacket, forward energy burst, and glowing floor lines, but ease particle sparkwalls and keep rim light modest—no blood, guns aimed at camera, or brand emblems.`,
+  },
+  "fantasy-druid-forest-ai-photo-prompt": {
+    intro: `Fierce twilight druid under a giant mossy canopy: leaf-and-bark armor, glowing green rune magic, fireflies—your real face and skin tone kept.`,
+    tips: [
+      `Chest-up sharpness helps rune glow stay around the hands without melting facial features.`,
+      `Ask for leaf-and-bark armor and green nature runes if the outfit turns into plain fantasy robes.`,
+      `If the forest looks thin, request huge mossy roots, hanging vines, and firefly swarms at dusk.`,
+      `Keep clothing off for the druid armor restyle; preserve hair and any head covering.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a forest photo already?`,
+        answer: `No. A clear chest-up portrait works; the ancient canopy and vines build when background is not preserved.`,
+      },
+      {
+        question: `Will magic light change my skin tone?`,
+        answer: `Ask to keep exact skin tone; green rune light should rim hands and armor, not bleach the face.`,
+      },
+      {
+        question: `Is this the misty dawn monk look?`,
+        answer: `No—monk meditation is a calm cliff-ledge sunrise. This is an active twilight forest spell cast.`,
+      },
+      {
+        question: `Armor looking plastic?`,
+        answer: `Ask for realistic leaf, bark, and moss textures with soft dusk light on the materials.`,
+      },
+    ],
+    addonLine: `Want a quieter canopy casting? Add: keep the leaf-and-bark armor, green rune glow, and giant twilight roots, but soften firefly density and ease spell brightness near the face—no modern weapons or neon city props.`,
+  },
+  "monk-meditating-misty-dawn-ai-photo-prompt": {
+    intro: `Calm dawn meditation on a cliff ledge above a misty mountain valley: simple robe, soft gold sunrise, layered peaks—your face kept recognizable.`,
+    tips: [
+      `Use a clear chest-up photo; serene looks fail when eyes or jaw are soft or cropped.`,
+      `Ask for a simple robe and seated cliff-edge meditation if the pose turns into a standing action stance.`,
+      `If mist becomes foggy mush, request layered distant peaks with soft gold sunrise and readable valley depth.`,
+      `Keep clothing and pose off so the calm dawn scene can form.`,
+    ],
+    faqs: [
+      {
+        question: `Must my photo already show meditation?`,
+        answer: `No. Everyday portraits work; the cliff-ledge meditation pose builds when pose is not preserved.`,
+      },
+      {
+        question: `Will my hair or beard stay?`,
+        answer: `Yes—hairstyle, beard, glasses, or head covering stay while the robe and misty valley change.`,
+      },
+      {
+        question: `Is this the storm hammer warrior cliff?`,
+        answer: `No—storm warrior is battle-cry lightning drama. This is soft misty dawn stillness.`,
+      },
+      {
+        question: `Valley looking flat?`,
+        answer: `Ask for layered mountain peaks, soft gold sunrise, and gentle mist between ridges.`,
+      },
+    ],
+    addonLine: `Want an even quieter dawn sit? Add: keep the simple robe, cliff ledge, and misty valley sunrise, but lower gold intensity and calm the expression further—no floating weapons, neon runes, or storm lightning.`,
+  },
+  "astronomer-observatory-ai-photo-prompt": {
+    intro: `Twilight observatory portrait at a brass telescope under an open dome: meteor shower sky, star charts, warm lamp gold—your face locked.`,
+    tips: [
+      `Chest-up clarity matters beside metal telescope detail; soft faces fight the lamp highlights.`,
+      `Ask for a brass telescope, open dome slit, and meteor streaks if props turn into random gadgets.`,
+      `If the sky stays daytime blue, request deep twilight indigo with warm brass lamp light.`,
+      `Keep clothing off for the astronomer restyle; preserve glasses if you wear them in the source.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a telescope in my photo?`,
+        answer: `No. A clear portrait works; the brass telescope and open dome build when pose is not preserved.`,
+      },
+      {
+        question: `Will my glasses stay?`,
+        answer: `Yes if they are in the source—ask to keep glasses, skin tone, and hairstyle while the scene changes.`,
+      },
+      {
+        question: `Is this the cosmic energy space hero?`,
+        answer: `No—cosmic hero floats in deep space with nebula energy. This is an old observatory dome at twilight.`,
+      },
+      {
+        question: `Sky looking empty?`,
+        answer: `Ask for a deep twilight sky with a gentle meteor shower and warm brass lamps inside the dome.`,
+      },
+    ],
+    addonLine: `Want a quieter dome night? Add: keep the brass telescope, open observatory slit, and warm lamp glow, but thin the meteor shower and soften lamp bloom on the face—no spaceship cockpits or neon city signs.`,
+  },
+  "sky-pirate-captain-ai-photo-prompt": {
+    intro: `Golden-hour sky pirate at the helm of a wooden flying galleon above the clouds: long captain's coat, wind and spray—your real face kept.`,
+    tips: [
+      `Use a sharp chest-up portrait so wind-blown hair and coat details do not erase your likeness.`,
+      `Ask for a wooden flying galleon deck, billowing sails, and sea-of-clouds horizon if it becomes a normal ship at sea.`,
+      `If the coat turns into modern streetwear, request a long original captain's coat with no franchise marks.`,
+      `Keep clothing and pose off for the helm stance in golden-hour wind.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a ship photo already?`,
+        answer: `No. A clear portrait works; the flying galleon deck and cloud sea build when background is not preserved.`,
+      },
+      {
+        question: `Will I look older or weathered against my will?`,
+        answer: `Ask to keep exact apparent age and skin tone—adventure light should not age you up.`,
+      },
+      {
+        question: `Is this a sea pirate on water?`,
+        answer: `No—this is a sky pirate above the clouds at golden hour, not an ocean-surface ship.`,
+      },
+      {
+        question: `Coat looking branded?`,
+        answer: `Ask for an original unbranded captain's coat with no logos, emblems, or franchise costumes.`,
+      },
+    ],
+    addonLine: `Want a calmer cloud voyage? Add: keep the flying galleon helm, long captain's coat, and golden-hour cloud sea, but ease wind spray and soften rim light—no skull flags with logos or modern city skylines.`,
+  },
+  "armored-tech-superhero-ai-photo-prompt": {
+    intro: `Original low-profile tech armor, bare head and high collar, striding a dusk city rooftop in graphite and electric blue—your face fully visible.`,
+    tips: [
+      `Face must stay uncovered and sharp; ask for no helmet so identity reads clearly.`,
+      `Request matte graphite plating with electric-blue accents if the suit goes shiny chrome or logo-covered.`,
+      `If the rooftop looks empty, ask for glowing skyscrapers, wind-blown haze, and a dramatic dusk sky.`,
+      `Keep clothing and pose off for the rooftop stride.`,
+    ],
+    faqs: [
+      {
+        question: `Will a helmet cover my face?`,
+        answer: `No—this look keeps a bare head and high collar so your real face stays visible.`,
+      },
+      {
+        question: `Do I need a rooftop photo already?`,
+        answer: `No. A clear chest-up portrait works; the dusk rooftop and skyline build when pose is not preserved.`,
+      },
+      {
+        question: `Is this the night cape ledge hero?`,
+        answer: `No—cape ledge is a crouched night skyline poster. This is low-profile tech armor walking at dusk.`,
+      },
+      {
+        question: `Armor looking like a known character?`,
+        answer: `Ask for original matte graphite plating with no logos, emblems, or copied costumes.`,
+      },
+    ],
+    addonLine: `Want a quieter dusk stride? Add: keep the bare-head tech armor, high collar, and graphite-blue rooftop walk, but soften electric glow lines and ease wind haze—no helmets, franchise emblems, or daylight beach props.`,
+  },
+  "rooftop-skyline-superhero-ai-photo-prompt": {
+    intro: `Caped hero crouched on a skyscraper ledge at night: original suit, whipping cape, searchlights and drifting clouds—your face and skin tone locked.`,
+    tips: [
+      `Chest-up sharpness beats tiny distant figures; the ledge crop needs readable eyes.`,
+      `Ask for an original caped suit with no franchise emblems if logos appear on the chest.`,
+      `If the city looks daytime, request night blue-and-gold glow with searchlights and drifting clouds.`,
+      `Keep pose off for the wind-whipped crouch on the ledge.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a night city photo already?`,
+        answer: `No. A clear portrait works; the skyscraper ledge and night skyline build when background is not preserved.`,
+      },
+      {
+        question: `Will my face stay uncovered?`,
+        answer: `Yes—ask for no mask or helmet so face, skin tone, and hairstyle stay recognizable.`,
+      },
+      {
+        question: `Is this the glass-tower wall climber?`,
+        answer: `No—tower climber clings to a glass wall above neon streets. This is a caped crouch on a ledge.`,
+      },
+      {
+        question: `Cape looking stiff?`,
+        answer: `Ask for a long cape whipping in night wind with soft fabric folds and rim light.`,
+      },
+    ],
+    addonLine: `Want a calmer night ledge? Add: keep the original caped suit, skyscraper crouch, and glowing city lights, but ease searchlight beams and soften cape whip—no helmets covering the face or brand logos on the chest.`,
+  },
+  "glass-tower-climber-night-hero-ai-photo-prompt": {
+    intro: `Night hero clinging to a glass-and-steel tower wall above neon streets: sleek original suit, motion blur, teal city glow—your face kept.`,
+    tips: [
+      `Face must stay sharp against motion blur on traffic trails—ask for blur only in distant lights.`,
+      `Request a wall-climbing pose on glass panels between neon towers if it becomes a flat rooftop stand.`,
+      `If neon turns pink-purple mush, ask for teal night glow with readable skyscraper edges.`,
+      `Keep clothing off for the sleek original suit; preserve hair and any head covering.`,
+    ],
+    faqs: [
+      {
+        question: `Will motion blur ruin my face?`,
+        answer: `It should not. Ask for a sharp face with motion blur only on distant traffic light trails.`,
+      },
+      {
+        question: `Do I need a climbing photo already?`,
+        answer: `No. A calm chest-up portrait works; the wall-cling pose builds when pose is not preserved.`,
+      },
+      {
+        question: `Is this the rainy gargoyle vigilante?`,
+        answer: `No—vigilante sits on a gothic gargoyle in rain. This is a glass tower climb above neon streets.`,
+      },
+      {
+        question: `Suit looking branded?`,
+        answer: `Ask for an original sleek suit with no logos, chest emblems, or copied costumes.`,
+      },
+    ],
+    addonLine: `Want a tighter neon climb? Add: keep the sleek original suit, glass-wall cling, and neon tower trails, but ease motion blur near the face and soften neon bloom—no flowers, daylight parks, or franchise emblems.`,
+  },
+  "caped-night-vigilante-ai-photo-prompt": {
+    intro: `Dark armored vigilante on a stone gargoyle ledge in pouring rain and lightning: long cape, rainy steel-blue mood—your real face kept.`,
+    tips: [
+      `Use a sharp chest-up source; rain and lightning can wash faces—ask to keep exact skin tone.`,
+      `Request dark armored suit, long cape, and a gothic gargoyle ledge if it becomes a sunny rooftop.`,
+      `If rain streaks cover the eyes, ask for rain in the air and cape, with a clear face.`,
+      `Keep clothing and pose off for the rainy ledge stance.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a rainy night photo already?`,
+        answer: `No. A clear portrait works; rain, lightning, and the gargoyle ledge build when pose is not preserved.`,
+      },
+      {
+        question: `Will a mask hide my face?`,
+        answer: `Ask for an uncovered face with dark armor and cape only—no mask covering identity.`,
+      },
+      {
+        question: `Is this the kids toy-town hero?`,
+        answer: `No—kids superhero is bright playful rooftops. This is a moody adult rain vigilante scene.`,
+      },
+      {
+        question: `Lightning looking fake?`,
+        answer: `Ask for distant forked lightning and rainy steel-blue light, not neon overlays on the skin.`,
+      },
+    ],
+    addonLine: `Want a quieter storm ledge? Add: keep the dark armored suit, long cape, and gargoyle in heavy rain, but ease lightning flashes and reduce rain streaks across the face—no bright floral props or daytime blue sky.`,
+  },
+  "kids-superhero-ai-photo-prompt": {
+    intro: `Little superhero kid flying over colourful toy-town rooftops in a homemade-style cape and mask—child's face, age and skin tone locked.`,
+    tips: [
+      `Upload one clear child photo at eye level; soft daylight without stickers works best.`,
+      `Ask for a homemade-looking cape and mask with bright primary colours if it turns into dark adult armor.`,
+      `If the town looks too real or scary, request toy-town rooftops, puffy clouds, and paper-kite birds.`,
+      `Keep clothing and pose off for the joyful flying pose; never age the child up.`,
+    ],
+    faqs: [
+      {
+        question: `Can I use an adult photo?`,
+        answer: `This page is for a child source. Use an adult hero style if the photo is of a grown-up.`,
+      },
+      {
+        question: `Will my child's age change?`,
+        answer: `No—ask to keep exact apparent age, face, hair, and skin tone; do not age up or slim.`,
+      },
+      {
+        question: `Is this a dark night vigilante look?`,
+        answer: `No—this is bright playful primary colours over toy-town rooftops.`,
+      },
+      {
+        question: `Mask covering the whole face?`,
+        answer: `Ask for a small homemade-style mask that still leaves eyes and smile readable.`,
+      },
+    ],
+    addonLine: `Want a gentler toy-town flight? Add: keep the homemade-style cape, child's exact face and age, and colourful rooftops, but soften primary saturation and calm the flying pose—no realistic explosions, weapons, or adult armor.`,
+  },
+  "storm-hammer-warrior-ai-photo-prompt": {
+    intro: `Norse-myth storm warrior on a sea cliff: rune-carved hammer raised, forked lightning, crashing waves—your face, skin tone and hairstyle locked.`,
+    tips: [
+      `Chest-up sharpness helps when lightning contrast is high—ask to keep exact skin tone under blue storm light.`,
+      `Request Norse-style armor and a rune-carved war hammer if props become modern gym gear.`,
+      `If the cliff looks calm, ask for towering black clouds, crashing waves, and forked lightning.`,
+      `Keep clothing and pose off for the battle-cry hammer raise.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a storm photo already?`,
+        answer: `No. A clear portrait works; the sea cliff, waves, and lightning build when background is not preserved.`,
+      },
+      {
+        question: `Will lightning bleach my skin?`,
+        answer: `Ask to keep exact skin tone; storm light should rim armor and hammer, not wash out the face.`,
+      },
+      {
+        question: `Is this the misty dawn monk cliff?`,
+        answer: `No—monk dawn is calm gold mist. This is an epic storm warrior with a raised hammer.`,
+      },
+      {
+        question: `Hammer looking branded?`,
+        answer: `Ask for an original rune-carved war hammer with no logos or franchise designs.`,
+      },
+    ],
+    addonLine: `Want a tighter storm battle cry? Add: keep the Norse-style armor, rune-carved hammer, and sea-cliff lightning, but ease flash brightness on the face and reduce spray—no flowers, soft pastel skies, or franchise logos on the hammer.`,
+  },
+  "superhero-squad-group-ai-photo-prompt": {
+    intro: `Friends as a matching original hero squad poster: navy-silver suits, orange accents, explosion backlight—every face, age and skin tone kept from one group photo.`,
+    tips: [
+      `Every face must be sharp and unobstructed in one group frame; hidden faces get invented wrong.`,
+      `Ask for matching original navy-and-silver suits with glowing orange accents and no chest emblems.`,
+      `If someone is added or removed, request the exact same number of people as your upload.`,
+      `Clothing stays by default here; turn pose off so the staggered heroic lineup can form.`,
+    ],
+    faqs: [
+      {
+        question: `Can I merge separate selfies?`,
+        answer: `This page expects one clear group photo with every face visible. Separate uploads need a merge-style workflow.`,
+      },
+      {
+        question: `Will outfits stay what we wore?`,
+        answer: `Clothing preservation defaults on here, but the look still builds matching original hero suits when you allow restyle—follow the on-page clothing toggle.`,
+      },
+      {
+        question: `Why did an extra person appear?`,
+        answer: `Ask for only the people in your photo—same count, each exact face and skin tone, no strangers.`,
+      },
+      {
+        question: `Is this a solo cosmic space hero?`,
+        answer: `No—this is a multi-person squad poster with explosion backlight behind a city skyline.`,
+      },
+    ],
+    addonLine: `Want a cleaner squad poster? Add: keep every exact face, matching navy-silver suits, and explosion backlight, but soften smoke and sparks near cheeks—no extra teammates, franchise logos, or masks that hide identity.`,
+  },
+  "cosmic-energy-hero-ai-photo-prompt": {
+    intro: `Hero floating in deep space with a star-dust aura and galaxy energy in the hands: purple-gold nebula, distant planets—your face locked.`,
+    tips: [
+      `Chest-up clarity matters against bright nebula glow—ask for energy in the hands, not across the face.`,
+      `Request a swirling purple-and-gold nebula with star dust if the backdrop becomes a plain black void.`,
+      `If skin lightens under violet light, ask to keep exact skin tone and facial features.`,
+      `Keep clothing and pose off for the floating space stance.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a space photo already?`,
+        answer: `No. A clear chest-up portrait works; deep space and the nebula build when background is not preserved.`,
+      },
+      {
+        question: `Will purple light change my skin?`,
+        answer: `Ask to keep exact skin tone; galaxy energy should stay in the hands and aura, not bleach the face.`,
+      },
+      {
+        question: `Is this the observatory telescope look?`,
+        answer: `No—observatory is brass telescope under a dome. This is a floating cosmic hero in open space.`,
+      },
+      {
+        question: `Energy looking like text or logos?`,
+        answer: `Ask for abstract galaxy energy only—no lettering, numbers, or brand shapes in the hands.`,
+      },
+    ],
+    addonLine: `Want a quieter nebula float? Add: keep the star-dust aura, galaxy energy in the hands, and purple-gold space backdrop, but soften glow near the cheeks and ease planet clutter—no earth rooftops or flower gardens behind you.`,
+  },
+  "golden-aura-anime-fighter-ai-photo-prompt": {
+    intro: `Anime fighter powering up on a shattered battlefield: crackling golden aura, torn training clothes, floating boulders—your face recognizable under stylization.`,
+    tips: [
+      `Even with anime shading, ask to keep face shape, eye shape, hairline, and exact skin tone.`,
+      `Request a blazing gold aura and floating rocky debris if the scene stays a quiet indoor room.`,
+      `If the scream pose exaggerates the jaw too far, ask for a powerful but still recognizable expression.`,
+      `Keep clothing off for torn training clothes; preserve beard or head covering if present.`,
+    ],
+    faqs: [
+      {
+        question: `Will I still look like myself in anime style?`,
+        answer: `Yes—ask to keep face shape, features, hairstyle, and skin tone even under cel-shaded power-up art.`,
+      },
+      {
+        question: `Do I need an action photo already?`,
+        answer: `No. A calm portrait works; the power-up scream and floating boulders build when pose is not preserved.`,
+      },
+      {
+        question: `Is this the soft 90s rooftop anime portrait?`,
+        answer: `No—90s retro is pastel sunset rooftop calm. This is a blazing golden battlefield power-up.`,
+      },
+      {
+        question: `Aura looking neon green?`,
+        answer: `Ask for blazing gold energy with stormy sky and cracked rocky ground.`,
+      },
+    ],
+    addonLine: `Want a tighter power-up frame? Add: keep the crackling golden aura, shattered battlefield rocks, and torn training clothes, but ease aura brightness on the face and calm debris density—no soft floral props or pastel scrapbook overlays.`,
+  },
+  "90s-retro-anime-portrait-ai-photo-prompt": {
+    intro: `Cel-shaded 90s anime portrait on a pastel pink-lavender sunset rooftop with power lines, film grain, and wind-blown retro fashion—your likeness kept.`,
+    tips: [
+      `Upload a clear chest-up photo; ask for soft film grain without melting eye detail.`,
+      `Request pastel pink and lavender sunset, rooftop power lines, and gentle wind if it becomes modern neon night.`,
+      `If the anime look swaps your face, insist on same face shape, hair colour, and skin tone.`,
+      `Keep clothing off for retro fashion; turn it on only to keep your real outfit under the cel shade.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a rooftop photo already?`,
+        answer: `No. A clear portrait works; the sunset rooftop and power lines build when background is not preserved.`,
+      },
+      {
+        question: `Will cel shading erase my features?`,
+        answer: `Ask to keep face shape, eye shape, hairstyle, and exact skin tone even in 90s anime rendering.`,
+      },
+      {
+        question: `Is this the golden aura fighter look?`,
+        answer: `No—fighter power-up is battlefield gold energy. This is a calm pastel 90s sunset portrait.`,
+      },
+      {
+        question: `Sky looking too dark?`,
+        answer: `Ask for pastel pink and lavender sunset glow with soft film grain, not night neon.`,
+      },
+    ],
+    addonLine: `Want a quieter 90s rooftop dusk? Add: keep the cel-shaded look, pastel sunset sky, and power-line rooftop, but soften grain and ease wind on the hair—no golden battle auras or shattered rocks.`,
+  },
+  "hand-painted-anime-film-poster-ai-prompt": {
+    intro: `Hand-painted anime film-poster frame on a windswept grassy hilltop under a huge painted sunset sky—your face, skin tone and hair locked.`,
+    tips: [
+      `Chest-up sharpness helps painterly strokes stay on sky and grass, not across facial landmarks.`,
+      `Ask for a towering cloud-filled sunset and wind-swept hilltop if the backdrop becomes a plain studio wall.`,
+      `If brush texture makes you look like someone else, request exact face shape and skin tone under painterly light.`,
+      `Keep clothing and pose off for the poster-style windswept stance.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a hilltop photo already?`,
+        answer: `No. A clear portrait works; the grassy hill and painted sunset sky build when background is not preserved.`,
+      },
+      {
+        question: `Will the painted look change my skin tone?`,
+        answer: `Ask to keep exact skin tone; painterly light should sit in the sky and grass, not bleach the face.`,
+      },
+      {
+        question: `Is this the 90s pastel rooftop anime look?`,
+        answer: `No—90s retro uses cel shading on a city rooftop. This is a hand-painted film-poster hilltop.`,
+      },
+      {
+        question: `Poster looking too photographic?`,
+        answer: `Ask for visible hand-painted brush texture in the giant cloud sky while keeping facial likeness sharp.`,
+      },
+    ],
+    addonLine: `Want a quieter painted poster dusk? Add: keep the hand-painted anime finish, grassy hilltop, and huge sunset clouds, but soften brush contrast on the face and ease wind in the hair—no neon cities, battle auras, or scrapbook stickers.`,
+  },
 };
 

@@ -196,7 +196,7 @@ const BATCH1_ACTIVATED_DRAFT_IDS = [
 describe("AdSense uniqueness style sections", () => {
   it("ships uniqueness copy for all covered guide-linked styles", () => {
     const ids = Object.keys(STYLE_UNIQUENESS_ENTRIES);
-    assert.ok(ids.length >= 160, `expected ~167 uniqueness entries, got ${ids.length}`);
+    assert.ok(ids.length >= 250, `expected ~267 uniqueness entries, got ${ids.length}`);
     for (const id of ids) {
       const override = styleSeoOverride(id);
       assert.ok(override, id);
@@ -230,13 +230,22 @@ describe("AdSense uniqueness style sections", () => {
     }
   });
 
-  it("does not mark intro-only SEO overrides as uniqueness-section pages", () => {
-    // Winter GSC body still present; uniqueness FAQs not yet rolled out there.
-    const override = styleSeoOverride(
-      "foggy-road-hoodie-muffler-winter-ai-photo-prompt-boys",
+  it("gates uniqueness layout on faqs, not intro alone", () => {
+    assert.equal(
+      styleHasUniqueContentSections({
+        intro: "A long intro without FAQs should keep the legacy layout.",
+        tips: ["One tip"],
+      }),
+      false,
     );
-    assert.ok(override?.intro);
-    assert.equal(styleHasUniqueContentSections(override), false);
+    assert.equal(
+      styleHasUniqueContentSections({
+        intro: "Short intro",
+        tips: ["One tip"],
+        faqs: [{ question: "Q?", answer: "A." }],
+      }),
+      true,
+    );
   });
 });
 
