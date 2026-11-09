@@ -486,14 +486,25 @@ export function StyleDetailClient({ style, children }: Props) {
                   data-testid="style-seo-faqs"
                 >
                   <h2 className="mb-4 text-[22px]">FAQs</h2>
-                  <div className="grid max-w-[690px] gap-4">
+                  <div className="max-w-[690px] border-t border-[var(--line)]">
                     {seo.faqs.map((faq) => (
-                      <div key={faq.question}>
-                        <p className="m-0 mb-1.5 text-sm font-bold text-[#d2cfd7]">
-                          {faq.question}
+                      <details
+                        key={faq.question}
+                        className="group border-b border-[var(--line)]"
+                      >
+                        <summary className="flex cursor-pointer list-none items-center justify-between gap-3 py-3.5 text-sm font-medium text-[#d2cfd7] marker:content-none [&::-webkit-details-marker]:hidden">
+                          <span>{faq.question}</span>
+                          <span
+                            className="grid h-5 w-5 shrink-0 place-items-center text-base leading-none text-[var(--muted)] transition-transform duration-200 ease-out group-open:rotate-45"
+                            aria-hidden
+                          >
+                            +
+                          </span>
+                        </summary>
+                        <p className="m-0 origin-top pb-4 text-sm leading-relaxed text-[#d2cfd7] motion-safe:animate-[faq-answer-in_180ms_ease-out]">
+                          {faq.answer}
                         </p>
-                        <p className="m-0 text-sm text-[#d2cfd7]">{faq.answer}</p>
-                      </div>
+                      </details>
                     ))}
                   </div>
                 </section>
