@@ -11,6 +11,7 @@ import {
   styleSocialTitle,
 } from "../../src/lib/catalog/style-meta";
 import { STYLE_UNIQUENESS_ENTRIES } from "../../src/lib/catalog/style-uniqueness-data";
+import { getPublishedStyles } from "../../src/lib/catalog/styles";
 
 const SECOND = "Copy-ready prompt for ChatGPT, Gemini, and other AI image editors.";
 
@@ -194,9 +195,9 @@ const BATCH1_ACTIVATED_DRAFT_IDS = [
 ] as const;
 
 describe("AdSense uniqueness style sections", () => {
-  it("ships uniqueness copy for all covered guide-linked styles", () => {
+  it("ships uniqueness copy for every published seed style", () => {
     const ids = Object.keys(STYLE_UNIQUENESS_ENTRIES);
-    assert.ok(ids.length >= 250, `expected ~267 uniqueness entries, got ${ids.length}`);
+    assert.ok(ids.length >= 330, `expected ~338 uniqueness entries, got ${ids.length}`);
     for (const id of ids) {
       const override = styleSeoOverride(id);
       assert.ok(override, id);
@@ -206,6 +207,11 @@ describe("AdSense uniqueness style sections", () => {
       assert.ok(override.addonLine?.trim(), `${id} addon`);
       assert.equal(styleHasUniqueContentSections(override), true, id);
     }
+
+    const missing = getPublishedStyles()
+      .map((style) => style.id)
+      .filter((id) => !STYLE_UNIQUENESS_ENTRIES[id]);
+    assert.deepEqual(missing, [], `published styles missing uniqueness: ${missing.join(", ")}`);
   });
 
   it("activates crimson-bangle-reverie and the four former drafts", () => {

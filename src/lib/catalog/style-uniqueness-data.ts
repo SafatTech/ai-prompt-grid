@@ -7483,5 +7483,1993 @@ export const STYLE_UNIQUENESS_ENTRIES: Readonly<
     ],
     addonLine: `Want a quieter painted poster dusk? Add: keep the hand-painted anime finish, grassy hilltop, and huge sunset clouds, but soften brush contrast on the face and ease wind in the hair—no neon cities, battle auras, or scrapbook stickers.`,
   },
+  "anime-swordsman-ai-photo-prompt": {
+    intro: `Anime night battle look: plain hakama and kimono, a glowing blade trailing one silver moonlight arc through misty bamboo. Upload one clear chest-up photo with your face fully visible.`,
+    tips: [
+      `Use a sharp chest-up portrait in even light—side profiles and beauty filters make the moonlight rim light smear across the cheeks.`,
+      `If the sword glow looks neon or rainbow, ask for a single silver moonlight arc along the blade, nothing else.`,
+      `Ask for plain hakama and kimono fabric with readable folds; avoid ornate clan crests or logo embroidery.`,
+      `Keep clothing and pose off so the mid-slash action and bamboo grove can appear while your face stays locked.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a photo already holding a sword?`,
+        answer: `No. A clear everyday portrait works; the look adds the blade, slash pose, and moonlight arc when pose is not preserved.`,
+      },
+      {
+        question: `Will my own clothes stay?`,
+        answer: `Only if you turn clothing preservation on. By default you get plain hakama and kimono while your face stays exact.`,
+      },
+      {
+        question: `Why does the moonlight look purple or pink?`,
+        answer: `Ask for cool silver-blue moonlight only—one clean arc on the blade, no rainbow trails or sparkle stickers.`,
+      },
+      {
+        question: `Can I use a full-body mirror selfie?`,
+        answer: `Chest-up is safer. Distant full-body shots shrink the face against the bamboo and mist.`,
+      },
+    ],
+    addonLine: `Want a quieter moonlight cut? Add: keep the plain hakama, glowing blade, and misty bamboo grove, but thin the drifting leaves and soften the silver arc—no extra swordsmen, no fireworks.`,
+  },
+  "anime-ninja-hero-ai-photo-prompt": {
+    intro: `Sunset rooftop leap in anime style: original ninja outfit, blank headband, flowing scarf, and dusk embers over tiled village roofs. One clear chest-up photo is enough.`,
+    tips: [
+      `Upload a sharp frontal or three-quarter portrait; heavy filters fight the warm sunset orange and leaf-green grade.`,
+      `If the headband shows random letters or symbols, ask for a blank headband with no text or clan marks.`,
+      `Ask for a flowing scarf and drifting dusk embers—avoid solid black void backgrounds that erase the hillside village.`,
+      `Keep pose off so the rooftop leap can appear; preserve clothing only if you must keep your own outfit.`,
+    ],
+    faqs: [
+      {
+        question: `Must I already be jumping in the source photo?`,
+        answer: `No. A still portrait works; the prompt builds the rooftop leap when pose is not preserved.`,
+      },
+      {
+        question: `Will famous anime logos appear on the headband?`,
+        answer: `They should not. Ask for a blank headband with no letters, symbols, or franchise marks.`,
+      },
+      {
+        question: `Why do the rooftops look modern and flat?`,
+        answer: `Ask for tiled hillside village roofs at sunset with swirling leaves and distant mountains, not glass skyscrapers.`,
+      },
+      {
+        question: `Can girls use this ninja look?`,
+        answer: `Yes. The prompt keeps your face, hair, and age; the leap and outfit restyle around that identity.`,
+      },
+    ],
+    addonLine: `Want a calmer dusk leap? Add: keep the ninja outfit, blank headband, scarf, and tiled rooftops, but reduce ember density near the face—no second ninja, no neon city signs.`,
+  },
+  "anime-samurai-autumn-leaves-ai-photo-prompt": {
+    intro: `Crimson autumn samurai draw: red-and-black armor, katana mid-draw, and a storm of red maple leaves on a mountain path. Best from one clear chest-up photo.`,
+    tips: [
+      `Prefer a sharp chest-up portrait; blurry selfies lose the side-light edge on the armor plates.`,
+      `If leaves stick to the face like stickers, ask for swirling maple leaves in the air and path, not glued to skin.`,
+      `Ask for red-and-black armor with a clean katana draw—avoid random European plate mail.`,
+      `Keep clothing and pose off so the autumn mountain path and dramatic side light can build correctly.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need autumn photos already?`,
+        answer: `No. Any clear portrait works; the look builds the blazing maple trees and falling leaves for you.`,
+      },
+      {
+        question: `Will my beard or hairstyle change?`,
+        answer: `No. Face, skin tone, hairstyle, beard, and head covering are meant to stay while armor and pose change.`,
+      },
+      {
+        question: `Why does the armor look plastic?`,
+        answer: `Ask for matte red-and-black armor with readable plate seams and dramatic side light, not shiny toy plastic.`,
+      },
+      {
+        question: `Is a group photo okay?`,
+        answer: `Use a single-person chest-up shot. Extra faces confuse who becomes the samurai.`,
+      },
+    ],
+    addonLine: `Want a quieter leaf storm? Add: keep the red-and-black armor, katana draw, and maple mountain path, but thin the falling leaves near the eyes—no second warrior, no cherry blossoms.`,
+  },
+  "chibi-3d-couple-ai-photo-prompt": {
+    intro: `Turn you both into glossy big-head 3D chibi figures bouncing in a soft pastel set with hearts, stars, and confetti. Upload two clear photos or one of you together.`,
+    tips: [
+      `Use two sharp face photos with similar light, or one clear couple shot where both faces are large.`,
+      `If heads look adult-proportioned, ask for big-head chibi proportions with a glossy toy finish.`,
+      `Keep clothing on if you want your real outfits as tiny chibi versions; turn it off for a full toy restyle.`,
+      `When heights look swapped, ask to keep realistic relative heights between person A and person B.`,
+    ],
+    faqs: [
+      {
+        question: `Can I upload two separate selfies?`,
+        answer: `Yes. One clear photo per person works well; a single photo of you both also works if both faces are sharp.`,
+      },
+      {
+        question: `Will our real heights stay?`,
+        answer: `Relative heights should stay realistic even in chibi form. Ask to preserve them if one person looks wrongly taller.`,
+      },
+      {
+        question: `Why do our faces blend into one person?`,
+        answer: `Upload two distinct photos with large faces, or crop a couple shot so each face is clear and unobstructed.`,
+      },
+      {
+        question: `Do our clothes stay in the chibi look?`,
+        answer: `Clothing preservation is on by default here, so outfits usually carry over into the toy style.`,
+      },
+    ],
+    addonLine: `Want a softer pastel bounce? Add: keep both exact faces, glossy chibi finish, and pastel backdrop, but quiet the confetti a little—no third character, no scary monster props.`,
+  },
+  "anime-clone-flashlight-glow-ai-photo-prompt": {
+    intro: `Viral flashlight-clone portrait: a tiny anime you shines a torch that warms your hair with golden rim light in a dark moody room. One clear chest-up photo works best.`,
+    tips: [
+      `Upload a sharp chest-up portrait with visible hair edges—heavy beauty blur kills the warm hair glow.`,
+      `If the tiny clone looks like a stranger, ask for the same face, hair, and skin tone on the mini anime figure.`,
+      `Ask for a single flashlight beam lighting the hair with warm rim light, not a full studio softbox.`,
+      `Keep clothing and pose off so the moody dark room and clone gesture can appear correctly.`,
+    ],
+    faqs: [
+      {
+        question: `Must my photo already be taken in the dark?`,
+        answer: `No. A daylight portrait is fine; the prompt builds the dark room and warm flashlight glow.`,
+      },
+      {
+        question: `Will the tiny clone copy my exact face?`,
+        answer: `It should. If it drifts, ask for the mini figure to match your face shape, hair, and skin tone exactly.`,
+      },
+      {
+        question: `Why is my whole face overexposed?`,
+        answer: `Ask for the flashlight to warm the hair with soft rim light while keeping the face naturally lit, not blasted white.`,
+      },
+      {
+        question: `Can I keep my own outfit?`,
+        answer: `Turn clothing preservation on. By default the look may restyle clothing around the clone scene.`,
+      },
+    ],
+    addonLine: `Want a softer hair glow? Add: keep the tiny anime clone, flashlight beam, and dark moody room, but ease the warm rim light on the hair tips—no second clone, no neon party lights.`,
+  },
+  "mecha-pilot-anime-key-visual-ai-prompt": {
+    intro: `Anime key-visual framing: original pilot suit, low camera angle, and a towering original giant robot in a dusk launch bay with steam and sparks. Use one clear chest-up photo.`,
+    tips: [
+      `Prefer a sharp frontal portrait; tiny distant full-body shots make the pilot face vanish under the robot scale.`,
+      `If the mecha looks like a famous franchise design, ask for an original giant robot with no logos or known silhouettes.`,
+      `Ask for steel-blue hangar light with warning-orange accents, steam, and sparks—avoid flat white studio backdrops.`,
+      `Keep clothing and pose off so the pilot suit and low-angle key-visual stance can build.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a photo in a jumpsuit already?`,
+        answer: `No. A clear everyday portrait works; the prompt adds the original pilot suit when clothing is not preserved.`,
+      },
+      {
+        question: `Will a real anime mecha brand appear?`,
+        answer: `It should stay original. Ask for a custom giant robot with no franchise badges, names, or copied silhouettes.`,
+      },
+      {
+        question: `Why does the robot look tiny behind me?`,
+        answer: `Ask for a towering robot filling the hangar behind you with a low camera angle so scale reads epic.`,
+      },
+      {
+        question: `Is a blurry phone selfie okay?`,
+        answer: `Avoid blur. The face must stay sharp because the hangar detail will otherwise overpower identity.`,
+      },
+    ],
+    addonLine: `Want a quieter launch-bay stare? Add: keep the original pilot suit, giant robot, and hangar bay, but soften the warning lights and reduce spark density—no flowers, no second pilot.`,
+  },
+  "anime-couple-cherry-blossoms-ai-photo-prompt": {
+    intro: `Soft shoujo couple scene on a petal-covered path under arching cherry blossoms, with a romantic glance and sparkles in the air. Upload two clear photos or one of you both.`,
+    tips: [
+      `Use two sharp portraits with similar lighting, or one couple photo where both faces are large and unobstructed.`,
+      `If petals cover the eyes, ask for a petal gust around the path and trees, not stuck on lashes.`,
+      `Keep clothing on by default so your real outfits carry into the blossom path; turn it off only for a full restyle.`,
+      `When one person looks older or lighter-skinned wrongly, ask to lock each exact skin tone and apparent age.`,
+    ],
+    faqs: [
+      {
+        question: `Can we use two photos taken years apart?`,
+        answer: `Yes, if both faces are clear. Matching light and camera height helps the blend look natural.`,
+      },
+      {
+        question: `Will our relative heights stay?`,
+        answer: `They should. Ask to keep realistic relative heights if one person suddenly looks much taller.`,
+      },
+      {
+        question: `Why do we look like strangers?`,
+        answer: `Upload sharper, closer face crops and ask to preserve each person’s face shape, hair, and skin tone exactly.`,
+      },
+      {
+        question: `Do our clothes change under the blossoms?`,
+        answer: `Clothing preservation is on by default, so outfits usually stay while the petal path and sparkles are added.`,
+      },
+    ],
+    addonLine: `Want a calmer blossom walk? Add: keep both exact faces, cherry path, and soft pink mood, but thin the petal storm near the cheeks—no third person, no heavy jewellery props.`,
+  },
+  "sunset-city-game-loading-screen-ai-prompt": {
+    intro: `Bold cel-shaded game loading-screen couple on a palm-lined coastal boulevard at hot sunset, with thick outlines and an unbadged sports car. Two clear photos or one couple shot.`,
+    tips: [
+      `Upload two sharp face photos or one clear couple portrait—beauty filters flatten the cel-shade edge lines.`,
+      `If the car shows brand logos or number plates, ask for a sleek original sports car with no badges or plates.`,
+      `Ask for thick outlines and bold cel shading under hot orange-pink sunset light, not soft photoreal skin.`,
+      `Keep clothing on if you want your real outfits in the illustration; turn pose off for the loading-screen stance.`,
+    ],
+    faqs: [
+      {
+        question: `Must we already stand near a car?`,
+        answer: `No. Clear portraits are enough; the prompt builds the coastal boulevard, palms, and unbadged sports car.`,
+      },
+      {
+        question: `Will game UI text appear on the image?`,
+        answer: `It should stay clean. If letters show up, ask for a loading-screen illustration with no readable text or buttons.`,
+      },
+      {
+        question: `Why do we look photoreal instead of game-art?`,
+        answer: `Ask for bold cel shading, thick outlines, and saturated sunset colour like a game key art frame.`,
+      },
+      {
+        question: `Can one photo of both of us work?`,
+        answer: `Yes, if both faces are large and sharp. Separate portraits also work well.`,
+      },
+    ],
+    addonLine: `Want a cleaner loading-screen frame? Add: keep both faces, thick cel outlines, palms, and sunset boulevard, but soften the car reflections slightly—no UI text, no random NPCs.`,
+  },
+  "dark-fantasy-game-over-screen-ai-prompt": {
+    intro: `Lone wanderer at a misty grey-blue waterfall gorge, framed like a dark fantasy game-over screen with cold cinematic light. One clear chest-up photo is enough.`,
+    tips: [
+      `Use a sharp chest-up portrait; smiling party selfies fight the cold misty game-over mood.`,
+      `If the menu overlay looks cluttered, ask for a simple game-menu frame with minimal plain UI and no readable ads.`,
+      `Ask for damp black rocks, pale mist, and a grey-blue waterfall gorge—avoid bright tropical water.`,
+      `Keep clothing and pose off so the lone wanderer stance and cold cinematic light can appear.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a waterfall photo already?`,
+        answer: `No. A clear indoor or outdoor portrait works; the prompt builds the misty gorge and rocks.`,
+      },
+      {
+        question: `Will real game logos appear?`,
+        answer: `They should not. Ask for a plain original game-menu overlay with no franchise titles or brand marks.`,
+      },
+      {
+        question: `Why do I look cheerful in the result?`,
+        answer: `Ask for a subdued lone-wanderer expression under cold cinematic light, matching a game-over frame.`,
+      },
+      {
+        question: `Can I keep my own jacket?`,
+        answer: `Turn clothing preservation on. Otherwise the look restyles you as the misty wanderer while locking your face.`,
+      },
+    ],
+    addonLine: `Want a quieter game-over mood? Add: keep the misty waterfall gorge, lone wanderer framing, and cold light, but soften the menu overlay opacity—no victory confetti, no bright loot glow.`,
+  },
+  "cartoon-battle-royale-avatar-ai-photo-prompt": {
+    intro: `Stylised 3D battle-royale avatar gliding down onto a colourful tropical island with bright trees, supply crates, and a parachute pack. Upload one clear chest-up photo.`,
+    tips: [
+      `Prefer a sharp frontal portrait; sunglasses and heavy filters hide the cartoon eye shapes.`,
+      `If the outfit looks military-camo drab, ask for a bright original avatar outfit with no real brand logos.`,
+      `Ask for a parachute pack and colourful island drop—avoid empty grey voids with no terrain.`,
+      `Keep clothing and pose off so the glide-down stance and tropical island can build.`,
+    ],
+    faqs: [
+      {
+        question: `Must I already be wearing a parachute?`,
+        answer: `No. A plain portrait is enough; the prompt adds the pack and glide-down pose when clothing and pose are off.`,
+      },
+      {
+        question: `Will famous battle-royale skins copy over?`,
+        answer: `Ask for an original bright outfit and island—no franchise skin names, logos, or copied costumes.`,
+      },
+      {
+        question: `Why does my skin tone look lighter?`,
+        answer: `Ask to lock your exact skin tone; cartoon shading should not bleach or Europeanise the face.`,
+      },
+      {
+        question: `Is a group photo okay?`,
+        answer: `Use a single clear chest-up photo. Extra people can get turned into random island NPCs.`,
+      },
+    ],
+    addonLine: `Want a cleaner island drop? Add: keep the stylised 3D avatar, parachute pack, and colourful island, but reduce floating crate clutter near the face—no real gun brands, no blood effects.`,
+  },
+  "hero-shooter-character-card-ai-photo-prompt": {
+    intro: `Splash-art hero character card: dynamic angle, ability glow, and saturated energy shapes behind a framed portrait. Best from one clear chest-up photo with a sharp face.`,
+    tips: [
+      `Upload a sharp chest-up portrait; low-res crops make the splash-art face melt into paint streaks.`,
+      `If ability glow covers the eyes, ask for glow on hands or gear edges, with the face kept clear.`,
+      `Ask for an abstract splash-art backdrop of energy shapes and paint-like streaks—not a plain white card.`,
+      `Keep clothing and pose off so the hero suit and dynamic card angle can appear.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a costume photo already?`,
+        answer: `No. A clear everyday portrait works; the look builds splash-art styling and ability glow when clothing is off.`,
+      },
+      {
+        question: `Will hero names from real games appear?`,
+        answer: `They should not. Ask for an original character card with no franchise titles, logos, or ability names.`,
+      },
+      {
+        question: `Why does the card look flat and dull?`,
+        answer: `Ask for saturated splash-art colour, a dynamic camera angle, and bright energy shapes behind you.`,
+      },
+      {
+        question: `Can I keep my own clothes on the card?`,
+        answer: `Turn clothing preservation on. By default the prompt restyles you into hero splash-art gear.`,
+      },
+    ],
+    addonLine: `Want a cleaner character-card hit? Add: keep the splash-art style, ability glow, and dynamic angle, but pull glow away from the eyes—no real team logos, no cluttered stat text.`,
+  },
+  "16-bit-pixel-rpg-party-ai-photo-prompt": {
+    intro: `Your whole group as a 16-bit pixel RPG party on a retro overworld with castle, forest, river, and plain icon-only health bars. Use one clear group photo with every face visible.`,
+    tips: [
+      `Shoot or pick a group photo where every face is sharp and facing camera—hidden faces vanish in pixel form.`,
+      `If someone is missing from the party, ask to keep the same number of people as the source, no extras.`,
+      `Ask for 16-bit sprite style with a pixel fantasy overworld and plain icon-only HP bars—no readable modern UI text.`,
+      `Keep clothing on if you want outfit colours to carry into the sprites; keep pose off for a classic party lineup.`,
+    ],
+    faqs: [
+      {
+        question: `Can I merge separate selfies into one party?`,
+        answer: `This style expects one group photo with every face visible. Separate selfies are harder to line up as a party.`,
+      },
+      {
+        question: `Will we all stay recognisable in pixel form?`,
+        answer: `Yes if faces are sharp. Ask to preserve each hairstyle, skin tone, and head covering in the sprite read.`,
+      },
+      {
+        question: `Why do HP bars show random numbers or ads?`,
+        answer: `Ask for plain icon-only health bars with no readable text, scores, or brand marks.`,
+      },
+      {
+        question: `Is a blurry wedding group shot okay?`,
+        answer: `Avoid blur. Even light on all faces works better than a distant soft group photo.`,
+      },
+    ],
+    addonLine: `Want a cleaner overworld party? Add: keep every exact face as 16-bit sprites, the pixel castle-forest map, and icon HP bars, but simplify the river detail slightly—no modern HUD text, no extra hirelings.`,
+  },
+  "voxel-block-world-avatar-ai-photo-prompt": {
+    intro: `Kid-friendly rounded pastel voxel avatar jumping on candy-colored floating islands with soft trees and a little waterfall. Upload one clear photo of a child with the face visible.`,
+    tips: [
+      `Use a sharp child photo at eye level—adult-height downward shots warp the voxel head shape.`,
+      `If blocks look sharp and scary, ask for rounded pastel voxels and soft candy island colours.`,
+      `Ask for a bright sky with soft round clouds and a small waterfall—avoid dark caves or combat props.`,
+      `Keep clothing and pose off so the jumping kid avatar and floating islands can appear.`,
+    ],
+    faqs: [
+      {
+        question: `Can I use an adult photo for this look?`,
+        answer: `It is written for a child source photo. Adult faces often look odd in this pastel kid avatar set.`,
+      },
+      {
+        question: `Will filters or stickers on the photo cause issues?`,
+        answer: `Yes. Soft daylight with no stickers works best so hair and face lock cleanly into voxels.`,
+      },
+      {
+        question: `Why does my child look older?`,
+        answer: `Ask to lock apparent age and face shape; the voxel style should stay playful, not aged up.`,
+      },
+      {
+        question: `Do clothes stay from the source?`,
+        answer: `By default clothing changes into the voxel avatar look. Turn clothing preservation on to keep the real outfit colours.`,
+      },
+    ],
+    addonLine: `Want a gentler island hop? Add: keep the rounded pastel voxels, candy floating islands, and kid-friendly jump, but soften the waterfall spray—no weapons, no scary mobs.`,
+  },
+  "fighting-game-versus-screen-ai-photo-prompt": {
+    intro: `Two friends on a split fighting-game versus screen: crimson side versus electric blue, crackling energy, lightning, and plain health bars. Upload two clear photos or one of you both.`,
+    tips: [
+      `Use two sharp portraits with similar light, or one clear duo shot where both faces are large.`,
+      `If sides mix colours, ask for a clean split—crimson energy on one side, electric blue on the other.`,
+      `Ask for plain health bars at the top with no readable names or brand logos.`,
+      `Keep clothing on by default so real outfits stay in the face-off; keep pose off for the versus stances.`,
+    ],
+    faqs: [
+      {
+        question: `Can cousins or classmates use this, not just friends?`,
+        answer: `Yes. Any two people work if both faces are clear and you upload two photos or one duo shot.`,
+      },
+      {
+        question: `Will real fighting-game titles appear?`,
+        answer: `They should not. Ask for an original versus screen with no franchise logos or fighter names.`,
+      },
+      {
+        question: `Why does one person look washed out?`,
+        answer: `Ask to preserve each skin tone separately and balance the crimson and blue side lighting.`,
+      },
+      {
+        question: `Do our clothes change for the fight?`,
+        answer: `Clothing preservation is on by default, so outfits usually stay while the VS energy frame is added.`,
+      },
+    ],
+    addonLine: `Want a cleaner VS stare-down? Add: keep both exact faces, the crimson-blue split arena, and plain health bars, but ease lightning near the cheeks—no third fighter, no blood spray.`,
+  },
+  "dark-fantasy-armored-knight-ai-photo-prompt": {
+    intro: `Battle-worn knight swinging a glowing sword through a misty ruined castle courtyard with broken arches, cold fog, and falling ash. One clear chest-up photo works best.`,
+    tips: [
+      `Upload a sharp chest-up portrait; smiling party photos fight the cold misty steel mood.`,
+      `If armor looks shiny and new, ask for ornate battle-worn plates with scuffs and ash dust.`,
+      `Ask for a glowing sword mid-swing in misty ruins—avoid bright flower gardens or sunny meadows.`,
+      `Keep clothing and pose off so the armor and sword-swing action can build correctly.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a photo in armor already?`,
+        answer: `No. A clear everyday portrait works; the prompt adds ornate battle-worn armor when clothing is not preserved.`,
+      },
+      {
+        question: `Will my beard or glasses stay?`,
+        answer: `Yes. Face details including beard, glasses, or head covering are meant to stay under the helm framing.`,
+      },
+      {
+        question: `Why does the sword glow look neon pink?`,
+        answer: `Ask for a cold steel-compatible sword glow—pale blue or silver—matching the misty ruin light.`,
+      },
+      {
+        question: `Is a full-body gym mirror shot okay?`,
+        answer: `Chest-up is safer. Very wide full-body shots shrink the face against the ruined arches.`,
+      },
+    ],
+    addonLine: `Want a colder ruin swing? Add: keep the battle-worn armor, glowing sword, and misty courtyard, but thin the falling ash near the face—no flowers, no second knight.`,
+  },
+  "eastern-wanderer-swordsman-ai-photo-prompt": {
+    intro: `Wandering swordsman in flowing robes and a bamboo hat on a misty mountain path among bamboo and pine, cloud-wrapped peaks behind. Upload one clear chest-up photo.`,
+    tips: [
+      `Use a sharp chest-up portrait in even light—harsh flash fights the misty jade mountain grade.`,
+      `If the hat hides the whole face, ask for a bamboo hat angled so eyes and face stay readable.`,
+      `Ask for flowing robes and a sword-draw on a misty bamboo-pine path—avoid modern street clothes lingering.`,
+      `Keep clothing and pose off so the wanderer stance and cloud-wrapped peaks can appear.`,
+    ],
+    faqs: [
+      {
+        question: `Must I already wear robes in the photo?`,
+        answer: `No. A plain portrait is enough; the look adds flowing robes and the bamboo hat when clothing is off.`,
+      },
+      {
+        question: `Will my turban or head covering be removed?`,
+        answer: `Head coverings from the source are meant to stay. If a bamboo hat conflicts, ask to keep your covering and skip the hat.`,
+      },
+      {
+        question: `Why do the mountains look flat like a poster?`,
+        answer: `Ask for layered misty peaks with bamboo and pine depth, soft fog between ridges, and natural jade-green light.`,
+      },
+      {
+        question: `Can women use this wanderer look?`,
+        answer: `Yes. The prompt locks your face, hair, and age while building the misty path and sword-draw.`,
+      },
+    ],
+    addonLine: `Want a quieter mountain draw? Add: keep the flowing robes, bamboo hat, and misty pine path, but soften peak haze slightly—no modern city skyline, no extra travellers.`,
+  },
+  "elven-forest-archer-ai-photo-prompt": {
+    intro: `Elven archer in a sun-dappled ancient forest: pointed ears, leaf-embroidered cloak, longbow draw, and a glowing arrow between huge trees and ferns. One clear chest-up photo.`,
+    tips: [
+      `Prefer a sharp frontal or three-quarter portrait so ear tips and eye line stay clean under forest light shafts.`,
+      `If pointed ears look glued on, ask for natural ear blending that still keeps your exact face shape.`,
+      `Ask for a leaf-embroidered cloak and glowing arrow—avoid heavy plate armor that belongs to knight looks.`,
+      `Keep clothing and pose off so the longbow draw and sun-dappled forest can build.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a bow in my source photo?`,
+        answer: `No. A clear portrait works; the prompt adds the longbow draw and glowing arrow when pose is not preserved.`,
+      },
+      {
+        question: `Will pointed ears change my whole face?`,
+        answer: `They should not. Ask to keep your exact face shape and only add subtle pointed ears.`,
+      },
+      {
+        question: `Why does the forest look fake and plastic?`,
+        answer: `Ask for huge ancient trees, ferns, and soft light shafts with natural sun-dappled gold, not flat green screens.`,
+      },
+      {
+        question: `Can I keep my own clothes?`,
+        answer: `Turn clothing preservation on. By default you get the leaf-embroidered cloak and archer styling.`,
+      },
+    ],
+    addonLine: `Want a quieter forest aim? Add: keep the pointed ears, leaf cloak, longbow, and sun-dappled trees, but soften the arrow glow—no battle army in the background, no neon magic rings.`,
+  },
+  "royal-mughal-prince-princess-ai-photo-prompt": {
+    intro: `Couple as a royal prince and princess in a marble palace courtyard with carved arches, hanging lanterns, fountains, and rose petals. Upload two clear photos or one of you both.`,
+    tips: [
+      `Use two sharp portraits with similar light, or one clear couple photo where both faces are large.`,
+      `If outfits look costume-shop plastic, ask for jewelled sherwani and lehenga with rich fabric folds.`,
+      `Ask for marble arches, lantern glow, and soft rose petals—avoid modern hotel lobbies sneaking in.`,
+      `Keep clothing on by default if you already wear festive wear; turn it off for a full royal restyle.`,
+    ],
+    faqs: [
+      {
+        question: `Can we use engagement photos as the source?`,
+        answer: `Yes, if both faces are sharp. Separate selfies also work when you cannot stand together.`,
+      },
+      {
+        question: `Will our skin tones stay natural?`,
+        answer: `They should. Ask to lock each exact skin tone if the palace light tries to lighten either face.`,
+      },
+      {
+        question: `Do we need real sherwani and lehenga already?`,
+        answer: `Not required. With clothing off, the prompt can dress you in jewelled royal outfits while keeping faces exact.`,
+      },
+      {
+        question: `Why do lanterns look like LED strips?`,
+        answer: `Ask for warm hanging palace lanterns under carved marble arches, with soft fountain mist—not club lighting.`,
+      },
+    ],
+    addonLine: `Want a quieter palace portrait? Add: keep both exact faces, marble arches, lanterns, and regal pose, but thin the rose petals on the floor—no crowded court, no modern sunglasses.`,
+  },
+  "dragon-rider-ai-photo-prompt": {
+    intro: `Epic rider on a huge original dragon soaring above jagged mountain peaks at sunset, with wind, smoke, and ember-filled air. Best from one clear chest-up photo.`,
+    tips: [
+      `Upload a sharp chest-up portrait; tiny distant full-body shots lose facial identity against the dragon scale.`,
+      `If the dragon looks like a movie franchise creature, ask for a huge original dragon with no known logos or copied heads.`,
+      `Ask for leather riding armor, wind-swept motion, and ember sky above the clouds—avoid calm studio poses.`,
+      `Keep clothing and pose off so the saddle stance and mountain peaks can build.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a photo on a bike or horse first?`,
+        answer: `No. A clear portrait works; the prompt builds the dragon, wind, and mountain soar when pose is off.`,
+      },
+      {
+        question: `Will famous movie dragons appear?`,
+        answer: `Ask for an original dragon design with no franchise silhouettes, names, or saddle logos.`,
+      },
+      {
+        question: `Why does my face look tiny?`,
+        answer: `Ask to keep the rider large in frame with a readable face, dragon body filling the sky behind.`,
+      },
+      {
+        question: `Can I keep my own jacket?`,
+        answer: `Turn clothing preservation on. By default you get leather riding armor while your face stays locked.`,
+      },
+    ],
+    addonLine: `Want a fiercer high-altitude ride? Add: keep the original dragon, leather riding armor, and ember mountain sky, but thin embers near the eyes—no second dragon, no flowers in the saddle.`,
+  },
+  "80s-dark-fantasy-film-still-ai-photo-prompt": {
+    intro: `1980s sword-and-sorcery film still: practical fog, colored gels, crumbling stone pillars, film grain, and a faded fantasy costume. Upload one clear chest-up photo.`,
+    tips: [
+      `Use a sharp portrait without modern beauty filters—the faded 80s film grade needs real skin texture.`,
+      `If the image looks like crisp digital HDR, ask for soft film grain, slight fade, and practical smoke-machine fog.`,
+      `Ask for sword-and-sorcery costume under colored gels—avoid clean modern streetwear lingering in frame.`,
+      `Keep clothing and pose off so the foggy set and film-still framing can appear.`,
+    ],
+    faqs: [
+      {
+        question: `Must my photo already look old?`,
+        answer: `No. A clear modern portrait works; the prompt adds the faded 80s film look, fog, and gels.`,
+      },
+      {
+        question: `Will I look like a famous 80s actor?`,
+        answer: `You should stay yourself. Ask to lock your exact face, skin tone, and age—no celebrity morph.`,
+      },
+      {
+        question: `Why does fog erase my face?`,
+        answer: `Ask for practical smoke around the pillars and mid-ground, with sharp focus kept on the eyes and face.`,
+      },
+      {
+        question: `Can I keep my own clothes in the film still?`,
+        answer: `Turn clothing preservation on. Otherwise the default uses a sword-and-sorcery costume.`,
+      },
+    ],
+    addonLine: `Want a more VHS-era still? Add: keep the foggy pillars, sword-and-sorcery costume, and colored gels, but add a touch more film grain—no modern LED panels, no clean studio white.`,
+  },
+  "enchanted-academy-wizard-kids-ai-photo-prompt": {
+    intro: `Young wizard casting a sparkly spell in a candle-lit castle library with towering shelves, floating books, and warm lanterns. Upload one clear photo of a child with the face visible.`,
+    tips: [
+      `Use a sharp child photo at eye level with soft daylight—stickers and cartoon filters fight identity lock.`,
+      `If robes look house-branded, ask for plain wizard robes with no crest letters or franchise marks.`,
+      `Ask for a wand spell with soft sparkles, floating books, and candle-lit shelves—avoid dark horror lighting.`,
+      `Keep clothing and pose off so the library spell cast can appear while age and face stay exact.`,
+    ],
+    faqs: [
+      {
+        question: `Can adults use this wizard academy look?`,
+        answer: `It is written for a child source photo. Adult faces often read oddly in this young-wizard library set.`,
+      },
+      {
+        question: `Will famous wizard school logos appear?`,
+        answer: `They should not. Ask for plain robes and an original castle library with no franchise crests or names.`,
+      },
+      {
+        question: `Why does my child look older or younger?`,
+        answer: `Ask to lock apparent age exactly; the magic styling should not de-age or age up the face.`,
+      },
+      {
+        question: `Is a blurry birthday-party photo okay?`,
+        answer: `Avoid blur and heavy party filters. Soft daylight with a clear face works much better.`,
+      },
+    ],
+    addonLine: `Want a gentler library spell? Add: keep the plain wizard robes, wand sparkles, and candle-lit shelves, but soften floating-book motion—no scary creatures, no exam-board text on books.`,
+  },
+  "sorceress-glowing-spell-book-ai-photo-prompt": {
+    intro: `Dramatic sorceress in a gothic tower chamber: dark gown, levitating spell book, violet magic swirl, floating candles, and a stormy arched window. One clear chest-up photo.`,
+    tips: [
+      `Upload a sharp chest-up portrait; heavy beauty blur melts the violet magic edges into the face.`,
+      `If the spell book looks like a phone or laptop, ask for a levitating hardbound spell book with soft violet glow.`,
+      `Ask for a gothic tower chamber with stormy night through a tall arched window—avoid sunny beach light.`,
+      `Keep clothing and pose off so the dark gown and levitating-book gesture can build.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a book in my hands already?`,
+        answer: `No. A clear portrait works; the prompt adds the levitating spell book and violet magic when pose is off.`,
+      },
+      {
+        question: `Will my hijab or head covering stay?`,
+        answer: `Yes, head coverings are meant to stay. If the gown hood conflicts, ask to keep your exact covering from the source.`,
+      },
+      {
+        question: `Why is the violet glow turning my skin purple?`,
+        answer: `Ask for violet magic around the book and hands while keeping natural skin tone on the face.`,
+      },
+      {
+        question: `Can men use this sorceress look?`,
+        answer: `The styling is written as a sorceress scene. For a different mage mood, pick a wizard or wanderer style instead.`,
+      },
+    ],
+    addonLine: `Want a quieter arcane cast? Add: keep the dark gown, levitating spell book, violet swirl, and gothic tower, but ease magic density near the eyes—no extra familiars, no modern neon signs.`,
+  },
+  "desert-warrior-prince-ai-photo-prompt": {
+    intro: `Warrior prince on rolling sunset dunes: flowing scarves, curved sword, swirling sand, and a golden palace far away under desert sunset gold. Upload one clear chest-up photo.`,
+    tips: [
+      `Use a sharp chest-up portrait; dusty filters on the source fight clean scarf edges and sand motion.`,
+      `If scarves hide the whole face, ask for flowing scarves that frame the face without covering the eyes.`,
+      `Ask for a curved sword and distant golden palace on sunset dunes—avoid snowy or forest backgrounds.`,
+      `Keep clothing and pose off so the desert prince stance and swirling sand can appear.`,
+    ],
+    faqs: [
+      {
+        question: `Must I already be in a desert photo?`,
+        answer: `No. A clear indoor or city portrait works; the prompt builds the dunes, sand, and distant palace.`,
+      },
+      {
+        question: `Will my beard or hairstyle change?`,
+        answer: `No. Face, skin tone, hairstyle, beard, and head covering stay while scarves and pose restyle around you.`,
+      },
+      {
+        question: `Why does the palace look like a modern mall?`,
+        answer: `Ask for a distant golden palace silhouette on the horizon under warm sunset light, not glass buildings.`,
+      },
+      {
+        question: `Can I keep my own kurta?`,
+        answer: `Turn clothing preservation on. By default the look restyles into flowing scarves and desert prince attire.`,
+      },
+    ],
+    addonLine: `Want a quieter dune stare? Add: keep the flowing scarves, curved sword, sunset dunes, and distant palace, but thin the sand swirl near the face—no modern sunglasses, no crowded camel caravan.`,
+  },
+  "space-bounty-hunter-ai-photo-prompt": {
+    intro: `Dusty desert sci-fi bounty hunter look: layered leather gear at a sunbaked spaceport with dome hangars and heat haze, original helmet under one arm. Your face, skin tone and hairstyle stay locked.`,
+    tips: [
+      `Use one clear chest-up photo with the face sharp—front or slight three-quarter angle in even daylight.`,
+      `Leave clothing and pose unlocked so the leather gear, helmet-under-arm stance and desert spaceport can apply.`,
+      `If the port looks empty, ask for rounded cargo containers and dome hangars with dust storms—without covering the face.`,
+      `When skin tone shifts, restate exact skin tone and apparent age; avoid beauty filters on the upload.`,
+    ],
+    faqs: [
+      {
+        question: `Will my clothes stay the same?`,
+        answer: `Not by default. Clothing is unlocked so layered leather bounty-hunter gear can apply; turn clothing on only to keep your real outfit.`,
+      },
+      {
+        question: `Do I need a full-body photo?`,
+        answer: `A clear chest-up portrait is enough. Face fully visible and sharp matters more than seeing your shoes.`,
+      },
+      {
+        question: `Can I keep my exact pose?`,
+        answer: `Yes—turn pose preservation on. By default pose is unlocked so the helmet-under-arm spaceport stance can form.`,
+      },
+      {
+        question: `Why does the helmet hide my face?`,
+        answer: `Ask for the original helmet held under the arm, visor away from the face, so identity stays clear.`,
+      },
+    ],
+    addonLine: `Want thicker desert atmosphere? Add: keep the leather gear, helmet under the arm and spaceport, but deepen the heat haze and distant dust—no jetpack, no extra bounty targets in frame.`,
+  },
+  "kids-astronaut-space-ai-photo-prompt": {
+    intro: `Fun kids' astronaut adventure: white space suit with visor up, bouncing on an alien planet of glowing crystals while Earth rises in a starry sky. Your child's face, hair and age stay exact.`,
+    tips: [
+      `Upload one clear eye-level photo of the child with a sharp, unobscured face and soft daylight—no filters or stickers.`,
+      `Leave clothing and pose unlocked so the white suit, visor-up look and bounce pose can apply.`,
+      `If the planet looks blank, ask for glowing crystals, craters and Earth rising without covering the face.`,
+      `When age or skin tone drifts, restate exact skin tone and apparent age—no beautify or age-up.`,
+    ],
+    faqs: [
+      {
+        question: `What photo works best for a child?`,
+        answer: `One sharp eye-level shot with the face fully visible. Soft daylight and no stickers help keep identity.`,
+      },
+      {
+        question: `Will the child's age change?`,
+        answer: `No—face, hair, skin tone and apparent age stay. Avoid add-ons that ask to make them look older.`,
+      },
+      {
+        question: `Does the helmet cover the face?`,
+        answer: `The look uses a white suit with the visor up so the child's face stays readable.`,
+      },
+      {
+        question: `Why does Earth look flat in the sky?`,
+        answer: `Ask for Earth rising clearly above the alien horizon with a starry sky, not a sticker pasted behind the suit.`,
+      },
+    ],
+    addonLine: `Want a richer alien surface? Add: keep the white suit, visor up and Earth rise, but add a few more glowing crystals near the boots—no extra astronauts, no scary aliens.`,
+  },
+  "half-android-portrait-ai-photo-prompt": {
+    intro: `Cinematic half-android close-up: one side chrome with glowing circuitry, the other your real face, lit by cyan and orange rim light in a dark studio. Identity and skin tone stay locked.`,
+    tips: [
+      `Start with one clear chest-up photo, face fully visible—front or slight three-quarter works best.`,
+      `Leave clothing and pose unlocked for the chrome half-face circuitry and cinematic studio framing.`,
+      `If circuitry looks muddy, ask for sharp glowing lines on the chrome half without covering both eyes.`,
+      `When the human side lightens, restate exact skin tone—no beautify or ethnicity shift.`,
+    ],
+    faqs: [
+      {
+        question: `Will both sides of my face stay mine?`,
+        answer: `Yes—the human half keeps your exact features and skin tone; only one side becomes chrome circuitry.`,
+      },
+      {
+        question: `Do I need a dark studio photo already?`,
+        answer: `No. A clear daylight portrait works; the dark studio with cyan and orange rim light is built in.`,
+      },
+      {
+        question: `Will my hairstyle change?`,
+        answer: `No—hairstyle, beard or head covering stay. The chrome treatment sits on the face, not a new haircut.`,
+      },
+      {
+        question: `Why does the chrome side look blurry?`,
+        answer: `Ask for crisp chrome plating and fine glowing circuitry on one half, with sharp focus on both eyes.`,
+      },
+    ],
+    addonLine: `Want stronger chrome contrast? Add: keep half the face human and half chrome with glowing circuitry, but sharpen the cyan rim on the metal side—no full-robot head, no floating HUD text.`,
+  },
+  "neon-samurai-cyborg-ai-photo-prompt": {
+    intro: `Neon crimson-and-cyan cyborg samurai: armored figure slashing a glowing katana on a rain-soaked megacity rooftop with abstract neon signs. Your face, skin tone and hair stay recognisable.`,
+    tips: [
+      `Use one sharp chest-up portrait in even daylight with the face fully visible.`,
+      `Leave clothing and pose unlocked so cyborg samurai armor, glowing katana and slash action can apply.`,
+      `If neon looks dull, ask for rain reflections and abstract glowing signs—without readable brand logos on the face.`,
+      `When identity drifts, restate same face shape, skin tone and hairstyle; skip beauty filters on the source.`,
+    ],
+    faqs: [
+      {
+        question: `Will my clothes be replaced?`,
+        answer: `Yes by default—clothing is unlocked for cyborg samurai armor. Turn clothing on only to keep your real outfit.`,
+      },
+      {
+        question: `Must I already hold a sword in the photo?`,
+        answer: `No. With pose unlocked, the glowing katana slash is added while your face stays the same.`,
+      },
+      {
+        question: `Is the background a real city photo?`,
+        answer: `It builds a rainy neon megacity rooftop with abstract glowing signs and holograms—not a tourist landmark shot.`,
+      },
+      {
+        question: `Why does the katana look like a stick?`,
+        answer: `Ask for a clear glowing katana blade mid-slash with neon rim light catching the rain.`,
+      },
+    ],
+    addonLine: `Want wetter neon rain? Add: keep the cyborg armor, glowing katana and rooftop slash, but thicken rain streaks on the armor plates—no extra fighters, no bloody effects.`,
+  },
+  "desert-planet-wanderer-ai-photo-prompt": {
+    intro: `Burnt-orange desert-planet wanderer: layered robes crossing vast dunes under a single huge pale sun, with sandstorms on the horizon. Face, skin tone and hairstyle stay yours.`,
+    tips: [
+      `Upload one clear chest-up photo with a sharp face—front or slight three-quarter angle.`,
+      `Leave clothing and pose unlocked so layered desert robes and the dune-crossing stance can apply.`,
+      `If dunes look flat, ask for vast orange sand under one huge pale sun with distant storms—without hiding the face.`,
+      `When skin lightens in harsh sun, restate exact skin tone and apparent age.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need an outdoor desert photo?`,
+        answer: `No. A clear indoor portrait works; the vast orange dunes and huge pale sun are generated around you.`,
+      },
+      {
+        question: `Will my clothes stay?`,
+        answer: `Not by default. Clothing is unlocked for layered desert robes; preserve clothing only if you want your real outfit.`,
+      },
+      {
+        question: `Can I keep a head covering I already wear?`,
+        answer: `Yes—hairstyle, beard or head covering stay part of your identity even when robes are added.`,
+      },
+      {
+        question: `Why does the sun look like a white circle sticker?`,
+        answer: `Ask for one huge pale sun low over the dunes with natural heat haze, not a flat cut-out in the sky.`,
+      },
+    ],
+    addonLine: `Want a stronger dune epic feel? Add: keep the layered robes, huge pale sun and orange dunes, but push the sandstorm a little closer on the horizon—no second sun, no speeder vehicles.`,
+  },
+  "star-of-your-own-movie-poster-ai-prompt": {
+    intro: `Moody teal-and-orange blockbuster poster: you as the action star against a night city skyline with explosions and searchlights. Face, skin tone and hairstyle stay locked.`,
+    tips: [
+      `Use one clear chest-up photo with the face sharp and fully visible.`,
+      `Leave clothing and pose unlocked so hero wardrobe and a strong poster pose can apply.`,
+      `If the poster feels empty, ask for night skyline, searchlights and distant explosions that stay behind you—not over the face.`,
+      `When the grade washes out skin, restate exact skin tone under the moody teal-orange look.`,
+    ],
+    faqs: [
+      {
+        question: `Will title text appear on the poster?`,
+        answer: `The default look is you as the star with a blockbuster backdrop. Ask for no title text if lettering shows up.`,
+      },
+      {
+        question: `Do I need a dramatic pose already?`,
+        answer: `No. Pose is unlocked so a hero poster stance can form while your face stays recognisable.`,
+      },
+      {
+        question: `Will my age or face change?`,
+        answer: `No—face shape, skin tone, hairstyle and apparent age stay. Avoid beautify or de-age add-ons.`,
+      },
+      {
+        question: `Why do the explosions cover my face?`,
+        answer: `Ask for explosions and searchlights in the background city skyline only, with your face clear in the foreground.`,
+      },
+    ],
+    addonLine: `Want a punchier poster sky? Add: keep your face, the night skyline and hero pose, but add one sharper searchlight beam behind the shoulder—no title text, no fake studio logos.`,
+  },
+  "retro-hand-painted-film-poster-ai-prompt": {
+    intro: `Warm 1970s hand-painted cinema poster: you both as hero and heroine against a dramatic painted sky with burst lines and grain. Both faces, skin tones and relative heights stay true.`,
+    tips: [
+      `Upload one clear photo per person, or one sharp photo of you both with both faces large.`,
+      `Clothing stays by default—your real outfits remain; unlock clothing only if you want period poster costumes.`,
+      `Leave pose unlocked so the classic hero-and-heroine poster layout can form.`,
+      `If the paint look fades, ask for grainy hand-painted texture and burst lines without covering either face.`,
+    ],
+    faqs: [
+      {
+        question: `Do we need two separate photos?`,
+        answer: `One clear photo per person works best, but a single photo of you both is fine if both faces are sharp.`,
+      },
+      {
+        question: `Will our clothes change?`,
+        answer: `No by default—clothing is preserved. Turn clothing off only if you want retro film-poster outfits.`,
+      },
+      {
+        question: `Can heights look wrong between us?`,
+        answer: `The look keeps realistic relative heights. Use sources where neither face is oddly cropped.`,
+      },
+      {
+        question: `Why do we look like smooth digital art?`,
+        answer: `Ask for visible hand-painted brush texture and grainy 1970s poster finish, not a glossy modern render.`,
+      },
+    ],
+    addonLine: `Want richer painted drama? Add: keep both faces, the 1970s poster layout and grain, but deepen the dramatic sky washes behind you—no modern CGI gloss, no third person.`,
+  },
+  "masked-stranger-halloween-selfie-ai-prompt": {
+    intro: `Grainy late-90s flash Halloween selfie: you in a dim bedroom hallway with a shadowy blank white-mask figure behind. Spooky, not violent—your face and skin tone stay exact.`,
+    tips: [
+      `Use one clear chest-up photo with the face sharp; even daylight source photos still work for this flash look.`,
+      `Leave clothing and pose unlocked so the late-90s selfie framing and spooky hallway setup can apply.`,
+      `If the mask figure crowds you, ask for the blank white mask slightly behind and to the side—never covering your face.`,
+      `When flash washes skin, restate exact skin tone and keep grainy flash shadows without beautify.`,
+    ],
+    faqs: [
+      {
+        question: `Is this meant to look violent?`,
+        answer: `No—it is a spooky late-90s flash selfie with a blank white mask figure. Keep it eerie, not graphic.`,
+      },
+      {
+        question: `Will my face stay clear?`,
+        answer: `Yes. Your face stays the main subject; the masked figure stays behind you in the dim hallway.`,
+      },
+      {
+        question: `Do I need a dark hallway photo already?`,
+        answer: `No. A clear portrait works; the dim late-90s bedroom hallway and flash look are built in.`,
+      },
+      {
+        question: `Why does the mask look like a face filter on me?`,
+        answer: `Ask for a separate shadowy figure in a blank white mask behind you—not a mask on your own face.`,
+      },
+    ],
+    addonLine: `Want a creepier hallway depth? Add: keep your face, the flash selfie and blank white mask figure, but push the figure a step deeper into the dark hallway—no gore, no jump-scare blood.`,
+  },
+  "y2k-ghost-doorway-selfie-ai-photo-prompt": {
+    intro: `Early-2000s point-and-shoot spooky selfie: digital flash grain with a sheet-ghost silhouette in a half-open dark doorway behind you. Your real face, hair and skin tone stay locked.`,
+    tips: [
+      `Upload one clear chest-up photo with the face fully visible and sharp.`,
+      `Leave clothing and pose unlocked so the Y2K flash selfie framing and doorway ghost can apply.`,
+      `If the ghost looks solid or scary-violent, ask for a soft sheet-ghost silhouette in the doorway—fun spooky, not gore.`,
+      `When colours look too clean, ask for early-2000s digital-camera flash and mild noise.`,
+    ],
+    faqs: [
+      {
+        question: `Is the ghost on my face?`,
+        answer: `No. You stay clear in the flash selfie; the sheet-ghost silhouette stands in the dark doorway behind.`,
+      },
+      {
+        question: `Do I need an old digital camera photo?`,
+        answer: `No. A sharp modern portrait works; the early-2000s point-and-shoot flash look is applied.`,
+      },
+      {
+        question: `Will my clothes change?`,
+        answer: `By default clothing is unlocked for the selfie scene. Turn clothing on if you want to keep your real outfit only.`,
+      },
+      {
+        question: `Why does the doorway look bright?`,
+        answer: `Ask for a dark home hallway at night with a half-open doorway so the sheet ghost reads as a silhouette.`,
+      },
+    ],
+    addonLine: `Want a more Y2K camera feel? Add: keep your face, the flash selfie and sheet ghost in the doorway, but add slight digital noise and a softer flash hotspot—no text date stamps covering the face.`,
+  },
+  "film-noir-detective-ai-photo-prompt": {
+    intro: `1940s black-and-white noir detective: fedora and trench coat in a night office with venetian-blind shadows, rain on the window and smoke haze. Your face and identity stay recognisable in mono.`,
+    tips: [
+      `Use one clear chest-up photo with the face sharp—front or slight three-quarter angle.`,
+      `Leave clothing and pose unlocked so the fedora, trench coat and noir office framing can apply.`,
+      `If shadows look flat, ask for strong venetian-blind stripes and rain-streaked window light across the scene.`,
+      `When the face softens in black and white, restate exact features and apparent age—no beautify.`,
+    ],
+    faqs: [
+      {
+        question: `Will the photo stay in colour?`,
+        answer: `No—this look is black-and-white film noir. Your face shape and features still stay recognisable.`,
+      },
+      {
+        question: `Do I need a vintage photo already?`,
+        answer: `No. A clear modern portrait works; the 1940s office, blinds and rain window are built around you.`,
+      },
+      {
+        question: `Can I keep my own clothes?`,
+        answer: `Turn clothing preservation on. By default clothing is unlocked for the fedora and trench coat.`,
+      },
+      {
+        question: `Why do the blind shadows miss my face?`,
+        answer: `Ask for venetian-blind shadow stripes falling across the coat and wall, with the face still readable.`,
+      },
+    ],
+    addonLine: `Want deeper noir shadows? Add: keep the fedora, trench coat and rain-streaked window, but strengthen the venetian-blind stripes across the coat—no colour tint, no modern gadgets.`,
+  },
+  "secret-agent-tuxedo-couple-ai-photo-prompt": {
+    intro: `Glamorous spy-thriller couple night: tuxedo and evening gown on a casino-style marble balcony over a glittering harbor with fireworks. Both faces, skin tones and relative heights stay true.`,
+    tips: [
+      `Upload one clear photo per person, or one sharp photo of you both with both faces large.`,
+      `Clothing stays by default—your real outfits remain; unlock clothing only for tuxedo and gown styling.`,
+      `Leave pose unlocked so the balcony spy-thriller stance can form over the harbor.`,
+      `If fireworks overpower faces, ask for distant harbor fireworks and glitter without washing out either person.`,
+    ],
+    faqs: [
+      {
+        question: `Do we need two photos?`,
+        answer: `One clear photo per person is ideal, but one photo of you both works if both faces are sharp and visible.`,
+      },
+      {
+        question: `Will we automatically get a tuxedo and gown?`,
+        answer: `Only if you turn clothing preservation off. By default your real clothes stay on the glittering balcony.`,
+      },
+      {
+        question: `Can heights look uneven?`,
+        answer: `The look keeps realistic relative heights. Prefer sources where neither person is tightly cropped.`,
+      },
+      {
+        question: `Why do the fireworks look pasted on?`,
+        answer: `Ask for fireworks over the glittering harbor behind the balcony, with natural night depth—not stickers beside your heads.`,
+      },
+    ],
+    addonLine: `Want richer night gold? Add: keep both faces, the marble balcony and harbor glitter, but warm the fireworks bokeh slightly behind you—no logos on the railing, no third agent in frame.`,
+  },
+  "wild-west-frontier-cowboy-ai-photo-prompt": {
+    intro: `Dusty sunset sepia frontier hero: duster coat and hat striding a wooden-storefront town street with tumbleweeds and low sun film grain. Face, skin tone and hairstyle stay yours.`,
+    tips: [
+      `Start with one clear chest-up photo, face fully visible in even daylight.`,
+      `Leave clothing and pose unlocked so the duster, hat and sunset street stride can apply.`,
+      `If the town looks modern, ask for dusty wooden storefronts with no readable signs and tumbleweeds at low sun.`,
+      `When sepia washes skin, restate exact skin tone under the dusty sunset grade.`,
+    ],
+    faqs: [
+      {
+        question: `Will my clothes change?`,
+        answer: `Yes by default—clothing is unlocked for a duster coat and hat. Preserve clothing only to keep your real outfit.`,
+      },
+      {
+        question: `Do I need a full-body walking photo?`,
+        answer: `No. A sharp chest-up portrait is enough; the dusty street stride builds when pose is unlocked.`,
+      },
+      {
+        question: `Is the look full colour?`,
+        answer: `It uses a dusty sunset sepia-leaning grade with film grain—not bright modern colour.`,
+      },
+      {
+        question: `Why do store signs show random text?`,
+        answer: `Ask for wooden storefronts with no readable signs so the frontier street stays clean behind you.`,
+      },
+    ],
+    addonLine: `Want thicker sunset dust? Add: keep the duster coat, hat and frontier street, but add a light dust haze in the low sun—no gunfights, no crowd of extras.`,
+  },
+  "zombie-apocalypse-survivor-group-ai-photo-prompt": {
+    intro: `Gritty but family-friendly survivor poster: your whole group with backpacks through an abandoned overgrown city of rusted cars, vines and horizon smoke. Every face and the same headcount stay locked.`,
+    tips: [
+      `Use one clear group photo where every face is visible, facing the camera, with even light on all.`,
+      `Clothing stays by default—real outfits remain; unlock clothing only if you want matching survivor gear.`,
+      `Leave pose unlocked so the running-through-ruins energy can form without adding extra people.`,
+      `If the city looks empty, ask for rusted cars, vines and distant smoke without covering any face.`,
+    ],
+    faqs: [
+      {
+        question: `Must everyone be in one photo?`,
+        answer: `Yes—one clear group photo with every face visible works best so the same people and count are kept.`,
+      },
+      {
+        question: `Will our clothes change?`,
+        answer: `No by default. Clothing is preserved; turn it off only if you want survivor gear applied.`,
+      },
+      {
+        question: `Can extra people appear?`,
+        answer: `No. Only the people in your upload are used—same number of faces, no blended or swapped identities.`,
+      },
+      {
+        question: `Is this too scary for a family share?`,
+        answer: `It is a desaturated survival poster with overgrown ruins—gritty mood, not graphic horror. Ask for no gore if anything looks too intense.`,
+      },
+    ],
+    addonLine: `Want denser overgrown ruins? Add: keep every face, the abandoned street and backpacks, but add more vines on the rusted cars—no graphic zombies in the foreground, no extra strangers.`,
+  },
+  "vintage-1920s-gangster-boss-ai-photo-prompt": {
+    intro: `Cold steel 1920s gangster-boss stride: flat cap and wool coat through a smoky industrial street of brick factories, cobblestones and gas lamps. Your face, skin tone and age stay exact.`,
+    tips: [
+      `Upload one clear chest-up photo with the face sharp and fully visible.`,
+      `Leave clothing and pose unlocked so the flat cap, wool coat and industrial-street stride can apply.`,
+      `If smoke looks fake, ask for soft factory smoke and gas-lamp glow without hiding the face.`,
+      `When the cold grade lightens skin, restate exact skin tone—no beautify.`,
+    ],
+    faqs: [
+      {
+        question: `Will my clothes be replaced?`,
+        answer: `Yes by default for the flat cap and wool coat. Turn clothing preservation on to keep your real outfit.`,
+      },
+      {
+        question: `Do I need a period photo already?`,
+        answer: `No. A clear modern portrait works; the smoky 1920s industrial street is built around you.`,
+      },
+      {
+        question: `Does my face stay the same in the cold grade?`,
+        answer: `Yes—face shape, features, hairstyle and apparent age stay while the cold cinematic grade applies.`,
+      },
+      {
+        question: `Why do the gas lamps look like yellow blobs?`,
+        answer: `Ask for clear gas lamps along the brick factory street with soft smoke, still keeping your face sharp.`,
+      },
+    ],
+    addonLine: `Want heavier industrial mood? Add: keep the flat cap, wool coat and cobblestone street, but thicken the factory smoke behind you—no tommy-gun props, no crowd of henchmen.`,
+  },
+  "victorian-gothic-novel-heroine-ai-photo-prompt": {
+    intro: `Moody Victorian gothic heroine: lace high-neck gown, candle in hand on a foggy moor with a dark manor and storm clouds. Face, skin tone and hairstyle stay locked in oil-painting light.`,
+    tips: [
+      `Use one clear chest-up photo with the face fully visible—front or slight three-quarter.`,
+      `Leave clothing and pose unlocked so the lace gown, candle-in-hand pose and foggy moor can apply.`,
+      `If fog swallows detail, ask for soft moor fog with the gothic manor readable in the distance—face still clear.`,
+      `When candle light washes skin, restate exact skin tone under warm oil-painting light.`,
+    ],
+    faqs: [
+      {
+        question: `Will my clothes stay?`,
+        answer: `Not by default. Clothing is unlocked for a lace high-neck gown; preserve clothing only to keep your real outfit.`,
+      },
+      {
+        question: `Must I already hold a candle?`,
+        answer: `No. With pose unlocked, a candle in hand is added while your face stays recognisable.`,
+      },
+      {
+        question: `Is this a painted look or a photo look?`,
+        answer: `It aims for photoreal portraiture with oil-painting-like light on a foggy moor—not a flat illustration.`,
+      },
+      {
+        question: `Why is the manor missing?`,
+        answer: `Ask for a dark gothic manor on the foggy moor under storm clouds, placed behind you without covering the face.`,
+      },
+    ],
+    addonLine: `Want deeper moor atmosphere? Add: keep the lace gown, candle and foggy manor, but thicken storm clouds behind the manor—no modern buildings, no extra figures on the moor.`,
+  },
+  "regency-ballroom-couple-ai-photo-prompt": {
+    intro: `Pastel candlelit Regency romance: empire-waist gown and tailcoat mid-waltz in a chandelier ballroom with pastel flowers. Both faces, skin tones and relative heights stay true.`,
+    tips: [
+      `Upload one clear photo per person, or one sharp photo of you both with both faces large.`,
+      `Clothing stays by default—unlock it only if you want empire gown and tailcoat styling.`,
+      `Leave pose unlocked so the mid-waltz ballroom moment can form.`,
+      `If chandeliers look sparse, ask for warm candlelight and pastel flowers without covering either face.`,
+    ],
+    faqs: [
+      {
+        question: `Do we need two separate photos?`,
+        answer: `One clear photo per person works best, but a single photo of you both is fine if both faces are sharp.`,
+      },
+      {
+        question: `Will our clothes change into period outfits?`,
+        answer: `Only if you turn clothing preservation off. By default your real clothes stay in the ballroom.`,
+      },
+      {
+        question: `Must we already be dancing in the source?`,
+        answer: `No. Pose is unlocked so a mid-waltz frame can form while both faces stay recognisable.`,
+      },
+      {
+        question: `Why do heights look wrong?`,
+        answer: `The look keeps realistic relative heights—use sources where neither person is tightly cropped at the neck only.`,
+      },
+    ],
+    addonLine: `Want softer ballroom romance? Add: keep both faces, the waltz and candle-lit chandeliers, but add a few more pastel flowers along the wall—no modern DJ gear, no third dancer close-up.`,
+  },
+  "moonlit-vampire-romance-couple-ai-photo-prompt": {
+    intro: `Moonlit crimson gothic romance: couple in dark velvet in a misty pine forest under a huge full moon. Both faces, skin tones and relative heights stay locked—romantic mood, not horror gore.`,
+    tips: [
+      `Use one clear photo per person, or one sharp photo of you both with both faces readable.`,
+      `Clothing stays by default—unlock clothing only if you want dark velvet styling.`,
+      `Leave pose unlocked so the misty forest romance framing can form under the full moon.`,
+      `If mist hides faces, ask for soft pine mist with moonlit glow that still keeps both faces clear.`,
+    ],
+    faqs: [
+      {
+        question: `Is this a scary vampire photo?`,
+        answer: `It is a moonlit gothic romance in a misty pine forest—moody and stylish, not a gore horror shot.`,
+      },
+      {
+        question: `Will our clothes become velvet automatically?`,
+        answer: `Only if you turn clothing preservation off. By default your real outfits stay under the moonlight.`,
+      },
+      {
+        question: `Do we need a forest photo already?`,
+        answer: `No. Clear portraits work; the misty pine forest and huge full moon are built around you.`,
+      },
+      {
+        question: `Can one face get lost in the mist?`,
+        answer: `Ask for moonlit glow on both faces with mist in the pines behind—not fog covering either person.`,
+      },
+    ],
+    addonLine: `Want richer moonlit mist? Add: keep both faces, dark velvet and the huge full moon, but soften crimson accents on the collars only—no fangs close-up, no blood effects.`,
+  },
+  "storybook-princess-kids-ai-photo-prompt": {
+    intro: `Soft rose-gold storybook princess: child in an original sparkling gown twirling in a castle garden with fountain, fireflies and pastel flowers. Face, hair, skin tone and age stay exact.`,
+    tips: [
+      `Upload one clear eye-level photo of the child with a sharp face—soft daylight, no filters or stickers.`,
+      `Leave clothing and pose unlocked so the sparkling gown and twirl pose can apply.`,
+      `If the garden looks empty, ask for a fountain, glowing fireflies and pastel flowers without covering the face.`,
+      `When skin or age shifts, restate exact skin tone and apparent age—no beautify or age-up.`,
+    ],
+    faqs: [
+      {
+        question: `What photo works best?`,
+        answer: `One sharp eye-level photo of the child with the face fully visible and no stickers on the skin.`,
+      },
+      {
+        question: `Will the child's age change?`,
+        answer: `No—face, hair, skin tone and apparent age stay. Avoid add-ons that age them up or down.`,
+      },
+      {
+        question: `Does the gown copy a famous movie dress?`,
+        answer: `The look uses an original sparkling gown in a storybook castle garden—not a copy of a branded costume.`,
+      },
+      {
+        question: `Why is the castle missing?`,
+        answer: `Ask for a storybook castle garden with fountain and pastel flowers behind the child, face still clear.`,
+      },
+    ],
+    addonLine: `Want a sweeter garden glow? Add: keep the child's face, sparkling gown and castle garden, but add a few more fireflies near the fountain—no licensed cartoon characters, no heavy crown hiding the hairline.`,
+  },
+  "dark-academia-library-ai-photo-prompt": {
+    intro: `Moody brown dark-academia scholar: tweed blazer in a towering old library with spiral stairs, stacked books, warm lamps and papers in flight. Face, skin tone and hairstyle stay yours.`,
+    tips: [
+      `Use one clear chest-up photo with the face sharp—front or slight three-quarter.`,
+      `Leave clothing and pose unlocked so the tweed blazer and library scholar framing can apply.`,
+      `If papers look chaotic over the face, ask for flying pages around the shoulders, not across the eyes.`,
+      `When warm lamps shift skin, restate exact skin tone under the moody brown grade.`,
+    ],
+    faqs: [
+      {
+        question: `Will my clothes change?`,
+        answer: `Yes by default—clothing is unlocked for a tweed blazer look. Preserve clothing only to keep your real outfit.`,
+      },
+      {
+        question: `Do I need a library photo already?`,
+        answer: `No. A clear portrait works; the towering old library with spiral stairs and warm lamps is generated.`,
+      },
+      {
+        question: `Can I keep my glasses or head covering?`,
+        answer: `Yes—glasses, beard or head covering stay as part of your identity.`,
+      },
+      {
+        question: `Why do the flying papers cover my face?`,
+        answer: `Ask for papers swirling beside and behind you with the face kept clear in the warm lamp light.`,
+      },
+    ],
+    addonLine: `Want a taller library feel? Add: keep the tweed blazer, stacked books and warm lamps, but show more of the spiral stairs behind—no floating Latin text overlays, no extra scholars crowding the frame.`,
+  },
+  "retro-90s-blister-card-action-figure-ai-prompt": {
+    intro: `Saturated 90s toy listing shot: you as a glossy action figure sealed on a vintage blister card with a starburst sticker, photographed on a plain table in soft daylight. Face and skin tone stay recognisable.`,
+    tips: [
+      `Upload one clear chest-up photo with the face sharp and fully visible.`,
+      `Leave clothing and pose unlocked so the glossy figure sculpt and blister-card packaging can apply.`,
+      `If the card looks modern, ask for a vintage 90s blister card, starburst sticker and soft tabletop listing light.`,
+      `When the toy face drifts, restate same face shape, hairstyle and exact skin tone even in plastic gloss.`,
+    ],
+    faqs: [
+      {
+        question: `Will I still look like myself as a toy?`,
+        answer: `Yes—even stylized as a glossy figure, face shape, hair, skin tone and age stay recognisable.`,
+      },
+      {
+        question: `Do I need a product photo background already?`,
+        answer: `No. A clear portrait works; the plain table listing photo and blister card are built around you.`,
+      },
+      {
+        question: `Will my clothes become plastic armor?`,
+        answer: `By default clothing is unlocked for the action-figure look. Turn clothing on only to keep your real outfit details.`,
+      },
+      {
+        question: `Why does the blister card show random logos?`,
+        answer: `Ask for a vintage-style blister card with abstract starburst art only—no real brand names or logos.`,
+      },
+    ],
+    addonLine: `Want a more 90s shelf look? Add: keep your face on the glossy figure and the blister card, but brighten the starburst sticker slightly—no real brand logos, no extra figures in the pack.`,
+  },
+  "plastic-brick-toy-figure-group-ai-photo-prompt": {
+    intro: `Bright brick-toy diorama: each friend as a glossy plastic figure on a baseplate with tiny trees and a little house. Every face, skin tone and the same group size stay locked in fun toy scale.`,
+    tips: [
+      `Use one clear group photo where every face is visible and evenly lit, facing the camera.`,
+      `Clothing stays by default so real outfits read on the toy figures; unlock clothing only for full toy costumes.`,
+      `Leave pose unlocked so playful toy-scale action on the baseplate can form.`,
+      `If the diorama looks empty, ask for tiny trees and a little house on the baseplate without hiding faces.`,
+    ],
+    faqs: [
+      {
+        question: `Must everyone be in one photo?`,
+        answer: `Yes—one clear group photo with every face visible keeps the same people and count on the diorama.`,
+      },
+      {
+        question: `Will our clothes change?`,
+        answer: `No by default. Clothing is preserved so outfits stay readable on the glossy toy figures.`,
+      },
+      {
+        question: `Can faces still look like us in toy form?`,
+        answer: `Yes—each face, hairstyle, skin tone and age stay recognisable even as glossy brick-toy figures.`,
+      },
+      {
+        question: `Why does someone disappear from the group?`,
+        answer: `Make sure every face is visible in the source. The look keeps the same number of people—no extras, no drops.`,
+      },
+    ],
+    addonLine: `Want a fuller baseplate scene? Add: keep every face as glossy brick-toy figures and the baseplate, but add one more tiny tree beside the little house—no extra people, no real brand logo tiles.`,
+  },
+  "crochet-amigurumi-couple-ai-photo-prompt": {
+    intro: `Cozy craft-table amigurumi couple: yarn-textured crochet dolls with stitched details among yarn balls and hooks in soft window light. Both faces, skin tones and relative heights stay recognisable.`,
+    tips: [
+      `Upload one clear photo per person, or one sharp photo of you both with both faces large.`,
+      `Clothing stays by default so outfits read in yarn texture; unlock clothing only for full crochet outfits.`,
+      `Leave pose unlocked so the cozy craft-table doll pairing can form.`,
+      `If yarn texture looks smooth like plastic, ask for clear crochet stitches and soft window light on the wooden table.`,
+    ],
+    faqs: [
+      {
+        question: `Do we need two photos?`,
+        answer: `One clear photo per person is ideal, but one photo of you both works if both faces are sharp.`,
+      },
+      {
+        question: `Will we still look like ourselves as dolls?`,
+        answer: `Yes—even with yarn texture, both faces, hairstyles, skin tones and ages stay recognisable.`,
+      },
+      {
+        question: `Do our clothes stay?`,
+        answer: `Yes by default. Clothing is preserved so your outfits translate into stitched yarn detail.`,
+      },
+      {
+        question: `Why do we look like smooth plastic toys?`,
+        answer: `Ask for visible crochet amigurumi stitches and soft yarn texture on a cozy wooden craft table.`,
+      },
+    ],
+    addonLine: `Want cozier craft clutter? Add: keep both faces as yarn amigurumi and the wooden craft table, but add one small yarn ball near the hooks—no third doll, no messy pile covering faces.`,
+  },
+  "color-pop-pedestal": {
+    intro: `Bold monochrome product campaign: your item on a circular coral pedestal against a seamless coral studio backdrop—minimal, high-impact colour pop. Exact product shape, materials and colour stay preserved.`,
+    tips: [
+      `Upload a sharp product shot with the full item visible, true colour and clean edges—no heavy filters.`,
+      `Keep the scene monochrome: one dominant backdrop colour with a slightly deeper or lighter pedestal tone.`,
+      `Avoid unrelated props; the geometric pedestal and seamless backdrop should carry the campaign look.`,
+      `If lighting looks flat, ask for premium studio highlights and soft controlled shadows on the product only.`,
+    ],
+    faqs: [
+      {
+        question: `Will my product colour change to coral?`,
+        answer: `No—the product keeps its original colour, materials and finish. Coral is for the pedestal and backdrop only.`,
+      },
+      {
+        question: `Can I add lifestyle props around it?`,
+        answer: `This look stays minimal. Skip unrelated props so the pedestal and monochrome set keep the product dominant.`,
+      },
+      {
+        question: `What kind of source photo works best?`,
+        answer: `A sharp, well-lit product image showing the full shape and true surface colour without busy backgrounds.`,
+      },
+      {
+        question: `Why does the pedestal match the product oddly?`,
+        answer: `Ask for a simple geometric coral pedestal that supports the item, with the product colour left unchanged.`,
+      },
+    ],
+    addonLine: `Want a cleaner coral campaign frame? Add: keep the exact product, circular pedestal and monochrome coral set, but soften the shadow under the base slightly—no extra props, no text overlays on the product.`,
+  },
+  "botanical-wellness-still-life": {
+    intro: `Calm botanical still-life for skincare and wellness: product on warm limestone with soft green leaves, natural stone, folded unbleached linen and a pale beige backdrop. Exact product details stay preserved.`,
+    tips: [
+      `Use a sharp product photo with true colour, readable label and the full bottle or jar visible.`,
+      `Keep props restrained—only a few leaves, stone or linen pieces so the product stays clearly dominant.`,
+      `Prefer soft natural daylight; avoid harsh flash that flattens glass or cream textures.`,
+      `If the set feels crowded, remove extra foliage and keep the limestone pedestal and pale beige backdrop clean.`,
+    ],
+    faqs: [
+      {
+        question: `Will the product packaging change?`,
+        answer: `No—shape, materials, original colour, surface finish and packaging details stay the same.`,
+      },
+      {
+        question: `How many props should appear?`,
+        answer: `Only a few restrained natural elements like foliage, stone or linen. The product must stay dominant.`,
+      },
+      {
+        question: `Is this good for skincare bottles?`,
+        answer: `Yes—it is built as a calm botanical still-life set suited to skincare and wellness items.`,
+      },
+      {
+        question: `Why do leaves cover the label?`,
+        answer: `Ask for soft green leaves beside or behind the product so the label and full shape stay fully visible.`,
+      },
+    ],
+    addonLine: `Want a quieter wellness set? Add: keep the exact product, limestone pedestal and soft leaves, but fold the linen a little flatter beside the base—no flower piles, no extra bottles in frame.`,
+  },
+  "midnight-luxury-spotlight": {
+    intro: `Dark cinematic jewellery spotlight: rings, watches or perfume sit on a low black reflective plinth in a charcoal studio, rim light tracing the silhouette. Use one clear product photo.`,
+    tips: [
+      `Shoot or crop so the product fills the frame—rim light needs clean edges, not busy packaging clutter.`,
+      `Ask for deep charcoal seamless studio and a low black reflective plinth—not a bright white tabletop.`,
+      `Keep original metal colour and stone hues exact; cool grades often turn gold into silver tones.`,
+      `Skip props and lifestyle hands; this look isolates the piece with controlled rim light only.`,
+    ],
+    faqs: [
+      {
+        question: `Does this work for perfume bottles as well as rings?`,
+        answer: `Yes. Any jewellery, watch, or perfume piece works if shape, materials, and finish stay true to your photo.`,
+      },
+      {
+        question: `Will my product colours change on the black background?`,
+        answer: `They should not—original colour and surface finish stay locked. Re-ask if metals look washed out.`,
+      },
+      {
+        question: `Is this a bright white ecommerce table shot?`,
+        answer: `No—this is a dark charcoal studio with a reflective plinth and rim light for a premium campaign feel.`,
+      },
+      {
+        question: `Do I need a studio photo already?`,
+        answer: `No. A clear product shot with readable shape and finish is enough; the dark studio builds in the edit.`,
+      },
+    ],
+    addonLine: `Want a softer luxury spotlight? Add: keep the charcoal studio, black reflective plinth, and rim light, but ease highlight intensity slightly—no white seamless, props, or lifestyle hands.`,
+  },
+  "floating-motion-hero": {
+    intro: `Dynamic floating hero for ads: your product hangs in mid-air over a pale sage-to-cream studio with soft curved light trails and a subtle shadow beneath. Upload one sharp product photo.`,
+    tips: [
+      `Use a sharp, fully visible product shot so floating staging keeps edges crisp against the gradient.`,
+      `Ask for pale sage-to-cream gradient with restrained light trails—not busy particle explosions.`,
+      `Keep original packaging colour exact; warm grades can shift label whites toward cream.`,
+      `Motion should stay in the background trails only—the product itself must remain perfectly sharp.`,
+    ],
+    faqs: [
+      {
+        question: `Will my product look blurry because of the motion?`,
+        answer: `No. The product stays sharp; motion is only suggested through soft background light trails.`,
+      },
+      {
+        question: `Do I need a photo already shot mid-air?`,
+        answer: `No. A normal tabletop product photo works; suspension and the soft under-shadow are added in the style.`,
+      },
+      {
+        question: `Is this a dark luxury jewellery spotlight?`,
+        answer: `No—this is a warm pale sage-to-cream floating hero for banners and ads, not a charcoal rim-light studio.`,
+      },
+      {
+        question: `Can I use this for bottle or box packaging?`,
+        answer: `Yes, as long as shape, materials, labels, and finish stay true to the uploaded product.`,
+      },
+    ],
+    addonLine: `Want a calmer floating banner? Add: keep the suspended product, soft under-shadow, and sage-to-cream studio, but soften light trails further—no heavy particle storms or tilted action blur on the product.`,
+  },
+  "tactile-macro-detail": {
+    intro: `Macro texture close-up: the most tactile details of your product sit on warm ivory microsuede with soft shallow depth of field and golden-neutral light. Use one clear detail-ready product photo.`,
+    tips: [
+      `Prefer photos where stitching, grain, metal grain, or finish is already visible—macro needs real texture to reveal.`,
+      `Ask for warm ivory microsuede with fine matte-stone feel—not a glossy reflective table.`,
+      `Keep the hero detail tack sharp; only distant edges should fall into soft shallow depth of field.`,
+      `Preserve original colour and finish; warm golden grades sometimes over-amber leather and metals.`,
+    ],
+    faqs: [
+      {
+        question: `Should I upload a full product shot or a close crop?`,
+        answer: `Either works if texture is readable. A clear full product photo is fine; the style frames the most tactile detail.`,
+      },
+      {
+        question: `Will the whole product stay in focus?`,
+        answer: `The main feature stays tack sharp; distant areas can soft-fall naturally, like a real macro lens.`,
+      },
+      {
+        question: `Is this an in-hand scale shot?`,
+        answer: `No—this is a surface macro on ivory microsuede. In-hand scale is a separate style.`,
+      },
+      {
+        question: `Does packaging print stay readable?`,
+        answer: `Yes if it is in the hero detail. Ask again if labels smear while texture elsewhere looks sharp.`,
+      },
+    ],
+    addonLine: `Want a gentler macro read? Add: keep the ivory microsuede surface and tack-sharp main detail, but soften depth-of-field falloff slightly—no extreme fisheye crop or glossy mirror table.`,
+  },
+  "everyday-in-hand-scale": {
+    intro: `Natural in-hand scale shot: one adult hand holds your product so buyers see true size, against a softly blurred bathroom vanity by a sunlit window. Upload one clear product photo.`,
+    tips: [
+      `Use a sharp product photo with readable proportions so the hand scale feels believable.`,
+      `Ask for one adult hand and a softly blurred neutral vanity by a window—not a crowded lifestyle scene.`,
+      `Keep the product fully visible and unobstructed; fingers should not hide labels or key details.`,
+      `Preserve exact product colour under soft daylight; warm window light can orange pale packaging.`,
+    ],
+    faqs: [
+      {
+        question: `Do I need a photo of someone already holding the product?`,
+        answer: `No. A clear product-only shot works; a natural adult hand and vanity backdrop are added for scale.`,
+      },
+      {
+        question: `Will the hand cover important labels?`,
+        answer: `It should not—the product stays fully visible and sharp. Re-ask if fingers block key details.`,
+      },
+      {
+        question: `Is this a floating mid-air hero for banners?`,
+        answer: `No—this is an everyday in-hand scale reference so buyers judge true size.`,
+      },
+      {
+        question: `Whose hand appears in the result?`,
+        answer: `A generic adult hand with realistic skin texture for scale—not a celebrity or model identity.`,
+      },
+    ],
+    addonLine: `Want a quieter scale frame? Add: keep the single adult hand, true product size, and sunlit vanity blur, but ease skin warmth slightly—no two-hand grips, props, or sharp busy backgrounds.`,
+  },
+  "analog-street-fashion": {
+    intro: `Candid film-look street walk: soft sunlit analog warmth, tree-lined city street with parked cars and gentle motion blur, simple elegant black outfit with pearl necklace and red roses. Use one clear portrait with walking crop space.`,
+    tips: [
+      `Upload a clear face with room for full or half-body crop—tight headshots fight the walking pose.`,
+      `Natural daylight sources hold the faded film warmth better than harsh flash selfies.`,
+      `Face, features, skin texture, and likeness stay locked; outfit and street rebuild unless you preserve clothing.`,
+      `Ask for soft grain and analog warmth—not heavy Instagram filters that muddy the face.`,
+    ],
+    faqs: [
+      {
+        question: `Will my face stay recognisable?`,
+        answer: `Yes. Identity, facial features, natural skin texture, and likeness stay; only scene, outfit, and film texture shift by default.`,
+      },
+      {
+        question: `Do I need a street photo already?`,
+        answer: `No. A clear portrait with space for a walking crop is enough; the tree-lined street builds in the style.`,
+      },
+      {
+        question: `Can I keep my own clothes?`,
+        answer: `Turn clothing preservation on. Otherwise it restyles into the black outfit, pearl necklace, and red rose look.`,
+      },
+      {
+        question: `Is this a sharp digital fashion studio shot?`,
+        answer: `No—it is a candid analog street walk with soft sunlit film warmth and light grain.`,
+      },
+    ],
+    addonLine: `Want a quieter film street walk? Add: keep the tree-lined street, black outfit, pearl necklace, and red rose bouquet, but soften grain slightly and use a calmer mid-stride—no neon night props or heavy vintage overlays.`,
+  },
+  "cozy-dream-room": {
+    intro: `Cozy dream-room makeover for plain bedrooms: warm wood accents, layered neutral textiles, soft curtains and subtle greenery while your room’s walls, windows and proportions stay recognisable. Upload one clear bedroom photo.`,
+    tips: [
+      `Photograph the full room with walls, windows, and floor visible so furniture fits real proportions.`,
+      `Ask for warm wood, layered neutrals, soft curtains, and light greenery—not a hotel lobby makeover.`,
+      `Keep architecture locked: room size, major walls, doors, and ceiling geometry should not invent new windows.`,
+      `Even daylight or soft evening light in the source helps textiles read warm without orange blowouts.`,
+    ],
+    faqs: [
+      {
+        question: `Will my bedroom still look like my house?`,
+        answer: `Yes. Proportions, major walls, windows, doors, and ceiling geometry stay when preserved; only furniture and soft décor upgrade.`,
+      },
+      {
+        question: `Does this work on an empty or sparsely furnished room?`,
+        answer: `Yes. Plain bedrooms are ideal—the style furnishes for the room’s function without inventing a different property.`,
+      },
+      {
+        question: `Is this the same as empty-room virtual staging for listings?`,
+        answer: `Related idea, different mood—this is a cozy lived-in dream bedroom with warm textiles, not a cooler sales staging.`,
+      },
+      {
+        question: `Can I use a phone photo?`,
+        answer: `Yes if the room is clear and not blurry. Wide, level shots work better than extreme corner selfies.`,
+      },
+    ],
+    addonLine: `Want a lighter dream bedroom? Add: keep the warm wood accents, layered neutral textiles, and soft curtains, but reduce greenery slightly—no chandelier overload or layout-changing wall moves.`,
+  },
+  "modern-virtual-staging": {
+    intro: `Move-in-ready virtual staging for empty rooms: cream upholstery, warm natural wood, textured neutral rug, soft curtains and minimal décor while walls, windows and floor plan stay true. Use one clear empty-room photo.`,
+    tips: [
+      `Shoot empty rooms wide and level so sofa and rug scale match real floor area.`,
+      `Ask for cream upholstery, warm wood, and refined minimal décor—not cluttered showroom props.`,
+      `Preserve wall positions, window and door locations, ceiling geometry, and flooring direction.`,
+      `Balanced exposure helps staged fabrics stay cream instead of yellow or grey.`,
+    ],
+    faqs: [
+      {
+        question: `Must the room be completely empty?`,
+        answer: `Empty or nearly empty works best. The style stages for the room’s function while keeping architecture recognisable.`,
+      },
+      {
+        question: `Will windows and doors move?`,
+        answer: `No when preserved. Wall positions, openings, ceiling geometry, and flooring direction stay locked.`,
+      },
+      {
+        question: `Is this a luxury walnut living-room redesign?`,
+        answer: `No—this is clean move-in-ready staging with cream upholstery and minimal décor for listings.`,
+      },
+      {
+        question: `Can agents use this for listing photos?`,
+        answer: `Yes—that is the intent: polished staged living spaces that still read as the same property.`,
+      },
+    ],
+    addonLine: `Want a quieter staged listing look? Add: keep the cream upholstery, warm wood, and textured neutral rug, but simplify décor further—no oversized art walls or layout-changing furniture piles.`,
+  },
+  "refined-luxury-living": {
+    intro: `Sophisticated luxury living restyle: cream upholstery, warm walnut wood, layered textiles, refined artwork and soft premium lighting while your room shell stays recognisable. Upload one clear living-room photo.`,
+    tips: [
+      `Show full wall spans and window light so walnut and cream furniture scale correctly.`,
+      `Ask for cream upholstery, warm walnut, layered textiles, and refined artwork—not gold-leaf maximalism.`,
+      `Keep architectural shell, proportions, windows, doors, and flooring boundaries locked.`,
+      `Warm elegant neutrals should not bleach skin tones in mirrors or wash artwork into neon.`,
+    ],
+    faqs: [
+      {
+        question: `Will my room still be recognisable?`,
+        answer: `Yes. The architectural shell, proportions, windows, doors, and flooring boundaries stay when preserved.`,
+      },
+      {
+        question: `Is this empty-room listing staging?`,
+        answer: `No—this upgrades toward a sophisticated premium residential interior with walnut and layered textiles.`,
+      },
+      {
+        question: `Do I need professional interior photos?`,
+        answer: `No. A clear, level living-room photo with readable walls and windows is enough.`,
+      },
+      {
+        question: `Can furniture colours change from my current set?`,
+        answer: `Yes by default—the restyle brings cream upholstery and warm walnut while structure stays.`,
+      },
+    ],
+    addonLine: `Want a slightly quieter luxury living room? Add: keep cream upholstery, warm walnut, and layered textiles, but ease artwork presence—no crystal chandeliers crowding the ceiling or moved window walls.`,
+  },
+  "garden-lawn-makeover": {
+    intro: `Natural residential garden landscaping: healthy lawn, layered shrubs, flowering borders, ornamental grasses, small trees and a subtle stepping-stone path while yard boundaries stay true. Use one clear yard photo.`,
+    tips: [
+      `Capture the full yard with house edge, fences, and major trees visible so planting fits real boundaries.`,
+      `Ask for healthy lawn, layered shrubs, flowering borders, and a subtle stepping-stone path—not a resort pool deck.`,
+      `Preserve yard boundaries, house walls, fences, major trees, and overall spatial proportions.`,
+      `Fresh natural green should stay realistic—avoid neon turf or cartoon flower beds.`,
+    ],
+    faqs: [
+      {
+        question: `Will my house and fence stay in place?`,
+        answer: `Yes when preserved. Yard boundaries, house walls, fences, and major trees stay; planting and lawn improve.`,
+      },
+      {
+        question: `Does a patchy or bare yard work as a source?`,
+        answer: `Yes. The style improves landscape health and beds rather than inventing a different property.`,
+      },
+      {
+        question: `Is this a patio furniture lounge makeover?`,
+        answer: `No—this focuses on lawn, shrubs, borders, and a subtle path, not outdoor seating sets.`,
+      },
+      {
+        question: `Should I photograph in sunlight?`,
+        answer: `Clear daylight helps greens read natural. Avoid heavy blur or night shots where planting detail is lost.`,
+      },
+    ],
+    addonLine: `Want a softer lawn makeover? Add: keep the healthy lawn, layered shrubs, and stepping-stone pathway, but reduce flowering density slightly—no swimming pools, fake turf, or relocated fence lines.`,
+  },
+  "outdoor-living-oasis": {
+    intro: `Polished patio or rooftop lounge: natural wood seating, cream cushions, dining furniture, slatted pergola, warm ambient lights and potted greenery while terrace boundaries stay recognisable. Upload one clear outdoor photo.`,
+    tips: [
+      `Include railings, floor area, and doors so furniture and the pergola fit the real terrace footprint.`,
+      `Ask for wood seating, cream cushions, slatted pergola, and warm ambient lighting—not a club dance floor.`,
+      `Preserve architectural boundaries, railings, doors, windows, and overall spatial proportions.`,
+      `Warm golden evening mood should not blow out cushion colour or invent extra floors.`,
+    ],
+    faqs: [
+      {
+        question: `Does this work for balconies as well as rooftops?`,
+        answer: `Yes. Terrace, patio, rooftop, backyard, or balcony photos work if the floor area and boundaries are clear.`,
+      },
+      {
+        question: `Will railings and doors stay where they are?`,
+        answer: `Yes when preserved. Main boundaries, railings, doors, windows, and proportions stay locked.`,
+      },
+      {
+        question: `Is this a front-yard curb-appeal makeover?`,
+        answer: `No—this builds a lounge outdoor living oasis with seating, shade, and evening light.`,
+      },
+      {
+        question: `Can I start from a bare concrete terrace?`,
+        answer: `Yes. Bare outdoor spaces are ideal; furniture, pergola, plants, and lights are added in place.`,
+      },
+    ],
+    addonLine: `Want a quieter rooftop evening? Add: keep the wood seating, cream cushions, slatted pergola, and warm lights, but soften string-light density—no DJ setups, water features, or moved railings.`,
+  },
+  "modern-curb-refresh": {
+    intro: `Modern curb-appeal exterior refresh: manicured lawn, layered shrubs, flowering borders, stone walkway, warm entry lighting and subtle uplights while footprint, roofline and windows stay true. Use one clear front-of-house photo.`,
+    tips: [
+      `Shoot the full façade straight-on or slightly angled with driveway and walkway visible.`,
+      `Ask for manicured lawn, layered shrubs, stone walkway, and warm entry lighting—not a commercial glass tower.`,
+      `Preserve building footprint, roofline, window and door placement, garage position, and façade proportions.`,
+      `Warm golden evening light should enhance entry lamps without inventing new window openings.`,
+    ],
+    faqs: [
+      {
+        question: `Will my house still look like mine?`,
+        answer: `Yes. Footprint, roofline, windows, doors, garage alignment, and façade proportions stay when preserved.`,
+      },
+      {
+        question: `Can paint and landscaping change?`,
+        answer: `Yes—that is the makeover: façade finishes, planting, lighting, and walkway refresh around the same structure.`,
+      },
+      {
+        question: `Is this an interior living-room restyle?`,
+        answer: `No—this is a polished exterior curb-appeal upgrade of the front yard and façade.`,
+      },
+      {
+        question: `Do night photos work?`,
+        answer: `Warm evening shots can work if the façade is clear. Very dark underexposed fronts hide landscaping detail.`,
+      },
+    ],
+    addonLine: `Want a softer curb refresh? Add: keep the manicured lawn, stone walkway, and warm entry lighting, but ease landscape uplighting—no tropical resort planting or shifted garage doors.`,
+  },
+  "kitchen-remodel-vision": {
+    intro: `Realistic contemporary kitchen renovation preview: cream upper cabinets, muted sage lowers, light stone counters, white tile backsplash, brass hardware and stainless appliances while layout stays recognisable. Upload one clear kitchen photo.`,
+    tips: [
+      `Include counters, cabinets, and windows so the remodel respects the real footprint.`,
+      `Ask for cream uppers, muted sage lowers, light stone, white tile, and brass hardware—not neon open shelving chaos.`,
+      `Preserve room proportions, wall positions, sink and major appliance placement, and camera view.`,
+      `Warm natural neutrals should keep stainless looking steel, not gold-tinted.`,
+    ],
+    faqs: [
+      {
+        question: `Will my sink and appliance places stay?`,
+        answer: `Yes when preserved. Room proportions, sink position, major appliances, cabinet footprint, and view stay locked.`,
+      },
+      {
+        question: `Is this only for empty gut-renovation shells?`,
+        answer: `No. Lived-in kitchens work—the style modernises surfaces and cabinetry on the same layout.`,
+      },
+      {
+        question: `Is this a spa bathroom upgrade?`,
+        answer: `No—this is a contemporary kitchen remodel vision with cream, sage, stone, and brass.`,
+      },
+      {
+        question: `Can I use this before hiring contractors?`,
+        answer: `Yes—that is a common use: a realistic renovation preview from your own kitchen photo.`,
+      },
+    ],
+    addonLine: `Want a quieter kitchen remodel preview? Add: keep cream uppers, muted sage lowers, light stone counters, and brass hardware, but simplify backsplash pattern—no island relocation or moved window walls.`,
+  },
+  "bathroom-spa-upgrade": {
+    intro: `Calm spa bathroom renovation: warm wood vanity, pale stone, large-format neutral tile, frameless glass shower, brushed brass fixtures and soft integrated light while plumbing layout stays true. Use one clear bathroom photo.`,
+    tips: [
+      `Show vanity, shower zone, and tiles clearly so upgrades fit the real wet-area footprint.`,
+      `Ask for warm wood vanity, pale stone, frameless glass, and brushed brass—not black glossy nightclub tile.`,
+      `Preserve room proportions, toilet and shower footprint, vanity zone, window, and camera perspective.`,
+      `Warm spa neutrals should not turn pale stone pink or invent extra windows.`,
+    ],
+    faqs: [
+      {
+        question: `Will toilet and shower positions change?`,
+        answer: `No when preserved. Room proportions, toilet position, shower footprint, and vanity zone stay locked.`,
+      },
+      {
+        question: `Does a small Indian apartment bathroom work?`,
+        answer: `Yes if the photo is clear. The upgrade respects the existing footprint rather than inventing a hotel suite.`,
+      },
+      {
+        question: `Is this a kitchen remodel style?`,
+        answer: `No—this is a spa-inspired bathroom with stone, wood vanity, and soft integrated lighting.`,
+      },
+      {
+        question: `Do I need a renovation already started?`,
+        answer: `No. A normal bathroom photo is enough to preview the calm spa surfaces and fixtures.`,
+      },
+    ],
+    addonLine: `Want a softer spa bath mood? Add: keep the warm wood vanity, pale stone, frameless glass shower, and brushed brass, but ease greenery—no freestanding tub added where none fits or moved plumbing walls.`,
+  },
+  "street-beautification": {
+    intro: `Walkable neighbourhood street upgrade: improved sidewalks, street trees, planters, benches, tidy façades and subtle modern lighting while road alignment and buildings stay recognisable. Upload one clear street photo.`,
+    tips: [
+      `Shoot the road with sidewalks and building fronts visible so planting and benches fit real widths.`,
+      `Ask for cleaner sidewalks, street trees, planters, and tidy edges—not a highway flyover redesign.`,
+      `Preserve road alignment, building positions, boundary walls, gates, major trees, and camera viewpoint.`,
+      `Fresh clean daylight should organise the street without erasing local building character.`,
+    ],
+    faqs: [
+      {
+        question: `Will the road and buildings stay the same?`,
+        answer: `Yes when preserved. Road alignment, building positions, walls, gates, and major trees stay; public space tidies up.`,
+      },
+      {
+        question: `Is this for a single house front only?`,
+        answer: `It is a streetscape upgrade—sidewalks, trees, and edges—not a solo façade curb-appeal makeover.`,
+      },
+      {
+        question: `Can narrow gali-style streets work?`,
+        answer: `Yes if the photo clearly shows the street width and building edges; improvements stay realistic to that space.`,
+      },
+      {
+        question: `Does night lighting get added?`,
+        answer: `Subtle modern street lighting can appear, but the default mood is fresh clean daylight organisation.`,
+      },
+    ],
+    addonLine: `Want a quieter street beautification? Add: keep improved sidewalks, street trees, planters, and tidy façades, but reduce bench count slightly—no skyscraper replacements or relocated road centre lines.`,
+  },
+  "historic-revival": {
+    intro: `Careful heritage façade restoration: warm aged plaster, repaired stone, restored timber shutters and doors, preserved iron balcony railings and authentic patina while proportions and openings stay true. Use one clear building photo.`,
+    tips: [
+      `Photograph the full façade with windows, doors, balconies, and mouldings readable.`,
+      `Ask for restored plaster, stone repair, timber shutters, and subtle patina—not a glass curtain-wall rebuild.`,
+      `Preserve façade proportions, floor count, roofline, arches, columns, cornices, railings, and masonry patterns.`,
+      `Warm heritage neutrals should repair surfaces, not invent new floors or modern cladding.`,
+    ],
+    faqs: [
+      {
+        question: `Will original arches and balconies stay?`,
+        answer: `Yes when preserved. Proportions, openings, arches, columns, cornices, balconies, and masonry patterns stay locked.`,
+      },
+      {
+        question: `Is this a brand-new modern house design?`,
+        answer: `No—it restores the historic property carefully rather than replacing it with a different style.`,
+      },
+      {
+        question: `Do damaged or peeling façades work as sources?`,
+        answer: `Yes. Clear photos of worn heritage buildings are ideal; the style repairs surfaces and ornament.`,
+      },
+      {
+        question: `Should decorative mouldings disappear for a clean look?`,
+        answer: `No. Historically significant ornament stays; the goal is restoration, not stripping character.`,
+      },
+    ],
+    addonLine: `Want a gentler heritage restore? Add: keep aged plaster, repaired stone, timber shutters, and iron railings, but soften patina slightly—no modern glass façades or removed historic cornices.`,
+  },
+  "family-lakshmi-puja-photo": {
+    intro: `Warm Diwali family puja portrait at a decorated Lakshmi Puja entrance with marigold torans, large rangoli and glowing diyas at your feet—every face, age and height kept true. Upload one clear group photo with all faces visible.`,
+    tips: [
+      `Frame everyone together with every face sharp and evenly lit—missing faces cannot be invented accurately.`,
+      `Pose stays by default; outfits restyle into coordinated festive red, gold, and cream unless clothing is preserved.`,
+      `Ask for marigold torans, rangoli, and diyas at the family’s feet—not a generic party balloon backdrop.`,
+      `Keep exact skin tones under warm festive light; Diwali grades often over-orange complexions.`,
+    ],
+    faqs: [
+      {
+        question: `Will children’s ages stay correct?`,
+        answer: `Yes. Every person’s face, age, height difference, and family resemblance stay locked to the source.`,
+      },
+      {
+        question: `Do we need a photo already taken at a puja entrance?`,
+        answer: `No. A clear family group photo works; the decorated Lakshmi Puja entrance builds around your preserved pose.`,
+      },
+      {
+        question: `Can we keep our real clothes?`,
+        answer: `Turn clothing preservation on. Otherwise the family restyles into coordinated festive red, gold, and cream.`,
+      },
+      {
+        question: `What if someone is blinking or blurry?`,
+        answer: `Use a sharper alternate frame. Blurry or closed-eye faces are hard to keep accurate in a group edit.`,
+      },
+    ],
+    addonLine: `Want a softer Lakshmi Puja doorway frame? Add: keep marigold torans, rangoli, diyas at the feet, and coordinated festive outfits, but ease diya glow slightly—no fireworks overlays or face swaps between relatives.`,
+  },
+  "side-by-side-keepsake-frame-merge-two-photos-prompt-gemini-couple": {
+    intro: `Couple keepsake frame merge: both original photos sit side by side unchanged in a soft cream paper border with a thin gold divider—faces, outfits and backgrounds stay as uploaded. Upload two similar chest-up photos, left side first.`,
+    tips: [
+      `Upload two photos with similar crop and brightness so the cream frame feels balanced.`,
+      `Left photo first, right photo second—order controls which side each image appears on.`,
+      `Do not expect people to be merged into one scene; each photo’s content stays separate and unchanged.`,
+      `Faces must be clear and unblurred; the style frames photos, it does not rebuild identity.`,
+    ],
+    faqs: [
+      {
+        question: `Are the two people placed into one shared background?`,
+        answer: `No. Each photo stays as-is side by side in one framed layout; backgrounds are not combined into one scene.`,
+      },
+      {
+        question: `Will outfits or poses change?`,
+        answer: `No by default. Faces, outfits, poses, and original photo backgrounds stay exactly as uploaded.`,
+      },
+      {
+        question: `Does upload order matter?`,
+        answer: `Yes. The first photo goes left and the second goes right in the cream keepsake frame.`,
+      },
+      {
+        question: `What if one photo is much darker?`,
+        answer: `Try closer brightness between the two. A gentle matching grade may help, but content still stays unchanged.`,
+      },
+    ],
+    addonLine: `Want a quieter keepsake frame? Add: keep both photos unchanged side by side with the cream border and thin gold divider, but soften the gold line slightly—no single-scene body merge or heavy ornate scrapbook stickers.`,
+  },
+  "sofa-cuddle-with-your-pet-merge-two-photos-prompt-gemini-person-and-pet": {
+    intro: `Person-and-pet sofa merge: you and your dog share one cozy living-room sofa scene, the dog leaning on your shoulder, with your face, outfit, breed, coat and markings kept exact. Upload you first, pet second.`,
+    tips: [
+      `Use a sharp face photo and a clear pet photo with eyes and markings visible.`,
+      `Upload person first and pet second so identities map correctly into the sofa cuddle.`,
+      `Your outfit stays; pose rebuilds for the lean-on-shoulder sofa moment under soft daylight.`,
+      `Ask for cream living-room sofa staging—not a park run or studio seamless.`,
+    ],
+    faqs: [
+      {
+        question: `Will my dog’s breed and markings stay correct?`,
+        answer: `Yes. Breed, coat, markings, and eye colour from the pet photo stay locked.`,
+      },
+      {
+        question: `Do I need a photo already taken together on a sofa?`,
+        answer: `No. Separate photos work—you first, pet second—and they merge into one sofa scene.`,
+      },
+      {
+        question: `Will my clothes change?`,
+        answer: `No by default. Your outfit from the first photo stays while pose adapts to the sofa cuddle.`,
+      },
+      {
+        question: `Can I use a cat instead of a dog?`,
+        answer: `Use a clear photo of your own pet. Markings and species cues follow the second upload, not a generic stock animal.`,
+      },
+    ],
+    addonLine: `Want a calmer sofa cuddle? Add: keep your face, outfit, the pet’s breed and markings, and the living-room sofa lean, but soften the lean intensity—no breed changes, outfit swaps, or outdoor park backgrounds.`,
+  },
+  "luxury-editorial-crew": {
+    intro: `High-fashion magazine crew portrait: coordinated editorial styling in a luxury garden picnic with soft golden-hour light, every face and headcount kept true. Upload one clear group photo.`,
+    tips: [
+      `All faces should be sharp and countable—the edit keeps the exact same number of people.`,
+      `Ask for luxury garden picnic golden-hour editorial styling—not a casual selfie mirror collage.`,
+      `Natural skin texture and authentic expressions stay; wardrobe restyles into coordinated high-fashion looks.`,
+      `Even group lighting in the source reduces one face going dark under golden hour.`,
+    ],
+    faqs: [
+      {
+        question: `Will everyone still look like themselves?`,
+        answer: `Yes. Faces stay recognisable with natural skin texture and the same headcount; styling and scene upgrade.`,
+      },
+      {
+        question: `Do we need a garden photo already?`,
+        answer: `No. A clear group photo works; the luxury garden picnic golden-hour setting builds in the style.`,
+      },
+      {
+        question: `Is this a claymation toy group look?`,
+        answer: `No—this is a premium magazine-campaign editorial for your crew in a garden picnic setting.`,
+      },
+      {
+        question: `Can clothing stay as in our photo?`,
+        answer: `Only if clothing preservation is on. Otherwise expect coordinated high-fashion editorial wardrobe.`,
+      },
+    ],
+    addonLine: `Want a quieter editorial crew frame? Add: keep the luxury garden picnic, golden-hour light, and coordinated high-fashion styling, but soften wardrobe drama slightly—no extra people added or face beautification.`,
+  },
+  "clay-crew": {
+    intro: `Handcrafted 3D clay group portrait: your friends become tactile claymation figures with rounded forms in a miniature snowy village scene, identities and headcount still clear. Use one sharp group photo.`,
+    tips: [
+      `Clear faces and distinct hairstyles help each clay figure stay recognisable.`,
+      `Ask for handcrafted clay texture and a miniature snowy village—not smooth plastic action figures.`,
+      `Keep the exact same number of people; the medium changes, not the crew size.`,
+      `Cozy playful lighting should show sculpted facial cues without melting features together.`,
+    ],
+    faqs: [
+      {
+        question: `Will we still be recognisable as clay figures?`,
+        answer: `Yes. Distinct facial identity, hairstyle cues, expressions, and headcount stay; the medium becomes tactile clay.`,
+      },
+      {
+        question: `Is this a luxury fashion magazine group shot?`,
+        answer: `No—this is a cozy handcrafted 3D clay group portrait in a miniature snowy village.`,
+      },
+      {
+        question: `Do solo photos work?`,
+        answer: `This style is for a group. Use a clear friends photo with every face visible and countable.`,
+      },
+      {
+        question: `Will outfits become clay too?`,
+        answer: `Yes—the whole group restyles as detailed clay figures, including clothing cues in sculpted form.`,
+      },
+    ],
+    addonLine: `Want a softer clay crew scene? Add: keep the handmade clay figures, rounded forms, and miniature snowy village, but ease snow density slightly—no realistic skin rendering or extra characters.`,
+  },
+  "hand-painted-watercolor-pet": {
+    intro: `Soft watercolor pet portrait on textured paper: translucent washes, delicate green botanical foliage and pigment splashes while breed, markings and eye colour stay true. Upload one clear pet photo.`,
+    tips: [
+      `Eyes and distinctive markings should be readable so the watercolor still looks like your pet.`,
+      `Ask for translucent washes on white watercolor paper with soft botanical foliage—not thick oil paint.`,
+      `Preserve species, breed cues, fur colours, markings, ear shape, and eye colour through the brushwork.`,
+      `Soft warm natural grades should not bleach white fur into pure paper white with no shading.`,
+    ],
+    faqs: [
+      {
+        question: `Will my pet still look like itself?`,
+        answer: `Yes. Species, breed characteristics, face, fur colours, markings, and eye colour stay recognisable in watercolor.`,
+      },
+      {
+        question: `Is this a plush-toy makeover?`,
+        answer: `No—this is a hand-painted watercolor portrait on textured paper with soft botanical accents.`,
+      },
+      {
+        question: `Do old slightly soft photos work?`,
+        answer: `They can if eyes and markings are still clear. Very blurry faces lose likeness in paint translation.`,
+      },
+      {
+        question: `Can I use a cat or a dog?`,
+        answer: `Yes. Any pet photo works; the watercolor follows the species and markings in your upload.`,
+      },
+    ],
+    addonLine: `Want a quieter watercolor pet portrait? Add: keep the translucent washes, paper texture, and delicate green foliage, but reduce pigment splashes—no photoreal fur rendering or busy full garden scenes.`,
+  },
+  "cozy-plushie-pet": {
+    intro: `Handcrafted plush-toy pet makeover: soft fuzzy fabric, stitched seams and rounded toy proportions in a cozy bedroom with blankets and warm lamps, still matching your pet’s colours and markings. Use one clear pet photo.`,
+    tips: [
+      `A sharp head-and-shoulders pet photo helps embroidered eyes and fabric ears match the real face.`,
+      `Ask for fuzzy plush fabric, visible stitched seams, and rounded toy proportions—not a realistic fur render.`,
+      `Preserve species, breed cues, coat colours, and markings even as anatomy simplifies into plush form.`,
+      `Warm cozy pastel bedroom light should not wash out darker coat patches.`,
+    ],
+    faqs: [
+      {
+        question: `Will coat colours and markings stay?`,
+        answer: `Yes. Species, breed cues, coat colours, and markings stay so the plush still reads as your pet.`,
+      },
+      {
+        question: `Is this a watercolor paper portrait?`,
+        answer: `No—this reimagines your pet as a handcrafted plush toy with stitched details in a cozy bedroom.`,
+      },
+      {
+        question: `Do the eyes become button-like?`,
+        answer: `Eyes become embroidered or glossy toy-like while still echoing your pet’s eye colour and expression cues.`,
+      },
+      {
+        question: `Can puppies and kittens use this look?`,
+        answer: `Yes. Clear photos of young pets work; rounded plush proportions often suit them especially well.`,
+      },
+    ],
+    addonLine: `Want a softer plushie pet scene? Add: keep the fuzzy fabric, stitched seams, and cozy bedroom setting, but simplify blanket clutter slightly—no hyper-real fur or outdoor park backgrounds.`,
+  },
+  "mini-collectible-figure": {
+    intro: `Premium mini collectible figurine: your pet as a display-worthy sculpted figure on a premium wooden base in a clean softly lit collector setting, markings and face kept recognisable. Upload one clear pet photo.`,
+    tips: [
+      `Full head or clear body shots help miniature proportions and painted finish stay accurate.`,
+      `Ask for a premium wooden display base and soft collector lighting—not a cluttered toy-store shelf.`,
+      `Preserve species, breed or type, facial structure, colours, markings, and eye colour in the sculpt.`,
+      `Warm premium display light should show painted detail without melting fine markings.`,
+    ],
+    faqs: [
+      {
+        question: `Will the figurine still look like my pet?`,
+        answer: `Yes. Species, face, colours, markings, and eye colour stay recognisable in the miniature sculpted finish.`,
+      },
+      {
+        question: `Is this a soft plush-toy look?`,
+        answer: `No—this is a hard premium collectible figure with molded detail on a wooden display base.`,
+      },
+      {
+        question: `Do I need a photo of an existing figurine?`,
+        answer: `No. A clear real pet photo is enough; the collectible presentation is created in the style.`,
+      },
+      {
+        question: `Can dogs and cats both work?`,
+        answer: `Yes. Any pet with readable features can become a display-ready mini collectible figure.`,
+      },
+    ],
+    addonLine: `Want a quieter collector display? Add: keep the mini figurine form, premium wooden base, and soft studio display light, but soften packaging presence—no giant robot redesign or missing breed markings.`,
+  },
+  "dreamy-memorial-portrait": {
+    intro: `Gentle remembrance pet portrait: soft golden sunset garden with misty hills, delicate blossoms and a faint rainbow, while species, face, fur colours and markings stay faithful to your photo. Use one clear pet photo with eyes visible.`,
+    tips: [
+      `Choose a photo where eyes and distinctive markings are clear—likeness matters most for memorial pieces.`,
+      `Ask for a peaceful flower garden, soft golden sunset, distant misty hills, and a faint rainbow—not party confetti.`,
+      `Preserve species, breed cues, facial structure, fur colours, markings, and eye colour exactly.`,
+      `Soft warm peaceful light should feel gentle; avoid heavy glow that washes out the face.`,
+    ],
+    faqs: [
+      {
+        question: `Will my pet’s face and markings stay accurate?`,
+        answer: `Yes. Species, facial structure, fur or feather colours, distinctive markings, and eye colour stay faithful.`,
+      },
+      {
+        question: `Can I use an older or slightly imperfect photo?`,
+        answer: `Yes if eyes and markings remain readable. Very blurry memorial sources make likeness harder to hold.`,
+      },
+      {
+        question: `Is this a playful plush-toy style?`,
+        answer: `No—this is a soft emotional remembrance portrait in a peaceful sunset garden.`,
+      },
+      {
+        question: `Does the rainbow have to appear?`,
+        answer: `A faint rainbow is part of the default memorial atmosphere. Use a small add-on only if you want it softer, without rewriting the whole look.`,
+      },
+    ],
+    addonLine: `Want a quieter memorial garden mood? Add: keep the peaceful flower garden, soft golden sunset, and faithful pet likeness, but soften the rainbow further—no text overlays, heavy lens flares, or altered markings.`,
+  },
 };
 
