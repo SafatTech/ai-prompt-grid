@@ -981,4 +981,5 @@ Who it is for: anyone who wants a viral snowflake close-up winter portrait rathe
       "shawl-chai-winter-ai-photo-prompt-girls",
     ],
   },
+
 };

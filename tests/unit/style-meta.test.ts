@@ -3,12 +3,15 @@ import { describe, it } from "node:test";
 import {
   STYLE_SEO_OVERRIDES,
   styleDisplayTitle,
+  styleHasUniqueContentSections,
   styleMetadataTitle,
   stylePageDescription,
   styleSeoDescription,
   styleSeoOverride,
   styleSocialTitle,
 } from "../../src/lib/catalog/style-meta";
+import { STYLE_UNIQUENESS_ENTRIES } from "../../src/lib/catalog/style-uniqueness-data";
+import { getPublishedStyles } from "../../src/lib/catalog/styles";
 
 const SECOND = "Copy-ready prompt for ChatGPT, Gemini, and other AI image editors.";
 
@@ -90,7 +93,9 @@ describe("style SEO overrides", () => {
     for (const id of [passportId, cvId]) {
       const override = STYLE_SEO_OVERRIDES[id];
       assert.ok(override);
+      assert.ok(override.title);
       assert.ok(override.title.length <= 60, `${id} title is ${override.title.length}`);
+      const overrideTitle = override.title;
 
       const metadata = styleMetadataTitle({
         id,
@@ -98,14 +103,14 @@ describe("style SEO overrides", () => {
       });
       assert.equal(typeof metadata, "object");
       if (typeof metadata === "string") return;
-      assert.equal(metadata.absolute, override.title);
+      assert.equal(metadata.absolute, overrideTitle);
       assert.equal(metadata.absolute.includes(" · AI Prompt Grid"), false);
 
       const social = styleSocialTitle({
         id,
         title: "Catalog title that should be ignored for SEO",
       });
-      assert.equal(social, override.title);
+      assert.equal(social, overrideTitle);
       assert.equal(social.endsWith(" · AI Prompt Grid"), false);
 
       const description = styleSeoDescription({
@@ -131,18 +136,24 @@ describe("style SEO overrides", () => {
 });
 
 describe("GSC thin-style SEO overrides", () => {
-  it("gives every listed slug a keyword title, H1, 150+ word intro, tips, and guide links", () => {
+  it("gives every listed slug a keyword title, H1, intro, tips, and guide links", () => {
     for (const id of GSC_THIN_STYLE_IDS) {
       const override = styleSeoOverride(id);
       assert.ok(override, id);
-      assert.ok(override.title.trim().length > 0, `${id} title`);
-      assert.ok(override.description.trim().length > 40, `${id} meta`);
+      assert.ok(override.title?.trim().length, `${id} title`);
+      assert.ok((override.description?.trim().length ?? 0) > 40, `${id} meta`);
       const h1 = styleDisplayTitle({ id, title: "Catalog title" });
       assert.equal(h1, override.h1 || override.title);
       assert.notEqual(h1, "Catalog title");
       assert.ok(override.intro, `${id} intro`);
       const words = override.intro.trim().split(/\s+/).filter(Boolean).length;
-      assert.ok(words >= 150, `${id} intro has ${words} words`);
+      if (styleHasUniqueContentSections(override)) {
+        // Batch-1 uniqueness replaces the long GSC body with short intro + FAQs.
+        assert.ok(words >= 15 && words <= 60, `${id} uniqueness intro has ${words} words`);
+        assert.ok(override.faqs && override.faqs.length >= 3, `${id} faqs`);
+      } else {
+        assert.ok(words >= 150, `${id} intro has ${words} words`);
+      }
       assert.ok(override.tips && override.tips.length >= 2, `${id} tips`);
       assert.ok(override.guideLinks && override.guideLinks.length >= 1, `${id} guides`);
     }
@@ -152,9 +163,8 @@ describe("GSC thin-style SEO overrides", () => {
     const hacker = STYLE_SEO_OVERRIDES["cyberpunk-hacker-ai-photo-prompt"];
     const market = STYLE_SEO_OVERRIDES["cyberpunk-street-market-ai-photo-prompt"];
     assert.ok(hacker?.intro && market?.intro);
-    assert.match(hacker.intro, /indoor terminal|wall of monitors|desk/i);
-    assert.match(market.intro, /outdoor|rainy night|vendor alley/i);
-    assert.match(hacker.intro, /not the indoor hacker|separate from cyberpunk street market|never merged/i);
+    assert.match(hacker.intro, /monitors|hologram|hacker|desk|terminal/i);
+    assert.match(market.intro, /market|outdoor|rainy|stall|neon|vendor/i);
     assert.ok(hacker.title !== market.title);
     assert.ok(
       hacker.relatedStyleIds?.includes("cyberpunk-street-market-ai-photo-prompt"),
@@ -169,10 +179,79 @@ describe("GSC thin-style SEO overrides", () => {
     const couple = STYLE_SEO_OVERRIDES["couple-action-figure-two-pack-ai-prompt"];
     const clay = STYLE_SEO_OVERRIDES["clay-stop-motion-group-ai-photo-prompt"];
     const menu = STYLE_SEO_OVERRIDES["main-character-game-menu-ai-photo-prompt"];
-    assert.match(solo?.intro ?? "", /solo|1\/7|desk/i);
-    assert.match(couple?.intro ?? "", /two-pack|two people|person A/i);
+    assert.match(solo?.intro ?? "", /solo|collectible|window box|1\/7|desk/i);
+    assert.match(couple?.intro ?? "", /two-pack|two people|person A|two action figures|both faces/i);
     assert.match(clay?.intro ?? "", /clay|stop-motion/i);
-    assert.match(menu?.intro ?? "", /character-select|menu|UI/i);
+    assert.match(menu?.intro ?? "", /character-select|menu|UI|game/i);
+    assert.ok(solo?.title !== couple?.title);
+  });
+});
+
+const BATCH1_ACTIVATED_DRAFT_IDS = [
+  "diwali-couple-poses-diya-doorway",
+  "birthday-ai-photo-prompt-boy-black-gold",
+  "anime-squad",
+  "separate-photos-couple",
+] as const;
+
+describe("AdSense uniqueness style sections", () => {
+  it("ships uniqueness copy for every published seed style", () => {
+    const ids = Object.keys(STYLE_UNIQUENESS_ENTRIES);
+    assert.ok(ids.length >= 330, `expected ~338 uniqueness entries, got ${ids.length}`);
+    for (const id of ids) {
+      const override = styleSeoOverride(id);
+      assert.ok(override, id);
+      assert.ok(override.intro?.trim(), `${id} intro`);
+      assert.ok(override.tips && override.tips.length >= 3, `${id} tips`);
+      assert.ok(override.faqs && override.faqs.length >= 3, `${id} faqs`);
+      assert.ok(override.addonLine?.trim(), `${id} addon`);
+      assert.equal(styleHasUniqueContentSections(override), true, id);
+    }
+
+    const missing = getPublishedStyles()
+      .map((style) => style.id)
+      .filter((id) => !STYLE_UNIQUENESS_ENTRIES[id]);
+    assert.deepEqual(missing, [], `published styles missing uniqueness: ${missing.join(", ")}`);
+  });
+
+  it("activates crimson-bangle-reverie and the four former drafts", () => {
+    const id = "crimson-bangle-reverie";
+    const override = styleSeoOverride(id);
+    assert.ok(override, id);
+    assert.equal(override.title, undefined);
+    assert.equal(override.description, undefined);
+    assert.ok(override.intro?.trim());
+    const introWords = (override.intro ?? "").trim().split(/\s+/).filter(Boolean).length;
+    assert.ok(introWords <= 45, `crimson intro should stay short (${introWords} words)`);
+    assert.ok(override.tips && override.tips.length >= 3);
+    assert.ok(override.faqs && override.faqs.length >= 3);
+    assert.ok(override.addonLine?.trim());
+    assert.equal(styleHasUniqueContentSections(override), true);
+
+    for (const draftId of BATCH1_ACTIVATED_DRAFT_IDS) {
+      const draft = styleSeoOverride(draftId);
+      assert.ok(draft, `${draftId} must be live`);
+      assert.ok(STYLE_UNIQUENESS_ENTRIES[draftId], `${draftId} in uniqueness data`);
+      assert.equal(styleHasUniqueContentSections(draft), true, draftId);
+    }
+  });
+
+  it("gates uniqueness layout on faqs, not intro alone", () => {
+    assert.equal(
+      styleHasUniqueContentSections({
+        intro: "A long intro without FAQs should keep the legacy layout.",
+        tips: ["One tip"],
+      }),
+      false,
+    );
+    assert.equal(
+      styleHasUniqueContentSections({
+        intro: "Short intro",
+        tips: ["One tip"],
+        faqs: [{ question: "Q?", answer: "A." }],
+      }),
+      true,
+    );
   });
 });
 

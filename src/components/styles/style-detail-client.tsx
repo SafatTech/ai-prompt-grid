@@ -39,7 +39,11 @@ import {
 } from "@/lib/catalog/prompt-core";
 import { labeledOptionsForStyle } from "@/lib/catalog/prompt-option-presets";
 import { getStyleProfile } from "@/lib/catalog/style-profile";
-import { styleDisplayTitle, styleSeoOverride } from "@/lib/catalog/style-meta";
+import {
+  styleDisplayTitle,
+  styleHasUniqueContentSections,
+  styleSeoOverride,
+} from "@/lib/catalog/style-meta";
 import type { CatalogStyle } from "@/lib/catalog/types";
 import { recordRecentView } from "@/lib/recent/views";
 import { cn } from "@/lib/utils";
@@ -57,6 +61,7 @@ export function StyleDetailClient({ style, children }: Props) {
   const profile = getStyleProfile(style);
   const seo = styleSeoOverride(style.id);
   const displayTitle = styleDisplayTitle(style);
+  const uniqueSections = styleHasUniqueContentSections(seo);
   const introParagraphs = seo?.intro
     ? seo.intro
         .split(/\n\s*\n/)
@@ -135,32 +140,58 @@ export function StyleDetailClient({ style, children }: Props) {
     toast(saved ? "Style removed from your library." : "Style saved to your library.");
   }
 
+  async function copyText(value: string): Promise<boolean> {
+    try {
+      if (navigator.clipboard?.writeText) {
+        await navigator.clipboard.writeText(value);
+      } else {
+        const area = document.createElement("textarea");
+        area.value = value;
+        document.body.appendChild(area);
+        area.select();
+        document.execCommand("copy");
+        area.remove();
+      }
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
   async function onCopy() {
     const result = assemblePromptCore(style, options);
     if (!result.ok) {
       toast(result.errors[0] ?? "Prompt is incomplete and cannot be copied.", "error");
       return;
     }
-    try {
-      if (navigator.clipboard?.writeText) {
-        await navigator.clipboard.writeText(result.prompt);
-      } else {
-        const area = document.createElement("textarea");
-        area.value = result.prompt;
-        document.body.appendChild(area);
-        area.select();
-        document.execCommand("copy");
-        area.remove();
-      }
-      track("prompt_copy", {
-        style_id: style.id,
-        variant_id: style.promptVariant.id,
-        tool: result.tool,
-      });
-      toast("Prompt copied. Open your AI image editor and upload your photo there.");
-    } catch {
+    const ok = await copyText(result.prompt);
+    if (!ok) {
       toast("Could not copy automatically. Select the prompt text manually.", "error");
+      return;
     }
+    track("prompt_copy", {
+      style_id: style.id,
+      variant_id: style.promptVariant.id,
+      tool: result.tool,
+    });
+    toast("Prompt copied. Open your AI image editor and upload your photo there.");
+  }
+
+  async function onCopyAddon() {
+    const line = seo?.addonLine?.trim();
+    if (!line) return;
+    const ok = await copyText(line);
+    if (!ok) {
+      toast("Could not copy automatically. Select the add-on text manually.", "error");
+      return;
+    }
+    track("prompt_copy", {
+      style_id: style.id,
+      variant_id: style.promptVariant.id,
+      tool: style.promptVariant.tool,
+      addon: true,
+    });
+    toast("Optional add-on copied. Paste it after your main prompt.");
   }
 
   function onSaveResult() {
@@ -300,7 +331,9 @@ export function StyleDetailClient({ style, children }: Props) {
           <h1 className="m-0 mb-4 text-[clamp(32px,6vw,67px)] leading-none tracking-[-0.05em]">
             {displayTitle}
           </h1>
-          {introParagraphs.length > 0 ? (
+          {/* Uniqueness pages keep the catalog description at the top (like master).
+              Legacy GSC thin pages still replace description with their long intro. */}
+          {!uniqueSections && introParagraphs.length > 0 ? (
             <div
               className="max-w-[690px] space-y-4 text-[16px] leading-relaxed text-[#c2c0ca] sm:text-[19px]"
               data-testid="style-seo-intro"
@@ -316,7 +349,7 @@ export function StyleDetailClient({ style, children }: Props) {
               {profile.description}
             </p>
           )}
-          {seo?.tips && seo.tips.length > 0 ? (
+          {!uniqueSections && seo?.tips && seo.tips.length > 0 ? (
             <section className="mt-6 max-w-[690px]" data-testid="style-seo-tips">
               <h2 className="mb-3 text-[22px]">Tips for this look</h2>
               <ul className="m-0 list-disc space-y-2 pl-5 text-sm text-[#d2cfd7] sm:text-[15px]">
@@ -398,6 +431,86 @@ export function StyleDetailClient({ style, children }: Props) {
               ))}
             </ul>
           </section>
+
+          {uniqueSections ? (
+            <div data-testid="style-unique-sections">
+              {introParagraphs.length > 0 ? (
+                <section className="border-t border-[var(--line)] py-7">
+                  <p
+                    className="m-0 max-w-[690px] text-sm text-[#d2cfd7]"
+                    data-testid="style-seo-intro"
+                  >
+                    {introParagraphs.join(" ")}
+                  </p>
+                </section>
+              ) : null}
+
+              {seo?.tips && seo.tips.length > 0 ? (
+                <section
+                  className="border-t border-[var(--line)] py-7"
+                  data-testid="style-seo-tips"
+                >
+                  <h2 className="mb-4 text-[22px]">Tips for this look</h2>
+                  <ul className="m-0 list-disc space-y-2 pl-5 text-sm text-[#d2cfd7]">
+                    {seo.tips.map((tip) => (
+                      <li key={tip}>{tip}</li>
+                    ))}
+                  </ul>
+                </section>
+              ) : null}
+
+              {seo?.addonLine ? (
+                <section
+                  className="border-t border-[var(--line)] py-7"
+                  data-testid="style-addon-card"
+                >
+                  <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+                    <h2 className="m-0 text-[22px]">Optional add-on</h2>
+                    <button
+                      type="button"
+                      className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-[var(--line)] bg-transparent px-2.5 py-1.5 text-xs font-bold text-[var(--muted)] hover:border-[var(--line-strong)] hover:text-[var(--text)]"
+                      data-testid="copy-addon-line"
+                      onClick={onCopyAddon}
+                    >
+                      <CopyIcon />
+                      Copy
+                    </button>
+                  </div>
+                  <p className="m-0 max-w-[690px] text-sm text-[#d2cfd7]">{seo.addonLine}</p>
+                </section>
+              ) : null}
+
+              {seo?.faqs && seo.faqs.length > 0 ? (
+                <section
+                  className="border-t border-[var(--line)] py-7"
+                  data-testid="style-seo-faqs"
+                >
+                  <h2 className="mb-4 text-[22px]">FAQs</h2>
+                  <div className="max-w-[690px] border-t border-[var(--line)]">
+                    {seo.faqs.map((faq) => (
+                      <details
+                        key={faq.question}
+                        className="group border-b border-[var(--line)]"
+                      >
+                        <summary className="flex cursor-pointer list-none items-center justify-between gap-3 py-3.5 text-sm font-medium text-[#d2cfd7] marker:content-none [&::-webkit-details-marker]:hidden">
+                          <span>{faq.question}</span>
+                          <span
+                            className="grid h-5 w-5 shrink-0 place-items-center text-base leading-none text-[var(--muted)] transition-transform duration-200 ease-out group-open:rotate-45"
+                            aria-hidden
+                          >
+                            +
+                          </span>
+                        </summary>
+                        <p className="m-0 origin-top pb-4 text-sm leading-relaxed text-[#d2cfd7] motion-safe:animate-[faq-answer-in_180ms_ease-out]">
+                          {faq.answer}
+                        </p>
+                      </details>
+                    ))}
+                  </div>
+                </section>
+              ) : null}
+            </div>
+          ) : null}
         </article>
 
         <aside
