@@ -8,6 +8,7 @@ import { linkedinStyleIds } from "./seed-linkedin-styles";
 import { mergeStyleIds } from "./seed-merge-styles";
 import { STYLE_SEO_OVERRIDE_ENTRIES } from "./style-seo-overrides-data";
 import type { StyleSeoOverride } from "./style-seo-override-types";
+import { STYLE_UNIQUENESS_ENTRIES } from "./style-uniqueness-data";
 import { winterStyleIds } from "./seed-winter-styles";
 
 export type {
@@ -26,9 +27,28 @@ const TITLE_LIMIT = 60;
  * Code-level SEO overrides for published styles whose title/description live
  * in Supabase. Values replace catalog fields for <title>, meta description,
  * optional H1, and on-page intro/tips when present.
+ * Uniqueness copy (intro/tips/faqs/addonLine) is layered from
+ * STYLE_UNIQUENESS_ENTRIES without changing prompts or catalog defaults.
  */
-export const STYLE_SEO_OVERRIDES: Readonly<Record<string, StyleSeoOverride>> =
-  STYLE_SEO_OVERRIDE_ENTRIES;
+export const STYLE_SEO_OVERRIDES: Readonly<Record<string, StyleSeoOverride>> = {
+  ...STYLE_SEO_OVERRIDE_ENTRIES,
+  ...Object.fromEntries(
+    Object.entries(STYLE_UNIQUENESS_ENTRIES).map(([slug, uniq]) => {
+      const base = STYLE_SEO_OVERRIDE_ENTRIES[slug];
+      return [
+        slug,
+        {
+          ...(base ?? {}),
+          // Uniqueness copy only; never wipe SEO title/meta/h1/guides.
+          intro: uniq.intro,
+          tips: uniq.tips,
+          faqs: uniq.faqs,
+          addonLine: uniq.addonLine,
+        } satisfies StyleSeoOverride,
+      ];
+    }),
+  ),
+};
 
 /** Sentence-ending punctuation, including a closing quote or parenthesis. */
 const ENDS_WITH_PUNCTUATION = /[.!?…]["')\]]*$/;

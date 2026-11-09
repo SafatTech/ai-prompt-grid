@@ -10,7 +10,7 @@ import {
   styleSeoOverride,
   styleSocialTitle,
 } from "../../src/lib/catalog/style-meta";
-import { STYLE_UNIQUENESS_DRAFT_ENTRIES } from "../../src/lib/catalog/style-seo-overrides-data";
+import { STYLE_UNIQUENESS_ENTRIES } from "../../src/lib/catalog/style-uniqueness-data";
 
 const SECOND = "Copy-ready prompt for ChatGPT, Gemini, and other AI image editors.";
 
@@ -135,7 +135,7 @@ describe("style SEO overrides", () => {
 });
 
 describe("GSC thin-style SEO overrides", () => {
-  it("gives every listed slug a keyword title, H1, 150+ word intro, tips, and guide links", () => {
+  it("gives every listed slug a keyword title, H1, intro, tips, and guide links", () => {
     for (const id of GSC_THIN_STYLE_IDS) {
       const override = styleSeoOverride(id);
       assert.ok(override, id);
@@ -146,7 +146,13 @@ describe("GSC thin-style SEO overrides", () => {
       assert.notEqual(h1, "Catalog title");
       assert.ok(override.intro, `${id} intro`);
       const words = override.intro.trim().split(/\s+/).filter(Boolean).length;
-      assert.ok(words >= 150, `${id} intro has ${words} words`);
+      if (styleHasUniqueContentSections(override)) {
+        // Batch-1 uniqueness replaces the long GSC body with short intro + FAQs.
+        assert.ok(words >= 15 && words <= 60, `${id} uniqueness intro has ${words} words`);
+        assert.ok(override.faqs && override.faqs.length >= 3, `${id} faqs`);
+      } else {
+        assert.ok(words >= 150, `${id} intro has ${words} words`);
+      }
       assert.ok(override.tips && override.tips.length >= 2, `${id} tips`);
       assert.ok(override.guideLinks && override.guideLinks.length >= 1, `${id} guides`);
     }
@@ -173,14 +179,15 @@ describe("GSC thin-style SEO overrides", () => {
     const couple = STYLE_SEO_OVERRIDES["couple-action-figure-two-pack-ai-prompt"];
     const clay = STYLE_SEO_OVERRIDES["clay-stop-motion-group-ai-photo-prompt"];
     const menu = STYLE_SEO_OVERRIDES["main-character-game-menu-ai-photo-prompt"];
-    assert.match(solo?.intro ?? "", /solo|1\/7|desk/i);
-    assert.match(couple?.intro ?? "", /two-pack|two people|person A/i);
+    assert.match(solo?.intro ?? "", /solo|collectible|window box|1\/7|desk/i);
+    assert.match(couple?.intro ?? "", /two-pack|two people|person A|two action figures|both faces/i);
     assert.match(clay?.intro ?? "", /clay|stop-motion/i);
-    assert.match(menu?.intro ?? "", /character-select|menu|UI/i);
+    assert.match(menu?.intro ?? "", /character-select|menu|UI|game/i);
+    assert.ok(solo?.title !== couple?.title);
   });
 });
 
-const DISABLED_UNIQUENESS_DRAFT_IDS = [
+const BATCH1_ACTIVATED_DRAFT_IDS = [
   "diwali-couple-poses-diya-doorway",
   "birthday-ai-photo-prompt-boy-black-gold",
   "anime-squad",
@@ -188,7 +195,21 @@ const DISABLED_UNIQUENESS_DRAFT_IDS = [
 ] as const;
 
 describe("AdSense uniqueness style sections", () => {
-  it("activates only crimson-bangle-reverie with short intro, tips, FAQs, and addon", () => {
+  it("ships uniqueness copy for all batch-1 guide-linked styles", () => {
+    const ids = Object.keys(STYLE_UNIQUENESS_ENTRIES);
+    assert.ok(ids.length >= 70, `expected ~77 uniqueness entries, got ${ids.length}`);
+    for (const id of ids) {
+      const override = styleSeoOverride(id);
+      assert.ok(override, id);
+      assert.ok(override.intro?.trim(), `${id} intro`);
+      assert.ok(override.tips && override.tips.length >= 3, `${id} tips`);
+      assert.ok(override.faqs && override.faqs.length >= 3, `${id} faqs`);
+      assert.ok(override.addonLine?.trim(), `${id} addon`);
+      assert.equal(styleHasUniqueContentSections(override), true, id);
+    }
+  });
+
+  it("activates crimson-bangle-reverie and the four former drafts", () => {
     const id = "crimson-bangle-reverie";
     const override = styleSeoOverride(id);
     assert.ok(override, id);
@@ -196,18 +217,17 @@ describe("AdSense uniqueness style sections", () => {
     assert.equal(override.description, undefined);
     assert.ok(override.intro?.trim());
     const introWords = (override.intro ?? "").trim().split(/\s+/).filter(Boolean).length;
-    assert.ok(introWords <= 40, `crimson intro should stay short (${introWords} words)`);
-    assert.ok(override.tips && override.tips.length === 3);
-    assert.ok(override.faqs && override.faqs.length === 2);
+    assert.ok(introWords <= 45, `crimson intro should stay short (${introWords} words)`);
+    assert.ok(override.tips && override.tips.length >= 3);
+    assert.ok(override.faqs && override.faqs.length >= 3);
     assert.ok(override.addonLine?.trim());
     assert.equal(styleHasUniqueContentSections(override), true);
-  });
 
-  it("keeps the other four pilot drafts out of live SEO overrides", () => {
-    for (const id of DISABLED_UNIQUENESS_DRAFT_IDS) {
-      assert.equal(styleSeoOverride(id), undefined, `${id} must render like master`);
-      assert.ok(STYLE_UNIQUENESS_DRAFT_ENTRIES[id], `${id} draft retained in code`);
-      assert.equal(styleHasUniqueContentSections(undefined), false);
+    for (const draftId of BATCH1_ACTIVATED_DRAFT_IDS) {
+      const draft = styleSeoOverride(draftId);
+      assert.ok(draft, `${draftId} must be live`);
+      assert.ok(STYLE_UNIQUENESS_ENTRIES[draftId], `${draftId} in uniqueness data`);
+      assert.equal(styleHasUniqueContentSections(draft), true, draftId);
     }
   });
 
