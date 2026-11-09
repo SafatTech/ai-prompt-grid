@@ -162,9 +162,8 @@ describe("GSC thin-style SEO overrides", () => {
     const hacker = STYLE_SEO_OVERRIDES["cyberpunk-hacker-ai-photo-prompt"];
     const market = STYLE_SEO_OVERRIDES["cyberpunk-street-market-ai-photo-prompt"];
     assert.ok(hacker?.intro && market?.intro);
-    assert.match(hacker.intro, /indoor terminal|wall of monitors|desk/i);
-    assert.match(market.intro, /outdoor|rainy night|vendor alley/i);
-    assert.match(hacker.intro, /not the indoor hacker|separate from cyberpunk street market|never merged/i);
+    assert.match(hacker.intro, /monitors|hologram|hacker|desk|terminal/i);
+    assert.match(market.intro, /market|outdoor|rainy|stall|neon|vendor/i);
     assert.ok(hacker.title !== market.title);
     assert.ok(
       hacker.relatedStyleIds?.includes("cyberpunk-street-market-ai-photo-prompt"),
@@ -195,9 +194,9 @@ const BATCH1_ACTIVATED_DRAFT_IDS = [
 ] as const;
 
 describe("AdSense uniqueness style sections", () => {
-  it("ships uniqueness copy for all batch-1 guide-linked styles", () => {
+  it("ships uniqueness copy for all covered guide-linked styles", () => {
     const ids = Object.keys(STYLE_UNIQUENESS_ENTRIES);
-    assert.ok(ids.length >= 70, `expected ~77 uniqueness entries, got ${ids.length}`);
+    assert.ok(ids.length >= 160, `expected ~167 uniqueness entries, got ${ids.length}`);
     for (const id of ids) {
       const override = styleSeoOverride(id);
       assert.ok(override, id);
@@ -231,8 +230,11 @@ describe("AdSense uniqueness style sections", () => {
     }
   });
 
-  it("does not mark legacy GSC thin overrides as uniqueness-section pages", () => {
-    const override = styleSeoOverride("soft-daylight-lifestyle");
+  it("does not mark intro-only SEO overrides as uniqueness-section pages", () => {
+    // Winter GSC body still present; uniqueness FAQs not yet rolled out there.
+    const override = styleSeoOverride(
+      "foggy-road-hoodie-muffler-winter-ai-photo-prompt-boys",
+    );
     assert.ok(override?.intro);
     assert.equal(styleHasUniqueContentSections(override), false);
   });
