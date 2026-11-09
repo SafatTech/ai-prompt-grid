@@ -28,9 +28,9 @@ export type StyleSeoOverride = {
   /** FAQ pairs for an on-page accordion + FAQPage JSON-LD. */
   readonly faqs?: readonly StyleFaq[];
   /**
-   * Optional extra prompt line kept in data for a future prompt-box redesign.
-   * Not rendered on style pages while add-on UI is parked. Does not change
-   * the main prompt or its defaults.
+   * Optional extra prompt line rendered in the left column (not in the prompt
+   * box) with a small copy control. Does not change the main prompt or its
+   * defaults.
    */
   readonly addonLine?: string;
   /** In-page links to related guides. */
