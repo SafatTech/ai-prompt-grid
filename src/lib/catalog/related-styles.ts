@@ -1,6 +1,49 @@
 import type { CatalogStyle } from "@/lib/catalog/types";
+import { styleIdsSharingGuide } from "@/lib/guides/style-featured-guides";
 
-export const RELATED_STYLE_LIMIT = 6;
+export const RELATED_STYLE_LIMIT = 8;
+
+const THEME_STOP_WORDS = new Set([
+  "ai",
+  "photo",
+  "photos",
+  "prompt",
+  "prompts",
+  "free",
+  "gemini",
+  "chatgpt",
+  "for",
+  "the",
+  "and",
+  "with",
+  "from",
+  "into",
+  "your",
+  "edit",
+  "editing",
+  "look",
+  "style",
+  "image",
+  "portrait",
+]);
+
+function themeTokens(style: CatalogStyle): Set<string> {
+  const tokens = new Set<string>();
+  const hay = `${style.title} ${style.category} ${style.note} ${style.description}`;
+  for (const raw of hay.toLowerCase().split(/[^a-z0-9]+/)) {
+    if (raw.length < 3 || THEME_STOP_WORDS.has(raw)) continue;
+    tokens.add(raw);
+  }
+  return tokens;
+}
+
+function sharedThemeCount(a: Set<string>, b: Set<string>): number {
+  let count = 0;
+  for (const token of a) {
+    if (b.has(token)) count += 1;
+  }
+  return count;
+}
 
 function neighboringRelated(
   styleId: string,
@@ -18,10 +61,10 @@ function neighboringRelated(
 }
 
 /**
- * Neighboring published styles for a detail page.
- * Same category comes first, walking forward through the catalog (and wrapping),
- * so each style links onward instead of always pointing at the same top three.
- * When `preferredIds` is set (SEO overrides), those styles lead the block.
+ * Related styles for a detail page (limit 8).
+ * Order: preferredIds overrides → styles sharing a published guide → same
+ * category → shared theme words in title/note → catalog neighbours.
+ * `catalog` must already be published/indexable only.
  */
 export function relatedStylesFor(
   styleId: string,
@@ -29,31 +72,51 @@ export function relatedStylesFor(
   catalog: CatalogStyle[],
   preferredIds?: readonly string[],
 ): CatalogStyle[] {
-  const neighbors = neighboringRelated(styleId, category, catalog);
-
-  if (!preferredIds?.length) {
-    return neighbors.slice(0, RELATED_STYLE_LIMIT);
-  }
-
   const byId = new Map(catalog.map((item) => [item.id, item]));
-  const preferred: CatalogStyle[] = [];
+  const current = byId.get(styleId);
+  const currentTokens = current ? themeTokens(current) : new Set<string>();
+  const guidePeers = styleIdsSharingGuide(styleId);
+  const neighbors = neighboringRelated(styleId, category, catalog);
+  const neighborRank = new Map(neighbors.map((item, index) => [item.id, index]));
+
+  const scored = catalog
+    .filter((item) => item.id !== styleId)
+    .map((item) => {
+      let score = 0;
+      if (guidePeers.has(item.id)) score += 1_000;
+      if (item.category === category) score += 300;
+      score += sharedThemeCount(currentTokens, themeTokens(item)) * 20;
+      const nRank = neighborRank.get(item.id);
+      if (nRank != null) score += Math.max(0, 50 - nRank);
+      return { item, score };
+    })
+    .sort((a, b) => {
+      if (b.score !== a.score) return b.score - a.score;
+      return a.item.title.localeCompare(b.item.title);
+    });
+
+  const result: CatalogStyle[] = [];
   const seen = new Set<string>([styleId]);
-  for (const id of preferredIds) {
-    if (seen.has(id)) continue;
-    const style = byId.get(id);
-    if (!style) continue;
-    preferred.push(style);
-    seen.add(id);
-    if (preferred.length >= RELATED_STYLE_LIMIT) {
-      return preferred;
+
+  const push = (style: CatalogStyle | undefined) => {
+    if (!style || seen.has(style.id)) return;
+    // Catalog is published-only; still guard against accidental drafts.
+    if (style.status !== "published") return;
+    seen.add(style.id);
+    result.push(style);
+  };
+
+  if (preferredIds?.length) {
+    for (const id of preferredIds) {
+      push(byId.get(id));
+      if (result.length >= RELATED_STYLE_LIMIT) return result;
     }
   }
 
-  for (const item of neighbors) {
-    if (seen.has(item.id)) continue;
-    preferred.push(item);
-    seen.add(item.id);
-    if (preferred.length >= RELATED_STYLE_LIMIT) break;
+  for (const { item } of scored) {
+    push(item);
+    if (result.length >= RELATED_STYLE_LIMIT) break;
   }
-  return preferred;
+
+  return result;
 }

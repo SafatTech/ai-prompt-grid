@@ -55,9 +55,14 @@ type ShareModalProps = {
   onClose: () => void;
 };
 
-type Props = { style: CatalogStyle; children?: ReactNode };
+type Props = {
+  style: CatalogStyle;
+  children?: ReactNode;
+  /** Precomputed "Best for / Works with" line from generated catalog data. */
+  bestForLine?: string;
+};
 
-export function StyleDetailClient({ style, children }: Props) {
+export function StyleDetailClient({ style, children, bestForLine }: Props) {
   const profile = getStyleProfile(style);
   const seo = styleSeoOverride(style.id);
   const displayTitle = styleDisplayTitle(style);
@@ -328,9 +333,23 @@ export function StyleDetailClient({ style, children }: Props) {
               </span>
             ))}
           </div>
-          <h1 className="m-0 mb-4 text-[clamp(32px,6vw,67px)] leading-none tracking-[-0.05em]">
+          <h1
+            className={
+              bestForLine
+                ? "m-0 mb-1.5 text-[clamp(32px,6vw,67px)] leading-none tracking-[-0.05em]"
+                : "m-0 mb-4 text-[clamp(32px,6vw,67px)] leading-none tracking-[-0.05em]"
+            }
+          >
             {displayTitle}
           </h1>
+          {bestForLine ? (
+            <p
+              className="m-0 mb-3 max-w-[690px] text-[11px] leading-snug text-[rgba(199,197,207,0.78)] sm:text-[12px]"
+              data-testid="style-best-for"
+            >
+              {bestForLine}
+            </p>
+          ) : null}
           {/* Uniqueness pages keep the catalog description at the top (like master).
               Legacy GSC thin pages still replace description with their long intro. */}
           {!uniqueSections && introParagraphs.length > 0 ? (

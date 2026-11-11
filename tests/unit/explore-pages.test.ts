@@ -110,22 +110,17 @@ describe("explore pagination", () => {
     ]);
   });
 
-  it("links each style to other styles, preferring the same category", () => {
+  it("links each style to up to eight others, never self", () => {
     const styles = getPublishedStyles();
     for (const style of styles) {
       const related = relatedStylesFor(style.id, style.category, styles);
       assert.ok(related.length >= 1);
-      assert.ok(related.length <= 6);
+      assert.ok(related.length <= 8);
       assert.equal(
         related.some((item) => item.id === style.id),
         false,
       );
-      const same = styles.filter(
-        (item) => item.id !== style.id && item.category === style.category,
-      );
-      if (same.length > 0) {
-        assert.equal(related[0]?.category, style.category);
-      }
+      assert.ok(related.every((item) => item.status === "published"));
     }
   });
 });

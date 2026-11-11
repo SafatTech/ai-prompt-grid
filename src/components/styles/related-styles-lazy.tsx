@@ -63,7 +63,7 @@ export function RelatedStylesLazy(props: RelatedProps) {
       >
         <div className="mb-7 flex flex-col items-start gap-2 sm:flex-row sm:items-end sm:justify-between sm:gap-5">
           <h2 className="m-0 text-[clamp(28px,3vw,42px)] tracking-[-0.035em]">
-            Related styles
+            More styles like this
           </h2>
           <div className="flex flex-wrap gap-x-4 gap-y-2">
             <Link href={categoryHref} className="font-bold text-[#bbaeff]">
@@ -75,7 +75,7 @@ export function RelatedStylesLazy(props: RelatedProps) {
           </div>
         </div>
         {props.styles.length ? (
-          <ul className="m-0 grid list-none grid-cols-1 gap-[18px] p-0 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="m-0 grid list-none grid-cols-1 gap-[18px] p-0 sm:grid-cols-2 lg:grid-cols-4">
             {props.styles.map((item) => {
               const mediaH = Math.min(item.height || 320, 320);
               return (
