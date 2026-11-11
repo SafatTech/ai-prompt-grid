@@ -372,12 +372,6 @@ export function StyleDetailClient({ style, children, bestFor }: Props) {
                   {bestFor.occasions}
                 </span>
               </p>
-              <span
-                className="hidden text-[rgba(199,197,207,0.25)] sm:inline"
-                aria-hidden
-              >
-                ·
-              </span>
               <p className="m-0 flex min-w-0 flex-wrap items-baseline gap-x-2.5 gap-y-0.5">
                 <span className="shrink-0 text-[10px] font-semibold tracking-[0.12em] text-[rgba(199,197,207,0.48)] uppercase">
                   Works with
