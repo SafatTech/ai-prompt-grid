@@ -165,7 +165,14 @@ export default async function StyleDetailPage({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
       ) : null}
-      <StyleDetailClient style={detailStyle} bestForLine={bestFor?.line}>
+      <StyleDetailClient
+        style={detailStyle}
+        bestFor={
+          bestFor
+            ? { occasions: bestFor.occasions, worksWith: bestFor.worksWith }
+            : undefined
+        }
+      >
         <StyleFeaturedGuides block={featuredGuides} />
         <RelatedStylesLazy styles={relatedStyles} category={detailStyle.category} />
       </StyleDetailClient>
