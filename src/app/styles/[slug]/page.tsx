@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { RelatedStylesLazy } from "@/components/styles/related-styles-lazy";
 import { StyleDetailClient } from "@/components/styles/style-detail-client";
+import { StyleFeaturedGuides } from "@/components/styles/style-featured-guides";
 import { usesMergeHero } from "@/lib/catalog/merge-inputs";
 import { relatedStylesFor } from "@/lib/catalog/related-styles";
 import {
@@ -10,6 +11,7 @@ import {
   listPublishedStyles,
   withStyleAmbientBlur,
 } from "@/lib/catalog/repository";
+import { styleBestForLine } from "@/lib/catalog/style-best-for-lookup";
 import { toStyleCardDataList } from "@/lib/catalog/style-card-data";
 import {
   styleDisplayTitle,
@@ -18,6 +20,7 @@ import {
   styleSeoOverride,
   styleSocialTitle,
 } from "@/lib/catalog/style-meta";
+import { featuredGuidesForStyle } from "@/lib/guides/style-featured-guides";
 import { absoluteUrl } from "@/lib/site-url";
 
 /** Hourly safety net; admin catalog writes invalidate cached data and paths. */
@@ -103,6 +106,14 @@ export default async function StyleDetailPage({
     ),
     { sharedBlur: true },
   );
+  const featuredGuides = featuredGuidesForStyle({
+    styleId: detailStyle.id,
+    styleTitle: detailStyle.title,
+    styleCategory: detailStyle.category,
+    styleNote: detailStyle.note,
+    guideLinks: seoOverride?.guideLinks,
+  });
+  const bestFor = styleBestForLine(detailStyle.id);
   // LCP: CompareSlider / MergeBeforeAfter use priority + fetchPriority="high"
   // (no react-dom preload — avoids a second request behind CSS).
   const pageUrl = absoluteUrl(`/styles/${detailStyle.id}`);
@@ -154,7 +165,15 @@ export default async function StyleDetailPage({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(faqJsonLd) }}
         />
       ) : null}
-      <StyleDetailClient style={detailStyle}>
+      <StyleDetailClient
+        style={detailStyle}
+        bestFor={
+          bestFor
+            ? { occasions: bestFor.occasions, worksWith: bestFor.worksWith }
+            : undefined
+        }
+      >
+        <StyleFeaturedGuides block={featuredGuides} />
         <RelatedStylesLazy styles={relatedStyles} category={detailStyle.category} />
       </StyleDetailClient>
     </>

@@ -1,5 +1,6 @@
 import type { NextConfig } from "next";
 import { writePublishedGuideManifest } from "./src/lib/guides/published-manifest";
+import { writeStyleGuideIndex } from "./src/lib/guides/style-guide-index";
 import { isVercelImageOptEnabled } from "./src/lib/images/vercel-image-opt";
 
 // Bake published slugs into the layout bundle before compile. The root layout
@@ -7,6 +8,8 @@ import { isVercelImageOptEnabled } from "./src/lib/images/vercel-image-opt";
 // serverless functions (style pages, explore, and so on) do not trace the
 // markdown files and would otherwise drop the Guides link after publishing.
 writePublishedGuideManifest();
+// Style pages import the generated membership/cards module (no MDX trace).
+writeStyleGuideIndex();
 
 const nextConfig: NextConfig = {
   allowedDevOrigins: ["127.0.0.1", "localhost"],

@@ -48,7 +48,7 @@ describe("home feed click expansion and soft-cap reserves", () => {
 describe("PR34 follow-up: related SSR links (N-17 / R2)", () => {
   it("renders related style titles and hrefs before the heavy grid loads", () => {
     const src = readSrc("src/components/styles/related-styles-lazy.tsx");
-    assert.ok(src.includes("Related styles"));
+    assert.ok(src.includes("More styles like this"));
     assert.ok(src.includes("href={`/styles/${item.id}`}"));
     assert.ok(src.includes("{item.title}"));
     assert.ok(src.includes("related-styles-skeleton"));

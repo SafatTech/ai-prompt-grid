@@ -55,9 +55,19 @@ type ShareModalProps = {
   onClose: () => void;
 };
 
-type Props = { style: CatalogStyle; children?: ReactNode };
+type StyleBestForProps = {
+  readonly occasions: string;
+  readonly worksWith: string;
+};
 
-export function StyleDetailClient({ style, children }: Props) {
+type Props = {
+  style: CatalogStyle;
+  children?: ReactNode;
+  /** Curated Best for / Works with from style-best-for-data (unique occasions). */
+  bestFor?: StyleBestForProps;
+};
+
+export function StyleDetailClient({ style, children, bestFor }: Props) {
   const profile = getStyleProfile(style);
   const seo = styleSeoOverride(style.id);
   const displayTitle = styleDisplayTitle(style);
@@ -328,14 +338,14 @@ export function StyleDetailClient({ style, children }: Props) {
               </span>
             ))}
           </div>
-          <h1 className="m-0 mb-4 text-[clamp(32px,6vw,67px)] leading-none tracking-[-0.05em]">
+          <h1 className="m-0 mb-5 text-[clamp(32px,6vw,67px)] leading-none tracking-[-0.05em]">
             {displayTitle}
           </h1>
           {/* Uniqueness pages keep the catalog description at the top (like master).
               Legacy GSC thin pages still replace description with their long intro. */}
           {!uniqueSections && introParagraphs.length > 0 ? (
             <div
-              className="max-w-[690px] space-y-4 text-[16px] leading-relaxed text-[#c2c0ca] sm:text-[19px]"
+              className="max-w-[690px] space-y-4 text-[15px] leading-[1.7] text-[#b4b1bc] sm:text-[17px]"
               data-testid="style-seo-intro"
             >
               {introParagraphs.map((paragraph) => (
@@ -345,10 +355,33 @@ export function StyleDetailClient({ style, children }: Props) {
               ))}
             </div>
           ) : (
-            <p className="m-0 max-w-[690px] text-[16px] text-[#c2c0ca] sm:text-[19px]">
+            <p className="m-0 max-w-[690px] text-[15px] leading-[1.7] text-[#b4b1bc] sm:text-[17px]">
               {profile.description}
             </p>
           )}
+          {bestFor ? (
+            <div
+              className="mt-6 flex max-w-[690px] flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-baseline sm:gap-x-6 sm:gap-y-2"
+              data-testid="style-best-for"
+            >
+              <p className="m-0 flex min-w-0 flex-wrap items-baseline gap-x-2.5 gap-y-0.5">
+                <span className="shrink-0 text-[10px] font-semibold tracking-[0.12em] text-[rgba(199,197,207,0.48)] uppercase">
+                  Best for
+                </span>
+                <span className="text-[13px] leading-snug text-[#c9c6d0]">
+                  {bestFor.occasions}
+                </span>
+              </p>
+              <p className="m-0 flex min-w-0 flex-wrap items-baseline gap-x-2.5 gap-y-0.5">
+                <span className="shrink-0 text-[10px] font-semibold tracking-[0.12em] text-[rgba(199,197,207,0.48)] uppercase">
+                  Works with
+                </span>
+                <span className="text-[13px] leading-snug text-[#c9c6d0]">
+                  {bestFor.worksWith}
+                </span>
+              </p>
+            </div>
+          ) : null}
           {!uniqueSections && seo?.tips && seo.tips.length > 0 ? (
             <section className="mt-6 max-w-[690px]" data-testid="style-seo-tips">
               <h2 className="mb-3 text-[22px]">Tips for this look</h2>
@@ -382,14 +415,26 @@ export function StyleDetailClient({ style, children }: Props) {
               is the guide for couple, family, and pet merges. This page keeps its own look.
             </p>
           ) : null}
-          <p className="mt-3 text-sm text-[var(--muted)]">
-            Target photo: {style.targetSourcePhoto}. Inputs:{" "}
-            {style.promptVariant.inputImageRoles.join(" → ")} (
-            {style.promptVariant.inputImageCount}).
-            {style.promptVariant.lastVerified
-              ? ` Last verified ${style.promptVariant.lastVerified}.`
-              : null}{" "}
-            Prompt v{style.promptVariant.version}.
+          <p className="mt-4 flex max-w-[690px] flex-wrap items-center gap-x-2 gap-y-1 text-[11px] leading-relaxed text-[rgba(199,197,207,0.5)] sm:text-[12px]">
+            {/* When Best for includes Works with, skip repeating Target photo. */}
+            {!bestFor ? (
+              <>
+                <span>Target photo: {style.targetSourcePhoto}</span>
+                <span aria-hidden>·</span>
+              </>
+            ) : null}
+            <span>
+              Inputs: {style.promptVariant.inputImageRoles.join(" → ")} (
+              {style.promptVariant.inputImageCount})
+            </span>
+            {style.promptVariant.lastVerified ? (
+              <>
+                <span aria-hidden>·</span>
+                <span>Verified {style.promptVariant.lastVerified}</span>
+              </>
+            ) : null}
+            <span aria-hidden>·</span>
+            <span>Prompt v{style.promptVariant.version}</span>
           </p>
 
           <section className="mt-9 border-t border-[var(--line)] py-7">

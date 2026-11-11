@@ -28,7 +28,8 @@
     "db:generate-blur-thumbs": "tsx --env-file=.env.local scripts/generate-blur-thumbs.ts",
     "db:backfill-image-focus": "tsx --env-file=.env.local scripts/backfill-image-focus.ts",
     "emails:build": "tsx scripts/build-email-templates.ts",
-    "indexnow": "tsx scripts/indexnow-submit.ts"
+    "indexnow": "tsx scripts/indexnow-submit.ts",
+    "generate:style-enrichment": "tsx scripts/generate-style-page-enrichment.mts"
   },
   "dependencies": {
     "@splinetool/react-spline": "^4.1.0",
