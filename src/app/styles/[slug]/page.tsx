@@ -20,6 +20,7 @@ import {
   styleSeoOverride,
   styleSocialTitle,
 } from "@/lib/catalog/style-meta";
+import { isTemporaryNoindexStyleSlug } from "@/lib/catalog/style-noindex";
 import { featuredGuidesForStyle } from "@/lib/guides/style-featured-guides";
 import { absoluteUrl } from "@/lib/site-url";
 
@@ -58,6 +59,9 @@ export async function generateMetadata({
   return {
     title,
     description,
+    ...(isTemporaryNoindexStyleSlug(style.id)
+      ? { robots: { index: false, follow: true } }
+      : {}),
     alternates: {
       canonical: url,
     },
