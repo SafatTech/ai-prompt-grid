@@ -1,3 +1,4 @@
+import { STYLE_BEST_FOR_DATA } from "@/lib/catalog/style-best-for-data";
 import { STYLE_BEST_FOR } from "@/lib/catalog/style-best-for.generated";
 import {
   formatBestForLine,
@@ -5,13 +6,16 @@ import {
   type StyleBestForLine,
 } from "@/lib/catalog/style-best-for";
 
-/** Stored best-for entry for a style page (generated data, not runtime regex). */
+/**
+ * Preferred: hand-authored per-style data (unique occasions).
+ * Fallback: older heuristic generated map if an id is ever missing.
+ */
 export function styleBestForEntry(styleId: string): StyleBestForEntry | undefined {
-  return STYLE_BEST_FOR[styleId];
+  return STYLE_BEST_FOR_DATA[styleId] ?? STYLE_BEST_FOR[styleId];
 }
 
 export function styleBestForLine(styleId: string): StyleBestForLine | undefined {
-  const entry = STYLE_BEST_FOR[styleId];
+  const entry = styleBestForEntry(styleId);
   if (!entry) return undefined;
   return {
     ...entry,

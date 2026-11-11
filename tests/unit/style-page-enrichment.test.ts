@@ -4,12 +4,13 @@ import {
   RELATED_STYLE_LIMIT,
   relatedStylesFor,
 } from "../../src/lib/catalog/related-styles";
-import { STYLE_BEST_FOR } from "../../src/lib/catalog/style-best-for.generated";
 import {
   buildStyleBestFor,
   formatBestForLine,
   worksWithForStyle,
 } from "../../src/lib/catalog/style-best-for";
+import { STYLE_BEST_FOR_DATA } from "../../src/lib/catalog/style-best-for-data";
+import { styleBestForEntry } from "../../src/lib/catalog/style-best-for-lookup";
 import { getPublishedStyles } from "../../src/lib/catalog/styles";
 import {
   featuredGuidesForStyle,
@@ -100,21 +101,40 @@ describe("related styles ranking", () => {
 });
 
 describe("best for lines", () => {
-  it("stores a line for every published seed style", () => {
+  it("has a hand-authored entry for every published seed style", () => {
     const styles = getPublishedStyles();
-    assert.equal(Object.keys(STYLE_BEST_FOR).length, styles.length);
+    assert.equal(Object.keys(STYLE_BEST_FOR_DATA).length, styles.length);
     for (const style of styles) {
-      const entry = STYLE_BEST_FOR[style.id];
-      assert.ok(entry, style.id);
+      const entry = STYLE_BEST_FOR_DATA[style.id];
+      assert.ok(entry, `missing STYLE_BEST_FOR_DATA entry for ${style.id}`);
       assert.ok(entry.occasions.length > 0, style.id);
       assert.ok(entry.worksWith.length > 0, style.id);
+      assert.equal(styleBestForEntry(style.id)?.occasions, entry.occasions);
       assert.match(formatBestForLine(entry), /^Best for: .+ · Works with: .+$/);
     }
   });
 
+  it("keeps every occasions string unique across the catalog", () => {
+    const styles = getPublishedStyles();
+    const seen = new Map<string, string>();
+    for (const style of styles) {
+      const occasions = STYLE_BEST_FOR_DATA[style.id]?.occasions;
+      assert.ok(occasions, style.id);
+      const key = occasions.toLowerCase().replace(/\s+/g, " ").trim();
+      const prior = seen.get(key);
+      assert.equal(
+        prior,
+        undefined,
+        `duplicate occasions "${occasions}" on ${style.id} and ${prior}`,
+      );
+      seen.set(key, style.id);
+    }
+    assert.equal(seen.size, styles.length);
+  });
+
   it("does not put festive occasions on non-festive styles", () => {
     for (const style of getPublishedStyles()) {
-      const entry = STYLE_BEST_FOR[style.id];
+      const entry = STYLE_BEST_FOR_DATA[style.id];
       assert.ok(entry);
       const hay = [
         style.id,
@@ -125,12 +145,13 @@ describe("best for lines", () => {
       ]
         .join(" ")
         .toLowerCase();
-      const festive = /\b(diwali|christmas|xmas|halloween|festive|holiday|eid)\b/.test(
-        hay,
-      );
+      const festive =
+        /\b(diwali|christmas|xmas|halloween|festive|holiday|eid|diya|rangoli|zombie|vampire|ornament)\b/.test(
+          hay,
+        );
       if (festive) continue;
       assert.equal(
-        /\b(Diwali|Christmas|Halloween|festive|holiday cards|costume)\b/i.test(
+        /\b(Diwali|Christmas|Halloween|Eid|festive|holiday cards|costume)\b/i.test(
           entry.occasions,
         ),
         false,
