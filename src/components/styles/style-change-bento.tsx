@@ -232,7 +232,7 @@ function EffectDetailModal({
       }}
       className="style-change-modal-backdrop fixed inset-0 z-50 flex items-center justify-center bg-[#050508]/75 p-4 backdrop-blur-[10px]"
     >
-      <div className="style-change-modal-card relative w-full max-w-[460px] overflow-hidden rounded-2xl border border-white/[0.12] bg-[#13131A] shadow-[0_28px_80px_rgba(0,0,0,0.85),0_0_0_1px_rgba(139,92,246,0.2)]">
+      <div className="style-change-modal-card relative max-h-[min(900px,calc(100dvh-2rem))] w-full max-w-[460px] overflow-y-auto overflow-x-hidden rounded-2xl border border-white/[0.12] bg-[#13131A] shadow-[0_28px_80px_rgba(0,0,0,0.85),0_0_0_1px_rgba(139,92,246,0.2)]">
         <div className="flex items-center justify-between gap-2 border-b border-white/[0.08] bg-[#0E0E14]/90 px-4 py-3">
           <span className="inline-flex items-center gap-1.5 rounded-full border border-violet-500/30 bg-violet-500/15 px-2.5 py-0.5 font-mono text-[10px] font-semibold tracking-wider text-violet-300 uppercase">
             {index + 1} / {total}
@@ -316,7 +316,7 @@ function EffectDetailModal({
           />
         </div>
 
-        <div className="space-y-4 p-5">
+        <div className="scm-body">
           <div>
             <span className="mb-1.5 inline-flex rounded-md border border-white/[0.08] bg-white/[0.03] px-2 py-0.5 font-mono text-[10px] font-semibold tracking-wider text-zinc-400 uppercase">
               {item.category}
@@ -335,8 +335,8 @@ function EffectDetailModal({
             </p>
           </div>
 
-          <div className="rounded-xl border border-white/[0.08] bg-[#0B0B0F] p-3">
-            <div className="mb-1.5 flex items-center justify-between">
+          <div className="scm-shift-box">
+            <div className="scm-shift-head">
               <span className="font-mono text-[10px] font-semibold tracking-wider text-zinc-500 uppercase">
                 Visual Shift
               </span>
@@ -344,12 +344,12 @@ function EffectDetailModal({
                 Identity Preserved
               </span>
             </div>
-            <div className="flex flex-wrap items-center gap-2 text-xs">
-              <span className="rounded-md border border-white/[0.06] bg-white/[0.03] px-2 py-1 text-zinc-400 line-through decoration-zinc-500">
+            <div className="scm-shift-pills">
+              <span className="scm-shift-pill border border-white/[0.06] bg-white/[0.03] text-zinc-400 line-through decoration-zinc-500">
                 {item.beforeLabel}
               </span>
               <svg
-                className="h-3.5 w-3.5 shrink-0 text-violet-400"
+                className="h-3.5 w-3.5 shrink-0 self-center text-violet-400"
                 viewBox="0 0 24 24"
                 fill="none"
                 stroke="currentColor"
@@ -358,25 +358,25 @@ function EffectDetailModal({
               >
                 <path d="M5 12h14M13 5l7 7-7 7" />
               </svg>
-              <span className="rounded-md border border-violet-500/30 bg-violet-500/15 px-2 py-1 font-medium text-violet-200">
+              <span className="scm-shift-pill border border-violet-500/30 bg-violet-500/15 font-medium text-violet-200">
                 {item.afterLabel}
               </span>
             </div>
           </div>
 
-          <div className="rounded-xl border border-white/[0.08] bg-[#0B0B0F] p-3">
-            <div className="mb-1.5 flex items-center justify-between">
-              <span className="font-mono text-[10px] font-semibold tracking-wider text-zinc-500 uppercase">
+          <div className="scm-trigger-box">
+            <div className="scm-trigger-head">
+              <span className="font-mono text-[10px] font-semibold leading-none tracking-wider text-zinc-500 uppercase">
                 Prompt Trigger
               </span>
               <button
                 type="button"
                 onClick={() => void copyTrigger()}
-                className="inline-flex items-center gap-1 rounded-md border border-white/[0.08] bg-[#191B24] px-2 py-0.5 text-[10px] font-medium text-zinc-300 transition-colors hover:border-violet-400/40 hover:text-violet-200"
+                className="scm-btn-mini"
                 title="Copy just this effect phrase"
               >
                 <svg
-                  className="h-3 w-3 text-violet-400"
+                  className="text-violet-400"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -389,7 +389,7 @@ function EffectDetailModal({
                 <span>Copy phrase</span>
               </button>
             </div>
-            <p className="font-mono text-xs text-violet-300">
+            <p className="font-mono text-xs leading-relaxed text-violet-300">
               &ldquo;{item.trigger}&rdquo;
             </p>
           </div>
@@ -399,7 +399,7 @@ function EffectDetailModal({
           <button
             type="button"
             onClick={onClose}
-            className="rounded-xl border border-white/[0.1] bg-[#191B24] px-4 py-2 text-xs font-medium text-zinc-300 transition-all hover:border-white/20 hover:bg-white/[0.08] hover:text-white"
+            className="scm-btn-footer scm-btn-footer--close"
           >
             Close
           </button>
@@ -407,10 +407,9 @@ function EffectDetailModal({
             type="button"
             onClick={onCopyPrompt}
             disabled={!prompt}
-            className="inline-flex items-center justify-center gap-2 rounded-xl bg-violet-600 px-4 py-2 text-xs font-semibold text-white shadow-[0_6px_22px_rgba(124,58,237,0.45)] transition-all hover:bg-violet-500 active:scale-[0.98] disabled:opacity-50"
+            className="scm-btn-footer scm-btn-footer--copy"
           >
             <svg
-              className="h-3.5 w-3.5"
               viewBox="0 0 24 24"
               fill="none"
               stroke="currentColor"
