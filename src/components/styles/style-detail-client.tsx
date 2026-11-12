@@ -18,6 +18,7 @@ import { MergeBeforeAfter, resultPresentation } from "@/components/merge-before-
 import { useLibrary } from "@/components/providers/library-provider";
 import { useToast } from "@/components/providers/toast-provider";
 import { useUiModals } from "@/components/providers/ui-modal-provider";
+import { StyleChangeBento } from "@/components/styles/style-change-bento";
 import { StyleSaveResultQuery } from "@/components/styles/style-save-result-query";
 import { Button } from "@/components/ui/button";
 import {
@@ -448,11 +449,26 @@ export function StyleDetailClient({ style, children, bestFor }: Props) {
 
           <section className="border-t border-[var(--line)] py-7">
             <h2 className="mb-4 text-[22px]">What changes</h2>
-            <div className="grid grid-cols-2 gap-2.5 max-[380px]:grid-cols-1 lg:grid-cols-4">
-              {profile.changes.map((item, index) => (
-                <ChangeCard key={item} label={item} index={index} />
-              ))}
-            </div>
+            <StyleChangeBento
+              styleId={style.id}
+              styleTitle={displayTitle}
+              labels={profile.changes}
+              prompt={prompt}
+              onCopyPrompt={() => {
+                void onCopy();
+              }}
+              onCopyTrigger={(phrase) => {
+                void (async () => {
+                  const ok = await copyText(phrase);
+                  toast(
+                    ok
+                      ? `Copied phrase: "${phrase}"`
+                      : "Could not copy automatically. Select the phrase manually.",
+                    ok ? undefined : "error",
+                  );
+                })();
+              }}
+            />
           </section>
 
           <section className="border-t border-[var(--line)] py-7">
@@ -791,130 +807,6 @@ function CheckItem({ children }: { children: ReactNode }) {
         ✓
       </span>
       {children}
-    </div>
-  );
-}
-
-type ChangeTheme = {
-  border: string;
-  wash: string;
-  orb: string;
-  accent: string;
-};
-
-const CHANGE_FALLBACKS: ChangeTheme[] = [
-  {
-    border: "border-[rgba(245,180,90,0.28)]",
-    wash: "from-[rgba(245,180,90,0.22)] via-[rgba(30,24,18,0.55)] to-[rgba(18,16,24,0.95)]",
-    orb: "bg-[rgba(255,196,110,0.45)]",
-    accent: "text-[#f3d5a0]",
-  },
-  {
-    border: "border-[rgba(110,180,255,0.28)]",
-    wash: "from-[rgba(90,160,255,0.22)] via-[rgba(18,24,36,0.55)] to-[rgba(16,16,24,0.95)]",
-    orb: "bg-[rgba(120,190,255,0.4)]",
-    accent: "text-[#b8d7ff]",
-  },
-  {
-    border: "border-[rgba(180,130,255,0.3)]",
-    wash: "from-[rgba(160,110,255,0.24)] via-[rgba(28,20,40,0.55)] to-[rgba(16,14,24,0.95)]",
-    orb: "bg-[rgba(180,140,255,0.42)]",
-    accent: "text-[#d4c4ff]",
-  },
-  {
-    border: "border-[rgba(103,216,178,0.28)]",
-    wash: "from-[rgba(103,216,178,0.2)] via-[rgba(18,28,26,0.55)] to-[rgba(16,16,22,0.95)]",
-    orb: "bg-[rgba(103,216,178,0.4)]",
-    accent: "text-[#b8eed8]",
-  },
-];
-
-function themeForChange(label: string, index: number): ChangeTheme {
-  const key = label.toLowerCase();
-
-  if (key.includes("light") || key.includes("shadow") || key.includes("rim")) {
-    return CHANGE_FALLBACKS[0];
-  }
-  if (
-    key.includes("background") ||
-    key.includes("environment") ||
-    key.includes("surface") ||
-    key.includes("staging") ||
-    key.includes("framing") ||
-    key.includes("camera")
-  ) {
-    return CHANGE_FALLBACKS[1];
-  }
-  if (key.includes("color") || key.includes("mood") || key.includes("grade")) {
-    return CHANGE_FALLBACKS[2];
-  }
-  if (
-    key.includes("wardrobe") ||
-    key.includes("outfit") ||
-    key.includes("cloth") ||
-    key.includes("glove") ||
-    key.includes("jewellery") ||
-    key.includes("jewelry") ||
-    key.includes("styling")
-  ) {
-    return {
-      border: "border-[rgba(255,140,170,0.28)]",
-      wash: "from-[rgba(255,120,160,0.2)] via-[rgba(36,18,28,0.55)] to-[rgba(18,14,20,0.95)]",
-      orb: "bg-[rgba(255,150,180,0.4)]",
-      accent: "text-[#f5c4d2]",
-    };
-  }
-  if (key.includes("pose") || key.includes("motion") || key.includes("floating")) {
-    return CHANGE_FALLBACKS[3];
-  }
-  if (
-    key.includes("prop") ||
-    key.includes("flower") ||
-    key.includes("bouquet") ||
-    key.includes("paper") ||
-    key.includes("collage") ||
-    key.includes("panel") ||
-    key.includes("layout")
-  ) {
-    return {
-      border: "border-[rgba(255,160,100,0.28)]",
-      wash: "from-[rgba(255,150,90,0.18)] via-[rgba(36,24,18,0.55)] to-[rgba(18,16,20,0.95)]",
-      orb: "bg-[rgba(255,170,110,0.38)]",
-      accent: "text-[#f0c9a8]",
-    };
-  }
-
-  return CHANGE_FALLBACKS[index % CHANGE_FALLBACKS.length];
-}
-
-function ChangeCard({ label, index }: { label: string; index: number }) {
-  const theme = themeForChange(label, index);
-
-  return (
-    <div
-      className={`group relative flex min-h-[98px] items-end overflow-hidden rounded-[14px] border ${theme.border} bg-[#121218] p-3.5 text-[13px] font-bold transition duration-300 hover:-translate-y-0.5 hover:border-[var(--line-strong)]`}
-    >
-      <div
-        className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${theme.wash}`}
-        aria-hidden
-      />
-      <div
-        className={`pointer-events-none absolute -top-8 -right-6 h-24 w-24 rounded-full ${theme.orb} opacity-50 blur-2xl transition duration-500 group-hover:scale-110 group-hover:opacity-70`}
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute -bottom-10 left-0 h-16 w-16 rounded-full bg-white/10 opacity-30 blur-2xl"
-        aria-hidden
-      />
-      <div
-        className="pointer-events-none absolute inset-0 opacity-[0.09]"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
-        }}
-        aria-hidden
-      />
-      <span className={`relative z-10 drop-shadow-sm ${theme.accent}`}>{label}</span>
     </div>
   );
 }
