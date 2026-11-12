@@ -38,11 +38,17 @@ function words(s: string): string[] {
 }
 
 function clampChars(text: string, max: number): string {
-  const cleaned = text.replace(/\s+/g, " ").trim();
+  const cleaned = text
+    .replace(/\s+/g, " ")
+    .replace(/[;:]+$/g, "")
+    .trim();
   if (cleaned.length <= max) return cleaned;
   const sliced = cleaned.slice(0, max - 1);
   const lastSpace = sliced.lastIndexOf(" ");
-  return `${(lastSpace > 36 ? sliced.slice(0, lastSpace) : sliced).trimEnd()}…`;
+  let out = (lastSpace > 36 ? sliced.slice(0, lastSpace) : sliced).trimEnd();
+  // Avoid dangling articles / conjunctions at the cut.
+  out = out.replace(/\b(a|an|the|and|or|with|for|to|in|of|on)$/i, "").trim();
+  return `${out}…`;
 }
 
 function upperFirst(s: string): string {
@@ -145,8 +151,12 @@ function bitsFor(style: CatalogStyle): StyleBits {
             /^(?:dress|style)\s+(?:the\s+)?(?:woman|man|couple|subject|them)\s+in\s+/i,
             "",
           )
-          .replace(/^wear\s+/i, ""),
-        16,
+          .replace(/^wear\s+/i, "")
+          // Prefer the first wardrobe clause when couple prompts dress two people.
+          .split(/\band dress the\b/i)[0]!
+          .replace(/[,;]+$/g, "")
+          .trim(),
+        14,
       ) || null
     : null;
 
@@ -349,11 +359,16 @@ function shortTemplates(
   const theme = themePhrase(bits, 3);
   const bg = bgShort(bits, 6);
   const mood = excerpt(bits.mood, 5);
-  const note = excerpt(bits.note, 6);
+  const note = keywords(bits.note, 5).join(" ") || excerpt(bits.note, 5);
   const labelL = lowerFirst(label);
 
   const outfitBit = bits.outfitHint
-    ? lowerFirst(excerpt(bits.outfitHint, 8))
+    ? lowerFirst(
+        excerpt(bits.outfitHint, 5)
+          .replace(/[,;]+$/g, "")
+          .replace(/\b(with|and|or|a|an|the|in|of|to)$/i, "")
+          .trim(),
+      )
     : labelL;
   const moodL = lowerFirst(mood || "fresh");
   const genericLabel = /^(outfit|background|lighting|color mood|pose|props|decor|atmosphere)$/i.test(
@@ -391,10 +406,10 @@ function shortTemplates(
       ];
     case "OUTFIT":
       return [
-        `Restyles wardrobe to ${outfitBit} for ${theme}.`,
+        `Restyles the wardrobe to ${outfitBit} — ${theme}.`,
         `Changes clothing to ${outfitBit}, keeping face and proportions.`,
-        `Fits the ${theme} look with ${outfitBit} from the prompt.`,
-        `Swaps source clothes for ${outfitBit} while identity stays locked.`,
+        `Fits ${theme} with ${outfitBit} from the prompt.`,
+        `Swaps source clothes for ${outfitBit}; identity stays locked.`,
       ];
     case "JEWELLERY & ACCESSORIES":
       return [
@@ -403,13 +418,19 @@ function shortTemplates(
         `Completes the look with ${labelL} without changing your face.`,
         `Styles ${labelL} to match ${theme}.`,
       ];
-    case "POSE & FRAMING":
+    case "POSE & FRAMING": {
+      const poseBit = lowerFirst(
+        excerpt(bits.poseHint || label, 6)
+          .replace(/\b(with|and|or|a|an|the|in|of|to)$/i, "")
+          .trim(),
+      );
       return [
-        `Adjusts stance to ${excerpt(bits.poseHint || label, 8)} for ${theme}.`,
+        `Adjusts stance to ${poseBit} — ${theme}.`,
         `Reframes the body into ${labelL} while identity stays locked.`,
         `Sets ${labelL} so the ${theme} composition reads clean.`,
-        `Guides posture toward ${excerpt(bits.poseHint || note, 7)}.`,
+        `Guides posture toward ${poseBit}.`,
       ];
+    }
     case "LAYOUT":
       return [
         `Arranges the output as ${labelL} for a ${theme} storyboard.`,
@@ -424,13 +445,19 @@ function shortTemplates(
         `Places ${labelL} as practical detail from the prompt.`,
         `Builds ${labelL} into ${bg || theme}.`,
       ];
-    case "ART STYLE":
+    case "ART STYLE": {
+      const artBit = lowerFirst(
+        excerpt(bits.artHint || label, 6)
+          .replace(/\b(with|and|or|a|an|the|in|of|to)$/i, "")
+          .trim(),
+      );
       return [
-        `Restyles the photo into ${excerpt(bits.artHint || label, 8)}.`,
+        `Restyles the photo into ${artBit}.`,
         `Applies ${labelL} while preserving your likeness.`,
         `Converts capture into ${labelL} for ${theme}.`,
-        `Pushes medium toward ${excerpt(bits.artHint || theme, 7)}.`,
+        `Pushes medium toward ${artBit}.`,
       ];
+    }
     case "HAIR & MAKEUP":
       return [
         `Restyles ${labelL} to suit ${theme} without changing bone structure.`,
@@ -476,8 +503,10 @@ function summaryFor(
       `The palette is tuned to ${mood} so ${theme} reads cohesive end-to-end.`,
     ],
     OUTFIT: [
-      `Wardrobe becomes ${label.toLowerCase()}, matching the ${theme} brief${bits.outfitHint ? ` (${excerpt(bits.outfitHint, 10)})` : ""}.`,
-      `Clothing is restyled into ${label.toLowerCase()} while face geometry stays fixed.`,
+      bits.outfitHint
+        ? `Wardrobe becomes ${lowerFirst(excerpt(bits.outfitHint, 12))}, matching the ${theme} brief.`
+        : `Clothing is restyled into ${label.toLowerCase()} for ${theme}.`,
+      `Clothing is restyled into ${bits.outfitHint ? lowerFirst(excerpt(bits.outfitHint, 10)) : label.toLowerCase()} while face geometry stays fixed.`,
     ],
     "JEWELLERY & ACCESSORIES": [
       `${upperFirst(label)} is layered as finishing accent for ${theme}.`,
