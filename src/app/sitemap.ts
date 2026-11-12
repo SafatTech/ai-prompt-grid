@@ -1,5 +1,6 @@
 import type { MetadataRoute } from "next";
 import { listPublishedStyleSitemapEntries } from "@/lib/catalog/repository";
+import { isTemporaryNoindexStyleSlug } from "@/lib/catalog/style-noindex";
 import { publishedGuides } from "@/lib/guides/published-slugs.generated";
 import { isRetiredStyleSlug } from "@/lib/http/retired-style-redirects";
 import { guideSitemapEntries } from "@/lib/seo/guide-sitemap";
@@ -64,18 +65,24 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModifiedBySlug.set(slug, safeLastModified(style.lastModified));
     }
 
-    styleEntries = dedupedStylePaths([...lastModifiedBySlug.keys()]).map((path) => ({
-      url: absoluteUrl(path),
-      lastModified: lastModifiedBySlug.get(path.slice("/styles/".length)) ?? now,
-      changeFrequency: "weekly" as const,
-      priority: 0.8,
-    }));
-
-    explorePageEntries = explorePaginationPaths(styleEntries.length).map((path) => ({
+    // Explore pagination follows the live catalog size (noindex styles stay
+    // listed in /explore). Only the style detail URLs are omitted below.
+    const publishedSlugs = [...lastModifiedBySlug.keys()];
+    explorePageEntries = explorePaginationPaths(publishedSlugs.length).map((path) => ({
       url: absoluteUrl(path),
       lastModified: now,
       changeFrequency: "daily" as const,
       priority: 0.5,
+    }));
+
+    const indexableSlugs = publishedSlugs.filter(
+      (slug) => !isTemporaryNoindexStyleSlug(slug),
+    );
+    styleEntries = dedupedStylePaths(indexableSlugs).map((path) => ({
+      url: absoluteUrl(path),
+      lastModified: lastModifiedBySlug.get(path.slice("/styles/".length)) ?? now,
+      changeFrequency: "weekly" as const,
+      priority: 0.8,
     }));
   } catch (err) {
     console.warn("[sitemap] Style entries unavailable; serving static URLs only.", err);
