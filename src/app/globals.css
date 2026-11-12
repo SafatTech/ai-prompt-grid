@@ -2527,6 +2527,67 @@ textarea:focus-visible,
 }
 
 
+/* Glass Icon Bento — What changes modal + banner motion */
+@keyframes style-change-modal-backdrop {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes style-change-modal-card {
+  0% {
+    opacity: 0;
+    transform: translateY(14px) scale(0.95);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes style-change-smoke-float {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+    opacity: 0.85;
+  }
+  50% {
+    transform: translate3d(4px, -5px, 0) scale(1.06);
+    opacity: 1;
+  }
+}
+
+@keyframes style-change-rim-shimmer {
+  0%,
+  100% {
+    opacity: 0.75;
+    filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.65));
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 14px rgba(167, 139, 250, 0.9));
+  }
+}
+
+.style-change-modal-backdrop {
+  animation: style-change-modal-backdrop 0.22s ease-out forwards;
+}
+
+.style-change-modal-card {
+  animation: style-change-modal-card 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.style-change-smoke-1 {
+  animation: style-change-smoke-float 6s ease-in-out infinite;
+}
+
+.style-change-rim {
+  animation: style-change-rim-shimmer 4s ease-in-out infinite;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .hero-wall-track {
     animation: none !important;
@@ -2551,6 +2612,13 @@ textarea:focus-visible,
 
   .style-card-hover-preview {
     transition: none;
+  }
+
+  .style-change-modal-backdrop,
+  .style-change-modal-card,
+  .style-change-smoke-1,
+  .style-change-rim {
+    animation: none !important;
   }
 }
 
