@@ -285,6 +285,12 @@ export function SeasonBanner({
           className="home-season-links"
           aria-label={`Featured ${season.heroChip} styles`}
         >
+          {/*
+            Desktop: in-flow grid cell (cols 6–12, end-aligned) so a tall
+            countdown + multi-line title never lets CTAs/chips sit under these
+            pills. Absolute bottom-right placement overlapped the text column
+            once five featured labels filled the row.
+          */}
           {styles.slice(0, 5).map((style) => (
             <Link key={style.id} href={`/styles/${style.id}`}>
               {styleLabelForSeason(season, style.id, style.title)} →
