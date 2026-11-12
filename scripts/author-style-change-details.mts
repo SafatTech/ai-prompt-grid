@@ -1,11 +1,12 @@
 /**
- * Offline authoring for Glass Icon Bento "What changes" detail copy.
- * Output: src/lib/catalog/style-change-details.ts
+ * LEGACY scaffold only — do not use for production copy.
  *
- * Run: npx tsx scripts/author-style-change-details.mts
+ * `src/lib/catalog/style-change-details.ts` is hand-authored natural English
+ * (batched rewrites reading each style prompt). Template-fill output from this
+ * script was rejected in review (ellipsis cuts, title pastes, stock sentences).
  *
- * Text is derived from each style's title, note, description, mood,
- * background, and prompt template — never generic boilerplate.
+ * Prefer rewriting batches under /tmp/change-rewrite and merging into the data
+ * file. Keep this script only as a structural reference.
  */
 import fs from "node:fs";
 import path from "node:path";
