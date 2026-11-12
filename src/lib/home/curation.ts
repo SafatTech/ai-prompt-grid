@@ -15,6 +15,10 @@ export const seasonChipSchema = z.object({
   icon: z.enum(["couple", "family", "sparkle"]),
 });
 
+const seasonStyleLabelsSchema = z
+  .record(z.string().trim().min(1), z.string().trim().min(1).max(40))
+  .default({});
+
 export const homepageSettingsSchema = z.object({
   heroSlugs: z.array(z.string().trim().min(1)).max(40),
   heroAutoFill: z.boolean(),
@@ -26,6 +30,8 @@ export const homepageSettingsSchema = z.object({
   seasonChips: z.array(seasonChipSchema).max(6).nullable(),
   seasonStyleSlugs: z.array(z.string().trim().min(1)).max(12),
   seasonImageSlugs: z.array(z.string().trim().min(1)).max(8),
+  /** Optional short pill labels keyed by style slug. */
+  seasonStyleLabels: seasonStyleLabelsSchema,
 });
 
 export type HomepageSettings = z.infer<typeof homepageSettingsSchema>;
@@ -41,6 +47,7 @@ export const DEFAULT_HOMEPAGE_SETTINGS: HomepageSettings = {
   seasonChips: null,
   seasonStyleSlugs: [],
   seasonImageSlugs: [],
+  seasonStyleLabels: {},
 };
 
 type SettingsRow = {
@@ -54,6 +61,7 @@ type SettingsRow = {
   season_chips: unknown;
   season_style_slugs: string[];
   season_image_slugs: string[];
+  season_style_labels?: unknown;
 };
 
 export function mapHomepageSettings(row: SettingsRow | null): HomepageSettings {
@@ -69,6 +77,7 @@ export function mapHomepageSettings(row: SettingsRow | null): HomepageSettings {
     seasonChips: row.season_chips,
     seasonStyleSlugs: row.season_style_slugs,
     seasonImageSlugs: row.season_image_slugs,
+    seasonStyleLabels: row.season_style_labels ?? {},
   });
   return parsed.success ? parsed.data : DEFAULT_HOMEPAGE_SETTINGS;
 }
@@ -81,7 +90,7 @@ async function fetchHomepageSettings(): Promise<HomepageSettings> {
     const { data, error } = await client
       .from("homepage_settings")
       .select(
-        "hero_slugs, hero_auto_fill, season_mode, season_id, season_eyebrow, season_headline, season_body, season_chips, season_style_slugs, season_image_slugs",
+        "hero_slugs, hero_auto_fill, season_mode, season_id, season_eyebrow, season_headline, season_body, season_chips, season_style_slugs, season_image_slugs, season_style_labels",
       )
       .eq("id", "default")
       .maybeSingle();
@@ -101,7 +110,7 @@ async function fetchHomepageSettings(): Promise<HomepageSettings> {
 
 const getCachedHomepageSettings = unstable_cache(
   fetchHomepageSettings,
-  ["homepage-settings-v1"],
+  ["homepage-settings-v2"],
   {
     tags: [HOMEPAGE_SETTINGS_CACHE_TAG],
     revalidate: PUBLIC_DATA_REVALIDATE_SECONDS,
@@ -113,15 +122,12 @@ export const getHomepageSettings = cache(async (): Promise<HomepageSettings> => 
   return getCachedHomepageSettings();
 });
 
-export function resolveHomepageSeason(
+/** Merge admin curation onto a calendar/override base season. */
+export function applyHomepageSeasonSettings(
+  base: Season,
   settings: HomepageSettings,
-  now = new Date(),
-): Season | null {
-  if (settings.seasonMode === "hidden") return null;
-  const calendar = activeSeason(now);
-  if (settings.seasonMode === "calendar") return calendar;
-  const base = SEASONS.find((season) => season.id === settings.seasonId) ?? calendar;
-  if (!base) return null;
+): Season {
+  const adminLabels = settings.seasonStyleLabels ?? {};
   return {
     ...base,
     eyebrow: settings.seasonEyebrow || base.eyebrow,
@@ -130,7 +136,25 @@ export function resolveHomepageSeason(
     chips: (settings.seasonChips as SeasonChip[] | null) ?? base.chips,
     styleSlugs:
       settings.seasonStyleSlugs.length > 0 ? settings.seasonStyleSlugs : base.styleSlugs,
+    styleLabels: {
+      ...(base.styleLabels ?? {}),
+      ...adminLabels,
+    },
   };
+}
+
+export function resolveHomepageSeason(
+  settings: HomepageSettings,
+  now = new Date(),
+): Season | null {
+  if (settings.seasonMode === "hidden") return null;
+  const calendar = activeSeason(now);
+  const base =
+    settings.seasonMode === "override"
+      ? (SEASONS.find((season) => season.id === settings.seasonId) ?? calendar)
+      : calendar;
+  if (!base) return null;
+  return applyHomepageSeasonSettings(base, settings);
 }
 
 export function resolveHomepageSeasonImages(

@@ -96,7 +96,7 @@ export async function getHomepageAdminData(
       client
         .from("homepage_settings")
         .select(
-          "hero_slugs, hero_auto_fill, season_mode, season_id, season_eyebrow, season_headline, season_body, season_chips, season_style_slugs, season_image_slugs",
+          "hero_slugs, hero_auto_fill, season_mode, season_id, season_eyebrow, season_headline, season_body, season_chips, season_style_slugs, season_image_slugs, season_style_labels",
         )
         .eq("id", "default")
         .maybeSingle(),
@@ -194,6 +194,7 @@ export async function saveHomepageCuration(
     season_chips: value.settings.seasonChips,
     season_style_slugs: value.settings.seasonStyleSlugs,
     season_image_slugs: value.settings.seasonImageSlugs,
+    season_style_labels: value.settings.seasonStyleLabels ?? {},
     updated_by: userId,
   });
   if (settingsError) return { ok: false, error: "Could not save homepage settings." };

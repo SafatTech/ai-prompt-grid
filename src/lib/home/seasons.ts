@@ -503,6 +503,54 @@ export function formatFestivalDay(festivalDate: string): string {
   }).format(date);
 }
 
-export function styleLabelForSeason(season: Season, styleId: string, fallbackTitle: string): string {
-  return season.styleLabels?.[styleId] ?? fallbackTitle;
+const SHORT_STYLE_LABEL_MAX = 22;
+
+/**
+ * Derive a compact banner pill / strip label from an SEO title.
+ * Strips "AI Prompt", "Prompt", "for Gemini", and parentheticals; trims to ~22 chars.
+ */
+export function shortStyleLabel(
+  title: string,
+  maxLen = SHORT_STYLE_LABEL_MAX,
+): string {
+  const cleaned = title
+    .replace(/\([^)]*\)/g, " ")
+    .replace(/\bAI\s+Prompt\b/gi, " ")
+    .replace(/\bPrompt\b/gi, " ")
+    // "for Gemini", "for Grooms", "for Women", etc.
+    .replace(/\bfor\s+\w+\b/gi, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+  if (!cleaned) return title.trim().slice(0, maxLen) || "Style";
+
+  const words = cleaned.split(" ");
+  // Sentence case: first word capitalised as-is from title words, rest lowercased
+  // when the source was Title Case SEO copy.
+  const sentence = words
+    .map((word, index) => {
+      if (index === 0) return word;
+      if (/^[A-Z0-9&/-]+$/.test(word) && word.length <= 3) return word;
+      return word.toLocaleLowerCase();
+    })
+    .join(" ");
+
+  if (sentence.length <= maxLen) return sentence;
+
+  let out = "";
+  for (const word of sentence.split(" ")) {
+    const next = out ? `${out} ${word}` : word;
+    if (next.length > maxLen) break;
+    out = next;
+  }
+  return out || sentence.slice(0, maxLen).trim();
+}
+
+export function styleLabelForSeason(
+  season: Season,
+  styleId: string,
+  fallbackTitle: string,
+): string {
+  const curated = season.styleLabels?.[styleId]?.trim();
+  if (curated) return curated;
+  return shortStyleLabel(fallbackTitle);
 }

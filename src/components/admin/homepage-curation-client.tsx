@@ -14,7 +14,14 @@ import {
 } from "@/lib/admin/homepage";
 import type { HomepageSettings } from "@/lib/home/curation";
 
-type ListKey = "hero" | "trending" | "new" | "hiddenNew" | "bannerLinks" | "bannerImages";
+type ListKey =
+  | "hero"
+  | "trending"
+  | "new"
+  | "hiddenNew"
+  | "bannerLinks"
+  | "bannerImages"
+  | "exploreAdjust";
 type PickerState = { key: ListKey; title: string; max: number } | null;
 type Controls = Pick<
   HomepageAdminStyle,
@@ -109,18 +116,22 @@ export function HomepageCurationClient({
     if (key === "trending") return trending;
     if (key === "new") return newPins;
     if (key === "hiddenNew") return hiddenNew;
+    if (key === "exploreAdjust") return [...exploreEdited];
     if (key === "bannerLinks")
       return settings.seasonStyleSlugs
         .map((slug) => bySlug.get(slug)?.id)
         .filter(Boolean) as string[];
-    return settings.seasonImageSlugs
-      .map((slug) => bySlug.get(slug)?.id)
-      .filter(Boolean) as string[];
+    if (key === "bannerImages")
+      return settings.seasonImageSlugs
+        .map((slug) => bySlug.get(slug)?.id)
+        .filter(Boolean) as string[];
+    return [];
   }
 
   function setIds(key: ListKey, ids: string[]) {
     if (key === "trending") return setTrending(ids);
     if (key === "new") return setNewPins(ids);
+    if (key === "exploreAdjust") return;
     if (key === "hiddenNew") {
       setControls((current) => {
         const selected = new Set(ids);
@@ -134,13 +145,18 @@ export function HomepageCurationClient({
       return;
     }
     const slugs = ids.map((id) => byId.get(id)?.slug).filter(Boolean) as string[];
-    const field =
-      key === "hero"
-        ? "heroSlugs"
-        : key === "bannerLinks"
-          ? "seasonStyleSlugs"
-          : "seasonImageSlugs";
-    setSettings((current) => ({ ...current, [field]: slugs }));
+    if (key === "hero") {
+      setSettings((current) => ({ ...current, heroSlugs: slugs }));
+      return;
+    }
+    if (key === "bannerLinks") {
+      setSettings((current) => ({ ...current, seasonStyleSlugs: slugs }));
+      return;
+    }
+    if (key === "bannerImages") {
+      setSettings((current) => ({ ...current, seasonImageSlugs: slugs }));
+      return;
+    }
   }
 
   function addExploreStyle(id: string) {
@@ -393,7 +409,7 @@ export function HomepageCurationClient({
               variant="ghost"
               onClick={() =>
                 setPicker({
-                  key: "bannerImages",
+                  key: "exploreAdjust",
                   title: "Choose styles to adjust",
                   max: initialData.styles.length,
                 })
@@ -407,7 +423,7 @@ export function HomepageCurationClient({
         <Panel
           number="5"
           title="Season / event banner"
-          description="Keep the calendar, hide the banner, or override an event and its copy, links, and displayed after-images."
+          description="Keep the calendar, hide the banner, or override an event. Banner photos and style buttons are separate fields—photos write season_image_slugs; buttons write season_style_slugs."
         >
           <div className="grid gap-3 md:grid-cols-2">
             <Field label="Mode">
@@ -496,22 +512,11 @@ export function HomepageCurationClient({
               />
             </Field>
           </div>
-          <h3 className="mt-6 mb-2 text-sm">Linked styles</h3>
-          <OrderedStyles
-            styles={idsFor("bannerLinks")}
-            byId={byId}
-            onChange={(ids) => setIds("bannerLinks", ids)}
-          />
-          <PanelActions
-            onPick={() =>
-              setPicker({
-                key: "bannerLinks",
-                title: "Choose event-linked styles",
-                max: 12,
-              })
-            }
-          />
-          <h3 className="mt-6 mb-2 text-sm">Images displayed on banner</h3>
+          <h3 className="mt-6 mb-1 text-sm">Banner photos</h3>
+          <p className="m-0 mb-2 text-xs text-[var(--muted)]">
+            Background after-images on the banner (writes{" "}
+            <code>season_image_slugs</code>). Pick up to 8; order is preserved.
+          </p>
           <OrderedStyles
             styles={idsFor("bannerImages")}
             byId={byId}
@@ -521,11 +526,51 @@ export function HomepageCurationClient({
             onPick={() =>
               setPicker({
                 key: "bannerImages",
-                title: "Choose event banner after-images",
+                title: "Choose banner photos (background images)",
                 max: 8,
               })
             }
           />
+
+          <h3 className="mt-6 mb-1 text-sm">Style buttons on banner</h3>
+          <p className="m-0 mb-2 text-xs text-[var(--muted)]">
+            Short pill links under the banner copy (writes{" "}
+            <code>season_style_slugs</code>). Not the background photos.
+          </p>
+          <OrderedStyles
+            styles={idsFor("bannerLinks")}
+            byId={byId}
+            onChange={(ids) => setIds("bannerLinks", ids)}
+          />
+          <PanelActions
+            onPick={() =>
+              setPicker({
+                key: "bannerLinks",
+                title: "Choose style buttons on banner",
+                max: 12,
+              })
+            }
+          />
+
+          <div className="mt-6">
+            <Field label="Short labels for style buttons (optional: slug | label)">
+              <textarea
+                className="admin-curation-input min-h-24"
+                placeholder={
+                  "black-sherwani | Black sherwani\ncouple-wedding-outfits | Couple wedding dress"
+                }
+                value={Object.entries(settings.seasonStyleLabels ?? {})
+                  .map(([slug, label]) => `${slug} | ${label}`)
+                  .join("\n")}
+                onChange={(event) =>
+                  setSettings((current) => ({
+                    ...current,
+                    seasonStyleLabels: parseStyleLabels(event.target.value),
+                  }))
+                }
+              />
+            </Field>
+          </div>
         </Panel>
       </div>
 
@@ -533,19 +578,12 @@ export function HomepageCurationClient({
         <ImagePicker
           title={picker.title}
           styles={initialData.styles}
-          selected={
-            picker.key === "bannerImages" && picker.title === "Choose styles to adjust"
-              ? [...exploreEdited]
-              : idsFor(picker.key)
-          }
+          selected={idsFor(picker.key)}
           max={picker.max}
           loadError={initialData.stylesLoadError}
           onClose={() => setPicker(null)}
           onChange={(ids) => {
-            if (
-              picker.key === "bannerImages" &&
-              picker.title === "Choose styles to adjust"
-            ) {
+            if (picker.key === "exploreAdjust") {
               const nextIds = new Set(ids);
               setControls((current) =>
                 Object.fromEntries(
@@ -556,9 +594,9 @@ export function HomepageCurationClient({
                 ),
               );
               setExploreEdited(new Set(ids));
-            } else {
-              setIds(picker.key, ids);
+              return;
             }
+            setIds(picker.key, ids);
           }}
         />
       ) : null}
@@ -810,4 +848,16 @@ function parseChips(value: string): HomepageSettings["seasonChips"] {
       return { label: label!, q: q!, icon: chipIcon };
     });
   return chips.length > 0 ? chips : null;
+}
+
+function parseStyleLabels(value: string): Record<string, string> {
+  const labels: Record<string, string> = {};
+  for (const line of value.split("\n")) {
+    const parts = line.split("|").map((item) => item.trim());
+    const slug = parts[0];
+    const label = parts[1];
+    if (!slug || !label) continue;
+    labels[slug] = label.slice(0, 40);
+  }
+  return labels;
 }
