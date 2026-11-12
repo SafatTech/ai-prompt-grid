@@ -16,6 +16,10 @@ import {
 import { mapDbStyleToCatalog, type DbStyleRow } from "./mapper";
 import { getPublishedStyleById, getPublishedStyles } from "./styles";
 import type { CatalogStyle } from "./types";
+import {
+  isProfessionalHeadshotFallback,
+  mergeProfessionalRailStyles,
+} from "@/lib/home/rails";
 
 /**
  * Keep the shared public payload lean. List cards use SHARED_STYLE_BLUR.
@@ -356,6 +360,24 @@ export async function listStylesBySlugs(slugs: string[]): Promise<CatalogStyle[]
   return slugs
     .map((slug) => bySlug.get(slug))
     .filter((style): style is CatalogStyle => style !== undefined);
+}
+
+/**
+ * Fill the Professional homepage rail when curated slugs resolve fewer than 8.
+ * Candidates must match headshot-like slug/title tokens and exclude saree/bridal glam.
+ */
+export async function fillProfessionalRailStyles(
+  curated: CatalogStyle[],
+  limit: number,
+): Promise<CatalogStyle[]> {
+  if (curated.length >= Math.min(8, Math.min(Math.max(limit, 1), 24))) {
+    return mergeProfessionalRailStyles(curated, [], limit);
+  }
+  const seen = new Set(curated.map((style) => style.id));
+  const fallback = (await listPublishedStyles())
+    .filter((style) => style.showOnHome !== false && !seen.has(style.id))
+    .filter((style) => isProfessionalHeadshotFallback(style.id, style.title));
+  return mergeProfessionalRailStyles(curated, fallback, limit);
 }
 
 export type ExploreFeedPage = {

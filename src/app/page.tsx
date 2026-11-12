@@ -12,7 +12,7 @@ import {
   listExploreFeed,
   listHeroWallImages,
   listNewestStyles,
-  listStylesByCategory,
+  fillProfessionalRailStyles,
   listStylesBySlugs,
   listStylesMatchingQuery,
   listTrendingStyles,
@@ -110,7 +110,9 @@ export default async function HomePage() {
     season ? countStylesMatchingQuery(season.ctaCategoryQuery) : Promise.resolve(0),
     listStylesMatchingQuery(HOME_RAILS[0]!.q!, HOME_RAILS[0]!.limit),
     listStylesMatchingQuery(HOME_RAILS[1]!.q!, HOME_RAILS[1]!.limit),
-    listStylesByCategory(HOME_RAILS[2]!.category!, HOME_RAILS[2]!.limit),
+    listStylesBySlugs(HOME_RAILS[2]!.slugs ?? []).then((curated) =>
+      fillProfessionalRailStyles(curated, HOME_RAILS[2]!.limit),
+    ),
     listStylesMatchingQuery(HOME_RAILS[3]!.q!, HOME_RAILS[3]!.limit),
     // Multiple of 5-col count so CSS columns fill evenly; +8 rows vs prior 12.
     listExploreFeed({ page: 1, pageSize: HOME_MASONRY_PAGE_SIZE }),
