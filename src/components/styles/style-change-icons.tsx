@@ -117,25 +117,8 @@ export function StyleChangeCategoryIcon({
   }
 }
 
-export function CardInspectBadge({ showLabel }: { showLabel: boolean }) {
-  if (showLabel) {
-    return (
-      <span className="inline-flex items-center gap-1 rounded-md border border-violet-400/35 bg-[#0B0B0F]/85 px-1.5 py-0.5 font-mono text-[9px] font-medium text-violet-200 backdrop-blur-sm transition-all duration-200 group-hover:border-violet-400 group-hover:bg-violet-600 group-hover:text-white">
-        <span>Click to inspect</span>
-        <svg
-          className="h-2.5 w-2.5"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2.4"
-          aria-hidden
-        >
-          <path d="M15 3h6v6M21 3l-7 7" />
-        </svg>
-      </span>
-    );
-  }
-
+/** Same expand-icon control on every card (no prototype "Click to inspect" label). */
+export function CardInspectBadge() {
   return (
     <span className="flex h-6 w-6 items-center justify-center rounded-lg border border-white/10 bg-[#0B0B0F]/80 text-zinc-400 backdrop-blur-sm transition-all duration-200 group-hover:border-violet-400/50 group-hover:bg-violet-500/20 group-hover:text-violet-200">
       <svg

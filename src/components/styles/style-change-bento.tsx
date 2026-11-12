@@ -104,7 +104,6 @@ export function StyleChangeBento({
             key={`${item.label}-${index}`}
             item={item}
             index={index}
-            isFirst={index === 0}
             onOpen={openAt}
           />
         ))}
@@ -131,12 +130,10 @@ export function StyleChangeBento({
 function ChangeCard({
   item,
   index,
-  isFirst,
   onOpen,
 }: {
   item: StyleChangeDetail;
   index: number;
-  isFirst: boolean;
   onOpen: (index: number, el: HTMLElement | null) => void;
 }) {
   const accent = getStyleChangeCategory(item.category).accent;
@@ -177,7 +174,7 @@ function ChangeCard({
         >
           <StyleChangeCategoryIcon category={item.category} />
         </div>
-        <CardInspectBadge showLabel={isFirst} />
+        <CardInspectBadge />
       </div>
       <h3 className="mt-3.5 text-[13.5px] font-semibold text-white transition-colors group-hover:text-violet-200">
         {item.label}
