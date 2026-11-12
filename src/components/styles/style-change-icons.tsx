@@ -21,15 +21,16 @@ export function StyleChangeCategoryIcon({
     case "ATMOSPHERE":
       return (
         <svg {...svgProps}>
-          <path d="M17.5 19H9a7 7 0 1 1 6.71-9h1.79a4.5 4.5 0 1 1 0 9Z" />
+          <path d="M17.7 7.7a2.5 2.5 0 1 1 1.8 4.3H2" />
+          <path d="M9.6 4.6A2 2 0 1 1 11 8H2" />
+          <path d="M12.6 19.4A2 2 0 1 0 14 16H2" />
         </svg>
       );
     case "BACKDROP":
       return (
         <svg {...svgProps}>
           <rect x="3" y="3" width="18" height="18" rx="3" />
-          <circle cx="12" cy="10" r="3" />
-          <path d="M7 21v-2a4 4 0 0 1 4-4h2a4 4 0 0 1 4 4v2" />
+          <circle cx="12" cy="12" r="4" />
         </svg>
       );
     case "LIGHTING":
@@ -43,7 +44,7 @@ export function StyleChangeCategoryIcon({
       return (
         <svg {...svgProps}>
           <circle cx="12" cy="12" r="9" />
-          <path d="M12 3a9 9 0 0 0 0 18Z" fill="currentColor" fillOpacity="0.35" />
+          <path d="M12 3a9 9 0 0 0 0 18Z" fill="currentColor" fillOpacity="0.25" />
         </svg>
       );
     case "OUTFIT":

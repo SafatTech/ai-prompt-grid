@@ -2548,30 +2548,6 @@ textarea:focus-visible,
   }
 }
 
-@keyframes style-change-smoke-float {
-  0%,
-  100% {
-    transform: translate3d(0, 0, 0) scale(1);
-    opacity: 0.85;
-  }
-  50% {
-    transform: translate3d(4px, -5px, 0) scale(1.06);
-    opacity: 1;
-  }
-}
-
-@keyframes style-change-rim-shimmer {
-  0%,
-  100% {
-    opacity: 0.75;
-    filter: drop-shadow(0 0 8px rgba(139, 92, 246, 0.65));
-  }
-  50% {
-    opacity: 1;
-    filter: drop-shadow(0 0 14px rgba(167, 139, 250, 0.9));
-  }
-}
-
 .style-change-modal-backdrop {
   animation: style-change-modal-backdrop 0.22s ease-out forwards;
 }
@@ -2716,14 +2692,6 @@ textarea:focus-visible,
   padding: 1.25rem;
 }
 
-.style-change-smoke-1 {
-  animation: style-change-smoke-float 6s ease-in-out infinite;
-}
-
-.style-change-rim {
-  animation: style-change-rim-shimmer 4s ease-in-out infinite;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .hero-wall-track {
     animation: none !important;
@@ -2751,9 +2719,7 @@ textarea:focus-visible,
   }
 
   .style-change-modal-backdrop,
-  .style-change-modal-card,
-  .style-change-smoke-1,
-  .style-change-rim {
+  .style-change-modal-card {
     animation: none !important;
   }
 }
