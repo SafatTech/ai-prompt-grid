@@ -454,19 +454,44 @@ export function StyleDetailClient({ style, children, bestFor }: Props) {
               styleTitle={displayTitle}
               labels={profile.changes}
               prompt={prompt}
-              onCopyPrompt={() => {
-                void onCopy();
+              onCopyPrompt={async () => {
+                const result = assemblePromptCore(style, options);
+                if (!result.ok) {
+                  return {
+                    ok: false,
+                    notice:
+                      result.errors[0] ??
+                      "Prompt is incomplete and cannot be copied.",
+                  };
+                }
+                const ok = await copyText(result.prompt);
+                if (!ok) {
+                  return {
+                    ok: false,
+                    notice:
+                      "Could not copy automatically. Select the prompt text manually.",
+                  };
+                }
+                track("prompt_copy", {
+                  style_id: style.id,
+                  variant_id: style.promptVariant.id,
+                  tool: result.tool,
+                });
+                return {
+                  ok: true,
+                  notice:
+                    "Prompt copied. Open your AI image editor and upload your photo there.",
+                };
               }}
-              onCopyTrigger={(phrase) => {
-                void (async () => {
-                  const ok = await copyText(phrase);
-                  toast(
-                    ok
-                      ? `Copied phrase: "${phrase}"`
-                      : "Could not copy automatically. Select the phrase manually.",
-                    ok ? undefined : "error",
-                  );
-                })();
+              onCopyTrigger={async (phrase) => {
+                const ok = await copyText(phrase);
+                return ok
+                  ? { ok: true, notice: "Phrase copied." }
+                  : {
+                      ok: false,
+                      notice:
+                        "Could not copy automatically. Select the phrase manually.",
+                    };
               }}
             />
           </section>

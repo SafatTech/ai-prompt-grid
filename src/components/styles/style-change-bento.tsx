@@ -14,13 +14,20 @@ import { cn } from "@/lib/utils";
 import { StyleChangeBanner } from "./style-change-banners";
 import { CardInspectBadge, StyleChangeCategoryIcon } from "./style-change-icons";
 
+/** Result of a silent copy from the detail modal (no global toast). */
+export type StyleChangeModalCopyResult = {
+  ok: boolean;
+  /** Short notice for the in-modal confirmation strip. */
+  notice: string;
+};
+
 type Props = {
   styleId: string;
   styleTitle: string;
   labels: readonly string[];
   prompt: string;
-  onCopyPrompt: () => void;
-  onCopyTrigger?: (phrase: string) => void;
+  onCopyPrompt: () => Promise<StyleChangeModalCopyResult>;
+  onCopyTrigger?: (phrase: string) => Promise<StyleChangeModalCopyResult>;
 };
 
 export function StyleChangeBento({
@@ -206,18 +213,115 @@ function EffectDetailModal({
   prompt: string;
   onClose: () => void;
   onNavigate: (delta: number) => void;
-  onCopyPrompt: () => void;
-  onCopyTrigger?: (phrase: string) => void;
+  onCopyPrompt: () => Promise<StyleChangeModalCopyResult>;
+  onCopyTrigger?: (phrase: string) => Promise<StyleChangeModalCopyResult>;
 }) {
+  /** Stamp feedback with the effect index so navigating clears it without remount. */
+  const [feedback, setFeedback] = useState<{
+    at: number;
+    phraseCopied: boolean;
+    promptCopied: boolean;
+    notice: { message: string; tone: "success" | "error" } | null;
+  }>({ at: -1, phraseCopied: false, promptCopied: false, notice: null });
+  const phraseTimer = useRef<number | null>(null);
+  const promptTimer = useRef<number | null>(null);
+  const noticeTimer = useRef<number | null>(null);
+  const indexRef = useRef(index);
+
+  const phraseCopied = feedback.at === index && feedback.phraseCopied;
+  const promptCopied = feedback.at === index && feedback.promptCopied;
+  const footerNotice = feedback.at === index ? feedback.notice : null;
+
+  useEffect(() => {
+    indexRef.current = index;
+  }, [index]);
+
+  useEffect(() => {
+    return () => {
+      if (phraseTimer.current) window.clearTimeout(phraseTimer.current);
+      if (promptTimer.current) window.clearTimeout(promptTimer.current);
+      if (noticeTimer.current) window.clearTimeout(noticeTimer.current);
+    };
+  }, []);
+
+  const showFooterNotice = (
+    at: number,
+    message: string,
+    tone: "success" | "error",
+  ) => {
+    setFeedback((prev) => ({
+      ...prev,
+      at,
+      notice: { message, tone },
+    }));
+    if (noticeTimer.current) window.clearTimeout(noticeTimer.current);
+    noticeTimer.current = window.setTimeout(() => {
+      if (indexRef.current !== at) return;
+      setFeedback((prev) =>
+        prev.at === at ? { ...prev, notice: null } : prev,
+      );
+    }, 2800);
+  };
+
   const copyTrigger = async () => {
+    const at = index;
+    let result: StyleChangeModalCopyResult;
     if (onCopyTrigger) {
-      onCopyTrigger(item.trigger);
-      return;
+      result = await onCopyTrigger(item.trigger);
+    } else {
+      try {
+        await navigator.clipboard?.writeText(item.trigger);
+        result = { ok: true, notice: "Phrase copied." };
+      } catch {
+        result = {
+          ok: false,
+          notice: "Could not copy automatically. Select the phrase manually.",
+        };
+      }
     }
-    try {
-      await navigator.clipboard?.writeText(item.trigger);
-    } catch {
-      /* parent toast path preferred */
+
+    if (indexRef.current !== at) return;
+
+    if (result.ok) {
+      setFeedback((prev) => ({
+        ...prev,
+        at,
+        phraseCopied: true,
+      }));
+      if (phraseTimer.current) window.clearTimeout(phraseTimer.current);
+      phraseTimer.current = window.setTimeout(() => {
+        if (indexRef.current !== at) return;
+        setFeedback((prev) =>
+          prev.at === at ? { ...prev, phraseCopied: false } : prev,
+        );
+      }, 1600);
+      showFooterNotice(at, result.notice, "success");
+    } else {
+      showFooterNotice(at, result.notice, "error");
+    }
+  };
+
+  const copyPrompt = async () => {
+    const at = index;
+    const result = await onCopyPrompt();
+    if (indexRef.current !== at) return;
+
+    if (result.ok) {
+      setFeedback((prev) => ({
+        ...prev,
+        at,
+        promptCopied: true,
+      }));
+      if (promptTimer.current) window.clearTimeout(promptTimer.current);
+      promptTimer.current = window.setTimeout(() => {
+        if (indexRef.current !== at) return;
+        setFeedback((prev) =>
+          prev.at === at ? { ...prev, promptCopied: false } : prev,
+        );
+      }, 1600);
+      showFooterNotice(at, result.notice, "success");
+    } else {
+      showFooterNotice(at, result.notice, "error");
     }
   };
 
@@ -374,19 +478,33 @@ function EffectDetailModal({
                 onClick={() => void copyTrigger()}
                 className="scm-btn-mini"
                 title="Copy just this effect phrase"
+                aria-label={phraseCopied ? "Phrase copied" : "Copy phrase"}
               >
-                <svg
-                  className="text-violet-400"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  aria-hidden
-                >
-                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-                </svg>
-                <span>Copy phrase</span>
+                {phraseCopied ? (
+                  <svg
+                    className="text-teal-400"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.4"
+                    aria-hidden
+                  >
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                ) : (
+                  <svg
+                    className="text-violet-400"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2"
+                    aria-hidden
+                  >
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                  </svg>
+                )}
+                <span>{phraseCopied ? "Copied" : "Copy phrase"}</span>
               </button>
             </div>
             <p className="font-mono text-xs leading-relaxed text-violet-300">
@@ -395,32 +513,60 @@ function EffectDetailModal({
           </div>
         </div>
 
-        <div className="flex items-center justify-end gap-2.5 border-t border-white/[0.08] bg-[#0E0E14]/90 px-5 py-3.5">
-          <button
-            type="button"
-            onClick={onClose}
-            className="scm-btn-footer scm-btn-footer--close"
-          >
-            Close
-          </button>
-          <button
-            type="button"
-            onClick={onCopyPrompt}
-            disabled={!prompt}
-            className="scm-btn-footer scm-btn-footer--copy"
-          >
-            <svg
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.2"
-              aria-hidden
+        <div className="border-t border-white/[0.08] bg-[#0E0E14]/90 px-5 py-3.5">
+          {footerNotice ? (
+            <div
+              role={footerNotice.tone === "error" ? "alert" : "status"}
+              className={cn(
+                "mb-2.5 rounded-xl border px-3 py-2 text-[12px] leading-snug backdrop-blur-md",
+                footerNotice.tone === "error"
+                  ? "border-[rgba(255,124,142,0.28)] bg-[rgba(48,22,28,0.88)] text-[#f0c4cb]"
+                  : "border-[rgba(103,216,178,0.22)] bg-[rgba(18,32,30,0.92)] text-[#d7efe6]",
+              )}
             >
-              <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
-              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-            </svg>
-            <span>Copy prompt</span>
-          </button>
+              {footerNotice.message}
+            </div>
+          ) : null}
+          <div className="flex items-center justify-end gap-2.5">
+            <button
+              type="button"
+              onClick={onClose}
+              className="scm-btn-footer scm-btn-footer--close"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              onClick={() => void copyPrompt()}
+              disabled={!prompt}
+              className="scm-btn-footer scm-btn-footer--copy"
+              aria-label={promptCopied ? "Prompt copied" : "Copy prompt"}
+            >
+              {promptCopied ? (
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.4"
+                  aria-hidden
+                >
+                  <polyline points="20 6 9 17 4 12" />
+                </svg>
+              ) : (
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.2"
+                  aria-hidden
+                >
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2" />
+                  <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                </svg>
+              )}
+              <span>{promptCopied ? "Copied" : "Copy prompt"}</span>
+            </button>
+          </div>
         </div>
       </div>
     </div>
