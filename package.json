@@ -25,6 +25,7 @@
     "db:upload-wedding-dresses": "tsx --env-file=.env.local scripts/upload-wedding-dresses-assets.ts",
     "db:upload-christmas": "tsx --env-file=.env.local scripts/upload-christmas-assets.ts",
     "db:upload-outfit-change": "tsx --env-file=.env.local scripts/upload-outfit-change-assets.ts",
+    "db:upload-saree": "tsx --env-file=.env.local scripts/upload-saree-assets.ts",
     "db:generate-blur-thumbs": "tsx --env-file=.env.local scripts/generate-blur-thumbs.ts",
     "db:backfill-image-focus": "tsx --env-file=.env.local scripts/backfill-image-focus.ts",
     "emails:build": "tsx scripts/build-email-templates.ts",

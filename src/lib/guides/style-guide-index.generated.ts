@@ -122,6 +122,18 @@ export const STYLE_GUIDE_CARDS: Readonly<Record<string, StyleGuideCardData>> = {
     hasRealImage: true,
     tags: ["Outfit Change", "Fashion", "Gemini"],
   },
+  "saree-ai-photo-prompts": {
+    slug: "saree-ai-photo-prompts",
+    title: "Sari AI Photo Prompts: Copy-Paste Looks for Women",
+    description: "Copy-paste saree AI photo prompts for adult women. Party sequin, organza, black and gold, Banarasi, red ruffle and more. Keep your face,…",
+    category: "trends",
+    imageUrl: "https://rbmirzmppbytorbhncxj.supabase.co/storage/v1/object/public/catalog-public/seed/catalog/editorial/result-324.webp",
+    imageAlt: "Champagne Pallu Flare Saree AI Photo Prompt (Palace Hall)",
+    imageWidth: 1200,
+    imageHeight: 1489,
+    hasRealImage: true,
+    tags: ["Saree", "Fashion"],
+  },
   "stylish-ai-photo-prompts": {
     slug: "stylish-ai-photo-prompts",
     title: "Stylish AI Photo Prompts for Men, Boys & Women",
@@ -302,8 +314,14 @@ export const STYLE_GUIDE_MEMBERSHIP: Readonly<Record<string, readonly string[]>>
   "birthday-wishes-ai-photo-prompt-3d-text-poster": [
     "birthday-ai-photo-prompts",
   ],
+  "black-banarasi-pallu-saree-vintage-living-room": [
+    "saree-ai-photo-prompts",
+  ],
   "black-blazer-linkedin-profile-picture-prompt-gemini-women": [
     "gemini-headshot-cv-photo-prompts",
+  ],
+  "black-gold-border-saree-flower-steps": [
+    "saree-ai-photo-prompts",
   ],
   "black-shalwar-kameez-outfit-change-men": [
     "outfit-change-ai-prompts",
@@ -325,6 +343,12 @@ export const STYLE_GUIDE_MEMBERSHIP: Readonly<Record<string, readonly string[]>>
   "blazer-power-suit-outfit-change-women": [
     "outfit-change-ai-prompts",
   ],
+  "blush-floral-sequin-saree-luxury-lounge": [
+    "saree-ai-photo-prompts",
+  ],
+  "blush-organza-potli-saree-garden-patio": [
+    "saree-ai-photo-prompts",
+  ],
   "bridal-sharara": [
     "wedding-dress-ai-photo-prompts",
   ],
@@ -345,6 +369,9 @@ export const STYLE_GUIDE_MEMBERSHIP: Readonly<Record<string, readonly string[]>>
   ],
   "chai-dhaba-fog-leather-jacket-winter-ai-photo-prompt-men": [
     "winter-ai-photo-prompts",
+  ],
+  "champagne-pallu-flare-saree-palace-hall": [
+    "saree-ai-photo-prompts",
   ],
   "charcoal-suit-corporate-linkedin-profile-picture-prompt-gemini-men": [
     "gemini-headshot-cv-photo-prompts",
@@ -562,6 +589,9 @@ export const STYLE_GUIDE_MEMBERSHIP: Readonly<Record<string, readonly string[]>>
   "golden-bouquet-glow": [
     "diwali-couple-ai-photo-editing-prompts",
   ],
+  "golden-hour-chiffon-saree-rooftop-pallu-wind": [
+    "saree-ai-photo-prompts",
+  ],
   "golden-hour-sparkler-shot": [
     "diwali-couple-ai-photo-editing-prompts",
   ],
@@ -601,11 +631,17 @@ export const STYLE_GUIDE_MEMBERSHIP: Readonly<Record<string, readonly string[]>>
     "stylish-ai-photo-prompts",
     "winter-ai-photo-prompts",
   ],
+  "ivory-lace-reception-saree-boutique-mirror": [
+    "saree-ai-photo-prompts",
+  ],
   "ivory-sherwani": [
     "wedding-dress-ai-photo-prompts",
   ],
   "joyful-outdoor-lifestyle": [
     "birthday-ai-photo-prompts",
+  ],
+  "kanjivaram-silk-saree-carved-stone-colonnade": [
+    "saree-ai-photo-prompts",
   ],
   "kids-birthday-photo-ai-prompt-garden-party": [
     "birthday-ai-photo-prompts",
@@ -623,8 +659,14 @@ export const STYLE_GUIDE_MEMBERSHIP: Readonly<Record<string, readonly string[]>>
   "kurta-waistcoat-eid-outfit-change-men": [
     "outfit-change-ai-prompts",
   ],
+  "lavender-zari-saree-mirror-selfie": [
+    "saree-ai-photo-prompts",
+  ],
   "leather-jacket-street-outfit-change-men": [
     "outfit-change-ai-prompts",
+  ],
+  "leopard-print-belted-saree-old-city-street": [
+    "saree-ai-photo-prompts",
   ],
   "linkedin-photo-clean-up-ai-prompt-gemini-keep-outfit": [
     "gemini-headshot-cv-photo-prompts",
@@ -680,6 +722,9 @@ export const STYLE_GUIDE_MEMBERSHIP: Readonly<Record<string, readonly string[]>>
   "midnight-glove-noir": [
     "halloween-ai-prompts-for-selfies",
   ],
+  "mint-sequin-stripe-saree-marble-hallway": [
+    "saree-ai-photo-prompts",
+  ],
   "modern-cafe-mirror-selfie-ai-photo-prompt-for-boys": [
     "stylish-ai-photo-prompts",
   ],
@@ -691,9 +736,13 @@ export const STYLE_GUIDE_MEMBERSHIP: Readonly<Record<string, readonly string[]>>
   ],
   "modern-saree-drape-outfit-change": [
     "outfit-change-ai-prompts",
+    "saree-ai-photo-prompts",
   ],
   "modest-maxi-abaya-chic-outfit-change": [
     "outfit-change-ai-prompts",
+  ],
+  "monsoon-chiffon-saree-rainy-balcony": [
+    "saree-ai-photo-prompts",
   ],
   "mountain-viewpoint-trip-merge-two-photos-prompt-gemini-couple": [
     "how-to-merge-two-photos-in-gemini",
@@ -716,6 +765,9 @@ export const STYLE_GUIDE_MEMBERSHIP: Readonly<Record<string, readonly string[]>>
   ],
   "old-money-garden-women": [
     "luxury-lifestyle-ai-photo-prompts",
+  ],
+  "ombre-saree-over-shoulder-dressing-room": [
+    "saree-ai-photo-prompts",
   ],
   "outdoor-natural-light-linkedin-profile-picture-prompt-gemini": [
     "gemini-headshot-cv-photo-prompts",
@@ -777,6 +829,9 @@ export const STYLE_GUIDE_MEMBERSHIP: Readonly<Record<string, readonly string[]>>
   "red-bridal-lehenga": [
     "wedding-dress-ai-photo-prompts",
   ],
+  "red-ruffle-gown-saree-red-carpet": [
+    "saree-ai-photo-prompts",
+  ],
   "red-velvet-holiday-glam-portrait": [
     "trending-christmas-ai-photo-editing-prompts-gemini",
   ],
@@ -795,8 +850,14 @@ export const STYLE_GUIDE_MEMBERSHIP: Readonly<Record<string, readonly string[]>>
   "rooftop-sunset-anime-friends-ai-photo-prompt": [
     "anime-ai-photo-prompts",
   ],
+  "rose-gold-tissue-silk-saree-marble-studio": [
+    "saree-ai-photo-prompts",
+  ],
   "sad-ai-photo-prompt-for-boys-rainy-window": [
     "trending-ai-photo-prompts-for-boys",
+  ],
+  "sage-organza-saree-ivy-terrace": [
+    "saree-ai-photo-prompts",
   ],
   "separate-photos-couple": [
     "christmas-ai-photo-prompts",
@@ -862,6 +923,9 @@ export const STYLE_GUIDE_MEMBERSHIP: Readonly<Record<string, readonly string[]>>
   ],
   "stylish-girl-instagram-dp": [
     "stylish-ai-photo-prompts",
+  ],
+  "teal-sequin-glam-saree-velvet-curtain": [
+    "saree-ai-photo-prompts",
   ],
   "travel-fashion-bouquet": [
     "diwali-couple-ai-photo-editing-prompts",
