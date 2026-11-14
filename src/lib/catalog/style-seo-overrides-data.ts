@@ -981,5 +981,344 @@ Who it is for: anyone who wants a viral snowflake close-up winter portrait rathe
       "shawl-chai-winter-ai-photo-prompt-girls",
     ],
   },
-
+  "mint-sequin-stripe-saree-marble-hallway": {
+    title: "Mint Sequin Stripe Saree AI Prompt (Marble Hall)",
+    h1: "Mint Sequin Stripe Saree AI Photo Prompt (Marble Hallway)",
+    description: "Mint sequin stripe saree AI photo prompt: silver vertical sequins in a bright marble hallway. Keep your real face. Free copy-paste.",
+    guideLinks: [
+      {
+        href: "/guides/saree-ai-photo-prompts",
+        label: "Sari AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: [
+      "teal-sequin-glam-saree-velvet-curtain",
+      "blush-floral-sequin-saree-luxury-lounge",
+      "modern-saree-drape-outfit-change",
+    ],
+  },
+  "blush-organza-potli-saree-garden-patio": {
+    title: "Blush Organza Potli Saree AI Prompt (Garden Patio)",
+    h1: "Blush Organza Potli Saree AI Photo Prompt (Garden Patio)",
+    description: "Blush organza saree AI photo prompt with a pearl potli on a sunlit garden patio. Keeps your real face. Free copy-paste.",
+    guideLinks: [
+      {
+        href: "/guides/saree-ai-photo-prompts",
+        label: "Sari AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: [
+      "sage-organza-saree-ivy-terrace",
+      "lavender-zari-saree-mirror-selfie",
+      "golden-hour-chiffon-saree-rooftop-pallu-wind",
+    ],
+  },
+  "ivory-lace-reception-saree-boutique-mirror": {
+    title: "Ivory Lace Reception Saree AI Prompt (Boutique Mirror)",
+    h1: "Ivory Lace Reception Saree AI Photo Prompt (Boutique Mirror)",
+    description: "Ivory lace reception saree AI photo prompt at a boutique floor mirror with soft showroom light. Real face kept. Free copy-paste.",
+    guideLinks: [
+      {
+        href: "/guides/saree-ai-photo-prompts",
+        label: "Sari AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: [
+      "champagne-pallu-flare-saree-palace-hall",
+      "blush-floral-sequin-saree-luxury-lounge",
+      "red-ruffle-gown-saree-red-carpet",
+    ],
+  },
+  "leopard-print-belted-saree-old-city-street": {
+    title: "Leopard Print Belted Saree AI Prompt (Old City Street)",
+    h1: "Leopard Print Belted Saree AI Photo Prompt (Old City Street)",
+    description: "Leopard print belted saree AI photo prompt on an old city street with soft bokeh. Modest drape, real face kept. Free copy-paste.",
+    guideLinks: [
+      {
+        href: "/guides/saree-ai-photo-prompts",
+        label: "Sari AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: [
+      "black-gold-border-saree-flower-steps",
+      "golden-hour-chiffon-saree-rooftop-pallu-wind",
+      "shadowed-saree-noir",
+    ],
+  },
+  "teal-sequin-glam-saree-velvet-curtain": {
+    title: "Teal Sequin Glam Saree AI Prompt (Velvet Curtain)",
+    h1: "Teal Sequin Glam Saree AI Photo Prompt (Velvet Curtain)",
+    description: "Teal sequin glam saree AI photo prompt against champagne velvet curtains. Dramatic studio look, real face kept. Free copy-paste.",
+    guideLinks: [
+      {
+        href: "/guides/saree-ai-photo-prompts",
+        label: "Sari AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: [
+      "mint-sequin-stripe-saree-marble-hallway",
+      "blush-floral-sequin-saree-luxury-lounge",
+      "champagne-pallu-flare-saree-palace-hall",
+    ],
+  },
+  "sage-organza-saree-ivy-terrace": {
+    title: "Sage Organza Saree AI Prompt (Ivy Terrace)",
+    h1: "Sage Organza Saree AI Photo Prompt (Ivy Terrace)",
+    description: "Sage organza saree AI photo prompt on a bright ivy terrace with white stone railing. Keeps your real face. Free copy-paste.",
+    guideLinks: [
+      {
+        href: "/guides/saree-ai-photo-prompts",
+        label: "Sari AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: [
+      "blush-organza-potli-saree-garden-patio",
+      "mint-sequin-stripe-saree-marble-hallway",
+      "modern-saree-drape-outfit-change",
+    ],
+  },
+  "red-ruffle-gown-saree-red-carpet": {
+    title: "Red Ruffle Gown Saree AI Prompt (Red Carpet)",
+    h1: "Red Ruffle Gown Saree AI Photo Prompt (Red Carpet)",
+    description: "Red ruffle gown saree AI photo prompt on a red carpet with warm ballroom bokeh. Non-bridal party look, real face kept.",
+    guideLinks: [
+      {
+        href: "/guides/saree-ai-photo-prompts",
+        label: "Sari AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: [
+      "champagne-pallu-flare-saree-palace-hall",
+      "black-gold-border-saree-flower-steps",
+      "party-lehenga-outfit-change",
+    ],
+  },
+  "rose-gold-tissue-silk-saree-marble-studio": {
+    title: "Rose-Gold Tissue Silk Saree AI Prompt (Marble Studio)",
+    h1: "Rose-Gold Tissue Silk Saree AI Photo Prompt (Marble Studio)",
+    description: "Rose-gold tissue silk saree AI photo prompt in a minimal marble studio with soft side light. Real face kept. Free copy-paste.",
+    guideLinks: [
+      {
+        href: "/guides/saree-ai-photo-prompts",
+        label: "Sari AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: [
+      "champagne-pallu-flare-saree-palace-hall",
+      "kanjivaram-silk-saree-carved-stone-colonnade",
+      "blush-floral-sequin-saree-luxury-lounge",
+    ],
+  },
+  "champagne-pallu-flare-saree-palace-hall": {
+    title: "Champagne Pallu Flare Saree AI Prompt (Palace Hall)",
+    h1: "Champagne Pallu Flare Saree AI Photo Prompt (Palace Hall)",
+    description: "Champagne pallu-flare saree AI photo prompt in a palace hall with checkered marble floors. Real face kept. Free copy-paste.",
+    guideLinks: [
+      {
+        href: "/guides/saree-ai-photo-prompts",
+        label: "Sari AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: [
+      "ivory-lace-reception-saree-boutique-mirror",
+      "red-ruffle-gown-saree-red-carpet",
+      "rose-gold-tissue-silk-saree-marble-studio",
+    ],
+  },
+  "black-gold-border-saree-flower-steps": {
+    title: "Black and Gold Border Saree AI Prompt (Flower Steps)",
+    h1: "Black and Gold Border Saree AI Photo Prompt (Flower Steps)",
+    description: "Black and gold border saree AI photo prompt seated on light steps beside white flowers. Real face kept. Free copy-paste.",
+    guideLinks: [
+      {
+        href: "/guides/saree-ai-photo-prompts",
+        label: "Sari AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: [
+      "black-banarasi-pallu-saree-vintage-living-room",
+      "shadowed-saree-noir",
+      "teal-sequin-glam-saree-velvet-curtain",
+    ],
+  },
+  "ombre-saree-over-shoulder-dressing-room": {
+    title: "Ombre Saree Over-Shoulder AI Prompt (Dressing Room)",
+    h1: "Ombre Saree Over-Shoulder AI Photo Prompt (Dressing Room)",
+    description: "Ombre saree over-shoulder AI photo prompt in an elegant dressing room—modest blouse back, family-safe. Real face kept.",
+    guideLinks: [
+      {
+        href: "/guides/saree-ai-photo-prompts",
+        label: "Sari AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: [
+      "lavender-zari-saree-mirror-selfie",
+      "blush-organza-potli-saree-garden-patio",
+      "rose-gold-tissue-silk-saree-marble-studio",
+    ],
+  },
+  "black-banarasi-pallu-saree-vintage-living-room": {
+    title: "Black Banarasi Pallu Saree AI Prompt (Vintage Room)",
+    h1: "Black Banarasi Pallu Saree AI Photo Prompt (Vintage Living Room)",
+    description: "Black Banarasi pallu saree AI photo prompt on a vintage living-room sofa with warm side light. Real face kept. Free copy-paste.",
+    guideLinks: [
+      {
+        href: "/guides/saree-ai-photo-prompts",
+        label: "Sari AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: [
+      "kanjivaram-silk-saree-carved-stone-colonnade",
+      "black-gold-border-saree-flower-steps",
+      "leopard-print-belted-saree-old-city-street",
+    ],
+  },
+  "lavender-zari-saree-mirror-selfie": {
+    title: "Lavender Zari Saree Mirror Selfie AI Photo Prompt",
+    h1: "Lavender Zari Saree Mirror Selfie AI Photo Prompt",
+    description: "Lavender zari saree mirror-selfie AI photo prompt with a plain phone and cozy room reflection. Real face kept. Free copy-paste.",
+    guideLinks: [
+      {
+        href: "/guides/saree-ai-photo-prompts",
+        label: "Sari AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: [
+      "ombre-saree-over-shoulder-dressing-room",
+      "blush-organza-potli-saree-garden-patio",
+      "sage-organza-saree-ivy-terrace",
+    ],
+  },
+  "blush-floral-sequin-saree-luxury-lounge": {
+    title: "Blush Floral Sequin Saree AI Prompt (Luxury Lounge)",
+    h1: "Blush Floral Sequin Saree AI Photo Prompt (Luxury Lounge)",
+    description: "Blush floral sequin saree AI photo prompt in a luxury lounge with tufted sofa and chandelier glow. Real face kept.",
+    guideLinks: [
+      {
+        href: "/guides/saree-ai-photo-prompts",
+        label: "Sari AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: [
+      "teal-sequin-glam-saree-velvet-curtain",
+      "mint-sequin-stripe-saree-marble-hallway",
+      "champagne-pallu-flare-saree-palace-hall",
+    ],
+  },
+  "golden-hour-chiffon-saree-rooftop-pallu-wind": {
+    title: "Golden-Hour Chiffon Saree AI Prompt (Rooftop Wind)",
+    h1: "Golden-Hour Chiffon Saree AI Photo Prompt (Rooftop Pallu Wind)",
+    description: "Golden-hour chiffon saree AI photo prompt on a rooftop with the pallu lifting in the wind. Real face kept. Free copy-paste.",
+    guideLinks: [
+      {
+        href: "/guides/saree-ai-photo-prompts",
+        label: "Sari AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: [
+      "monsoon-chiffon-saree-rainy-balcony",
+      "leopard-print-belted-saree-old-city-street",
+      "blush-organza-potli-saree-garden-patio",
+    ],
+  },
+  "kanjivaram-silk-saree-carved-stone-colonnade": {
+    title: "Kanjivaram Silk Saree AI Prompt (Stone Colonnade)",
+    h1: "Kanjivaram Silk Saree AI Photo Prompt (Carved Stone Colonnade)",
+    description: "Kanjivaram silk saree AI photo prompt in a generic carved stone colonnade—no temples or idols. Real face kept. Free copy-paste.",
+    guideLinks: [
+      {
+        href: "/guides/saree-ai-photo-prompts",
+        label: "Sari AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: [
+      "black-banarasi-pallu-saree-vintage-living-room",
+      "rose-gold-tissue-silk-saree-marble-studio",
+      "black-gold-border-saree-flower-steps",
+    ],
+  },
+  "monsoon-chiffon-saree-rainy-balcony": {
+    title: "Monsoon Chiffon Saree AI Prompt (Rainy Balcony)",
+    h1: "Monsoon Chiffon Saree AI Photo Prompt (Rainy Balcony)",
+    description: "Monsoon chiffon saree AI photo prompt on a rainy balcony with soft rain streaks and city bokeh. Real face kept. Free copy-paste.",
+    guideLinks: [
+      {
+        href: "/guides/saree-ai-photo-prompts",
+        label: "Sari AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: [
+      "golden-hour-chiffon-saree-rooftop-pallu-wind",
+      "lavender-zari-saree-mirror-selfie",
+      "leopard-print-belted-saree-old-city-street",
+    ],
+  },
 };

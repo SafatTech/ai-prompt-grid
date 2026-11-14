@@ -197,7 +197,7 @@ const BATCH1_ACTIVATED_DRAFT_IDS = [
 describe("AdSense uniqueness style sections", () => {
   it("ships uniqueness copy for every published seed style", () => {
     const ids = Object.keys(STYLE_UNIQUENESS_ENTRIES);
-    assert.ok(ids.length >= 330, `expected ~338 uniqueness entries, got ${ids.length}`);
+    assert.ok(ids.length >= 347, `expected ~355 uniqueness entries, got ${ids.length}`);
     for (const id of ids) {
       const override = styleSeoOverride(id);
       assert.ok(override, id);

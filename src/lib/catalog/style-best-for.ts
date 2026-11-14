@@ -41,6 +41,7 @@ const GUIDE_OCCASIONS: Readonly<Record<string, readonly string[]>> = {
   "stylish-ai-photo-prompts": ["Stylish Instagram portraits"],
   "luxury-lifestyle-ai-photo-prompts": ["Luxury lifestyle edits"],
   "outfit-change-ai-prompts": ["Outfit change edits"],
+  "saree-ai-photo-prompts": ["Saree portraits", "party saree edits"],
   "how-to-merge-two-photos-in-gemini": ["Two-photo merges"],
 };
 

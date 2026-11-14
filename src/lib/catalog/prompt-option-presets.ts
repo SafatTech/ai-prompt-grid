@@ -265,6 +265,22 @@ export const moodLabels: Record<string, string> = {
   "Moody modern noir-lite": "Noir-lite",
   "Soft warm rose": "Warm rose",
   "Cool cinematic teal": "Cinematic teal",
+  "Cool mint glam": "Cool mint glam",
+  "Soft blush daylight": "Blush daylight",
+  "Warm ivory showroom": "Ivory showroom",
+  "Warm urban editorial": "Urban editorial",
+  "Teal glam studio": "Teal glam",
+  "Fresh sage daylight": "Sage daylight",
+  "Ruby red-carpet glam": "Red-carpet glam",
+  "Rose-gold luminous": "Rose-gold glow",
+  "Champagne palace drama": "Champagne drama",
+  "Black and gold elegance": "Black-gold elegance",
+  "Warm dressing-room glow": "Dressing-room glow",
+  "Warm vintage gold": "Vintage gold",
+  "Soft lavender mirror glow": "Lavender mirror",
+  "Blush luxury lounge": "Blush lounge",
+  "Rich temple-corridor gold": "Colonnade gold",
+  "Cool monsoon blue hour": "Monsoon blue hour",
 };
 
 /** Short 2–3 word UI labels for full background prompt strings. */
@@ -852,6 +868,40 @@ export const backgroundLabels: Record<string, string> = {
     "Modern lounge",
   "A clean modern city street with glass storefronts blurred into soft bokeh, no readable signs or logos":
     "Glass storefront street",
+  "A bright luxury marble hallway with polished light stone floors, soft wood paneling and gentle corridor depth":
+    "Marble hallway",
+  "A sunlit garden patio with pale gravel, stone steps to a shaded entrance and soft greenery bokeh":
+    "Garden patio",
+  "A boutique fitting room with a tall silver-framed floor mirror, warm neutral walls, a soft settee and blurred garment racks without logos":
+    "Boutique mirror",
+  "An old city street with a weathered stone wall in the foreground and soft-focus colonial facades and distant auto-rickshaws, no readable signage":
+    "Old city street",
+  "Floor-to-ceiling champagne or pale-gold velvet curtains with soft pleats and a light wood floor":
+    "Velvet curtains",
+  "A bright white stone terrace with climbing ivy on pillars, a classic balustrade and soft outdoor daylight":
+    "Ivy terrace",
+  "A red carpet aisle in a grand ballroom lobby with warm golden pillars, soft floral arrangements and elegant bokeh lights, no logos or famous venues":
+    "Red carpet lobby",
+  "A minimal luxury marble studio with large light-grey veined marble walls, dark patterned floor tiles and soft side daylight":
+    "Marble studio",
+  "A grand palace-style hall with dark wood paneling, gold moldings, tall mirrors and polished checkered marble floors, no famous landmarks":
+    "Palace hall",
+  "Clean modern indoor steps in soft beige stone with a large vase of white chrysanthemums and a leafy potted plant, no logos":
+    "Flower steps",
+  "An elegant dressing room or bedroom styling corner with a lit vanity lamp, soft window light, blurred bed linens and tasteful furniture, nothing suggestive":
+    "Dressing room",
+  "A vintage living room with a small silver-gilt sofa, soft cushions, warm wood door and classic wall molding, no logos":
+    "Vintage living room",
+  "A cozy room reflected in a large oval floor mirror with warm wood dresser, a green plant and soft window light, no logos":
+    "Oval mirror room",
+  "A luxury lounge with a cream tufted sofa with gold trim, polished marble floor and soft crystal chandelier bokeh, no brand names":
+    "Luxury lounge",
+  "A private city rooftop terrace at golden hour with soft skyline bokeh, warm sky and a low parapet, no famous landmarks":
+    "Golden-hour rooftop",
+  "A generic carved stone colonnade corridor with fluted pillars, soft geometric stone floor and warm filtered daylight; no deities, idols, shrines, real temples or famous landmarks":
+    "Stone colonnade",
+  "A covered balcony at rainy blue hour with wet railing reflections, soft rain streaks beyond and distant city light bokeh, no logos":
+    "Rainy balcony",
 };
 
 const genericMoodPresets = [

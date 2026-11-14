@@ -206,9 +206,17 @@ export const STYLE_BEST_FOR: Readonly<Record<string, StyleBestForEntry>> = {
     occasions: "Birthday portraits, party posts",
     worksWith: "solo portrait, half or three-quarter body photo",
   },
+  "black-banarasi-pallu-saree-vintage-living-room": {
+    occasions: "Saree portraits, party saree edits, Editorial portraits",
+    worksWith: "solo portrait, half or three-quarter body photo",
+  },
   "black-blazer-linkedin-profile-picture-prompt-gemini-women": {
     occasions: "LinkedIn, CV headshots",
     worksWith: "solo headshot or selfie",
+  },
+  "black-gold-border-saree-flower-steps": {
+    occasions: "Saree portraits, party saree edits, Editorial portraits",
+    worksWith: "solo portrait, half or three-quarter body photo",
   },
   "black-shalwar-kameez-outfit-change-men": {
     occasions: "Outfit change edits, Editorial portraits, portfolio shots",
@@ -237,6 +245,14 @@ export const STYLE_BEST_FOR: Readonly<Record<string, StyleBestForEntry>> = {
   "blue-note-scrapbook": {
     occasions: "Social portraits, Instagram posts",
     worksWith: "solo portrait, half or full body photo",
+  },
+  "blush-floral-sequin-saree-luxury-lounge": {
+    occasions: "Saree portraits, party saree edits, Luxury lifestyle edits",
+    worksWith: "solo portrait, half or three-quarter body photo",
+  },
+  "blush-organza-potli-saree-garden-patio": {
+    occasions: "Saree portraits, party saree edits, Editorial portraits",
+    worksWith: "solo portrait, half or three-quarter body photo",
   },
   "botanical-wellness-still-life": {
     occasions: "Product listings, shop galleries",
@@ -276,6 +292,10 @@ export const STYLE_BEST_FOR: Readonly<Record<string, StyleBestForEntry>> = {
   },
   "chai-dhaba-fog-leather-jacket-winter-ai-photo-prompt-men": {
     occasions: "Winter portraits, snow looks, Editorial portraits",
+    worksWith: "solo portrait, half or three-quarter body photo",
+  },
+  "champagne-pallu-flare-saree-palace-hall": {
+    occasions: "Saree portraits, party saree edits, Editorial portraits",
     worksWith: "solo portrait, half or three-quarter body photo",
   },
   "charcoal-suit-corporate-linkedin-profile-picture-prompt-gemini-men": {
@@ -674,6 +694,10 @@ export const STYLE_BEST_FOR: Readonly<Record<string, StyleBestForEntry>> = {
     occasions: "Stylish Instagram portraits",
     worksWith: "clear solo selfie",
   },
+  "golden-hour-chiffon-saree-rooftop-pallu-wind": {
+    occasions: "Saree portraits, party saree edits, Editorial portraits",
+    worksWith: "solo portrait, half or three-quarter body photo",
+  },
   "golden-hour-sparkler-shot": {
     occasions: "Diwali, festive Instagram posts, Wedding",
     worksWith: "solo portrait, half or three-quarter body photo",
@@ -750,6 +774,10 @@ export const STYLE_BEST_FOR: Readonly<Record<string, StyleBestForEntry>> = {
     occasions: "Editorial portraits, portfolio shots",
     worksWith: "solo portrait, half or three-quarter body photo",
   },
+  "ivory-lace-reception-saree-boutique-mirror": {
+    occasions: "Saree portraits, party saree edits, Editorial portraits",
+    worksWith: "solo portrait, half or three-quarter body photo",
+  },
   "ivory-sherwani": {
     occasions: "Wedding, bridal looks",
     worksWith: "solo portrait, half or three-quarter body photo",
@@ -757,6 +785,10 @@ export const STYLE_BEST_FOR: Readonly<Record<string, StyleBestForEntry>> = {
   "joyful-outdoor-lifestyle": {
     occasions: "Birthday portraits, party posts, Family or group posts",
     worksWith: "solo portrait, half or full body photo",
+  },
+  "kanjivaram-silk-saree-carved-stone-colonnade": {
+    occasions: "Saree portraits, party saree edits, Editorial portraits",
+    worksWith: "solo portrait, half or three-quarter body photo",
   },
   "kids-astronaut-space-ai-photo-prompt": {
     occasions: "Editorial portraits, portfolio shots",
@@ -790,8 +822,16 @@ export const STYLE_BEST_FOR: Readonly<Record<string, StyleBestForEntry>> = {
     occasions: "Outfit change edits, Editorial portraits, portfolio shots",
     worksWith: "solo portrait, half or three-quarter body photo",
   },
+  "lavender-zari-saree-mirror-selfie": {
+    occasions: "Saree portraits, party saree edits, Editorial portraits",
+    worksWith: "solo portrait, half or three-quarter body photo",
+  },
   "leather-jacket-street-outfit-change-men": {
     occasions: "Outfit change edits, Editorial portraits, portfolio shots",
+    worksWith: "solo portrait, half or three-quarter body photo",
+  },
+  "leopard-print-belted-saree-old-city-street": {
+    occasions: "Saree portraits, party saree edits, Editorial portraits",
     worksWith: "solo portrait, half or three-quarter body photo",
   },
   "linkedin-photo-clean-up-ai-prompt-gemini-keep-outfit": {
@@ -886,6 +926,10 @@ export const STYLE_BEST_FOR: Readonly<Record<string, StyleBestForEntry>> = {
     occasions: "Product listings, shop galleries, Pet portraits",
     worksWith: "clear pet photo",
   },
+  "mint-sequin-stripe-saree-marble-hallway": {
+    occasions: "Saree portraits, party saree edits, Editorial portraits",
+    worksWith: "solo portrait, half or three-quarter body photo",
+  },
   "modern-cafe-mirror-selfie-ai-photo-prompt-for-boys": {
     occasions: "Stylish Instagram portraits, Trending boy edits, Instagram posts",
     worksWith: "clear solo selfie",
@@ -903,7 +947,7 @@ export const STYLE_BEST_FOR: Readonly<Record<string, StyleBestForEntry>> = {
     worksWith: "solo headshot or selfie",
   },
   "modern-saree-drape-outfit-change": {
-    occasions: "Outfit change edits, Editorial portraits, portfolio shots",
+    occasions: "Outfit change edits, Saree portraits, party saree edits",
     worksWith: "solo portrait, half or three-quarter body photo",
   },
   "modern-virtual-staging": {
@@ -921,6 +965,10 @@ export const STYLE_BEST_FOR: Readonly<Record<string, StyleBestForEntry>> = {
   "monochrome-echo-trio": {
     occasions: "Editorial portraits, portfolio shots",
     worksWith: "clear solo selfie",
+  },
+  "monsoon-chiffon-saree-rainy-balcony": {
+    occasions: "Saree portraits, party saree edits, Editorial portraits",
+    worksWith: "solo portrait, half or three-quarter body photo",
   },
   "moonlit-vampire-romance-couple-ai-photo-prompt": {
     occasions: "Couple portraits, Instagram posts",
@@ -956,6 +1004,10 @@ export const STYLE_BEST_FOR: Readonly<Record<string, StyleBestForEntry>> = {
   },
   "old-money-garden-women": {
     occasions: "Luxury lifestyle edits, Editorial portraits, portfolio shots",
+    worksWith: "solo portrait, half or three-quarter body photo",
+  },
+  "ombre-saree-over-shoulder-dressing-room": {
+    occasions: "Saree portraits, party saree edits, Family or group posts",
     worksWith: "solo portrait, half or three-quarter body photo",
   },
   "outdoor-living-oasis": {
@@ -1042,6 +1094,10 @@ export const STYLE_BEST_FOR: Readonly<Record<string, StyleBestForEntry>> = {
     occasions: "Wedding, bridal looks, Editorial portraits",
     worksWith: "solo portrait, half or three-quarter body photo",
   },
+  "red-ruffle-gown-saree-red-carpet": {
+    occasions: "Saree portraits, party saree edits, Editorial portraits",
+    worksWith: "solo portrait, half or three-quarter body photo",
+  },
   "red-velvet-holiday-glam-portrait": {
     occasions: "Christmas, holiday Instagram posts, holiday cards",
     worksWith: "solo portrait, half or three-quarter body photo",
@@ -1086,6 +1142,10 @@ export const STYLE_BEST_FOR: Readonly<Record<string, StyleBestForEntry>> = {
     occasions: "Anime-style edits, stylized portraits, Family or group posts",
     worksWith: "group photo with every face visible",
   },
+  "rose-gold-tissue-silk-saree-marble-studio": {
+    occasions: "Saree portraits, party saree edits, Editorial portraits",
+    worksWith: "solo portrait, half or three-quarter body photo",
+  },
   "royal-blue-rose-storyboard": {
     occasions: "Professional headshots, profile photos",
     worksWith: "solo portrait, half or full body photo",
@@ -1096,6 +1156,10 @@ export const STYLE_BEST_FOR: Readonly<Record<string, StyleBestForEntry>> = {
   },
   "sad-ai-photo-prompt-for-boys-rainy-window": {
     occasions: "Trending boy edits, Instagram posts, Editorial portraits",
+    worksWith: "solo portrait, half or three-quarter body photo",
+  },
+  "sage-organza-saree-ivy-terrace": {
+    occasions: "Saree portraits, party saree edits, Editorial portraits",
     worksWith: "solo portrait, half or three-quarter body photo",
   },
   "secret-agent-tuxedo-couple-ai-photo-prompt": {
@@ -1241,6 +1305,10 @@ export const STYLE_BEST_FOR: Readonly<Record<string, StyleBestForEntry>> = {
   "tactile-macro-detail": {
     occasions: "Product listings, shop galleries",
     worksWith: "clear product photo",
+  },
+  "teal-sequin-glam-saree-velvet-curtain": {
+    occasions: "Saree portraits, party saree edits, Editorial portraits",
+    worksWith: "solo portrait, half or three-quarter body photo",
   },
   "travel-fashion-bouquet": {
     occasions: "Stylish Instagram portraits, Travel edits, vacation posts",

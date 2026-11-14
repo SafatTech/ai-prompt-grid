@@ -206,7 +206,7 @@ export function guideCategoriesForStyleTheme(
     out.add("couples-family");
   }
   if (
-    /\b(80s|boys|stylish|outfit|trending|retro|vintage)\b/.test(hay) ||
+    /\b(80s|boys|stylish|outfit|trending|retro|vintage|saree|sari)\b/.test(hay) ||
     category === "Vintage" ||
     category === "Retro"
   ) {

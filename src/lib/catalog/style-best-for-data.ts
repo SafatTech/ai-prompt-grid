@@ -1360,4 +1360,72 @@ export const STYLE_BEST_FOR_DATA: Readonly<Record<string, StyleBestForEntry>> = 
     occasions: "Zombie apocalypse survivor Halloween costume posts",
     worksWith: "one clear group photo with every face visible",
   },
+  "mint-sequin-stripe-saree-marble-hallway": {
+    occasions: "Mint sequin stripe saree marble hallway portraits",
+    worksWith: "one clear waist-up photo of an adult woman",
+  },
+  "blush-organza-potli-saree-garden-patio": {
+    occasions: "Blush organza potli saree garden patio portraits",
+    worksWith: "one clear waist-up photo of an adult woman",
+  },
+  "ivory-lace-reception-saree-boutique-mirror": {
+    occasions: "Ivory lace reception saree boutique mirror portraits",
+    worksWith: "one clear waist-up photo of an adult woman",
+  },
+  "leopard-print-belted-saree-old-city-street": {
+    occasions: "Leopard print belted saree old city street portraits",
+    worksWith: "one clear waist-up photo of an adult woman",
+  },
+  "teal-sequin-glam-saree-velvet-curtain": {
+    occasions: "Teal sequin glam saree velvet curtain studio portraits",
+    worksWith: "one clear waist-up photo of an adult woman",
+  },
+  "sage-organza-saree-ivy-terrace": {
+    occasions: "Sage organza saree ivy terrace daylight portraits",
+    worksWith: "one clear waist-up photo of an adult woman",
+  },
+  "red-ruffle-gown-saree-red-carpet": {
+    occasions: "Red ruffle gown saree red carpet event portraits",
+    worksWith: "one clear waist-up photo of an adult woman",
+  },
+  "rose-gold-tissue-silk-saree-marble-studio": {
+    occasions: "Rose-gold tissue silk saree marble studio portraits",
+    worksWith: "one clear waist-up photo of an adult woman",
+  },
+  "champagne-pallu-flare-saree-palace-hall": {
+    occasions: "Champagne pallu flare saree palace hall portraits",
+    worksWith: "one clear waist-up photo of an adult woman",
+  },
+  "black-gold-border-saree-flower-steps": {
+    occasions: "Black and gold border saree flower steps portraits",
+    worksWith: "one clear waist-up photo of an adult woman",
+  },
+  "ombre-saree-over-shoulder-dressing-room": {
+    occasions: "Ombre saree over-shoulder dressing room portraits",
+    worksWith: "one clear waist-up photo of an adult woman",
+  },
+  "black-banarasi-pallu-saree-vintage-living-room": {
+    occasions: "Black Banarasi pallu saree vintage living room portraits",
+    worksWith: "one clear waist-up photo of an adult woman",
+  },
+  "lavender-zari-saree-mirror-selfie": {
+    occasions: "Lavender zari saree mirror selfie casual portraits",
+    worksWith: "one clear waist-up photo of an adult woman",
+  },
+  "blush-floral-sequin-saree-luxury-lounge": {
+    occasions: "Blush floral sequin saree luxury lounge portraits",
+    worksWith: "one clear waist-up photo of an adult woman",
+  },
+  "golden-hour-chiffon-saree-rooftop-pallu-wind": {
+    occasions: "Golden-hour chiffon saree rooftop pallu wind portraits",
+    worksWith: "one clear waist-up photo of an adult woman",
+  },
+  "kanjivaram-silk-saree-carved-stone-colonnade": {
+    occasions: "Kanjivaram silk saree carved stone colonnade portraits",
+    worksWith: "one clear waist-up photo of an adult woman",
+  },
+  "monsoon-chiffon-saree-rainy-balcony": {
+    occasions: "Monsoon chiffon saree rainy balcony blue-hour portraits",
+    worksWith: "one clear waist-up photo of an adult woman",
+  },
 };

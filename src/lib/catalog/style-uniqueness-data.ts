@@ -9471,5 +9471,480 @@ export const STYLE_UNIQUENESS_ENTRIES: Readonly<
     ],
     addonLine: `Want a quieter memorial garden mood? Add: keep the peaceful flower garden, soft golden sunset, and faithful pet likeness, but soften the rainbow further—no text overlays, heavy lens flares, or altered markings.`,
   },
+  "mint-sequin-stripe-saree-marble-hallway": {
+    intro: `Party mint georgette with vertical silver sequin stripes in a bright marble hallway—not a teal curtain studio or blush lounge sequin look. Upload one clear waist-up photo of an adult woman.`,
+    tips: [
+      `Use a sharp waist-up or three-quarter photo of an adult woman—blurry selfies smear mint sequin-stripe saree detail.`,
+      `If the look drifts toward teal velvet curtain seated glam or blush floral lounge, restate this exact wardrobe and scene: mint georgette with vertical silver sequin stripes in a bright marble hallway.`,
+      `Keep jewellery light and modest; ask to remove heavy bridal sets if they appear uninvited.`,
+      `Leave clothing preservation off so the saree edit can apply; turn it on only to keep what you wore.`,
+    ],
+    faqs: [
+      {
+        question: `Will my face stay the same with this saree edit?`,
+        answer: `Yes. Face, skin tone, hair or head covering, and glasses stay from your photo while only the outfit and scene update.`,
+      },
+      {
+        question: `Do I need to already wear a saree?`,
+        answer: `No. Everyday wear is fine; the prompt swaps you into the mint sequin-stripe saree.`,
+      },
+      {
+        question: `Is this the same as a generic modern saree outfit change?`,
+        answer: `No. This page is the specific mint georgette with vertical silver sequin stripes in a bright marble hallway—distinct from a generic modern drape utility edit.`,
+      },
+      {
+        question: `Why does the fabric look flat or bridal-heavy?`,
+        answer: `Ask for true-to-life fabric texture on the mint sequin-stripe saree and keep jewellery light—explicitly non-bridal unless you want wedding styling.`,
+      },
+    ],
+    addonLine: `Want a quieter take on this look? Add: keep the mint sequin-stripe saree and marble hallway, lock exact skin tone and face, soften background bokeh slightly—no extra people, logos, or heavy bridal jewellery.`,
+  },
+  "blush-organza-potli-saree-garden-patio": {
+    intro: `Soft blush organza with a pearl-handled potli on a sunlit garden patio—airy outdoor daylight, not an ivy terrace or mirror selfie. One clear waist-up photo of an adult woman.`,
+    tips: [
+      `Use a sharp waist-up or three-quarter photo of an adult woman—blurry selfies smear blush organza saree detail.`,
+      `If the look drifts toward sage ivy terrace or lavender mirror selfie, restate this exact wardrobe and scene: sheer blush organza with a pearl-handled potli on a sunlit garden patio.`,
+      `Keep jewellery light and modest; ask to remove heavy bridal sets if they appear uninvited.`,
+      `Leave clothing preservation off so the saree edit can apply; turn it on only to keep what you wore.`,
+    ],
+    faqs: [
+      {
+        question: `Will my face stay the same with this saree edit?`,
+        answer: `Yes. Face, skin tone, hair or head covering, and glasses stay from your photo while only the outfit and scene update.`,
+      },
+      {
+        question: `Do I need to already wear a saree?`,
+        answer: `No. Everyday wear is fine; the prompt swaps you into the blush organza saree.`,
+      },
+      {
+        question: `Is this the same as a generic modern saree outfit change?`,
+        answer: `No. This page is the specific sheer blush organza with a pearl-handled potli on a sunlit garden patio—distinct from a generic modern drape utility edit.`,
+      },
+      {
+        question: `Why does the fabric look flat or bridal-heavy?`,
+        answer: `Ask for true-to-life fabric texture on the blush organza saree and keep jewellery light—explicitly non-bridal unless you want wedding styling.`,
+      },
+    ],
+    addonLine: `Want a quieter take on this look? Add: keep the blush organza saree and garden patio, lock exact skin tone and face, soften background bokeh slightly—no extra people, logos, or heavy bridal jewellery.`,
+  },
+  "ivory-lace-reception-saree-boutique-mirror": {
+    intro: `Ivory lace reception saree beside a boutique floor mirror under warm showroom light—not a palace-hall pallu flare or lounge sequin look. Upload one clear waist-up photo of an adult woman.`,
+    tips: [
+      `Use a sharp waist-up or three-quarter photo of an adult woman—blurry selfies smear ivory lace reception saree detail.`,
+      `If the look drifts toward champagne palace flare or blush lounge sequins, restate this exact wardrobe and scene: ivory lace reception saree beside a boutique floor mirror.`,
+      `Keep jewellery light and modest; ask to remove heavy bridal sets if they appear uninvited.`,
+      `Leave clothing preservation off so the saree edit can apply; turn it on only to keep what you wore.`,
+    ],
+    faqs: [
+      {
+        question: `Will my face stay the same with this saree edit?`,
+        answer: `Yes. Face, skin tone, hair or head covering, and glasses stay from your photo while only the outfit and scene update.`,
+      },
+      {
+        question: `Do I need to already wear a saree?`,
+        answer: `No. Everyday wear is fine; the prompt swaps you into the ivory lace reception saree.`,
+      },
+      {
+        question: `Is this the same as a generic modern saree outfit change?`,
+        answer: `No. This page is the specific ivory lace reception saree beside a boutique floor mirror—distinct from a generic modern drape utility edit.`,
+      },
+      {
+        question: `Why does the fabric look flat or bridal-heavy?`,
+        answer: `Ask for true-to-life fabric texture on the ivory lace reception saree and keep jewellery light—explicitly non-bridal unless you want wedding styling.`,
+      },
+    ],
+    addonLine: `Want a quieter take on this look? Add: keep the ivory lace reception saree and boutique floor mirror, lock exact skin tone and face, soften background bokeh slightly—no extra people, logos, or heavy bridal jewellery.`,
+  },
+  "leopard-print-belted-saree-old-city-street": {
+    intro: `Retro editorial leopard-print chiffon with a slim black belt on an old city street—vintage Bollywood street energy, not noir shadow or black-and-gold steps. One clear waist-up photo of an adult woman.`,
+    tips: [
+      `Use a sharp waist-up or three-quarter photo of an adult woman—blurry selfies smear leopard-print chiffon saree detail.`,
+      `If the look drifts toward shadowed saree noir or black-and-gold flower steps, restate this exact wardrobe and scene: tan leopard-print chiffon saree with a slim black belt on an old city street.`,
+      `Keep jewellery light and modest; ask to remove heavy bridal sets if they appear uninvited.`,
+      `Leave clothing preservation off so the saree edit can apply; turn it on only to keep what you wore.`,
+    ],
+    faqs: [
+      {
+        question: `Will my face stay the same with this saree edit?`,
+        answer: `Yes. Face, skin tone, hair or head covering, and glasses stay from your photo while only the outfit and scene update.`,
+      },
+      {
+        question: `Do I need to already wear a saree?`,
+        answer: `No. Everyday wear is fine; the prompt swaps you into the leopard-print chiffon saree.`,
+      },
+      {
+        question: `Is this the same as a generic modern saree outfit change?`,
+        answer: `No. This page is the specific tan leopard-print chiffon saree with a slim black belt on an old city street—distinct from a generic modern drape utility edit.`,
+      },
+      {
+        question: `Why does the fabric look flat or bridal-heavy?`,
+        answer: `Ask for true-to-life fabric texture on the leopard-print chiffon saree and keep jewellery light—explicitly non-bridal unless you want wedding styling.`,
+      },
+    ],
+    addonLine: `Want a quieter take on this look? Add: keep the leopard-print chiffon saree and old city street, lock exact skin tone and face, soften background bokeh slightly—no extra people, logos, or heavy bridal jewellery.`,
+  },
+  "teal-sequin-glam-saree-velvet-curtain": {
+    intro: `Deep teal sequin glam saree seated against champagne velvet curtains—studio drama, not a mint marble hallway walk or blush lounge stand. Upload one clear waist-up photo of an adult woman.`,
+    tips: [
+      `Use a sharp waist-up or three-quarter photo of an adult woman—blurry selfies smear teal sequin glam saree detail.`,
+      `If the look drifts toward mint marble hallway stripes or blush floral lounge, restate this exact wardrobe and scene: deep teal sequin saree seated against champagne velvet curtains.`,
+      `Keep jewellery light and modest; ask to remove heavy bridal sets if they appear uninvited.`,
+      `Leave clothing preservation off so the saree edit can apply; turn it on only to keep what you wore.`,
+    ],
+    faqs: [
+      {
+        question: `Will my face stay the same with this saree edit?`,
+        answer: `Yes. Face, skin tone, hair or head covering, and glasses stay from your photo while only the outfit and scene update.`,
+      },
+      {
+        question: `Do I need to already wear a saree?`,
+        answer: `No. Everyday wear is fine; the prompt swaps you into the teal sequin glam saree.`,
+      },
+      {
+        question: `Is this the same as a generic modern saree outfit change?`,
+        answer: `No. This page is the specific deep teal sequin saree seated against champagne velvet curtains—distinct from a generic modern drape utility edit.`,
+      },
+      {
+        question: `Why does the fabric look flat or bridal-heavy?`,
+        answer: `Ask for true-to-life fabric texture on the teal sequin glam saree and keep jewellery light—explicitly non-bridal unless you want wedding styling.`,
+      },
+    ],
+    addonLine: `Want a quieter take on this look? Add: keep the teal sequin glam saree and velvet curtains, lock exact skin tone and face, soften background bokeh slightly—no extra people, logos, or heavy bridal jewellery.`,
+  },
+  "sage-organza-saree-ivy-terrace": {
+    intro: `Pale sage organza with silver sequin stripes on a bright ivy terrace—fresh outdoor daylight, not a blush garden potli or mint marble hallway. One clear waist-up photo of an adult woman.`,
+    tips: [
+      `Use a sharp waist-up or three-quarter photo of an adult woman—blurry selfies smear sage organza saree detail.`,
+      `If the look drifts toward blush organza garden potli or mint marble hallway, restate this exact wardrobe and scene: pale sage organza with silver sequin stripes on a bright ivy terrace.`,
+      `Keep jewellery light and modest; ask to remove heavy bridal sets if they appear uninvited.`,
+      `Leave clothing preservation off so the saree edit can apply; turn it on only to keep what you wore.`,
+    ],
+    faqs: [
+      {
+        question: `Will my face stay the same with this saree edit?`,
+        answer: `Yes. Face, skin tone, hair or head covering, and glasses stay from your photo while only the outfit and scene update.`,
+      },
+      {
+        question: `Do I need to already wear a saree?`,
+        answer: `No. Everyday wear is fine; the prompt swaps you into the sage organza saree.`,
+      },
+      {
+        question: `Is this the same as a generic modern saree outfit change?`,
+        answer: `No. This page is the specific pale sage organza with silver sequin stripes on a bright ivy terrace—distinct from a generic modern drape utility edit.`,
+      },
+      {
+        question: `Why does the fabric look flat or bridal-heavy?`,
+        answer: `Ask for true-to-life fabric texture on the sage organza saree and keep jewellery light—explicitly non-bridal unless you want wedding styling.`,
+      },
+    ],
+    addonLine: `Want a quieter take on this look? Add: keep the sage organza saree and ivy stone terrace, lock exact skin tone and face, soften background bokeh slightly—no extra people, logos, or heavy bridal jewellery.`,
+  },
+  "red-ruffle-gown-saree-red-carpet": {
+    intro: `Deep ruby satin gown-saree with a cascading organza ruffle pallu on a red carpet—party glam, not a bridal lehenga or black-and-gold steps look. Upload one clear waist-up photo of an adult woman.`,
+    tips: [
+      `Use a sharp waist-up or three-quarter photo of an adult woman—blurry selfies smear red ruffle gown saree detail.`,
+      `If the look drifts toward bridal lehenga or black-and-gold flower steps, restate this exact wardrobe and scene: deep ruby satin gown-style saree with organza ruffle pallu on a red carpet.`,
+      `Keep jewellery light and modest; ask to remove heavy bridal sets if they appear uninvited.`,
+      `Leave clothing preservation off so the saree edit can apply; turn it on only to keep what you wore.`,
+    ],
+    faqs: [
+      {
+        question: `Will my face stay the same with this saree edit?`,
+        answer: `Yes. Face, skin tone, hair or head covering, and glasses stay from your photo while only the outfit and scene update.`,
+      },
+      {
+        question: `Do I need to already wear a saree?`,
+        answer: `No. Everyday wear is fine; the prompt swaps you into the red ruffle gown saree.`,
+      },
+      {
+        question: `Is this the same as a generic modern saree outfit change?`,
+        answer: `No. This page is the specific deep ruby satin gown-style saree with organza ruffle pallu on a red carpet—distinct from a generic modern drape utility edit.`,
+      },
+      {
+        question: `Why does the fabric look flat or bridal-heavy?`,
+        answer: `Ask for true-to-life fabric texture on the red ruffle gown saree and keep jewellery light—explicitly non-bridal unless you want wedding styling.`,
+      },
+    ],
+    addonLine: `Want a quieter take on this look? Add: keep the red ruffle gown saree and red carpet aisle, lock exact skin tone and face, soften background bokeh slightly—no extra people, logos, or heavy bridal jewellery.`,
+  },
+  "rose-gold-tissue-silk-saree-marble-studio": {
+    intro: `Iridescent rose-gold tissue silk in a minimal marble studio with soft side light—quiet metallic shimmer, not a champagne palace flare or Kanjivaram colonnade. One clear waist-up photo of an adult woman.`,
+    tips: [
+      `Use a sharp waist-up or three-quarter photo of an adult woman—blurry selfies smear rose-gold tissue silk saree detail.`,
+      `If the look drifts toward champagne palace pallu flare or Kanjivaram colonnade, restate this exact wardrobe and scene: iridescent rose-gold tissue silk saree in a minimal marble studio.`,
+      `Keep jewellery light and modest; ask to remove heavy bridal sets if they appear uninvited.`,
+      `Leave clothing preservation off so the saree edit can apply; turn it on only to keep what you wore.`,
+    ],
+    faqs: [
+      {
+        question: `Will my face stay the same with this saree edit?`,
+        answer: `Yes. Face, skin tone, hair or head covering, and glasses stay from your photo while only the outfit and scene update.`,
+      },
+      {
+        question: `Do I need to already wear a saree?`,
+        answer: `No. Everyday wear is fine; the prompt swaps you into the rose-gold tissue silk saree.`,
+      },
+      {
+        question: `Is this the same as a generic modern saree outfit change?`,
+        answer: `No. This page is the specific iridescent rose-gold tissue silk saree in a minimal marble studio—distinct from a generic modern drape utility edit.`,
+      },
+      {
+        question: `Why does the fabric look flat or bridal-heavy?`,
+        answer: `Ask for true-to-life fabric texture on the rose-gold tissue silk saree and keep jewellery light—explicitly non-bridal unless you want wedding styling.`,
+      },
+    ],
+    addonLine: `Want a quieter take on this look? Add: keep the rose-gold tissue silk saree and marble studio, lock exact skin tone and face, soften background bokeh slightly—no extra people, logos, or heavy bridal jewellery.`,
+  },
+  "champagne-pallu-flare-saree-palace-hall": {
+    intro: `Champagne net lace with a wide flared embroidered pallu in a palace-style hall—dramatic reception energy, not an ivory boutique mirror or red-carpet ruffle. Upload one clear waist-up photo of an adult woman.`,
+    tips: [
+      `Use a sharp waist-up or three-quarter photo of an adult woman—blurry selfies smear champagne net lace saree detail.`,
+      `If the look drifts toward ivory boutique mirror or red ruffle carpet, restate this exact wardrobe and scene: champagne net lace saree with flared pallu in a palace-style hall.`,
+      `Keep jewellery light and modest; ask to remove heavy bridal sets if they appear uninvited.`,
+      `Leave clothing preservation off so the saree edit can apply; turn it on only to keep what you wore.`,
+    ],
+    faqs: [
+      {
+        question: `Will my face stay the same with this saree edit?`,
+        answer: `Yes. Face, skin tone, hair or head covering, and glasses stay from your photo while only the outfit and scene update.`,
+      },
+      {
+        question: `Do I need to already wear a saree?`,
+        answer: `No. Everyday wear is fine; the prompt swaps you into the champagne net lace saree.`,
+      },
+      {
+        question: `Is this the same as a generic modern saree outfit change?`,
+        answer: `No. This page is the specific champagne net lace saree with flared pallu in a palace-style hall—distinct from a generic modern drape utility edit.`,
+      },
+      {
+        question: `Why does the fabric look flat or bridal-heavy?`,
+        answer: `Ask for true-to-life fabric texture on the champagne net lace saree and keep jewellery light—explicitly non-bridal unless you want wedding styling.`,
+      },
+    ],
+    addonLine: `Want a quieter take on this look? Add: keep the champagne net lace saree and palace-style hall, lock exact skin tone and face, soften background bokeh slightly—no extra people, logos, or heavy bridal jewellery.`,
+  },
+  "black-gold-border-saree-flower-steps": {
+    intro: `Black sheer georgette with a dense gold sequin border, seated on beige steps beside white chrysanthemums—festive black saree energy, not Banarasi sofa or noir shadow. One clear waist-up photo of an adult woman.`,
+    tips: [
+      `Use a sharp waist-up or three-quarter photo of an adult woman—blurry selfies smear black and gold border saree detail.`,
+      `If the look drifts toward black Banarasi vintage sofa or shadowed saree noir, restate this exact wardrobe and scene: black georgette with a wide gold sequin border seated on flower steps.`,
+      `Keep jewellery light and modest; ask to remove heavy bridal sets if they appear uninvited.`,
+      `Leave clothing preservation off so the saree edit can apply; turn it on only to keep what you wore.`,
+    ],
+    faqs: [
+      {
+        question: `Will my face stay the same with this saree edit?`,
+        answer: `Yes. Face, skin tone, hair or head covering, and glasses stay from your photo while only the outfit and scene update.`,
+      },
+      {
+        question: `Do I need to already wear a saree?`,
+        answer: `No. Everyday wear is fine; the prompt swaps you into the black and gold border saree.`,
+      },
+      {
+        question: `Is this the same as a generic modern saree outfit change?`,
+        answer: `No. This page is the specific black georgette with a wide gold sequin border seated on flower steps—distinct from a generic modern drape utility edit.`,
+      },
+      {
+        question: `Why does the fabric look flat or bridal-heavy?`,
+        answer: `Ask for true-to-life fabric texture on the black and gold border saree and keep jewellery light—explicitly non-bridal unless you want wedding styling.`,
+      },
+    ],
+    addonLine: `Want a quieter take on this look? Add: keep the black and gold border saree and flower steps, lock exact skin tone and face, soften background bokeh slightly—no extra people, logos, or heavy bridal jewellery.`,
+  },
+  "ombre-saree-over-shoulder-dressing-room": {
+    intro: `Ombre ivory-to-rose georgette in a soft over-shoulder dressing-room view with a modest blouse back—intimate styling corner, not a mirror selfie or outdoor patio. Upload one clear waist-up photo of an adult woman.`,
+    tips: [
+      `Use a sharp waist-up or three-quarter photo of an adult woman—blurry selfies smear ombre georgette saree detail.`,
+      `If the look drifts toward lavender mirror selfie or blush garden patio, restate this exact wardrobe and scene: ombre georgette over-shoulder dressing-room portrait with a modest blouse back.`,
+      `Keep jewellery light and modest; ask to remove heavy bridal sets if they appear uninvited.`,
+      `Leave clothing preservation off so the saree edit can apply; turn it on only to keep what you wore.`,
+    ],
+    faqs: [
+      {
+        question: `Will my face stay the same with this saree edit?`,
+        answer: `Yes. Face, skin tone, hair or head covering, and glasses stay from your photo while only the outfit and scene update.`,
+      },
+      {
+        question: `Do I need to already wear a saree?`,
+        answer: `No. Everyday wear is fine; the prompt swaps you into the ombre georgette saree.`,
+      },
+      {
+        question: `Is this the same as a generic modern saree outfit change?`,
+        answer: `No. This page is the specific ombre georgette over-shoulder dressing-room portrait with a modest blouse back—distinct from a generic modern drape utility edit.`,
+      },
+      {
+        question: `Why does the fabric look flat or bridal-heavy?`,
+        answer: `Ask for true-to-life fabric texture on the ombre georgette saree and keep jewellery light—explicitly non-bridal unless you want wedding styling.`,
+      },
+    ],
+    addonLine: `Want a quieter take on this look? Add: keep the ombre georgette saree and dressing room, lock exact skin tone and face, soften background bokeh slightly—no extra people, logos, or heavy bridal jewellery.`,
+  },
+  "black-banarasi-pallu-saree-vintage-living-room": {
+    intro: `Black Banarasi silk with an ornate gold woven pallu on a vintage living-room sofa—classic weave portrait, not sequin flower steps or Kanjivaram colonnade. One clear waist-up photo of an adult woman.`,
+    tips: [
+      `Use a sharp waist-up or three-quarter photo of an adult woman—blurry selfies smear black banarasi silk saree detail.`,
+      `If the look drifts toward black-and-gold sequin steps or Kanjivaram colonnade, restate this exact wardrobe and scene: black banarasi silk with ornate gold pallu on a vintage living-room sofa.`,
+      `Keep jewellery light and modest; ask to remove heavy bridal sets if they appear uninvited.`,
+      `Leave clothing preservation off so the saree edit can apply; turn it on only to keep what you wore.`,
+    ],
+    faqs: [
+      {
+        question: `Will my face stay the same with this saree edit?`,
+        answer: `Yes. Face, skin tone, hair or head covering, and glasses stay from your photo while only the outfit and scene update.`,
+      },
+      {
+        question: `Do I need to already wear a saree?`,
+        answer: `No. Everyday wear is fine; the prompt swaps you into the black banarasi silk saree.`,
+      },
+      {
+        question: `Is this the same as a generic modern saree outfit change?`,
+        answer: `No. This page is the specific black banarasi silk with ornate gold pallu on a vintage living-room sofa—distinct from a generic modern drape utility edit.`,
+      },
+      {
+        question: `Why does the fabric look flat or bridal-heavy?`,
+        answer: `Ask for true-to-life fabric texture on the black banarasi silk saree and keep jewellery light—explicitly non-bridal unless you want wedding styling.`,
+      },
+    ],
+    addonLine: `Want a quieter take on this look? Add: keep the black banarasi silk saree and vintage living room, lock exact skin tone and face, soften background bokeh slightly—no extra people, logos, or heavy bridal jewellery.`,
+  },
+  "lavender-zari-saree-mirror-selfie": {
+    intro: `Lavender zari organza as a full-length oval-mirror selfie with a plain unbranded phone—casual room reflection, not an ombre over-shoulder dressing room or outdoor patio. Upload one clear waist-up photo of an adult woman.`,
+    tips: [
+      `Use a sharp waist-up or three-quarter photo of an adult woman—blurry selfies smear lavender zari saree detail.`,
+      `If the look drifts toward ombre dressing-room over-shoulder or blush garden patio, restate this exact wardrobe and scene: lavender zari saree captured as a full-length mirror selfie with a plain phone.`,
+      `Keep jewellery light and modest; ask to remove heavy bridal sets if they appear uninvited.`,
+      `Leave clothing preservation off so the saree edit can apply; turn it on only to keep what you wore.`,
+    ],
+    faqs: [
+      {
+        question: `Will my face stay the same with this saree edit?`,
+        answer: `Yes. Face, skin tone, hair or head covering, and glasses stay from your photo while only the outfit and scene update.`,
+      },
+      {
+        question: `Do I need to already wear a saree?`,
+        answer: `No. Everyday wear is fine; the prompt swaps you into the lavender zari saree.`,
+      },
+      {
+        question: `Is this the same as a generic modern saree outfit change?`,
+        answer: `No. This page is the specific lavender zari saree captured as a full-length mirror selfie with a plain phone—distinct from a generic modern drape utility edit.`,
+      },
+      {
+        question: `Why does the fabric look flat or bridal-heavy?`,
+        answer: `Ask for true-to-life fabric texture on the lavender zari saree and keep jewellery light—explicitly non-bridal unless you want wedding styling.`,
+      },
+    ],
+    addonLine: `Want a quieter take on this look? Add: keep the lavender zari saree and oval floor mirror, lock exact skin tone and face, soften background bokeh slightly—no extra people, logos, or heavy bridal jewellery.`,
+  },
+  "blush-floral-sequin-saree-luxury-lounge": {
+    intro: `Soft blush organza with gold-champagne floral sequins in a luxury lounge—tufted sofa and chandelier bokeh, not teal curtain seating or mint marble hallway. One clear waist-up photo of an adult woman.`,
+    tips: [
+      `Use a sharp waist-up or three-quarter photo of an adult woman—blurry selfies smear blush floral sequin saree detail.`,
+      `If the look drifts toward teal velvet curtain glam or mint marble hallway, restate this exact wardrobe and scene: blush floral sequin saree in a luxury lounge with tufted sofa and chandelier bokeh.`,
+      `Keep jewellery light and modest; ask to remove heavy bridal sets if they appear uninvited.`,
+      `Leave clothing preservation off so the saree edit can apply; turn it on only to keep what you wore.`,
+    ],
+    faqs: [
+      {
+        question: `Will my face stay the same with this saree edit?`,
+        answer: `Yes. Face, skin tone, hair or head covering, and glasses stay from your photo while only the outfit and scene update.`,
+      },
+      {
+        question: `Do I need to already wear a saree?`,
+        answer: `No. Everyday wear is fine; the prompt swaps you into the blush floral sequin saree.`,
+      },
+      {
+        question: `Is this the same as a generic modern saree outfit change?`,
+        answer: `No. This page is the specific blush floral sequin saree in a luxury lounge with tufted sofa and chandelier bokeh—distinct from a generic modern drape utility edit.`,
+      },
+      {
+        question: `Why does the fabric look flat or bridal-heavy?`,
+        answer: `Ask for true-to-life fabric texture on the blush floral sequin saree and keep jewellery light—explicitly non-bridal unless you want wedding styling.`,
+      },
+    ],
+    addonLine: `Want a quieter take on this look? Add: keep the blush floral sequin saree and luxury lounge, lock exact skin tone and face, soften background bokeh slightly—no extra people, logos, or heavy bridal jewellery.`,
+  },
+  "golden-hour-chiffon-saree-rooftop-pallu-wind": {
+    intro: `Light peach chiffon on a private rooftop at golden hour with the pallu mid-motion in the breeze—soft vintage warmth, not a rainy monsoon balcony or leopard street edit. Upload one clear waist-up photo of an adult woman.`,
+    tips: [
+      `Use a sharp waist-up or three-quarter photo of an adult woman—blurry selfies smear golden-hour chiffon saree detail.`,
+      `If the look drifts toward monsoon rainy balcony or leopard old-city street, restate this exact wardrobe and scene: peach chiffon saree on a rooftop at golden hour with the pallu lifting in the wind.`,
+      `Keep jewellery light and modest; ask to remove heavy bridal sets if they appear uninvited.`,
+      `Leave clothing preservation off so the saree edit can apply; turn it on only to keep what you wore.`,
+    ],
+    faqs: [
+      {
+        question: `Will my face stay the same with this saree edit?`,
+        answer: `Yes. Face, skin tone, hair or head covering, and glasses stay from your photo while only the outfit and scene update.`,
+      },
+      {
+        question: `Do I need to already wear a saree?`,
+        answer: `No. Everyday wear is fine; the prompt swaps you into the golden-hour chiffon saree.`,
+      },
+      {
+        question: `Is this the same as a generic modern saree outfit change?`,
+        answer: `No. This page is the specific peach chiffon saree on a rooftop at golden hour with the pallu lifting in the wind—distinct from a generic modern drape utility edit.`,
+      },
+      {
+        question: `Why does the fabric look flat or bridal-heavy?`,
+        answer: `Ask for true-to-life fabric texture on the golden-hour chiffon saree and keep jewellery light—explicitly non-bridal unless you want wedding styling.`,
+      },
+    ],
+    addonLine: `Want a quieter take on this look? Add: keep the golden-hour chiffon saree and rooftop terrace, lock exact skin tone and face, soften background bokeh slightly—no extra people, logos, or heavy bridal jewellery.`,
+  },
+  "kanjivaram-silk-saree-carved-stone-colonnade": {
+    intro: `Rich Kanjivaram silk with broad contrast gold zari borders in a generic carved stone colonnade—weave showcase only, no temples or deities, and not a Banarasi sofa or rose-gold marble studio. One clear waist-up photo of an adult woman.`,
+    tips: [
+      `Use a sharp waist-up or three-quarter photo of an adult woman—blurry selfies smear kanjivaram silk saree detail.`,
+      `If the look drifts toward black Banarasi vintage sofa or rose-gold marble studio, restate this exact wardrobe and scene: rich kanjivaram silk with contrast gold zari borders in a carved stone colonnade.`,
+      `Keep jewellery light and modest; ask to remove heavy bridal sets if they appear uninvited.`,
+      `Leave clothing preservation off so the saree edit can apply; turn it on only to keep what you wore.`,
+    ],
+    faqs: [
+      {
+        question: `Will my face stay the same with this saree edit?`,
+        answer: `Yes. Face, skin tone, hair or head covering, and glasses stay from your photo while only the outfit and scene update.`,
+      },
+      {
+        question: `Do I need to already wear a saree?`,
+        answer: `No. Everyday wear is fine; the prompt swaps you into the kanjivaram silk saree.`,
+      },
+      {
+        question: `Is this the same as a generic modern saree outfit change?`,
+        answer: `No. This page is the specific rich kanjivaram silk with contrast gold zari borders in a carved stone colonnade—distinct from a generic modern drape utility edit.`,
+      },
+      {
+        question: `Why does the fabric look flat or bridal-heavy?`,
+        answer: `Ask for true-to-life fabric texture on the kanjivaram silk saree and keep jewellery light—explicitly non-bridal unless you want wedding styling.`,
+      },
+    ],
+    addonLine: `Want a quieter take on this look? Add: keep the kanjivaram silk saree and stone colonnade, lock exact skin tone and face, soften background bokeh slightly—no extra people, logos, or heavy bridal jewellery.`,
+  },
+  "monsoon-chiffon-saree-rainy-balcony": {
+    intro: `Powder-blue chiffon on a covered rainy balcony at cool blue hour with wet railing reflections—soft classic romance, not golden-hour rooftop wind or a dry mirror selfie. Upload one clear waist-up photo of an adult woman.`,
+    tips: [
+      `Use a sharp waist-up or three-quarter photo of an adult woman—blurry selfies smear monsoon chiffon saree detail.`,
+      `If the look drifts toward golden-hour rooftop pallu wind or lavender mirror selfie, restate this exact wardrobe and scene: powder-blue chiffon saree on a covered rainy balcony at blue hour.`,
+      `Keep jewellery light and modest; ask to remove heavy bridal sets if they appear uninvited.`,
+      `Leave clothing preservation off so the saree edit can apply; turn it on only to keep what you wore.`,
+    ],
+    faqs: [
+      {
+        question: `Will my face stay the same with this saree edit?`,
+        answer: `Yes. Face, skin tone, hair or head covering, and glasses stay from your photo while only the outfit and scene update.`,
+      },
+      {
+        question: `Do I need to already wear a saree?`,
+        answer: `No. Everyday wear is fine; the prompt swaps you into the monsoon chiffon saree.`,
+      },
+      {
+        question: `Is this the same as a generic modern saree outfit change?`,
+        answer: `No. This page is the specific powder-blue chiffon saree on a covered rainy balcony at blue hour—distinct from a generic modern drape utility edit.`,
+      },
+      {
+        question: `Why does the fabric look flat or bridal-heavy?`,
+        answer: `Ask for true-to-life fabric texture on the monsoon chiffon saree and keep jewellery light—explicitly non-bridal unless you want wedding styling.`,
+      },
+    ],
+    addonLine: `Want a quieter take on this look? Add: keep the monsoon chiffon saree and rainy balcony, lock exact skin tone and face, soften background bokeh slightly—no extra people, logos, or heavy bridal jewellery.`,
+  },
 };
-
