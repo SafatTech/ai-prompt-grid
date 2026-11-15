@@ -94,6 +94,18 @@
   position: relative;
   background: #0b0b10;
   overflow: hidden;
+  /* Kill globals .hero padding/min-height that stacked on explore spacing. */
+  padding: 0;
+  margin: 0;
+  min-height: 0;
+}
+
+/* Same breakpoint as globals phone .hero padding/min-height. */
+@media (max-width: 480px) {
+  .explore-v5 .hero {
+    padding: 0;
+    min-height: 0;
+  }
 }
 
 .explore-v5 .hero::after {
@@ -102,13 +114,14 @@
   left: 0;
   right: 0;
   bottom: 0;
-  height: 140px;
+  height: 160px;
   z-index: 4;
   pointer-events: none;
   background: linear-gradient(
     to bottom,
     transparent 0%,
-    color-mix(in srgb, var(--bg) 55%, transparent) 55%,
+    color-mix(in srgb, var(--bg) 35%, transparent) 40%,
+    color-mix(in srgb, var(--bg) 78%, transparent) 72%,
     var(--bg) 100%
   );
 }
@@ -271,8 +284,11 @@
   z-index: 3;
   max-width: var(--explore-max);
   margin: 0 auto;
+  /* Override globals .hero-inner (min-height 750px, align-items center, padding 38px). */
+  min-height: 0;
+  align-items: start;
   /* Match bottom breathing room (nav dots sit in ~14px + fade). */
-  padding: 20px var(--explore-pad-x) 56px;
+  padding: 20px var(--explore-pad-x) 52px;
   display: grid;
   gap: 18px;
   min-width: 0;
@@ -281,22 +297,33 @@
 @media (min-width: 860px) {
   .explore-v5 .hero-inner {
     grid-template-columns: minmax(240px, 0.9fr) minmax(320px, 1.2fr);
-    /* Top-align so padding alone sets equal breathing room (not vertical centering). */
+    /* Top-align columns; equal padding keeps top/bottom gaps matched. */
     align-items: start;
-    padding: 40px var(--explore-pad-x) 56px;
+    min-height: 0;
+    /* Bottom pad leaves room for dots; keep top the same visual weight. */
+    padding: 28px var(--explore-pad-x) 44px;
     gap: 16px;
+  }
+}
+
+/* Beat globals desktop .hero-inner min-height: 750px (same breakpoint family). */
+@media (min-width: 1024px) {
+  .explore-v5 .hero-inner {
+    min-height: 0;
   }
 }
 
 @media (min-width: 1280px) {
   .explore-v5 .hero-inner {
-    padding-top: 44px;
+    padding-top: 28px;
+    padding-bottom: 44px;
   }
 }
 
 @media (min-width: 1920px) {
   .explore-v5 .hero-inner {
-    padding-top: 48px;
+    padding-top: 32px;
+    padding-bottom: 48px;
   }
 }
 
@@ -329,11 +356,6 @@
     flex-direction: column;
     justify-content: flex-start;
     padding: 0 8px 0 0;
-    /* Keep text block optically centered against the collage height. */
-    padding-top: 12px;
-  }
-  .explore-v5 .collage {
-    margin-top: 4px;
   }
 }
 
@@ -515,7 +537,10 @@ button.explore-v5 .float-tag,
 
 @media (max-width: 859px) {
   .explore-v5 .hero-inner {
-    padding-top: 28px;
+    align-items: start;
+    /* Breathing room under the site header before the first tag row. */
+    padding-top: 36px;
+    padding-bottom: 48px;
   }
   .explore-v5 .hero-copy-stack {
     max-width: 100%;
@@ -533,7 +558,7 @@ button.explore-v5 .float-tag,
     margin-top: 14px;
   }
   .explore-v5 .hero-tag-band-top {
-    margin-top: 4px;
+    margin-top: 0;
   }
   .explore-v5 .hero-tag-band-bottom {
     margin-top: 14px;
