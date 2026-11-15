@@ -3,6 +3,7 @@ import {
   type ExploreCollectionKey,
   stylesForCollection,
 } from "@/lib/catalog/explore-collections";
+import { resolveCatalogMediaUrl } from "@/lib/catalog/seed-asset-url";
 import type { CatalogStyle } from "@/lib/catalog/types";
 
 export type ExploreHeroTag = {
@@ -202,7 +203,7 @@ export function buildExploreHeroSlides(
     const collage = list.slice(0, collageCount).map((style) => ({
       id: style.id,
       title: style.title,
-      result: style.result,
+      result: resolveCatalogMediaUrl(style.result),
     }));
     const tags = def.tags.map((tag) =>
       tag.countish
@@ -215,7 +216,7 @@ export function buildExploreHeroSlides(
       count: list.length,
       stats: `${list.length} ${promptWord(list.length)} · Free · Works with Gemini & ChatGPT`,
       styles: collage,
-      bg: collage[0]?.result ?? list[0].result,
+      bg: collage[0]?.result ?? resolveCatalogMediaUrl(list[0].result),
     });
   }
   // Preserve declared order even if some keys were skipped.
@@ -253,7 +254,7 @@ export function buildExplorePromoBanners(
       count: trending.length,
       thumbs: trending.slice(0, 5).map((s) => ({
         id: s.id,
-        result: s.result,
+        result: resolveCatalogMediaUrl(s.result),
         title: s.title,
       })),
     });
@@ -270,7 +271,7 @@ export function buildExplorePromoBanners(
       count: newest.length,
       thumbs: newest.slice(0, 5).map((s) => ({
         id: s.id,
-        result: s.result,
+        result: resolveCatalogMediaUrl(s.result),
         title: s.title,
       })),
     });

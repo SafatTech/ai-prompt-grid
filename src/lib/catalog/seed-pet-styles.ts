@@ -1,6 +1,7 @@
+import { seedCatalogAssetUrl } from "./seed-asset-url";
 import type { CatalogStyle } from "./types";
 
-const asset = (name: string) => `/catalog/pet/${name}`;
+const asset = (name: string) => seedCatalogAssetUrl("pet", name);
 
 function evidence(
   n: string,

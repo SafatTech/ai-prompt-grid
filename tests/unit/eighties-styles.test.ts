@@ -148,7 +148,7 @@ describe("1980s style pages", () => {
     );
     assert.equal(style.examplePairs.length, 1);
     assert.match(style.examplePairs[0]?.altSource ?? "", /^AI-generated/);
-    assert.match(style.source, /source-58\.png$/);
+    assert.match(style.source, /seed\/catalog\/editorial\/source-58\.webp$/);
     assert.equal(
       seedEightiesStyles.every((item) => item.examplePairs.length === 1),
       true,

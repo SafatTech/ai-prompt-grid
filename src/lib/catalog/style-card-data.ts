@@ -4,6 +4,7 @@ import {
   usesMergeStack,
 } from "@/lib/catalog/merge-inputs";
 import { assemblePrompt, defaultsForStyle, previewPrompt } from "@/lib/catalog/prompts";
+import { resolveCatalogMediaUrl } from "@/lib/catalog/seed-asset-url";
 import { SHARED_STYLE_BLUR } from "@/lib/catalog/shared-blur";
 import type { CatalogStyle, StyleSubject } from "@/lib/catalog/types";
 
@@ -97,8 +98,17 @@ export function toStyleCardData(
   const rail = surface === "rail";
   const pair =
     style.examplePairs.find((p) => p.result === style.result) ?? style.examplePairs[0];
-  const mergePhotos = usesMergeStack(style) ? mergeInputPhotos(style) : [];
-  const mergeResult = mergePhotos.length >= 2 ? mergeResultImage(style) : undefined;
+  const mergePhotos = (usesMergeStack(style) ? mergeInputPhotos(style) : []).map(
+    (photo) => ({
+      ...photo,
+      src: resolveCatalogMediaUrl(photo.src),
+    }),
+  );
+  const mergeResultRaw =
+    mergePhotos.length >= 2 ? mergeResultImage(style) : undefined;
+  const mergeResult = mergeResultRaw
+    ? { ...mergeResultRaw, src: resolveCatalogMediaUrl(mergeResultRaw.src) }
+    : undefined;
 
   let resultBlur: string | undefined;
   if (includeBlur && style.resultBlur) {
@@ -143,6 +153,9 @@ export function toStyleCardData(
     }
   }
 
+  const result = resolveCatalogMediaUrl(style.result);
+  const source = rail ? "" : resolveCatalogMediaUrl(style.source);
+
   return {
     id: style.id,
     title: style.title,
@@ -151,8 +164,8 @@ export function toStyleCardData(
     tool: rail ? "" : style.tool,
     note: rail ? "" : style.note,
     height: rail ? 0 : style.height,
-    source: rail ? "" : style.source,
-    result: style.result,
+    source,
+    result,
     ...(style.sourceFocus
       ? { sourceFocusX: style.sourceFocus.x, sourceFocusY: style.sourceFocus.y }
       : {}),

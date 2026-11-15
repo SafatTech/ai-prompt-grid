@@ -1,16 +1,9 @@
+import { seedCatalogAssetUrl } from "./seed-asset-url";
 import type { CatalogStyle } from "./types";
 
-/**
- * Prefer Supabase catalog-public WebPs (uploaded by upload-80s-assets / db:seed).
- * Falls back to local /catalog only when the public Supabase URL is unset.
- */
+/** Prefer Supabase catalog-public WebPs (uploaded by upload-80s-assets / db:seed). */
 function asset(name: string): string {
-  const base = process.env.NEXT_PUBLIC_SUPABASE_URL?.replace(/\/$/, "");
-  const stem = name.replace(/\.[^.]+$/, "");
-  if (base) {
-    return `${base}/storage/v1/object/public/catalog-public/seed/catalog/editorial/${stem}.webp`;
-  }
-  return `/catalog/editorial/${name}`;
+  return seedCatalogAssetUrl("editorial", name);
 }
 
 function evidence(

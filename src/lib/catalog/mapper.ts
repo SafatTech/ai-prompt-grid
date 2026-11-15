@@ -1,4 +1,5 @@
 import { normalizeFocus, type ImageFocus } from "./image-focus";
+import { resolveCatalogMediaUrl } from "./seed-asset-url";
 import type {
   CatalogStyle,
   EditIntent,
@@ -117,7 +118,8 @@ function asStringArray(value: unknown): string[] {
 function resolveAssetUrl(key: string, publicBaseUrl: string | null): string {
   if (!key) return "";
   if (/^https?:\/\//i.test(key)) return key;
-  // App-public paths (e.g. /catalog/editorial/source-01.png) stay site-relative.
+  // Legacy seed paths under /catalog/{folder}/… map to catalog-public WebPs.
+  if (key.startsWith("/catalog/")) return resolveCatalogMediaUrl(key);
   if (key.startsWith("/")) return key;
   if (!publicBaseUrl) return key;
   const base = publicBaseUrl.replace(/\/$/, "");

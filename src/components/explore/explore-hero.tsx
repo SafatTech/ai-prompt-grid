@@ -114,16 +114,16 @@ export function ExploreHero({ slides, onFilter }: Props) {
               data-mood={slide.mood}
               aria-hidden={!isOn}
             >
-              <div className="hero-bg-layer">
-                <Image
-                  className="hero-bg"
+              <div className="explore-hero-photo-layer">
+                {/* Plain img so CSS blur/saturate apply to the full photo (next/image wrappers fight filters). */}
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  className="explore-hero-photo"
                   src={slide.bg}
                   alt=""
-                  fill
-                  sizes="100vw"
-                  priority={slideIndex === 0}
+                  decoding="async"
                   loading={slideIndex === 0 ? "eager" : "lazy"}
-                  unoptimized={false}
+                  fetchPriority={slideIndex === 0 ? "high" : "auto"}
                 />
                 <div className="hero-tint" />
                 <div className="hero-scrim" />
