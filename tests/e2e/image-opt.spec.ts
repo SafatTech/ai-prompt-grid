@@ -19,7 +19,7 @@ async function expectGalleryImagesLoaded(page: Page) {
   // Prefer media roots so we don't pick up chrome/icons. Home masonry + explore
   // cards only — first viewport is priority/eager; later cards stay lazy.
   const imgs = page.locator(
-    ".home-masonry .style-card-rail-media img, [data-testid='style-results'] .style-card-explore img, .style-card-rail-media img",
+    ".home-masonry .style-card-rail-media img, [data-testid='style-results'] .wall-card .thumb-img, [data-testid='style-results'] .style-card-explore img, .style-card-rail-media img",
   );
   await expect(imgs.first()).toBeVisible({ timeout: 30_000 });
   const count = await imgs.count();

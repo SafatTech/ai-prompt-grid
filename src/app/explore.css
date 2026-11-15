@@ -7,7 +7,8 @@
 .explore-v5 .explore-toolbar-bar {
   position: sticky;
   top: var(--header);
-  z-index: 45;
+  /* Keep below site header menus (z-50) and cookie banner (z-90). */
+  z-index: 30;
   display: flex;
   align-items: center;
   gap: 10px;
