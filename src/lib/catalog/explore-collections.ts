@@ -79,10 +79,23 @@ export function selectTrendingCollection(
   return out;
 }
 
+function collectionThemeForStyle(
+  style: CatalogStyle,
+): Exclude<ExploreCollectionKey, "Trending" | "New"> | null {
+  const hay = styleHaystack(style);
+  for (const key of Object.keys(COLLECTION_MATCHERS) as Array<
+    Exclude<ExploreCollectionKey, "Trending" | "New">
+  >) {
+    if (COLLECTION_MATCHERS[key](hay)) return key;
+  }
+  return null;
+}
+
 /**
  * New: most recently added styles only (published_at / created_at desc).
  * Admin pins do not override date order on explore; hideFromNew still excludes.
- * When dates are absent (seed), later catalog order wins so newest packs surface first.
+ * When dates are absent (seed), prefer the newest themed pack (e.g. Sari) so
+ * older trailing packs like pets do not inherit New badges.
  */
 export function selectNewCollection(
   published: CatalogStyle[],
@@ -99,13 +112,19 @@ export function selectNewCollection(
     const seedIndex = new Map(
       getPublishedStyles().map((style, index) => [style.id, index]),
     );
-    return [...pool]
-      .sort(
-        (a, b) =>
-          (seedIndex.get(b.id) ?? -1) - (seedIndex.get(a.id) ?? -1) ||
-          a.id.localeCompare(b.id),
-      )
-      .slice(0, capped);
+    const sorted = [...pool].sort(
+      (a, b) =>
+        (seedIndex.get(b.id) ?? -1) - (seedIndex.get(a.id) ?? -1) ||
+        a.id.localeCompare(b.id),
+    );
+    const leadTheme = sorted[0] ? collectionThemeForStyle(sorted[0]) : null;
+    if (leadTheme) {
+      const themed = sorted.filter(
+        (style) => collectionThemeForStyle(style) === leadTheme,
+      );
+      if (themed.length >= 2) return themed.slice(0, capped);
+    }
+    return sorted.slice(0, capped);
   }
   const indexed = pool.map((style, index) => ({ style, index }));
   indexed.sort((a, b) => compareNewestDesc(a.style, b.style, a.index, b.index));

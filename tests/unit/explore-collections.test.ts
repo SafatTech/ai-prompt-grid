@@ -10,6 +10,7 @@ import {
   buildExploreHeroSlides,
   buildExplorePromoBanners,
   buildNewHeroContent,
+  dedupeHeroPillsAndChips,
 } from "../../src/lib/catalog/explore-hero";
 import { getPublishedStyles } from "../../src/lib/catalog/styles";
 import type { CatalogStyle } from "../../src/lib/catalog/types";
@@ -80,14 +81,23 @@ describe("explore collections + hero", () => {
   });
 
   it("surfaces Sari first for seed New when publishedAt is absent", () => {
-    const newest = selectNewCollection(getPublishedStyles(), 8);
+    const newest = selectNewCollection(getPublishedStyles(), 24);
     assert.ok(newest.length >= 2);
     assert.ok(
-      newest
-        .slice(0, 5)
-        .every((style) => /saree|sari/i.test(`${style.id} ${style.title}`)),
-      "seed fallback should prefer the latest Saree pack",
+      newest.every((style) =>
+        /\bsaree\b|\bsari\b|\bsarees\b/i.test(
+          [style.id, style.title, style.category, style.note, style.description].join(
+            "\n",
+          ),
+        ),
+      ),
+      "seed fallback should stay inside the newest themed pack",
     );
+    assert.equal(
+      newest.some((style) => style.id.includes("collectible")),
+      false,
+    );
+    assert.match(newest[0]!.id, /saree|sari/i);
   });
 
   it("derives New hero copy from newest style themes without dash punctuation", () => {
@@ -121,7 +131,20 @@ describe("explore collections + hero", () => {
       assert.ok(
         slide.tags.filter((tag) => tag.band === "bottom").length <= 3,
       );
-      assert.ok(slide.tags.every((tag) => !("#" in tag) && !tag.label.includes("#")));
+      assert.ok(slide.tags.every((tag) => !tag.label.includes("#")));
+      const pillLabels = new Set(
+        slide.tags
+          .filter((tag) => !tag.countish)
+          .map((tag) => tag.label.toLowerCase().replace(/\bsaree\b/g, "sari")),
+      );
+      for (const chip of slide.quick) {
+        const key = chip.label.toLowerCase().replace(/\bsaree\b/g, "sari");
+        assert.equal(
+          pillLabels.has(key),
+          false,
+          `${slide.key} repeats "${chip.label}" as pill and chip`,
+        );
+      }
     }
     const neu = slides.find((slide) => slide.key === "New");
     assert.ok(neu);
@@ -134,5 +157,24 @@ describe("explore collections + hero", () => {
     assert.ok(newBanner);
     assert.match(newBanner!.blurb, /Sari/i);
     assert.equal(/[—–]/.test(newBanner!.blurb), false);
+  });
+
+  it("dedupes matching pill and quick-chip labels", () => {
+    const result = dedupeHeroPillsAndChips(
+      [
+        { label: "Sari", band: "top" },
+        { label: "Cinematic", band: "bottom" },
+        { label: "12 styles", band: "bottom", countish: true },
+      ],
+      [
+        { label: "Sari", key: "Sari" },
+        { label: "Cinematic", key: "Cinematic" },
+        { label: "Travel", key: "Travel" },
+      ],
+    );
+    assert.deepEqual(
+      result.quick.map((chip) => chip.label),
+      ["Travel"],
+    );
   });
 });

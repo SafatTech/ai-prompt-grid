@@ -252,6 +252,36 @@ function clampSlideTags(tags: ExploreHeroTag[]): ExploreHeroTag[] {
   return assignTones([...top, ...bottomRest, ...(count ? [count] : [])]);
 }
 
+function normalizeLabel(value: string): string {
+  return value
+    .toLowerCase()
+    .replace(/^(professional\s+)/, "")
+    .replace(/\s+and\s+objects$/, "")
+    .replace(/\bsaree\b/g, "sari")
+    .replace(/[^a-z0-9]+/g, "");
+}
+
+/** Keep colored pills and quick chips from repeating the same label. */
+export function dedupeHeroPillsAndChips(
+  tags: ExploreHeroTag[],
+  quick: ExploreHeroQuickChip[],
+): { tags: ExploreHeroTag[]; quick: ExploreHeroQuickChip[] } {
+  const pillKeys = new Set(
+    tags
+      .filter((tag) => !tag.countish)
+      .map((tag) => normalizeLabel(tag.label)),
+  );
+  const quickOut: ExploreHeroQuickChip[] = [];
+  const used = new Set(pillKeys);
+  for (const chip of quick) {
+    const key = normalizeLabel(chip.label);
+    if (used.has(key)) continue;
+    used.add(key);
+    quickOut.push(chip);
+  }
+  return { tags, quick: quickOut };
+}
+
 /** Build New-slide copy from the newest styles so future uploads stay accurate. */
 export function buildNewHeroContent(newest: CatalogStyle[]): {
   lede: string;
@@ -288,7 +318,7 @@ export function buildNewHeroContent(newest: CatalogStyle[]): {
     used.add(key);
     bottomExtras.push({ label, filter: label });
   }
-  const tags = clampSlideTags([
+  const rawTags = clampSlideTags([
     { label: "New", filter: "New", band: "top", tone: "teal" },
     ...topExtras.map((entry, index) => ({
       label: entry.label,
@@ -312,7 +342,7 @@ export function buildNewHeroContent(newest: CatalogStyle[]): {
   ]);
 
   const quickSource = uniqueLabels(lead, 5);
-  const quick = quickSource.map((entry) => ({
+  let quick = quickSource.map((entry) => ({
     label: entry.label,
     key: entry.filter,
   }));
@@ -321,6 +351,25 @@ export function buildNewHeroContent(newest: CatalogStyle[]): {
       if (quick.some((chip) => chip.key === fallback)) continue;
       quick.push({ label: fallback, key: fallback });
       if (quick.length >= 3) break;
+    }
+  }
+  const deduped = dedupeHeroPillsAndChips(rawTags, quick);
+  const tags = deduped.tags;
+  quick = deduped.quick;
+  if (quick.length < 2) {
+    for (const fallback of [
+      { label: "Travel", key: "Travel" },
+      { label: "Vintage", key: "Vintage" },
+      { label: "Fantasy", key: "Fantasy" },
+    ]) {
+      if (quick.some((chip) => normalizeLabel(chip.label) === normalizeLabel(fallback.label))) {
+        continue;
+      }
+      if (tags.some((tag) => normalizeLabel(tag.label) === normalizeLabel(fallback.label))) {
+        continue;
+      }
+      quick.push(fallback);
+      if (quick.length >= 2) break;
     }
   }
 
@@ -351,16 +400,20 @@ export function buildExploreHeroSlides(
     const dynamic =
       def.key === "New" ? buildNewHeroContent(list) : null;
     const baseTags = clampSlideTags(dynamic?.tags ?? def.tags);
-    const tags = baseTags.map((tag) =>
+    const countedTags = baseTags.map((tag) =>
       tag.countish
         ? { ...tag, label: `${list.length} ${styleWord(list.length)}` }
         : tag,
+    );
+    const { tags, quick } = dedupeHeroPillsAndChips(
+      countedTags,
+      dynamic?.quick?.length ? dynamic.quick : [...def.quick],
     );
 
     slides.push({
       ...def,
       lede: dynamic?.lede ?? def.lede,
-      quick: dynamic?.quick?.length ? dynamic.quick : def.quick,
+      quick,
       tags,
       count: list.length,
       stats: `${list.length} ${promptWord(list.length)} · Free · Works with Gemini & ChatGPT`,

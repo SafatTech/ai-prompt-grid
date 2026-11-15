@@ -139,8 +139,9 @@ export function ExploreClient({
       seen.add(style.id);
       merged.push({
         ...style,
-        isHot: style.isHot ?? hotSet.has(style.id),
-        isNew: style.isNew ?? newSet.has(style.id),
+        isHot: hotSet.has(style.id),
+        // Badge membership must match the New collection ids exactly.
+        isNew: newSet.has(style.id),
       });
     }
     return merged;
@@ -162,11 +163,34 @@ export function ExploreClient({
     (cards: ExploreWallCardData[]): ExploreWallCardData[] =>
       cards.map((card) => ({
         ...card,
-        isHot: card.isHot ?? hotSet.has(card.id),
-        isNew: card.isNew ?? newSet.has(card.id),
+        isHot: hotSet.has(card.id),
+        isNew: newSet.has(card.id),
       })),
     [hotSet, newSet],
   );
+
+  const stickyControlsRef = useRef<HTMLDivElement>(null);
+  const [stickyStuck, setStickyStuck] = useState(false);
+
+  useEffect(() => {
+    const node = stickyControlsRef.current;
+    if (!node || typeof IntersectionObserver === "undefined") return;
+    const sentinel = document.createElement("div");
+    sentinel.setAttribute("aria-hidden", "true");
+    sentinel.style.cssText = "position:relative;height:1px;margin:0;padding:0;";
+    node.parentElement?.insertBefore(sentinel, node);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setStickyStuck(!entry.isIntersecting);
+      },
+      { rootMargin: "-1px 0px 0px 0px", threshold: 0 },
+    );
+    observer.observe(sentinel);
+    return () => {
+      observer.disconnect();
+      sentinel.remove();
+    };
+  }, []);
 
   const fetchListing = useCallback(
     async (queryString: string) => {
@@ -676,7 +700,10 @@ export function ExploreClient({
 
       <ExploreHero slides={heroSlides} onFilter={setQuickFilter} />
 
-      <div className="explore-sticky-controls">
+      <div
+        className={cn("explore-sticky-controls", stickyStuck && "is-stuck")}
+        ref={stickyControlsRef}
+      >
         <div className="explore-toolbar-bar">
           <label className="explore-search">
             <svg
