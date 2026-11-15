@@ -4,21 +4,30 @@ import {
   Suspense,
   useCallback,
   useEffect,
-  useId,
   useMemo,
   useRef,
   useState,
 } from "react";
 import { useRouter } from "next/navigation";
-import { EmptyState } from "@/components/empty-state";
+import { ExploreHero } from "@/components/explore/explore-hero";
+import { ExplorePromoBanners } from "@/components/explore/explore-promo-banners";
 import { ExploreUrlSync } from "@/components/explore/explore-url-sync";
-import { StyleCard } from "@/components/style-card";
+import {
+  ExploreWallCard,
+  type ExploreWallCardData,
+} from "@/components/explore/explore-wall-card";
 import { StyleCardSkeleton } from "@/components/style-card-skeleton";
 import { Button } from "@/components/ui/button";
 import {
+  EXPLORE_COLLECTION_KEYS,
+  isExploreCollectionKey,
+} from "@/lib/catalog/explore-collections";
+import type {
+  ExploreHeroSlide,
+  ExplorePromoBanner,
+} from "@/lib/catalog/explore-hero";
+import {
   exploreListingHeading,
-  explorePageCount,
-  explorePageHref,
   exploreQueryFromFilters,
   isExplicitFirstExplorePage,
   parseExploreOffset,
@@ -33,15 +42,14 @@ import {
   type FilterState,
   type SortOption,
 } from "@/lib/catalog/filters";
+import { categories as catalogCategories } from "@/lib/catalog/filter-constants";
 import type { ExploreQuery } from "@/lib/catalog/schemas";
-import type { StyleCardData } from "@/lib/catalog/style-card-data";
 import { filterGroups, groupLabels } from "@/lib/catalog/filter-constants";
 import { assignBareExploreIfFaceted } from "@/lib/navigation/bare-explore";
 import { cn } from "@/lib/utils";
 
 type Props = {
-  /** Default (no-param) SSR page — filters load via /api/home/explore. */
-  styles: StyleCardData[];
+  styles: ExploreWallCardData[];
   matchCount: number;
   catalogCount: number;
   pageSize: number;
@@ -49,13 +57,31 @@ type Props = {
   initialPage: number;
   initialQueryString: string;
   heading: string;
+  heroSlides: ExploreHeroSlide[];
+  banners: ExplorePromoBanner[];
+  hotIds: string[];
+  newIds: string[];
+  categories: string[];
 };
 
 type ListingPayload = {
-  styles: StyleCardData[];
+  styles: ExploreWallCardData[];
   matchCount: number;
   page: number;
   heading: string;
+};
+
+const QUICK_CHIPS = ["All", ...EXPLORE_COLLECTION_KEYS] as const;
+
+const SORT_OPTIONS: SortOption[] = ["A-Z", "Z-A", "Category"];
+
+const SORT_LABELS: Record<string, string> = {
+  "A-Z": "Name A-Z",
+  "Z-A": "Name Z-A",
+  Category: "Category",
+  Trending: "Trending",
+  Newest: "Newest",
+  "Most saved": "Most saved",
 };
 
 export function ExploreClient({
@@ -67,15 +93,24 @@ export function ExploreClient({
   initialPage,
   initialQueryString,
   heading: ssrHeading,
+  heroSlides,
+  banners,
+  hotIds,
+  newIds,
+  categories,
 }: Props) {
   const router = useRouter();
+  const hotSet = useMemo(() => new Set(hotIds), [hotIds]);
+  const newSet = useMemo(() => new Set(newIds), [newIds]);
+  const categoryList = categories.length ? categories : [...catalogCategories];
+
   const [search, setSearch] = useState(initialQuery.q);
   const [sort, setSort] = useState<SortOption>(initialQuery.sort);
+  const [collection, setCollection] = useState(initialQuery.collection ?? "");
   const [filters, setFilters] = useState<FilterState>(() =>
     filtersFromExploreQuery(initialQuery),
   );
   const [drawerOpen, setDrawerOpen] = useState(false);
-  /** Staged drawer filters — URL sync only on "Show N styles" (N-15). */
   const [draftFilters, setDraftFilters] = useState<FilterState>(() =>
     filtersFromExploreQuery(initialQuery),
   );
@@ -86,34 +121,52 @@ export function ExploreClient({
     page: initialPage,
     heading: ssrHeading,
   });
-  const [extraStyles, setExtraStyles] = useState<StyleCardData[]>([]);
+  const [extraStyles, setExtraStyles] = useState<ExploreWallCardData[]>([]);
   const [pendingCount, setPendingCount] = useState(0);
   const [loadingMore, setLoadingMore] = useState(false);
   const [listingLoading, setListingLoading] = useState(false);
-  // N-30: seed from the server query string so `/explore?offset=N` keeps SSR
-  // cards and does not flash empty while ExploreUrlSync re-fetches.
   const appliedQuery = useRef<string | null>(initialQueryString);
   const loadMoreInFlight = useRef(false);
   const fetchSeq = useRef(0);
   const draftCountSeq = useRef(0);
+  const searchTimer = useRef<number | null>(null);
 
-  const pageCount = explorePageCount(listing.matchCount);
-  const safePage = Math.min(listing.page, pageCount);
   const visible = useMemo(() => {
     const seen = new Set<string>();
-    const merged: StyleCardData[] = [];
+    const merged: ExploreWallCardData[] = [];
     for (const style of [...listing.styles, ...extraStyles]) {
       if (seen.has(style.id)) continue;
       seen.add(style.id);
-      merged.push(style);
+      merged.push({
+        ...style,
+        isHot: style.isHot ?? hotSet.has(style.id),
+        isNew: style.isNew ?? newSet.has(style.id),
+      });
     }
     return merged;
-  }, [listing.styles, extraStyles]);
+  }, [listing.styles, extraStyles, hotSet, newSet]);
+
   const hasMore = visible.length < listing.matchCount;
   const active = activeFilterEntries(filters);
-  const listingQuery = exploreQueryFromFilters(filters, search, sort);
+  const listingQuery = exploreQueryFromFilters(
+    filters,
+    search,
+    sort,
+    collection || null,
+  );
   const matchCount = listing.matchCount;
   const heading = listing.heading;
+  const activeChip = collection || [...filters.category][0] || "All";
+
+  const decorate = useCallback(
+    (cards: ExploreWallCardData[]): ExploreWallCardData[] =>
+      cards.map((card) => ({
+        ...card,
+        isHot: card.isHot ?? hotSet.has(card.id),
+        isNew: card.isNew ?? newSet.has(card.id),
+      })),
+    [hotSet, newSet],
+  );
 
   const fetchListing = useCallback(
     async (queryString: string) => {
@@ -122,7 +175,9 @@ export function ExploreClient({
         parsed.delete("page");
         const cleaned = parsed.toString();
         if (!cleaned && assignBareExploreIfFaceted()) return;
-        router.replace(cleaned ? `/explore?${cleaned}` : "/explore", { scroll: false });
+        router.replace(cleaned ? `/explore?${cleaned}` : "/explore", {
+          scroll: false,
+        });
         return;
       }
       const offset = parseExploreOffset(parsed);
@@ -154,7 +209,7 @@ export function ExploreClient({
         const res = await fetch(`/api/home/explore?${params.toString()}`);
         if (!res.ok || seq !== fetchSeq.current) return;
         const data = (await res.json()) as {
-          styles?: StyleCardData[];
+          styles?: ExploreWallCardData[];
           total?: number;
           page?: number;
           offset?: number;
@@ -167,21 +222,26 @@ export function ExploreClient({
               ? Math.floor(offset / Math.max(pageSize, 1)) + 1
               : (page ?? 1);
         setListing({
-          styles: Array.isArray(data.styles) ? data.styles : [],
+          styles: decorate(Array.isArray(data.styles) ? data.styles : []),
           matchCount: total,
           page: resolvedPage,
-          heading: exploreListingHeading(),
+          heading: exploreListingHeading(query.collection),
         });
         setDraftMatchCount(total);
       } finally {
         if (seq === fetchSeq.current) setListingLoading(false);
       }
     },
-    [pageSize, router],
+    [pageSize, router, decorate],
   );
 
   const syncUrl = useCallback(
-    (next: { q: string; sort: SortOption; filters: FilterState }) => {
+    (next: {
+      q: string;
+      sort: SortOption;
+      filters: FilterState;
+      collection?: string;
+    }) => {
       const params = exploreQueryToSearchParams({
         q: next.q,
         sort: next.sort,
@@ -190,11 +250,13 @@ export function ExploreClient({
         intent: [...next.filters.intent],
         requirement: [...next.filters.requirement],
         tool: [...next.filters.tool],
+        ...(next.collection?.trim()
+          ? { collection: next.collection.trim() }
+          : {}),
       });
       const qs = params.toString();
       appliedQuery.current = qs;
       if (!qs) {
-        // Soft-nav back to bare /explore can stack robots meta; hard-load instead.
         if (assignBareExploreIfFaceted()) return;
         router.replace("/explore", { scroll: false });
         setListing({
@@ -216,8 +278,6 @@ export function ExploreClient({
   const onUrlQueryString = useCallback(
     (next: string, focusSearch: boolean) => {
       if (appliedQuery.current !== next) {
-        // Soft-nav to `/explore?q=…` remounts via the faceted rewrite; ignore a
-        // brief empty searchParams flash so we do not snap back to SSR totals.
         if (
           !next &&
           typeof window !== "undefined" &&
@@ -231,6 +291,7 @@ export function ExploreClient({
         const nextFilters = filtersFromExploreQuery(query);
         setSearch(query.q);
         setSort(query.sort);
+        setCollection(query.collection ?? "");
         setFilters(nextFilters);
         setDraftFilters(nextFilters);
         setExtraStyles([]);
@@ -255,7 +316,12 @@ export function ExploreClient({
   );
 
   const previewDraftCount = useCallback(
-    async (nextFilters: FilterState, nextSearch: string, nextSort: SortOption) => {
+    async (
+      nextFilters: FilterState,
+      nextSearch: string,
+      nextSort: SortOption,
+      nextCollection: string,
+    ) => {
       const params = exploreQueryToSearchParams({
         q: nextSearch,
         sort: nextSort,
@@ -264,6 +330,7 @@ export function ExploreClient({
         intent: [...nextFilters.intent],
         requirement: [...nextFilters.requirement],
         tool: [...nextFilters.tool],
+        ...(nextCollection ? { collection: nextCollection } : {}),
       });
       params.set("page", "1");
       params.set("pageSize", "1");
@@ -284,12 +351,9 @@ export function ExploreClient({
     if (!hasMore || loadMoreInFlight.current || loadingMore) return;
     loadMoreInFlight.current = true;
     setLoadingMore(true);
-    // Insert placeholders in the click frame so footer CLS is excluded / avoided.
     setPendingCount(pageSize);
     try {
       const params = exploreQueryToSearchParams(listingQuery);
-      // N-26: exclude already-shown ids so cached page-1 vs live page-N cannot
-      // duplicate/skip; API tops up to a full pageSize batch.
       params.set("exclude", visible.map((style) => style.id).join(","));
       params.set("pageSize", String(pageSize));
       const res = await fetch(`/api/home/explore?${params.toString()}`);
@@ -297,8 +361,8 @@ export function ExploreClient({
         setPendingCount(0);
         return;
       }
-      const data = (await res.json()) as { styles?: StyleCardData[] };
-      const batch = Array.isArray(data.styles) ? data.styles : [];
+      const data = (await res.json()) as { styles?: ExploreWallCardData[] };
+      const batch = decorate(Array.isArray(data.styles) ? data.styles : []);
       setExtraStyles((prev) => {
         const seen = new Set(prev.map((style) => style.id));
         for (const style of listing.styles) seen.add(style.id);
@@ -317,7 +381,11 @@ export function ExploreClient({
     }
   }
 
-  function toggleFilter(group: keyof FilterState, value: string, stageOnly = false) {
+  function toggleFilter(
+    group: keyof FilterState,
+    value: string,
+    stageOnly = false,
+  ) {
     const source = stageOnly ? draftFilters : filters;
     const next: FilterState = {
       category: new Set(source.category),
@@ -330,14 +398,14 @@ export function ExploreClient({
     else next[group].add(value);
     if (stageOnly) {
       setDraftFilters(next);
-      void previewDraftCount(next, search, sort);
+      void previewDraftCount(next, search, sort, collection);
       return;
     }
     setFilters(next);
     setDraftFilters(next);
     setExtraStyles([]);
     setPendingCount(0);
-    syncUrl({ q: search, sort, filters: next });
+    syncUrl({ q: search, sort, filters: next, collection });
   }
 
   function applyDraftFilters() {
@@ -345,7 +413,7 @@ export function ExploreClient({
     setExtraStyles([]);
     setPendingCount(0);
     setDrawerOpen(false);
-    syncUrl({ q: search, sort, filters: draftFilters });
+    syncUrl({ q: search, sort, filters: draftFilters, collection });
   }
 
   function openDrawer() {
@@ -366,7 +434,8 @@ export function ExploreClient({
     setDraftFilters(empty);
     setDraftMatchCount(ssrMatchCount);
     setSearch("");
-    setSort("Trending");
+    setSort("A-Z");
+    setCollection("");
     setExtraStyles([]);
     setPendingCount(0);
     appliedQuery.current = "";
@@ -378,6 +447,57 @@ export function ExploreClient({
     });
     if (assignBareExploreIfFaceted()) return;
     router.replace("/explore", { scroll: false });
+  }
+
+  function setQuickFilter(key: string) {
+    setExtraStyles([]);
+    setPendingCount(0);
+    if (key === "All") {
+      const empty = createEmptyFilters();
+      setFilters(empty);
+      setDraftFilters(empty);
+      setCollection("");
+      setListing({
+        styles: ssrStyles,
+        matchCount: ssrMatchCount,
+        page: 1,
+        heading: exploreListingHeading(),
+      });
+      syncUrl({ q: search, sort, filters: empty, collection: "" });
+      scrollToGrid();
+      return;
+    }
+    if (isExploreCollectionKey(key)) {
+      const empty = createEmptyFilters();
+      setFilters(empty);
+      setDraftFilters(empty);
+      setCollection(key);
+      syncUrl({ q: search, sort, filters: empty, collection: key });
+      scrollToGrid();
+      return;
+    }
+    // Category / search tag from hero chips.
+    const empty = createEmptyFilters();
+    if ((catalogCategories as readonly string[]).includes(key)) {
+      empty.category.add(key);
+      setFilters(empty);
+      setDraftFilters(empty);
+      setCollection("");
+      syncUrl({ q: search, sort, filters: empty, collection: "" });
+    } else {
+      setFilters(empty);
+      setDraftFilters(empty);
+      setCollection("");
+      setSearch(key);
+      syncUrl({ q: key, sort, filters: empty, collection: "" });
+    }
+    scrollToGrid();
+  }
+
+  function scrollToGrid() {
+    document
+      .getElementById("explore-grid")
+      ?.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
   useEffect(() => {
@@ -398,18 +518,22 @@ export function ExploreClient({
     setSort(nextSort);
     setExtraStyles([]);
     setPendingCount(0);
-    syncUrl({ q: search, sort: nextSort, filters });
+    syncUrl({ q: search, sort: nextSort, filters, collection });
   }
 
   function onSearchChange(value: string) {
     setSearch(value);
     setExtraStyles([]);
     setPendingCount(0);
-    syncUrl({ q: value, sort, filters });
+    if (searchTimer.current) window.clearTimeout(searchTimer.current);
+    searchTimer.current = window.setTimeout(() => {
+      syncUrl({ q: value, sort, filters, collection });
+    }, 200);
   }
 
   const activeCount = active.length;
-  const panelFilters = (isDrawer: boolean) => (isDrawer ? draftFilters : filters);
+  const panelFilters = (isDrawer: boolean) =>
+    isDrawer ? draftFilters : filters;
   const panelActiveCount = (isDrawer: boolean) =>
     isDrawer ? activeFilterEntries(draftFilters).length : activeCount;
   const panelMatchCount = (isDrawer: boolean) =>
@@ -420,272 +544,294 @@ export function ExploreClient({
     const shownActive = panelActiveCount(isDrawer);
     const shownMatch = panelMatchCount(isDrawer);
     return (
-    <div
-      className={cn(
-        "filter-side-block",
-        isDrawer
-          ? "fixed inset-x-0 bottom-0 z-[65] max-h-[84dvh] rounded-b-none shadow-[0_-20px_60px_rgba(0,0,0,0.5)]"
-          : "sticky top-[calc(var(--header)+20px)] max-h-[calc(100dvh-var(--header)-40px)]",
-      )}
-      role={isDrawer ? "dialog" : undefined}
-      aria-modal={isDrawer || undefined}
-      aria-label={isDrawer ? "Style filters" : undefined}
-    >
-      <div className="filter-side-block__head">
-        <div className="min-w-0">
-          <h2 className="m-0 text-[15px] font-bold tracking-[-0.02em]">Filters</h2>
-          <p className="m-0 mt-0.5 text-[11px] text-[var(--muted)]">
-            {shownActive ? `${shownActive} active` : "Refine the catalog"}
-          </p>
+      <div
+        className={cn(
+          "filter-side-block",
+          isDrawer
+            ? "fixed inset-x-0 bottom-0 z-[65] max-h-[84dvh] rounded-b-none shadow-[0_-20px_60px_rgba(0,0,0,0.5)]"
+            : "sticky top-[calc(var(--header)+20px)] max-h-[calc(100dvh-var(--header)-40px)]",
+        )}
+        role={isDrawer ? "dialog" : undefined}
+        aria-modal={isDrawer || undefined}
+        aria-label={isDrawer ? "Style filters" : undefined}
+      >
+        <div className="filter-side-block__head">
+          <div className="min-w-0">
+            <h2 className="m-0 text-[15px] font-bold tracking-[-0.02em]">
+              Filters
+            </h2>
+            <p className="m-0 mt-0.5 text-[11px] text-[var(--muted)]">
+              {shownActive ? `${shownActive} active` : "Refine the catalog"}
+            </p>
+          </div>
+          <div className="flex shrink-0 items-center gap-1.5">
+            {shownActive ? (
+              <button
+                type="button"
+                className="cursor-pointer rounded-[10px] border-0 bg-transparent px-2.5 py-2 text-xs font-bold text-[#b9abff] hover:bg-[rgba(139,108,255,0.1)]"
+                onClick={() => {
+                  if (isDrawer) {
+                    const empty = createEmptyFilters();
+                    setDraftFilters(empty);
+                    setDraftMatchCount(catalogCount);
+                    return;
+                  }
+                  clearFilters();
+                }}
+                data-testid="clear-filters"
+              >
+                Clear
+              </button>
+            ) : (
+              <button
+                type="button"
+                className="sr-only"
+                onClick={() => {
+                  if (isDrawer) {
+                    const empty = createEmptyFilters();
+                    setDraftFilters(empty);
+                    setDraftMatchCount(catalogCount);
+                    return;
+                  }
+                  clearFilters();
+                }}
+                data-testid="clear-filters"
+              >
+                Clear all
+              </button>
+            )}
+            {isDrawer ? (
+              <button
+                type="button"
+                className="grid h-11 w-11 place-items-center rounded-[12px] border border-[var(--line)] bg-[var(--surface-2)] text-lg leading-none text-[var(--muted)]"
+                aria-label="Close filters"
+                onClick={() => setDrawerOpen(false)}
+              >
+                ×
+              </button>
+            ) : null}
+          </div>
         </div>
-        <div className="flex shrink-0 items-center gap-1.5">
-          {shownActive ? (
-            <button
-              type="button"
-              className="cursor-pointer rounded-[10px] border-0 bg-transparent px-2.5 py-2 text-xs font-bold text-[#b9abff] hover:bg-[rgba(139,108,255,0.1)]"
-              onClick={() => {
-                if (isDrawer) {
-                  const empty = createEmptyFilters();
-                  setDraftFilters(empty);
-                  setDraftMatchCount(catalogCount);
-                  return;
-                }
-                clearFilters();
-              }}
-              data-testid="clear-filters"
-            >
-              Clear
-            </button>
-          ) : (
-            <button
-              type="button"
-              className="sr-only"
-              onClick={() => {
-                if (isDrawer) {
-                  const empty = createEmptyFilters();
-                  setDraftFilters(empty);
-                  setDraftMatchCount(catalogCount);
-                  return;
-                }
-                clearFilters();
-              }}
-              data-testid="clear-filters"
-            >
-              Clear all
-            </button>
-          )}
-          {isDrawer ? (
-            <button
-              type="button"
-              className="grid h-11 w-11 place-items-center rounded-[12px] border border-[var(--line)] bg-[var(--surface-2)] text-lg leading-none text-[var(--muted)]"
-              aria-label="Close filters"
-              onClick={() => setDrawerOpen(false)}
-            >
-              ×
-            </button>
-          ) : null}
-        </div>
-      </div>
 
-      <div className="filter-side-block__body scroll-panel">
-        {(Object.keys(filterGroups) as (keyof typeof filterGroups)[]).map((key) => {
-          const groupActive = shownFilters[key].size;
-          return (
-            <section key={key} className="filter-side-block__group">
-              <div className="mb-3 flex items-center justify-between gap-2">
-                <h3 className="m-0 text-[11px] font-bold tracking-[0.08em] text-[#a8a5b4] uppercase">
-                  {groupLabels[key]}
-                </h3>
-                {groupActive ? (
-                  <span className="rounded-md bg-[rgba(139,108,255,0.16)] px-1.5 py-0.5 text-[10px] font-bold text-[#c5b9ff]">
-                    {groupActive}
-                  </span>
-                ) : null}
-              </div>
-              <div className="flex flex-wrap gap-1.5">
-                {filterGroups[key].map((value) => {
-                  const activeChip = shownFilters[key].has(value);
-                  return (
-                    <button
-                      key={value}
-                      type="button"
-                      aria-pressed={activeChip}
-                      data-testid={`filter-${key}-${value}`}
-                      onClick={() => toggleFilter(key, value, isDrawer)}
-                      className="filter-chip"
-                    >
-                      <span className="filter-chip__mark" aria-hidden>
-                        ✓
+        <div className="filter-side-block__body scroll-panel">
+          {(Object.keys(filterGroups) as (keyof typeof filterGroups)[]).map(
+            (key) => {
+              const groupActive = shownFilters[key].size;
+              return (
+                <section key={key} className="filter-side-block__group">
+                  <div className="mb-3 flex items-center justify-between gap-2">
+                    <h3 className="m-0 text-[11px] font-bold tracking-[0.08em] text-[#a8a5b4] uppercase">
+                      {groupLabels[key]}
+                    </h3>
+                    {groupActive ? (
+                      <span className="rounded-md bg-[rgba(139,108,255,0.16)] px-1.5 py-0.5 text-[10px] font-bold text-[#c5b9ff]">
+                        {groupActive}
                       </span>
-                      {value}
-                    </button>
-                  );
-                })}
-              </div>
-            </section>
-          );
-        })}
-      </div>
-
-      {isDrawer ? (
-        <div className="border-t border-[var(--line)] p-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
-          <Button className="w-full" onClick={applyDraftFilters}>
-            Show {shownMatch} {shownMatch === 1 ? "style" : "styles"}
-          </Button>
+                    ) : null}
+                  </div>
+                  <div className="flex flex-wrap gap-1.5">
+                    {filterGroups[key].map((value) => {
+                      const activeChipBtn = shownFilters[key].has(value);
+                      return (
+                        <button
+                          key={value}
+                          type="button"
+                          aria-pressed={activeChipBtn}
+                          data-testid={`filter-${key}-${value}`}
+                          onClick={() => toggleFilter(key, value, isDrawer)}
+                          className="filter-chip"
+                        >
+                          <span className="filter-chip__mark" aria-hidden>
+                            ✓
+                          </span>
+                          {value}
+                        </button>
+                      );
+                    })}
+                  </div>
+                </section>
+              );
+            },
+          )}
         </div>
-      ) : null}
-    </div>
+
+        {isDrawer ? (
+          <div className="border-t border-[var(--line)] p-4 pb-[max(1rem,env(safe-area-inset-bottom))]">
+            <Button className="w-full" onClick={applyDraftFilters}>
+              Show {shownMatch} {shownMatch === 1 ? "style" : "styles"}
+            </Button>
+          </div>
+        ) : null}
+      </div>
     );
   };
 
+  const showingLabel = `Showing ${visible.length} of ${matchCount}`;
+
   return (
-    <div>
+    <div className="explore-v5">
       <Suspense fallback={null}>
         <ExploreUrlSync onQueryString={onUrlQueryString} />
       </Suspense>
-      <section className="container pt-10 pb-9 sm:pt-16">
-        <h1 className="m-0 mb-2.5 text-[clamp(32px,8vw,70px)] leading-none tracking-[-0.055em]">
-          {heading}
-        </h1>
-        <p className="m-0 text-[15px] text-[var(--muted)] sm:text-[17px]">
-          Browse {catalogCount} tested styles for portraits, pets, places, objects, and
-          more.
-        </p>
-        <form
-          className="mt-[30px] grid grid-cols-1 gap-2.5 sm:grid-cols-[1fr_auto]"
-          onSubmit={(event) => event.preventDefault()}
-        >
-          <label className="sr-only" htmlFor="mainSearch">
-            Search styles
-          </label>
+
+      <div className="explore-toolbar-bar">
+        <label className="explore-search">
+          <svg
+            width="14"
+            height="14"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="#a6a4b2"
+            strokeWidth="2"
+            aria-hidden
+          >
+            <circle cx="11" cy="11" r="7" />
+            <path d="M20 20l-3.5-3.5" />
+          </svg>
+          <span className="sr-only">Search styles</span>
           <input
             id="mainSearch"
             type="search"
-            placeholder="Search cinematic, watercolor, headshot, anime..."
+            placeholder="Search styles…"
             value={search}
             onChange={(event) => onSearchChange(event.target.value)}
             data-testid="explore-search"
-            className="h-14 rounded-[14px] border border-[var(--line)] bg-[var(--surface)] px-[18px] text-base text-[var(--text)] placeholder:text-[#858391] focus-visible:outline focus-visible:outline-3 focus-visible:outline-offset-2 focus-visible:outline-[rgba(139,108,255,0.55)]"
+            autoComplete="off"
           />
-          <Button
-            type="button"
-            variant="secondary"
-            className="md:hidden"
-            data-testid="open-filters"
-            onClick={openDrawer}
-          >
-            Filters{activeCount ? ` · ${activeCount}` : ""}
-          </Button>
-        </form>
-        {active.length ? (
-          <div className="mt-4 flex flex-wrap gap-2" data-testid="active-filters">
-            {active.map(({ group, value }) => (
-              <button
-                key={`${group}-${value}`}
-                type="button"
-                className="inline-flex min-h-8 items-center gap-1.5 rounded-[var(--pill)] border border-[rgba(139,108,255,0.45)] bg-[rgba(139,108,255,0.12)] px-3 text-xs text-[#d6cdff]"
-                onClick={() => toggleFilter(group, value)}
-                aria-label={`Remove ${value} filter`}
-              >
-                {value} ×
-              </button>
+        </label>
+        <select
+          className="explore-sort"
+          aria-label="Sort"
+          value={SORT_OPTIONS.includes(sort) ? sort : "A-Z"}
+          data-testid="sort-select"
+          onChange={(event) => onSortChange(event.target.value as SortOption)}
+        >
+          {SORT_OPTIONS.map((option) => (
+            <option key={option} value={option}>
+              {SORT_LABELS[option] ?? option}
+            </option>
+          ))}
+        </select>
+        <button
+          type="button"
+          className="explore-filters-btn"
+          data-testid="open-filters"
+          onClick={openDrawer}
+        >
+          Filters{activeCount ? ` · ${activeCount}` : ""}
+        </button>
+      </div>
+
+      <ExploreHero slides={heroSlides} onFilter={setQuickFilter} />
+
+      <div className="chip-bar">
+        <div className="chips" role="toolbar" aria-label="Filters">
+          {QUICK_CHIPS.map((chip) => (
+            <button
+              key={chip}
+              type="button"
+              className="chip"
+              data-f={chip}
+              aria-pressed={activeChip === chip}
+              onClick={() => setQuickFilter(chip)}
+            >
+              {chip}
+            </button>
+          ))}
+          <span className="chip-sep" aria-hidden />
+          {categoryList.map((chip) => (
+            <button
+              key={chip}
+              type="button"
+              className="chip"
+              data-f={chip}
+              aria-pressed={filters.category.has(chip) && !collection}
+              onClick={() => setQuickFilter(chip)}
+            >
+              {chip}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <ExplorePromoBanners banners={banners} onFilter={setQuickFilter} />
+
+      <div className="wrap" id="explore-grid">
+        <div className="toolbar">
+          <div>
+            <h2>{heading}</h2>
+            <p>Catalog wall · {pageSize} at a time</p>
+          </div>
+          <div className="count" data-testid="results-count">
+            {matchCount ? showingLabel : null}
+          </div>
+        </div>
+
+        {listingLoading && visible.length === 0 ? (
+          <div className="page-grid" data-testid="style-results" aria-busy="true">
+            {Array.from({ length: Math.min(pageSize, 24) }, (_, index) => (
+              <StyleCardSkeleton
+                key={`explore-listing-${index}`}
+                variant="compact"
+                index={index}
+              />
             ))}
           </div>
-        ) : null}
-      </section>
-
-      <section className="container grid gap-6 pt-2.5 pb-[100px] md:grid-cols-[300px_minmax(0,1fr)] lg:gap-8">
-        <aside className="hidden md:block" data-testid="desktop-filters">
-          {filterPanel()}
-        </aside>
-        <div>
-          <div className="explore-toolbar mb-[18px] flex min-h-11 items-center justify-between gap-4">
-            <span
-              className="explore-results-count inline-block w-[12ch] shrink-0 text-[13px] text-[var(--muted)] tabular-nums"
-              data-testid="results-count"
-            >
-              {matchCount} {matchCount === 1 ? "style" : "styles"}
-            </span>
-            <div className="ml-auto flex items-center gap-2">
-              <SortSelect value={sort} onChange={onSortChange} />
-            </div>
-          </div>
-          <h2 className="sr-only">Style results</h2>
-          {listingLoading && visible.length === 0 ? (
+        ) : matchCount ? (
+          <>
             <div
-              className="grid grid-cols-1 items-start gap-[18px] sm:grid-cols-2 lg:grid-cols-3"
+              className="page-grid"
               data-testid="style-results"
-              aria-busy="true"
+              aria-busy={pendingCount > 0 || undefined}
             >
-              {Array.from({ length: pageSize }, (_, index) => (
+              {visible.map((style, index) => (
+                <ExploreWallCard
+                  key={style.id}
+                  style={style}
+                  priority={listing.page === 1 && index === 0}
+                  eager={listing.page === 1 && index > 0 && index < 8}
+                />
+              ))}
+              {Array.from({ length: pendingCount }, (_, index) => (
                 <StyleCardSkeleton
-                  key={`explore-listing-${index}`}
+                  key={`explore-pending-${index}`}
                   variant="compact"
                   index={index}
                 />
               ))}
             </div>
-          ) : matchCount ? (
-            <>
-              <div
-                className="grid grid-cols-1 items-start gap-[18px] sm:grid-cols-2 lg:grid-cols-3"
-                data-testid="style-results"
-                aria-busy={pendingCount > 0 || undefined}
-              >
-                {visible.map((style, index) => (
-                  <StyleCard
-                    key={style.id}
-                    style={style}
-                    compact
-                    /* Card 1 only: high fetchPriority. Cards 2–4: eager, normal priority (LCP). */
-                    priority={listing.page === 1 && index === 0}
-                    eager={listing.page === 1 && index > 0 && index < 4}
-                  />
-                ))}
-                {Array.from({ length: pendingCount }, (_, index) => (
-                  <StyleCardSkeleton
-                    key={`explore-pending-${index}`}
-                    variant="compact"
-                    index={index}
-                  />
-                ))}
-              </div>
+            <div className="more-wrap">
+              <div className="more-meta">{matchCount ? showingLabel : ""}</div>
               {hasMore ? (
-                <div className="mt-8 flex justify-center">
-                  <Button
-                    variant="secondary"
-                    data-testid="load-more"
-                    disabled={loadingMore}
-                    onClick={() => void loadMore()}
-                  >
-                    {loadingMore ? "Loading…" : "Load more styles"}
-                  </Button>
-                </div>
+                <button
+                  type="button"
+                  className="more"
+                  data-testid="load-more"
+                  disabled={loadingMore}
+                  onClick={() => void loadMore()}
+                >
+                  {loadingMore ? "Loading…" : "Load more"}
+                </button>
               ) : null}
-              <ExplorePagination
-                page={safePage}
-                pageCount={pageCount}
-                hrefFor={(target) => explorePageHref(listingQuery, target)}
-              />
-            </>
-          ) : (
-            <EmptyState
-              title="No styles match those filters"
-              description="Try a broader search or clear one of your selected filters."
-              action={
-                <Button variant="secondary" onClick={clearFilters}>
-                  Clear filters
-                </Button>
-              }
-            />
-          )}
-        </div>
-      </section>
+            </div>
+          </>
+        ) : (
+          <div className="empty show" data-testid="explore-empty">
+            Nothing matched those filters.
+            <div className="mt-4">
+              <Button variant="secondary" onClick={clearFilters}>
+                Clear filters
+              </Button>
+            </div>
+          </div>
+        )}
+      </div>
+
       {drawerOpen ? (
         <>
           <button
             type="button"
-            className="fixed inset-0 z-[64] cursor-pointer border-0 bg-black/55 md:hidden"
+            className="fixed inset-0 z-[64] cursor-pointer border-0 bg-black/55"
             aria-label="Close filters"
             onClick={() => setDrawerOpen(false)}
           />
@@ -693,207 +839,5 @@ export function ExploreClient({
         </>
       ) : null}
     </div>
-  );
-}
-
-function ExplorePagination({
-  page,
-  pageCount,
-  hrefFor,
-}: {
-  page: number;
-  pageCount: number;
-  hrefFor: (page: number) => string;
-}) {
-  if (pageCount <= 1) return null;
-
-  const linkClass =
-    "inline-flex min-h-11 items-center justify-center rounded-xl border border-[var(--line)] px-3 text-sm font-bold text-[var(--muted)] hover:border-[var(--line-strong)] hover:text-[var(--text)]";
-
-  return (
-    <nav
-      className="mt-8 flex flex-wrap items-center justify-center gap-2"
-      aria-label="Style pages"
-      data-testid="explore-pagination"
-    >
-      {page > 1 ? (
-        <a rel="prev" href={hrefFor(page - 1)} className={linkClass}>
-          Previous
-        </a>
-      ) : null}
-      {Array.from({ length: pageCount }, (_, index) => {
-        const number = index + 1;
-        if (number === page) {
-          return (
-            <span
-              key={number}
-              aria-current="page"
-              className="inline-flex min-h-11 min-w-11 items-center justify-center rounded-xl border border-[var(--line-strong)] bg-[var(--surface-2)] px-3 text-sm font-bold text-[var(--text)]"
-            >
-              {number}
-            </span>
-          );
-        }
-        return (
-          <a key={number} href={hrefFor(number)} className={`${linkClass} min-w-11`}>
-            {number}
-          </a>
-        );
-      })}
-      {page < pageCount ? (
-        <a
-          rel="next"
-          href={hrefFor(page + 1)}
-          className={linkClass}
-          data-testid="explore-next"
-        >
-          Next
-        </a>
-      ) : null}
-    </nav>
-  );
-}
-
-const SORT_OPTIONS: SortOption[] = ["Trending", "Newest", "Most saved"];
-
-function SortSelect({
-  value,
-  onChange,
-}: {
-  value: SortOption;
-  onChange: (value: SortOption) => void;
-}) {
-  const listId = useId();
-  const rootRef = useRef<HTMLDivElement>(null);
-  const [open, setOpen] = useState(false);
-
-  useEffect(() => {
-    if (!open) return;
-
-    const onPointerDown = (event: MouseEvent) => {
-      if (!rootRef.current?.contains(event.target as Node)) setOpen(false);
-    };
-    const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
-    };
-
-    document.addEventListener("mousedown", onPointerDown);
-    document.addEventListener("keydown", onKeyDown);
-    return () => {
-      document.removeEventListener("mousedown", onPointerDown);
-      document.removeEventListener("keydown", onKeyDown);
-    };
-  }, [open]);
-
-  return (
-    <div ref={rootRef} className="relative shrink-0">
-      <select
-        className="sr-only"
-        tabIndex={-1}
-        aria-hidden
-        value={value}
-        data-testid="sort-select"
-        onChange={(event) => onChange(event.target.value as SortOption)}
-      >
-        {SORT_OPTIONS.map((option) => (
-          <option key={option} value={option}>
-            {option}
-          </option>
-        ))}
-      </select>
-
-      <button
-        type="button"
-        aria-haspopup="listbox"
-        aria-expanded={open}
-        aria-controls={listId}
-        aria-label={`Sort styles: ${value}`}
-        onClick={() => setOpen((current) => !current)}
-        className={cn(
-          "flex min-h-11 min-w-[148px] cursor-pointer items-center justify-between gap-2 rounded-[12px] border px-3 text-[13px] transition-colors duration-150",
-          open
-            ? "border-[var(--line-strong)] bg-[var(--surface-2)]"
-            : "border-[var(--line)] bg-[var(--surface)] hover:border-[var(--line-strong)]",
-        )}
-      >
-        <span className="font-semibold text-[var(--text)]">{value}</span>
-        <span
-          className={cn(
-            "text-[var(--muted)] transition-transform duration-150",
-            open && "rotate-180",
-          )}
-          aria-hidden
-        >
-          <ChevronIcon />
-        </span>
-      </button>
-
-      {open ? (
-        <ul
-          id={listId}
-          role="listbox"
-          aria-label="Sort styles"
-          className="absolute top-[calc(100%+6px)] right-0 z-30 m-0 min-w-full list-none rounded-[12px] border border-[var(--line)] bg-[var(--surface)] p-1 shadow-[0_16px_40px_rgba(0,0,0,0.35)]"
-        >
-          {SORT_OPTIONS.map((option) => {
-            const active = option === value;
-            return (
-              <li key={option} role="presentation">
-                <button
-                  type="button"
-                  role="option"
-                  aria-selected={active}
-                  onClick={() => {
-                    onChange(option);
-                    setOpen(false);
-                  }}
-                  className={cn(
-                    "flex w-full cursor-pointer items-center justify-between gap-4 rounded-[8px] px-3 py-2 text-left text-[13px] transition-colors duration-150",
-                    active
-                      ? "bg-[rgba(255,255,255,0.06)] font-semibold text-[var(--text)]"
-                      : "text-[#d2d0da] hover:bg-[rgba(255,255,255,0.04)] hover:text-[var(--text)]",
-                  )}
-                >
-                  {option}
-                  {active ? (
-                    <span className="text-[var(--muted)]" aria-hidden>
-                      <CheckIcon />
-                    </span>
-                  ) : null}
-                </button>
-              </li>
-            );
-          })}
-        </ul>
-      ) : null}
-    </div>
-  );
-}
-
-function ChevronIcon() {
-  return (
-    <svg viewBox="0 0 20 20" fill="none" className="h-3.5 w-3.5" aria-hidden>
-      <path
-        d="M5 7.5 10 12.5 15 7.5"
-        stroke="currentColor"
-        strokeWidth="1.8"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
-  );
-}
-
-function CheckIcon() {
-  return (
-    <svg viewBox="0 0 20 20" fill="none" className="h-3.5 w-3.5" aria-hidden>
-      <path
-        d="M4.5 10.5 8.2 14.2 15.5 6"
-        stroke="currentColor"
-        strokeWidth="1.9"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      />
-    </svg>
   );
 }

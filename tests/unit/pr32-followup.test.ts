@@ -15,12 +15,13 @@ describe("PR32 follow-up: home → explore page math (N-10 / N-27)", () => {
     const { homeExploreContinueHref } = await import(
       "../../src/lib/catalog/explore-paging"
     );
-    assert.equal(EXPLORE_PAGE_SIZE, 18);
-    // Legacy page helper: floor(shown/18)+1 (no +1 skip).
-    assert.equal(homeExploreFallbackPage(72), 5);
-    assert.equal(homeExploreFallbackPage(24), 2);
-    assert.equal(homeExploreFallbackPage(54), 4);
-    assert.equal(homeExploreFallbackPage(18), 2);
+    assert.equal(EXPLORE_PAGE_SIZE, 50);
+    // Legacy page helper: floor(shown/pageSize)+1 (no +1 skip).
+    assert.equal(homeExploreFallbackPage(72), 2);
+    assert.equal(homeExploreFallbackPage(24), 1);
+    assert.equal(homeExploreFallbackPage(54), 2);
+    assert.equal(homeExploreFallbackPage(50), 2);
+    assert.equal(homeExploreFallbackPage(100), 3);
     // N-27: continue via offset so no cards are skipped.
     assert.equal(homeExploreContinueHref(100), "/explore?offset=100");
     assert.equal(homeExploreContinueHref(0), "/explore");

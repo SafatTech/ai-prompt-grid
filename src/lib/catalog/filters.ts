@@ -1,8 +1,20 @@
 import type { CatalogStyle } from "./types";
+import {
+  buildExploreCollectionSets,
+  isExploreCollectionKey,
+  styleMatchesCollection,
+} from "./explore-collections";
 import { filterGroups } from "./filter-constants";
 import type { ExploreQuery } from "./schemas";
 
-const SORT_OPTIONS = ["Trending", "Newest", "Most saved"] as const;
+const SORT_OPTIONS = [
+  "Trending",
+  "Newest",
+  "Most saved",
+  "A-Z",
+  "Z-A",
+  "Category",
+] as const;
 
 export type FilterState = {
   category: Set<string>;
@@ -68,10 +80,10 @@ export function filtersFromExploreQuery(query: ExploreQuery): FilterState {
 export function parseExploreSearchParams(params: URLSearchParams): ExploreQuery {
   const multi = (key: string) => params.getAll(key).filter(Boolean);
   const q = (params.get("q") ?? "").slice(0, 120);
-  const sortRaw = params.get("sort") ?? "Trending";
+  const sortRaw = params.get("sort") ?? "A-Z";
   const sort = (SORT_OPTIONS as readonly string[]).includes(sortRaw)
     ? (sortRaw as ExploreQuery["sort"])
-    : "Trending";
+    : "A-Z";
   return {
     q,
     sort,
@@ -80,6 +92,7 @@ export function parseExploreSearchParams(params: URLSearchParams): ExploreQuery 
     intent: multi("intent"),
     requirement: multi("requirement"),
     tool: multi("tool"),
+    collection: params.get("collection")?.trim() || undefined,
   };
 }
 
@@ -88,10 +101,11 @@ export function exploreQueryToSearchParams(
 ): URLSearchParams {
   const params = new URLSearchParams();
   if (query.q.trim()) params.set("q", query.q.trim());
-  if (query.sort !== "Trending") params.set("sort", query.sort);
+  if (query.sort !== "A-Z") params.set("sort", query.sort);
   for (const key of ["category", "subject", "intent", "requirement", "tool"] as const) {
     for (const value of query[key]) params.append(key, value);
   }
+  if (query.collection?.trim()) params.set("collection", query.collection.trim());
   return params;
 }
 
@@ -187,8 +201,14 @@ export function filterStyles(
   filters: FilterState,
   search: string,
   sort: SortOption,
+  collection?: string | null,
 ) {
   const tokens = tokenizeSearchQuery(search);
+  const collectionKey =
+    collection && isExploreCollectionKey(collection) ? collection : null;
+  const collectionSets = collectionKey
+    ? buildExploreCollectionSets(styles)
+    : null;
   let output = styles.filter((style) => {
     if (style.status !== "published") return false;
     const matchesSearch =
@@ -196,7 +216,11 @@ export function filterStyles(
     const matchesFilters = (Object.keys(filterGroups) as (keyof FilterState)[]).every(
       (key) => filters[key].size === 0 || filters[key].has(style[key]),
     );
-    return matchesSearch && matchesFilters;
+    const matchesCollection =
+      !collectionKey ||
+      !collectionSets ||
+      styleMatchesCollection(style, collectionKey, collectionSets);
+    return matchesSearch && matchesFilters && matchesCollection;
   });
 
   if (sort === "Most saved" || sort === "Trending") {
@@ -206,6 +230,22 @@ export function filterStyles(
     const indexed = output.map((style, index) => ({ style, index }));
     indexed.sort((a, b) => compareNewestDesc(a.style, b.style, a.index, b.index));
     output = indexed.map((entry) => entry.style);
+  } else if (sort === "Z-A") {
+    output = [...output].sort(
+      (a, b) => b.title.localeCompare(a.title) || compareStyleIdAsc(a, b),
+    );
+  } else if (sort === "Category") {
+    output = [...output].sort(
+      (a, b) =>
+        a.category.localeCompare(b.category) ||
+        a.title.localeCompare(b.title) ||
+        compareStyleIdAsc(a, b),
+    );
+  } else {
+    // A-Z (default) and any unknown sort.
+    output = [...output].sort(
+      (a, b) => a.title.localeCompare(b.title) || compareStyleIdAsc(a, b),
+    );
   }
   return output;
 }
