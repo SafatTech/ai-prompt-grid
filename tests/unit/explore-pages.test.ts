@@ -23,7 +23,7 @@ import {
 
 const emptyQuery = {
   q: "",
-  sort: "Trending" as const,
+  sort: "A-Z" as const,
   category: [] as string[],
   subject: [] as string[],
   intent: [] as string[],
@@ -50,9 +50,8 @@ describe("explore pagination", () => {
     assert.equal(exploreListingTitle(1), "Explore styles");
     assert.equal(exploreListingTitle(2), "Explore styles, Page 2");
     assert.match(exploreListingDescription(3), /Page 3\./);
-    assert.equal(exploreListingHeading(), "Find a style for your photo");
-    // Paginated listings keep the same visible H1 (Page N stays in title/description).
-    assert.equal(exploreListingHeading(), "Find a style for your photo");
+    assert.equal(exploreListingHeading(), "All styles");
+    assert.equal(exploreListingHeading("Diwali"), "Diwali");
     assert.equal(exploreQueryHasFacets(emptyQuery), false);
     assert.equal(exploreQueryHasFacets({ ...emptyQuery, category: ["Cinematic"] }), true);
     assert.equal(exploreCanonicalHref(emptyQuery, 2), "/explore?page=2");
@@ -69,11 +68,11 @@ describe("explore pagination", () => {
   it("covers every published style across server pages and the sitemap", () => {
     const styles = getPublishedStyles();
     assert.equal(styles.length, 355);
-    assert.equal(EXPLORE_PAGE_SIZE, 18);
+    assert.equal(EXPLORE_PAGE_SIZE, 50);
 
     const seen = new Set<string>();
     const pages = explorePageCount(styles.length);
-    assert.equal(pages, 20);
+    assert.equal(pages, 8);
     for (let page = 1; page <= pages; page += 1) {
       const slice = explorePageSlice(styles, page);
       assert.ok(slice.length > 0);
@@ -96,18 +95,6 @@ describe("explore pagination", () => {
       "/explore?page=6",
       "/explore?page=7",
       "/explore?page=8",
-      "/explore?page=9",
-      "/explore?page=10",
-      "/explore?page=11",
-      "/explore?page=12",
-      "/explore?page=13",
-      "/explore?page=14",
-      "/explore?page=15",
-      "/explore?page=16",
-      "/explore?page=17",
-      "/explore?page=18",
-      "/explore?page=19",
-      "/explore?page=20",
     ]);
   });
 

@@ -12,13 +12,12 @@ test.describe("PR34 follow-up a11y", () => {
     });
 
     await page.goto("/explore");
-    await expect(page.getByRole("heading", { level: 1 })).toContainText(
-      "Find a style for your photo",
-    );
+    await expect(page.getByTestId("explore-hero")).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
 
     await page.getByTestId("explore-search").fill("christmas");
     await page.getByTestId("explore-search").press("Enter");
-    await expect(page.getByTestId("results-count")).toContainText(/\d+ styles?/);
+    await expect(page.getByTestId("results-count")).toContainText(/Showing \d+ of \d+/);
     await expect(page).toHaveURL(/[?&]q=/);
 
     const firstCard = page.getByTestId("style-results").locator("article").first();
@@ -33,9 +32,8 @@ test.describe("PR34 follow-up a11y", () => {
     await dialog.getByRole("link", { name: "Explore styles" }).first().click();
 
     await expect(page).toHaveURL(/\/explore\/?(\?.*)?$/);
-    await expect(page.getByRole("heading", { level: 1 })).toContainText(
-      "Find a style for your photo",
-    );
+    await expect(page.getByTestId("explore-hero")).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
     await expect(page.getByTestId("explore-search")).toBeVisible();
     await expect(page.getByTestId("results-count")).toBeVisible();
 
@@ -67,20 +65,16 @@ test.describe("PR34 follow-up a11y", () => {
       .toBeLessThanOrEqual(1);
 
     await page.getByTestId("explore-search").fill("christmas");
-    await expect(page.getByTestId("results-count")).toContainText(/\d+ styles?/);
+    await expect(page.getByTestId("results-count")).toContainText(/Showing \d+ of \d+/);
+    await expect(page).toHaveURL(/[?&]q=/);
 
-    const clear = page.getByTestId("clear-filters");
-    if (await clear.isVisible().catch(() => false)) {
-      await clear.click();
-    } else {
-      await page.getByRole("button", { name: "Open menu" }).click();
-      await page
-        .getByRole("dialog", { name: "Site menu" })
-        .getByRole("link", { name: "Explore styles" })
-        .first()
-        .click();
-    }
-    await expect(page).toHaveURL(/\/explore\/?(\?.*)?$/);
+    // Soft-reset the listing (search alone does not activate Clear filters).
+    await page.getByTestId("explore-search").fill("");
+    await page
+      .getByRole("toolbar", { name: "Filters" })
+      .getByRole("button", { name: "All", exact: true })
+      .click();
+    await expect(page.getByTestId("results-count")).toContainText(/Showing \d+ of \d+/);
     await expect(page.getByTestId("explore-search")).toBeVisible();
 
     await expect

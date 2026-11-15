@@ -636,12 +636,17 @@ export type PromptOptionsInput = z.infer<typeof promptOptionsSchema>;
 
 export const exploreQuerySchema = z.object({
   q: z.string().max(120).optional().default(""),
-  sort: z.enum(["Trending", "Newest", "Most saved"]).optional().default("Trending"),
+  sort: z
+    .enum(["Trending", "Newest", "Most saved", "A-Z", "Z-A", "Category"])
+    .optional()
+    .default("A-Z"),
   category: z.array(z.string()).optional().default([]),
   subject: z.array(z.string()).optional().default([]),
   intent: z.array(z.string()).optional().default([]),
   requirement: z.array(z.string()).optional().default([]),
   tool: z.array(z.string()).optional().default([]),
+  /** Explore wall collection chip: Trending, New, Sari, Diwali, Winter, Birthday. */
+  collection: z.string().max(40).optional(),
 });
 
 export type ExploreQuery = z.infer<typeof exploreQuerySchema>;

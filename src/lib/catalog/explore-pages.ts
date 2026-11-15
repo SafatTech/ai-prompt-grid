@@ -18,6 +18,7 @@ export function exploreQueryFromFilters(
   filters: FilterState,
   search: string,
   sort: ExploreQuery["sort"],
+  collection?: string | null,
 ): ExploreQuery {
   return {
     q: search,
@@ -27,6 +28,7 @@ export function exploreQueryFromFilters(
     intent: [...filters.intent],
     requirement: [...filters.requirement],
     tool: [...filters.tool],
+    ...(collection?.trim() ? { collection: collection.trim() } : {}),
   };
 }
 
@@ -42,12 +44,13 @@ export function explorePageHref(query: ExploreQuery, page: number): string {
 export function exploreQueryHasFacets(query: ExploreQuery): boolean {
   return (
     query.q.trim().length > 0 ||
-    query.sort !== "Trending" ||
+    query.sort !== "A-Z" ||
     query.category.length > 0 ||
     query.subject.length > 0 ||
     query.intent.length > 0 ||
     query.requirement.length > 0 ||
-    query.tool.length > 0
+    query.tool.length > 0 ||
+    Boolean(query.collection?.trim())
   );
 }
 
@@ -70,9 +73,11 @@ export function exploreListingDescription(page: number): string {
   return page > 1 ? `${base} Page ${page}.` : base;
 }
 
-/** Visible H1 — same on every page; Page N belongs in title/description only. */
-export function exploreListingHeading(): string {
-  return "Find a style for your photo";
+/** Visible listing H2 under the hero; Page N belongs in title/description only. */
+export function exploreListingHeading(collection?: string | null): string {
+  const key = collection?.trim();
+  if (!key || key === "All") return "All styles";
+  return key;
 }
 
 export function explorePageSlice<T>(items: T[], page: number): T[] {

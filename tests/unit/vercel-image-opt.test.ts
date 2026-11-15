@@ -105,7 +105,7 @@ describe("Vercel image optimization toggle", () => {
 
     const explore = readSrc("src/components/explore/explore-client.tsx");
     assert.ok(explore.includes("priority={listing.page === 1 && index === 0}"));
-    assert.ok(explore.includes("eager={listing.page === 1 && index > 0 && index < 4}"));
+    assert.ok(explore.includes("eager={listing.page === 1 && index > 0 && index < 8}"));
     assert.ok(explore.includes('params.set("exclude"'));
 
     const skeleton = readSrc("src/components/style-card-skeleton.tsx");

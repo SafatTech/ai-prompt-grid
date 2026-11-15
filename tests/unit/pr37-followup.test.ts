@@ -78,10 +78,10 @@ describe("PR37 follow-up: bare /explore stays ISR (N-23 reverted)", () => {
 });
 
 describe("PR37 follow-up: explore LCP priority", () => {
-  it("limits fetchPriority high to card 1 and keeps cards 2–4 eager", () => {
+  it("limits fetchPriority high to card 1 and keeps early wall cards eager", () => {
     const explore = readSrc("src/components/explore/explore-client.tsx");
     assert.ok(explore.includes("index === 0"));
-    assert.ok(explore.includes("eager={listing.page === 1 && index > 0 && index < 4}"));
+    assert.ok(explore.includes("eager={listing.page === 1 && index > 0 && index < 8}"));
   });
 });
 

@@ -39,6 +39,7 @@ export async function GET(request: Request) {
     searchParams.has("intent") ||
     searchParams.has("requirement") ||
     searchParams.has("tool") ||
+    searchParams.has("collection") ||
     searchParams.has("exclude") ||
     searchParams.has("offset") ||
     rawPageSize === String(EXPLORE_PAGE_SIZE);
@@ -46,7 +47,7 @@ export async function GET(request: Request) {
   if (hasExploreFacets) {
     const pageSize =
       rawPageSize && /^[1-9]\d*$/.test(rawPageSize)
-        ? Math.min(Number(rawPageSize), 48)
+        ? Math.min(Number(rawPageSize), 100)
         : EXPLORE_PAGE_SIZE;
     const query = parseExploreSearchParams(searchParams);
     const styles = await listPublishedStyles();
@@ -55,6 +56,7 @@ export async function GET(request: Request) {
       filtersFromExploreQuery(query),
       query.q,
       query.sort,
+      query.collection,
     );
     const total = matches.length;
 

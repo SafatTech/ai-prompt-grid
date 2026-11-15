@@ -9,6 +9,8 @@ type Props = {
   /** Style slug / id only — prompt is fetched on interaction to keep RSC slim. */
   styleId: string;
   className?: string;
+  /** Dense catalog wall: icon-only control matching explore-v5 cards. */
+  variant?: "label" | "icon";
 };
 
 type PromptPayload = {
@@ -54,9 +56,14 @@ async function writeTextFallback(text: string) {
  * Promise-backed Blob so Safari allows the async prompt fetch; writeText is the
  * fallback when ClipboardItem / clipboard.write is unavailable.
  */
-export function CopyPromptButton({ styleId, className }: Props) {
+export function CopyPromptButton({
+  styleId,
+  className,
+  variant = "label",
+}: Props) {
   const { toast } = useToast();
   const [copying, setCopying] = useState(false);
+  const [done, setDone] = useState(false);
   const cacheRef = useRef<PromptPayload | null>(null);
   const inflightRef = useRef<Promise<PromptPayload> | null>(null);
 
@@ -112,6 +119,10 @@ export function CopyPromptButton({ styleId, className }: Props) {
         });
         track("copy_prompt", { style_id: styleId });
         toast("Prompt copied. Open your AI image editor and upload your photo there.");
+        if (variant === "icon") {
+          setDone(true);
+          window.setTimeout(() => setDone(false), 900);
+        }
       })
       .catch(() => {
         toast("Could not copy automatically. Select the prompt text manually.", "error");
@@ -119,6 +130,28 @@ export function CopyPromptButton({ styleId, className }: Props) {
       .finally(() => {
         setCopying(false);
       });
+  }
+
+  if (variant === "icon") {
+    return (
+      <button
+        type="button"
+        className={cn("icon-btn copy-btn", done && "is-done", className)}
+        aria-label="Copy prompt"
+        aria-busy={copying || undefined}
+        data-testid={`copy-prompt-${styleId}`}
+        disabled={copying}
+        onPointerEnter={prefetch}
+        onTouchStart={prefetch}
+        onFocus={prefetch}
+        onClick={onCopy}
+      >
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden>
+          <rect x="8" y="8" width="12" height="12" rx="2" />
+          <path d="M4 16V6a2 2 0 0 1 2-2h10" />
+        </svg>
+      </button>
+    );
   }
 
   return (

@@ -2,8 +2,8 @@
  * Explore pagination math — safe for client bundles (no filters/zod/seeds).
  */
 
-/** Matches the explore grid's first screen so each page stays a real listing. */
-export const EXPLORE_PAGE_SIZE = 18;
+/** Catalog wall page size (Explore v5: 50 tiles, then Load more). */
+export const EXPLORE_PAGE_SIZE = 50;
 
 /**
  * Homepage masonry SSR/append uses a larger pageSize than `/explore` (18).
