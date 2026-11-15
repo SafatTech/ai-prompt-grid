@@ -3,6 +3,7 @@ import {
   compareSavedDesc,
   publishedAtMs,
 } from "@/lib/catalog/filters";
+import { getPublishedStyles } from "@/lib/catalog/styles";
 import type { CatalogStyle } from "@/lib/catalog/types";
 
 /** Quick-filter collections shown in the explore hero and chip bar. */
@@ -93,7 +94,18 @@ export function selectNewCollection(
   );
   const hasDates = pool.some((style) => publishedAtMs(style) > 0);
   if (!hasDates) {
-    return [...pool].reverse().slice(0, capped);
+    // Repository pages may arrive popularity-sorted; map back to seed catalog
+    // order so later packs (e.g. Saree 316–332) still win without publishedAt.
+    const seedIndex = new Map(
+      getPublishedStyles().map((style, index) => [style.id, index]),
+    );
+    return [...pool]
+      .sort(
+        (a, b) =>
+          (seedIndex.get(b.id) ?? -1) - (seedIndex.get(a.id) ?? -1) ||
+          a.id.localeCompare(b.id),
+      )
+      .slice(0, capped);
   }
   const indexed = pool.map((style, index) => ({ style, index }));
   indexed.sort((a, b) => compareNewestDesc(a.style, b.style, a.index, b.index));
