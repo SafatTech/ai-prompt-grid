@@ -674,83 +674,85 @@ export function ExploreClient({
         <ExploreUrlSync onQueryString={onUrlQueryString} />
       </Suspense>
 
-      <div className="explore-toolbar-bar">
-        <label className="explore-search">
-          <svg
-            width="14"
-            height="14"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="#a6a4b2"
-            strokeWidth="2"
-            aria-hidden
-          >
-            <circle cx="11" cy="11" r="7" />
-            <path d="M20 20l-3.5-3.5" />
-          </svg>
-          <span className="sr-only">Search styles</span>
-          <input
-            id="mainSearch"
-            type="search"
-            placeholder="Search styles…"
-            value={search}
-            onChange={(event) => onSearchChange(event.target.value)}
-            data-testid="explore-search"
-            autoComplete="off"
-          />
-        </label>
-        <select
-          className="explore-sort"
-          aria-label="Sort"
-          value={SORT_OPTIONS.includes(sort) ? sort : "A-Z"}
-          data-testid="sort-select"
-          onChange={(event) => onSortChange(event.target.value as SortOption)}
-        >
-          {SORT_OPTIONS.map((option) => (
-            <option key={option} value={option}>
-              {SORT_LABELS[option] ?? option}
-            </option>
-          ))}
-        </select>
-        <button
-          type="button"
-          className="explore-filters-btn"
-          data-testid="open-filters"
-          onClick={openDrawer}
-        >
-          Filters{activeCount ? ` · ${activeCount}` : ""}
-        </button>
-      </div>
-
       <ExploreHero slides={heroSlides} onFilter={setQuickFilter} />
 
-      <div className="chip-bar">
-        <div className="chips" role="toolbar" aria-label="Filters">
-          {QUICK_CHIPS.map((chip) => (
-            <button
-              key={chip}
-              type="button"
-              className="chip"
-              data-f={chip}
-              aria-pressed={activeChip === chip}
-              onClick={() => setQuickFilter(chip)}
+      <div className="explore-sticky-controls">
+        <div className="explore-toolbar-bar">
+          <label className="explore-search">
+            <svg
+              width="14"
+              height="14"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#a6a4b2"
+              strokeWidth="2"
+              aria-hidden
             >
-              {chip}
-            </button>
-          ))}
-          <span className="chip-sep" aria-hidden />
-          {categoryList.map((chip) => (
-            <button
-              key={chip}
-              type="button"
-              className="chip"
-              data-f={chip}
-              aria-pressed={filters.category.has(chip) && !collection}
-              onClick={() => setQuickFilter(chip)}
-            >
-              {chip}
-            </button>
-          ))}
+              <circle cx="11" cy="11" r="7" />
+              <path d="M20 20l-3.5-3.5" />
+            </svg>
+            <span className="sr-only">Search styles</span>
+            <input
+              id="mainSearch"
+              type="search"
+              placeholder="Search styles…"
+              value={search}
+              onChange={(event) => onSearchChange(event.target.value)}
+              data-testid="explore-search"
+              autoComplete="off"
+            />
+          </label>
+          <select
+            className="explore-sort"
+            aria-label="Sort"
+            value={SORT_OPTIONS.includes(sort) ? sort : "A-Z"}
+            data-testid="sort-select"
+            onChange={(event) => onSortChange(event.target.value as SortOption)}
+          >
+            {SORT_OPTIONS.map((option) => (
+              <option key={option} value={option}>
+                {SORT_LABELS[option] ?? option}
+              </option>
+            ))}
+          </select>
+          <button
+            type="button"
+            className="explore-filters-btn"
+            data-testid="open-filters"
+            onClick={openDrawer}
+          >
+            Filters{activeCount ? ` · ${activeCount}` : ""}
+          </button>
+        </div>
+
+        <div className="chip-bar">
+          <div className="chips" role="toolbar" aria-label="Filters">
+            {QUICK_CHIPS.map((chip) => (
+              <button
+                key={chip}
+                type="button"
+                className="chip"
+                data-f={chip}
+                aria-pressed={activeChip === chip}
+                onClick={() => setQuickFilter(chip)}
+              >
+                {chip}
+              </button>
+            ))}
+            <span className="chip-sep" aria-hidden />
+            {categoryList.map((chip) => (
+              <button
+                key={chip}
+                type="button"
+                className="chip"
+                data-f={chip}
+                aria-pressed={filters.category.has(chip) && !collection}
+                onClick={() => setQuickFilter(chip)}
+              >
+                {chip}
+              </button>
+            ))}
+          </div>
         </div>
       </div>
 

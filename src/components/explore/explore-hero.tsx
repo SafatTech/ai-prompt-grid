@@ -130,36 +130,51 @@ export function ExploreHero({ slides, onFilter }: Props) {
                 <div className="hero-grain" />
               </div>
               <div className="hero-inner">
-                <div className="hero-tag-band hero-tag-band-top">
-                  {slide.tags
-                    .filter((tag) => tag.band !== "bottom")
-                    .map((tag) => (
-                      <HeroTag key={`${slide.key}-top-${tag.label}`} tag={tag} />
-                    ))}
-                </div>
                 <div className="hero-copy">
-                  <div className="hero-kicker">{slide.kicker}</div>
-                  <TitleTag className="hero-title">{slide.key}</TitleTag>
-                  <p className="hero-lede">{slide.lede}</p>
-                  <p className="hero-stats">{slide.stats}</p>
-                  <button
-                    type="button"
-                    className="hero-cta"
-                    data-key={slide.key}
-                  >
-                    {slide.cta}
-                  </button>
-                  <div className="hero-quick">
-                    {slide.quick.map((chip) => (
-                      <button
-                        key={`${slide.key}-q-${chip.key}`}
-                        type="button"
-                        className="hero-qchip"
-                        data-key={chip.key}
-                      >
-                        {chip.label}
-                      </button>
-                    ))}
+                  <div className="hero-copy-stack">
+                    <div className="hero-tag-band hero-tag-band-top">
+                      {slide.tags
+                        .filter((tag) => tag.band !== "bottom")
+                        .map((tag) => (
+                          <HeroTag
+                            key={`${slide.key}-top-${tag.label}`}
+                            tag={tag}
+                          />
+                        ))}
+                    </div>
+                    <div className="hero-kicker">{slide.kicker}</div>
+                    <TitleTag className="hero-title">{slide.key}</TitleTag>
+                    <p className="hero-lede">{slide.lede}</p>
+                    <p className="hero-stats">{slide.stats}</p>
+                    <button
+                      type="button"
+                      className="hero-cta"
+                      data-key={slide.key}
+                    >
+                      {slide.cta}
+                    </button>
+                    <div className="hero-quick">
+                      {slide.quick.map((chip) => (
+                        <button
+                          key={`${slide.key}-q-${chip.key}`}
+                          type="button"
+                          className="hero-qchip"
+                          data-key={chip.key}
+                        >
+                          {chip.label}
+                        </button>
+                      ))}
+                    </div>
+                    <div className="hero-tag-band hero-tag-band-bottom">
+                      {slide.tags
+                        .filter((tag) => tag.band === "bottom")
+                        .map((tag) => (
+                          <HeroTag
+                            key={`${slide.key}-bottom-${tag.label}`}
+                            tag={tag}
+                          />
+                        ))}
+                    </div>
                   </div>
                 </div>
                 <div
@@ -178,16 +193,6 @@ export function ExploreHero({ slides, onFilter }: Props) {
                       />
                     </figure>
                   ))}
-                </div>
-                <div className="hero-tag-band hero-tag-band-bottom">
-                  {slide.tags
-                    .filter((tag) => tag.band === "bottom")
-                    .map((tag) => (
-                      <HeroTag
-                        key={`${slide.key}-bottom-${tag.label}`}
-                        tag={tag}
-                      />
-                    ))}
                 </div>
               </div>
             </div>
@@ -240,13 +245,11 @@ function HeroTag({
   const content = (
     <>
       {tag.icon ? <span className="ft-ico">{tag.icon}</span> : null}
-      <span className="ft-label">
-        {tag.hash ? <span className="ft-hash">#</span> : null}
-        {tag.label}
-      </span>
+      <span className="ft-label">{tag.label}</span>
     </>
   );
-  const className = `float-tag${tag.countish ? " is-count" : ""}`;
+  const toneClass = tag.tone ? ` tone-${tag.tone}` : "";
+  const className = `float-tag${tag.countish ? " is-count" : ""}${toneClass}`;
   if (tag.filter) {
     return (
       <button type="button" className={className} data-key={tag.filter}>

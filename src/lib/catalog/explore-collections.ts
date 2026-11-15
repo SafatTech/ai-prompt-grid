@@ -79,26 +79,25 @@ export function selectTrendingCollection(
 }
 
 /**
- * New: admin pins first, then most recently published (organic tail).
- * Larger than the homepage rail so the explore collection feels complete.
+ * New: most recently added styles only (published_at / created_at desc).
+ * Admin pins do not override date order on explore; hideFromNew still excludes.
+ * When dates are absent (seed), later catalog order wins so newest packs surface first.
  */
 export function selectNewCollection(
   published: CatalogStyle[],
   limit = 24,
 ): CatalogStyle[] {
   const capped = Math.max(limit, 1);
-  const pool = published.filter((style) => style.status === "published");
-  const pinned = pool
-    .filter((style) => style.pinNewRank != null)
-    .sort((a, b) => (a.pinNewRank ?? 99) - (b.pinNewRank ?? 99))
-    .slice(0, 5);
-  const pinnedIds = new Set(pinned.map((style) => style.id));
-  const unpinned = pool.filter(
-    (style) => !style.hideFromNew && !pinnedIds.has(style.id),
+  const pool = published.filter(
+    (style) => style.status === "published" && !style.hideFromNew,
   );
-  const indexed = unpinned.map((style, index) => ({ style, index }));
+  const hasDates = pool.some((style) => publishedAtMs(style) > 0);
+  if (!hasDates) {
+    return [...pool].reverse().slice(0, capped);
+  }
+  const indexed = pool.map((style, index) => ({ style, index }));
   indexed.sort((a, b) => compareNewestDesc(a.style, b.style, a.index, b.index));
-  return [...pinned, ...indexed.map((entry) => entry.style)].slice(0, capped);
+  return indexed.map((entry) => entry.style).slice(0, capped);
 }
 
 export function stylesForCollection(
@@ -150,5 +149,5 @@ export function styleIsNew(
   style: CatalogStyle,
   sets: ExploreCollectionSets,
 ): boolean {
-  return sets.newIds.has(style.id) || style.pinNewRank != null;
+  return sets.newIds.has(style.id);
 }
