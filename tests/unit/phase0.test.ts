@@ -22,6 +22,7 @@ import { christmasStyleIds } from "../../src/lib/catalog/seed-christmas-styles";
 import { christmas2026StyleIds } from "../../src/lib/catalog/seed-christmas-2026-styles";
 import { outfitChangeStyleIds } from "../../src/lib/catalog/seed-outfit-change-styles";
 import { sareeStyleIds } from "../../src/lib/catalog/seed-saree-styles";
+import { republicDayStyleIds } from "../../src/lib/catalog/seed-republic-day-styles";
 import { diwaliAddonStyleIds } from "../../src/lib/catalog/seed-diwali-styles";
 import { eightiesStyleIds } from "../../src/lib/catalog/seed-80s-styles";
 import { linkedinStyleIds } from "../../src/lib/catalog/seed-linkedin-styles";
@@ -39,9 +40,9 @@ describe("cn", () => {
 });
 
 describe("published catalog seed", () => {
-  it("exposes 355 published styles with recipe fields", () => {
+  it("exposes 372 published styles with recipe fields", () => {
     const published = getPublishedStyles();
-    assert.equal(published.length, 355);
+    assert.equal(published.length, 372);
     for (const style of published) {
       assert.equal(style.status, "published");
       assert.ok(style.promptVariant.template.includes("{{mood}}"));
@@ -62,7 +63,9 @@ describe("published catalog seed", () => {
         (weddingDressStyleIds.has(style.id) && style.promptVariant.inputImageCount === 1) ||
         (christmas2026StyleIds.has(style.id) && style.promptVariant.inputImageCount === 1) ||
         (outfitChangeStyleIds.has(style.id) && style.promptVariant.inputImageCount === 1) ||
-        (sareeStyleIds.has(style.id) && style.promptVariant.inputImageCount === 1);
+        (sareeStyleIds.has(style.id) && style.promptVariant.inputImageCount === 1) ||
+        (republicDayStyleIds.has(style.id) &&
+          style.promptVariant.inputImageCount === 1);
       assert.ok(style.examplePairs.length >= (singlePair ? 1 : 2));
       assert.ok(style.promptVariant.limitations.length >= 1);
     }

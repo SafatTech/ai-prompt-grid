@@ -1428,4 +1428,72 @@ export const STYLE_BEST_FOR_DATA: Readonly<Record<string, StyleBestForEntry>> = 
     occasions: "Monsoon chiffon saree rainy balcony blue-hour portraits",
     worksWith: "one clear waist-up photo of an adult woman",
   },
+  "sunrise-terrace-salute-women": {
+    occasions: "Republic Day sunrise terrace salute portraits for women",
+    worksWith: "one clear photo of an adult woman",
+  },
+  "office-ethnic-day-kurta-men": {
+    occasions: "Republic Day office ethnic day kurta portraits for men",
+    worksWith: "one clear photo of an adult man",
+  },
+  "couple-tricolour-rangoli-courtyard": {
+    occasions: "Republic Day couple tricolour rangoli courtyard portraits",
+    worksWith: "two clear adult photos",
+  },
+  "family-parade-on-tv-living-room": {
+    occasions: "Republic Day adult-family parade-on-TV living-room portraits",
+    worksWith: "two clear adult photos",
+  },
+  "rooftop-tricolour-kites-women": {
+    occasions: "Republic Day rooftop tricolour kite portraits for women",
+    worksWith: "one clear photo of an adult woman",
+  },
+  "park-tiranga-balloons-men": {
+    occasions: "Republic Day park tiranga balloon portraits for men",
+    worksWith: "one clear photo of an adult man",
+  },
+  "office-ethnic-day-saree-women": {
+    occasions: "Republic Day office ethnic day saree portraits for women",
+    worksWith: "one clear photo of an adult woman",
+  },
+  "couple-terrace-tiranga-balloons": {
+    occasions: "Republic Day couple terrace tiranga balloon portraits",
+    worksWith: "two clear adult photos",
+  },
+  "community-flag-hoist-salute-men": {
+    occasions: "Republic Day community flag hoist salute portraits for men",
+    worksWith: "one clear photo of an adult man",
+  },
+  "courtyard-tricolour-flowers-women": {
+    occasions: "Republic Day courtyard tricolour flower portraits for women",
+    worksWith: "one clear photo of an adult woman",
+  },
+  "couple-balcony-parade-viewing": {
+    occasions: "Republic Day couple balcony parade-viewing portraits",
+    worksWith: "two clear adult photos",
+  },
+  "community-hall-tricolour-bunting-women": {
+    occasions: "Republic Day community hall bunting portraits for women",
+    worksWith: "one clear photo of an adult woman",
+  },
+  "kartavya-path-parade-boulevard-couple": {
+    occasions: "Republic Day Kartavya Path boulevard couple portraits",
+    worksWith: "two clear adult photos",
+  },
+  "india-gate-dusk-portrait-men": {
+    occasions: "Republic Day India Gate dusk portraits for men",
+    worksWith: "one clear photo of an adult man",
+  },
+  "parent-child-school-function-hall": {
+    occasions: "Republic Day parent-and-child school function portraits",
+    worksWith: "one adult photo and one child photo (about 7 to 10)",
+  },
+  "parent-child-terrace-kites": {
+    occasions: "Republic Day parent-and-child terrace kite portraits",
+    worksWith: "one adult photo and one child photo (about 7 to 10)",
+  },
+  "parent-child-balcony-parade": {
+    occasions: "Republic Day parent-and-child balcony parade portraits",
+    worksWith: "one adult photo and one child photo (about 7 to 10)",
+  },
 };

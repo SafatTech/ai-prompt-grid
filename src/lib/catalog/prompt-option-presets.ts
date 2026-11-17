@@ -281,6 +281,23 @@ export const moodLabels: Record<string, string> = {
   "Blush luxury lounge": "Blush lounge",
   "Rich temple-corridor gold": "Colonnade gold",
   "Cool monsoon blue hour": "Monsoon blue hour",
+  "Bright ceremonial morning": "Ceremonial morning",
+  "Bright daytime courtyard": "Day courtyard",
+  "Bright late-morning sky": "Late-morning sky",
+  "Bright midday ivory": "Midday ivory",
+  "Bright morning terrace sky": "Terrace morning",
+  "Clean office daylight": "Office daylight",
+  "Clear morning balcony light": "Balcony morning",
+  "Dusk sandstone and tricolour wash": "Dusk sandstone",
+  "Fresh morning park green": "Park morning",
+  "Indoor festive hall light": "Festive hall",
+  "Respectful morning ceremony": "Ceremony morning",
+  "Soft mid-morning pastel": "Mid-morning pastel",
+  "Soft saffron sunrise": "Saffron sunrise",
+  "Soft winter-morning balcony light": "Winter balcony",
+  "Warm indoor living-room light": "Living-room warm",
+  "Warm indoor school-hall light": "School-hall warm",
+  "Warm late-afternoon gold": "Late-afternoon gold",
 };
 
 /** Short 2–3 word UI labels for full background prompt strings. */
@@ -902,6 +919,40 @@ export const backgroundLabels: Record<string, string> = {
     "Stone colonnade",
   "A covered balcony at rainy blue hour with wet railing reflections, soft rain streaks beyond and distant city light bokeh, no logos":
     "Rainy balcony",
+  "A bright contemporary office lobby with stone floors, glass and pale architecture, a soft depth of corridor, no logos, no signage and no flags":
+    "Office lobby",
+  "A bright daytime home courtyard with stone or cement flooring, a simple verandah edge, and open daylight, no diyas as the focus, no doorway oil lamps, no signage":
+    "Day courtyard",
+  "A bright late-morning home rooftop with a simple parapet, open blue sky, and several kites in separate saffron, white and green colour panels, not flags flown as kites and with no Ashoka Chakra, no signage and no identifiable skyline":
+    "Kite rooftop",
+  "A bright morning home terrace with a simple parapet, open blue sky, and kites in separate saffron, white and green colour panels, not flags flown as kites and with no Ashoka Chakra, no signage and no identifiable skyline":
+    "Family kite terrace",
+  "A contemporary living room in daytime or late morning, a comfortable sofa, a television in the background showing a softly blurred ceremonial boulevard with no logos, no readable text and no military close-ups, and a low table with a tray of saffron, white and green flowers, no fireplace, no Christmas tree and no New Year banner":
+    "Living room",
+  "A grand sandstone memorial arch at dusk, seen in soft background blur, with a respectful open plaza and a gentle saffron, white and green light wash in the sky, no legible inscriptions, no exact replica of any named monument, no flags required so leave the flag out, and no military or police presence":
+    "Memorial arch dusk",
+  "A green public park path in morning light with trees, lawn and a soft path, no readable signage, no landmarks, and no flags, only loose saffron, white and green balloons as props":
+    "Park path",
+  "A late-afternoon home terrace with a simple parapet, warm sunlight, and bunches of plain saffron, white and green balloons behind the couple, no kites, no rangoli, no signage and no identifiable skyline":
+    "Balloon terrace",
+  "A modern office courtyard at midday with pale stone paving, planters, glass facade edges and soft shadow, no logos, no signage and no flags unless a distant pole is tiny and properly hoisted, preferably leave flags out":
+    "Office courtyard",
+  "A neighbourhood courtyard set for a small community ceremony, a clean flagpole at one side with a small Indian tricolour properly hoisted and flying upright, never touching the ground or any person, plus a simple flower cluster at the pole base, no extra people, no military guard, no signage":
+    "Flag courtyard",
+  "A private home terrace at dawn with a simple concrete or tile parapet, potted plants, and a soft clear horizon, no signage and no identifiable skyline":
+    "Dawn terrace",
+  "A residential balcony with a simple rail in soft winter morning light, looking toward a distant generic street civic parade kept far away and softly detailed, no named road, no readable signage, no landmarks, and no military or police units":
+    "Winter balcony",
+  "A wide ceremonial parade boulevard in morning light, trees planted in a formal row, soft background blur, and balloon bunches along the verge, no legible inscriptions, no street signs, no exact replica of any named road, and no military or police presence":
+    "Parade boulevard",
+  "An indoor community hall with plain walls, stacked chairs, and a line of saffron, white and green paper bunting that is clearly festive paper decoration, not the national flag, and has no Ashoka Chakra, no logos and no signage":
+    "Community hall",
+  "An indoor school function hall with rows of plain chairs, a simple stage edge, and bunches of plain saffron, white and green balloons at the back, no logos, no crests, no signage, no flags, and no uniforms with badges":
+    "School hall",
+  "An upper residential balcony with a simple rail, looking toward a distant generic street civic parade kept far away and softly detailed, with balloons or bunting only as tiny distant colour, no named road, no readable signage, no landmarks, and no military or police units":
+    "Parade balcony",
+  "Mid-morning home courtyard steps with pale stone or painted cement, a quiet verandah wall, and open daylight, no kites, no rangoli as the hook, no diyas and no signage":
+    "Flower courtyard",
 };
 
 const genericMoodPresets = [

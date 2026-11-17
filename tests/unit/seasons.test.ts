@@ -43,6 +43,24 @@ describe("activeSeason shortest-window preference", () => {
     assert.equal(activeSeason(atKarachiNoon("2027-01-04"))?.id, "wedding-2026-b");
   });
 
+  it("picks Republic Day over the wider wedding window on Jan 15-27 2027", () => {
+    const republic = SEASONS.find((s) => s.id === "republic-day-2027");
+    const wedding = SEASONS.find((s) => s.id === "wedding-2026-b");
+    assert.ok(republic && wedding);
+    assert.ok(seasonWindowDays(republic) < seasonWindowDays(wedding));
+    assert.equal(republic.festivalDate, "2027-01-26");
+    assert.equal(republic.ctaGuide, "/guides/republic-day-ai-photo-prompts");
+    assert.doesNotMatch(republic.eyebrow, /[\u2013\u2014]/);
+    assert.doesNotMatch(republic.title, /[\u2013\u2014]/);
+    assert.doesNotMatch(republic.body, /[\u2013\u2014]/);
+
+    assert.equal(activeSeason(atKarachiNoon("2027-01-15"))?.id, "republic-day-2027");
+    assert.equal(activeSeason(atKarachiNoon("2027-01-26"))?.id, "republic-day-2027");
+    assert.equal(activeSeason(atKarachiNoon("2027-01-27"))?.id, "republic-day-2027");
+    assert.equal(activeSeason(atKarachiNoon("2027-01-14"))?.id, "wedding-2026-b");
+    assert.equal(activeSeason(atKarachiNoon("2027-01-28"))?.id, "wedding-2026-b");
+  });
+
   it("ends Eid before Holi so Holi is never hidden", () => {
     assert.equal(activeSeason(atKarachiNoon("2027-03-09"))?.id, "ramadan-eid-2027");
     assert.equal(activeSeason(atKarachiNoon("2027-03-10"))?.id, "holi-2027");
@@ -59,9 +77,13 @@ describe("activeSeason shortest-window preference", () => {
 });
 
 describe("season featured style slugs", () => {
-  it("links only published catalog slugs for Halloween and Christmas", () => {
+  it("links only published catalog slugs for Halloween, Christmas, and Republic Day", () => {
     const published = new Set(getPublishedStyles().map((style) => style.id));
-    for (const id of ["halloween-2026", "christmas-2026"] as const) {
+    for (const id of [
+      "halloween-2026",
+      "christmas-2026",
+      "republic-day-2027",
+    ] as const) {
       const season = SEASONS.find((s) => s.id === id);
       assert.ok(season);
       assert.ok(season.styleSlugs.length >= 4);

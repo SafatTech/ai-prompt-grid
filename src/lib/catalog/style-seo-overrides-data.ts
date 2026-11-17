@@ -1321,4 +1321,276 @@ Who it is for: anyone who wants a viral snowflake close-up winter portrait rathe
       "leopard-print-belted-saree-old-city-street",
     ],
   },
+  "sunrise-terrace-salute-women": {
+    title: "Sunrise Terrace Salute AI Prompt (Republic Day)",
+    h1: "Sunrise Terrace Salute AI Photo Prompt",
+    description: "Republic Day sunrise terrace salute AI photo prompt: white salwar, saffron dupatta, green bangles. Keep your face. Free copy-paste.",
+    guideLinks: [
+      {
+        href: "/guides/republic-day-ai-photo-prompts",
+        label: "Republic Day AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: ["rooftop-tricolour-kites-women", "courtyard-tricolour-flowers-women", "office-ethnic-day-saree-women"],
+  },
+  "office-ethnic-day-kurta-men": {
+    title: "Office Ethnic Day Kurta AI Prompt (Men)",
+    h1: "Office Ethnic Day Kurta AI Photo Prompt",
+    description: "Republic Day office ethnic day kurta AI photo prompt for men: ivory kurta, small tricolour lapel ribbon. Keep your face.",
+    guideLinks: [
+      {
+        href: "/guides/republic-day-ai-photo-prompts",
+        label: "Republic Day AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: ["park-tiranga-balloons-men", "community-flag-hoist-salute-men", "india-gate-dusk-portrait-men"],
+  },
+  "couple-tricolour-rangoli-courtyard": {
+    title: "Couple Tricolour Rangoli AI Prompt",
+    h1: "Couple Tricolour Rangoli AI Photo Prompt",
+    description: "Republic Day couple tricolour rangoli AI photo prompt: daytime courtyard, no diya focus. Upload two photos. Both faces stay.",
+    guideLinks: [
+      {
+        href: "/guides/republic-day-ai-photo-prompts",
+        label: "Republic Day AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: ["couple-terrace-tiranga-balloons", "couple-balcony-parade-viewing", "kartavya-path-parade-boulevard-couple"],
+  },
+  "family-parade-on-tv-living-room": {
+    title: "Family Parade on TV AI Prompt",
+    h1: "Family Parade on TV AI Photo Prompt",
+    description: "Republic Day adult-family parade-on-TV AI photo prompt: living-room sofa, cream and saffron wear. Upload two adult photos.",
+    guideLinks: [
+      {
+        href: "/guides/republic-day-ai-photo-prompts",
+        label: "Republic Day AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: ["couple-balcony-parade-viewing", "parent-child-balcony-parade", "couple-tricolour-rangoli-courtyard"],
+  },
+  "rooftop-tricolour-kites-women": {
+    title: "Rooftop Tricolour Kites AI Prompt (Women)",
+    h1: "Rooftop Tricolour Kites AI Photo Prompt",
+    description: "Republic Day rooftop tricolour kites AI photo prompt: white suit, panel-colour kites, upward gaze. Keep your face.",
+    guideLinks: [
+      {
+        href: "/guides/republic-day-ai-photo-prompts",
+        label: "Republic Day AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: ["sunrise-terrace-salute-women", "parent-child-terrace-kites", "courtyard-tricolour-flowers-women"],
+  },
+  "park-tiranga-balloons-men": {
+    title: "Park Tiranga Balloons AI Prompt (Men)",
+    h1: "Park Tiranga Balloons AI Photo Prompt",
+    description: "Republic Day park tiranga balloons AI photo prompt for men: navy jacket, colour balloons, morning walk. Keep your face.",
+    guideLinks: [
+      {
+        href: "/guides/republic-day-ai-photo-prompts",
+        label: "Republic Day AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: ["office-ethnic-day-kurta-men", "couple-terrace-tiranga-balloons", "community-flag-hoist-salute-men"],
+  },
+  "office-ethnic-day-saree-women": {
+    title: "Office Ethnic Day Saree AI Prompt",
+    h1: "Office Ethnic Day Saree AI Photo Prompt",
+    description: "Republic Day office ethnic day saree AI photo prompt: cream saree, white bouquet, lobby setting. Keep your face.",
+    guideLinks: [
+      {
+        href: "/guides/republic-day-ai-photo-prompts",
+        label: "Republic Day AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: ["sunrise-terrace-salute-women", "community-hall-tricolour-bunting-women", "courtyard-tricolour-flowers-women"],
+  },
+  "couple-terrace-tiranga-balloons": {
+    title: "Couple Terrace Tiranga Balloons AI Prompt",
+    h1: "Couple Terrace Tiranga Balloons AI Photo Prompt",
+    description: "Republic Day couple terrace tiranga balloons AI photo prompt: late-afternoon terrace, warm light. Upload two photos.",
+    guideLinks: [
+      {
+        href: "/guides/republic-day-ai-photo-prompts",
+        label: "Republic Day AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: ["couple-tricolour-rangoli-courtyard", "couple-balcony-parade-viewing", "park-tiranga-balloons-men"],
+  },
+  "community-flag-hoist-salute-men": {
+    title: "Community Flag Hoist Salute AI Prompt",
+    h1: "Community Flag Hoist Salute AI Photo Prompt",
+    description: "Republic Day community flag hoist salute AI photo prompt: formal jacket, flag upright on a pole only. Keep your face.",
+    guideLinks: [
+      {
+        href: "/guides/republic-day-ai-photo-prompts",
+        label: "Republic Day AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: ["india-gate-dusk-portrait-men", "office-ethnic-day-kurta-men", "sunrise-terrace-salute-women"],
+  },
+  "courtyard-tricolour-flowers-women": {
+    title: "Courtyard Tricolour Flowers AI Prompt",
+    h1: "Courtyard Tricolour Flowers AI Photo Prompt",
+    description: "Republic Day courtyard tricolour flowers AI photo prompt: seated pastel suit, bloom tray. Keep your face.",
+    guideLinks: [
+      {
+        href: "/guides/republic-day-ai-photo-prompts",
+        label: "Republic Day AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: ["sunrise-terrace-salute-women", "community-hall-tricolour-bunting-women", "couple-tricolour-rangoli-courtyard"],
+  },
+  "couple-balcony-parade-viewing": {
+    title: "Couple Balcony Parade Viewing AI Prompt",
+    h1: "Couple Balcony Parade Viewing AI Photo Prompt",
+    description: "Republic Day couple balcony parade viewing AI photo prompt: cream and forest green, distant street. Upload two photos.",
+    guideLinks: [
+      {
+        href: "/guides/republic-day-ai-photo-prompts",
+        label: "Republic Day AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: ["kartavya-path-parade-boulevard-couple", "parent-child-balcony-parade", "couple-terrace-tiranga-balloons"],
+  },
+  "community-hall-tricolour-bunting-women": {
+    title: "Community Hall Bunting AI Prompt",
+    h1: "Community Hall Tricolour Bunting AI Photo Prompt",
+    description: "Republic Day community hall bunting AI photo prompt: paper bunting, not the flag. Keep your face.",
+    guideLinks: [
+      {
+        href: "/guides/republic-day-ai-photo-prompts",
+        label: "Republic Day AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: ["office-ethnic-day-saree-women", "courtyard-tricolour-flowers-women", "parent-child-school-function-hall"],
+  },
+  "kartavya-path-parade-boulevard-couple": {
+    title: "Kartavya Path Parade Couple AI Prompt",
+    h1: "Kartavya Path Parade Boulevard AI Photo Prompt",
+    description: "Republic Day Kartavya Path couple AI photo prompt: ceremonial boulevard walk, soft blur. Upload two photos. Both faces stay.",
+    guideLinks: [
+      {
+        href: "/guides/republic-day-ai-photo-prompts",
+        label: "Republic Day AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: ["couple-balcony-parade-viewing", "india-gate-dusk-portrait-men", "couple-terrace-tiranga-balloons"],
+  },
+  "india-gate-dusk-portrait-men": {
+    title: "India Gate Dusk Portrait AI Prompt (Men)",
+    h1: "India Gate Dusk Portrait AI Photo Prompt",
+    description: "Republic Day India Gate dusk AI photo prompt for men: formal coat, soft arch blur, tricolour wash. Keep your face.",
+    guideLinks: [
+      {
+        href: "/guides/republic-day-ai-photo-prompts",
+        label: "Republic Day AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: ["community-flag-hoist-salute-men", "kartavya-path-parade-boulevard-couple", "office-ethnic-day-kurta-men"],
+  },
+  "parent-child-school-function-hall": {
+    title: "Parent-Child School Function AI Prompt",
+    h1: "Parent and Child School Function AI Photo Prompt",
+    description: "Republic Day parent-and-child school function AI photo prompt: hall programme, tricolour balloons. Upload parent and child photos.",
+    guideLinks: [
+      {
+        href: "/guides/republic-day-ai-photo-prompts",
+        label: "Republic Day AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: ["parent-child-terrace-kites", "parent-child-balcony-parade", "family-parade-on-tv-living-room"],
+  },
+  "parent-child-terrace-kites": {
+    title: "Parent-Child Terrace Kites AI Prompt",
+    h1: "Parent and Child Terrace Kites AI Photo Prompt",
+    description: "Republic Day parent-and-child terrace kites AI photo prompt: panel-colour kites, not the flag. Upload parent and child photos.",
+    guideLinks: [
+      {
+        href: "/guides/republic-day-ai-photo-prompts",
+        label: "Republic Day AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: ["parent-child-school-function-hall", "rooftop-tricolour-kites-women", "parent-child-balcony-parade"],
+  },
+  "parent-child-balcony-parade": {
+    title: "Parent-Child Balcony Parade AI Prompt",
+    h1: "Parent and Child Balcony Parade AI Photo Prompt",
+    description: "Republic Day parent-and-child balcony parade AI photo prompt: cool-morning clothes, distant street. Upload parent and child photos.",
+    guideLinks: [
+      {
+        href: "/guides/republic-day-ai-photo-prompts",
+        label: "Republic Day AI Photo Prompts",
+      },
+      {
+        href: "/guides/how-to-keep-face-same-in-gemini-ai",
+        label: "How to Keep Your Face the Same in Gemini",
+      },
+    ],
+    relatedStyleIds: ["parent-child-school-function-hall", "couple-balcony-parade-viewing", "family-parade-on-tv-living-room"],
+  },
 };
