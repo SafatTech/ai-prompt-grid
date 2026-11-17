@@ -80,30 +80,33 @@ describe("explore collections + hero", () => {
     assert.equal(styleIsNew(styles[3]!, sets), true);
   });
 
-  it("surfaces Sari first for seed New when publishedAt is absent", () => {
+  it("surfaces Republic Day first for New when publishedAt dates are present", () => {
     const newest = selectNewCollection(getPublishedStyles(), 24);
     assert.ok(newest.length >= 2);
+    const dated = newest.filter((style) => Boolean(style.publishedAt));
+    assert.ok(dated.length >= 17, "expected Republic Day dated pack at the front");
     assert.ok(
-      newest.every((style) =>
-        /\bsaree\b|\bsari\b|\bsarees\b/i.test(
+      dated.every((style) =>
+        /republic day|tiranga|26 january|gantantra|kartavya|india gate|tricolour|salute|parade|bunting|rangoli|ethnic day/i.test(
           [style.id, style.title, style.category, style.note, style.description].join(
             "\n",
           ),
         ),
       ),
-      "seed fallback should stay inside the newest themed pack",
+      "dated New lead should stay inside the Republic Day pack",
     );
     assert.equal(
       newest.some((style) => style.id.includes("collectible")),
       false,
     );
-    assert.match(newest[0]!.id, /saree|sari/i);
+    assert.ok(Boolean(newest[0]?.publishedAt));
   });
 
   it("derives New hero copy from newest style themes without dash punctuation", () => {
     const newest = selectNewCollection(getPublishedStyles(), 24);
     const content = buildNewHeroContent(newest);
-    assert.match(content.lede, /Sari/i);
+    assert.match(content.lede, /Cinematic/i);
+    assert.doesNotMatch(content.lede, /Winter|Diwali|Sari/i);
     assert.equal(/[—–]/.test(content.lede), false);
     assert.equal(/[—–]/.test(content.blurb), false);
     assert.ok(content.tags.every((tag) => !tag.label.startsWith("#")));
@@ -148,14 +151,14 @@ describe("explore collections + hero", () => {
     }
     const neu = slides.find((slide) => slide.key === "New");
     assert.ok(neu);
-    assert.match(neu!.lede, /Sari/i);
-    assert.ok(neu!.tags.some((tag) => /Sari/i.test(tag.label)));
-    assert.ok(!/Winter|Diwali|Snowflake/i.test(neu!.lede));
+    assert.match(neu!.lede, /Cinematic/i);
+    assert.ok(neu!.tags.some((tag) => /Cinematic/i.test(tag.label)));
+    assert.ok(!/Winter|Diwali|Snowflake|Sari/i.test(neu!.lede));
 
     const banners = buildExplorePromoBanners(styles);
     const newBanner = banners.find((banner) => banner.key === "New");
     assert.ok(newBanner);
-    assert.match(newBanner!.blurb, /Sari/i);
+    assert.match(newBanner!.blurb, /Cinematic/i);
     assert.equal(/[—–]/.test(newBanner!.blurb), false);
   });
 

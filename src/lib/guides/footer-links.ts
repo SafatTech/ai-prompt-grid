@@ -32,6 +32,11 @@ const FOOTER_FESTIVAL_CANDIDATES: readonly {
     href: "/guides/diwali-couple-ai-photo-editing-prompts",
     label: "Diwali prompts",
   },
+  {
+    slug: "republic-day-ai-photo-prompts",
+    href: "/guides/republic-day-ai-photo-prompts",
+    label: "Republic Day prompts",
+  },
   { href: "/explore?q=Eid", label: "Eid prompts" },
   {
     slug: "halloween-ai-prompts-for-selfies",

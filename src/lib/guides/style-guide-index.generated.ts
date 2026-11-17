@@ -122,6 +122,18 @@ export const STYLE_GUIDE_CARDS: Readonly<Record<string, StyleGuideCardData>> = {
     hasRealImage: true,
     tags: ["Outfit Change", "Fashion", "Gemini"],
   },
+  "republic-day-ai-photo-prompts": {
+    slug: "republic-day-ai-photo-prompts",
+    title: "Republic Day AI Photo Prompts: 26 January Looks",
+    description: "Copy-paste Republic Day AI photo prompts for 26 January: tiranga-colour looks for women, men and couples. Keep your face. Respectful,…",
+    category: "festivals",
+    imageUrl: "https://rbmirzmppbytorbhncxj.supabase.co/storage/v1/object/public/catalog-public/seed/catalog/editorial/result-347.webp",
+    imageAlt: "Sunrise Terrace Salute AI Photo Prompt",
+    imageWidth: 1200,
+    imageHeight: 1489,
+    hasRealImage: true,
+    tags: ["Republic Day", "26 January", "Tiranga"],
+  },
   "saree-ai-photo-prompts": {
     slug: "saree-ai-photo-prompts",
     title: "Sari AI Photo Prompts: Copy-Paste Looks for Women",
@@ -419,6 +431,12 @@ export const STYLE_GUIDE_MEMBERSHIP: Readonly<Record<string, readonly string[]>>
     "80s-ai-photo-prompts-solo-couple",
     "how-to-merge-two-photos-in-gemini",
   ],
+  "community-flag-hoist-salute-men": [
+    "republic-day-ai-photo-prompts",
+  ],
+  "community-hall-tricolour-bunting-women": [
+    "republic-day-ai-photo-prompts",
+  ],
   "cool-editorial-low-angle-ai-photo-prompt-for-men": [
     "stylish-ai-photo-prompts",
   ],
@@ -428,6 +446,9 @@ export const STYLE_GUIDE_MEMBERSHIP: Readonly<Record<string, readonly string[]>>
   "couple-action-figure-two-pack-ai-prompt": [
     "anime-ai-photo-prompts",
     "how-to-merge-two-photos-in-gemini",
+  ],
+  "couple-balcony-parade-viewing": [
+    "republic-day-ai-photo-prompts",
   ],
   "couple-christmas-market-night-stroll": [
     "trending-christmas-ai-photo-editing-prompts-gemini",
@@ -450,8 +471,17 @@ export const STYLE_GUIDE_MEMBERSHIP: Readonly<Record<string, readonly string[]>>
   "couple-string-lights-doorway-christmas": [
     "trending-christmas-ai-photo-editing-prompts-gemini",
   ],
+  "couple-terrace-tiranga-balloons": [
+    "republic-day-ai-photo-prompts",
+  ],
+  "couple-tricolour-rangoli-courtyard": [
+    "republic-day-ai-photo-prompts",
+  ],
   "couple-wedding-outfits": [
     "wedding-dress-ai-photo-prompts",
+  ],
+  "courtyard-tricolour-flowers-women": [
+    "republic-day-ai-photo-prompts",
   ],
   "cozy-fireplace-sweater-christmas-portrait-women": [
     "trending-christmas-ai-photo-editing-prompts-gemini",
@@ -562,6 +592,9 @@ export const STYLE_GUIDE_MEMBERSHIP: Readonly<Record<string, readonly string[]>>
   "family-diwali-in-karachi-or-sindh": [
     "diwali-couple-ai-photo-editing-prompts",
   ],
+  "family-parade-on-tv-living-room": [
+    "republic-day-ai-photo-prompts",
+  ],
   "finishing-the-rangoli-together": [
     "diwali-couple-ai-photo-editing-prompts",
   ],
@@ -631,6 +664,9 @@ export const STYLE_GUIDE_MEMBERSHIP: Readonly<Record<string, readonly string[]>>
     "stylish-ai-photo-prompts",
     "winter-ai-photo-prompts",
   ],
+  "india-gate-dusk-portrait-men": [
+    "republic-day-ai-photo-prompts",
+  ],
   "ivory-lace-reception-saree-boutique-mirror": [
     "saree-ai-photo-prompts",
   ],
@@ -642,6 +678,9 @@ export const STYLE_GUIDE_MEMBERSHIP: Readonly<Record<string, readonly string[]>>
   ],
   "kanjivaram-silk-saree-carved-stone-colonnade": [
     "saree-ai-photo-prompts",
+  ],
+  "kartavya-path-parade-boulevard-couple": [
+    "republic-day-ai-photo-prompts",
   ],
   "kids-birthday-photo-ai-prompt-garden-party": [
     "birthday-ai-photo-prompts",
@@ -760,6 +799,12 @@ export const STYLE_GUIDE_MEMBERSHIP: Readonly<Record<string, readonly string[]>>
   "nikkah-dress": [
     "wedding-dress-ai-photo-prompts",
   ],
+  "office-ethnic-day-kurta-men": [
+    "republic-day-ai-photo-prompts",
+  ],
+  "office-ethnic-day-saree-women": [
+    "republic-day-ai-photo-prompts",
+  ],
   "old-money-aesthetic-portrait-ai-photo-prompt": [
     "luxury-lifestyle-ai-photo-prompts",
   ],
@@ -774,6 +819,18 @@ export const STYLE_GUIDE_MEMBERSHIP: Readonly<Record<string, readonly string[]>>
   ],
   "oversized-hoodie-cargo-streetwear-outfit-change": [
     "outfit-change-ai-prompts",
+  ],
+  "parent-child-balcony-parade": [
+    "republic-day-ai-photo-prompts",
+  ],
+  "parent-child-school-function-hall": [
+    "republic-day-ai-photo-prompts",
+  ],
+  "parent-child-terrace-kites": [
+    "republic-day-ai-photo-prompts",
+  ],
+  "park-tiranga-balloons-men": [
+    "republic-day-ai-photo-prompts",
   ],
   "party-lehenga-outfit-change": [
     "outfit-change-ai-prompts",
@@ -850,6 +907,9 @@ export const STYLE_GUIDE_MEMBERSHIP: Readonly<Record<string, readonly string[]>>
   "rooftop-sunset-anime-friends-ai-photo-prompt": [
     "anime-ai-photo-prompts",
   ],
+  "rooftop-tricolour-kites-women": [
+    "republic-day-ai-photo-prompts",
+  ],
   "rose-gold-tissue-silk-saree-marble-studio": [
     "saree-ai-photo-prompts",
   ],
@@ -923,6 +983,9 @@ export const STYLE_GUIDE_MEMBERSHIP: Readonly<Record<string, readonly string[]>>
   ],
   "stylish-girl-instagram-dp": [
     "stylish-ai-photo-prompts",
+  ],
+  "sunrise-terrace-salute-women": [
+    "republic-day-ai-photo-prompts",
   ],
   "teal-sequin-glam-saree-velvet-curtain": [
     "saree-ai-photo-prompts",
