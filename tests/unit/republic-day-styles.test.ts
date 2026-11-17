@@ -254,6 +254,18 @@ describe("Republic Day guide content", () => {
     assert.doesNotMatch(guide, /[\u2013\u2014]/);
     assert.doesNotMatch(guide, /title: ".*[Gg]emini/);
     assert.doesNotMatch(guide, /title: ".*[Cc]hatGPT/);
+    // Guide thumbnail, immersive header, and OG/social card use style 355.
+    const frontmatter = guide.slice(0, guide.indexOf("\n---", 4));
+    assert.match(
+      frontmatter,
+      /ogImage:\s*\n\s*url: "[^"]*\/result-355\.webp"/,
+    );
+    assert.match(
+      frontmatter,
+      /heroImage:\s*\n\s*url: "[^"]*\/result-355\.webp"/,
+    );
+    assert.match(frontmatter, /position: "50% 22%"/);
+    assert.doesNotMatch(frontmatter, /result-347\.webp/);
   });
 
   it("shows both source photos for every two-person guide entry", () => {
