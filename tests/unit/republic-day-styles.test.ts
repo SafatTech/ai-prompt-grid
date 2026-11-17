@@ -6,6 +6,10 @@ import {
   republicDayStyleIds,
   seedRepublicDayStyles,
 } from "../../src/lib/catalog/seed-republic-day-styles";
+import {
+  mergeInputPhotos,
+  usesMergeStack,
+} from "../../src/lib/catalog/merge-inputs";
 import { assemblePrompt, defaultsForStyle } from "../../src/lib/catalog/prompts";
 import {
   backgroundSchema,
@@ -106,8 +110,11 @@ describe("Republic Day guide catalog batch", () => {
             style.examplePairs[1]?.source.includes("b.webp"),
           style.id,
         );
+        assert.equal(mergeInputPhotos(style).length, 2, style.id);
+        assert.equal(usesMergeStack(style), true, style.id);
       } else {
         assert.equal(style.examplePairs.length, 1, style.id);
+        assert.equal(usesMergeStack(style), false, style.id);
       }
       assert.ok(style.publishedAt, style.id);
     }
@@ -247,5 +254,34 @@ describe("Republic Day guide content", () => {
     assert.doesNotMatch(guide, /[\u2013\u2014]/);
     assert.doesNotMatch(guide, /title: ".*[Gg]emini/);
     assert.doesNotMatch(guide, /title: ".*[Cc]hatGPT/);
+  });
+
+  it("shows both source photos for every two-person guide entry", () => {
+    const twoPersonIds = [349, 350, 354, 357, 359, 361, 362, 363] as const;
+    for (const id of twoPersonIds) {
+      assert.match(
+        guide,
+        new RegExp(`source-${id}\\.webp`),
+        `source-${id}.webp`,
+      );
+      assert.match(
+        guide,
+        new RegExp(`source-${id}b\\.webp`),
+        `source-${id}b.webp`,
+      );
+      assert.match(
+        guide,
+        new RegExp(`result-${id}\\.webp`),
+        `result-${id}.webp`,
+      );
+      // Contiguous MergeBeforeAfter group: source, source-b, then result.
+      assert.match(
+        guide,
+        new RegExp(
+          `source-${id}\\.webp[^\\n]*\\n!\\[[^\\]]*\\]\\([^\\n]*source-${id}b\\.webp[^\\n]*\\n!\\[[^\\]]*\\]\\([^\\n]*result-${id}\\.webp`,
+        ),
+        `contiguous pair for ${id}`,
+      );
+    }
   });
 });
