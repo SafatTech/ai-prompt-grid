@@ -1,3 +1,4 @@
+import { resolveCatalogMediaUrl } from "@/lib/catalog/seed-asset-url";
 import type { StyleGuideLink } from "@/lib/catalog/style-seo-override-types";
 import {
   STYLE_GUIDE_CARDS,
@@ -66,8 +67,16 @@ function guideSlugFromHref(href: string): string | null {
   return match?.[1] ?? null;
 }
 
+function withResolvedMedia(card: StyleGuideCardData): StyleGuideCardData {
+  return {
+    ...card,
+    imageUrl: resolveCatalogMediaUrl(card.imageUrl),
+  };
+}
+
 function cardForSlug(slug: string): StyleGuideCardData | undefined {
-  return STYLE_GUIDE_CARDS[slug];
+  const card = STYLE_GUIDE_CARDS[slug];
+  return card ? withResolvedMedia(card) : undefined;
 }
 
 /**
@@ -141,7 +150,8 @@ export function fallbackGuidesForStyle(input: {
   );
 
   const scored: Array<{ card: StyleGuideCardData; score: number }> = [];
-  for (const card of Object.values(STYLE_GUIDE_CARDS)) {
+  for (const raw of Object.values(STYLE_GUIDE_CARDS)) {
+    const card = withResolvedMedia(raw);
     let score = 0;
     if (preferredGuideCategories.has(card.category)) score += 40;
     const guideTokens = themeTokens(
@@ -169,6 +179,7 @@ export function fallbackGuidesForStyle(input: {
 
   // Absolute fallback: newest-feeling published guides by title stability.
   const rest = Object.values(STYLE_GUIDE_CARDS)
+    .map(withResolvedMedia)
     .filter((card) => !picked.some((p) => p.slug === card.slug))
     .sort((a, b) => a.title.localeCompare(b.title));
   return [...picked, ...rest].slice(0, MAX_FALLBACK);

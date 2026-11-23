@@ -5,6 +5,7 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import { CopyPromptButton } from "@/components/guides/copy-prompt-button";
 import { MergeBeforeAfter } from "@/components/merge-before-after";
+import { resolveCatalogMediaUrl } from "@/lib/catalog/seed-asset-url";
 import {
   classifyPairImages,
   firstDimensionedPairSrcs,
@@ -74,12 +75,26 @@ export function GuideMarkdown({
                     variant="guide"
                     priority={eager}
                     title={headingForImageSrc(markdown, classified.result.src)}
-                    inputs={classified.inputs}
-                    result={classified.result}
+                    inputs={classified.inputs.map((image) => ({
+                      ...image,
+                      src: resolveCatalogMediaUrl(image.src),
+                    }))}
+                    result={{
+                      ...classified.result,
+                      src: resolveCatalogMediaUrl(classified.result.src),
+                    }}
                   />
                 );
               }
-              return <GuideBeforeAfter images={pair} eager={eager} />;
+              return (
+                <GuideBeforeAfter
+                  images={pair.map((image) => ({
+                    ...image,
+                    src: resolveCatalogMediaUrl(image.src),
+                  }))}
+                  eager={eager}
+                />
+              );
             }
             return (
               <p className="my-4 text-[17px] leading-8 text-[color-mix(in_srgb,var(--text)_85%,transparent)]">
@@ -254,7 +269,8 @@ function GuideBeforeAfter({
 }
 
 function GuideFigure({ src, alt, title }: { src: string; alt: string; title?: string }) {
-  if (!src || src === PLACEHOLDER_SRC) {
+  const resolvedSrc = resolveCatalogMediaUrl(src);
+  if (!resolvedSrc || resolvedSrc === PLACEHOLDER_SRC) {
     return (
       <figure className="my-6">
         <div className="flex min-h-[180px] items-center justify-center rounded-2xl border-2 border-dashed border-[#8b6cff] bg-[#15151E] px-6 py-10 text-center">
@@ -272,12 +288,12 @@ function GuideFigure({ src, alt, title }: { src: string; alt: string; title?: st
   }
 
   const dimensions = parseDimensionTitle(title);
-  if (dimensions && isSizedGuideSrc(src)) {
-    const label = frameLabel(src);
+  if (dimensions && isSizedGuideSrc(resolvedSrc)) {
+    const label = frameLabel(resolvedSrc);
     return (
       <figure className="my-6">
         <Image
-          src={src}
+          src={resolvedSrc}
           alt={alt}
           width={dimensions.width}
           height={dimensions.height}
@@ -293,12 +309,12 @@ function GuideFigure({ src, alt, title }: { src: string; alt: string; title?: st
     );
   }
 
-  if (isSizedGuideSrc(src)) {
+  if (isSizedGuideSrc(resolvedSrc)) {
     return (
       <figure className="my-6">
         <div className="relative aspect-[3/2] overflow-hidden rounded-2xl bg-[#15151E]">
           <Image
-            src={src}
+            src={resolvedSrc}
             alt={alt}
             fill
             sizes="(max-width: 760px) 100vw, 760px"

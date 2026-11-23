@@ -1,21 +1,9 @@
+import { seedCatalogAssetUrl } from "./seed-asset-url";
 import type { CatalogStyle } from "./types";
 
-const PUBLISHED_SUPABASE_URL = "https://rbmirzmppbytorbhncxj.supabase.co";
-
-/**
- * Prefer Supabase catalog-public WebPs (uploaded by upload-saree-assets).
- * Falls back to the published project URL, then local /catalog.
- */
+/** Prefer catalog-public WebPs (Blob when NEXT_PUBLIC_MEDIA_BASE_URL is set). */
 function asset(name: string): string {
-  const base = (process.env.NEXT_PUBLIC_SUPABASE_URL || PUBLISHED_SUPABASE_URL).replace(
-    /\/$/,
-    "",
-  );
-  const stem = name.replace(/\.[^.]+$/, "");
-  if (base) {
-    return `${base}/storage/v1/object/public/catalog-public/seed/catalog/editorial/${stem}.webp`;
-  }
-  return `/catalog/editorial/${name}`;
+  return seedCatalogAssetUrl("editorial", name);
 }
 
 type SareeSeed = {

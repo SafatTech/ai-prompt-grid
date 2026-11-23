@@ -45,6 +45,11 @@ const nextConfig: NextConfig = {
         hostname: "rbmirzmppbytorbhncxj.supabase.co",
         pathname: "/storage/v1/object/public/catalog-public/**",
       },
+      {
+        protocol: "https",
+        hostname: "apbirgkz72rte2i7.public.blob.vercel-storage.com",
+        pathname: "/**",
+      },
     ],
   },
   // Guide pages read the markdown at runtime. The sitemap uses the generated

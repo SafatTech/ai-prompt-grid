@@ -1,18 +1,9 @@
+import { seedCatalogAssetUrl } from "./seed-asset-url";
 import type { CatalogStyle } from "./types";
 
-/**
- * Public catalog WebPs. A configured Supabase URL wins. Preview builds that
- * omit it still use the published project, because source-75b.png and the
- * other merge files are not in this repo.
- */
-const PUBLISHED_SUPABASE_URL = "https://rbmirzmppbytorbhncxj.supabase.co";
-
+/** Prefer catalog-public WebPs (Blob when NEXT_PUBLIC_MEDIA_BASE_URL is set). */
 function asset(name: string): string {
-  const base = (
-    process.env.NEXT_PUBLIC_SUPABASE_URL || PUBLISHED_SUPABASE_URL
-  ).replace(/\/$/, "");
-  const stem = name.replace(/\.[^.]+$/, "");
-  return `${base}/storage/v1/object/public/catalog-public/seed/catalog/editorial/${stem}.webp`;
+  return seedCatalogAssetUrl("editorial", name);
 }
 
 type MergeSeed = {

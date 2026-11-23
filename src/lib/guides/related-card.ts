@@ -1,3 +1,4 @@
+import { resolveCatalogMediaUrl } from "@/lib/catalog/seed-asset-url";
 import type { Guide } from "@/lib/guides/load";
 import { resolveGuideSocialImage } from "@/lib/guides/prepare";
 
@@ -14,13 +15,14 @@ export type RelatedGuideCard = {
 
 export function toRelatedGuideCard(guide: Guide): RelatedGuideCard {
   const image = resolveGuideSocialImage(guide);
+  const imageUrl = resolveCatalogMediaUrl(image.url);
   return {
     slug: guide.slug,
     heading: guide.heading,
     description: guide.description,
     date: guide.date,
-    imageUrl: image.url,
+    imageUrl,
     imageAlt: image.alt,
-    hasRealImage: Boolean(guide.ogImage) || image.url !== "/opengraph-image",
+    hasRealImage: Boolean(guide.ogImage) || imageUrl !== "/opengraph-image",
   };
 }

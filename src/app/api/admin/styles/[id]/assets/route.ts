@@ -4,13 +4,12 @@ import { requireEditor } from "@/lib/admin/access";
 import { adminAssetUploadMetaSchema } from "@/lib/admin/schemas";
 import { detectFaceFocusFromBuffer } from "@/lib/catalog/detect-face-focus-node";
 import { normalizeFocus } from "@/lib/catalog/image-focus";
+import { putCatalogObject } from "@/lib/catalog/put-catalog-object";
 import { buildResultBlurDataUrl } from "@/lib/catalog/result-blur";
 import { processUploadImage } from "@/lib/creations/image";
 import { createServerSupabaseClient } from "@/lib/supabase/server";
 
 export const runtime = "nodejs";
-
-const CATALOG_BUCKET = "catalog-public";
 
 type RouteContext = { params: Promise<{ id: string }> };
 
@@ -19,8 +18,11 @@ async function fileToBuffer(file: File): Promise<Buffer> {
 }
 
 /**
- * Upload a catalog image (source or result) into catalog-public and
+ * Upload a catalog image (source or result) into catalog storage and
  * optionally attach/update a style_assets row.
+ *
+ * When BLOB_READ_WRITE_TOKEN is set, stores on Vercel Blob with the same
+ * pathname scheme; otherwise uses Supabase catalog-public.
  *
  * Multipart fields:
  * - file: image
@@ -99,22 +101,23 @@ export async function POST(request: Request, context: RouteContext) {
   const assetId = String(form.get("assetId") || "") || randomUUID();
   const key = `${style.slug}/${assetId}/${role}.${processed.image.ext}`;
 
-  const { error: uploadError } = await supabase.storage
-    .from(CATALOG_BUCKET)
-    .upload(key, processed.image.buffer, {
+  let publicUrl: string;
+  try {
+    const stored = await putCatalogObject({
+      pathname: key,
+      body: processed.image.buffer,
       contentType: processed.image.contentType,
-      upsert: true,
+      supabase,
     });
-  if (uploadError) {
-    console.warn("[admin] catalog upload failed", uploadError.message);
+    publicUrl = stored.url;
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "upload failed";
+    console.warn("[admin] catalog upload failed", message);
     return NextResponse.json(
       { error: "Could not store catalog image." },
       { status: 500 },
     );
   }
-
-  const { data: publicUrlData } = supabase.storage.from(CATALOG_BUCKET).getPublicUrl(key);
-  const publicUrl = publicUrlData.publicUrl;
 
   const existingId = String(form.get("assetId") || "");
   if (existingId) {
