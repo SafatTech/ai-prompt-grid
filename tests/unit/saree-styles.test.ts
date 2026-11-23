@@ -120,12 +120,12 @@ describe("Saree / Sari guide content", () => {
     for (const style of batch) {
       assert.match(guide, new RegExp(`/styles/${style.id}(?:\\)|\\b)`), style.id);
     }
-    assert.match(guide, /title: "Sari AI Photo Prompts: Copy-Paste Looks for Women"/);
+    assert.match(guide, /title: "Saree AI Prompt for Girls \(Copy & Paste\)"/);
     assert.match(guide, /description: "Copy-paste saree AI photo prompts for adult women/);
-    assert.match(guide, /h1: "Sari AI Photo Prompts"/);
+    assert.match(guide, /h1: "Saree AI Prompt for Girls \(Copy & Paste\)"/);
     assert.match(guide, /slug: "saree-ai-photo-prompts"/);
     assert.match(guide, /primaryKeyword: "saree ai prompt"/);
-    assert.match(guide, /# Sari AI Photo Prompts/);
+    assert.match(guide, /# Saree AI Prompt for Girls \(Copy & Paste\)/);
     assert.match(guide, /## Copy-paste saree AI prompts for women/);
     assert.match(guide, /## Party sequin, organza and net saree looks/);
     assert.match(guide, /## Black, red and colour saree photo prompts/);
@@ -133,7 +133,7 @@ describe("Saree / Sari guide content", () => {
     assert.match(guide, /## Retro and vintage Bollywood saree looks/);
     assert.match(guide, /## Mirror selfie and casual saree edits/);
     assert.match(guide, /## FAQ: saree vs sari prompts, face keep, and outfit change/);
-    assert.match(guide, /### Saree or sari — which spelling should I use in a prompt\?/);
+    assert.match(guide, /### Saree or sari: which spelling should I use in a prompt\?/);
     assert.match(guide, /gemini saree prompt/i);
     assert.match(guide, /chatgpt saree prompt/i);
     assert.equal((guide.match(/gemini saree prompt/gi) ?? []).length, 1);

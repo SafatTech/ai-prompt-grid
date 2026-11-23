@@ -37,4 +37,12 @@ export type StyleSeoOverride = {
   readonly guideLinks?: readonly StyleGuideLink[];
   /** Preferred related-style ids for the Related styles block (slugs unchanged). */
   readonly relatedStyleIds?: readonly string[];
+  /**
+   * Optional extra on-page H2 sections (plain-text body). Used for short SEO
+   * variants that should appear as real headings without changing the prompt.
+   */
+  readonly contentSections?: readonly {
+    readonly heading: string;
+    readonly body: string;
+  }[];
 };

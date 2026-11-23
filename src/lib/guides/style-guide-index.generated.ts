@@ -4,8 +4,8 @@ import type { StyleGuideCardData } from "./style-guide-index";
 export const STYLE_GUIDE_CARDS: Readonly<Record<string, StyleGuideCardData>> = {
   "80s-ai-photo-prompts-solo-couple": {
     slug: "80s-ai-photo-prompts-solo-couple",
-    title: "80s AI Photo Prompts for Girls, Boys & Couples (Copy-Paste)",
-    description: "Copy-paste an 80s AI photo prompt for Gemini or ChatGPT, including an 80s girl AI photo prompt, an 80s boy AI photo prompt, and an 80s…",
+    title: "1980s Couple AI Photo Prompts",
+    description: "Copy-paste 1980s couple AI photo prompts, plus 80s girl and boy solo looks. Retro film, studio, and Bollywood-style edits that keep your…",
     category: "trends",
     imageUrl: "https://rbmirzmppbytorbhncxj.supabase.co/storage/v1/object/public/catalog-public/seed/catalog/editorial/result-51.webp",
     imageAlt: "Man in a denim jacket with orange foam headphones and a cassette player on a sunny 1980s market street.",
@@ -29,7 +29,7 @@ export const STYLE_GUIDE_CARDS: Readonly<Record<string, StyleGuideCardData>> = {
   "birthday-ai-photo-prompts": {
     slug: "birthday-ai-photo-prompts",
     title: "Birthday AI Photo Prompts for Girls, Boys & Kids",
-    description: "Free birthday AI photo prompts for cake, balloon and photoshoot looks. Copy-paste for girls, boys, men and kids — keep your real face.",
+    description: "Free birthday image prompts for cake, balloon and photoshoot looks. Copy-paste for girls, boys, men and kids. Keep your real face.",
     category: "occasions",
     imageUrl: "https://rbmirzmppbytorbhncxj.supabase.co/storage/v1/object/public/catalog-public/seed/catalog/editorial/result-116.webp",
     imageAlt: "Realistic party photo of four friends laughing around a candle-lit white cake on a cake stand: a curly-haired woman in a maroon shirt leans in to blow out the candles, a woman in a lilac hijab and green top, a man with glasses in a navy t-shirt clapping, and a man in a grey t-shirt, with confetti falling, red, yellow, blue and green balloons, gold and green tinsel curtains, polka-dot paper plates, cups and party poppers on the table.",
@@ -64,8 +64,8 @@ export const STYLE_GUIDE_CARDS: Readonly<Record<string, StyleGuideCardData>> = {
   },
   "gemini-headshot-cv-photo-prompts": {
     slug: "gemini-headshot-cv-photo-prompts",
-    title: "LinkedIn Profile Picture Prompt for Gemini: CV & Office",
-    description: "LinkedIn profile picture prompt for Gemini: copy-paste prompts that turn a selfie into a CV, office or passport headshot with your real…",
+    title: "LinkedIn Headshot AI Photo Prompts: CV & Office",
+    description: "LinkedIn headshot AI photo prompts: copy-paste looks that turn a selfie into a CV, office or passport headshot with your real face kept.",
     category: "professional",
     imageUrl: "https://rbmirzmppbytorbhncxj.supabase.co/storage/v1/object/public/catalog-public/seed/catalog/editorial/result-60.webp",
     imageAlt: "Man in a navy blazer over a white shirt against a light-grey studio backdrop.",
@@ -89,7 +89,7 @@ export const STYLE_GUIDE_CARDS: Readonly<Record<string, StyleGuideCardData>> = {
   "how-to-merge-two-photos-in-gemini": {
     slug: "how-to-merge-two-photos-in-gemini",
     title: "How to Merge Two Photos: Couple & Family AI Prompts",
-    description: "Merge two photos into one with free AI prompts for couples and families. Copy-paste steps plus fixes when light or faces look wrong.",
+    description: "Merge two photos with AI, free, with copy-paste prompts for couples and families. Steps plus fixes when light or faces look wrong.",
     category: "couples-family",
     imageUrl: "https://rbmirzmppbytorbhncxj.supabase.co/storage/v1/object/public/catalog-public/seed/catalog/editorial/result-86.webp",
     imageAlt: "Couple in warm jackets at a mountain railing with pines, a green valley, and snowy peaks.",
@@ -127,8 +127,8 @@ export const STYLE_GUIDE_CARDS: Readonly<Record<string, StyleGuideCardData>> = {
     title: "Republic Day AI Photo Prompts: 26 January Looks",
     description: "Copy-paste Republic Day AI photo prompts for 26 January: tiranga-colour looks for women, men and couples. Keep your face. Respectful,…",
     category: "festivals",
-    imageUrl: "https://rbmirzmppbytorbhncxj.supabase.co/storage/v1/object/public/catalog-public/seed/catalog/editorial/result-347.webp",
-    imageAlt: "Sunrise Terrace Salute AI Photo Prompt",
+    imageUrl: "https://rbmirzmppbytorbhncxj.supabase.co/storage/v1/object/public/catalog-public/seed/catalog/editorial/result-355.webp",
+    imageAlt: "Community Flag Hoist Salute AI Photo Prompt: man in a formal jacket with hand on heart beside an upright Indian flag on a pole",
     imageWidth: 1200,
     imageHeight: 1489,
     hasRealImage: true,
@@ -136,7 +136,7 @@ export const STYLE_GUIDE_CARDS: Readonly<Record<string, StyleGuideCardData>> = {
   },
   "saree-ai-photo-prompts": {
     slug: "saree-ai-photo-prompts",
-    title: "Sari AI Photo Prompts: Copy-Paste Looks for Women",
+    title: "Saree AI Prompt for Girls (Copy & Paste)",
     description: "Copy-paste saree AI photo prompts for adult women. Party sequin, organza, black and gold, Banarasi, red ruffle and more. Keep your face,…",
     category: "trends",
     imageUrl: "https://rbmirzmppbytorbhncxj.supabase.co/storage/v1/object/public/catalog-public/seed/catalog/editorial/result-324.webp",
@@ -196,8 +196,8 @@ export const STYLE_GUIDE_CARDS: Readonly<Record<string, StyleGuideCardData>> = {
   },
   "winter-ai-photo-prompts": {
     slug: "winter-ai-photo-prompts",
-    title: "Winter AI Photo Prompts: Snowfall, Fog & Cozy Aesthetic Looks",
-    description: "Copy-paste winter AI photo prompts for boys, girls and couples: snowfall, foggy roads, shawls and chai, cozy aesthetic looks. Keep your…",
+    title: "Viral Winter AI Photo Prompts (Free, Copy & Paste)",
+    description: "Viral winter AI photo prompts to copy and paste free: snowfall, foggy roads, shawls and chai, cozy looks for boys, girls and couples.…",
     category: "seasonal",
     imageUrl: "https://rbmirzmppbytorbhncxj.supabase.co/storage/v1/object/public/catalog-public/seed/catalog/editorial/result-95.webp",
     imageAlt: "Couple in matching winter jackets and scarves at a snowy mountain viewpoint with white peaks.",

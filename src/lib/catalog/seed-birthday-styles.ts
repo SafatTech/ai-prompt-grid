@@ -118,10 +118,10 @@ const birthday: BirthdaySeed[] = [
   {
     n: "113",
     id: "baby-boy-birthday-photo-ai-prompt-number-balloon",
-    title: "Baby Boy Birthday Photo AI Prompt (Number Balloon)",
+    title: "Baby Boy Photoshoot AI Prompt (Birthday Number Balloon)",
     note: "Baby with a big gold number balloon and confetti",
     description:
-      "A baby boy birthday photo AI prompt: your little one with a giant gold number balloon, soft blue decor and falling confetti, same sweet face.",
+      "Baby boy photoshoot AI prompt with a giant gold number balloon, soft blue decor and confetti. Same sweet face. Free to copy and paste.",
     category: "Cinematic",
     subject: "Person",
     intent: "New outfit or theme",

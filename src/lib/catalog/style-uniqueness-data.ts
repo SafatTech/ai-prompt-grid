@@ -6395,7 +6395,7 @@ export const STYLE_UNIQUENESS_ENTRIES: Readonly<
     intro: `Moody blue-and-amber sadness for boys: sit by a rain-streaked night window with warm lamp glow and blurred city lights outside, hoodie on. Upload one clear chest-up or waist-up photo.`,
     tips: [
       `Chest-up sharpness keeps eyes readable under mixed blue window light and amber lamp.`,
-      `Ask for rain streaks on the glass and a small warm table lamp—not a bright studio fill.`,
+      `Ask for rain streaks on the glass and a small warm table lamp, not a bright studio fill.`,
       `Keep exact skin tone; moody grades can drain warmth or over-blue the face.`,
       `Request a thoughtful quiet expression, not exaggerated crying unless you specifically want that.`,
     ],
@@ -6406,7 +6406,7 @@ export const STYLE_UNIQUENESS_ENTRIES: Readonly<
       },
       {
         question: `Is this black-and-white?`,
-        answer: `No—it stays in colour with moody blue window light and warm amber lamp.`,
+        answer: `No: it stays in colour with moody blue window light and warm amber lamp.`,
       },
       {
         question: `Will clothing stay mine?`,
@@ -6417,7 +6417,7 @@ export const STYLE_UNIQUENESS_ENTRIES: Readonly<
         answer: `Ask for a thoughtful sad expression with rain streaks and soft lamp light, not a bright smile.`,
       },
     ],
-    addonLine: `Want a quieter rainy-window mood? Add: keep the rain-streaked glass, warm lamp, and hoodie, but soften blue contrast and use a calmer glance outside—no text overlays or heavy tears.`,
+    addonLine: `Want a quieter rainy-window mood? Add: keep the rain-streaked glass, warm lamp, and hoodie, but soften blue contrast and use a calmer glance outside, no text overlays or heavy tears.`,
   },
   "attitude-ai-photo-prompt-for-boys-black-outfit": {
     intro: `High-contrast urban attitude for boys: all-black outfit, sunglasses in hand, low-angle shot against a raw grey concrete city wall with hard afternoon shadows. Use one clear chest-up or waist-up photo.`,

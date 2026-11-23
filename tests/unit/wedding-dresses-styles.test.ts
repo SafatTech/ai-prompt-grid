@@ -114,9 +114,9 @@ describe("Wedding Dress guide content", () => {
     assert.equal(guide.match(/\bGemini\b/g)?.length, 1);
     assert.equal(guide.match(/\bChatGPT\b/g)?.length, 1);
     assert.match(guide, /h1: "Wedding Dress AI Photo Prompts"/);
-    assert.match(guide, /## Bridal Lehenga AI Prompts \(Dulhan Looks\)/);
+    assert.match(guide, /## Bridal AI photo prompts/);
     assert.match(guide, /## Groom Sherwani AI Prompts \(Dulha Looks\)/);
-    assert.match(guide, /## Bride and Groom & Couple Wedding Poses Prompts/);
+    assert.match(guide, /## Marriage AI photo prompts/);
     assert.match(guide, /## Haldi, Mehndi, Nikah & Walima Outfit Prompts/);
     assert.match(guide, /## White Wedding Gown AI Prompts/);
     assert.match(guide, /## 2026 Bridal Dress Trends \(Pakistani & Indian Looks\)/);
