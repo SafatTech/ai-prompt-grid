@@ -1,18 +1,9 @@
+import { seedCatalogAssetUrl } from "./seed-asset-url";
 import type { CatalogStyle } from "./types";
 
-/**
- * Prefer Supabase catalog-public WebPs (uploaded by publish-character-standalone).
- * Falls back to the published project URL when the env is unset, because the
- * character style WebPs are not checked into this repo.
- */
-const PUBLISHED_SUPABASE_URL = "https://rbmirzmppbytorbhncxj.supabase.co";
-
+/** Prefer catalog-public WebPs (Blob when NEXT_PUBLIC_MEDIA_BASE_URL is set). */
 function asset(name: string): string {
-  const base = (
-    process.env.NEXT_PUBLIC_SUPABASE_URL || PUBLISHED_SUPABASE_URL
-  ).replace(/\/$/, "");
-  const stem = name.replace(/\.[^.]+$/, "");
-  return `${base}/storage/v1/object/public/catalog-public/seed/catalog/editorial/${stem}.webp`;
+  return seedCatalogAssetUrl("editorial", name);
 }
 
 type CharacterCategory =

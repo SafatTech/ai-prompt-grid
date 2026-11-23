@@ -5,18 +5,13 @@
  */
 import fs from "node:fs";
 import path from "node:path";
-import { createClient } from "@supabase/supabase-js";
-import { processUploadImage } from "../src/lib/creations/image";
+import {
+  createCatalogUploadClient,
+  uploadEditorialAsset,
+} from "./lib/catalog-upload";
 
-const CATALOG_BUCKET = "catalog-public";
 const ROOT = path.resolve(import.meta.dirname, "..");
 const DIR = path.join(ROOT, "diwali photo edit prompts");
-
-function requireEnv(name: string): string {
-  const value = process.env[name];
-  if (!value) throw new Error(`Missing required env: ${name}`);
-  return value;
-}
 
 function find(dir: string, matcher: (name: string) => boolean): string {
   const hit = fs.readdirSync(dir).find((name) => matcher(name));
@@ -88,26 +83,19 @@ const pairs = [
 ] as const;
 
 async function main() {
-  const url = requireEnv("NEXT_PUBLIC_SUPABASE_URL");
-  const serviceRoleKey = requireEnv("SUPABASE_SERVICE_ROLE_KEY");
-  const client = createClient(url, serviceRoleKey, {
-    auth: { autoRefreshToken: false, persistSession: false },
-  });
+  const client = createCatalogUploadClient();
 
   const srcDir = path.join(DIR, "source-images");
   const resDir = path.join(DIR, "result-images");
 
   async function uploadOne(localPath: string, keyStem: string): Promise<string> {
-    const input = fs.readFileSync(localPath);
-    const processed = await processUploadImage(input, "image/png");
-    if (!processed.ok) throw new Error(`${localPath}: ${processed.error}`);
-    const key = `seed/catalog/editorial/${keyStem}.${processed.image.ext}`;
-    const { error } = await client.storage.from(CATALOG_BUCKET).upload(key, processed.image.buffer, {
-      contentType: processed.image.contentType,
-      upsert: true,
+    const stored = await uploadEditorialAsset({
+      localPath,
+      keyStem,
+      mimeHint: "image/png",
+      supabase: client,
     });
-    if (error) throw new Error(`${key}: ${error.message}`);
-    return client.storage.from(CATALOG_BUCKET).getPublicUrl(key).data.publicUrl;
+    return stored.url;
   }
 
   for (const pair of pairs) {

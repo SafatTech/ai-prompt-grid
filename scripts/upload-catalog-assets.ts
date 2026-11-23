@@ -1,5 +1,6 @@
 /**
- * Upload local /catalog/... style images into Supabase Storage (catalog-public)
+ * Upload local /catalog/... style images into catalog storage
+ * (Vercel Blob when BLOB_READ_WRITE_TOKEN is set, else Supabase catalog-public)
  * and rewrite style_assets to public URLs (same pipeline as admin upload).
  *
  * Usage:
@@ -8,12 +9,15 @@
 import fs from "node:fs";
 import path from "node:path";
 import { createClient, type SupabaseClient } from "@supabase/supabase-js";
+import {
+  CATALOG_PUBLIC_BUCKET,
+  putCatalogObject,
+} from "../src/lib/catalog/put-catalog-object";
 import { processUploadImage } from "../src/lib/creations/image";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type SeedClient = SupabaseClient<any>;
 
-const CATALOG_BUCKET = "catalog-public";
 const ROOT = path.resolve(import.meta.dirname, "..");
 
 function requireEnv(name: string): string {
@@ -25,6 +29,9 @@ function requireEnv(name: string): string {
 function isAlreadyRemote(url: string): boolean {
   if (!url) return false;
   if (/^https?:\/\//i.test(url) && url.includes("/storage/v1/object/public/catalog-public/")) {
+    return true;
+  }
+  if (/^https?:\/\/[^/]+\.public\.blob\.vercel-storage\.com\//i.test(url)) {
     return true;
   }
   return false;
@@ -69,38 +76,37 @@ async function uploadLocalAsset(
   }
 
   const key = storageKeyFromLocalUrl(assetUrl, processed.image.ext);
-  const { error: uploadError } = await client.storage
-    .from(CATALOG_BUCKET)
-    .upload(key, processed.image.buffer, {
-      contentType: processed.image.contentType,
-      upsert: true,
-    });
-  if (uploadError) {
-    throw new Error(`Upload failed for ${key}: ${uploadError.message}`);
-  }
-
-  const { data } = client.storage.from(CATALOG_BUCKET).getPublicUrl(key);
-  const publicUrl = data.publicUrl;
-  cache.set(assetUrl, publicUrl);
-  console.log(`Uploaded ${assetUrl} → ${key}`);
-  return publicUrl;
+  const stored = await putCatalogObject({
+    pathname: key,
+    body: processed.image.buffer,
+    contentType: processed.image.contentType,
+    supabase: client,
+  });
+  cache.set(assetUrl, stored.url);
+  console.log(`Uploaded ${assetUrl} → ${key} (${stored.backend})`);
+  return stored.url;
 }
 
 async function ensureCatalogBucket(client: SeedClient) {
+  if (process.env.BLOB_READ_WRITE_TOKEN?.trim()) return;
+
   const { data: buckets, error: listError } = await client.storage.listBuckets();
   if (listError) throw listError;
-  const exists = (buckets ?? []).some((b) => b.name === CATALOG_BUCKET);
+  const exists = (buckets ?? []).some((b) => b.name === CATALOG_PUBLIC_BUCKET);
   if (exists) return;
 
-  const { error: createError } = await client.storage.createBucket(CATALOG_BUCKET, {
-    public: true,
-    fileSizeLimit: "10MB",
-    allowedMimeTypes: ["image/jpeg", "image/png", "image/webp"],
-  });
+  const { error: createError } = await client.storage.createBucket(
+    CATALOG_PUBLIC_BUCKET,
+    {
+      public: true,
+      fileSizeLimit: "10MB",
+      allowedMimeTypes: ["image/jpeg", "image/png", "image/webp"],
+    },
+  );
   if (createError && !/already exists/i.test(createError.message)) {
     throw createError;
   }
-  console.log(`Created storage bucket ${CATALOG_BUCKET}`);
+  console.log(`Created storage bucket ${CATALOG_PUBLIC_BUCKET}`);
 }
 
 async function main() {

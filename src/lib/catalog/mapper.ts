@@ -1,5 +1,8 @@
 import { normalizeFocus, type ImageFocus } from "./image-focus";
-import { resolveCatalogMediaUrl } from "./seed-asset-url";
+import {
+  catalogMediaBaseUrl,
+  resolveCatalogMediaUrl,
+} from "./seed-asset-url";
 import type {
   CatalogStyle,
   EditIntent,
@@ -117,10 +120,14 @@ function asStringArray(value: unknown): string[] {
 
 function resolveAssetUrl(key: string, publicBaseUrl: string | null): string {
   if (!key) return "";
-  if (/^https?:\/\//i.test(key)) return key;
+  if (/^https?:\/\//i.test(key)) return resolveCatalogMediaUrl(key);
   // Legacy seed paths under /catalog/{folder}/… map to catalog-public WebPs.
   if (key.startsWith("/catalog/")) return resolveCatalogMediaUrl(key);
   if (key.startsWith("/")) return key;
+
+  const media = catalogMediaBaseUrl();
+  if (media) return `${media}/${key.replace(/^\//, "")}`;
+
   if (!publicBaseUrl) return key;
   const base = publicBaseUrl.replace(/\/$/, "");
   return `${base}/storage/v1/object/public/catalog-public/${key.replace(/^\//, "")}`;

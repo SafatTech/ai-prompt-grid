@@ -5,6 +5,7 @@ import { StyleDetailClient } from "@/components/styles/style-detail-client";
 import { StyleFeaturedGuides } from "@/components/styles/style-featured-guides";
 import { usesMergeHero } from "@/lib/catalog/merge-inputs";
 import { relatedStylesFor } from "@/lib/catalog/related-styles";
+import { resolveCatalogMediaUrl } from "@/lib/catalog/seed-asset-url";
 import {
   getPublishedStyleAmbientBlur,
   getPublishedStyleBySlug,
@@ -53,7 +54,8 @@ export async function generateMetadata({
   const title = styleMetadataTitle(style);
   const socialTitle = styleSocialTitle(style);
   const url = `/styles/${style.id}`;
-  const ogImage = style.result || style.source || undefined;
+  const ogImage =
+    resolveCatalogMediaUrl(style.result || style.source || "") || undefined;
   const ogAlt = style.examplePairs[0]?.altResult || `${style.title} result example`;
 
   return {

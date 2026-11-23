@@ -1,6 +1,7 @@
 import type { SupabaseClient } from "@supabase/supabase-js";
 import { z } from "zod";
 import { getPublicSupabaseConfig } from "@/lib/env";
+import { resolveCatalogMediaUrl } from "@/lib/catalog/seed-asset-url";
 import {
   DEFAULT_HOMEPAGE_SETTINGS,
   homepageSettingsSchema,
@@ -81,11 +82,16 @@ export function filterHomepageAdminStyles(
 }
 
 function assetUrl(key: string): string {
-  if (!key || /^https?:\/\//i.test(key) || key.startsWith("/")) return key;
-  const base = getPublicSupabaseConfig()?.url?.replace(/\/$/, "");
-  return base
-    ? `${base}/storage/v1/object/public/catalog-public/${key.replace(/^\//, "")}`
-    : key;
+  if (!key) return key;
+  if (/^https?:\/\//i.test(key)) return resolveCatalogMediaUrl(key);
+  if (key.startsWith("/")) return resolveCatalogMediaUrl(key);
+  const base = getPublicSupabaseConfig()?.url?.replace(/\/$/, "") ?? null;
+  // Bare storage keys: prefer Blob base, else Supabase catalog-public.
+  return resolveCatalogMediaUrl(
+    base
+      ? `${base}/storage/v1/object/public/catalog-public/${key.replace(/^\//, "")}`
+      : key,
+  );
 }
 
 export async function getHomepageAdminData(

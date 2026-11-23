@@ -1,3 +1,4 @@
+import { resolveCatalogMediaUrl } from "@/lib/catalog/seed-asset-url";
 import { absoluteUrl, PRODUCTION_SITE_URL } from "@/lib/site-url";
 
 const BRAND_SUFFIX = " · AI Prompt Grid";
@@ -152,7 +153,7 @@ export function resolveGuideDisplayHero(guide: {
   if (guide.heroImage) {
     return {
       kind: "image",
-      url: guide.heroImage.url,
+      url: resolveCatalogMediaUrl(guide.heroImage.url),
       alt: guide.heroImage.alt,
       position: guide.heroImage.position ?? "50% 35%",
     };
@@ -160,7 +161,7 @@ export function resolveGuideDisplayHero(guide: {
   if (guide.ogImage) {
     return {
       kind: "image",
-      url: guide.ogImage.url,
+      url: resolveCatalogMediaUrl(guide.ogImage.url),
       alt: guide.ogImage.alt,
       position: "50% 35%",
     };
@@ -270,7 +271,8 @@ export function resolveGuideSocialImage(guide: {
   ogImage?: GuideOgImage;
   body: string;
 }): { url: string; alt: string; width?: number; height?: number } {
-  return guide.ogImage ?? guideSocialImage(guide.body);
+  const image = guide.ogImage ?? guideSocialImage(guide.body);
+  return { ...image, url: resolveCatalogMediaUrl(image.url) };
 }
 
 /** Absolute Article JSON-LD image. Frontmatter `ogImage` wins over the body hero. */
@@ -279,7 +281,7 @@ export function resolveGuideArticleImage(guide: {
   body: string;
 }): string | undefined {
   if (!guide.ogImage) return guideArticleImage(guide.body);
-  const url = guide.ogImage.url;
+  const url = resolveCatalogMediaUrl(guide.ogImage.url);
   if (/^https?:\/\//i.test(url)) return url;
   return absoluteUrl(url);
 }
@@ -288,9 +290,10 @@ export function resolveGuideArticleImage(guide: {
 export function guideArticleImage(markdown: string): string | undefined {
   const hero = guideHeroImage(markdown);
   if (!hero) return undefined;
-  if (/^https?:\/\//i.test(hero.src)) return hero.src;
-  if (hero.src.startsWith("//")) return `https:${hero.src}`;
-  const path = hero.src.startsWith("/") ? hero.src : `/${hero.src}`;
+  const src = resolveCatalogMediaUrl(hero.src);
+  if (/^https?:\/\//i.test(src)) return src;
+  if (src.startsWith("//")) return `https:${src}`;
+  const path = src.startsWith("/") ? src : `/${src}`;
   return `${PRODUCTION_SITE_URL}${path}`;
 }
 
