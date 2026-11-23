@@ -153,10 +153,10 @@ const boys: BoysSeed[] = [
   {
     n: "126",
     id: "sad-ai-photo-prompt-for-boys-rainy-window",
-    title: "Sad AI Photo Prompt for Boys (Rainy Window)",
+    title: "Sad Boy AI Photo Prompt: Rainy Window (Copy & Paste)",
     note: "Sad boy by a rain-streaked window at night, warm lamp light, in colour",
     description:
-      "A sad AI photo prompt for boys: sitting by a rain-streaked window at night with a warm lamp glow, an emotional colour portrait, real face kept.",
+      "A sad boy AI photo prompt: sitting by a rain-streaked window at night with a warm lamp glow, an emotional colour portrait, real face kept.",
     category: "Cinematic",
     subject: "Person",
     intent: "New outfit or theme",

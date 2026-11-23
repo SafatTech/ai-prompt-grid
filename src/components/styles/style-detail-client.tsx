@@ -393,6 +393,22 @@ export function StyleDetailClient({ style, children, bestFor }: Props) {
               </ul>
             </section>
           ) : null}
+          {!uniqueSections &&
+          seo?.contentSections &&
+          seo.contentSections.length > 0
+            ? seo.contentSections.map((section) => (
+                <section
+                  key={section.heading}
+                  className="mt-6 max-w-[690px]"
+                  data-testid="style-seo-content-section"
+                >
+                  <h2 className="mb-3 text-[22px]">{section.heading}</h2>
+                  <p className="m-0 text-sm text-[#d2cfd7] sm:text-[15px]">
+                    {section.body}
+                  </p>
+                </section>
+              ))
+            : null}
           {seo?.guideLinks && seo.guideLinks.length > 0 ? (
             <p className="mt-4 max-w-[690px] text-sm text-[var(--muted)]">
               Related guides:{" "}
@@ -544,6 +560,19 @@ export function StyleDetailClient({ style, children, bestFor }: Props) {
                   </ul>
                 </section>
               ) : null}
+
+              {seo?.contentSections?.map((section) => (
+                <section
+                  key={section.heading}
+                  className="border-t border-[var(--line)] py-7"
+                  data-testid="style-seo-content-section"
+                >
+                  <h2 className="mb-4 text-[22px]">{section.heading}</h2>
+                  <p className="m-0 max-w-[690px] text-sm text-[#d2cfd7]">
+                    {section.body}
+                  </p>
+                </section>
+              ))}
 
               {seo?.addonLine ? (
                 <section

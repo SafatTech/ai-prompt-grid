@@ -107,6 +107,48 @@ Use it when you sell goods that photograph well from above: skincare, stationery
     ],
     relatedStyleIds: ["pure-white-packshot", "soft-daylight-lifestyle", "botanical-wellness-still-life"],
   },
+  "sad-ai-photo-prompt-for-boys-rainy-window": {
+    title: "Sad Boy AI Photo Prompt: Rainy Window (Copy & Paste)",
+    h1: "Sad Boy AI Photo Prompt: Rainy Window (Copy & Paste)",
+    description:
+      "Sad boy AI photo prompt by a rain-streaked night window with warm lamp glow. Free copy-paste look that keeps your real face.",
+    contentSections: [
+      {
+        heading: "Sad boy love photo prompt",
+        body: "Want a heartbreak or quiet-crush angle on the same rainy window? Keep the hoodie, rain streaks, and warm lamp, then ask for a soft longing look toward the glass as if remembering someone. Still colour, still face-locked, still free to copy and paste.",
+      },
+    ],
+    guideLinks: [
+      {
+        href: "/guides/trending-ai-photo-prompts-for-boys",
+        label: "Trending AI Photo Prompts for Boys",
+      },
+    ],
+  },
+  "hand-painted-watercolor-pet": {
+    title: "Watercolor Dog Portrait AI Prompt",
+    h1: "Watercolor Dog Portrait AI Prompt",
+    description:
+      "Watercolor dog portrait AI prompt: a soft hand-painted portrait of your dog on textured paper, true to its face. Free to copy and paste.",
+  },
+  "mini-collectible-figure": {
+    title: "3D Dog Collectible Figure AI Photo Prompt",
+    h1: "3D Dog Collectible Figure AI Photo Prompt",
+    description:
+      "Turn your dog into a premium mini collectible figure on a display stand. Free copy-paste 3D dog AI photo prompt that keeps breed and markings.",
+  },
+  "christmas-baby-photoshoot-ai-prompt-gift-boxes": {
+    title: "Baby Photoshoot AI Prompt (Christmas Gift Boxes)",
+    h1: "Baby Photoshoot AI Prompt (Christmas Gift Boxes)",
+    description:
+      "Baby photoshoot AI prompt among gift boxes and a small tree. Soft Christmas styling, same sweet face. Free to copy and paste.",
+  },
+  "baby-boy-birthday-photo-ai-prompt-number-balloon": {
+    title: "Baby Boy Photoshoot AI Prompt (Birthday Number Balloon)",
+    h1: "Baby Boy Photoshoot AI Prompt (Birthday Number Balloon)",
+    description:
+      "Baby boy photoshoot AI prompt with a giant gold number balloon, soft blue decor and confetti. Same sweet face. Free to copy and paste.",
+  },
   "cute-3d-toon-pet": {
     title: "Cute 3D Toon Pet AI Photo Prompt",
     h1: "Cute 3D Toon Pet AI Photo Prompt",

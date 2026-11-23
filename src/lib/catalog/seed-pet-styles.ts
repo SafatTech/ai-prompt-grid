@@ -71,11 +71,11 @@ Compose the final image for {{ratio}}, keeping the pet comfortably framed and en
   {
     n: "02",
     id: "hand-painted-watercolor-pet",
-    title: "Watercolor Pet Portrait AI Prompt",
+    title: "Watercolor Dog Portrait AI Prompt",
     category: "Painting",
     note: "Soft watercolor pet portrait on paper",
     description:
-      "Pet portrait AI prompt for watercolor: a soft hand-painted portrait of your dog or cat on textured paper, true to its face. Free to copy-paste.",
+      "Watercolor dog portrait AI prompt: a soft hand-painted portrait of your dog on textured paper, true to its face. Free to copy and paste.",
     intent: "Artistic restyle",
     mood: "Soft warm natural",
     background:
@@ -175,11 +175,11 @@ Compose the final image for {{ratio}}, keeping the face, ears, paws, wings, mane
   {
     n: "06",
     id: "mini-collectible-figure",
-    title: "3D Collectible Figure AI Photo Prompt (Free, Copy-Paste)",
+    title: "3D Dog Collectible Figure AI Photo Prompt",
     category: "Product and objects",
     note: "Premium collectible figurine presentation",
     description:
-      "3D AI photo prompt free to copy: turn your photo into a premium collectible figurine on a display stand with packaging. Works in Gemini and ChatGPT.",
+      "Turn your dog into a premium mini collectible figure on a display stand. Free copy-paste 3D dog AI photo prompt that keeps breed and markings.",
     intent: "Artistic restyle",
     mood: "Warm premium display",
     background:

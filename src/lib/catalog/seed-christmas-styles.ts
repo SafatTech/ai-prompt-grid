@@ -94,10 +94,10 @@ const christmas: ChristmasSeed[] = [
   {
     n: "136",
     id: "christmas-baby-photoshoot-ai-prompt-gift-boxes",
-    title: "Christmas Baby Photoshoot AI Prompt (Gift Boxes)",
+    title: "Baby Photoshoot AI Prompt (Christmas Gift Boxes)",
     note: "Baby sitting among wrapped gift boxes beside a small tree",
     description:
-      "A Christmas baby photoshoot AI prompt: your little one among red, green and gold gift boxes with ribbons beside a small decorated tree, same sweet face.",
+      "Baby photoshoot AI prompt among gift boxes and a small tree. Soft Christmas styling, same sweet face. Free to copy and paste.",
     category: "Cinematic",
     subject: "Person",
     intent: "New outfit or theme",

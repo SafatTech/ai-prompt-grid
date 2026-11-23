@@ -579,15 +579,15 @@ describe("guide files", () => {
     );
     assert.ok(guide);
     assert.equal(guide.draft, false);
-    assert.equal(guide.updated, "2026-10-31");
+    assert.equal(guide.updated, "2026-11-23");
     assert.equal(guide.heading, "Wedding Dress AI Photo Prompts");
     assert.equal(
       guide.title,
       "Wedding Dress AI Prompts: Bridal Lehenga, Sherwani & Dulhan Looks",
     );
     assert.match(guide.description, /gemini bridal look prompts/);
-    assert.match(guide.body, /## Bridal Lehenga AI Prompts \(Dulhan Looks\)/);
-    assert.match(guide.body, /## Bride and Groom & Couple Wedding Poses Prompts/);
+    assert.match(guide.body, /## Bridal AI photo prompts/);
+    assert.match(guide.body, /## Marriage AI photo prompts/);
     assert.match(guide.body, /## Haldi, Mehndi, Nikah & Walima Outfit Prompts/);
     assert.match(guide.body, /## 2026 Bridal Dress Trends \(Pakistani & Indian Looks\)/);
     assert.match(guide.body, /### Are these prompts free\?/);
