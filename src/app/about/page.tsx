@@ -5,7 +5,7 @@ import { CONTACT_EMAIL, CONTACT_MAILTO } from "@/lib/site-contact";
 export const metadata: Metadata = {
   title: "About",
   description:
-    "AI Prompt Grid is run by Saad Masood under Safat Tech in Pakistan. Free copy-paste AI photo prompts with real before-and-after examples.",
+    "AI Prompt Grid is run by Safat Tech in Pakistan. Free copy-paste AI photo prompts with real before-and-after examples.",
   alternates: {
     canonical: "/about",
   },
@@ -22,8 +22,7 @@ export default function AboutPage() {
       </h1>
       <p className="m-0 mb-10 text-[17px] leading-relaxed text-[var(--muted)]">
         aipromptgrid.com is a free catalog of copy-paste AI photo prompts with
-        real before-and-after examples, run by Saad Masood under Safat Tech in
-        Pakistan.
+        real before-and-after examples, operated by Safat Tech in Pakistan.
       </p>
 
       <section className="mb-8">
@@ -31,12 +30,11 @@ export default function AboutPage() {
         <div className="space-y-3 text-[15px] leading-relaxed text-[var(--muted)]">
           <p>
             AI Prompt Grid is operated by{" "}
-            <strong className="text-[var(--text)]">Saad Masood</strong> under{" "}
             <strong className="text-[var(--text)]">Safat Tech</strong>, based in
-            Pakistan. There is no large editorial team behind the catalog. Saad
-            builds the site, writes and revises the prompts, prepares the example
-            images, and publishes seasonal guides when festivals and trends call
-            for them.
+            Pakistan. There is no large editorial team behind the catalog. Safat
+            Tech builds the site, writes and revises the prompts, prepares the
+            example images, and publishes seasonal guides when festivals and
+            trends call for them.
           </p>
           <p>
             The goal is simple: help people in Pakistan, India, South Asia, and
@@ -75,11 +73,12 @@ export default function AboutPage() {
         </h2>
         <div className="space-y-3 text-[15px] leading-relaxed text-[var(--muted)]">
           <p>
-            Saad tests each published prompt himself in popular AI image apps.
-            He starts from a realistic source photo, runs the prompt, compares
-            the before and after, and rewrites lines that break identity,
-            clothing, lighting, or composition. The process repeats until the
-            result is reliable enough to publish with a clear example.
+            Safat Tech tests each published prompt in popular AI image apps
+            before it goes live. The workflow starts from a realistic source
+            photo, runs the prompt, compares the before and after, and rewrites
+            lines that break identity, clothing, lighting, or composition. The
+            process repeats until the result is reliable enough to publish with
+            a clear example.
           </p>
           <p>
             Identity-preserving instructions stay in the prompt on purpose: face
@@ -177,7 +176,8 @@ export default function AboutPage() {
             >
               contact page
             </Link>
-            . Typical replies arrive within 2 to 3 business days.
+            . Typical replies arrive within 2 to 3 business days. Mail is handled
+            by Safat Tech in Pakistan.
           </p>
         </div>
       </section>
