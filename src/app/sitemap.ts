@@ -65,19 +65,19 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModifiedBySlug.set(slug, safeLastModified(style.lastModified));
     }
 
-    // Explore pagination follows the live catalog size (noindex styles stay
-    // listed in /explore). Only the style detail URLs are omitted below.
+    // Explore pagination matches the indexable catalog (noindex styles are
+    // omitted from /explore listings and from style detail URLs below).
     const publishedSlugs = [...lastModifiedBySlug.keys()];
-    explorePageEntries = explorePaginationPaths(publishedSlugs.length).map((path) => ({
+    const indexableSlugs = publishedSlugs.filter(
+      (slug) => !isTemporaryNoindexStyleSlug(slug),
+    );
+    explorePageEntries = explorePaginationPaths(indexableSlugs.length).map((path) => ({
       url: absoluteUrl(path),
       lastModified: now,
       changeFrequency: "daily" as const,
       priority: 0.5,
     }));
 
-    const indexableSlugs = publishedSlugs.filter(
-      (slug) => !isTemporaryNoindexStyleSlug(slug),
-    );
     styleEntries = dedupedStylePaths(indexableSlugs).map((path) => ({
       url: absoluteUrl(path),
       lastModified: lastModifiedBySlug.get(path.slice("/styles/".length)) ?? now,

@@ -10088,32 +10088,38 @@ export const STYLE_UNIQUENESS_ENTRIES: Readonly<
     addonLine: "Want a quieter take on this look? Add: keep the rooftop tricolour kites scene, lock exact skin tone and face, soften background bokeh slightly, no extra people, logos, or worn flags.",
   },
   "park-tiranga-balloons-men": {
-    intro: "Solo man walking a green park path in morning light, holding a bunch of saffron, white and green balloons. Upload one clear photo of an adult man. Keep faces locked. Never wear, drape, crumple, or ground the Indian flag. Tricolour comes through outfit colours, flowers, balloons, kites, paper bunting, or lighting. Distinct from office ethnic day kurta men or couple terrace tiranga balloons.",
+    intro: `This page is a morning park walk for one adult man, not an office kurta lobby shot and not a couple terrace balloon set. The scene is a green footpath with soft side light, trees a little out of focus, and a bunch of solid saffron, white and green balloons held at chest height so the colours read clearly without printing a flag on fabric.
+
+Best photo to upload: a sharp chest-up or three-quarter portrait of an adult man, face fully visible, no heavy filters. Even outdoor light works better than a night selfie. Keep glasses or a beard if you wear them; the prompt is written to lock those details.
+
+Outfit and colour ideas: a navy or charcoal jacket over a plain shirt, optional white or cream kurta layer, balloons as the only tiranga signal. Avoid Ashoka Chakra prints on clothes. Leave clothing preservation off unless you want to keep what you already wore.
+
+Common mistakes: balloons that look like tiny party dots far from the body, faces that wash out in bright sky, extra strangers walking into frame, or the model draping a flag over the shoulder. Fix by asking for a larger balloon bunch near the torso, softer morning fill light on the face, empty path behind you, and solid colour balloons only.`,
     tips: [
-      "Use a sharp photo of an adult man; blurry faces weaken identity lock on this park tiranga balloons look.",
-      "If the edit drifts toward office ethnic day kurta men or couple terrace tiranga balloons, restate this exact scene: solo man walking a green park path in morning light, holding a bunch of saffron, white and green balloons.",
-      "Leave clothing preservation off so the Republic Day wardrobe can apply; turn it on only to keep what you wore.",
-      "Flag respect: never wear or drape the flag; use outfit colour blocking, flowers, balloons, kites, or paper bunting instead.",
+      "Shoot or crop so your face and upper torso fill most of the frame before you upload.",
+      "Ask for soft morning side light and a shallow park path blur if the sky blows out the face.",
+      "If balloons shrink or vanish, say: keep a large saffron-white-green balloon bunch at chest height.",
+      "Never ask the model to wear or drape the Indian flag; keep colour in the balloons and jacket tones only.",
     ],
     faqs: [
       {
-        question: "Will my face stay the same in this Republic Day edit?",
-        answer: "Yes. Face, skin tone, hair or head covering, and glasses stay from your photo while only the outfit and scene update. See How to keep your face the same for a fuller checklist.",
+        question: "Will my face stay the same in this park balloons edit?",
+        answer: "Yes. Keep face shape, skin tone, hair or head covering, glasses and beard from your upload. Let the park path, jacket and balloon bunch change unless clothing preservation is on.",
       },
       {
-        question: "How do I show tiranga colours without wearing the flag?",
-        answer: "Use solid saffron, white or green in outfits, flowers, balloons, kite colour panels, paper bunting, or lighting. Do not print the Ashoka Chakra on clothing. Only the community flag hoist style shows a flag, upright on a pole.",
+        question: "Why does this look different from the office ethnic day kurta page?",
+        answer: "This page is outdoors on a park path with balloons in hand. The office ethnic day look is an indoor lobby with a kurta and no balloon prop.",
       },
       {
-        question: "Is this the same as a generic solo festive edit?",
-        answer: "No. This page is the specific Park Tiranga Balloons Republic Day look: solo man walking a green park path in morning light, holding a bunch of saffron, white and green balloons.",
+        question: "Balloons look fake or tiny. What do I say?",
+        answer: "Ask for a dense bunch of solid saffron, white and green balloons held naturally at chest height, with soft daylight on the latex and no logos on the balloons.",
       },
       {
-        question: "Can I say Gantantra Diwas instead of Republic Day in the prompt?",
-        answer: "Yes. You can swap the festival name to Gantantra Diwas in a follow-up line. Keep every face-lock line.",
+        question: "Can I rename the festival to Gantantra Diwas?",
+        answer: "Yes. Add a short follow-up that keeps every face-lock line and only swaps the festival name.",
       },
     ],
-    addonLine: "Want a quieter take on this look? Add: keep the park tiranga balloons scene, lock exact skin tone and face, soften background bokeh slightly, no extra people, logos, or worn flags.",
+    addonLine: "Optional follow-up: keep the morning park path and balloon bunch, lock exact skin tone and face, empty path behind me, no worn flags or extra people.",
   },
   "office-ethnic-day-saree-women": {
     intro: "Solo woman in a cream saree with a saffron and green decorative border, white bouquet, standing in an office lobby. Upload one clear photo of an adult woman. Keep faces locked. Never wear, drape, crumple, or ground the Indian flag. Tricolour comes through outfit colours, flowers, balloons, kites, paper bunting, or lighting. Distinct from sunrise terrace salute women or community hall tricolour bunting women.",
@@ -10312,115 +10318,139 @@ export const STYLE_UNIQUENESS_ENTRIES: Readonly<
     addonLine: "Want a quieter take on this look? Add: keep the kartavya path parade boulevard scene, lock exact skin tone and face, soften background bokeh slightly, no extra people, logos, or worn flags.",
   },
   "india-gate-dusk-portrait-men": {
-    intro: "Solo man in a formal coat at dusk beside a grand sandstone memorial arch in soft background blur, tricolour light wash. Style name is India Gate. The image is not an exact replica and has no legible inscription.. Upload one clear photo of an adult man. Keep faces locked. Never wear, drape, crumple, or ground the Indian flag. Tricolour comes through outfit colours, flowers, balloons, kites, paper bunting, or lighting. Distinct from community flag hoist salute men or kartavya path parade boulevard couple.",
+    intro: `This page is a dusk memorial-arch portrait for one adult man, not a neighbourhood courtyard flag hoist and not a couple walking a parade boulevard. The person stands in the foreground in a formal coat; a grand sandstone arch sits softly blurred behind with a gentle saffron-white-green light wash. The style name references India Gate; the image is an atmospheric suggestion, not an exact replica, and should not invent legible inscriptions.
+
+Best photo to upload: a sharp waist-up or three-quarter portrait of an adult man with a calm expression and even light on the face. Indoor or outdoor sources both work if the face is clear. Avoid sunglasses that hide the eyes unless you wear them daily.
+
+Outfit and colour ideas: charcoal or navy formal coat, optional cream scarf, subtle tricolour only in ambient light or a distant soft bokeh wash. No flag worn as clothing. Leave clothing preservation off to let the coat apply.
+
+Common mistakes: a sharp tourist landmark with readable text, midday hard sun instead of dusk, a tiny figure lost under a huge arch, or a flag draped on the shoulders. Fix by asking for soft dusk rim light on the face, a blurred arch without inscriptions, the person filling the lower two-thirds of the frame, and colour only in the light wash.`,
     tips: [
-      "Use a sharp photo of an adult man; blurry faces weaken identity lock on this india gate dusk portrait look.",
-      "If the edit drifts toward community flag hoist salute men or kartavya path parade boulevard couple, restate this exact scene: solo man in a formal coat at dusk beside a grand sandstone memorial arch in soft background blur, tricolour light wash. Style name is India Gate. The image is not an exact replica and has no legible inscription..",
-      "Leave clothing preservation off so the Republic Day wardrobe can apply; turn it on only to keep what you wore.",
-      "Flag respect: never wear or drape the flag; use outfit colour blocking, flowers, balloons, kites, or paper bunting instead.",
+      "Prefer a chest-up source so the formal coat and face stay dominant over the arch.",
+      "Ask for dusk light and a soft tricolour ambient wash if the background turns into bright noon.",
+      "If the arch becomes too sharp or gains fake text, say: soft background blur, no legible inscription.",
+      "Keep the flag off the body; this page uses light and wardrobe colour, not a worn flag.",
     ],
     faqs: [
       {
-        question: "Will my face stay the same in this Republic Day edit?",
-        answer: "Yes. Face, skin tone, hair or head covering, and glasses stay from your photo while only the outfit and scene update. See How to keep your face the same for a fuller checklist.",
+        question: "Is this meant to be an exact India Gate photograph?",
+        answer: "No. The style name is India Gate for search clarity. The prompt keeps a grand sandstone memorial arch in soft blur without claiming a precise replica or readable carving.",
       },
       {
-        question: "How do I show tiranga colours without wearing the flag?",
-        answer: "Use solid saffron, white or green in outfits, flowers, balloons, kite colour panels, paper bunting, or lighting. Do not print the Ashoka Chakra on clothing. Only the community flag hoist style shows a flag, upright on a pole.",
+        question: "How is this different from the community flag hoist page?",
+        answer: "Flag hoist is a neighbourhood courtyard with a small flag upright on a pole. This page is a dusk portrait beside a blurred memorial arch with no pole flag in hand.",
       },
       {
-        question: "Is this the same as a generic solo festive edit?",
-        answer: "No. This page is the specific India Gate Dusk Portrait Republic Day look: solo man in a formal coat at dusk beside a grand sandstone memorial arch in soft background blur, tricolour light wash. Style name is India Gate. The image is not an exact replica and has no legible inscription..",
+        question: "My face looks too dark at dusk. What should I ask?",
+        answer: "Ask for soft fill on the face, gentle rim light, and keep the dusk mood only in the sky and arch wash so skin tone stays true.",
       },
       {
-        question: "Can I say Gantantra Diwas instead of Republic Day in the prompt?",
-        answer: "Yes. You can swap the festival name to Gantantra Diwas in a follow-up line. Keep every face-lock line.",
+        question: "Will my face stay recognizable at dusk?",
+        answer: "Yes. Preserve face, skin tone, hair or head covering, glasses and beard. Ask for soft fill on the face if dusk light goes too dark. Let coat and background change unless clothing preservation is on.",
       },
     ],
-    addonLine: "Want a quieter take on this look? Add: keep the india gate dusk portrait scene, lock exact skin tone and face, soften background bokeh slightly, no extra people, logos, or worn flags.",
+    addonLine: "Optional follow-up: keep dusk memorial-arch blur, lock exact skin tone and face, no legible inscription, no worn flags, no extra people.",
   },
   "parent-child-school-function-hall": {
-    intro: "Parent standing beside a child in an indoor school hall programme, tricolour balloons at the back, both fully clothed and in frame. Upload one adult photo and one child photo (about 7 to 10). Keep faces locked. Never wear, drape, crumple, or ground the Indian flag. Tricolour comes through outfit colours, flowers, balloons, kites, paper bunting, or lighting. Distinct from parent child terrace kites or parent child balcony parade.",
+    intro: `This page is an indoor school-hall Republic Day programme for one parent and one child, not a terrace kite scene and not a balcony parade watch. Both people stand side by side on a modest stage or hall floor with tricolour balloon clusters or paper bunting behind them, soft overhead hall lighting, and both faces clearly readable.
+
+Best photos to upload: Photo 1 is the parent (clear adult portrait). Photo 2 is the child, roughly school age, face visible, fully clothed. Match roughly similar camera height when you can. Example people shown on this page are AI-generated, including the child illustration.
+
+Outfit and colour ideas: parent in a neat kurta, saree blouse set, or simple formal shirt; child in a school-event outfit with saffron, white or green accents in dupatta, scarf, socks or balloon props. No flag worn as a cape. Leave clothing preservation off unless you want real outfits kept.
+
+Common mistakes: faces swapping between parent and child, the child looking adult-aged, a outdoor park background instead of a hall, or balloons covering faces. Fix by restating Photo 1 parent / Photo 2 child, asking for an indoor hall with stage curtains or wall bunting, and keeping balloons behind the shoulders.`,
     tips: [
-      "Use a sharp photo of a parent and a child; blurry faces weaken identity lock on this parent and child school function look.",
-      "If the edit drifts toward parent child terrace kites or parent child balcony parade, restate this exact scene: parent standing beside a child in an indoor school hall programme, tricolour balloons at the back, both fully clothed and in frame.",
-      "Leave clothing preservation off so the Republic Day wardrobe can apply; turn it on only to keep what you wore.",
-      "Flag respect: never wear or drape the flag; use outfit colour blocking, flowers, balloons, kites, or paper bunting instead.",
+      "Upload parent first, child second, and say both must stay fully clothed and modest.",
+      "Ask for indoor hall lighting and soft stage or wall bunting if the scene drifts outdoors.",
+      "If ages look wrong, restate approximate child age and keep adult proportions on Photo 1.",
+      "Keep balloon colour in the background; do not drape a flag on either person.",
     ],
     faqs: [
       {
-        question: "Will my face stay the same in this Republic Day edit?",
-        answer: "Yes. The parent face from Photo 1 and the child face from Photo 2 stay locked. Example people on this page are AI-generated, including the child. See How to keep your face the same for a fuller checklist.",
+        question: "Will both faces stay the same?",
+        answer: "Photo 1 is the parent. Photo 2 is the child. Keep both faces locked as separate people. Example images on this page are AI-generated.",
       },
       {
-        question: "How do I show tiranga colours without wearing the flag?",
-        answer: "Use solid saffron, white or green in outfits, flowers, balloons, kite colour panels, paper bunting, or lighting. Do not print the Ashoka Chakra on clothing. Only the community flag hoist style shows a flag, upright on a pole.",
+        question: "How is this different from the terrace kites page?",
+        answer: "School function is indoors in a hall with programme lighting and balloons or bunting. Terrace kites is a bright outdoor home terrace with kite strings.",
       },
       {
-        question: "Is this the same as a generic parent-child festive edit?",
-        answer: "No. This page is the specific Parent and Child School Function Republic Day look: parent standing beside a child in an indoor school hall programme, tricolour balloons at the back, both fully clothed and in frame.",
+        question: "Faces swapped or blended. What do I do?",
+        answer: "Send a short follow-up: keep Photo 1 face on the adult, Photo 2 face on the child, no face blend, both fully in frame.",
       },
       {
-        question: "Which photo is the parent and which is the child?",
-        answer: "Upload the parent as Photo 1 and the child as Photo 2. Keep both fully clothed and modest.",
+        question: "What lighting works best for this hall look?",
+        answer: "Soft overhead or stage-style indoor light. Avoid harsh noon outdoor contrast so the hall ceiling and bunting stay believable.",
       },
     ],
-    addonLine: "Want a quieter take on this look? Add: keep the parent and child school function scene, lock exact skin tone and face, soften background bokeh slightly, no extra people, logos, or worn flags.",
+    addonLine: "Optional follow-up: keep indoor school-hall programme, lock both faces, balloons behind shoulders only, no worn flags.",
   },
   "parent-child-terrace-kites": {
-    intro: "Home terrace in bright morning, a father helping a child hold a kite string, kites in saffron, white and green panels, not flags. Upload one adult photo and one child photo (about 7 to 10). Keep faces locked. Never wear, drape, crumple, or ground the Indian flag. Tricolour comes through outfit colours, flowers, balloons, kites, paper bunting, or lighting. Distinct from parent child school function hall or rooftop tricolour kites women.",
+    intro: `This page is a bright home-terrace kite moment for one parent and one child, not a school hall programme and not a women-only rooftop kite collage. Morning light hits a terrace parapet; the parent helps the child hold a kite string while solid saffron, white and green kite panels fly nearby as colour panels, not as printed national flags.
+
+Best photos to upload: Photo 1 parent, Photo 2 child (about primary-school age), both faces clear. A standing or three-quarter crop is easier than a distant full-body phone shot. Example people on this page are AI-generated, including the child.
+
+Outfit and colour ideas: light cotton kurtas or casual morning clothes, optional muffler or dupatta in cream; kite panels carry the tiranga colours. No Ashoka Chakra printed on clothing. Leave clothing preservation off to apply the terrace wardrobe.
+
+Common mistakes: kites turning into draped flags, windy hair hiding eyes, only one person in frame, or a city street instead of a terrace. Fix by asking for panel-colour kites (not flags), both people at the parapet, morning sky behind them, and faces unobscured.`,
     tips: [
-      "Use a sharp photo of a parent and a child; blurry faces weaken identity lock on this parent and child terrace kites look.",
-      "If the edit drifts toward parent child school function hall or rooftop tricolour kites women, restate this exact scene: home terrace in bright morning, a father helping a child hold a kite string, kites in saffron, white and green panels, not flags.",
-      "Leave clothing preservation off so the Republic Day wardrobe can apply; turn it on only to keep what you wore.",
-      "Flag respect: never wear or drape the flag; use outfit colour blocking, flowers, balloons, kites, or paper bunting instead.",
+      "Prefer morning or open-shade parent and child portraits so bright sky does not erase faces.",
+      "Say kite panels in saffron, white and green only; no flag cloth on the body.",
+      "If the child disappears, ask to keep both people at the terrace rail with hands on the string.",
+      "Restate Photo 1 parent / Photo 2 child if identities drift.",
     ],
     faqs: [
       {
-        question: "Will my face stay the same in this Republic Day edit?",
-        answer: "Yes. The parent face from Photo 1 and the child face from Photo 2 stay locked. Example people on this page are AI-generated, including the child. See How to keep your face the same for a fuller checklist.",
+        question: "Are the kites allowed to look like the national flag?",
+        answer: "Use solid colour panels only. Do not ask for a wearable flag or a flag printed with the Ashoka Chakra on clothing. Colour comes from the kite panels and outfits.",
       },
       {
-        question: "How do I show tiranga colours without wearing the flag?",
-        answer: "Use solid saffron, white or green in outfits, flowers, balloons, kite colour panels, paper bunting, or lighting. Do not print the Ashoka Chakra on clothing. Only the community flag hoist style shows a flag, upright on a pole.",
+        question: "How is this different from the rooftop tricolour kites women page?",
+        answer: "This page is a parent-and-child terrace pair with a shared kite string. The women rooftop page is a solo or women-led kite collage without the parent-child upload pair.",
       },
       {
-        question: "Is this the same as a generic parent-child festive edit?",
-        answer: "No. This page is the specific Parent and Child Terrace Kites Republic Day look: home terrace in bright morning, a father helping a child hold a kite string, kites in saffron, white and green panels, not flags.",
+        question: "Will both faces stay locked on the terrace?",
+        answer: "Yes. Upload one clear adult portrait and one clear child portrait. Keep Photo 1 as the parent face and Photo 2 as the child face. Avoid group selfies with extra relatives in frame.",
       },
       {
-        question: "Which photo is the parent and which is the child?",
-        answer: "Upload the parent as Photo 1 and the child as Photo 2. Keep both fully clothed and modest.",
+        question: "Hands or string look wrong. What should I ask?",
+        answer: "Ask for a natural two-hand grip on one kite string, no extra limbs, and keep both faces toward camera or slightly turned together.",
       },
     ],
-    addonLine: "Want a quieter take on this look? Add: keep the parent and child terrace kites scene, lock exact skin tone and face, soften background bokeh slightly, no extra people, logos, or worn flags.",
+    addonLine: "Optional follow-up: keep bright terrace and panel-colour kites, lock both faces, no worn flags, both people fully in frame.",
   },
   "parent-child-balcony-parade": {
-    intro: "Parent and child at a balcony rail in modest cool-morning clothes, watching a distant generic civic parade, both in frame. Upload one adult photo and one child photo (about 7 to 10). Keep faces locked. Never wear, drape, crumple, or ground the Indian flag. Tricolour comes through outfit colours, flowers, balloons, kites, paper bunting, or lighting. Distinct from parent child school function hall or couple balcony parade viewing.",
+    intro: `This page is a cool-morning balcony watch for one parent and one child, not an indoor school hall and not a couple-only balcony parade. Both lean gently on a balcony rail while a distant generic civic street parade stays soft and far below. Clothes stay modest and practical for a chill morning; tiranga colour appears in scarves, sweaters or far paper accents, never as a worn flag.
+
+Best photos to upload: Photo 1 parent, Photo 2 child, faces readable, similar lighting if possible. A balcony or window selfie can work if both heads are clear. Example people on this page are AI-generated, including the child.
+
+Outfit and colour ideas: cream or grey sweaters, light jackets, optional saffron or green muffler accents. Keep the parade small in the background so faces stay the subject.
+
+Common mistakes: parade crowds sharp and huge in the foreground, couple styling instead of parent-child, summer sleeveless outfits, or a flag cape. Fix by asking for a distant soft street parade, both people at the rail in cool-morning layers, and no worn flag.`,
     tips: [
-      "Use a sharp photo of a parent and a child; blurry faces weaken identity lock on this parent and child balcony parade look.",
-      "If the edit drifts toward parent child school function hall or couple balcony parade viewing, restate this exact scene: parent and child at a balcony rail in modest cool-morning clothes, watching a distant generic civic parade, both in frame.",
-      "Leave clothing preservation off so the Republic Day wardrobe can apply; turn it on only to keep what you wore.",
-      "Flag respect: never wear or drape the flag; use outfit colour blocking, flowers, balloons, kites, or paper bunting instead.",
+      "Keep the civic parade distant and soft so parent and child faces stay the focus.",
+      "Ask for modest cool-morning layers if the model invents summer clothes.",
+      "Restate Photo 1 parent / Photo 2 child when ages or faces mix.",
+      "Do not drape a flag on the balcony rail as clothing; keep colour in scarves or soft background accents.",
     ],
     faqs: [
       {
-        question: "Will my face stay the same in this Republic Day edit?",
-        answer: "Yes. The parent face from Photo 1 and the child face from Photo 2 stay locked. Example people on this page are AI-generated, including the child. See How to keep your face the same for a fuller checklist.",
+        question: "How is this different from the couple balcony parade page?",
+        answer: "Couple balcony uses two adult uploads. This page needs one parent and one child, with child-safe modest styling and both people at the rail.",
       },
       {
-        question: "How do I show tiranga colours without wearing the flag?",
-        answer: "Use solid saffron, white or green in outfits, flowers, balloons, kite colour panels, paper bunting, or lighting. Do not print the Ashoka Chakra on clothing. Only the community flag hoist style shows a flag, upright on a pole.",
+        question: "The parade looks too close. What do I say?",
+        answer: "Ask for a distant generic civic street below the balcony, soft blur, no readable banners, and keep both faces large in the foreground.",
       },
       {
-        question: "Is this the same as a generic parent-child festive edit?",
-        answer: "No. This page is the specific Parent and Child Balcony Parade Republic Day look: parent and child at a balcony rail in modest cool-morning clothes, watching a distant generic civic parade, both in frame.",
+        question: "Will both faces stay the same on the balcony?",
+        answer: "Yes. Preserve both faces, skin tones, hair or head coverings and glasses. Let balcony, clothes and distant street update unless clothing preservation is on.",
       },
       {
-        question: "Which photo is the parent and which is the child?",
-        answer: "Upload the parent as Photo 1 and the child as Photo 2. Keep both fully clothed and modest.",
+        question: "Is a real street parade photo required?",
+        answer: "No. Upload clear parent and child portraits. The prompt builds a generic distant civic street; you do not need your own parade photo.",
       },
     ],
-    addonLine: "Want a quieter take on this look? Add: keep the parent and child balcony parade scene, lock exact skin tone and face, soften background bokeh slightly, no extra people, logos, or worn flags.",
+    addonLine: "Optional follow-up: keep cool-morning balcony rail, distant soft parade, lock both faces, no worn flags, both people fully in frame.",
   },
 };

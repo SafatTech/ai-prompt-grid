@@ -1,14 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-
-/** Public support address for this page only (shared CONTACT_EMAIL stays hello@ elsewhere). */
-const SUPPORT_EMAIL = "support@aipromptgrid.com";
-const SUPPORT_MAILTO = `mailto:${SUPPORT_EMAIL}`;
+import { CONTACT_EMAIL, CONTACT_MAILTO } from "@/lib/site-contact";
 
 export const metadata: Metadata = {
   title: "Contact",
   description:
-    "Contact AI Prompt Grid for support, style requests, partnerships, or privacy questions.",
+    "Contact Safat Tech about AI Prompt Grid: prompt issues, corrections, takedown requests, and partnerships at hello@aipromptgrid.com.",
   alternates: {
     canonical: "/contact",
   },
@@ -24,39 +21,59 @@ export default function ContactPage() {
         Contact
       </h1>
       <p className="m-0 mb-10 text-[17px] leading-relaxed text-[var(--muted)]">
-        We read every message. Use email for the fastest reply on product questions, style
-        ideas, and account requests.
+        Reach Safat Tech about aipromptgrid.com by email. We read every message
+        and usually reply within 2 to 3 business days.
       </p>
 
       <section className="mb-10 rounded-2xl border border-[var(--line)] bg-[var(--surface)] p-6 sm:p-8">
         <h2 className="m-0 mb-2 text-[20px] tracking-[-0.02em]">Email</h2>
         <p className="m-0 mb-4 text-[15px] leading-relaxed text-[var(--muted)]">
-          Reach the AI Prompt Grid team at:
+          Public contact address:
         </p>
         <a
-          href={SUPPORT_MAILTO}
+          href={CONTACT_MAILTO}
           className="inline-flex min-h-11 items-center justify-center rounded-xl bg-[var(--violet)] px-5 text-sm font-bold text-[#100d1a] hover:bg-[#9b82ff]"
         >
-          {SUPPORT_EMAIL}
+          {CONTACT_EMAIL}
         </a>
         <p className="m-0 mt-4 text-[13px] text-[var(--muted)]">
-          Typical topics: catalog feedback, style requests, privacy or account deletion,
-          partnerships, and press.
+          Business name: Safat Tech. Location: Pakistan. Typical response time:
+          within 2 to 3 business days.
         </p>
+      </section>
+
+      <section className="mb-8">
+        <h2 className="mt-0 mb-3 text-[22px] tracking-[-0.02em]">What to contact about</h2>
+        <ul className="m-0 list-disc space-y-2 pl-5 text-[15px] leading-relaxed text-[var(--muted)]">
+          <li>
+            Prompt issues: a style that stopped working well, unclear wording, or
+            a before-and-after example that needs a correction.
+          </li>
+          <li>
+            Corrections: factual mistakes on a guide or style page, broken links,
+            or outdated instructions after an AI app update.
+          </li>
+          <li>
+            Takedown and copyright: requests about images, text, or other
+            material you believe should be removed.
+          </li>
+          <li>
+            Partnerships: collaboration ideas that fit a free prompt catalog and
+            guide audience.
+          </li>
+          <li>
+            Privacy or account help: use the email on your account when relevant,
+            and never send passwords.
+          </li>
+        </ul>
       </section>
 
       <section className="mb-8">
         <h2 className="mt-0 mb-3 text-[22px] tracking-[-0.02em]">What to include</h2>
         <ul className="m-0 list-disc space-y-2 pl-5 text-[15px] leading-relaxed text-[var(--muted)]">
-          <li>
-            For a style request: subject (person, pet, place, product), the look you want,
-            and which AI editor you use.
-          </li>
-          <li>For account help: the email on your account (do not send passwords).</li>
-          <li>
-            For privacy requests: a clear description of what you need removed or
-            exported.
-          </li>
+          <li>The page URL or style name, when the message is about a specific prompt.</li>
+          <li>A short description of what went wrong or what you need changed.</li>
+          <li>For takedown requests: enough detail to identify the content.</li>
         </ul>
       </section>
 
@@ -70,7 +87,7 @@ export default function ContactPage() {
             >
               About
             </Link>{" "}
-            — who we are and how prompts are tested.
+            — who runs the site and how prompts are tested.
           </p>
           <p>
             <Link

@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { listPublishedStyles } from "@/lib/catalog/repository";
+import { listIndexablePublishedStyles } from "@/lib/catalog/repository";
 import {
   buildSearchSuggestions,
   toSuggestionIndex,
@@ -13,7 +13,7 @@ export async function GET(request: Request) {
     return NextResponse.json({ suggestions: [] }, { status: 400 });
   }
 
-  const styles = await listPublishedStyles();
+  const styles = await listIndexablePublishedStyles();
   const suggestions = buildSearchSuggestions(q, toSuggestionIndex(styles));
 
   return NextResponse.json(

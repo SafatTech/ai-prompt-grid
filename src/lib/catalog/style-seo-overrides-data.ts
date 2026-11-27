@@ -51,7 +51,7 @@ Use it when your storefront needs warmer lifestyle context than a marketplace wh
         label: "How to Keep Your Face the Same in Gemini",
       },
     ],
-    relatedStyleIds: ["pure-white-packshot", "editorial-flat-lay", "color-pop-pedestal"],
+    relatedStyleIds: ["pure-white-packshot", "editorial-flat-lay", "soft-daylight-lifestyle"],
   },
   "pure-white-packshot": {
     title: "White Background Product Packshot AI Prompt",
@@ -78,7 +78,7 @@ It works well as the first frame in a set: white packshot for search grids, then
         label: "How to Keep Your Face the Same in Gemini",
       },
     ],
-    relatedStyleIds: ["soft-daylight-lifestyle", "editorial-flat-lay", "color-pop-pedestal"],
+    relatedStyleIds: ["soft-daylight-lifestyle", "editorial-flat-lay", "pure-white-packshot"],
   },
   "editorial-flat-lay": {
     title: "Flat Lay Product Photography AI Prompt",
@@ -105,7 +105,7 @@ Use it when you sell goods that photograph well from above: skincare, stationery
         label: "How to Keep Your Face the Same in Gemini",
       },
     ],
-    relatedStyleIds: ["pure-white-packshot", "soft-daylight-lifestyle", "botanical-wellness-still-life"],
+    relatedStyleIds: ["pure-white-packshot", "soft-daylight-lifestyle", "editorial-flat-lay"],
   },
   "cute-3d-toon-pet": {
     title: "Cute 3D Toon Pet AI Photo Prompt",
@@ -744,8 +744,8 @@ Who it is for: couples who want a soft hand-painted anime meadow picnic rather t
     ],
     relatedStyleIds: [
       "cherry-blossom-anime-couple-prompt-gemini",
-      "anime-couple-cherry-blossoms-ai-photo-prompt",
       "turn-photo-into-anime-countryside-family-ai-prompt",
+      "cute-chibi-ai-photo-prompt-girls-sticker",
     ],
   },
 

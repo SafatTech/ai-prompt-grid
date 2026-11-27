@@ -9,7 +9,7 @@ import { resolveCatalogMediaUrl } from "@/lib/catalog/seed-asset-url";
 import {
   getPublishedStyleAmbientBlur,
   getPublishedStyleBySlug,
-  listPublishedStyles,
+  listIndexablePublishedStyles,
   withStyleAmbientBlur,
 } from "@/lib/catalog/repository";
 import { styleBestForLine } from "@/lib/catalog/style-best-for-lookup";
@@ -91,7 +91,7 @@ export default async function StyleDetailPage({
   const { slug } = await params;
   const [style, catalog] = await Promise.all([
     getPublishedStyleBySlug(slug),
-    listPublishedStyles(),
+    listIndexablePublishedStyles(),
   ]);
   if (!style) notFound();
 
@@ -103,6 +103,7 @@ export default async function StyleDetailPage({
   );
 
   const seoOverride = styleSeoOverride(detailStyle.id);
+  // Related pool is indexable-only so temporary noindex thin pages stay unlinked.
   const relatedStyles = toStyleCardDataList(
     relatedStylesFor(
       detailStyle.id,

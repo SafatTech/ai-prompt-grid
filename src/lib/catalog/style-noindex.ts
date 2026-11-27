@@ -1,9 +1,11 @@
 /**
  * Temporary AdSense / Search re-review list: keep these style pages live (200)
- * and linked site-wide, but ask crawlers not to index them.
+ * with robots noindex,follow, but omit them from the sitemap and from every
+ * public discovery surface (explore, homepage rails, related styles, search
+ * suggestions, guide body links). Direct URLs still work; do not delete data.
  *
  * To re-index a style later, remove its id from TEMPORARY_NOINDEX_STYLE_IDS
- * (and redeploy so sitemap + metadata update). Do not delete the page.
+ * (and redeploy so sitemap + metadata + listings update).
  */
 const TEMPORARY_NOINDEX_STYLE_IDS = [
   "anime-couple-cherry-blossoms-ai-photo-prompt",
@@ -48,4 +50,11 @@ export const temporaryNoindexStyleIds: ReadonlySet<string> = new Set(
 
 export function isTemporaryNoindexStyleSlug(slug: string): boolean {
   return temporaryNoindexStyleIds.has(slug.trim());
+}
+
+/** Drop temporary noindex styles from public listing / related / search pools. */
+export function withoutTemporaryNoindexStyles<T extends { id: string }>(
+  styles: readonly T[],
+): T[] {
+  return styles.filter((style) => !isTemporaryNoindexStyleSlug(style.id));
 }
