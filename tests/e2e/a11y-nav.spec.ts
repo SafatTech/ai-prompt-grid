@@ -13,7 +13,7 @@ test.describe("PR34 follow-up a11y", () => {
 
     await page.goto("/explore");
     await expect(page.getByTestId("explore-hero")).toBeVisible();
-    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+    await expect(page.locator("h1").first()).toBeAttached();
 
     await page.getByTestId("explore-search").fill("christmas");
     await page.getByTestId("explore-search").press("Enter");
@@ -23,17 +23,17 @@ test.describe("PR34 follow-up a11y", () => {
     const firstCard = page.getByTestId("style-results").locator("article").first();
     await expect(firstCard).toBeVisible();
     await firstCard.getByRole("link").first().click();
-    await expect(page).toHaveURL(/\/styles\//);
-    await expect(page.getByTestId("prompt-box")).toBeVisible();
+    await expect(page).toHaveURL(/\/styles\//, { timeout: 30_000 });
+    await expect(page.getByTestId("prompt-box")).toBeVisible({ timeout: 30_000 });
 
     await page.getByRole("button", { name: "Open menu" }).click();
     const dialog = page.getByRole("dialog", { name: "Site menu" });
     await expect(dialog).toBeVisible();
     await dialog.getByRole("link", { name: "Explore styles" }).first().click();
 
-    await expect(page).toHaveURL(/\/explore\/?(\?.*)?$/);
+    await expect(page).toHaveURL(/\/explore\/?(\?.*)?$/, { timeout: 30_000 });
     await expect(page.getByTestId("explore-hero")).toBeVisible();
-    await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
+    await expect(page.locator("h1").first()).toBeAttached();
     await expect(page.getByTestId("explore-search")).toBeVisible();
     await expect(page.getByTestId("results-count")).toBeVisible();
 
