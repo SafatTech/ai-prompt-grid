@@ -14,6 +14,10 @@ import {
   filterStyles,
 } from "./filters";
 import { mapDbStyleToCatalog, type DbStyleRow } from "./mapper";
+import {
+  isTemporaryNoindexStyleSlug,
+  withoutTemporaryNoindexStyles,
+} from "./style-noindex";
 import { getPublishedStyleById, getPublishedStyles } from "./styles";
 import type { CatalogStyle } from "./types";
 import {
@@ -193,6 +197,17 @@ export const listPublishedStyles = cache(async (): Promise<CatalogStyle[]> => {
 });
 
 /**
+ * Published styles that may appear in public discovery (explore, homepage,
+ * related, search). Temporary noindex thin pages stay reachable by direct URL
+ * via getPublishedStyleBySlug / listPublishedStyles (library, admin).
+ */
+export const listIndexablePublishedStyles = cache(
+  async (): Promise<CatalogStyle[]> => {
+    return withoutTemporaryNoindexStyles(await listPublishedStyles());
+  },
+);
+
+/**
  * Pure New-styles rail selection. Admin pins (pinNewRank 1–5) always win their
  * slot even when hideFromNew is set; hideFromNew only filters the organic tail.
  * Exported for unit tests.
@@ -232,8 +247,12 @@ export function selectNewestStyles(
  * Orders by published_at / created_at desc; seed fallback uses reverse catalog order.
  */
 export async function listNewestStyles(limit = 12): Promise<CatalogStyle[]> {
-  const published = await listPublishedStyles();
-  return selectNewestStyles(published, limit, getPublishedStyles());
+  const published = await listIndexablePublishedStyles();
+  return selectNewestStyles(
+    published,
+    limit,
+    withoutTemporaryNoindexStyles(getPublishedStyles()),
+  );
 }
 
 /**
@@ -242,7 +261,9 @@ export async function listNewestStyles(limit = 12): Promise<CatalogStyle[]> {
  */
 export async function listTrendingStyles(limit = 6): Promise<CatalogStyle[]> {
   const capped = Math.min(Math.max(limit, 1), 12);
-  const all = (await listPublishedStyles()).filter((style) => style.showOnHome !== false);
+  const all = (await listIndexablePublishedStyles()).filter(
+    (style) => style.showOnHome !== false,
+  );
   const ranked = all
     .filter((style) => style.trendingRank != null)
     .sort((a, b) => (a.trendingRank ?? 0) - (b.trendingRank ?? 0))
@@ -274,7 +295,7 @@ export async function listHeroWallImages(
   preferSlugs: string[] = [],
   autoFill = true,
 ): Promise<HeroWallImage[]> {
-  const styles = (await listPublishedStyles()).filter(
+  const styles = (await listIndexablePublishedStyles()).filter(
     (style) => style.showOnHome !== false && style.allowInHero !== false,
   );
   const bySlug = new Map(styles.map((style) => [style.id, style]));
@@ -323,7 +344,7 @@ export async function listStylesByCategory(
 ): Promise<CatalogStyle[]> {
   const capped = Math.min(Math.max(limit, 1), 24);
   if (!category.trim()) return [];
-  return (await listPublishedStyles())
+  return (await listIndexablePublishedStyles())
     .filter((style) => style.showOnHome !== false && style.category === category)
     .slice(0, capped);
 }
@@ -337,7 +358,9 @@ export async function listStylesMatchingQuery(
   const q = query.trim().toLowerCase();
   if (!q) return [];
 
-  const all = (await listPublishedStyles()).filter((style) => style.showOnHome !== false);
+  const all = (await listIndexablePublishedStyles()).filter(
+    (style) => style.showOnHome !== false,
+  );
   return filterStyles(all, createEmptyFilters(), q, "Trending").slice(0, capped);
 }
 
@@ -349,17 +372,22 @@ export async function countStylesMatchingQuery(query: string): Promise<number> {
   const q = query.trim().toLowerCase();
   if (!q) return 0;
 
-  const all = (await listPublishedStyles()).filter((style) => style.showOnHome !== false);
+  const all = (await listIndexablePublishedStyles()).filter(
+    (style) => style.showOnHome !== false,
+  );
   return filterStyles(all, createEmptyFilters(), q, "Trending").length;
 }
 
 export async function listStylesBySlugs(slugs: string[]): Promise<CatalogStyle[]> {
   if (slugs.length === 0) return [];
-  const all = (await listPublishedStyles()).filter((style) => style.showOnHome !== false);
+  const all = (await listIndexablePublishedStyles()).filter(
+    (style) => style.showOnHome !== false,
+  );
   const bySlug = new Map(all.map((style) => [style.id, style]));
   return slugs
     .map((slug) => bySlug.get(slug))
-    .filter((style): style is CatalogStyle => style !== undefined);
+    .filter((style): style is CatalogStyle => style !== undefined)
+    .filter((style) => !isTemporaryNoindexStyleSlug(style.id));
 }
 
 /**
@@ -374,7 +402,7 @@ export async function fillProfessionalRailStyles(
     return mergeProfessionalRailStyles(curated, [], limit);
   }
   const seen = new Set(curated.map((style) => style.id));
-  const fallback = (await listPublishedStyles())
+  const fallback = (await listIndexablePublishedStyles())
     .filter((style) => style.showOnHome !== false && !seen.has(style.id))
     .filter((style) => isProfessionalHeadshotFallback(style.id, style.title));
   return mergeProfessionalRailStyles(curated, fallback, limit);
@@ -398,7 +426,7 @@ export async function listExploreFeed(options?: {
   const pageSize = Math.min(Math.max(options?.pageSize ?? 24, 1), 60);
   const category = options?.category?.trim() || "";
 
-  let all = (await listPublishedStyles())
+  let all = (await listIndexablePublishedStyles())
     .filter((style) => style.showOnHome !== false && !style.excludeFromExplore)
     .sort(
       (a, b) => (b.exploreWeight ?? 0) - (a.exploreWeight ?? 0) || compareSavedDesc(a, b),

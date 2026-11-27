@@ -1,4 +1,5 @@
 import type { CatalogStyle } from "@/lib/catalog/types";
+import { isTemporaryNoindexStyleSlug } from "@/lib/catalog/style-noindex";
 import { styleIdsSharingGuide } from "@/lib/guides/style-featured-guides";
 
 export const RELATED_STYLE_LIMIT = 8;
@@ -102,6 +103,8 @@ export function relatedStylesFor(
     if (!style || seen.has(style.id)) return;
     // Catalog is published-only; still guard against accidental drafts.
     if (style.status !== "published") return;
+    // Temporary noindex thin pages must not appear in related blocks.
+    if (isTemporaryNoindexStyleSlug(style.id)) return;
     seen.add(style.id);
     result.push(style);
   };

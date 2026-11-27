@@ -1,4 +1,5 @@
 import { resolveCatalogMediaUrl } from "@/lib/catalog/seed-asset-url";
+import { isTemporaryNoindexStyleSlug } from "@/lib/catalog/style-noindex";
 import type { StyleGuideLink } from "@/lib/catalog/style-seo-override-types";
 import {
   STYLE_GUIDE_CARDS,
@@ -239,6 +240,7 @@ export function styleIdsSharingGuide(styleId: string): ReadonlySet<string> {
   const peers = new Set<string>();
   for (const [otherId, otherGuides] of Object.entries(STYLE_GUIDE_MEMBERSHIP)) {
     if (otherId === styleId) continue;
+    if (isTemporaryNoindexStyleSlug(otherId)) continue;
     if (otherGuides.some((slug) => guides.includes(slug))) peers.add(otherId);
   }
   return peers;

@@ -76,15 +76,9 @@ describe("legacy WordPress requests", () => {
     }
   });
 
-  it("301s the leftover SEO tools WordPress URL to the homepage", () => {
-    assert.deepEqual(classify("/best-ai-seo-tools-2025"), {
-      kind: "redirect",
-      pathname: "/",
-    });
-    assert.deepEqual(classify("/best-ai-seo-tools-2025/"), {
-      kind: "redirect",
-      pathname: "/",
-    });
+  it("returns 410 for leftover WordPress posts instead of soft-404 redirects to /", () => {
+    assert.deepEqual(classify("/best-ai-seo-tools-2025"), { kind: "gone" });
+    assert.deepEqual(classify("/best-ai-seo-tools-2025/"), { kind: "gone" });
   });
 
   it("301s the Google-indexed photographer typo slug to the real style page", () => {

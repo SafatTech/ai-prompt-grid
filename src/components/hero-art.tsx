@@ -2,11 +2,11 @@ import Link from "next/link";
 
 const cards = [
   {
-    href: "/styles/modern-curb-refresh",
+    href: "/styles/intimate-cinematic-portrait",
     source: "/brand/hero/place-source-06.webp",
     result: "/brand/hero/place-result-06.webp",
     from: "Place photo",
-    to: "Modern curb refresh",
+    to: "Cinematic look",
   },
   {
     href: "/styles/intimate-cinematic-portrait",

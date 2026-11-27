@@ -10,7 +10,10 @@ import {
   filtersFromExploreQuery,
   parseExploreSearchParams,
 } from "@/lib/catalog/filters";
-import { listExploreFeed, listPublishedStyles } from "@/lib/catalog/repository";
+import {
+  listExploreFeed,
+  listIndexablePublishedStyles,
+} from "@/lib/catalog/repository";
 import { toStyleCardDataList } from "@/lib/catalog/style-card-data";
 import { HOME_MASONRY_PAGE_SIZE } from "@/lib/home/masonry-page-size";
 
@@ -50,7 +53,7 @@ export async function GET(request: Request) {
         ? Math.min(Number(rawPageSize), 100)
         : EXPLORE_PAGE_SIZE;
     const query = parseExploreSearchParams(searchParams);
-    const styles = await listPublishedStyles();
+    const styles = await listIndexablePublishedStyles();
     let matches = filterStyles(
       styles,
       filtersFromExploreQuery(query),

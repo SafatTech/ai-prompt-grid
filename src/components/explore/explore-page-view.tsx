@@ -17,11 +17,11 @@ import {
 } from "@/lib/catalog/explore-pages";
 import { parseExploreOffset } from "@/lib/catalog/explore-paging";
 import { filterStyles, createEmptyFilters } from "@/lib/catalog/filters";
-import { listPublishedStyles } from "@/lib/catalog/repository";
+import { listIndexablePublishedStyles } from "@/lib/catalog/repository";
 import { toStyleCardDataList } from "@/lib/catalog/style-card-data";
 import type { ExploreWallCardData } from "@/components/explore/explore-wall-card";
 
-const getCatalog = cache(listPublishedStyles);
+const getCatalog = cache(listIndexablePublishedStyles);
 
 type Props = {
   /** Optional raw `?offset=` from the URL (home Load more N-27). */
